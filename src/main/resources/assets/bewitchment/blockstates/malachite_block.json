@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "normal": [
+      {
+        "model": "bewitchment:malachite_block"
+      }
+    ]
+  }
+}

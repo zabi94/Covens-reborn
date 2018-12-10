@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "bewitchment:blocks/crop_wormwood_0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "T",
+    "T"
+  ],
+  "key": {
+    "S": {
+      "item": "bewitchment:candle_small",
+      "data": 0
+    },
+    "T": {
+      "item": "bewitchment:wax",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "bewitchment:candle_medium",
+    "data": 0
+  }
+}
