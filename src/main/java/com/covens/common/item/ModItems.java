@@ -208,7 +208,6 @@ public final class ModItems {
 	public static final Item toe_of_frog = null;
 	public static final Item eye_of_newt = null;
 	public static final Item lizard_leg = null;
-	public static final Item blindworms_sting = null;
 
 	public static final Item pentacle = null;
 
@@ -296,7 +295,6 @@ public final class ModItems {
 				new ItemMod(LibItemName.FILET_OF_FENNY_SNAKE),
 				new ItemMod(LibItemName.SNAKE_VENOM),
 				new ItemMod(LibItemName.TOE_OF_FROG),
-				new ItemMod(LibItemName.BLINDWORMS_STING),
 				new ItemMod(LibItemName.LIZARD_LEG),
 				new ItemMod(LibItemName.EYE_OF_NEWT),
 				new ItemMod(LibItemName.QUARTZ_POWDER),
