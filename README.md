@@ -1,5 +1,5 @@
-# Bewitchment
-A mod inspired by Witchery
+# Covens Reborn
+A mod inspired by Witchery, forked from [Bewitchment](https://github.com/Um-Mitternacht/Bewitchment)
 
 ![BewitchmentV](https://img.shields.io/badge/Covens%20reborn-v0.0.16-purple.svg?longCache=true&style=flat)  
 ![Minecraft Version](https://img.shields.io/badge/minecraft_version-1.12.2+-red.svg?longCache=true&style=flat)
