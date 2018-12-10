@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I  ",
+    "II ",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "covens:scorned_bricks"
+    }
+  },
+  "result": {
+    "item": "covens:scorned_brick_stairs",
+    "count": 6
+  }
+}

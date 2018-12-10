@@ -1,0 +1,6 @@
+{
+  "parent": "covens:block/salt_side",
+  "textures": {
+    "line": "covens:blocks/salt_dust_line0"
+  }
+}

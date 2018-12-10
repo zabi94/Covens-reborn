@@ -1,0 +1,46 @@
+{
+  "boil": {
+    "sounds": [
+      "covens:bubble_1",
+      "covens:bubble_2",
+      "covens:bubble_3"
+    ],
+    "subtitle": "covens.subtitle.boil"
+  },
+  "buzz": {
+    "sounds": [
+      "covens:buzz"
+    ],
+    "subtitle": "covens.subtitle.buzz"
+  },
+  "chalk_scribble": {
+    "sounds": [
+      "covens:chalk_scribble_1",
+      "covens:chalk_scribble_2",
+      "covens:chalk_scribble_3"
+    ],
+    "subtitle": "covens.subtitle.chalk_scribble"
+  },
+  "broom_sweep": {
+    "sounds": [
+      "covens:broom_sweep"
+    ],
+    "subtitle": "covens.subtitle.broom_sweep"
+  },
+  "owl_hoot": {
+    "sounds": [
+      "covens:owl_hoot_1",
+      "covens:owl_hoot_2",
+      "covens:owl_hoot_3",
+      "covens:owl_hoot_4"
+    ],
+    "subtitle": "covens.subtitle.owl_hoot"
+  },
+  "raven_cry": {
+    "sounds": [
+      "covens:raven_cry_1",
+      "covens:raven_cry_2"
+    ],
+    "subtitle": "covens.subtitle.raven_croaks"
+  }
+}

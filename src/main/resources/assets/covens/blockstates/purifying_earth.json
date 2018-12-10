@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "normal": [
+      {
+        "model": "covens:purifying_earth"
+      }
+    ]
+  }
+}

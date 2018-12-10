@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=top": {
+      "model": "covens:fake_ice"
+    },
+    "half=bottom": {
+      "model": "covens:fake_ice"
+    }
+  }
+}

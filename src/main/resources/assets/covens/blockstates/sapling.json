@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cross"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+      },
+      "1": {
+      },
+      "2": {
+      },
+      "3": {
+      }
+    },
+    "type": {
+      "elder": {
+        "textures": {
+          "cross": "covens:blocks/sapling_elder"
+        }
+      },
+      "juniper": {
+        "textures": {
+          "cross": "covens:blocks/sapling_juniper"
+        }
+      },
+      "yew": {
+        "textures": {
+          "cross": "covens:blocks/sapling_yew"
+        }
+      },
+      "cypress": {
+        "textures": {
+          "cross": "covens:blocks/sapling_cypress"
+        }
+      }
+    }
+  }
+}

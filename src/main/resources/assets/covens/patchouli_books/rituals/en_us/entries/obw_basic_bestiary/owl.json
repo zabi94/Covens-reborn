@@ -1,0 +1,18 @@
+{
+  "name": "Owl",
+  "icon": "covens:owlets_wing",
+  "category": "obw_basic_bestiary",
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    },
+    {
+      "type": "entity",
+      "name": "Owl",
+      "entity": "covens:owl",
+      "scale": 0.95,
+      "text": "TODO"
+    }
+  ]
+}

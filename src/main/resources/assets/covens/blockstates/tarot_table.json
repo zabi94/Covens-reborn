@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "covens:tarot_table"
+    },
+    "facing=south": {
+      "model": "covens:tarot_table",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "covens:tarot_table",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "covens:tarot_table",
+      "y": 270
+    }
+  }
+}

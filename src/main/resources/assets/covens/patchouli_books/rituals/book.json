@@ -1,0 +1,11 @@
+{
+  "name": "covens.book.rites.name",
+  "landing_text": "Welcome to your own personal grimoire, detailing various rituals and other forms of magic you have come across.",
+  "version": 4,
+  "model": "covens:book_of_shadows",
+  "subtitle": "covens.book.rites.subtitle",
+  "book_texture": "covens:textures/gui/book.png",
+  "show_toasts": false,
+  "creative_tab": "covens_items",
+  "show_progress": false
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "covens:oilpress"
+    },
+    "facing=south": {
+      "model": "covens:oilpress",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "covens:oilpress",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "covens:oilpress",
+      "y": 270
+    }
+  }
+}

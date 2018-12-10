@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " S ",
+    "G G",
+    "GGG"
+  ],
+  "key": {
+    "S": {
+      "item": "covens:fume",
+      "data": 7
+    },
+    "G": {
+      "item": "covens:cold_iron_nugget",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "covens:horseshoe",
+    "data": 0,
+    "count": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "parent": "block/block",
+  "defaults": {
+    "normal": {
+      "model": "covens:leaves_yew"
+    }
+  },
+  "variants": {
+    "check_decay": {
+      "true": {
+        "model": "covens:leaves_yew"
+      },
+      "false": {
+        "model": "covens:leaves_yew"
+      }
+    },
+    "decayable": {
+      "true": {
+        "model": "covens:leaves_yew"
+      },
+      "false": {
+        "model": "covens:leaves_yew"
+      }
+    }
+  }
+}

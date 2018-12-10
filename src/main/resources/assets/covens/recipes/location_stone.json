@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "FSF",
+    "SPS",
+    "FSF"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "P": {
+      "item": "covens:pentacle",
+      "data": 0
+    },
+    "F": {
+      "item": "covens:gem_powder",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "covens:location_stone",
+    "data": 0,
+    "count": 4
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "WIW",
+    "ISI",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "covens:witches_stitching"
+    },
+    "I": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetSilver"
+    }
+  },
+  "result": {
+    "item": "covens:pouch",
+    "data": 0
+  }
+}

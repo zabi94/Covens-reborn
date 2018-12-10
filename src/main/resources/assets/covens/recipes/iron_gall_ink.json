@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "covens:mortar_and_pestle",
+      "data": 0
+    },
+    {
+      "item": "covens:oak_apple_gall",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "covens:iron_gall_ink",
+    "data": 0,
+    "count": 2
+  }
+}

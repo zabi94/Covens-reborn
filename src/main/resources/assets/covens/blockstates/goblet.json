@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "parent": "block/block",
+  "defaults": {
+    "model": "covens:goblet"
+  },
+  "variants": {
+    "filled": {
+      "true": {
+        "model": "covens:goblet_filled"
+      },
+      "false": {
+        "model": "covens:goblet"
+      }
+    }
+  }
+}

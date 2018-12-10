@@ -1,0 +1,29 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SDS",
+    "ISI",
+    "OIO"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "ingotSilver"
+    },
+    "O": {
+      "item": "covens:fume",
+      "data": 12
+    },
+    "D": {
+      "item": "covens:fume",
+      "data": 11
+    }
+  },
+  "result": {
+    "item": "covens:brazier",
+    "data": 0
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Ritual of the Marks",
+  "icon": "covens:wood_ash",
+  "sortnum": "4",
+  "category": "obw_manifestations_of_magic",
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:draw_circle_small"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:draw_circle_medium"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:draw_circle_large"
+    }
+  ]
+}

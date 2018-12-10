@@ -1,0 +1,61 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "variant": {
+      "sun": {
+        "textures": {
+          "all": "covens:blocks/silver_block_sun"
+        }
+      },
+      "cup": {
+        "textures": {
+          "all": "covens:blocks/silver_block_cup"
+        }
+      },
+      "moon": {
+        "textures": {
+          "all": "covens:blocks/silver_block_moon"
+        }
+      },
+      "pentacle": {
+        "textures": {
+          "all": "covens:blocks/silver_block_pentacle"
+        }
+      },
+      "pentagram": {
+        "textures": {
+          "all": "covens:blocks/silver_block_pentagram"
+        }
+      },
+      "sword": {
+        "textures": {
+          "all": "covens:blocks/silver_block_sword"
+        }
+      },
+      "symbol": {
+        "textures": {
+          "all": "covens:blocks/silver_block_symbol"
+        }
+      },
+      "wand": {
+        "textures": {
+          "all": "covens:blocks/silver_block_wand"
+        }
+      },
+      "bevel": {
+        "textures": {
+          "all": "covens:blocks/silver_block_bevel"
+        }
+      }
+    }
+  }
+}

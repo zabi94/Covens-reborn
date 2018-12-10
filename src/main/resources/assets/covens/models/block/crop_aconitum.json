@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "covens:blocks/crop_aconitum_0"
+  }
+}

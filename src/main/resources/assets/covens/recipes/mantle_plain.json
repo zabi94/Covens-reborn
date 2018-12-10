@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SOS",
+    "SWS",
+    "WSW"
+  ],
+  "key": {
+    "S": {
+      "item": "covens:witches_stitching"
+    },
+    "W": {
+      "item": "covens:wool_of_bat"
+    },
+    "O": {
+      "item": "covens:fume",
+      "data": 20
+    }
+  },
+  "result": {
+    "item": "covens:mantle",
+    "data": 0
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "covens:gem_block",
+      "data": 5
+    }
+  ],
+  "result": {
+    "item": "covens:gem",
+    "data": 5,
+    "count": 9
+  }
+}

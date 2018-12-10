@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "covens:log_elder",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "covens:planks_elder",
+    "data": 0,
+    "count": 4
+  }
+}

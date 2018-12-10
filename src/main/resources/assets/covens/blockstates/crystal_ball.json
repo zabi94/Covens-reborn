@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "parent": "block/block",
+  "defaults": {
+    "model": "covens:crystal_ball"
+  },
+  "variants": {
+    "normal": {
+      "model": "covens:crystal_ball"
+    },
+    "inventory": {
+      "model": "covens:crystal_ball",
+      "transform": "forge:default-block"
+    }
+  }
+}

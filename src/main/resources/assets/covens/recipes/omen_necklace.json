@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PIP",
+    "ISI",
+    "PIP"
+  ],
+  "key": {
+    "I": {
+      "item": "covens:pure_filament"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "gemLapis"
+    },
+    "P": {
+      "item": "covens:fume",
+      "data": 7
+    }
+  },
+  "result": {
+    "item": "covens:omen_necklace",
+    "data": 0
+  }
+}

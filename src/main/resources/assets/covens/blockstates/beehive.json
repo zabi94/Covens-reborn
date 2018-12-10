@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "covens:beehive"
+    },
+    "facing=south": {
+      "model": "covens:beehive",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "covens:beehive",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "covens:beehive",
+      "y": 270
+    }
+  }
+}

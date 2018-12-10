@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer1": "covens:items/spell_static",
+    "layer0": "covens:items/spell_inside"
+  }
+}

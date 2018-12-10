@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "covens:mortar_and_pestle_stone",
+      "data": 0
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "gemQuartz"
+    }
+  ],
+  "result": {
+    "item": "covens:quartz_powder",
+    "data": 0,
+    "count": 2
+  }
+}

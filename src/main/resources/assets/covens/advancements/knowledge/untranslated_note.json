@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:filled_map"
+    },
+    "title": {
+      "translate": "covens.advancements.knowledge.discovery"
+    },
+    "description": {
+      "translate": "covens.advancements.knowledge.discovery.desc"
+    },
+    "background": "minecraft:textures/blocks/bookshelf.png"
+  },
+  "criteria": {
+    "fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "covens:knowledge_fragment"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "variant": {
+      "sentient": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_sentient"
+        }
+      },
+      "polished": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_polished"
+        }
+      },
+      "skull": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_skull"
+        }
+      },
+      "pentacle": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_pentacle"
+        }
+      },
+      "pentagram": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_pentagram"
+        }
+      },
+      "eye_watching": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_eye_watching"
+        }
+      },
+      "symbol": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_symbol"
+        }
+      },
+      "eye": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_eye"
+        }
+      },
+      "bevel": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_bevel"
+        }
+      },
+      "hellish": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_hellish"
+        }
+      },
+      "hellish_watching": {
+        "textures": {
+          "all": "covens:blocks/nethersteel_hellish_watching"
+        }
+      }
+    }
+  }
+}

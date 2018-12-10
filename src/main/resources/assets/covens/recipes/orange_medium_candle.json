@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S ",
+    "T ",
+    "TD"
+  ],
+  "key": {
+    "S": {
+      "item": "covens:candle_small",
+      "data": 0
+    },
+    "T": {
+      "item": "covens:wax",
+      "data": 0
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dyeOrange"
+    }
+  },
+  "result": {
+    "item": "covens:candle_medium",
+    "data": 1
+  }
+}

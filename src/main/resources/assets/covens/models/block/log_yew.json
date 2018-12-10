@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "covens:blocks/log_yew_top",
+    "side": "covens:blocks/log_yew"
+  }
+}

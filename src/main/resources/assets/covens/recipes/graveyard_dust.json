@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "covens:mortar_and_pestle",
+      "data": 0
+    },
+    {
+      "item": "covens:ectoplasm",
+      "data": 0
+    },
+    {
+      "item": "covens:spectral_dust",
+      "data": 0
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 15
+    }
+  ],
+  "result": {
+    "item": "covens:graveyard_dust",
+    "data": 0,
+    "count": 3
+  }
+}

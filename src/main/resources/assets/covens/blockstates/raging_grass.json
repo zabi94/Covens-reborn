@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "parent": "block/block",
+  "variants": {
+    "inventory": {
+      "model": "covens:raging_grass",
+      "transform": "forge:default-block"
+    },
+    "normal": {
+      "model": "covens:raging_grass"
+    }
+  }
+}

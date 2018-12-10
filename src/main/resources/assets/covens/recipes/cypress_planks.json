@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "covens:log_cypress",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "covens:planks_cypress",
+    "data": 0,
+    "count": 4
+  }
+}

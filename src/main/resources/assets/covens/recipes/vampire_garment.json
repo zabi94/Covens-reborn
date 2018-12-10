@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "X X",
+    "XSX",
+    "XXX"
+  ],
+  "key": {
+    "S": {
+      "item": "covens:diabolic_vein",
+      "data": 0
+    },
+    "X": {
+      "item": "covens:sanguine_fabric",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "covens:vampire_vest",
+    "data": 0
+  }
+}

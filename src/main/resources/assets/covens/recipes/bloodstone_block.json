@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    },
+    {
+      "item": "covens:gem",
+      "data": 4
+    }
+  ],
+  "result": {
+    "item": "covens:gem_block",
+    "data": 4,
+    "count": 1
+  }
+}

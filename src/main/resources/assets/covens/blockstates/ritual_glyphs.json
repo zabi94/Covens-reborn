@@ -1,0 +1,67 @@
+{
+  "forge_marker": 1,
+  "parent": "block/block",
+  "defaults": {
+    "model": "covens:glyph"
+  },
+  "variants": {
+    "facing": {
+      "north": {
+        "y": 0
+      },
+      "south": {
+        "y": 180
+      },
+      "east": {
+        "y": 90
+      },
+      "west": {
+        "y": 270
+      }
+    },
+    "letter": {
+      "0": {
+        "textures": {
+          "btexture": "covens:blocks/glyph0"
+        }
+      },
+      "1": {
+        "textures": {
+          "btexture": "covens:blocks/glyph1"
+        }
+      },
+      "2": {
+        "textures": {
+          "btexture": "covens:blocks/glyph2"
+        }
+      },
+      "3": {
+        "textures": {
+          "btexture": "covens:blocks/glyph3"
+        }
+      },
+      "4": {
+        "textures": {
+          "btexture": "covens:blocks/glyph4"
+        }
+      },
+      "5": {
+        "textures": {
+          "btexture": "covens:blocks/glyph5"
+        }
+      }
+    },
+    "type": {
+      "normal": {
+      },
+      "golden": {
+      },
+      "ender": {
+      },
+      "nether": {
+      },
+      "any": {
+      }
+    }
+  }
+}

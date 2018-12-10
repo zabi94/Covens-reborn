@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "facing=north": [
+      {
+        "model": "covens:placed_item"
+      }
+    ],
+    "facing=east": [
+      {
+        "model": "covens:placed_item"
+      }
+    ],
+    "facing=south": [
+      {
+        "model": "covens:placed_item"
+      }
+    ],
+    "facing=west": [
+      {
+        "model": "covens:placed_item"
+      }
+    ]
+  }
+}

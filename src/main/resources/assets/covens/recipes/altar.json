@@ -1,0 +1,31 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "OSO",
+    "ILI",
+    "ILI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:stonebrick",
+      "data": 0
+    },
+    "L": {
+      "item": "covens:log_elder",
+      "data": 0
+    },
+    "O": {
+      "item": "covens:fume",
+      "data": 2
+    },
+    "S": {
+      "item": "covens:salt",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "covens:witch_altar",
+    "data": 0,
+    "count": 3
+  }
+}

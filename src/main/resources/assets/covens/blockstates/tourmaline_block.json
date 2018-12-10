@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "normal": [
+      {
+        "model": "covens:tourmaline_block"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "blocks/dirt",
+    "bottom": "covens:blocks/infested_farmland_top",
+    "top": "blocks/dirt",
+    "side": "covens:blocks/infested_farmland_side"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "covens:blocks/raging_grass"
+  }
+}

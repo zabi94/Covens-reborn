@@ -34,9 +34,9 @@ checkstyle {
     configFile = new File(rootDir, "checkstyle/checkstyle.xml")
 }
 
-version = "${mc_version}-${bw_version}"
-group = "com.bewitchment" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Bewitchment"
+version = "${mc_version}-${cv_version}"
+group = "com.covens"
+archivesBaseName = "Covens Reborn"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -122,14 +122,10 @@ runClient {
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
 
-    // Skips if the keyStore property is missing.
     onlyIf {
         project.hasProperty('keyStore')
     }
 
-    // findProperty allows us to reference the property without it existing.
-    // Using project.propName would cause the script to fail validation if
-    // the property did not exist.
     keyStore = project.findProperty('keyStore')
     alias = project.findProperty('keyStoreAlias')
     storePass = project.findProperty('keyStorePass')
@@ -155,7 +151,7 @@ task apiJar(type: Jar) {
     classifier = 'api'
     from sourceSets.main.output //Save .class files
     from sourceSets.main.allJava //Save corresponding .java files
-    include 'com/bewitchment/api/**/*' //Only include the api directory and subdirectory
+    include 'com/covens/api/**/*' //Only include the api directory and subdirectory
 }
 
 artifacts {
