@@ -91,5 +91,6 @@ public class LibIngredients {
 	public static Ingredient tulsi = Ingredient.fromItem(ModItems.tulsi);
 	public static Ingredient oakAppleGall = Ingredient.fromItem(ModItems.oak_apple_gall);
 	public static Ingredient empty_jar = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.empty_jar.ordinal()));
+	public static Ingredient anySeed = new OreIngredient("listAllSeeds");//TODO check
 
 }

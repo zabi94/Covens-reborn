@@ -1,10 +1,14 @@
 package com.covens.common.entity.living.animals;
 
+import java.util.Set;
+
 import com.covens.common.core.statics.ModSounds;
 import com.covens.common.entity.living.EntityMultiSkin;
 import com.covens.common.item.ModItems;
+import com.covens.common.lib.LibIngredients;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -12,7 +16,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISit;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -33,13 +44,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.Set;
-
 public class EntityRaven extends EntityMultiSkin {
 
 	private static final ResourceLocation loot = new ResourceLocation(LibMod.MOD_ID, "entities/raven");
 	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.GOLD_NUGGET, ModItems.silver_nugget);
-	private static final Set<Item> FODDER_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.NETHER_WART, ModItems.seed_aconitum, ModItems.seed_asphodel, ModItems.seed_belladonna, ModItems.seed_chrysanthemum, ModItems.seed_garlic, ModItems.seed_ginger, ModItems.seed_hellebore, ModItems.seed_kelp, ModItems.seed_kenaf, ModItems.seed_lavender, ModItems.seed_mandrake, ModItems.seed_mint, ModItems.seed_sagebrush, ModItems.seed_silphium, ModItems.seed_thistle, ModItems.seed_tulsi, ModItems.seed_white_sage, ModItems.seed_wormwood);
 	//	private static final String[] names = {"Huginn", "Muninn", "Morrigan", "Bhusunda", "Pallas", "Qrow", "Nevermore", "Corvus", "Apollo", "Odin", "Badhbh", "Bran", "Crowe", "Scarecrow", "Santa Caws", "Valravn", "Cain", "Mabel", "Grip", "Harbinger", "Shani", "Diablo", "Raven", "Charlie", "Unidan", "Yatagarasu", "Samjokgo", "Ischys"}; //I'm trash lmao
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntityRaven.class, DataSerializers.VARINT);
 
@@ -143,7 +151,7 @@ public class EntityRaven extends EntityMultiSkin {
 
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return stack.getItem() == FODDER_ITEMS;
+		return LibIngredients.anySeed.apply(stack);
 	}
 
 	@Override
