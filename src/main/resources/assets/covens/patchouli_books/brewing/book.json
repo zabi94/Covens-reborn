@@ -1,8 +1,8 @@
 {
-  "name": "covens.book.rites.name",
-  "landing_text": "covens.book.rites.landing",
-  "version": 4,
-  "model": "covens:book_of_shadows",
+  "name": "covens.book.brews.name",
+  "landing_text": "covens.book.brews.landing",
+  "version": 1,
+  "model": "covens:book_brews",
   "subtitle": "covens.book.rites.subtitle",
   "book_texture": "covens:textures/gui/book.png",
   "show_toasts": false,

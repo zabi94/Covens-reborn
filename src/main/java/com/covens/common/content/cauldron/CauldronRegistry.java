@@ -140,10 +140,8 @@ public class CauldronRegistry {
 				.filter(ing -> BREW_INGREDIENT_REGISTRY.get(ing) == effect)
 				.findFirst();
 	}
-
+	
 	public static void init() { // TODO: Tune values. Also call for oredicts where possible. Such things have been marked with todos.
-
-		Ingredient salt = new IngredientMultiOreDict("salt", "itemSalt", "dustSalt", "foodSalt", "listAllSalt", "ingredientSalt", "pinchSalt", "portionSalt", "lumpSalt");
 
 		registerFood(Ingredient.fromItem(Items.APPLE), 4, 2.4f);
 		registerFood(Ingredient.fromItem(Items.BAKED_POTATO), 5, 6f);

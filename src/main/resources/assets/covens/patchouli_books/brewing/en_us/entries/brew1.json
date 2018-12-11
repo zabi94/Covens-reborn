@@ -1,0 +1,15 @@
+{
+  "name": "Brew of something",
+  "icon": "covens:owlets_wing",
+  "category": "brews",
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    },
+    {
+      "type": "covens:brew_recipe",
+      "brew": "minecraft:strength"
+    }
+  ]
+}

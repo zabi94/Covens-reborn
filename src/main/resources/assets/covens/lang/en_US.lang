@@ -952,7 +952,9 @@ gui.cvguicfg.hide=§b§l[Shift+Click]§r to hide/show
 
 //Books
 covens.book.rites.name=Book of Shadows
-covens.book.codex_infernalis.name=Codex Infernalis
+covens.book.rites.landing=A grimoire, handed from witch to witch for centuries.
+covens.book.brews.name=Almanac of boiling
+covens.book.brews.landing=Bubble, bubble! Fire burn and caldron bubble.
 
 //Knowledge Fragments
 item.knowledge_fragment_untranslated.name=Untranslated Knowledge Fragment

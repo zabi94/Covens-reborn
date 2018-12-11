@@ -1,0 +1,29 @@
+{
+	"processor": "com.covens.common.integration.patchouli.processors.BrewRecipeProcessor",
+	"components": [
+    {
+      "type": "text",
+      "text": "#potionname",
+      "x": 10,
+      "y": 8
+    },
+    {
+      "type": "image",
+      "image": "covens:textures/gui/books/brews/cauldron_pic.png",
+      "width": 32,
+      "height": 32,
+      "texture_width": 32,
+      "texture_height": 32,
+      "x": 20,
+      "y": 40,
+      "scale": 2
+    },
+    {
+      "type": "item",
+      "item": "#ingredient",
+      "framed": true,
+      "x": 20,
+      "y": 20
+    }
+  ]
+}
