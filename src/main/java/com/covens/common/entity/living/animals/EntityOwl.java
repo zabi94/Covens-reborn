@@ -17,11 +17,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
+import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.ai.EntityFlyHelper;
@@ -93,8 +95,10 @@ public class EntityOwl extends EntityMultiSkin {
 		this.tasks.addTask(5, new EntityAILookIdle(this));
 		this.tasks.addTask(4, new EntityAIWatchClosest2(this, EntityPlayer.class, 5f, 1f));
 		this.tasks.addTask(2, new EntityAIFleeSun(this, 1d));
-		this.tasks.addTask(4, new EntityAIWanderAvoidWaterFlying(this, 0.8));
+		this.tasks.addTask(6, new EntityAIWanderAvoidWaterFlying(this, 0.8));
 		this.tasks.addTask(3, new EntityAIMate(this, 0.8d));
+        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TAME_ITEMS));
+        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(4, this.aiSit);
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 	}

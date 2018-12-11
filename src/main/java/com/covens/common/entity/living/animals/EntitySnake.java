@@ -14,12 +14,14 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
+import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,12 +54,12 @@ public class EntitySnake extends EntityMultiSkin {
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntitySnake.class, DataSerializers.VARINT);
 	private static final int TIME_BETWEEN_MILK = 3600;
 
-	private int timerRef = 0;
 	private int milkCooldown = 0;
 
 	public EntitySnake(World worldIn) {
 		super(worldIn);
 		setSize(1F, .3F);
+		this.stepHeight = 0.2f;
 	}
 
 	@Override
@@ -95,6 +97,8 @@ public class EntitySnake extends EntityMultiSkin {
 		this.tasks.addTask(5, new EntityAILookIdle(this));
 		this.tasks.addTask(4, new EntityAIWatchClosest2(this, EntityPlayer.class, 5f, 1f));
 		this.tasks.addTask(3, new EntityAIMate(this, 1d));
+        this.tasks.addTask(4, new EntityAITempt(this, 0.3D, false, TAME_ITEMS));
+        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(4, this.aiSit);
 		this.targetTasks.addTask(3, new EntityAITargetNonTamed<>(this, EntityPlayer.class, true, p -> p.getDistanceSq(this) < 1));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
@@ -243,19 +247,6 @@ public class EntitySnake extends EntityMultiSkin {
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("milkCooldown", milkCooldown);
-	}
-
-
-	public void resetTimer() {
-		timerRef = 0;
-	}
-
-	public void addTimer(int n) {
-		timerRef += n;
-	}
-
-	public int getTimer() {
-		return timerRef;
 	}
 
 	@Override
