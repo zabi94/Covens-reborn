@@ -4,26 +4,32 @@
     {
       "type": "text",
       "text": "#potionname",
-      "x": 10,
+      "x": -1,
       "y": 8
     },
     {
       "type": "image",
-      "image": "covens:textures/gui/books/brews/cauldron_pic.png",
-      "width": 32,
-      "height": 32,
-      "texture_width": 32,
-      "texture_height": 32,
-      "x": 20,
-      "y": 40,
-      "scale": 2
+      "image": "covens:textures/gui/books/brews/cauldron_outline_book.png",
+      "width": 128,
+      "height": 128,
+      "texture_width": 128,
+      "texture_height": 128,
+      "x": 25,
+      "y": 70,
+      "scale": 0.5
     },
     {
       "type": "item",
       "item": "#ingredient",
       "framed": true,
-      "x": 20,
-      "y": 20
+      "x": 49,
+      "y": 58
+    },
+    {
+      "type": "text",
+      "text": "#cost",
+      "x": -1,
+      "y": 30
     }
   ]
 }

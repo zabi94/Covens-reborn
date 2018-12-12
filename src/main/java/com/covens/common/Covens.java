@@ -35,6 +35,7 @@ import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.proxy.ISidedProxy;
 import com.covens.common.core.statics.ModLootTables;
+import com.covens.common.core.util.Watchdog;
 import com.covens.common.crafting.FrostFireRecipe;
 import com.covens.common.crafting.ModDistilleryRecipes;
 import com.covens.common.crafting.ModOvenSmeltingRecipes;
@@ -86,6 +87,7 @@ public class Covens {
 
 	static {
 		FluidRegistry.enableUniversalBucket();
+		Watchdog.init();
 	}
 
 	@EventHandler
