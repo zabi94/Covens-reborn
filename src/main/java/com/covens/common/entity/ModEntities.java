@@ -13,41 +13,36 @@ import com.covens.common.entity.living.animals.EntitySnake;
 import com.covens.common.entity.living.animals.EntityToad;
 import com.covens.common.lib.LibMod;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
- */
 public final class ModEntities {
 
 	private ModEntities() {
 	}
 
 	public static void init() {
-		int id = 0;
-
 		// Utility entities
-		EntityRegistry.registerModEntity(getResource("spell_carrier"), EntitySpellCarrier.class, "spell_carrier", id++, Covens.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(getResource("broom"), EntityFlyingBroom.class, "broom", id++, Covens.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(getResource("swarm"), EntityBatSwarm.class, "swarm", id++, Covens.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(getResource("brew_arrow"), EntityBrewArrow.class, "brew_arrow", id++, Covens.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(getResource("brew_bottle"), EntityBrew.class, "brew_bottle", id++, Covens.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(getResource("brew_lingering_effect"), EntityLingeringBrew.class, "brew_lingering_effect", id++, Covens.instance, 64, 100, false);
-		EntityRegistry.registerModEntity(getResource("brew_aoe_effect"), EntityAoE.class, "brew_aoe_effect", id++, Covens.instance, 64, 100, false);
+		registerEntity("spell_carrier", EntitySpellCarrier.class, 64, 1, true);
+		registerEntity("broom", EntityFlyingBroom.class, 64, 1, true);
+		registerEntity("swarm", EntityBatSwarm.class, 64, 1, true);
+		registerEntity("brew_arrow", EntityBrewArrow.class, 64, 1, true);
+		registerEntity("brew_bottle", EntityBrew.class, 64, 1, true);
+		registerEntity("brew_lingering_effect", EntityLingeringBrew.class, 64, 100, false);
+		registerEntity("brew_aoe_effect", EntityAoE.class, 64, 100, false);
 
 		// Mob entities
-		EntityRegistry.registerModEntity(getResource("owl"), EntityOwl.class, "entity_owl", id++, Covens.instance, 64, 1, true, 0xAF813F, 0x6E5127);
-		EntityRegistry.registerModEntity(getResource("snake"), EntitySnake.class, "entity_snake", id++, Covens.instance, 64, 1, true, 0x8F9779, 0x696969);
-		EntityRegistry.registerModEntity(getResource("raven"), EntityRaven.class, "entity_raven", id++, Covens.instance, 64, 1, true, 0x222222, 0x280638);
-		EntityRegistry.registerModEntity(getResource("toad"), EntityToad.class, "entity_toad", id++, Covens.instance, 64, 1, true, 0xA9BA9D, 0xC3B091);
-		EntityRegistry.registerModEntity(getResource("lizard"), EntityLizard.class, "entity_lizard", id++, Covens.instance, 64, 1, true, 0x568203, 0x0070BB);
+		registerEntity("owl", EntityOwl.class, 64, 1, true, 0xAF813F, 0x6E5127);
+		registerEntity("snake", EntitySnake.class, 64, 1, true, 0x8F9779, 0x696969);
+		registerEntity("raven", EntityRaven.class, 64, 1, true, 0x222222, 0x280638);
+		registerEntity("toad", EntityToad.class, 64, 1, true, 0xA9BA9D, 0xC3B091);
+		registerEntity("lizard", EntityLizard.class, 64, 1, true, 0x568203, 0x0070BB);
 
 		List<Biome> validOwl = BiomeDictionary.getBiomes(Type.FOREST).stream()
 				.filter(b -> BiomeDictionary.hasType(b, Type.DENSE))
@@ -86,5 +81,27 @@ public final class ModEntities {
 
 	private static ResourceLocation getResource(String name) {
 		return new ResourceLocation(LibMod.MOD_ID, name);
+	}
+	
+	private static int id = 0;
+	
+	private static void registerEntity(String name, Class<? extends Entity> clazz, int track_range, int update_frewuency, boolean sends_updates, int eggColor, int secundaryEggColor) {
+		checkContructor(clazz);
+		EntityRegistry.registerModEntity(getResource(name), clazz, name, id++, Covens.instance, track_range, update_frewuency, sends_updates, eggColor, secundaryEggColor);
+	}
+	
+	private static void registerEntity(String name, Class<? extends Entity> clazz, int track_range, int update_frewuency, boolean sends_updates) {
+		checkContructor(clazz);
+		EntityRegistry.registerModEntity(getResource(name), clazz, name, id++, Covens.instance, track_range, update_frewuency, sends_updates);
+	}
+	
+	private static void checkContructor(Class<? extends Entity> clazz) {
+		try {
+			clazz.getConstructor(World.class);
+		} catch (NoSuchMethodException e) {
+			throw new NoSuchMethodError("You need a contructor that takes a world object for the entity "+clazz.getCanonicalName());
+		} catch (SecurityException e) {
+			throw new RuntimeException("Exception during entity registration", e);
+		}
 	}
 }
