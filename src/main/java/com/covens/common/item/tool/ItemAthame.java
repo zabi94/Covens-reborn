@@ -1,19 +1,37 @@
 package com.covens.common.item.tool;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
+import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.ModMaterials;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.monster.AbstractSkeleton;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityEndermite;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.AbstractHorse;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
@@ -29,16 +47,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-
 /**
  * This class was created by BerciTheBeast on 27.3.2017.
  * It's distributed as part of Covens under
  * the MIT license.
  */
-// Uses code from Botania
 
 public class ItemAthame extends ItemSword implements IModelRegister {
 
@@ -58,7 +71,7 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 		if (!target.world.isRemote)
 			if (target instanceof EntityEnderman && attacker instanceof EntityPlayer) {
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), 20);
-				stack.damageItem(50, attacker);
+				stack.damageItem(5, attacker);
 			} else {
 				stack.damageItem(1, attacker);
 			}
@@ -75,8 +88,6 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 		tooltip.add(TextFormatting.YELLOW + I18n.format("witch.tooltip." + getNameInefficiently(stack) + "_description.name"));
 	}
 
-	//Todo: Rewrite in it's entirety. Use loot tables.
-	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public void onEntityDrops(LivingDropsEvent event) {
 		if (event.isRecentlyHit() && event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityPlayer) {
@@ -100,43 +111,13 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 				else if (event.getEntityLiving() instanceof EntityWolf && rand.nextInt(5) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.tongue_of_dog, 1));
 
-				else if (event.getEntityLiving() instanceof EntityZombie && rand.nextInt(16) <= 2 + 2 * looting)
+				else if (event.getEntityLiving().getCreatureAttribute() == EnumCreatureAttribute.UNDEAD && rand.nextInt(16) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.spectral_dust, 1));
-
-				else if (event.getEntityLiving() instanceof EntitySkeleton && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 1));
-
-				else if (event.getEntityLiving() instanceof EntitySkeletonHorse && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 2));
-
-				else if (event.getEntityLiving() instanceof EntityStray && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 1));
-
-				else if (event.getEntityLiving() instanceof EntityPigZombie && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 3));
-
-				else if (event.getEntityLiving() instanceof EntityHusk && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 1));
-
-				else if (event.getEntityLiving() instanceof EntityWitherSkeleton && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 2));
-
-				else if (event.getEntityLiving() instanceof EntityZombieHorse && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 1));
-
-				else if (event.getEntityLiving() instanceof EntityZombieVillager && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 1));
-
-				else if (event.getEntityLiving() instanceof EntityWither && rand.nextInt(16) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.spectral_dust, 6));
 
 				else if (event.getEntityLiving() instanceof EntitySilverfish && rand.nextInt(16) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.silver_scales, 2));
 
-				else if (event.getEntityLiving() instanceof EntityVillager && rand.nextInt(2) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.heart, 1));
-
-				else if (event.getEntityLiving() instanceof EntityPlayer && rand.nextInt(4) <= 2 + 2 * looting)
+				else if (MobHelper.isHumanoid(event.getEntityLiving()) && rand.nextInt(2) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.heart, 1));
 
 				else if (event.getEntityLiving() instanceof EntitySpider && rand.nextInt(6) <= 2 + 2 * looting)
