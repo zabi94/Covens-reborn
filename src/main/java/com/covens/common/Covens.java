@@ -1,5 +1,10 @@
 package com.covens.common;
 
+import static com.covens.common.lib.LibMod.MOD_NAME;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.covens.common.api.ApiInstance;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.natural.plants.BlockMoonbell;
@@ -27,7 +32,11 @@ import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExp
 import com.covens.common.core.capability.mimic.CapabilityMimicData;
 import com.covens.common.core.capability.simple.BarkCapability;
 import com.covens.common.core.capability.simple.SimpleCapability;
-import com.covens.common.core.command.*;
+import com.covens.common.core.command.CommandCreateTaglock;
+import com.covens.common.core.command.CommandForceFortune;
+import com.covens.common.core.command.CommandFortuneActivator;
+import com.covens.common.core.command.CommandIncantation;
+import com.covens.common.core.command.CommandTransformationModifier;
 import com.covens.common.core.event.LootTableEventHandler;
 import com.covens.common.core.gen.ModGen;
 import com.covens.common.core.helper.CropHelper;
@@ -42,11 +51,11 @@ import com.covens.common.crafting.ModOvenSmeltingRecipes;
 import com.covens.common.crafting.ModSpinningThreadRecipes;
 import com.covens.common.entity.ModEntities;
 import com.covens.common.integration.patchouli.Patchouli;
-import com.covens.common.integration.thaumcraft.ThaumcraftCompatBridge;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 import com.covens.common.world.EntityPlacementHelper;
+
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.item.EnumDyeColor;
@@ -58,11 +67,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import static com.covens.common.lib.LibMod.MOD_NAME;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 /**
  * This class was created by <Arekkuusu> on 26/02/2017.
@@ -120,7 +129,6 @@ public class Covens {
 		ModLootTables.registerLootTables();
 		FrostFireRecipe.init();
 		proxy.preInit(event);
-		ThaumcraftCompatBridge.loadThaumcraftCompat();
 		EntityPlacementHelper.init();
 	}
 

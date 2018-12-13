@@ -10,6 +10,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.INpc;
+import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEvoker;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityIllusionIllager;
@@ -55,6 +56,8 @@ public class MobHelper {
 		SPIRITS.add("familiarfauna.entities.EntityPixie");
 		SPIRITS.add("com.github.alexthe666.iceandfire.entity.EntityPixie");
 		SPIRITS.add("teamroots.roots.entity.EntityFairy");
+		
+		DEMONS.add(EntityBlaze.class.getName());
 
 		CANIDS.add(EntityWolf.class.getName());
 		CANIDS.add("evilcraft.common.entity.monster.Werewolf");
