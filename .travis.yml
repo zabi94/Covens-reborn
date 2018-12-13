@@ -17,9 +17,9 @@ deploy:
   file_glob: true
   api_key: $GITHUB_OAUTH
   file: 
-  - "./build/libs/Bewitchment-*-*.jar"
-  - "./build/libs/Bewitchment-*-*-sources.jar"
-  - "./build/libs/Bewitchment-*-*-api.jar"
+  - "./build/libs/Covens-*-*.jar"
+  - "./build/libs/Covens-*-*-sources.jar"
+  - "./build/libs/Covens-*-*-api.jar"
   skip_cleanup: true
   on:
     tags: true
