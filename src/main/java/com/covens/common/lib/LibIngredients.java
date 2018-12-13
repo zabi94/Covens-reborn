@@ -44,17 +44,19 @@ public class LibIngredients {
 	public static Ingredient fumeBottledMagic = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.bottled_magic.ordinal()));
 	public static Ingredient fumeBirchSoul = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.birch_soul.ordinal()));
 	public static Ingredient fumeDropletOfWisdom = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.droplet_of_wisdom.ordinal()));
-	public static Ingredient ectoplasm = Ingredient.fromItem(ModItems.ectoplasm);
+	public static Ingredient fumeEmanationDishonesty = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.emanation_of_dishonesty.ordinal()));
+	public static Ingredient fumeEverchangingPresence = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.everchanging_presence.ordinal()));
+	public static Ingredient fumeUndyingImage = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.undying_image.ordinal()));
 	public static Ingredient graveyardDust = Ingredient.fromItem(ModItems.graveyard_dust);
 	public static Ingredient wormwood = Ingredient.fromItem(ModItems.wormwood);
 	public static Ingredient empty_honeycomb = Ingredient.fromItem(ModItems.empty_honeycomb);
-	public static Ingredient hoof = Ingredient.fromItem(ModItems.hoof);
 	public static Ingredient emptyGoblet = Ingredient.fromStacks(new ItemStack(ModBlocks.goblet, 1, 0));
 	public static Ingredient diamondOre = new OreIngredient("oreDiamond");
 	public static Ingredient glowstoneBlock = Ingredient.fromItem(Item.getItemFromBlock(Blocks.GLOWSTONE));
 	public static Ingredient goldenCarrot = Ingredient.fromItem(Items.GOLDEN_CARROT);
 	public static Ingredient athame = Ingredient.fromItem(ModItems.athame);
 	public static Ingredient apple = Ingredient.fromItem(Items.APPLE);
+	public static Ingredient potato = Ingredient.fromItem(Items.POTATO);
 	public static Ingredient poisonousPotato = Ingredient.fromItem(Items.POISONOUS_POTATO);
 	public static Ingredient witherSkull = Ingredient.fromStacks(new ItemStack(Items.SKULL, 1, 1));
 	public static Ingredient soulSand = Ingredient.fromItem(Item.getItemFromBlock(Blocks.SOUL_SAND));
@@ -81,10 +83,11 @@ public class LibIngredients {
 	public static Ingredient magicSalve = Ingredient.fromItem(ModItems.magic_salve);
 	public static Ingredient elytra = Ingredient.fromItem(Items.ELYTRA);
 	public static Ingredient anyString = new OreIngredient("string");
+	public static Ingredient string = Ingredient.fromItems(Items.STRING);
 	public static Ingredient glowstoneDust = Ingredient.fromItem(Items.GLOWSTONE_DUST);
 	public static Ingredient boline = Ingredient.fromItem(ModItems.boline);
 	public static Ingredient bloodyRags = Ingredient.fromItem(ModItems.sanguine_fabric);
-	public static Ingredient eyes = Ingredient.fromStacks(new ItemStack(Items.ENDER_EYE, 1, 0), (new ItemStack(ModItems.eye_of_ancient, 1, 0)), (new ItemStack(ModItems.eye_of_old, 1, 0)));
+	public static Ingredient eyes = Ingredient.fromStacks(new ItemStack(Items.ENDER_EYE), new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.FERMENTED_SPIDER_EYE));
 	public static Ingredient anySapling = new OreIngredient("treeSapling");
 	public static Ingredient acaciaResin = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.acacia_essence.ordinal()));
 	public static Ingredient yewEssence = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.vital_essence.ordinal()));
@@ -92,5 +95,12 @@ public class LibIngredients {
 	public static Ingredient oakAppleGall = Ingredient.fromItem(ModItems.oak_apple_gall);
 	public static Ingredient empty_jar = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.empty_jar.ordinal()));
 	public static Ingredient anySeed = new OreIngredient("listAllSeeds");//TODO check
-
+	public static Ingredient feather = Ingredient.fromItem(Items.FEATHER);
+	public static Ingredient spider_web = Ingredient.fromStacks(new ItemStack(Blocks.WEB));
+	public static Ingredient hay = Ingredient.fromStacks(new ItemStack(Blocks.HAY_BLOCK));
+	public static Ingredient wheat = Ingredient.fromItem(Items.WHEAT);
+	public static Ingredient soul_string = Ingredient.fromItem(ModItems.soul_string);
+	public static Ingredient kenaf = Ingredient.fromItem(ModItems.kenaf);
+	public static Ingredient witches_stitching = Ingredient.fromItem(ModItems.witches_stitching);
+	public static Ingredient honeycomb = Ingredient.fromItem(ModItems.honeycomb);
 }

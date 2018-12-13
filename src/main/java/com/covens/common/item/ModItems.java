@@ -160,18 +160,12 @@ public final class ModItems {
 	public static final Item athame = null;
 	public static final Item boline = null;
 	public static final Item taglock = null;
-	public static final Item ectoplasm = null;
 	public static final Item spectral_dust = null;
 	public static final Item silver_scales = null;
-	public static final Item eye_of_old = null;
 	public static final Item heart = null;
 	public static final Item envenomed_fang = null;
 	public static final Item dimensional_sand = null;
-	public static final Item chromatic_quill = null;
-	public static final Item carnivorous_tooth = null;
 	public static final Item catechu = null;
-	public static final Item eye_of_ancient = null;
-	public static final Item hoof = null;
 	public static final Item owlets_wing = null;
 	public static final Item ravens_feather = null;
 	public static final Item equine_tail = null;
@@ -302,16 +296,10 @@ public final class ModItems {
 				new ItemMod(LibItemName.WOOL_OF_BAT),
 				new ItemMod(LibItemName.TONGUE_OF_DOG),
 				new ItemMod(LibItemName.WOOD_ASH),
-				new ItemMod(LibItemName.ECTOPLASM),
 				new ItemMod(LibItemName.SPECTRAL_DUST),
 				new ItemMod(LibItemName.SILVER_SCALES),
-				new ItemMod(LibItemName.EYE_OF_OLD),
 				new ItemMod(LibItemName.ENVENOMED_FANG),
 				new ItemMod(LibItemName.DIMENSIONAL_SAND),
-				new ItemMod(LibItemName.CHROMATIC_QUILL),
-				new ItemMod(LibItemName.CARNIVOROUS_TOOTH),
-				new ItemMod(LibItemName.EYE_OF_ANCIENT),
-				new ItemMod(LibItemName.HOOF),
 				new ItemMod(LibItemName.EQUINE_TAIL),
 				new ItemMod(LibItemName.CATECHU),
 				new ItemMod(LibItemName.OAK_APPLE_GALL),
@@ -536,7 +524,6 @@ public final class ModItems {
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.silphium));
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("cropWormwood", new ItemStack(ModItems.wormwood));
-		OreDictionary.registerOre("feather", new ItemStack(ModItems.chromatic_quill));
 		OreDictionary.registerOre("dyeBrown", new ItemStack(ModItems.catechu));
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ModItems.iron_gall_ink));
 		OreDictionary.registerOre("dye", new ItemStack(ModItems.iron_gall_ink));

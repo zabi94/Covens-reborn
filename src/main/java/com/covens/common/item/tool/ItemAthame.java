@@ -100,18 +100,6 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 				else if (event.getEntityLiving() instanceof EntityWolf && rand.nextInt(5) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.tongue_of_dog, 1));
 
-				else if (event.getEntityLiving() instanceof EntityVex && rand.nextInt(5) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.ectoplasm, 4));
-
-				else if (event.getEntityLiving() instanceof EntityGhast && rand.nextInt(5) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.ectoplasm, 2));
-
-				else if (event.getEntityLiving() instanceof EntityBlaze && rand.nextInt(5) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.ectoplasm, 1));
-
-				else if (event.getEntityLiving() instanceof EntityEnderman && rand.nextInt(5) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.ectoplasm, 1));
-
 				else if (event.getEntityLiving() instanceof EntityZombie && rand.nextInt(16) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.spectral_dust, 1));
 
@@ -145,9 +133,6 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 				else if (event.getEntityLiving() instanceof EntitySilverfish && rand.nextInt(16) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.silver_scales, 2));
 
-				else if (event.getEntityLiving() instanceof EntityGuardian && rand.nextInt(10) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.eye_of_old, 1));
-
 				else if (event.getEntityLiving() instanceof EntityVillager && rand.nextInt(2) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.heart, 1));
 
@@ -163,52 +148,7 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 				else if (event.getEntityLiving() instanceof EntityEndermite && rand.nextInt(6) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.dimensional_sand, 2));
 
-				else if (event.getEntityLiving() instanceof EntityParrot && rand.nextInt(3) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.chromatic_quill, 2));
-
-				else if (event.getEntityLiving() instanceof EntityWolf && rand.nextInt(5) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.carnivorous_tooth, 2));
-
-				else if (event.getEntityLiving() instanceof EntityPolarBear && rand.nextInt(5) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.carnivorous_tooth, 4));
-
-				else if (event.getEntityLiving() instanceof EntityOcelot && rand.nextInt(5) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.carnivorous_tooth, 2));
-
-				else if (event.getEntityLiving() instanceof EntityElderGuardian && rand.nextInt(10) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.eye_of_ancient, 1));
-
-				else if (event.getEntityLiving() instanceof EntityHorse && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 4));
-
-				else if (event.getEntityLiving() instanceof EntityLlama && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 4));
-
-				else if (event.getEntityLiving() instanceof EntityCow && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 4));
-
-				else if (event.getEntityLiving() instanceof EntityDonkey && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 4));
-
-				else if (event.getEntityLiving() instanceof EntitySheep && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 4));
-
-				else if (event.getEntityLiving() instanceof EntityPigZombie && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 2));
-
-				else if (event.getEntityLiving() instanceof EntityPig && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 4));
-
-				else if (event.getEntityLiving() instanceof EntityMule && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.hoof, 4));
-
-				else if (event.getEntityLiving() instanceof EntityHorse && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.equine_tail, 1));
-
-				else if (event.getEntityLiving() instanceof EntityMule && rand.nextInt(4) <= 2 + 2 * looting)
-					addDrop(event, new ItemStack(ModItems.equine_tail, 1));
-
-				else if (event.getEntityLiving() instanceof EntityDonkey && rand.nextInt(4) <= 2 + 2 * looting)
+				else if (event.getEntityLiving() instanceof AbstractHorse && rand.nextInt(4) <= 2 + 2 * looting)
 					addDrop(event, new ItemStack(ModItems.equine_tail, 1));
 
 				else if (event.getEntityLiving() instanceof EntityPlayer && rand.nextInt(11) <= 1 + looting) {

@@ -25,7 +25,7 @@ public class ModOvenSmeltingRecipes {
 				new OvenSmeltingRecipe(rl("sapling_3"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 3)), ash, cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("sapling_4"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 4)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.acacia_essence.ordinal()), 0.85f), //
 				new OvenSmeltingRecipe(rl("sapling_5"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 5)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.oak_spirit.ordinal()), 0.85f), //
-				new OvenSmeltingRecipe(rl("rotten_flesh"), Ingredient.fromStacks(new ItemStack(Items.ROTTEN_FLESH)), new ItemStack(Items.LEATHER), new ItemStack(ModItems.ectoplasm, 3), 0.85f), //
+				new OvenSmeltingRecipe(rl("rotten_flesh"), Ingredient.fromStacks(new ItemStack(Items.ROTTEN_FLESH)), new ItemStack(Items.LEATHER), new ItemStack(Items.SLIME_BALL), 0.85f), //
 				new OvenSmeltingRecipe(rl("iron_ore"), Ingredient.fromStacks(new ItemStack(Blocks.IRON_ORE)), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_NUGGET, 4), 0.85f), //
 				new OvenSmeltingRecipe(rl("gold_ore"), Ingredient.fromStacks(new ItemStack(Blocks.GOLD_ORE)), new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.GOLD_NUGGET, 2), 0.85f), //
 				new OvenSmeltingRecipe(rl("silver_ore"), Ingredient.fromStacks(new ItemStack(ModBlocks.silver_ore)), new ItemStack(ModItems.silver_ingot), new ItemStack(ModItems.silver_nugget, 3), 0.85f), //
@@ -35,7 +35,7 @@ public class ModOvenSmeltingRecipes {
 				new OvenSmeltingRecipe(rl("log_3"), Ingredient.fromStacks(new ItemStack(Blocks.LOG, 1, 3)), new ItemStack(Items.COAL, 1, 1), ash, 0.85f), //
 				new OvenSmeltingRecipe(rl("log2_0"), Ingredient.fromStacks(new ItemStack(Blocks.LOG2)), new ItemStack(Items.COAL, 1, 1), ash, 0.85f), //
 				new OvenSmeltingRecipe(rl("log2_1"), Ingredient.fromStacks(new ItemStack(Blocks.LOG2, 1, 1)), new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wood_ash, 3), 0.85f), //
-				new OvenSmeltingRecipe(rl("bone"), Ingredient.fromStacks(new ItemStack(Items.BONE)), new ItemStack(Items.DYE, 1, 15), new ItemStack(ModItems.ectoplasm, 1), 0.85f), //
+				new OvenSmeltingRecipe(rl("bone"), Ingredient.fromStacks(new ItemStack(Items.BONE)), new ItemStack(Items.DYE, 1, 15), ash, 0.85f), //
 				new OvenSmeltingRecipe(rl("wheat"), Ingredient.fromStacks(new ItemStack(Items.WHEAT)), new ItemStack(Items.BREAD), cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("rabbit"), Ingredient.fromStacks(new ItemStack(Items.RABBIT)), new ItemStack(Items.COOKED_RABBIT), cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("porkchop"), Ingredient.fromStacks(new ItemStack(Items.PORKCHOP)), new ItemStack(Items.COOKED_PORKCHOP), cloudy_oil, 0.85f), //

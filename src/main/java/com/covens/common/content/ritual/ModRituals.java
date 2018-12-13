@@ -131,7 +131,7 @@ public class ModRituals {
 						LibIngredients.soulSand,
 						LibIngredients.soulSand,
 						LibIngredients.soulSand,
-						LibIngredients.ectoplasm,
+						LibIngredients.fire_charge,
 						LibIngredients.fumeReekOfDeath,
 						LibIngredients.glowstoneDust,
 						LibIngredients.athame
