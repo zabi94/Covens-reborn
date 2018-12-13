@@ -40,7 +40,6 @@ import com.covens.common.item.magic.ItemBroom;
 import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.item.magic.ItemGem;
 import com.covens.common.item.magic.ItemGemPowder;
-import com.covens.common.item.magic.ItemKnowledgeFragment;
 import com.covens.common.item.magic.ItemLocationStone;
 import com.covens.common.item.magic.ItemRitualChalk;
 import com.covens.common.item.magic.ItemSalt;
@@ -241,7 +240,6 @@ public final class ModItems {
 	public static final Item spell_page = null;
 	public static final Item ritual_chalk = null;
 	public static final Item location_stone = null;
-	public static final Item knowledge_fragment = null;
 
 	public static final Item snake_venom = null;
 	public static final Item filet_of_fenny_snake = null;
@@ -279,7 +277,6 @@ public final class ModItems {
 		registry.register(new ItemMod(LibItemName.SILVER_NUGGET));
 
 		registry.register(new ItemSpellPage(LibItemName.SPELL_PAGE));
-		registry.register(new ItemKnowledgeFragment());
 
 		//Misc
 		registry.registerAll(

@@ -979,9 +979,6 @@ covens.book.rites.landing=A grimoire, handed from witch to witch for centuries.
 covens.book.brews.name=Almanac of boiling
 covens.book.brews.landing=Bubble, bubble! Fire burn and caldron bubble.
 
-//Knowledge Fragments
-item.knowledge_fragment_untranslated.name=Untranslated Knowledge Fragment
-
 //Advancements - Knowledge
 covens.advancements.knowledge.discovery=Knowledge
 covens.advancements.knowledge.discovery.desc=Find a knowledge fragment.
