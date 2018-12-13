@@ -676,6 +676,7 @@ effect.resistance.desc=Makes you receive less damage from enemy hits
 effect.digSpeed.desc=Makes you swing your tools faster
 effect.blindness.desc=Anything farther than a few blocks will be shrouded in darkness for your eyes
 effect.weakness.desc=Makes you deal less damage
+effect.jump.desc=Makes you jump higher
 
 //Sound
 covens.subtitle.boil=Cauldron boiling
