@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class PotionTillLand extends BrewMod {
 
 	public PotionTillLand() {
-		super("amplifier", false, 0x602312, true, 0);
+		super("till_land", false, 0x602312, true, 0);
 	}
 
 	@Override
