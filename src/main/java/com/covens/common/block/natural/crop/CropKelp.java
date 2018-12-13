@@ -88,7 +88,7 @@ public class CropKelp extends BlockCrop {
 
 	@Override
 	protected boolean canSustainBush(IBlockState state) {
-		return state.getBlock() == this;
+		return state.getBlock() == this && isMaxAge(state);
 	}
 
 	@Override
