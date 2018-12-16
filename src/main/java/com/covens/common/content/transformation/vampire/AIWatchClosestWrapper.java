@@ -2,17 +2,18 @@ package com.covens.common.content.transformation.vampire;
 
 import java.lang.reflect.Field;
 
+import com.covens.common.lib.LibReflection;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class AIWatchClosestWrapper extends EntityAIBase {
 
-	private static final Field entityClosest = ObfuscationReflectionHelper.findField(EntityAIWatchClosest.class, "closestEntity");
-	private static final Field entitySubject = ObfuscationReflectionHelper.findField(EntityAIWatchClosest.class, "entity");
+	private static final Field entityClosest = LibReflection.field("entityClosest", "field_75334_a", EntityAIWatchClosest.class);
+	private static final Field entitySubject = LibReflection.field("entity", "field_75332_b", EntityAIWatchClosest.class);
 	private EntityAIWatchClosest wrapped;
 
 	public AIWatchClosestWrapper(EntityAIWatchClosest action) {

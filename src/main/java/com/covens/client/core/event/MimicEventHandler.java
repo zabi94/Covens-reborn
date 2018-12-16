@@ -8,6 +8,7 @@ import java.util.UUID;
 import com.covens.client.core.event.custom.MimicEvent;
 import com.covens.common.Covens;
 import com.covens.common.lib.LibMod;
+import com.covens.common.lib.LibReflection;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
@@ -18,7 +19,6 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,9 +27,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MimicEventHandler {
 
 	@SideOnly(Side.CLIENT)
-	private static final Field playerTextures = ObfuscationReflectionHelper.findField(NetworkPlayerInfo.class, "playerTextures"/*, LibReflection.NETWORK_PLAYER_INFO__PLAYER_TEXTURES*/);
+	private static final Field playerTextures = LibReflection.field("playerTextures", LibReflection.NETWORK_PLAYER_INFO__PLAYER_TEXTURES, NetworkPlayerInfo.class);
+	
 	@SideOnly(Side.CLIENT)
 	private static final HashMap<UUID, ResourceLocation> skinMap = new HashMap<>();
+	
 	@SideOnly(Side.CLIENT)
 	private static final HashMap<UUID, String> modelType = new HashMap<>();
 

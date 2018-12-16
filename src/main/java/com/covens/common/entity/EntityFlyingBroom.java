@@ -9,6 +9,7 @@ import com.covens.api.mp.IMagicPowerContainer;
 import com.covens.common.Covens;
 import com.covens.common.core.util.DimensionalPosition;
 import com.covens.common.item.ModItems;
+import com.covens.common.lib.LibReflection;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -31,7 +32,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -41,7 +41,7 @@ public class EntityFlyingBroom extends Entity {
 	private static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(EntityFlyingBroom.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> FUEL = EntityDataManager.<Integer>createKey(EntityFlyingBroom.class, DataSerializers.VARINT); //ONLY SYNCHRONIZED WHEN EMPTY OR FULL
 	private static final int MAX_FUEL = 100;
-	Field isJumping = ObfuscationReflectionHelper.findField(EntityLivingBase.class, "isJumping");
+	Field isJumping = LibReflection.field("isJumping", "field_70703_bu", EntityLivingBase.class);
 	private DimensionalPosition orig_position;
 
 	public EntityFlyingBroom(World world) {

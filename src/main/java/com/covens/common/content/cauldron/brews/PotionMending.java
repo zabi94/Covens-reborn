@@ -9,6 +9,7 @@ import java.util.UUID;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+import com.covens.common.lib.LibReflection;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
@@ -26,7 +27,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.LoaderException;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class PotionMending extends BrewMod {
 
@@ -42,7 +42,7 @@ public class PotionMending extends BrewMod {
 		stateMap.put(Blocks.BROWN_MUSHROOM, Blocks.TALLGRASS.getDefaultState());
 		stateMap.put(Blocks.SAND, Blocks.DIRT.getDefaultState());
 		try {
-			startConverting = ObfuscationReflectionHelper.findMethod(EntityZombieVillager.class, "startConverting", Void.class, UUID.class, int.class);
+			startConverting = LibReflection.method("startConverting", "func_191991_a", EntityZombieVillager.class, Void.class, UUID.class, int.class); 
 		} catch (Exception e) {
 			throw new LoaderException("[Covens] Failed to find startConverting method in class EntityZombieVillager for PotionMending");
 		}
