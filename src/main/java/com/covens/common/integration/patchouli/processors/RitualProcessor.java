@@ -35,6 +35,9 @@ public class RitualProcessor implements IComponentProcessor {
 			if (val.equals("ritualname")) {
 				return I18n.format("ritual." + ritual.getRegistryName().toString().replace(':', '.') + ".name");
 			}
+			if (val.equals("ritual")) {
+				return ritual.getRegistryName().toString();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
