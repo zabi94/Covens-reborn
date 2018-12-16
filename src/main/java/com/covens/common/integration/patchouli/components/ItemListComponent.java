@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.covens.common.integration.patchouli.Patchouli;
 
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.crafting.Ingredient;
 import vazkii.patchouli.api.IComponentRenderContext;
@@ -28,7 +27,6 @@ public class ItemListComponent implements ICustomComponent {
 	public String list_type;
 
 	transient List<Ingredient> ingredients;
-	transient int index = 0;
 
 	@Override
 	public void build(int componentX, int componentY, int pageNum) {
@@ -40,23 +38,21 @@ public class ItemListComponent implements ICustomComponent {
 	@Override
 	public void render(IComponentRenderContext context, float pticks, int mouseX, int mouseY) {
 		if (ingredients.size() > 0) {
-			int maxIndex = 0;
-			if (slots < ingredients.size()) {
-				maxIndex = ingredients.size() - slots;
-			}
-
-			if (maxIndex > 0 && !GuiScreen.isShiftKeyDown()) {
-				index = (int) ((System.currentTimeMillis() / 1000) % maxIndex);
-			}
-
+			int remaining = ingredients.size();
+			int row = 0;
 			int border = slots <= ingredients.size() ? 0 : (slots - ingredients.size())*17/2;
-			
 			GlStateManager.pushMatrix();
-			for (int i = 0; i < Math.min(slots, ingredients.size()); i++) {
-				context.renderIngredient(border + x + 17*i, y, mouseX, mouseY, ingredients.get(index + i));
+			while (remaining > 0) {
+				for (int i = 0; i < Math.min(slots, remaining); i++) {
+					context.renderIngredient(border + x + 17*i, y + 17*row, mouseX, mouseY, ingredients.get(row * slots + i));
+				}
+				row++;
+				remaining -= slots;
 			}
 			GlStateManager.popMatrix();
 		}
+		
 	}
+
 
 }

@@ -8,6 +8,11 @@
       "y": 0
     },
     {
+      "type": "separator",
+      "x": -1,
+      "y": 10
+    },
+    {
       "type": "image",
       "image": "#circle3",
       "width": 32,
@@ -15,7 +20,7 @@
       "texture_width": 32,
       "texture_height": 32,
       "x": 20,
-      "y": 40,
+      "y": 55,
       "scale": 2
     },
     {
@@ -26,7 +31,7 @@
       "texture_width": 32,
       "texture_height": 32,
       "x": 20,
-      "y": 40,
+      "y": 55,
       "scale": 2
     },
     {
@@ -37,7 +42,7 @@
       "texture_width": 32,
       "texture_height": 32,
       "x": 20,
-      "y": 40,
+      "y": 55,
       "scale": 2
     },
     {
@@ -48,7 +53,7 @@
       "texture_width": 32,
       "texture_height": 32,
       "x": 20,
-      "y": 40,
+      "y": 55,
       "scale": 2
     },
     {
@@ -59,7 +64,7 @@
       "name": "#ritual",
       "list_type": "output",
       "x": 2,
-      "y": 105
+      "y": 120
     },
     {
       "type": "custom",
@@ -69,7 +74,7 @@
       "name": "#ritual",
       "list_type": "input",
       "x": 2,
-      "y": 20
+      "y": 25
     }
   ]
 }
