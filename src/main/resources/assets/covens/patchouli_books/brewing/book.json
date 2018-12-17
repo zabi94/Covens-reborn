@@ -4,7 +4,7 @@
   "version": 1,
   "model": "covens:book_brews",
   "subtitle": "covens.book.rites.subtitle",
-  "book_texture": "covens:textures/gui/book.png",
+  "book_texture": "covens:textures/gui/book_brews.png",
   "show_toasts": false,
   "creative_tab": "covens_items",
   "show_progress": false

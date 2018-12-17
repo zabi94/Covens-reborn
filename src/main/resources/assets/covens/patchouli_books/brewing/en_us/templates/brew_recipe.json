@@ -10,13 +10,13 @@
     {
       "type": "image",
       "image": "covens:textures/gui/books/brews/cauldron_outline_book.png",
-      "width": 128,
-      "height": 128,
-      "texture_width": 128,
-      "texture_height": 128,
+      "width": 32,
+      "height": 32,
+      "texture_width": 32,
+      "texture_height": 32,
       "x": 25,
       "y": 70,
-      "scale": 0.5
+      "scale": 2
     },
     {
       "type": "item",
