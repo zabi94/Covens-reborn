@@ -19,8 +19,8 @@
       "height": 32,
       "texture_width": 32,
       "texture_height": 32,
-      "x": 20,
-      "y": 55,
+      "x": 27,
+      "y": 45,
       "scale": 2
     },
     {
@@ -30,8 +30,8 @@
       "height": 32,
       "texture_width": 32,
       "texture_height": 32,
-      "x": 20,
-      "y": 55,
+      "x": 27,
+      "y": 45,
       "scale": 2
     },
     {
@@ -41,19 +41,30 @@
       "height": 32,
       "texture_width": 32,
       "texture_height": 32,
-      "x": 20,
-      "y": 55,
+      "x": 27,
+      "y": 45,
       "scale": 2
     },
     {
       "type": "image",
       "image": "covens:textures/gui/books/ritual/circle_center.png",
+      "width": 64,
+      "height": 64,
+      "texture_width": 64,
+      "texture_height": 64,
+      "x": 27,
+      "y": 45,
+      "scale": 1
+    },
+    {
+      "type": "image",
+      "image": "#separator",
       "width": 32,
       "height": 32,
       "texture_width": 32,
       "texture_height": 32,
-      "x": 20,
-      "y": 55,
+      "x": 27,
+      "y": 94,
       "scale": 2
     },
     {
@@ -63,8 +74,8 @@
       "registry": "covens:rituals",
       "name": "#ritual",
       "list_type": "output",
-      "x": 2,
-      "y": 120
+      "x": 9,
+      "y": 132
     },
     {
       "type": "custom",
@@ -73,8 +84,8 @@
       "registry": "covens:rituals",
       "name": "#ritual",
       "list_type": "input",
-      "x": 2,
-      "y": 25
+      "x": 9,
+      "y": 15
     }
   ]
 }

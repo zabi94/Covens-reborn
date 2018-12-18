@@ -38,6 +38,9 @@ public class RitualProcessor implements IComponentProcessor {
 			if (val.equals("ritual")) {
 				return ritual.getRegistryName().toString();
 			}
+			if (val.equals("separator")) {
+				return ritual.getOutputRaw().isEmpty()?"covens:textures/gui/books/ritual/separator_none.png":"covens:textures/gui/books/ritual/separator.png";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
