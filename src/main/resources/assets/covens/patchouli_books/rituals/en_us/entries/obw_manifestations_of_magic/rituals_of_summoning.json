@@ -11,6 +11,26 @@
     {
       "type": "ritual",
       "ritual": "covens:conjure_wither"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:conjure_witch"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:conjure_ghast"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:conjure_vex"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:conjure_blaze"
+    },
+    {
+      "type": "ritual",
+      "ritual": "covens:conjure_magma_cube"
     }
   ]
 }
