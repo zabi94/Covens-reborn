@@ -31,6 +31,6 @@ public class EnchantmentPotentWard extends BaublesEnchantment {
 
 	@Override
 	protected boolean canApplyTogether(Enchantment ench) {
-		return !(ench instanceof EnchantmentDesperateWard);
+		return !(ench instanceof EnchantmentDesperateWard) && super.canApplyTogether(ench);
 	}
 }
