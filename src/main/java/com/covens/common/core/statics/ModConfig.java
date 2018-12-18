@@ -205,7 +205,10 @@ public final class ModConfig {
 
 		@Comment("The amount of visual imprecision to give to chalk runes. Use 0 to have them perfectly aligned to the block")
 		@Config.RangeDouble(min = 0d, max = 1d)
-		public double glyphImprecision = 0.6d;
+		public double glyphImprecision = 0.3d;
+		
+		@Comment("Set this to false to disable ritual circles from emitting particles on non-golden circles. Might increase client performance")
+		public boolean allGlyphParticles = true;
 
 		public static class EnergyHUD {
 			@Comment("Should the energy HUD be automatically hidden?")

@@ -1,11 +1,16 @@
 package com.covens.common.block.tiles;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.BlockMod;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.item.ModItems;
 import com.covens.common.tile.tiles.TileEntityGlyph;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -36,10 +41,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 
 
@@ -51,7 +52,7 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 				.withProperty(BlockHorizontal.FACING, EnumFacing.SOUTH)
 				.withProperty(StateProperties.GLYPH_TYPE, EnumGlyphType.NORMAL)
 				.withProperty(StateProperties.LETTER, 0)
-		);
+				);
 		this.setHardness(5);
 	}
 
@@ -201,25 +202,69 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		int pt = stateIn.getValue(StateProperties.GLYPH_TYPE).ordinal();
 		double d0 = pos.getX() + 0.5D;
 		double d1 = pos.getY() + 0.05D;
 		double d2 = pos.getZ() + 0.5D;
-		if (pt > 1) {
+		EnumParticleTypes part = getParticleFor(stateIn);
+		if (part != null) {
 			double spreadX = rand.nextGaussian() / 3;
 			double spreadZ = rand.nextGaussian() / 3;
-			worldIn.spawnParticle(pt == 3 ? EnumParticleTypes.FLAME : EnumParticleTypes.PORTAL, d0 + spreadX, d1, d2 + spreadZ, 0.0D, 0.0D, 0.0D, new int[0]);
+			worldIn.spawnParticle(part, d0 + spreadX, d1, d2 + spreadZ, 0.0D, 0.0D, 0.0D, new int[0]);
 		}
-		if (pt == 1) {
-			TileEntityGlyph te = (TileEntityGlyph) worldIn.getTileEntity(pos);
-			if (te.hasRunningRitual()) {
-				double spreadX = rand.nextGaussian() * 0.4;
-				double spreadZ = rand.nextGaussian() * 0.4;
-				Minecraft.getMinecraft().effectRenderer.addEffect(
-						new ParticleEndRod(worldIn, d0 + spreadX, d1, d2 + spreadZ, 0, 0.02 + 0.1 * rand.nextDouble(), 0)
-				);
+		TileEntityGlyph te = (TileEntityGlyph) worldIn.getTileEntity(pos);
+		if (te != null && te.hasRunningRitual()) {
+			double spreadX = rand.nextGaussian() * 0.4;
+			double spreadZ = rand.nextGaussian() * 0.4;
+			Minecraft.getMinecraft().effectRenderer.addEffect(
+					new ParticleEndRod(worldIn, d0 + spreadX, d1, d2 + spreadZ, 0, 0.02 + 0.1 * rand.nextDouble(), 0)
+					);
+			if (ModConfig.CLIENT.allGlyphParticles) {
+				EnumParticleTypes p = getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.small.get(0)[0], 0, TileEntityGlyph.small.get(0)[1])));
+				if (p!=null) {
+					for (int[] coo:TileEntityGlyph.small) {
+						if (rand.nextInt(5) == 0) {
+							spreadX = rand.nextGaussian() * 0.4;
+							spreadZ = rand.nextGaussian() * 0.4;
+							worldIn.spawnParticle(p, pos.getX()+coo[0], pos.getY(), pos.getZ()+coo[1], 0, 0.05 + 0.1 * rand.nextDouble(), 0);
+						}
+					}
+				}
+				p = getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.medium.get(0)[0], 0, TileEntityGlyph.medium.get(0)[1])));
+				if (p!=null) {
+					for (int[] coo:TileEntityGlyph.medium) {
+						if (rand.nextInt(5) == 0) {
+							spreadX = rand.nextGaussian() * 0.4;
+							spreadZ = rand.nextGaussian() * 0.4;
+							worldIn.spawnParticle(p, pos.getX()+coo[0], pos.getY(), pos.getZ()+coo[1], 0, 0.05 + 0.1 * rand.nextDouble(), 0);
+						}
+					}
+				}
+				p = getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.big.get(0)[0], 0, TileEntityGlyph.big.get(0)[1])));
+				if (p!=null) {
+					for (int[] coo:TileEntityGlyph.big) {
+						if (rand.nextInt(5) == 0) {
+							spreadX = rand.nextGaussian() * 0.4;
+							spreadZ = rand.nextGaussian() * 0.4;
+							worldIn.spawnParticle(p, pos.getX()+coo[0], pos.getY(), pos.getZ()+coo[1], 0, 0.05 + 0.1 * rand.nextDouble(), 0);
+						}
+					}
+				}
 			}
 		}
+	}
+
+
+	@SideOnly(Side.CLIENT)
+	private EnumParticleTypes getParticleFor(IBlockState blockState) {
+		if (blockState.getBlock() == this) {
+			EnumGlyphType type = blockState.getValue(StateProperties.GLYPH_TYPE);
+			switch (type) {
+			case ENDER: return EnumParticleTypes.PORTAL;
+			case NETHER: return EnumParticleTypes.FLAME;
+			default: break;
+			}
+		}
+		return null;
 	}
 
 	@SuppressWarnings("deprecation")
