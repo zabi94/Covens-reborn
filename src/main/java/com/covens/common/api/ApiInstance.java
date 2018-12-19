@@ -31,12 +31,18 @@ import com.covens.common.content.transformation.vampire.CapabilityVampire;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
 import com.covens.common.core.capability.energy.player.PlayerMPContainer;
 import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExpansion;
+import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
+import com.covens.common.core.util.CreatureSyncHelper;
+import com.covens.common.core.util.syncTasks.DisengageFamiliar;
+import com.covens.common.core.util.syncTasks.RemoveFamiliarFromPlayer;
 import com.covens.common.crafting.FrostFireRecipe;
 import com.covens.common.crafting.OvenSmeltingRecipe;
 import com.covens.common.crafting.SpinningThreadRecipe;
 import com.covens.common.potion.ModPotions;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -216,6 +222,24 @@ public class ApiInstance extends CovensAPI {
 				NetworkHandler.HANDLER.sendToAllAround(new EntityInternalBloodChanged(entity), new TargetPoint(entity.dimension, entity.posX, entity.posY, entity.posZ, 32));
 			}
 		}
+	}
+
+	@Override
+	public void bindFamiliar(EntityPlayer player, Entity familiar) {
+		if (!familiar.hasCapability(CapabilityFamiliarCreature.CAPABILITY, null)) {
+			throw new IllegalArgumentException(familiar.getClass().getCanonicalName()+" is not a valid familiar");
+		}
+		
+	}
+
+	@Override
+	public void unbindFamiliar(Entity familiar) {
+		if (!familiar.hasCapability(CapabilityFamiliarCreature.CAPABILITY, null)) {
+			throw new IllegalArgumentException(familiar.getClass().getCanonicalName()+" is not a valid familiar");
+		}
+		CapabilityFamiliarCreature cap = familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
+		CreatureSyncHelper.executeOnPlayerAvailable(cap.owner, new RemoveFamiliarFromPlayer(cap.owner));
+		CreatureSyncHelper.executeOnEntityLivingAvailable(familiar.getPersistentID(), new DisengageFamiliar(familiar.getPersistentID()));
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.covens.api;
 
+import java.util.function.Supplier;
+
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.divination.IFortune;
@@ -11,6 +13,8 @@ import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.ritual.IRitual;
 import com.covens.api.spell.ISpell;
 import com.covens.api.transformation.ITransformation;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +23,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.BiomeDictionary;
-
-import java.util.function.Supplier;
 
 // TODO Javadocs
 public abstract class CovensAPI {
@@ -107,4 +109,7 @@ public abstract class CovensAPI {
 
 	public abstract void drainBloodFromEntity(EntityPlayer player, EntityLivingBase entity);
 
+	public abstract void bindFamiliar(EntityPlayer player, Entity familiar);
+	
+	public abstract void unbindFamiliar(Entity entity);
 }
