@@ -51,6 +51,7 @@ public abstract class SimpleCapability {
 	private static final ArrayList<Tuple<SimpleCapability, Capability<? extends SimpleCapability>>> capabilities = new ArrayList<>();
 	private static int nextId = 0;
 	private static SimpleNetworkWrapper net = null;
+	protected static final Random rng = new Random();
 
 	static {
 		map(byte.class, SimpleCapability::readByte, SimpleCapability::writeByte);
@@ -534,7 +535,7 @@ public abstract class SimpleCapability {
 		@SubscribeEvent
 		public void onWorldJoin(EntityJoinWorldEvent evt) {
 			if (default_instance.shouldSyncToOwnerPlayer()) {
-				if (evt.getEntity() instanceof EntityPlayerMP) {
+				if (evt.getEntity() instanceof EntityPlayerMP && default_instance.isRelevantFor(evt.getEntity())) {
 					log("onWorldJoin - player");
 					EntityPlayerMP entity = (EntityPlayerMP) evt.getEntity();
 					NBTTagCompound tag = new NBTTagCompound();
