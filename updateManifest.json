@@ -2,10 +2,11 @@
   "homepage": "https://minecraft.curseforge.com/projects/covens-reborn",
   "1.12.2": {
     "0.0.1.0": "Bewitchment fork",
-    "0.0.1.1": "In progress"
+    "0.0.1.1": "In progress",
+    "0.0.1.2": "First closed alpha"
   },
   "promos": {
-    "1.12.2-latest": "0.0.1.1",
-    "1.12.2-recommended": "0.0.1.1"
+    "1.12.2-latest": "0.0.1.2",
+    "1.12.2-recommended": "0.0.1.2"
   }
 }
