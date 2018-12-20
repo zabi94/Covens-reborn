@@ -51,6 +51,7 @@ import com.covens.common.crafting.ModDistilleryRecipes;
 import com.covens.common.crafting.ModOvenSmeltingRecipes;
 import com.covens.common.crafting.ModSpinningThreadRecipes;
 import com.covens.common.entity.ModEntities;
+import com.covens.common.integration.extraalchemy.ExtraAlchemy;
 import com.covens.common.integration.patchouli.Patchouli;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
@@ -160,6 +161,7 @@ public class Covens {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
+		ExtraAlchemy.init();
 		BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).parallelStream().filter(b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.DENSE)).forEach(b -> {
 			BlockMoonbell.addValidMoonbellBiome(b);
 		});
