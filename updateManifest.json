@@ -3,10 +3,11 @@
   "1.12.2": {
     "0.0.1.0": "Bewitchment fork",
     "0.0.1.1": "In progress",
-    "0.0.1.2": "First closed alpha"
+    "0.0.1.2": "First closed alpha",
+    "0.0.1.2HF1": "First closed alpha - hotfix"
   },
   "promos": {
-    "1.12.2-latest": "0.0.1.2",
-    "1.12.2-recommended": "0.0.1.2"
+    "1.12.2-latest": "0.0.1.2HF1",
+    "1.12.2-recommended": "0.0.1.2HF1"
   }
 }
