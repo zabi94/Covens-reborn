@@ -97,14 +97,9 @@ public final class LibItemName {
 	public static final String WOOD_ASH = "wood_ash";
 	public static final String SPECTRAL_DUST = "spectral_dust";
 	public static final String SILVER_SCALES = "silver_scales";
-	public static final String EYE_OF_OLD = "eye_of_old";
 	public static final String ENVENOMED_FANG = "envenomed_fang";
 	public static final String HEART = "heart";
 	public static final String DIMENSIONAL_SAND = "dimensional_sand";
-	public static final String CHROMATIC_QUILL = "chromatic_quill";
-	public static final String CARNIVOROUS_TOOTH = "carnivorous_tooth";
-	public static final String EYE_OF_ANCIENT = "eye_of_ancient";
-	public static final String HOOF = "hoof";
 	public static final String EQUINE_TAIL = "equine_tail";
 	public static final String CATECHU = "catechu";
 	public static final String OAK_APPLE_GALL = "oak_apple_gall";
@@ -133,7 +128,6 @@ public final class LibItemName {
 	public static final String PENTACLE = "pentacle";
 	public static final String TOE_OF_FROG = "toe_of_frog";
 	public static final String EYE_OF_NEWT = "eye_of_newt";
-	public static final String BLINDWORMS_STING = "blindworms_sting";
 	public static final String LIZARD_LEG = "lizard_leg";
 
 	//Materials
