@@ -1,9 +1,17 @@
 package com.covens.common.block.natural;
 
+import static com.covens.common.core.statics.ModCreativeTabs.BLOCKS_CREATIVE_TAB;
+
+import java.util.Random;
+
+import javax.annotation.Nonnull;
+
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockMod;
+import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -12,17 +20,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
-import java.util.Random;
-
-import static com.covens.common.core.statics.ModCreativeTabs.BLOCKS_CREATIVE_TAB;
 
 /**
  * This class was created by <Arekkuusu> on 27/06/2017.
@@ -105,20 +107,4 @@ public class BlockGemOre extends BlockMod {
 		}
 	}
 
-	public enum Gem implements IStringSerializable {
-		GARNET,
-		NUUMMITE,
-		TIGERS_EYE,
-		TOURMALINE,
-		BLOODSTONE,
-		JASPER,
-		MALACHITE,
-		AMETHYST,
-		ALEXANDRITE;
-
-		@Override
-		public String getName() {
-			return name().toLowerCase();
-		}
-	}
 }

@@ -4,7 +4,7 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.block.chisel.BlockColdIronChiseled;
 import com.covens.common.block.chisel.BlockNetherSteelChiseled;
 import com.covens.common.block.chisel.BlockSilverChiseled;
-import com.covens.common.block.natural.BlockGemOre.Gem;
+import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.block.natural.fluid.Fluids;
 import com.covens.common.core.helper.CropHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
@@ -476,6 +476,7 @@ public final class ModItems {
 		OreDictionary.registerOre("gemMalachite", new ItemStack(ModItems.gem, 1, Gem.MALACHITE.ordinal()));
 		OreDictionary.registerOre("gemAmethyst", new ItemStack(ModItems.gem, 1, Gem.AMETHYST.ordinal()));
 		OreDictionary.registerOre("gemAlexandrite", new ItemStack(ModItems.gem, 1, Gem.ALEXANDRITE.ordinal()));
+		
 		OreDictionary.registerOre("nuggetSilver", new ItemStack(ModItems.silver_nugget));
 		OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.silver_ingot));
 		OreDictionary.registerOre("honeyDrop", new ItemStack(ModItems.honey));

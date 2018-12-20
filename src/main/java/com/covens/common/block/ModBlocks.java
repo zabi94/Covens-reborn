@@ -9,6 +9,7 @@ import com.covens.common.block.chisel.BlockSilverChiseled.BlockSilverVariant;
 import com.covens.common.block.decorations.*;
 import com.covens.common.block.misc.*;
 import com.covens.common.block.natural.*;
+import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.block.natural.crop.*;
 import com.covens.common.block.natural.fluid.Fluids;
 import com.covens.common.block.natural.plants.BlockEmberGrass;
@@ -267,25 +268,27 @@ public final class ModBlocks {
 		for (BlockSteelVariant sv : BlockSteelVariant.values()) {
 			OreDictionary.registerOre("blockNethersteel", new ItemStack(ModBlocks.nethersteel_chisel, 1, sv.ordinal()));
 		}
-		OreDictionary.registerOre("blockGarnet", new ItemStack(ModBlocks.gem_block, 1, 0));
-		OreDictionary.registerOre("blockNuummite", new ItemStack(ModBlocks.gem_block, 1, 1));
-		OreDictionary.registerOre("blockTigersEye", new ItemStack(ModBlocks.gem_block, 1, 2));
-		OreDictionary.registerOre("blockTourmaline", new ItemStack(ModBlocks.gem_block, 1, 3));
-		OreDictionary.registerOre("blockBloodstone", new ItemStack(ModBlocks.gem_block, 1, 4));
-		OreDictionary.registerOre("blockJasper", new ItemStack(ModBlocks.gem_block, 1, 5));
-		OreDictionary.registerOre("blockMalachite", new ItemStack(ModBlocks.gem_block, 1, 6));
-		OreDictionary.registerOre("blockAmethyst", new ItemStack(ModBlocks.gem_block, 1, 7));
-		OreDictionary.registerOre("blockAlexandrite", new ItemStack(ModBlocks.gem_block, 1, 8));
-		OreDictionary.registerOre("oreGarnet", new ItemStack(ModBlocks.gem_ore, 1, 0));
-		OreDictionary.registerOre("oreNuummite", new ItemStack(ModBlocks.gem_ore, 1, 2));
-		OreDictionary.registerOre("oreAmethyst", new ItemStack(ModBlocks.gem_ore, 1, 8));
-		OreDictionary.registerOre("oreAlexandrite", new ItemStack(ModBlocks.gem_ore, 1, 9));
+		OreDictionary.registerOre("blockGarnet", new ItemStack(ModBlocks.gem_block, 1, Gem.GARNET.ordinal()));
+		OreDictionary.registerOre("blockNuummite", new ItemStack(ModBlocks.gem_block, 1, Gem.NUUMMITE.ordinal()));
+		OreDictionary.registerOre("blockTigersEye", new ItemStack(ModBlocks.gem_block, 1, Gem.TIGERS_EYE.ordinal()));
+		OreDictionary.registerOre("blockTourmaline", new ItemStack(ModBlocks.gem_block, 1, Gem.TOURMALINE.ordinal()));
+		OreDictionary.registerOre("blockBloodstone", new ItemStack(ModBlocks.gem_block, 1, Gem.BLOODSTONE.ordinal()));
+		OreDictionary.registerOre("blockJasper", new ItemStack(ModBlocks.gem_block, 1, Gem.JASPER.ordinal()));
+		OreDictionary.registerOre("blockMalachite", new ItemStack(ModBlocks.gem_block, 1, Gem.MALACHITE.ordinal()));
+		OreDictionary.registerOre("blockAmethyst", new ItemStack(ModBlocks.gem_block, 1, Gem.AMETHYST.ordinal()));
+		OreDictionary.registerOre("blockAlexandrite", new ItemStack(ModBlocks.gem_block, 1, Gem.ALEXANDRITE.ordinal()));
+		
+		OreDictionary.registerOre("oreGarnet", new ItemStack(ModBlocks.gem_ore, 1, Gem.GARNET.ordinal()));
+		OreDictionary.registerOre("oreNuummite", new ItemStack(ModBlocks.gem_ore, 1, Gem.NUUMMITE.ordinal()));
+		OreDictionary.registerOre("oreAmethyst", new ItemStack(ModBlocks.gem_ore, 1, Gem.AMETHYST.ordinal()));
+		OreDictionary.registerOre("oreAlexandrite", new ItemStack(ModBlocks.gem_ore, 1, Gem.ALEXANDRITE.ordinal()));
+		OreDictionary.registerOre("oreBloodstone", new ItemStack(ModBlocks.gem_ore, 1, Gem.BLOODSTONE.ordinal()));
+		OreDictionary.registerOre("oreTourmaline", new ItemStack(ModBlocks.gem_ore, 1, Gem.TOURMALINE.ordinal()));
+		OreDictionary.registerOre("oreMalachite", new ItemStack(ModBlocks.gem_ore, 1, Gem.MALACHITE.ordinal()));
+		OreDictionary.registerOre("oreTigersEye", new ItemStack(ModBlocks.gem_ore, 1, Gem.TIGERS_EYE.ordinal()));
+		OreDictionary.registerOre("oreJasper", new ItemStack(ModBlocks.gem_ore, 1, Gem.JASPER.ordinal()));
+		
 		OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.silver_ore));
-		OreDictionary.registerOre("oreBloodstone", new ItemStack(ModBlocks.gem_ore, 1, 5));
-		OreDictionary.registerOre("oreTourmaline", new ItemStack(ModBlocks.gem_ore, 1, 4));
-		OreDictionary.registerOre("oreMalachite", new ItemStack(ModBlocks.gem_ore, 1, 7));
-		OreDictionary.registerOre("oreTigersEye", new ItemStack(ModBlocks.gem_ore, 1, 3));
-		OreDictionary.registerOre("oreJasper", new ItemStack(ModBlocks.gem_ore, 1, 6));
 		OreDictionary.registerOre("blockNethersteel", new ItemStack(ModBlocks.nethersteel));
 		OreDictionary.registerOre("oreSalt", new ItemStack(ModBlocks.salt_ore));
 		//Candles
