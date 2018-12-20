@@ -141,7 +141,7 @@ public class CauldronRegistry {
 				.findFirst();
 	}
 	
-	public static void init() { // TODO: Tune values. Also call for oredicts where possible. Such things have been marked with todos.
+	public static void init() {
 
 		registerFood(Ingredient.fromItem(Items.APPLE), 4, 2.4f);
 		registerFood(Ingredient.fromItem(Items.BAKED_POTATO), 5, 6f);
@@ -231,7 +231,7 @@ public class CauldronRegistry {
 		registerVanillaBrewEffect(MobEffects.SPEED, Ingredient.fromItem(Items.SUGAR));
 		registerVanillaBrewEffect(MobEffects.SLOWNESS, Ingredient.fromItem(Item.getItemFromBlock(Blocks.SOUL_SAND)));
 		registerVanillaBrewEffect(MobEffects.WATER_BREATHING, Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 3)));
-		registerVanillaBrewEffect(MobEffects.STRENGTH, Ingredient.fromItem(Items.BLAZE_POWDER));
+		registerVanillaBrewEffect(MobEffects.STRENGTH, LibIngredients.blazePowder);
 		registerVanillaBrewEffect(MobEffects.WEAKNESS, Ingredient.fromItem(Items.RABBIT_HIDE));
 		registerVanillaBrewEffect(MobEffects.BLINDNESS, Ingredient.fromItem(ModItems.belladonna), 200);
 		registerVanillaBrewEffect(MobEffects.HASTE, Ingredient.fromItem(ModItems.lavender), 1200);
@@ -242,7 +242,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.arrow_deflect, Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.everchanging_presence.ordinal())));
 		registerCombinedBrewEffect(ModPotions.absence, Ingredient.fromItem(ModItems.cold_iron_dust_small));
 		registerCombinedBrewEffect(ModPotions.plant, Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));
-		registerCombinedBrewEffect(ModPotions.bane_arthropods, Ingredient.fromItem(ModItems.wormwood));
+		registerCombinedBrewEffect(ModPotions.bane_arthropods, LibIngredients.wormwood);
 		registerCombinedBrewEffect(ModPotions.corruption, Ingredient.fromItem(Items.BONE));
 		registerCombinedBrewEffect(ModPotions.cursed_leaping, Ingredient.fromItem(Items.CHORUS_FRUIT));
 		registerCombinedBrewEffect(ModPotions.demons_bane, Ingredient.fromItem(ModItems.hellebore));
@@ -258,7 +258,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.harvest, Ingredient.fromItem(Items.APPLE));
 		registerCombinedBrewEffect(ModPotions.holy_water, Ingredient.fromItem(ModItems.white_sage));
 		registerCombinedBrewEffect(ModPotions.ice_world, Ingredient.fromItem(ModItems.mint));
-		registerCombinedBrewEffect(ModPotions.outcasts_shame, LibIngredients.spider_web);
+		registerCombinedBrewEffect(ModPotions.outcasts_shame, LibIngredients.fumeReekOfDeath);
 		registerCombinedBrewEffect(ModPotions.infestation, Ingredient.fromItem(Item.getItemFromBlock(Blocks.MYCELIUM)));
 		registerCombinedBrewEffect(ModPotions.ozymandias, Ingredient.fromItem(Item.getItemFromBlock(Blocks.SANDSTONE)));
 		registerCombinedBrewEffect(ModPotions.purification, Ingredient.fromItem(ModItems.tulsi));
@@ -270,7 +270,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.shell_armor, Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.coquina)));
 		registerCombinedBrewEffect(ModPotions.till_land, Ingredient.fromItem(Item.getItemFromBlock(Blocks.DIRT)));
 		registerCombinedBrewEffect(ModPotions.snow_trail, Ingredient.fromItem(Item.getItemFromBlock(Blocks.PACKED_ICE)));
-		registerCombinedBrewEffect(ModPotions.spider_nightmare, Ingredient.fromItem(Item.getItemFromBlock(Blocks.WEB)));
+		registerCombinedBrewEffect(ModPotions.spider_nightmare, LibIngredients.spider_web);
 		registerCombinedBrewEffect(ModPotions.volatility, Ingredient.fromItem(Items.GUNPOWDER));
 		registerCombinedBrewEffect(ModPotions.pulverize, Ingredient.fromItem(Item.getItemFromBlock(Blocks.COBBLESTONE)));
 		registerCombinedBrewEffect(ModPotions.love, Ingredient.fromItem(ModItems.seed_silphium));
