@@ -16,9 +16,8 @@ public class ModTransformations {
 		DefaultTransformations.NONE = new SimpleTransformation("none", true);
 		DefaultTransformations.WEREWOLF = new SimpleTransformation("werewolf", false);
 		DefaultTransformations.VAMPIRE = new SimpleTransformation("vampire", false);
-		DefaultTransformations.SPECTRE = new SimpleTransformation("spectre", false);
 		DefaultTransformations.HUNTER = new SimpleTransformation("hunter", true);
 
-		REGISTRY.registerAll(DefaultTransformations.NONE, DefaultTransformations.WEREWOLF, DefaultTransformations.VAMPIRE, DefaultTransformations.SPECTRE, DefaultTransformations.HUNTER);
+		REGISTRY.registerAll(DefaultTransformations.NONE, DefaultTransformations.WEREWOLF, DefaultTransformations.VAMPIRE, DefaultTransformations.HUNTER);
 	}
 }

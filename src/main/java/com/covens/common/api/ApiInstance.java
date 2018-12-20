@@ -132,7 +132,7 @@ public class ApiInstance extends CovensAPI {
 		if (oldTransformation != type && oldTransformation == DefaultTransformations.VAMPIRE) {
 			player.getCapability(CapabilityVampire.CAPABILITY, null).setNightVision(false);
 		}
-		if ((type == DefaultTransformations.SPECTRE || type == DefaultTransformations.VAMPIRE)) {
+		if (type == DefaultTransformations.VAMPIRE) {
 			ibr.setMaxBlood(-1);
 			player.removePotionEffect(ModPotions.bloodDrained);
 		} else if (ibr.getMaxBlood() < 0) {

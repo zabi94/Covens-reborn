@@ -115,9 +115,6 @@ public class MobHelper {
 		if (entity.getCreatureAttribute() == CovensAPI.getAPI().SPIRIT) {
 			return true;
 		}
-		if (entity instanceof EntityPlayer && entity.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.SPECTRE) {
-			return true;
-		}
 		return SPIRITS.contains(entity.getClass().getName());
 	}
 

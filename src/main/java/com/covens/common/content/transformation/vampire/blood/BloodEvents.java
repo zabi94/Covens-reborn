@@ -78,7 +78,7 @@ public class BloodEvents {
 				if (ent instanceof EntityPlayer) {
 					CapabilityTransformation data = ent.getCapability(CapabilityTransformation.CAPABILITY, null);
 
-					if (data.getType() == DefaultTransformations.VAMPIRE || data.getType() == DefaultTransformations.SPECTRE) {
+					if (data.getType() == DefaultTransformations.VAMPIRE) {
 						ignore = true;
 					} else {
 						ent.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 60, 1));

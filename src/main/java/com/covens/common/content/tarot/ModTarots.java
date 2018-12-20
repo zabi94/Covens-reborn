@@ -25,8 +25,8 @@ public class ModTarots {
 		TarotHandler.registerTarot(new QuickTarot("nitwit", p -> p.getCapability(IMagicPowerContainer.CAPABILITY, null).getMaxAmount() / 800 > 0, null, p -> p.getCapability(IMagicPowerContainer.CAPABILITY, null).getMaxAmount() / 800));
 		TarotHandler.registerTarot(new QuickTarot("moon", p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE || p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF, p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF, p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getLevel()));
 		TarotHandler.registerTarot(new QuickTarot("silver_sword", p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.HUNTER, p -> false, p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getLevel()));
-		TarotHandler.registerTarot(new QuickTarot("hermit", p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.SPECTRE, null, p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getLevel()));
-
+		
+		TarotHandler.registerTarot(new QuickTarot("hermit", random, null, null));
 		TarotHandler.registerTarot(new QuickTarot("ender_dragon", random, null, null));
 		TarotHandler.registerTarot(new QuickTarot("evoker", random, null, null));
 		TarotHandler.registerTarot(new QuickTarot("guardian", random, null, null));
