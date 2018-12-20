@@ -95,7 +95,6 @@ public final class LibItemName {
 	public static final String WOOL_OF_BAT = "wool_of_bat";
 	public static final String TONGUE_OF_DOG = "tongue_of_dog";
 	public static final String WOOD_ASH = "wood_ash";
-	public static final String ECTOPLASM = "ectoplasm";
 	public static final String SPECTRAL_DUST = "spectral_dust";
 	public static final String SILVER_SCALES = "silver_scales";
 	public static final String EYE_OF_OLD = "eye_of_old";
