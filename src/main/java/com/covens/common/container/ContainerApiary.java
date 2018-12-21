@@ -9,7 +9,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 /**
- * This class was created by Arekkuusu on 16/04/2017.
+ * This class was created by Zabi94.
  * It's distributed as part of Covens under
  * the MIT license.
  */
@@ -21,7 +21,7 @@ public class ContainerApiary extends ModContainer<TileEntityApiary> {
 		IItemHandler ih = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for (int i = 0; i < TileEntityApiary.ROWS; i++) {
 			for (int j = 0; j < TileEntityApiary.COLUMNS; j++) {
-				this.addSlotToContainer(new SlotOneItem(tileEntity, ih, j + i * 6, 62 + j * 18, 16 + i * 18));
+				this.addSlotToContainer(new SlotOneItem(tileEntity, ih, j + i * TileEntityApiary.COLUMNS, 8 + j * 18, 16 + i * 18));
 			}
 		}
 		this.addPlayerSlots(playerInventory);

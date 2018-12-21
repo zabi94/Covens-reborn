@@ -1,11 +1,13 @@
 package com.covens.common.tile.tiles;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import java.util.ArrayList;
+
 import com.covens.common.Covens;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibGui;
 import com.covens.common.tile.ModTileEntity;
 import com.google.common.collect.Lists;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -22,28 +24,46 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import java.util.ArrayList;
-
 public class TileEntityApiary extends ModTileEntity implements ITickable {
 
-	public static final int ROWS = 3, COLUMNS = 6;
+	public static final int ROWS = 3, COLUMNS = 9;
 
-	private boolean hasBees = false;
-	private IMagicPowerConsumer mp_controller = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
-	private ApiaryInventory hives_inventory = new ApiaryInventory();
+	private int beesSlots = 0;
+	private ApiaryInventory hives_inventory = new ApiaryInventory() {
+		@Override
+		protected void onContentsChanged(int slot) {
+			super.onContentsChanged(slot);
+			markDirty();
+			int hivesCount = 0;
+			for (int i = 0; i < COLUMNS * ROWS; i++) {
+				if (hives_inventory.getStackInSlot(i).getItem() == ModItems.honeycomb || hives_inventory.getStackInSlot(i).getItem() == ModItems.empty_honeycomb) {
+					hivesCount++;
+				}
+			}
+			if (hivesCount != beesSlots) {
+				beesSlots = hivesCount;
+				syncToClient();
+			}
+		}
+	};
 
 	@Override
 	public void update() {
-		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0) {
-			boolean hasHives = false;
+		if (!world.isRemote && world.getTotalWorldTime() % 80 == 0) {
+			int hivesCount = 0;
 			for (int i = 0; i < COLUMNS * ROWS; i++) {
-				if (rng.nextInt(150) == 0) {
+				if (rng.nextInt(500) == 0) { // this is once every 1m14s on average: (500 chance*(80 ticks/20tps))/27 slots
 					hives_inventory.setStackInSlot(i, growItem(i));
+					if (hives_inventory.getStackInSlot(i).getItem() == ModItems.honeycomb || hives_inventory.getStackInSlot(i).getItem() == ModItems.empty_honeycomb) {
+						hivesCount++;
+					}
 				}
 			}
-			hasBees = hasHives;
-			syncToClient();
 			markDirty();
+			if (hivesCount != beesSlots) {
+				beesSlots = hivesCount;
+				syncToClient();
+			}
 		}
 	}
 
@@ -70,21 +90,15 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == IMagicPowerConsumer.CAPABILITY) {
-			return true;
-		}
-		return super.hasCapability(capability, facing);
+		return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing));
 	}
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(mp_controller);
-		}
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(hives_inventory);
 		}
-		return null;
+		return super.getCapability(capability, facing);
 	}
 
 	private ArrayList<Integer> getNeighbors(int slot) {
@@ -101,25 +115,23 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound tag) {
 		hives_inventory.deserializeNBT(tag.getCompoundTag("hives"));
-		mp_controller.readFromNbt(tag.getCompoundTag("mp"));
 		readModSyncDataNBT(tag);
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
 		tag.setTag("hives", hives_inventory.serializeNBT());
-		tag.setTag("mp", mp_controller.writeToNbt());
 		writeModSyncDataNBT(tag);
 	}
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
-		tag.setBoolean("hasbees", hasBees);
+		tag.setInteger("hasbees", beesSlots);
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
-		hasBees = tag.getBoolean("hasbees");
+		beesSlots = tag.getInteger("hasbees");
 	}
 
 	@Override
@@ -129,7 +141,7 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 	}
 
 	public boolean hasBees() {
-		return hasBees;
+		return beesSlots > 0;
 	}
 
 	static class ApiaryInventory extends ItemStackHandler {

@@ -21,8 +21,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -65,7 +67,9 @@ public class BlockBeehive extends BlockFalling implements IModelRegister {
 	@Override
 	public void onEndFalling(World world, BlockPos pos, IBlockState falling, IBlockState falling2) {
 		world.destroyBlock(pos, false);
-		//TODO damage and poison
+		world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(5)).forEach(elb -> {
+			elb.addPotionEffect(new PotionEffect(MobEffects.POISON, 100, 1, true, true));
+		});
 	}
 
 	@Override
