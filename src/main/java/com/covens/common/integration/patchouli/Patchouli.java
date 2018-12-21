@@ -8,7 +8,6 @@ import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.ritual.AdapterIRitual;
-import com.covens.common.core.helper.Log;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
 
@@ -93,13 +92,9 @@ public class Patchouli {
 	
 	public static List<Ingredient> getInputsFromRegistry(String registry, String name, String type) {
 		try {
-			Log.i("Fetiching "+ name + " (" + type + ") from "+registry);
 			if (registry.equals("covens:rituals")) {
 				AdapterIRitual ritual = AdapterIRitual.REGISTRY.getValue(new ResourceLocation(name));
 				if (type.equals("input")) {
-					if (ritual == null) {
-						Log.i("Too soon");
-					}
 					return ritual.getInput();
 				} else if (type.equals("output")) {
 					return ritual.getOutputRaw().parallelStream().map(is -> Ingredient.fromStacks(is)).collect(Collectors.toList());
