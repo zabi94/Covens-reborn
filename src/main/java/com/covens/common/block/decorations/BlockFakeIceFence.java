@@ -63,10 +63,10 @@ public class BlockFakeIceFence extends BlockMod {
 
 	public BlockFakeIceFence() {
 		super(LibBlockName.FAKE_ICE_FENCE, Material.ICE);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));
 		setResistance(2F);
 		setHardness(2F);
-		slipperiness = 0.98F;
+		setDefaultSlipperiness(0.98F);
 		useNeighborBrightness = true;
 	}
 
@@ -108,7 +108,8 @@ public class BlockFakeIceFence extends BlockMod {
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
+	public void addCollisionBoxToList(IBlockState stateIn, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
+		IBlockState state = stateIn;
 		if (!p_185477_7_) {
 			state = state.getActualState(worldIn, pos);
 		}

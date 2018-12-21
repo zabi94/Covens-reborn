@@ -3,10 +3,6 @@ package com.covens.client.render.entity.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.MathHelper;
-import org.lwjgl.input.Keyboard;
 
 /**
  * werewolf5 - cybercat5555
@@ -68,13 +64,13 @@ public class ModelWerewolf extends ModelBase {
 	public ModelRenderer lLeg03;
 	public ModelRenderer lFoot;
 
-	int timer = 0;
-	int phase = 0;
-	int transformation = 0;
-	int howling = 0;
-	int swing = 0;
-	float swing_amount;
-	boolean swinging_arm;
+//	private int timer = 0;
+//	private int phase = 0;
+//	private int transformation = 0;
+//	private int howling = 0;
+//	private int swing = 0;
+//	private float swing_amount;
+//	private boolean swinging_arm;
 
 	public ModelWerewolf() {
 		this.textureWidth = 128;
@@ -380,260 +376,262 @@ public class ModelWerewolf extends ModelBase {
 
 	}
 
+	//This method has a NPATH complexity of >50k. That's a lot of code to stuff in a single method
+	//TODO break this down and fix
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float ptick) {
 
-		EntityPlayer p = (EntityPlayer) entity;
-
-		if (transformation == 0 && howling == 0 && timer == 0) {//Head movement with the cursor...
-			bipedHead.rotateAngleY = netHeadYaw * 0.017453292F;
-			bipedHead.rotateAngleX = MathHelper.clamp((float) (Math.PI * headPitch / 180f), -1.20f, 0.4f) + 0.785398163395f; //TODO change limits so it covers all the movement range
-		}
-
-
-		if (p.swingProgress != 0) {
-
-			if (swinging_arm) {
-				bipedRightArm.rotateAngleX = -0.3490658503988659F - 1.57079632679F * swing_amount;
-				bipedRightArm.rotateAngleY = 0.17453292519943295F + 0.52359877559F * swing_amount;
-				bipedRightArm.rotateAngleZ = 0.3490658503988659F + 0.34906585039F * swing_amount;
-				rArm02.rotateAngleX = -0.5235987755982988F - 0.34906585039F * swing_amount;
-				chest.rotateAngleY = -0.17453292519F * swing_amount;
-
-			} else {
-				bipedLeftArm.rotateAngleX = -0.3490658503988659F - 1.57079632679F * swing_amount;
-				bipedLeftArm.rotateAngleY = -0.17453292519943295F - 0.52359877559F * swing_amount;
-				bipedLeftArm.rotateAngleZ = -0.3490658503988659F - 0.34906585039F * swing_amount;
-				lArm02.rotateAngleX = -0.5235987755982988F - 0.34906585039F * swing_amount;
-				chest.rotateAngleY = 0.17453292519F * swing_amount;
-			}
-
-			swing++;
-			swing_amount = MathHelper.sin((float) (swing * 0.20943951023));
-
-		} else if (p.swingProgress == 0 && swing != 0) {//Just in case reset
-
-			bipedRightArm.rotateAngleX = -0.3490658503988659F;
-			bipedRightArm.rotateAngleY = 0.17453292519943295F;
-			bipedRightArm.rotateAngleZ = 0.3490658503988659F;
-			rArm02.rotateAngleX = -0.5235987755982988F;
-
-
-			bipedLeftArm.rotateAngleX = -0.3490658503988659F;
-			bipedLeftArm.rotateAngleY = -0.17453292519943295F;
-			bipedLeftArm.rotateAngleZ = -0.3490658503988659F;
-
-			chest.rotateAngleY = 0;
-
-			swing = 0;
-			swinging_arm = !swinging_arm;
-		}
-
-		float time = (p.ticksExisted + ptick) * 0.10471975512F;
-		float time_running;
-
-		if (p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() < 0.1820000051558018) {//Increases animation speed based on the player's max speed;
-			time_running = (p.ticksExisted + ptick) * 0.31772053926F;
-		} else if (p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() > 0.3640000122487546) {
-			time_running = (p.ticksExisted + ptick) * 0.81728115053F;
-		} else {
-			time_running = (float) ((float) ((p.ticksExisted + ptick) * 1.42799666 * p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) / (1 - p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
-		}
-
-		this.bipedBody.render(1);
-
-		tail01Floof.rotateAngleZ = 0.03490658503F * MathHelper.sin((time));
-		tail01Floof.rotateAngleX = 0.6108652381980153F + 0.00872664626F * MathHelper.cos((time));
-		tail02Floof.rotateAngleZ = 0.03490658503F * MathHelper.cos((time));
-		tail03Floof.rotateAngleZ = tail02Floof.rotateAngleZ;
-
-
-		if (limbSwingAmount > 0.05 || timer > 0) {//Walking animation
-			if (limbSwingAmount < 0.3333333 && timer == 0) { // Walking animation
-				bipedRightArm.rotateAngleX = -0.3490658503988659F + limbSwingAmount * 2 * MathHelper.sin(time * 5);
-				bipedLeftArm.rotateAngleX = -0.698131701F - bipedRightArm.rotateAngleX;
-				bipedLeftLeg.rotateAngleX = bipedRightArm.rotateAngleX;
-				bipedRightLeg.rotateAngleX = bipedLeftArm.rotateAngleX;
-				chest.rotateAngleY = bipedRightArm.rotateAngleX / 10 + 0.03490658503988659F;
-			} else {
-				if (timer < 13) { // Transition to running animation
-					if ((MathHelper.sin(time_running) > -0.1 && MathHelper.sin(time_running) < 0.1) || phase == 1 && transformation != 1) {
-						bipedBody.rotateAngleX = bipedBody.rotateAngleX + (1.4835298642F - bipedBody.rotateAngleX) * (timer + 1) / 40;
-						chest.rotateAngleX = chest.rotateAngleX - (chest.rotateAngleX - 0.17453292519F) * (timer + 1) / 40;
-						bipedHead.rotateAngleX = bipedHead.rotateAngleX + (-bipedHead.rotateAngleX) * (timer + 1) / 40;
-						bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX + (-1.74532925199F - bipedLeftArm.rotateAngleX) * (timer + 1) / 40;
-						bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX + (-1.74532925199F - bipedRightArm.rotateAngleX) * (timer + 1) / 40;
-						bipedRightArm.rotateAngleZ = bipedRightArm.rotateAngleZ - bipedRightArm.rotateAngleZ * (timer + 1) / 40;
-						bipedLeftArm.rotateAngleZ = -bipedRightArm.rotateAngleZ;
-						bipedLeftLeg.rotateAngleX = bipedLeftLeg.rotateAngleX + (-1.2217304764F - bipedLeftLeg.rotateAngleX) * (timer + 1) / 40;
-						bipedRightLeg.rotateAngleX = bipedRightLeg.rotateAngleX + (-1.2217304764F - bipedRightLeg.rotateAngleX) * (timer + 1) / 40;
-						lLeg02.rotateAngleX = lLeg02.rotateAngleX + (1.0471975512F - lLeg02.rotateAngleX) * (timer + 1) / 40;
-						rLeg02.rotateAngleX = lLeg02.rotateAngleX;
-						lFoot.rotateAngleX = lFoot.rotateAngleX + (0.3839724354387525f - lFoot.rotateAngleX) * (timer + 1) / 40;
-						rFoot.rotateAngleX = lFoot.rotateAngleX;
-						fur02.rotateAngleX = fur02.rotateAngleX + (0.69813170079F - fur02.rotateAngleX) * (timer + 1) / 40;
-						fur03.rotateAngleX = fur02.rotateAngleX + (0.52359877559F - fur03.rotateAngleX) * (timer + 1) / 40;
-						fur04.rotateAngleX = fur03.rotateAngleX + (0.26179938779F - fur04.rotateAngleX) * (timer + 1) / 40;
-
-						timer++;
-						phase = 1;
-					} else {
-						bipedRightArm.rotateAngleX = -0.3490658503988659F + limbSwingAmount * MathHelper.sin(time * 5);
-						bipedLeftArm.rotateAngleX = -0.698131701F - bipedRightArm.rotateAngleX;
-						bipedLeftLeg.rotateAngleX = bipedRightArm.rotateAngleX;
-						bipedRightLeg.rotateAngleX = bipedLeftArm.rotateAngleX;
-						chest.rotateAngleY = bipedRightArm.rotateAngleX / 10 + 0.03490658503988659F;
-					}
-				} else {
-					if (limbSwingAmount > 0.3333333) { //Running animation goes here; Sin phase = 6; timer unit = 0.033 (aprox);
-						bipedBody.rotateAngleX = 1.4835298642F + 0.17453292519F * MathHelper.sin(time_running);
-						chest.rotateAngleX = 0.34906585038F + 0.08726646259F * MathHelper.sin(time_running);
-						bipedHead.rotateAngleX = -0.52359877559F + chest.rotateAngleX - 0.34906585038F;
-						bipedLeftArm.rotateAngleX = -1.74532925199F + 0.52359877559F * MathHelper.sin((float) (time_running + 4.5));
-						bipedRightArm.rotateAngleX = -1.74532925199F + 0.52359877559F * MathHelper.sin(time_running + 5);
-						rArm02.rotateAngleX = -1.3962634016F + 0.0872664626F * MathHelper.sin(time_running);
-						lArm02.rotateAngleX = -1.3962634016F + 0.0872664626F * MathHelper.sin((float) (time_running + 0.5));
-						bipedLeftLeg.rotateAngleX = -1.2217304764F + 0.52359877559F * MathHelper.cos(time_running);
-						bipedRightLeg.rotateAngleX = -1.2217304764F + 0.52359877559F * MathHelper.cos((float) (time_running + 0.5));
-						lLeg02.rotateAngleX = 1.0471975512F + 0.52359877559F * MathHelper.sin((float) (time_running + 4.5));
-						rLeg02.rotateAngleX = 1.0471975512F + 0.52359877559F * MathHelper.sin(time_running + 5);
-						lFoot.rotateAngleX = 0.3839724354387525f + 0.43633231299F * MathHelper.cos(time_running);
-						rFoot.rotateAngleX = 0.3839724354387525f + 0.43633231299F * MathHelper.cos((float) (time_running + 0.5));
-						bipedBody.setRotationPoint(0.0F, -1.5F + 5 * MathHelper.sin((float) (time_running + 4.5)), 6.0F);
-						tail01Floof.rotateAngleX = 0.34906585039F + 0.26179938779F * MathHelper.cos(time_running);
-						tail02Floof.rotateAngleX = -0.3490658503988659F + 0.26179938779F * MathHelper.sin(time_running);
-						tail03Floof.rotateAngleX = -0.17453292519943295F + 0.08726646259F * MathHelper.sin(time_running);
-						fur02.rotateAngleX = 0.69813170079F + 0.0872664625997164F * MathHelper.sin(time_running);
-						fur03.rotateAngleX = 0.52359877559F + fur02.rotateAngleX - 0.69813170079F;
-						fur04.rotateAngleX = 0.26179938779F + fur02.rotateAngleX - 0.69813170079F;
-					} else {
-						if (timer < 26) { //Transition to idle
-							bipedBody.rotateAngleX = bipedBody.rotateAngleX - bipedBody.rotateAngleX * (timer - 12) / 40;
-							bipedBody.setRotationPoint(0.0F, -1.25F, 6.0F);
-							chest.rotateAngleX = chest.rotateAngleX + (0.5235987755982988F - chest.rotateAngleX) * (timer - 12) / 40;
-							bipedHead.rotateAngleX = bipedHead.rotateAngleX + (0.7853981633974483F - bipedHead.rotateAngleX) * (timer - 12) / 40;
-							bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX + (-0.17683882565f - bipedLeftArm.rotateAngleX) * (timer - 12) / 40;
-							bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX;
-							bipedLeftArm.rotateAngleZ = bipedLeftArm.rotateAngleZ + (-0.3490658503988659F - bipedLeftArm.rotateAngleZ) * (timer - 12) / 40;
-							bipedRightArm.rotateAngleZ = -bipedLeftArm.rotateAngleZ;
-							rArm02.rotateAngleX = rArm02.rotateAngleX + (-0.5235987755982988F - rArm02.rotateAngleX) * (timer - 12) / 40;
-							lArm02.rotateAngleX = rArm02.rotateAngleX;
-							bipedLeftLeg.rotateAngleX = bipedLeftLeg.rotateAngleX + (-0.5235987755982988F - bipedLeftLeg.rotateAngleX) * (timer - 12) / 40;
-							bipedRightLeg.rotateAngleX = bipedLeftLeg.rotateAngleX;
-							lLeg02.rotateAngleX = lLeg02.rotateAngleX + (1.2217304763960306F - lLeg02.rotateAngleX) * (timer - 12) / 40;
-							rLeg02.rotateAngleX = lLeg02.rotateAngleX;
-							lFoot.rotateAngleX = lFoot.rotateAngleX + (0.296705972839036F - lFoot.rotateAngleX) * (timer - 12) / 40;
-							rFoot.rotateAngleX = lFoot.rotateAngleX;
-							tail01Floof.rotateAngleX = tail01Floof.rotateAngleX - (0.6108652381980153F - tail01Floof.rotateAngleX) * (timer - 12) / 40;
-							tail02Floof.rotateAngleX = tail02Floof.rotateAngleX + (-0.3490658503988659F - tail02Floof.rotateAngleX) * (timer - 12) / 40;
-							tail03Floof.rotateAngleX = tail03Floof.rotateAngleX + (-0.17453292519943295F - tail03Floof.rotateAngleX) * (timer - 12) / 40;
-							fur02.rotateAngleX = fur02.rotateAngleX + (0.9599310885968813F - fur02.rotateAngleX) * (timer - 12) / 40;
-							fur03.rotateAngleX = fur02.rotateAngleX + (0.7853981633974483F - fur03.rotateAngleX) * (timer - 12) / 40;
-							fur04.rotateAngleX = fur03.rotateAngleX + (0.5235987755982988F - fur04.rotateAngleX) * (timer - 12) / 40;
-
-							timer++;
-						} else {//Resets the values to the originals, as to avoid possible aberrations...
-							bipedBody.rotateAngleX = 0;
-							bipedBody.setRotationPoint(0.0F, -1.25F, 6.0F);
-							chest.rotateAngleX = 0.5235987755982988F;
-							bipedHead.rotateAngleX = 0.7853981633974483F;
-							bipedLeftArm.rotateAngleX = -0.17683882565F;
-							bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX;
-							bipedLeftArm.rotateAngleZ = -0.3490658503988659F;
-							bipedRightArm.rotateAngleZ = -bipedLeftArm.rotateAngleZ;
-							rArm02.rotateAngleX = -0.5235987755982988F;
-							bipedLeftLeg.rotateAngleX = -0.5235987755982988F;
-							bipedRightLeg.rotateAngleX = bipedLeftLeg.rotateAngleX;
-							lLeg02.rotateAngleX = 1.2217304763960306F;
-							rLeg02.rotateAngleX = lLeg02.rotateAngleX;
-							lFoot.rotateAngleX = 0.296705972839036F;
-							rFoot.rotateAngleX = lFoot.rotateAngleX;
-							tail01Floof.rotateAngleX = 0.6108652381980153F;
-							tail02Floof.rotateAngleX = -0.3490658503988659F;
-							tail03Floof.rotateAngleX = -0.17453292519943295F;
-							fur02.rotateAngleX = 0.9599310885968813F;
-							fur03.rotateAngleX = 0.7853981633974483F;
-							fur04.rotateAngleX = 0.5235987755982988F;
-
-							timer = 0;
-							phase = 0;
-						}
-					}
-				}
-			}
-		} else {
-
-			if (transformation == 0 && howling == 0) {
-				chest.rotateAngleX = 0.5235987755982988F + 0.0174532925199432F * MathHelper.cos((time));
-				bipedRightArm.rotateAngleZ = 0.3490658503988659F - 0.0174532925199432F * MathHelper.cos((time));
-				bipedLeftArm.rotateAngleZ = -bipedRightArm.rotateAngleZ;
-			}
-
-			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-				bipedBody.rotateAngleY = MathHelper.abs((float) (2 * Math.PI * MathHelper.sin(time / 20)));
-			} else {
-				bipedBody.rotateAngleY = 0.0F;
-			}
-
-
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || transformation != 0) { //Transformation?
-				transformation++;
-				System.out.println(transformation);
-				if (transformation < 40) { //Transformation animation
-
-					chest.rotateAngleX = 1.0235987755982988F + MathHelper.sin(transformation * 0.10471975512F + 0.5F);
-					bipedRightArm.rotateAngleX = -0.8490658503988659F - MathHelper.sin(transformation * 0.10471975512F + 0.5F);
-					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
-					bipedHead.rotateAngleX = 0.8853981633974483F + 0.1f * MathHelper.sin(transformation * 0.10471975512F + 0.5F);
-
-				} else if (transformation < 71) {
-					chest.rotateAngleX = 0.03182757F + 0.49177120559F * MathHelper.sin((transformation - 40) * 0.05235987756F) + 0.0174532925199432F * MathHelper.cos((time / 0.10471975512F));
-					bipedHead.rotateAngleX = 0.786221F;
-					bipedLeftArm.rotateAngleX = 0.14270538F - 0.49177123F * MathHelper.sin((transformation - 40) * 0.05235987756F);
-					bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX;
-
-
-				} else if (transformation >= 71) {
-					transformation = 0;
-
-				}
-			}
-
-
-			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || howling != 0) { //Howling animation
-				howling++;
-				if (howling < 45) {
-					chest.rotateAngleX = 0.5235987755982988F + 0.5f + MathHelper.sin(howling * 0.10471975512F + 0.5F) + 0.0174532925199432F * MathHelper.cos(time);
-					bipedRightArm.rotateAngleX = -0.3490658503988659F - 0.5f - MathHelper.sin(howling * 0.10471975512F + 0.5F);
-					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
-					bipedHead.rotateAngleX = 0.0922922634F + 0.1f * MathHelper.sin(howling * 0.10471975512F + 0.5F);
-					if (howling > 30) {
-						jawLower.rotateAngleX = MathHelper.abs(0.5235987755F * MathHelper.cos((howling - 14) / 10F));
-					}
-				} else if (howling < 172 && howling > 45) {
-					chest.rotateAngleX = 0.10067606F + 0.0174532925199432F * MathHelper.cos((time));
-					bipedRightArm.rotateAngleX = 0.07385689F;
-					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
-					bipedHead.rotateAngleX = MathHelper.abs(0.05235987755F * MathHelper.cos((howling + 2) / 10F));
-					bipedHead.rotateAngleZ = 0.05235987755F * MathHelper.sin((howling + 2) / 10F);
-					jawLower.rotateAngleX = 0.5235987755F;
-
-				} else if (howling < 194 && howling > 171) {
-					chest.rotateAngleX = 0.10067606F + 0.422922716F * MathHelper.sin(howling * 0.10471975512F) + 0.0174532925199432F * MathHelper.cos(time);
-					bipedRightArm.rotateAngleX = 0.07385689F - 0.42292274F * MathHelper.sin(howling * 0.10471975512F);
-					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
-					bipedHead.rotateAngleX = 0.05235987755F + 0.733038286F * MathHelper.sin(howling * 0.10471975512F);
-					jawLower.rotateAngleX = 0.5235987755F - 0.5235987755F * MathHelper.sin(howling * 0.10471975512F);
-				}
-
-				if (howling > 194 || Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-					howling = 0;
-					jawLower.rotateAngleX = 0;
-				}
-			}
-
-
-		}
+//		EntityPlayer p = (EntityPlayer) entity;
+//
+//		if (transformation == 0 && howling == 0 && timer == 0) {//Head movement with the cursor...
+//			bipedHead.rotateAngleY = netHeadYaw * 0.017453292F;
+//			bipedHead.rotateAngleX = MathHelper.clamp((float) (Math.PI * headPitch / 180f), -1.20f, 0.4f) + 0.785398163395f; //TODO change limits so it covers all the movement range
+//		}
+//
+//
+//		if (p.swingProgress != 0) {
+//
+//			if (swinging_arm) {
+//				bipedRightArm.rotateAngleX = -0.3490658503988659F - 1.57079632679F * swing_amount;
+//				bipedRightArm.rotateAngleY = 0.17453292519943295F + 0.52359877559F * swing_amount;
+//				bipedRightArm.rotateAngleZ = 0.3490658503988659F + 0.34906585039F * swing_amount;
+//				rArm02.rotateAngleX = -0.5235987755982988F - 0.34906585039F * swing_amount;
+//				chest.rotateAngleY = -0.17453292519F * swing_amount;
+//
+//			} else {
+//				bipedLeftArm.rotateAngleX = -0.3490658503988659F - 1.57079632679F * swing_amount;
+//				bipedLeftArm.rotateAngleY = -0.17453292519943295F - 0.52359877559F * swing_amount;
+//				bipedLeftArm.rotateAngleZ = -0.3490658503988659F - 0.34906585039F * swing_amount;
+//				lArm02.rotateAngleX = -0.5235987755982988F - 0.34906585039F * swing_amount;
+//				chest.rotateAngleY = 0.17453292519F * swing_amount;
+//			}
+//
+//			swing++;
+//			swing_amount = MathHelper.sin((float) (swing * 0.20943951023));
+//
+//		} else if (p.swingProgress == 0 && swing != 0) {//Just in case reset
+//
+//			bipedRightArm.rotateAngleX = -0.3490658503988659F;
+//			bipedRightArm.rotateAngleY = 0.17453292519943295F;
+//			bipedRightArm.rotateAngleZ = 0.3490658503988659F;
+//			rArm02.rotateAngleX = -0.5235987755982988F;
+//
+//
+//			bipedLeftArm.rotateAngleX = -0.3490658503988659F;
+//			bipedLeftArm.rotateAngleY = -0.17453292519943295F;
+//			bipedLeftArm.rotateAngleZ = -0.3490658503988659F;
+//
+//			chest.rotateAngleY = 0;
+//
+//			swing = 0;
+//			swinging_arm = !swinging_arm;
+//		}
+//
+//		float time = (p.ticksExisted + ptick) * 0.10471975512F;
+//		float time_running;
+//
+//		if (p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() < 0.1820000051558018) {//Increases animation speed based on the player's max speed;
+//			time_running = (p.ticksExisted + ptick) * 0.31772053926F;
+//		} else if (p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() > 0.3640000122487546) {
+//			time_running = (p.ticksExisted + ptick) * 0.81728115053F;
+//		} else {
+//			time_running = (float) ((float) ((p.ticksExisted + ptick) * 1.42799666 * p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) / (1 - p.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+//		}
+//
+//		this.bipedBody.render(1);
+//
+//		tail01Floof.rotateAngleZ = 0.03490658503F * MathHelper.sin((time));
+//		tail01Floof.rotateAngleX = 0.6108652381980153F + 0.00872664626F * MathHelper.cos((time));
+//		tail02Floof.rotateAngleZ = 0.03490658503F * MathHelper.cos((time));
+//		tail03Floof.rotateAngleZ = tail02Floof.rotateAngleZ;
+//
+//
+//		if (limbSwingAmount > 0.05 || timer > 0) {//Walking animation
+//			if (limbSwingAmount < 0.3333333 && timer == 0) { // Walking animation
+//				bipedRightArm.rotateAngleX = -0.3490658503988659F + limbSwingAmount * 2 * MathHelper.sin(time * 5);
+//				bipedLeftArm.rotateAngleX = -0.698131701F - bipedRightArm.rotateAngleX;
+//				bipedLeftLeg.rotateAngleX = bipedRightArm.rotateAngleX;
+//				bipedRightLeg.rotateAngleX = bipedLeftArm.rotateAngleX;
+//				chest.rotateAngleY = bipedRightArm.rotateAngleX / 10 + 0.03490658503988659F;
+//			} else {
+//				if (timer < 13) { // Transition to running animation
+//					if ((MathHelper.sin(time_running) > -0.1 && MathHelper.sin(time_running) < 0.1) || phase == 1 && transformation != 1) {
+//						bipedBody.rotateAngleX = bipedBody.rotateAngleX + (1.4835298642F - bipedBody.rotateAngleX) * (timer + 1) / 40;
+//						chest.rotateAngleX = chest.rotateAngleX - (chest.rotateAngleX - 0.17453292519F) * (timer + 1) / 40;
+//						bipedHead.rotateAngleX = bipedHead.rotateAngleX + (-bipedHead.rotateAngleX) * (timer + 1) / 40;
+//						bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX + (-1.74532925199F - bipedLeftArm.rotateAngleX) * (timer + 1) / 40;
+//						bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX + (-1.74532925199F - bipedRightArm.rotateAngleX) * (timer + 1) / 40;
+//						bipedRightArm.rotateAngleZ = bipedRightArm.rotateAngleZ - bipedRightArm.rotateAngleZ * (timer + 1) / 40;
+//						bipedLeftArm.rotateAngleZ = -bipedRightArm.rotateAngleZ;
+//						bipedLeftLeg.rotateAngleX = bipedLeftLeg.rotateAngleX + (-1.2217304764F - bipedLeftLeg.rotateAngleX) * (timer + 1) / 40;
+//						bipedRightLeg.rotateAngleX = bipedRightLeg.rotateAngleX + (-1.2217304764F - bipedRightLeg.rotateAngleX) * (timer + 1) / 40;
+//						lLeg02.rotateAngleX = lLeg02.rotateAngleX + (1.0471975512F - lLeg02.rotateAngleX) * (timer + 1) / 40;
+//						rLeg02.rotateAngleX = lLeg02.rotateAngleX;
+//						lFoot.rotateAngleX = lFoot.rotateAngleX + (0.3839724354387525f - lFoot.rotateAngleX) * (timer + 1) / 40;
+//						rFoot.rotateAngleX = lFoot.rotateAngleX;
+//						fur02.rotateAngleX = fur02.rotateAngleX + (0.69813170079F - fur02.rotateAngleX) * (timer + 1) / 40;
+//						fur03.rotateAngleX = fur02.rotateAngleX + (0.52359877559F - fur03.rotateAngleX) * (timer + 1) / 40;
+//						fur04.rotateAngleX = fur03.rotateAngleX + (0.26179938779F - fur04.rotateAngleX) * (timer + 1) / 40;
+//
+//						timer++;
+//						phase = 1;
+//					} else {
+//						bipedRightArm.rotateAngleX = -0.3490658503988659F + limbSwingAmount * MathHelper.sin(time * 5);
+//						bipedLeftArm.rotateAngleX = -0.698131701F - bipedRightArm.rotateAngleX;
+//						bipedLeftLeg.rotateAngleX = bipedRightArm.rotateAngleX;
+//						bipedRightLeg.rotateAngleX = bipedLeftArm.rotateAngleX;
+//						chest.rotateAngleY = bipedRightArm.rotateAngleX / 10 + 0.03490658503988659F;
+//					}
+//				} else {
+//					if (limbSwingAmount > 0.3333333) { //Running animation goes here; Sin phase = 6; timer unit = 0.033 (aprox);
+//						bipedBody.rotateAngleX = 1.4835298642F + 0.17453292519F * MathHelper.sin(time_running);
+//						chest.rotateAngleX = 0.34906585038F + 0.08726646259F * MathHelper.sin(time_running);
+//						bipedHead.rotateAngleX = -0.52359877559F + chest.rotateAngleX - 0.34906585038F;
+//						bipedLeftArm.rotateAngleX = -1.74532925199F + 0.52359877559F * MathHelper.sin((float) (time_running + 4.5));
+//						bipedRightArm.rotateAngleX = -1.74532925199F + 0.52359877559F * MathHelper.sin(time_running + 5);
+//						rArm02.rotateAngleX = -1.3962634016F + 0.0872664626F * MathHelper.sin(time_running);
+//						lArm02.rotateAngleX = -1.3962634016F + 0.0872664626F * MathHelper.sin((float) (time_running + 0.5));
+//						bipedLeftLeg.rotateAngleX = -1.2217304764F + 0.52359877559F * MathHelper.cos(time_running);
+//						bipedRightLeg.rotateAngleX = -1.2217304764F + 0.52359877559F * MathHelper.cos((float) (time_running + 0.5));
+//						lLeg02.rotateAngleX = 1.0471975512F + 0.52359877559F * MathHelper.sin((float) (time_running + 4.5));
+//						rLeg02.rotateAngleX = 1.0471975512F + 0.52359877559F * MathHelper.sin(time_running + 5);
+//						lFoot.rotateAngleX = 0.3839724354387525f + 0.43633231299F * MathHelper.cos(time_running);
+//						rFoot.rotateAngleX = 0.3839724354387525f + 0.43633231299F * MathHelper.cos((float) (time_running + 0.5));
+//						bipedBody.setRotationPoint(0.0F, -1.5F + 5 * MathHelper.sin((float) (time_running + 4.5)), 6.0F);
+//						tail01Floof.rotateAngleX = 0.34906585039F + 0.26179938779F * MathHelper.cos(time_running);
+//						tail02Floof.rotateAngleX = -0.3490658503988659F + 0.26179938779F * MathHelper.sin(time_running);
+//						tail03Floof.rotateAngleX = -0.17453292519943295F + 0.08726646259F * MathHelper.sin(time_running);
+//						fur02.rotateAngleX = 0.69813170079F + 0.0872664625997164F * MathHelper.sin(time_running);
+//						fur03.rotateAngleX = 0.52359877559F + fur02.rotateAngleX - 0.69813170079F;
+//						fur04.rotateAngleX = 0.26179938779F + fur02.rotateAngleX - 0.69813170079F;
+//					} else {
+//						if (timer < 26) { //Transition to idle
+//							bipedBody.rotateAngleX = bipedBody.rotateAngleX - bipedBody.rotateAngleX * (timer - 12) / 40;
+//							bipedBody.setRotationPoint(0.0F, -1.25F, 6.0F);
+//							chest.rotateAngleX = chest.rotateAngleX + (0.5235987755982988F - chest.rotateAngleX) * (timer - 12) / 40;
+//							bipedHead.rotateAngleX = bipedHead.rotateAngleX + (0.7853981633974483F - bipedHead.rotateAngleX) * (timer - 12) / 40;
+//							bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX + (-0.17683882565f - bipedLeftArm.rotateAngleX) * (timer - 12) / 40;
+//							bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX;
+//							bipedLeftArm.rotateAngleZ = bipedLeftArm.rotateAngleZ + (-0.3490658503988659F - bipedLeftArm.rotateAngleZ) * (timer - 12) / 40;
+//							bipedRightArm.rotateAngleZ = -bipedLeftArm.rotateAngleZ;
+//							rArm02.rotateAngleX = rArm02.rotateAngleX + (-0.5235987755982988F - rArm02.rotateAngleX) * (timer - 12) / 40;
+//							lArm02.rotateAngleX = rArm02.rotateAngleX;
+//							bipedLeftLeg.rotateAngleX = bipedLeftLeg.rotateAngleX + (-0.5235987755982988F - bipedLeftLeg.rotateAngleX) * (timer - 12) / 40;
+//							bipedRightLeg.rotateAngleX = bipedLeftLeg.rotateAngleX;
+//							lLeg02.rotateAngleX = lLeg02.rotateAngleX + (1.2217304763960306F - lLeg02.rotateAngleX) * (timer - 12) / 40;
+//							rLeg02.rotateAngleX = lLeg02.rotateAngleX;
+//							lFoot.rotateAngleX = lFoot.rotateAngleX + (0.296705972839036F - lFoot.rotateAngleX) * (timer - 12) / 40;
+//							rFoot.rotateAngleX = lFoot.rotateAngleX;
+//							tail01Floof.rotateAngleX = tail01Floof.rotateAngleX - (0.6108652381980153F - tail01Floof.rotateAngleX) * (timer - 12) / 40;
+//							tail02Floof.rotateAngleX = tail02Floof.rotateAngleX + (-0.3490658503988659F - tail02Floof.rotateAngleX) * (timer - 12) / 40;
+//							tail03Floof.rotateAngleX = tail03Floof.rotateAngleX + (-0.17453292519943295F - tail03Floof.rotateAngleX) * (timer - 12) / 40;
+//							fur02.rotateAngleX = fur02.rotateAngleX + (0.9599310885968813F - fur02.rotateAngleX) * (timer - 12) / 40;
+//							fur03.rotateAngleX = fur02.rotateAngleX + (0.7853981633974483F - fur03.rotateAngleX) * (timer - 12) / 40;
+//							fur04.rotateAngleX = fur03.rotateAngleX + (0.5235987755982988F - fur04.rotateAngleX) * (timer - 12) / 40;
+//
+//							timer++;
+//						} else {//Resets the values to the originals, as to avoid possible aberrations...
+//							bipedBody.rotateAngleX = 0;
+//							bipedBody.setRotationPoint(0.0F, -1.25F, 6.0F);
+//							chest.rotateAngleX = 0.5235987755982988F;
+//							bipedHead.rotateAngleX = 0.7853981633974483F;
+//							bipedLeftArm.rotateAngleX = -0.17683882565F;
+//							bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX;
+//							bipedLeftArm.rotateAngleZ = -0.3490658503988659F;
+//							bipedRightArm.rotateAngleZ = -bipedLeftArm.rotateAngleZ;
+//							rArm02.rotateAngleX = -0.5235987755982988F;
+//							bipedLeftLeg.rotateAngleX = -0.5235987755982988F;
+//							bipedRightLeg.rotateAngleX = bipedLeftLeg.rotateAngleX;
+//							lLeg02.rotateAngleX = 1.2217304763960306F;
+//							rLeg02.rotateAngleX = lLeg02.rotateAngleX;
+//							lFoot.rotateAngleX = 0.296705972839036F;
+//							rFoot.rotateAngleX = lFoot.rotateAngleX;
+//							tail01Floof.rotateAngleX = 0.6108652381980153F;
+//							tail02Floof.rotateAngleX = -0.3490658503988659F;
+//							tail03Floof.rotateAngleX = -0.17453292519943295F;
+//							fur02.rotateAngleX = 0.9599310885968813F;
+//							fur03.rotateAngleX = 0.7853981633974483F;
+//							fur04.rotateAngleX = 0.5235987755982988F;
+//
+//							timer = 0;
+//							phase = 0;
+//						}
+//					}
+//				}
+//			}
+//		} else {
+//
+//			if (transformation == 0 && howling == 0) {
+//				chest.rotateAngleX = 0.5235987755982988F + 0.0174532925199432F * MathHelper.cos((time));
+//				bipedRightArm.rotateAngleZ = 0.3490658503988659F - 0.0174532925199432F * MathHelper.cos((time));
+//				bipedLeftArm.rotateAngleZ = -bipedRightArm.rotateAngleZ;
+//			}
+//
+//			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+//				bipedBody.rotateAngleY = MathHelper.abs((float) (2 * Math.PI * MathHelper.sin(time / 20)));
+//			} else {
+//				bipedBody.rotateAngleY = 0.0F;
+//			}
+//
+//
+//			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || transformation != 0) { //Transformation?
+//				transformation++;
+//				System.out.println(transformation);
+//				if (transformation < 40) { //Transformation animation
+//
+//					chest.rotateAngleX = 1.0235987755982988F + MathHelper.sin(transformation * 0.10471975512F + 0.5F);
+//					bipedRightArm.rotateAngleX = -0.8490658503988659F - MathHelper.sin(transformation * 0.10471975512F + 0.5F);
+//					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
+//					bipedHead.rotateAngleX = 0.8853981633974483F + 0.1f * MathHelper.sin(transformation * 0.10471975512F + 0.5F);
+//
+//				} else if (transformation < 71) {
+//					chest.rotateAngleX = 0.03182757F + 0.49177120559F * MathHelper.sin((transformation - 40) * 0.05235987756F) + 0.0174532925199432F * MathHelper.cos((time / 0.10471975512F));
+//					bipedHead.rotateAngleX = 0.786221F;
+//					bipedLeftArm.rotateAngleX = 0.14270538F - 0.49177123F * MathHelper.sin((transformation - 40) * 0.05235987756F);
+//					bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX;
+//
+//
+//				} else if (transformation >= 71) {
+//					transformation = 0;
+//
+//				}
+//			}
+//
+//
+//			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || howling != 0) { //Howling animation
+//				howling++;
+//				if (howling < 45) {
+//					chest.rotateAngleX = 0.5235987755982988F + 0.5f + MathHelper.sin(howling * 0.10471975512F + 0.5F) + 0.0174532925199432F * MathHelper.cos(time);
+//					bipedRightArm.rotateAngleX = -0.3490658503988659F - 0.5f - MathHelper.sin(howling * 0.10471975512F + 0.5F);
+//					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
+//					bipedHead.rotateAngleX = 0.0922922634F + 0.1f * MathHelper.sin(howling * 0.10471975512F + 0.5F);
+//					if (howling > 30) {
+//						jawLower.rotateAngleX = MathHelper.abs(0.5235987755F * MathHelper.cos((howling - 14) / 10F));
+//					}
+//				} else if (howling < 172 && howling > 45) {
+//					chest.rotateAngleX = 0.10067606F + 0.0174532925199432F * MathHelper.cos((time));
+//					bipedRightArm.rotateAngleX = 0.07385689F;
+//					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
+//					bipedHead.rotateAngleX = MathHelper.abs(0.05235987755F * MathHelper.cos((howling + 2) / 10F));
+//					bipedHead.rotateAngleZ = 0.05235987755F * MathHelper.sin((howling + 2) / 10F);
+//					jawLower.rotateAngleX = 0.5235987755F;
+//
+//				} else if (howling < 194 && howling > 171) {
+//					chest.rotateAngleX = 0.10067606F + 0.422922716F * MathHelper.sin(howling * 0.10471975512F) + 0.0174532925199432F * MathHelper.cos(time);
+//					bipedRightArm.rotateAngleX = 0.07385689F - 0.42292274F * MathHelper.sin(howling * 0.10471975512F);
+//					bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
+//					bipedHead.rotateAngleX = 0.05235987755F + 0.733038286F * MathHelper.sin(howling * 0.10471975512F);
+//					jawLower.rotateAngleX = 0.5235987755F - 0.5235987755F * MathHelper.sin(howling * 0.10471975512F);
+//				}
+//
+//				if (howling > 194 || Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+//					howling = 0;
+//					jawLower.rotateAngleX = 0;
+//				}
+//			}
+//
+//
+//		}
 	}
 
 	/**

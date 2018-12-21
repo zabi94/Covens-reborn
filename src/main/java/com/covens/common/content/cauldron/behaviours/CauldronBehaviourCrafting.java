@@ -53,13 +53,11 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 
 	@Override
 	public void statusChanged(boolean isActiveBehaviour) {
-		if (isActiveBehaviour) {
-			if (!cauldron.getInputs().isEmpty() && cauldron.getFluid().isPresent() && !validRecipe) {
+		if (isActiveBehaviour && !cauldron.getInputs().isEmpty() && cauldron.getFluid().isPresent() && !validRecipe) {
 				validRecipe = CauldronRegistry.getCraftingResult(cauldron.getFluid().get(), cauldron.getInputs()).isPresent();
 				color = Color.getHSBColor(cauldron.getWorld().rand.nextFloat(), 0.6f + 0.4f * cauldron.getWorld().rand.nextFloat(), cauldron.getWorld().rand.nextFloat()).getRGB();
 				cauldron.markDirty();
 				cauldron.syncToClient();
-			}
 		}
 	}
 

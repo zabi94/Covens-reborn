@@ -323,10 +323,8 @@ public class BlockSaltBarrier extends BlockMod {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onBlockBreaking(BlockEvent.BreakEvent event) {
-		if (!event.getPlayer().getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt()) {
-			if (event.getState().getBlock() == this || event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == this) {
-				event.setCanceled(true);
-			}
+		if (!event.getPlayer().getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt() && (event.getState().getBlock() == this || event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == this)) {
+			event.setCanceled(true);
 		}
 	}
 

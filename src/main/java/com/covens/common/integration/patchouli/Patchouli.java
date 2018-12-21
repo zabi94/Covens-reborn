@@ -92,11 +92,11 @@ public class Patchouli {
 	
 	public static List<Ingredient> getInputsFromRegistry(String registry, String name, String type) {
 		try {
-			if (registry.equals("covens:rituals")) {
+			if ("covens:rituals".equals(registry)) {
 				AdapterIRitual ritual = AdapterIRitual.REGISTRY.getValue(new ResourceLocation(name));
-				if (type.equals("input")) {
+				if ("input".equals(type)) {
 					return ritual.getInput();
-				} else if (type.equals("output")) {
+				} else if ("output".equals(type)) {
 					return ritual.getOutputRaw().parallelStream().map(is -> Ingredient.fromStacks(is)).collect(Collectors.toList());
 				}
 			}

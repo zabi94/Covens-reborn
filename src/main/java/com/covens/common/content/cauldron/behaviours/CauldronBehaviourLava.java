@@ -22,7 +22,7 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 
 	@Override
 	public void handleParticles(boolean active) {
-
+		//NO-OP
 	}
 
 	@Override
@@ -42,22 +42,22 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
@@ -104,6 +104,6 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 
 	@Override
 	public void onDeactivation() {
-
+		//NO-OP
 	}
 }

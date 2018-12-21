@@ -1,11 +1,19 @@
 package com.covens.common.item.magic;
 
+import static net.minecraft.util.math.RayTraceResult.Type.ENTITY;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.Covens;
 import com.covens.common.core.helper.NBTHelper;
 import com.covens.common.core.helper.RayTraceHelper;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
-import net.minecraft.block.BlockBed;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -23,13 +31,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-import static net.minecraft.util.math.RayTraceResult.Type.ENTITY;
 
 /**
  * This class was created by Arekkuusu on 5/15/2017.
@@ -92,7 +93,7 @@ public class ItemTaglock extends ItemMod {
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock().isBed(state, world, pos, player)) {
-			Optional<EntityPlayer> victim = getPlayerFromBed(world, pos, state.getValue(BlockBed.OCCUPIED));
+			Optional<EntityPlayer> victim = getPlayerFromBed(world, pos);
 			if (victim.isPresent()) {
 				setVictim(player.getHeldItem(hand), victim.get());
 				return EnumActionResult.SUCCESS;
@@ -102,7 +103,7 @@ public class ItemTaglock extends ItemMod {
 		return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 	}
 
-	private Optional<EntityPlayer> getPlayerFromBed(World world, BlockPos bed, boolean inBed) {
+	private Optional<EntityPlayer> getPlayerFromBed(World world, BlockPos bed) {
 		return world.playerEntities.stream()
 				.filter(player -> player.bedLocation != null)
 				.filter(player -> player.getBedLocation().equals(bed))

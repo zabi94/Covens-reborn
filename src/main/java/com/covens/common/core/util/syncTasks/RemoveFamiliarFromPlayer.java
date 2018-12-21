@@ -12,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class RemoveFamiliarFromPlayer extends SyncTask<EntityPlayer> {
 	
-	UUID pID;
+	private UUID pID;
 
 	public RemoveFamiliarFromPlayer() {
 	}

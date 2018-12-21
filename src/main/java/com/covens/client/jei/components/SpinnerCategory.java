@@ -42,11 +42,11 @@ public class SpinnerCategory implements IRecipeCategory<SpinnerWrapper> {
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, SpinnerWrapper recipeWrapper, IIngredients ingredients) {
-		for (int i = 0; i < recipeWrapper.input.length; i++) {
+		for (int i = 0; i < recipeWrapper.getInput().length; i++) {
 			recipeLayout.getItemStacks().init(i + 1, true, (i % 2) * 18, (i / 2) * 18);
-			recipeLayout.getItemStacks().set(i + 1, Arrays.asList(recipeWrapper.input[i].getMatchingStacks()));
+			recipeLayout.getItemStacks().set(i + 1, Arrays.asList(recipeWrapper.getInput()[i].getMatchingStacks()));
 		}
 		recipeLayout.getItemStacks().init(0, false, 72, 9);
-		recipeLayout.getItemStacks().set(0, recipeWrapper.output);
+		recipeLayout.getItemStacks().set(0, recipeWrapper.getOutput());
 	}
 }

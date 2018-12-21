@@ -13,8 +13,8 @@ import java.util.Objects;
 
 public class BrewRecipeProcessor implements IComponentProcessor {
 
-	Ingredient brew;
-	Potion p;
+	private Ingredient brew;
+	private Potion p;
 
 	@Override
 	public void setup(IVariableProvider<String> json) {
@@ -26,13 +26,13 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 	@Override
 	public String process(String val) {
 		try {
-			if (val.equals("potionname")) {
+			if ("potionname".equals(val)) {
 				return (p.isBeneficial()?TextFormatting.DARK_BLUE:TextFormatting.DARK_RED)+TextFormatting.BOLD.toString()+I18n.format(p.getName());
 			}
-			if (val.equals("ingredient")) {
+			if ("ingredient".equals(val)) {
 				return PatchouliAPI.instance.serializeIngredient(brew);
 			} 
-			if (val.equals("cost")) {
+			if ("cost".equals(val)) {
 				return I18n.format("covens.brew.cost", 10);
 			}
 		} catch (Exception e) {

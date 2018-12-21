@@ -9,7 +9,8 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiThreadSpinner extends GuiContainer {
-	TileEntityThreadSpinner tileEntity;
+	
+	private TileEntityThreadSpinner tileEntity;
 
 	public GuiThreadSpinner(InventoryPlayer playerInventory, TileEntityThreadSpinner te) {
 		super(new ContainerThreadSpinner(playerInventory, te));

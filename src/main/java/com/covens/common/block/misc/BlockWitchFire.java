@@ -191,10 +191,7 @@ public class BlockWitchFire extends BlockMod {
 
 	private boolean isMundane(EntityItem i) {
 		Block b = Block.getBlockFromItem(i.getItem().getItem());
-		if (b instanceof BlockStone || b instanceof BlockDirt || b instanceof BlockSand || b instanceof BlockGravel) {
-			return true;
-		}
-		return false;
+		return (b instanceof BlockStone || b instanceof BlockDirt || b instanceof BlockSand || b instanceof BlockGravel);
 	}
 
 	@Override

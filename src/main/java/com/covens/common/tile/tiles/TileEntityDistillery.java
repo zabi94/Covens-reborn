@@ -252,10 +252,12 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
+		//NO-OP
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
+		//NO-OP
 	}
 
 	public int getStartingTime() {

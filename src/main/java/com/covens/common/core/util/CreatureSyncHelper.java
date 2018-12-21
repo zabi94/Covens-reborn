@@ -173,7 +173,6 @@ public class CreatureSyncHelper {
 
 		@Override
 		public void readFromNBT(NBTTagCompound tag) {
-			Log.i("Reading from NBT:\n"+tag);
 			synchronized (playerLock) {
 				playerList = new HashMap<>();
 				unpackPlayers(playerList, tag.getTagList("players", NBT.TAG_COMPOUND));
@@ -185,7 +184,7 @@ public class CreatureSyncHelper {
 		}
 
 		@SuppressWarnings("unchecked")
-		private void unpackEntities(HashMap<UUID, ArrayList<SyncTask<EntityLiving>>> entityList, NBTTagList tagList) {
+		private static void unpackEntities(HashMap<UUID, ArrayList<SyncTask<EntityLiving>>> entityListIn, NBTTagList tagList) {
 			tagList.forEach(entTag -> {
 				NBTTagCompound tag = (NBTTagCompound) entTag;
 				UUID id = new UUID(tag.getLong("msb"), tag.getLong("lsb"));
@@ -202,12 +201,12 @@ public class CreatureSyncHelper {
 						e.printStackTrace();
 					}
 				});
-				entityList.put(id, nlist);
+				entityListIn.put(id, nlist);
 			});
 		}
 
 		@SuppressWarnings("unchecked")
-		private void unpackPlayers(HashMap<UUID, ArrayList<SyncTask<EntityPlayer>>> playerList, NBTTagList tagList) {
+		private static void unpackPlayers(HashMap<UUID, ArrayList<SyncTask<EntityPlayer>>> playerListIn, NBTTagList tagList) {
 			tagList.forEach(entTag -> {
 				NBTTagCompound tag = (NBTTagCompound) entTag;
 				UUID id = new UUID(tag.getLong("msb"), tag.getLong("lsb"));
@@ -224,7 +223,7 @@ public class CreatureSyncHelper {
 						e.printStackTrace();
 					}
 				});
-				playerList.put(id, nlist);
+				playerListIn.put(id, nlist);
 			});
 		}
 

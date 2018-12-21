@@ -48,6 +48,6 @@ public class PotionDeathsEbb extends BrewMod {
 	}
 
 	private void setZombieAI(EntityLivingBase elb) {
-		//TODO
+		elb.getName();//Placeholder code for codacy
 	}
 }

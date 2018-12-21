@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class DisengageFamiliar extends SyncTask<EntityLiving> {
 
-	UUID eID;
+	private UUID eID;
 	
 	public DisengageFamiliar() {
 	}

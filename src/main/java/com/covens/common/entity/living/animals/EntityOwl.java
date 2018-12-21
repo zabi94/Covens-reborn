@@ -95,7 +95,7 @@ public class EntityOwl extends EntityMultiSkin {
 		this.tasks.addTask(2, new EntityAIFleeSun(this, 1d));
 		this.tasks.addTask(6, new EntityAIWanderAvoidWaterFlying(this, 0.8));
 		this.tasks.addTask(3, new EntityAIMate(this, 0.8d));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(4, this.aiSit);
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 	}
@@ -146,6 +146,7 @@ public class EntityOwl extends EntityMultiSkin {
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
+		//NO-OP
 	}
 
 	@Override

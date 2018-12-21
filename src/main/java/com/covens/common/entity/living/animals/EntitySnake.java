@@ -97,8 +97,8 @@ public class EntitySnake extends EntityMultiSkin {
 		this.tasks.addTask(5, new EntityAILookIdle(this));
 		this.tasks.addTask(4, new EntityAIWatchClosest2(this, EntityPlayer.class, 5f, 1f));
 		this.tasks.addTask(3, new EntityAIMate(this, 1d));
-        this.tasks.addTask(4, new EntityAITempt(this, 0.3D, false, TAME_ITEMS));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+		this.tasks.addTask(4, new EntityAITempt(this, 0.3D, false, TAME_ITEMS));
+		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(4, this.aiSit);
 		this.targetTasks.addTask(3, new EntityAITargetNonTamed<>(this, EntityPlayer.class, true, p -> p.getDistanceSq(this) < 1));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));

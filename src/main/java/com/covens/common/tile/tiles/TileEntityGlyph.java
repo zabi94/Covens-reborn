@@ -264,14 +264,12 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 		EnumGlyphType typeFirst = EnumGlyphType.fromMeta(rit.getCircles() >> 2 & 3);
 		EnumGlyphType typeSecond = EnumGlyphType.fromMeta(rit.getCircles() >> 4 & 3);
 		EnumGlyphType typeThird = EnumGlyphType.fromMeta(rit.getCircles() >> 6 & 3);
-		if (requiredCircles > 1)
-			if (!checkThird(typeThird)) {
-				return false;
-			}
-		if (requiredCircles > 0)
-			if (!checkSecond(typeSecond)) {
-				return false;
-			}
+		if (requiredCircles > 1 && !checkThird(typeThird)) {
+			return false;
+		}
+		if (requiredCircles > 0 && !checkSecond(typeSecond)) {
+			return false;
+		}
 		if (!checkFirst(typeFirst)) {
 			return false;
 		}

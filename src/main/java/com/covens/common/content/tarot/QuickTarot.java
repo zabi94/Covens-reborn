@@ -10,15 +10,14 @@ import java.util.function.Predicate;
 
 public class QuickTarot implements ITarot {
 
-	ResourceLocation rl;
-	ResourceLocation regName = null;
-	String name, unlocalizedName;
-	Predicate<EntityPlayer> apply, reverse;
-	Function<EntityPlayer, Integer> getNum;
+	private ResourceLocation rl;
+	private ResourceLocation regName = null;
+	private String unlocalizedName;
+	private Predicate<EntityPlayer> apply, reverse;
+	private Function<EntityPlayer, Integer> getNum;
 
 	public QuickTarot(String name, Predicate<EntityPlayer> apply, Predicate<EntityPlayer> reverse, Function<EntityPlayer, Integer> getNum) {
 		validateAll(name, apply);
-		this.name = name;
 		this.unlocalizedName = "tarot." + name + ".name";
 		rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/tarots/" + name + ".png");
 		this.reverse = reverse;

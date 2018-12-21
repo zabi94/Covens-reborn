@@ -23,6 +23,7 @@ public interface IMagicPowerUsingItem {
 
 		@Override
 		public void readNBT(Capability<IMagicPowerUsingItem> capability, IMagicPowerUsingItem instance, EnumFacing side, NBTBase nbt) {
+			//No op
 		}
 
 	}

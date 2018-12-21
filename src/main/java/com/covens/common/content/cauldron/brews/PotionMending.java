@@ -71,7 +71,7 @@ public class PotionMending extends BrewMod {
 			try {
 				startConverting.invoke(entity, starterUUID, 200);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-				throw new RuntimeException("Failed to reflect method", e);
+				throw new LoaderException("Failed to reflect method", e);
 			}
 		} else {
 			entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 400, 1));

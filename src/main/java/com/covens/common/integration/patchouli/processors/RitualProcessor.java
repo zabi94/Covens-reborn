@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class RitualProcessor implements IComponentProcessor {
 
-	AdapterIRitual ritual;
+	private AdapterIRitual ritual;
 
 	@Override
 	public void setup(IVariableProvider<String> json) {
@@ -32,13 +32,13 @@ public class RitualProcessor implements IComponentProcessor {
 			if (val.startsWith("output")) {
 				return getOutput(val.substring(6));
 			}
-			if (val.equals("ritualname")) {
+			if ("ritualname".equals(val)) {
 				return I18n.format("ritual." + ritual.getRegistryName().toString().replace(':', '.') + ".name");
 			}
-			if (val.equals("ritual")) {
+			if ("ritual".equals(val)) {
 				return ritual.getRegistryName().toString();
 			}
-			if (val.equals("separator")) {
+			if ("separator".equals(val)) {
 				return ritual.getOutputRaw().isEmpty()?"covens:textures/gui/books/ritual/separator_none.png":"covens:textures/gui/books/ritual/separator.png";
 			}
 		} catch (Exception e) {
