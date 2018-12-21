@@ -168,7 +168,7 @@ public class ClientProxy implements ISidedProxy {
 					case NORMAL:
 						return 0xFFFFFF;
 					case ANY:
-						return 0x00FF00; // A green one should never happen!
+						return 0xc5850b;
 				}
 			}
 		}, ModBlocks.ritual_glyphs);
