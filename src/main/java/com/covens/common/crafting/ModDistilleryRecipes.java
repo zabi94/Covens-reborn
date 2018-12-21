@@ -20,25 +20,25 @@ public class ModDistilleryRecipes {
 
 		REGISTRY.register(DistilleryRecipe.Factory.start("everchanging_presence")
 				.withBaseProcessingTime(300)
-				.withInput(LibIngredients.anyDye, LibIngredients.paper, LibIngredients.yewEssence)
+				.withInput(LibIngredients.soulSand, LibIngredients.paper, LibIngredients.yewEssence, LibIngredients.wormwood)
 				.withOutput(new ItemStack(ModItems.fume, 1, ItemFumes.Type.everchanging_presence.ordinal()))
 				.build()
 		);
 		REGISTRY.register(DistilleryRecipe.Factory.start("undying_image")
 				.withBaseProcessingTime(300)
-				.withInput(LibIngredients.wax, LibIngredients.fumeReekOfDeath)
+				.withInput(LibIngredients.wax, LibIngredients.fumeReekOfDeath, LibIngredients.ghastTear, LibIngredients.obsidian)
 				.withOutput(new ItemStack(ModItems.fume, 1, ItemFumes.Type.undying_image.ordinal()))
 				.build()
 		);
 		REGISTRY.register(DistilleryRecipe.Factory.start("emanation_of_dishonesty")
 				.withBaseProcessingTime(300)
-				.withInput(LibIngredients.graveyardDust, LibIngredients.blazePowder, LibIngredients.oakAppleGall, LibIngredients.fumeBottledMagic)
+				.withInput(LibIngredients.graveyardDust, LibIngredients.blazeRod, LibIngredients.oakAppleGall, LibIngredients.fumeBottledMagic)
 				.withOutput(new ItemStack(ModItems.fume, 1, ItemFumes.Type.emanation_of_dishonesty.ordinal()))
 				.build()
 		);
 		REGISTRY.register(DistilleryRecipe.Factory.start("otherworldy_tears")
 				.withBaseProcessingTime(300)
-				.withInput(LibIngredients.enderPearl, LibIngredients.lapisPowder, LibIngredients.fumeBirchSoul)
+				.withInput(LibIngredients.enderPearl, LibIngredients.lapisPowder, LibIngredients.fumeBirchSoul, LibIngredients.sagebrush)
 				.withOutput(
 						new ItemStack(ModItems.fume, 1, ItemFumes.Type.otherworld_tears.ordinal()),
 						new ItemStack(ModItems.dimensional_sand, 2, 0)
@@ -47,7 +47,7 @@ public class ModDistilleryRecipes {
 		);
 		REGISTRY.register(DistilleryRecipe.Factory.start("demonic_elixir")
 				.withBaseProcessingTime(300) //TODO: Add demon heart item
-				.withInput(LibIngredients.graveyardDust, LibIngredients.blazePowder, LibIngredients.eyes, LibIngredients.fumeCloudyOil)
+				.withInput(LibIngredients.graveyardDust, LibIngredients.blazeRod, LibIngredients.eyes, LibIngredients.fumeCloudyOil)
 				.withOutput(new ItemStack(ModItems.fume, 1, ItemFumes.Type.demonic_dew.ordinal()))
 				.build()
 		);
