@@ -125,4 +125,8 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 
 	}
 
+	public List<Ingredient> getInputs() {
+		return inputs;
+	}
+
 }

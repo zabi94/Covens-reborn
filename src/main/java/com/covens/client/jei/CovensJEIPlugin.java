@@ -9,6 +9,8 @@ import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.CauldronCraftingRecipe;
 import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.content.ritual.AdapterIRitual;
+import com.covens.common.crafting.DistilleryRecipe;
+import com.covens.common.crafting.ModDistilleryRecipes;
 import com.covens.common.crafting.OvenSmeltingRecipe;
 import com.covens.common.crafting.SpinningThreadRecipe;
 import com.covens.common.item.ModItems;
@@ -41,6 +43,7 @@ public class CovensJEIPlugin implements IModPlugin {
 		registry.addRecipeCategories(new BrewingCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new BrewModifierCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new CauldronCraftingCategory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new DistilleryCategory(registry.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override
@@ -68,6 +71,10 @@ public class CovensJEIPlugin implements IModPlugin {
 		registry.handleRecipes(CauldronCraftingRecipe.class, CauldronCraftingWrapper::new, CauldronCraftingCategory.UID);
 		registry.addRecipes(CauldronRegistry.CRAFTING_REGISTRY, CauldronCraftingCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.cauldron), CauldronCraftingCategory.UID);
+		
+		registry.handleRecipes(DistilleryRecipe.class, DistilleryWrapper::new, DistilleryCategory.UID);
+		registry.addRecipes(ModDistilleryRecipes.REGISTRY.getValuesCollection(), DistilleryCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.distillery), DistilleryCategory.UID);
 	}
 
 	@Override
