@@ -943,14 +943,11 @@ tc.aspect.luna=The Moon
 tc.aspect.sol=The Sun
 
 //Mobs
-entity.entity_owl.name=Owl
-entity.entity_snake.name=Snake
-entity.entity_raven.name=Raven
-entity.entity_toad.name=Toad
-entity.entity_lizard.name=Lizard
-entity.entity_blindworm.name=Blindworm
-entity.entity_newt.name=Newt
-entity.entity_uran.name=Uran
+entity.owl.name=Owl
+entity.snake.name=Snake
+entity.raven.name=Raven
+entity.toad.name=Toad
+entity.lizard.name=Lizard
 
 //Enchantments
 enchantment.extra_mp=Natural Attuning
