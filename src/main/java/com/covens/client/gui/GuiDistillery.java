@@ -33,9 +33,6 @@ public class GuiDistillery extends GuiContainer {
 			int l = this.getCookProgress(24);
 			this.drawTexturedModalRect(i + 76, j + 16, 176, 0, l + 1, 17);
 		}
-		if (containerDistillery.getTileEntity().getGuiHandler().getStackInSlot(12).isEmpty()) {
-			this.drawTexturedModalRect(i + 53, j + 53, 176, 17, 16, 16);
-		}
 		int burnProgress = 14 - (int) Math.ceil((14 * (containerDistillery.burnTime / (double) TileEntityDistillery.BURN_TIME)));
 		this.drawTexturedModalRect(i + 81, j + 36 + burnProgress, 242, 0 + burnProgress, 14, 14 - burnProgress);
 	}

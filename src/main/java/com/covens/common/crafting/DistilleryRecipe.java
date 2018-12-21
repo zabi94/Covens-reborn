@@ -1,37 +1,27 @@
 package com.covens.common.crafting;
 
-import com.covens.common.core.helper.Log;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe> {
 
 	private NonNullList<ItemStack> outputs = null;
 	private int time = -1;
-	private Ingredient container = null;
 	private NonNullList<Ingredient> inputs = null;
 
 	private DistilleryRecipe() {
 
 	}
 
-	public boolean matches(List<ItemStack> inputsIn, ItemStack containerIn) {
-		if (doesContainerMatch(containerIn)) {
-			if (doInputsMatch(inputsIn)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean doInputsMatch(List<ItemStack> list) {
+	public boolean matches(List<ItemStack> list) {
 		int nonEmpty = 0;
 		for (ItemStack is : list) {
 			if (is.getCount() > 0) {
@@ -60,10 +50,6 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 			}
 		}
 		return true;
-	}
-
-	private boolean doesContainerMatch(ItemStack containerIn) {
-		return (container == null && !containerIn.isEmpty()) || (container != null && container.apply(containerIn));
 	}
 
 	public int getTime() {
@@ -121,26 +107,6 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 
 		public Factory setNoOutput() {
 			recipe.outputs = NonNullList.create();
-			return this;
-		}
-
-		public Factory setNoContainer() {
-			recipe.container = Ingredient.EMPTY;
-			return this;
-		}
-
-		public Factory setAnyContainer() {
-			recipe.container = null;
-			return this;
-		}
-
-		public Factory withContainer(Ingredient containerIn) {
-			Log.w("The container option for distillery recipes is broken, reverting to anyContainer");
-			if (containerIn.getMatchingStacks().length == 0) {
-				throw new RuntimeException("No valid stack found");
-			}
-			recipe.container = containerIn;
-			setAnyContainer();
 			return this;
 		}
 

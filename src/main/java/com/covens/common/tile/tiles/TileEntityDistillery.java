@@ -1,5 +1,8 @@
 package com.covens.common.tile.tiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.Covens;
 import com.covens.common.crafting.DistilleryRecipe;
@@ -9,6 +12,7 @@ import com.covens.common.tile.ModTileEntity;
 import com.covens.common.tile.util.JointInventoryWrapper;
 import com.covens.common.tile.util.JointInventoryWrapper.Mode;
 import com.google.common.collect.Lists;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,16 +26,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TileEntityDistillery extends ModTileEntity implements ITickable {
 
@@ -42,55 +39,35 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	private int heat = 0;
 	private String currentRecipe = "";
 	private int startingProgress = -1;
-	private ItemStackHandler fluid_container_and_fuel = new ItemStackHandler(3) {
+	private ItemStackHandler fuelInventory = new ItemStackHandler(1) {
+		
 		@Override
 		protected void onContentsChanged(int slot) {
-			if (slot != 2) {
-				contentsChanged();
-			}
+			markDirty();
 		}
-
-		;
 
 		@Override
 		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-			if (slot == 0 && !stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-				return stack;
-			}
-			if (slot == 2 && stack.getItem() != Items.BLAZE_POWDER) {
+			if (stack.getItem() != Items.BLAZE_POWDER) {
 				return stack;
 			}
 			return super.insertItem(slot, stack, simulate);
 		}
-
-		;
-
-		@Override
-		public int getSlotLimit(int slot) {
-			if (slot == 0) {
-				return 1;
-			}
-			return super.getSlotLimit(slot);
-		}
-
-		;
 	};
+	
 	private ItemStackHandler inventoryOutput = new ItemStackHandler(6) {
 		@Override
 		protected void onContentsChanged(int slot) {
 			contentsChanged();
 		}
-
-		;
 	};
 	private ItemStackHandler inventoryInput = new ItemStackHandler(6) {
 		@Override
 		protected void onContentsChanged(int slot) {
 			contentsChanged();
 		}
-
-		;
 	};
+	
 	private JointInventoryWrapper ioSideWrapper = new JointInventoryWrapper();
 	private JointInventoryWrapper ioGuiWrapper = new JointInventoryWrapper();
 	private JointInventoryWrapper ioBackWrapper = new JointInventoryWrapper();
@@ -102,13 +79,8 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 			ioGuiWrapper.bind(() -> inventoryInput, i, Mode.BOTH);
 			ioGuiWrapper.bind(() -> inventoryOutput, i, Mode.EXTRACT);
 		}
-		ioSideWrapper.bind(() -> fluid_container_and_fuel, 1, Mode.EXTRACT);
-		ioGuiWrapper.bind(() -> fluid_container_and_fuel, 0, Mode.BOTH);
-		ioGuiWrapper.bind(() -> fluid_container_and_fuel, 1, Mode.EXTRACT);
-		ioGuiWrapper.bind(() -> fluid_container_and_fuel, 2, Mode.BOTH);
-		ioBackWrapper.bind(() -> fluid_container_and_fuel, 0, Mode.INSERT);
-		ioBackWrapper.bind(() -> fluid_container_and_fuel, 1, Mode.EXTRACT);
-		ioBackWrapper.bind(() -> fluid_container_and_fuel, 2, Mode.INSERT);
+		ioGuiWrapper.bind(() -> fuelInventory, 0, Mode.BOTH);
+		ioBackWrapper.bind(() -> fuelInventory, 0, Mode.INSERT);
 	}
 
 	@Override
@@ -140,11 +112,6 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 							}
 						}
 
-						if (drain(fluid_container_and_fuel.extractItem(0, 1, true))) {
-							ItemStack split = fluid_container_and_fuel.extractItem(0, 1, false);
-							fluid_container_and_fuel.insertItem(1, containerItem(split), false);
-						}
-
 						for (ItemStack is : recipe.getOutputs()) {
 							ItemStack remaining = is.copy();
 							for (int i = 0; i < inventoryOutput.getSlots() && !remaining.isEmpty(); i++) {
@@ -161,29 +128,9 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	}
 
 	private void burnFuel() {
-		if (!fluid_container_and_fuel.extractItem(2, 1, false).isEmpty()) {
+		if (!fuelInventory.extractItem(0, 1, false).isEmpty()) {
 			heat = BURN_TIME;
 		}
-	}
-
-	private ItemStack containerItem(ItemStack split) {
-		if (split.getItem().hasContainerItem(split)) {
-			return split.getItem().getContainerItem(split);
-		}
-		return split;
-	}
-
-	private boolean drain(ItemStack stack) {
-		IFluidHandlerItem fh = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-		if (fh == null) {
-			return false;
-		}
-		if (fh.drain(Fluid.BUCKET_VOLUME, false) != null && fh.drain(Fluid.BUCKET_VOLUME, false).amount == Fluid.BUCKET_VOLUME) {
-			fh.drain(Fluid.BUCKET_VOLUME, true);
-		} else {
-			return false;
-		}
-		return fh.drain(1, false) == null || fh.drain(1, false).amount == 0;
 	}
 
 
@@ -202,7 +149,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 
 	private void checkRecipe() {
 		DistilleryRecipe recipe = ModDistilleryRecipes.REGISTRY.getValuesCollection().parallelStream()
-				.filter(dr -> dr.matches(asList(inventoryInput), fluid_container_and_fuel.getStackInSlot(0)))
+				.filter(dr -> dr.matches(asList(inventoryInput)))
 				.findFirst().orElse(null);
 		if (recipe == null) {
 			currentRecipe = "";
@@ -234,17 +181,6 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 				remaining = simulated.insertItem(i, remaining, false);
 			}
 			if (!remaining.isEmpty()) {
-				return false;
-			}
-		}
-		ItemStack copy = fluid_container_and_fuel.getStackInSlot(0).copy();
-		if (copy.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-			IFluidHandler fh = copy.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-			if (fh.drain(1000, false) != null && fh.drain(1000, true).amount == 1000) {
-				if ((fh.drain(1, false) == null || fh.drain(1, false).amount == 0) && !fluid_container_and_fuel.insertItem(1, copy.splitStack(1), true).isEmpty()) {
-					return false;
-				}
-			} else {
 				return false;
 			}
 		}
@@ -292,7 +228,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	protected void readAllModDataNBT(NBTTagCompound tag) {
 		inventoryInput.deserializeNBT(tag.getCompoundTag("inv_in"));
 		inventoryOutput.deserializeNBT(tag.getCompoundTag("inv_out"));
-		fluid_container_and_fuel.deserializeNBT(tag.getCompoundTag("cont"));
+		fuelInventory.deserializeNBT(tag.getCompoundTag("fuel"));
 		mp.readFromNbt(tag.getCompoundTag("mp"));
 		progress = tag.getInteger("progress");
 		currentRecipe = tag.getString("recipe");
@@ -303,7 +239,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
 		tag.setTag("inv_in", inventoryInput.serializeNBT());
 		tag.setTag("inv_out", inventoryOutput.serializeNBT());
-		tag.setTag("cont", fluid_container_and_fuel.serializeNBT());
+		tag.setTag("fuel", fuelInventory.serializeNBT());
 		tag.setTag("mp", mp.writeToNbt());
 		tag.setInteger("progress", progress);
 		tag.setString("recipe", currentRecipe);

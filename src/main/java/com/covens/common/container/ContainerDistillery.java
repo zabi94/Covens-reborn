@@ -4,11 +4,11 @@ import com.covens.common.container.slots.ModSlot;
 import com.covens.common.container.slots.SlotFiltered;
 import com.covens.common.container.slots.SlotOutput;
 import com.covens.common.tile.tiles.TileEntityDistillery;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class ContainerDistillery extends ModContainer<TileEntityDistillery> {
@@ -27,9 +27,7 @@ public class ContainerDistillery extends ModContainer<TileEntityDistillery> {
 			this.addSlotToContainer(new SlotOutput<>(tileEntity, c, 3 + i * 4, 142, 18 * (i + 1) - 1));
 		}
 
-		this.addSlotToContainer(new SlotFiltered<>(tileEntity, c, 14, 80, 58, is -> is.getItem() == Items.BLAZE_POWDER));
-		this.addSlotToContainer(new SlotFiltered<>(tileEntity, c, 12, 54, 53, is -> is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)));
-		this.addSlotToContainer(new SlotOutput<>(tileEntity, c, 13, 106, 53));
+		this.addSlotToContainer(new SlotFiltered<>(tileEntity, c, 12, 80, 58, is -> is.getItem() == Items.BLAZE_POWDER));
 		this.addPlayerSlots(playerInventory);
 	}
 
