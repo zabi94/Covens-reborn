@@ -24,10 +24,8 @@ public class MiscEventHandler {
 
 	@SubscribeEvent
 	public void onKeyPress(KeyInputEvent evt) {
-		if (Keybinds.placeItem.isPressed()) {
-			if (isPointingToUpperFace() && canReplaceAbove() && isTopSolid()) {
+		if (Keybinds.placeItem.isPressed() && isPointingToUpperFace() && canReplaceAbove() && isTopSolid()) {
 				NetworkHandler.HANDLER.sendToServer(new PlaceHeldItemMessage(mc.objectMouseOver.getBlockPos().up()));
-			}
 		}
 	}
 	
