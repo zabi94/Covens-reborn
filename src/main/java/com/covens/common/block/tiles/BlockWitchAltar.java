@@ -153,7 +153,7 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 		return state;
 	}
 
-	private boolean tryFormMultiblock(World worldIn, BlockPos firstCorner, BlockPos secondCorner) {
+	private boolean tryFormMultiblockFromCorner(World worldIn, BlockPos firstCorner, BlockPos secondCorner) {
 		ArrayList<BlockPos> blocks = new ArrayList<BlockPos>(6);
 
 		int y = firstCorner.getY();
@@ -286,42 +286,30 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 	}
 
 	private boolean tryFormAltar(World worldIn, BlockPos pos) {
-		if (isMBBase(worldIn, pos.north().north().east())) {
-			if (tryFormMultiblock(worldIn, pos, pos.north().north().east())) return true;
-		}
-		if (isMBBase(worldIn, pos.north().north().west())) {
-			if (tryFormMultiblock(worldIn, pos, pos.north().north().west())) return true;
-		}
-		if (isMBBase(worldIn, pos.north().east().east())) {
-			if (tryFormMultiblock(worldIn, pos, pos.north().east().east())) return true;
-		}
-		if (isMBBase(worldIn, pos.north().west().west())) {
-			if (tryFormMultiblock(worldIn, pos, pos.north().west().west())) return true;
-		}
-		if (isMBBase(worldIn, pos.south().south().east())) {
-			if (tryFormMultiblock(worldIn, pos, pos.south().south().east())) return true;
-		}
-		if (isMBBase(worldIn, pos.south().south().west())) {
-			if (tryFormMultiblock(worldIn, pos, pos.south().south().west())) return true;
-		}
-		if (isMBBase(worldIn, pos.south().east().east())) {
-			if (tryFormMultiblock(worldIn, pos, pos.south().east().east())) return true;
-		}
-		if (isMBBase(worldIn, pos.south().west().west())) {
-			if (tryFormMultiblock(worldIn, pos, pos.south().west().west())) return true;
-		}
-
-		if (tryFormMultiblock(worldIn, pos.east(), pos.south().west())) {
+		
+		if (checkAndForm(worldIn, pos, pos.north().north().east(), pos.north().north().west(), pos.north().east().east(), pos.north().west().west(), pos.south().south().east(), pos.south().south().west(), pos.south().east().east(), pos.south().west().west())) {
 			return true;
 		}
-		if (tryFormMultiblock(worldIn, pos.east(), pos.north().west())) {
+		if (tryFormMultiblockFromCorner(worldIn, pos.east(), pos.south().west())) {
 			return true;
 		}
-		if (tryFormMultiblock(worldIn, pos.north(), pos.south().west())) {
+		if (tryFormMultiblockFromCorner(worldIn, pos.east(), pos.north().west())) {
 			return true;
 		}
-		if (tryFormMultiblock(worldIn, pos.north(), pos.south().east())) {
+		if (tryFormMultiblockFromCorner(worldIn, pos.north(), pos.south().west())) {
 			return true;
+		}
+		if (tryFormMultiblockFromCorner(worldIn, pos.north(), pos.south().east())) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean checkAndForm(World world, BlockPos currentPos, BlockPos... posCheckArray) {
+		for (BlockPos posCheck:posCheckArray) {
+			if (isMBBase(world, posCheck) && tryFormMultiblockFromCorner(world, currentPos, posCheck)) {
+				return true;
+			}
 		}
 		return false;
 	}

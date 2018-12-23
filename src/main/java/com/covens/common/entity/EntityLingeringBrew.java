@@ -101,91 +101,100 @@ public class EntityLingeringBrew extends Entity {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		float f = this.getRadius();
+		float radius = this.getRadius();
 
 		if (this.world.isRemote) {
-			float f5 = (float) Math.PI * f * f;
-			for (int k1 = 0; k1 < f5; ++k1) {
-				float f6 = this.rand.nextFloat() * ((float) Math.PI * 2F);
-				float f7 = MathHelper.sqrt(this.rand.nextFloat()) * f;
-				float f8 = MathHelper.cos(f6) * f7;
-				float f9 = MathHelper.sin(f6) * f7;
-				int l1 = this.getColor();
-				int i2 = l1 >> 16 & 255;
-				int j2 = l1 >> 8 & 255;
-				int j1 = l1 & 255;
-				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + f8, this.posY, this.posZ + f9, i2 / 255.0F, j2 / 255.0F, j1 / 255.0F);
-			}
+			handleParticles(radius);
 		} else {
-			if (this.ticksExisted >= this.waitTime + this.duration) {
+			updateLifetime(radius);
+			BrewData data = BrewData.fromStack(dataManager.get(BREW));
+			if (this.ticksExisted % 5 == 0) {
+				applyToEntities(data, radius);
+			}
+		}
+	}
+
+	private void applyToEntities(BrewData data, float radius) {
+		Iterator<Entry<Entity, Integer>> iterator = this.reapplicationDelayMap.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<Entity, Integer> entry = iterator.next();
+			if (this.ticksExisted >= entry.getValue().intValue()) {
+				iterator.remove();
+			}
+		}
+		List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox());
+		for (EntityLivingBase entitylivingbase : list) {
+			applyTo(entitylivingbase, radius, data);
+		}
+	}
+
+	private void applyTo(EntityLivingBase entitylivingbase, float radius, BrewData data) {
+		if (!this.reapplicationDelayMap.containsKey(entitylivingbase) && entitylivingbase.canBeHitWithPotion()) {
+			double dx = entitylivingbase.posX - this.posX;
+			double dz = entitylivingbase.posZ - this.posZ;
+			double distanceSquared = dx * dx + dz * dz;
+			if (distanceSquared <= radius * radius) {
+				this.reapplicationDelayMap.put(entitylivingbase, Integer.valueOf(this.ticksExisted + this.reapplicationDelay));
+				data.applyToEntity(entitylivingbase, this, this.getOwner(), ApplicationType.LINGERING);
+				decreaseRadiusAndLifespan(radius);
+			}
+		}
+	
+		
+	}
+
+	private void decreaseRadiusAndLifespan(float radius) {
+		if (this.radiusOnUse != 0.0F) {
+			radius += this.radiusOnUse; //decrease radius on reapplication
+			if (radius < 0.5F) {
+				this.setDead();
+				return;
+			}
+			this.setRadius(radius);
+		}
+		if (this.durationOnUse != 0) {
+			this.duration += this.durationOnUse; //Decrease lifespan on reapplication
+			if (this.duration <= 0) {
+				this.setDead();
+				return;
+			}
+		}
+	}
+
+	private void updateLifetime(float f) {
+		if (this.ticksExisted >= this.waitTime + this.duration) {
+			this.setDead();
+			return;
+		}
+
+		if (this.ticksExisted < this.waitTime) {
+			return;
+		}
+
+		if (this.radiusPerTick != 0.0F) {
+			f += this.radiusPerTick;
+
+			if (f < 0.5F) {
 				this.setDead();
 				return;
 			}
 
-			if (this.ticksExisted < this.waitTime) {
-				return;
-			}
+			this.setRadius(f);
+		}
+	}
 
-			if (this.radiusPerTick != 0.0F) {
-				f += this.radiusPerTick;
-
-				if (f < 0.5F) {
-					this.setDead();
-					return;
-				}
-
-				this.setRadius(f);
-			}
-			BrewData data = BrewData.fromStack(dataManager.get(BREW));
-			if (this.ticksExisted % 5 == 0) {
-				Iterator<Entry<Entity, Integer>> iterator = this.reapplicationDelayMap.entrySet().iterator();
-
-				while (iterator.hasNext()) {
-					Entry<Entity, Integer> entry = iterator.next();
-
-					if (this.ticksExisted >= entry.getValue().intValue()) {
-						iterator.remove();
-					}
-				}
-
-				List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox());
-
-				if (!list.isEmpty()) {
-					for (EntityLivingBase entitylivingbase : list) {
-						if (!this.reapplicationDelayMap.containsKey(entitylivingbase) && entitylivingbase.canBeHitWithPotion()) {
-							double d0 = entitylivingbase.posX - this.posX;
-							double d1 = entitylivingbase.posZ - this.posZ;
-							double d2 = d0 * d0 + d1 * d1;
-
-							if (d2 <= f * f) {
-								this.reapplicationDelayMap.put(entitylivingbase, Integer.valueOf(this.ticksExisted + this.reapplicationDelay));
-
-								data.applyToEntity(entitylivingbase, this, this.getOwner(), ApplicationType.LINGERING);
-
-								if (this.radiusOnUse != 0.0F) {
-									f += this.radiusOnUse;
-
-									if (f < 0.5F) {
-										this.setDead();
-										return;
-									}
-
-									this.setRadius(f);
-								}
-
-								if (this.durationOnUse != 0) {
-									this.duration += this.durationOnUse;
-
-									if (this.duration <= 0) {
-										this.setDead();
-										return;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+	private void handleParticles(float radius) {
+		float f5 = (float) Math.PI * radius * radius;
+		for (int k1 = 0; k1 < f5; ++k1) {
+			float f6 = this.rand.nextFloat() * ((float) Math.PI * 2F);
+			float f7 = MathHelper.sqrt(this.rand.nextFloat()) * radius;
+			float f8 = MathHelper.cos(f6) * f7;
+			float f9 = MathHelper.sin(f6) * f7;
+			int l1 = this.getColor();
+			int i2 = l1 >> 16 & 255;
+			int j2 = l1 >> 8 & 255;
+			int j1 = l1 & 255;
+			this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + f8, this.posY, this.posZ + f9, i2 / 255.0F, j2 / 255.0F, j1 / 255.0F);
 		}
 	}
 

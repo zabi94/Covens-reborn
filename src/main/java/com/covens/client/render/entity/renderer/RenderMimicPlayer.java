@@ -160,17 +160,18 @@ public class RenderMimicPlayer extends RenderLivingBase<AbstractClientPlayer> {
 	 */
 	@Override
 	protected void renderEntityName(AbstractClientPlayer entityIn, double x, double y, double z, String name, double distanceSq) {
+		double ny = y;
 		if (distanceSq < 100.0D) {
 			Scoreboard scoreboard = entityIn.getWorldScoreboard();
 			ScoreObjective scoreobjective = scoreboard.getObjectiveInDisplaySlot(2);
 			if (scoreobjective != null) {
 				Score score = scoreboard.getOrCreateScore(entityIn.getName(), scoreobjective);
 				this.renderLivingLabel(entityIn, score.getScorePoints() + " " + scoreobjective.getDisplayName(), x, y, z, 64);
-				y += this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * 0.025F;
+				ny += this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * 0.025F;
 			}
 		}
 
-		super.renderEntityName(entityIn, x, y, z, name, distanceSq);
+		super.renderEntityName(entityIn, x, ny, z, name, distanceSq);
 	}
 
 	public void renderRightArm(AbstractClientPlayer clientPlayer) {

@@ -202,7 +202,7 @@ public class EnergyHUD extends HudComponent {
 	}
 
 	private void renderText(int amount, int maxAmount) {
-
+		//NO-OP
 	}
 
 	private double getFillLevel(IMagicPowerContainer energy, float partialTicks) {

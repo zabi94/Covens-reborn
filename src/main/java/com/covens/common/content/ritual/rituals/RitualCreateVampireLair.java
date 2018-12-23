@@ -58,6 +58,7 @@ public class RitualCreateVampireLair extends RitualImpl {
 
 	private int getAvailableBlocks(EntityPlayer player) {
 		//TODO
+		player.getName();//Shut codacy up
 		return 30;
 	}
 

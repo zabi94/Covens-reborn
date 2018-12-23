@@ -35,7 +35,7 @@ public final class ModCreativeTabs {
 	private static class CreativeTab extends CreativeTabs {
 
 		@Nonnull
-		NonNullList<ItemStack> list;
+		private NonNullList<ItemStack> list;
 
 		CreativeTab(String name) {
 			super(LibMod.MOD_ID + name);

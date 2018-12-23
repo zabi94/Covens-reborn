@@ -20,7 +20,7 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 	public void setup(IVariableProvider<String> json) {
 		p = Potion.getPotionFromResourceLocation(json.get("brew"));
 		Objects.requireNonNull(p);
-		brew = CauldronRegistry.getIngredientFromBrew(CauldronRegistry.getBrewFromPotion(p)).orElseThrow(() -> new NullPointerException("Can't find ingredient"));
+		brew = CauldronRegistry.getIngredientFromBrew(CauldronRegistry.getBrewFromPotion(p)).orElseThrow(() -> new IllegalArgumentException("Can't find ingredient"));
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 			e.printStackTrace();
 			return "";
 		}
-		throw new RuntimeException("Unrecognized potion/brew value: " + val);
+		throw new IllegalArgumentException("Unrecognized potion/brew value: " + val);
 	}
 
 }

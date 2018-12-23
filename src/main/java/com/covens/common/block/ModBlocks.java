@@ -197,7 +197,7 @@ public final class ModBlocks {
 				new BlockScornedBrickStairs("scorned_brick_stairs", STAIRS_SCORNED_BRICK.getDefaultState(), Material.ROCK),
 				new BlockFakeIceSlabDouble("fake_ice_slab_double"),
 				new BlockFakeIceSlabHalf("fake_ice_slab_half"),
-				new BlockBeehive(LibBlockName.BEEHIVE, Material.GRASS),
+				new BlockBeehive(LibBlockName.BEEHIVE),
 				new BlockWitchAltar(LibBlockName.WITCH_ALTAR, Material.ROCK),
 				new BlockThreadSpinner(LibBlockName.THREAD_SPINNER),
 				new BlockCircleGlyph(LibBlockName.GLYPHS),

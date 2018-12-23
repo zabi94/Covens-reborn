@@ -84,7 +84,7 @@ public class EntityBrew extends EntityThrowable {
 				entBrew.setRadiusOnUse(0);
 				world.spawnEntity(entBrew);
 			} else {
-				applySplash(result, data);
+				applySplash(data);
 			}
 
 			int i = data.getEffects().stream().filter(be -> be.getPotion() != null).map(be -> be.getPotion()).anyMatch(p -> p.isInstant()) ? 2007 : 2002;
@@ -93,7 +93,7 @@ public class EntityBrew extends EntityThrowable {
 		}
 	}
 
-	private void applySplash(RayTraceResult raytrace, BrewData data) {
+	private void applySplash(BrewData data) {
 		int size = (int) data.getEffects().stream().mapToDouble(be -> be.getModifierList().getLevel(DefaultModifiers.RADIUS).orElse(0)).average().orElse(0);
 		AxisAlignedBB axisalignedbb = this.getEntityBoundingBox().grow(size + 4.0D, size / 2 + 2.0D, size + 4.0D);
 		List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);

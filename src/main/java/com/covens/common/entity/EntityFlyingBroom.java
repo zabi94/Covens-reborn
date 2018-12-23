@@ -125,56 +125,20 @@ public class EntityFlyingBroom extends Entity {
 		super.onEntityUpdate();
 		this.doBlockCollisions();
 		int broomType = getType();
-		float friction = broomType == 0 ? 0.99f : 0.98f;
-		if (onGround) {
-			friction = 0.8f;
-		}
-		this.motionX *= friction;
-		this.motionY *= friction;
-		this.motionZ *= friction;
-		EntityPlayer rider = (EntityPlayer) this.getControllingPassenger();
-
+		applyFriction(broomType);
 		if (this.isBeingRidden()) {
-			if (rider == null) {
-				Covens.logger.warn(this + " is being ridden by a null rider!");
-				return;
-			}
-			if (getDataManager().get(FUEL) < 5) {
-				refuel(rider);
-			}
-			float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
-			try {
-				up = isJumping.getBoolean(rider) ? 1 : 0;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			Vec3d look = rider.getLookVec();
-			if (broomType == 1) {
-				handleElderMovement(front, up, strafe, look);
-				this.motionY -= 0.005;
-			} else if (broomType == 2) {
-				handleJuniperMovement(front, up, strafe, look);
-			} else if (broomType == 3) {
-				handleYewMovement(front, up, strafe, look);
-			} else if (broomType == 4) {
-				handleCypressMovement(front, up, strafe, look);
-			}
-			this.setRotationYawHead(rider.rotationYaw);
-
+			updateFromRider(broomType);
 		} else {
 			if (!this.collidedVertically) {
 				motionY -= 0.009;
 				if (motionY < -0.5) motionY = -0.5;
 			}
 		}
+		handleCollisions();
+		setSizeAndMove();
+	}
 
-		if (this.collidedHorizontally) {
-			if (this.prevPosX == this.posX) motionX = 0;
-			if (this.prevPosZ == this.posZ) motionZ = 0;
-		}
-		if (this.collidedVertically) {
-			if (this.prevPosY == this.posY) motionY = 0;
-		}
+	private void setSizeAndMove() {
 		if (this.isBeingRidden()) {
 			this.setSize(1f, 2f);// If a player is riding, account for the height of the player
 		}
@@ -182,6 +146,53 @@ public class EntityFlyingBroom extends Entity {
 		if (this.isBeingRidden()) {
 			this.setSize(1f, 1f);
 		}
+	}
+
+	private void handleCollisions() {
+		if (this.collidedHorizontally) {
+			if (this.prevPosX == this.posX) motionX = 0;
+			if (this.prevPosZ == this.posZ) motionZ = 0;
+		}
+		if (this.collidedVertically && this.prevPosY == this.posY) motionY = 0;
+	}
+
+	private void applyFriction(int broomType) {
+		float friction = broomType == 0 ? 0.99f : 0.98f;
+		if (onGround) {
+			friction = 0.8f;
+		}
+		this.motionX *= friction;
+		this.motionY *= friction;
+		this.motionZ *= friction;
+	}
+
+	private void updateFromRider(int broomType) {
+		EntityPlayer rider = (EntityPlayer) this.getControllingPassenger();
+		if (rider == null) {
+			Covens.logger.warn(this + " is being ridden by a null rider!");
+			return;
+		}
+		if (getDataManager().get(FUEL) < 5) {
+			refuel(rider);
+		}
+		float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
+		try {
+			up = isJumping.getBoolean(rider) ? 1 : 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Vec3d look = rider.getLookVec();
+		if (broomType == 1) {
+			handleElderMovement(front, up, strafe, look);
+			this.motionY -= 0.005;
+		} else if (broomType == 2) {
+			handleJuniperMovement(front, up, strafe, look);
+		} else if (broomType == 3) {
+			handleYewMovement(front, up, strafe, look);
+		} else if (broomType == 4) {
+			handleCypressMovement(front, up, strafe, look);
+		}
+		this.setRotationYawHead(rider.rotationYaw);
 	}
 
 	private void refuel(EntityPlayer rider) {

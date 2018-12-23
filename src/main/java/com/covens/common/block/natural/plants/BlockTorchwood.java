@@ -141,7 +141,7 @@ public class BlockTorchwood extends BlockMod implements IGrowable, IPlantable {
 
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-
+		//NO-OP
 	}
 
 	@Override

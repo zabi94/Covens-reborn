@@ -46,6 +46,7 @@ public class SpellRenderer extends Render<EntitySpellCarrier> {
 
 	@Override
 	public void doRenderShadowAndFire(Entity entityIn, double x, double y, double z, float yaw, float partialTicks) {
+		//NO-OP
 	}
 
 }

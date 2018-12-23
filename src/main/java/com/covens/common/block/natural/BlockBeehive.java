@@ -53,7 +53,7 @@ public class BlockBeehive extends BlockFalling implements IModelRegister {
 
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.18F, 0, 0.18F, 0.82F, 1, 0.82F);
 
-	public BlockBeehive(String id, Material material) {
+	public BlockBeehive(String id) {
 		super(Material.GRASS);
 		setTranslationKey(id);
 		setDefaultState(blockState.getBaseState());

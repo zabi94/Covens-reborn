@@ -107,29 +107,27 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 
 	@Override
 	public void update() {
-		if (!world.isRemote) {
-			if (isBurning) {
-				this.burnTime++;
-				if (isWorking) {
-					this.work++;
-					if (this.work >= TOTAL_WORK) {
-						this.work = 0;
-						isWorking = false;
-						this.smelt();
-						checkRecipe();
-					}
+		if (!world.isRemote && isBurning) {
+			this.burnTime++;
+			if (isWorking) {
+				this.work++;
+				if (this.work >= TOTAL_WORK) {
+					this.work = 0;
+					isWorking = false;
+					this.smelt();
+					checkRecipe();
 				}
-				if (burnTime >= itemBurnTime) {
-					this.burnTime = 0;
-					this.itemBurnTime = 0;
-					this.isBurning = false;
-					itemBurnTime = consumeFuel();
-					if (itemBurnTime > 0) {
-						isBurning = true;
-					}
-				}
-				this.markDirty();
 			}
+			if (burnTime >= itemBurnTime) {
+				this.burnTime = 0;
+				this.itemBurnTime = 0;
+				this.isBurning = false;
+				itemBurnTime = consumeFuel();
+				if (itemBurnTime > 0) {
+					isBurning = true;
+				}
+			}
+			this.markDirty();
 		}
 	}
 

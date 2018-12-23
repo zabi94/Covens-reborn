@@ -70,7 +70,7 @@ class ParticleSpark extends Particle {
 	}
 
 	@SideOnly(Side.CLIENT)
-	static class Factory implements IParticleF {
+	public static class Factory implements IParticleF {
 		@Override
 		public Particle createParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... args) {
 			return new ParticleSpark(worldIn, xCoordIn, yCoordIn, zCoordIn);

@@ -69,10 +69,8 @@ public class BlockModSapling extends BlockBush implements IGrowable, IModelRegis
 			for (int dz = -2; dz < 3; dz++) {
 				for (int dy = -2; dy < 1; dy++) {
 					BlockPos current = pos.up(h).add(dx, dy, dz);
-					if (isAirBlock(world, current) && ((Math.abs(dz) != 2 || Math.abs(dx) != 2) || r.nextDouble() < 0.2)) {
-						if ((dy < 0 || (dx < 2 && dz < 2 && dx > -2 && dz > -2))) {
-							world.setBlockState(current, leaves, 3);
-						}
+					if ((isAirBlock(world, current) && ((Math.abs(dz) != 2 || Math.abs(dx) != 2) || r.nextDouble() < 0.2)) && ((dy < 0 || (dx < 2 && dz < 2 && dx > -2 && dz > -2)))) {
+						world.setBlockState(current, leaves, 3);
 					}
 				}
 			}
