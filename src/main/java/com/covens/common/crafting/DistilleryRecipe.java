@@ -112,13 +112,13 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 
 		public DistilleryRecipe build() {
 			if (recipe.time <= 0) {
-				throw new RuntimeException("Time was not set properly");
+				throw new IllegalStateException("Time was not set properly");
 			}
 			if (recipe.inputs == null) {
-				throw new RuntimeException("Inputs were not set");
+				throw new IllegalStateException("Inputs were not set");
 			}
 			if (recipe.outputs == null) {
-				throw new RuntimeException("Outputs were not set");
+				throw new IllegalStateException("Outputs were not set");
 			}
 			return recipe;
 		}

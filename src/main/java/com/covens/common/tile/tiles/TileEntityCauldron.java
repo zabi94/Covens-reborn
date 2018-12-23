@@ -71,13 +71,11 @@ public class TileEntityCauldron extends ModTileEntity implements ITickable {
 			worldIn.setBlockState(pos, state.cycleProperty(Covens.HALF), 3);
 		}
 		ItemStack heldItem = playerIn.getHeldItem(hand);
-		if (!playerIn.world.isRemote) {
-			if (ingredients.size() == 0 && heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-				FluidUtil.interactWithFluidHandler(playerIn, hand, tank);
-				if (playerIn.isCreative() && tank.isFull()) {
-					markDirty();
-					syncToClient();
-				}
+		if (!playerIn.world.isRemote && ingredients.size() == 0 && heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+			FluidUtil.interactWithFluidHandler(playerIn, hand, tank);
+			if (playerIn.isCreative() && tank.isFull()) {
+				markDirty();
+				syncToClient();
 			}
 		}
 

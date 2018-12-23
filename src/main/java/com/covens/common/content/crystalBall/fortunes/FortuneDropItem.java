@@ -34,10 +34,8 @@ public class FortuneDropItem extends Fortune {
 	public void onItemUsed(RightClickItem evt) {
 		if (evt.getEntityPlayer() != null) { // Needs to check for mainhand due to how the event works
 			CapabilityFortune cap = evt.getEntityPlayer().getCapability(CapabilityFortune.CAPABILITY, null);
-			if (cap.getFortune() == this && cap.isActive()) {
-				if (evt.getEntityPlayer().dropItem(true) != null) {
-					cap.setRemovable();
-				}
+			if (cap.getFortune() == this && cap.isActive() && evt.getEntityPlayer().dropItem(true) != null) {
+				cap.setRemovable();
 			}
 		}
 	}

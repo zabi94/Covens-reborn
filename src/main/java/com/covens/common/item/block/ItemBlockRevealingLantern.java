@@ -86,13 +86,10 @@ public class ItemBlockRevealingLantern extends ItemBlock {
 			return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 		}
 
-		if (lit) {
-			if (world.getBlockState(pos.offset(side)).getBlock().isReplaceable(world, pos.offset(side)) && player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
-				world.setBlockState(pos.offset(side), ModBlocks.witches_light.getDefaultState(), 3);
-				return EnumActionResult.SUCCESS;
-			}
+		if (lit && world.getBlockState(pos.offset(side)).getBlock().isReplaceable(world, pos.offset(side)) && player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
+			world.setBlockState(pos.offset(side), ModBlocks.witches_light.getDefaultState(), 3);
+			return EnumActionResult.SUCCESS;
 		}
-
 		return EnumActionResult.FAIL;
 	}
 

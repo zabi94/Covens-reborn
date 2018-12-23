@@ -161,6 +161,7 @@ public class EntityOwl extends EntityMultiSkin {
 
 	@Override
 	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+		//NO-OP
 	}
 
 	@Override

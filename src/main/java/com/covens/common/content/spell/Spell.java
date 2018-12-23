@@ -16,10 +16,10 @@ public abstract class Spell implements ISpell {
 
 	public static final IForgeRegistry<ISpell> SPELL_REGISTRY = new RegistryBuilder<ISpell>().setName(new ResourceLocation(LibMod.MOD_ID, "spells")).setType(ISpell.class).setIDRange(0, 255).create();
 
-	int color, cost;
-	String name;
-	ISpell.EnumSpellType type;
-	ResourceLocation regName;
+	private int color, cost;
+	private String name;
+	private ISpell.EnumSpellType type;
+	private ResourceLocation regName;
 
 	public Spell(int cost, int color, ISpell.EnumSpellType type, String name, String mod_id) {
 		this.color = color;

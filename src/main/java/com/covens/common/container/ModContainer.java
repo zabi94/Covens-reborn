@@ -86,6 +86,6 @@ public abstract class ModContainer<T extends TileEntity> extends Container {
 
 	@SideOnly(Side.CLIENT)
 	protected void onFieldUpdated(int id, int data) {
-
+		//Extend this
 	}
 }

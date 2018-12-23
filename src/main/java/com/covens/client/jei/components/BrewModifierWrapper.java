@@ -20,9 +20,9 @@ import java.util.Arrays;
 
 public class BrewModifierWrapper implements IRecipeWrapper {
 
-	ItemStack[] in;
-	ArrayList<ItemStack> validBrews = new ArrayList<ItemStack>(CauldronRegistry.BREW_POTION_MAP.size());
-	String name;
+	private ItemStack[] in;
+	private ArrayList<ItemStack> validBrews = new ArrayList<ItemStack>(CauldronRegistry.BREW_POTION_MAP.size());
+	private String name;
 
 	public BrewModifierWrapper(IBrewModifier modifier) {
 		in = modifier.getJEIStackRepresentative().getMatchingStacks();

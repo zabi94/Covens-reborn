@@ -19,8 +19,6 @@ import net.minecraftforge.common.IPlantable;
 
 public class PotionInfestation extends BrewMod {
 
-	private static final DamageSource[] source = new DamageSource[]{DamageSource.WITHER, DamageSource.DROWN, DamageSource.ON_FIRE, DamageSource.MAGIC};
-
 	public PotionInfestation() {
 		super("infestation", true, 0xFF80DC, false, 3 * 60 * 20);
 	}
@@ -32,28 +30,30 @@ public class PotionInfestation extends BrewMod {
 
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
-
 		if (entity instanceof EntityCow) {
-			EntityMooshroom entitymooshroom = new EntityMooshroom(entity.world);
-			entitymooshroom.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-			entitymooshroom.setHealth(entity.getHealth());
-			entitymooshroom.renderYawOffset = entity.renderYawOffset;
-			if (entity.hasCustomName()) {
-				entitymooshroom.setCustomNameTag(entity.getCustomNameTag());
+			convertCow(entity);
+		} else {
+			entity.attackEntityFrom(DamageSource.MAGIC, 1 + entity.getRNG().nextFloat() * amplifier);
+			if (entity.getRNG().nextBoolean() && amplifier > 1) {
+				entity.world.getEntitiesWithinAABB(EntityLivingBase.class, entity.getEntityBoundingBox().grow(2 * amplifier)).forEach(e -> {
+					if (e.getActivePotionEffect(this) == null) {
+						e.addPotionEffect(new PotionEffect(this, this.getDefaultDuration(), amplifier - 1));
+					}
+				});
 			}
-			entity.setDead();
-			entity.world.spawnEntity(entitymooshroom);
-			return;
 		}
+	}
 
-		entity.attackEntityFrom(source[entity.getRNG().nextInt(source.length)], 3 + entity.getRNG().nextFloat() * amplifier);
-		if (entity.getRNG().nextBoolean() && amplifier > 1) {
-			entity.world.getEntitiesWithinAABB(EntityLivingBase.class, entity.getEntityBoundingBox().grow(amplifier)).forEach(e -> {
-				if (e.getActivePotionEffect(this) == null) {
-					e.addPotionEffect(new PotionEffect(this, this.getDefaultDuration(), amplifier - 1));
-				}
-			});
+	private void convertCow(EntityLivingBase entity) {
+		EntityMooshroom entitymooshroom = new EntityMooshroom(entity.world);
+		entitymooshroom.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
+		entitymooshroom.setHealth(entity.getHealth());
+		entitymooshroom.renderYawOffset = entity.renderYawOffset;
+		if (entity.hasCustomName()) {
+			entitymooshroom.setCustomNameTag(entity.getCustomNameTag());
 		}
+		entity.setDead();
+		entity.world.spawnEntity(entitymooshroom);
 	}
 
 	@Override

@@ -199,7 +199,7 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 			dismantleRecursive(world, pos);
 		} else if (fromPos.getY() == pos.getY() + 1 && state.getValue(ALTAR_TYPE) != AltarMultiblockType.UNFORMED) {
 			//This should never cause NPEs. If it does, investigate why getAltarTileFromMultiblock returned null from a formed piece of altar
-			((TileEntityWitchAltar) world.getTileEntity(getAltarTileFromMultiblock(world, pos))).scheduleUpgrade();
+			((TileEntityWitchAltar) world.getTileEntity(getAltarTileFromMultiblock(world, pos))).scheduleUpgradeCheck();
 		}
 	}
 

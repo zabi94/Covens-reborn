@@ -48,12 +48,10 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	 * 
 	 */
 
-	static final int RADIUS = 18;
-	static final int MAX_SCORE_PER_CATEGORY = 20;
-	static final int RIGHT_CLICK_RECALCULATION_COOLDOWN = 200;
-	ItemStack swordItem = ItemStack.EMPTY;
-	double multiplier = 1;
-	DefaultMPContainer storage = new DefaultMPContainer(0);
+	private static final int RIGHT_CLICK_RECALCULATION_COOLDOWN = 200;
+	private ItemStack swordItem = ItemStack.EMPTY;
+	private double multiplier = 1;
+	private DefaultMPContainer storage = new DefaultMPContainer(0);
 	private AltarScanHelper scanHelper;
 	private int gain = 1;
 	private int recalcCooldown = 0;
@@ -182,8 +180,8 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		}
 	}
 
-	public void scheduleUpgrade() {
-		scanHelper.upgradeCheckScheduled = true;
+	public void scheduleUpgradeCheck() {
+		scanHelper.scheduleUpgradeCheck();
 	}
 
 	@Override
@@ -202,7 +200,7 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 			if (recalcCooldown > 0) {
 				recalcCooldown--;
 			}
-			if (swordItem.getItem() == ModItems.athame) {
+			if (getSwordItemStack().getItem() == ModItems.athame) {
 				world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5))
 						.forEach(player -> {
 							IMagicPowerContainer playerMP = player.getCapability(IMagicPowerContainer.CAPABILITY, null);
@@ -231,7 +229,7 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	protected void refreshUpgrades() {
 		gain = 1;
 		multiplier = 1;
-		swordItem = ItemStack.EMPTY;
+		setSwordItem(ItemStack.EMPTY);
 		AltarUpgradeController controller = getUpgrades();
 		for (int i = 0; i < controller.getModifierPositions().length; i++) {
 			BlockPos p = controller.getModifierPositions()[i];
@@ -284,7 +282,7 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
 		tag.setTag("mp", storage.saveNBTTag());
 		tag.setInteger("gain", gain);
-		tag.setTag("swordItem", swordItem.writeToNBT(new NBTTagCompound()));
+		tag.setTag("swordItem", getSwordItemStack().writeToNBT(new NBTTagCompound()));
 		tag.setDouble("multiplier", multiplier);
 		tag.setInteger("recalcCooldown", recalcCooldown);
 		writeModSyncDataNBT(tag);
@@ -294,7 +292,7 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	protected void readAllModDataNBT(NBTTagCompound tag) {
 		storage.loadFromNBT(tag.getCompoundTag("mp"));
 		gain = tag.getInteger("gain");
-		swordItem = new ItemStack(tag.getCompoundTag("swordItem"));
+		setSwordItem(new ItemStack(tag.getCompoundTag("swordItem")));
 		multiplier = tag.getDouble("multiplier");
 		recalcCooldown = tag.getInteger("recalcCooldown");
 		readModSyncDataNBT(tag);
@@ -319,6 +317,18 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 			scanHelper.forceFullScan();
 			recalcCooldown = RIGHT_CLICK_RECALCULATION_COOLDOWN;
 		}
+	}
+
+	public ItemStack getSwordItemStack() {
+		return swordItem;
+	}
+
+	public double getMultiplier() {
+		return multiplier;
+	}
+
+	public void setMultiplier(double multiplier) {
+		this.multiplier = multiplier;
 	}
 
 }

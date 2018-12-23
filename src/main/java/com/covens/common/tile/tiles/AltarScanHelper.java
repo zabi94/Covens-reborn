@@ -1,5 +1,6 @@
 package com.covens.common.tile.tiles;
 
+import com.covens.api.mp.IMagicPowerContainer;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibIngredients;
@@ -15,9 +16,12 @@ import java.util.HashMap;
 
 class AltarScanHelper {
 
-	TileEntityWitchAltar te;
-	boolean upgradeCheckScheduled = false;
-	private int dx = -TileEntityWitchAltar.RADIUS, dy = -TileEntityWitchAltar.RADIUS, dz = -TileEntityWitchAltar.RADIUS;
+	private static final int RADIUS = 18;
+	private static final int MAX_SCORE_PER_CATEGORY = 20;
+	
+	private TileEntityWitchAltar te;
+	private boolean upgradeCheckScheduled = false;
+	private int dx = -RADIUS, dy = -RADIUS, dz = -RADIUS;
 	private HashMap<Block, Integer> map = new HashMap<Block, Integer>();
 	private BlockPos.MutableBlockPos checking = new BlockPos.MutableBlockPos(0, 0, 0);
 	private boolean complete = false;
@@ -43,11 +47,15 @@ class AltarScanHelper {
 			refreshNature();
 		}
 	}
+	
+	public void scheduleUpgradeCheck() {
+		upgradeCheckScheduled = true;
+	}
 
 	private void getNextCycle() {
 		complete = false;
-		int radius_c = TileEntityWitchAltar.RADIUS;
-		if (te.swordItem.getItem() == ModItems.boline) {
+		int radius_c = RADIUS;
+		if (te.getSwordItemStack().getItem() == ModItems.boline) {
 			radius_c += 2;
 		}
 		dx++;
@@ -89,7 +97,7 @@ class AltarScanHelper {
 			if (map.containsKey(block)) {
 				currentScore = map.get(block);
 			}
-			int max_score = TileEntityWitchAltar.MAX_SCORE_PER_CATEGORY;
+			int max_score = MAX_SCORE_PER_CATEGORY;
 			if (currentScore < max_score) {
 				map.put(block, currentScore + score);
 			}
@@ -100,20 +108,20 @@ class AltarScanHelper {
 		te.refreshUpgrades();
 		int maxPower = map.values().parallelStream().reduce(0, (a, b) -> a + b);
 		int varietyMultiplier = 40;
-		if (te.swordItem.getItem() == ModItems.silver_sword) {
+		if (te.getSwordItemStack().getItem() == ModItems.silver_sword) {
 			varietyMultiplier = 51;
 		}
 		maxPower += (map.keySet().size() * varietyMultiplier); //Variety is the most important thing
-		maxPower *= te.multiplier;
-		te.storage.setMaxAmount(maxPower);
+		maxPower = (int) (maxPower * te.getMultiplier());
+		te.getCapability(IMagicPowerContainer.CAPABILITY, null).setMaxAmount(maxPower);
 		map.clear();
 		te.markDirty();
 	}
 
 	public void forceFullScan() {
-		dx = -TileEntityWitchAltar.RADIUS;
-		dy = -TileEntityWitchAltar.RADIUS;
-		dz = -TileEntityWitchAltar.RADIUS;
+		dx = -RADIUS;
+		dy = -RADIUS;
+		dz = -RADIUS;
 		complete = false;
 		while (!complete) {
 			getNextCycle();

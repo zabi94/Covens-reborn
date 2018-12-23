@@ -14,9 +14,9 @@ public class CapabilityBloodReserve implements IBloodReserve {
 	@CapabilityInject(IBloodReserve.class)
 	public static final Capability<IBloodReserve> CAPABILITY = null;
 
-	int max_blood, blood;
+	private int max_blood, blood;
 	@Nullable
-	UUID lastDrinker;
+	private UUID lastDrinker;
 
 	public CapabilityBloodReserve() {
 		max_blood = 0;

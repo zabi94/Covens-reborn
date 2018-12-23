@@ -120,10 +120,8 @@ public abstract class HudComponent {
 	public abstract void render(ScaledResolution resolution, float partialTicks, boolean renderDummy);
 
 	public boolean isHovered(int mx, int my) {
-		if (getX() < mx && getX() + getWidth() > mx) {
-			if (getY() < my && getY() + getHeight() > my) {
-				return true;
-			}
+		if (getX() < mx && getX() + getWidth() > mx && getY() < my && getY() + getHeight() > my) {
+			return true;
 		}
 		return false;
 	}

@@ -59,22 +59,19 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 				potionAmountUsed = 300;
 			}
 
-			if (cauldron.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(null, cauldron.getPos(), cauldron.getWorld().provider.getDimension(), 1000)) { //TODO make the amount dependent on the brew type
-
-				if (cauldron.getFluid().isPresent() && cauldron.getFluid().get().amount >= potionAmountUsed) {
-					if (heldItem == ModItems.empty_brew_drink) {
-						TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_drink)));
-					} else if (heldItem == ModItems.empty_brew_linger) {
-						TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_linger)));
-					} else if (heldItem == ModItems.empty_brew_splash) {
-						TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_splash)));
-					} else if (heldItem == Items.ARROW) {
-						TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_arrow)));
-					}
-					cauldron.setTankLock(true);
-					cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null).drain(potionAmountUsed, true);
-					cauldron.setTankLock(false);
+			if (hasEnergy(1000) && hasRequiredFluidAmount(potionAmountUsed)) { //TODO make energy dependent on brew
+				if (heldItem == ModItems.empty_brew_drink) {
+					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_drink)));
+				} else if (heldItem == ModItems.empty_brew_linger) {
+					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_linger)));
+				} else if (heldItem == ModItems.empty_brew_splash) {
+					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_splash)));
+				} else if (heldItem == Items.ARROW) {
+					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_arrow)));
 				}
+				cauldron.setTankLock(true);
+				cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null).drain(potionAmountUsed, true);
+				cauldron.setTankLock(false);
 			}
 
 			if (!cauldron.getFluid().isPresent() || cauldron.getFluid().get().amount <= 0) {
@@ -85,6 +82,14 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 			cauldron.markDirty();
 			cauldron.syncToClient();
 		}
+	}
+	
+	private boolean hasEnergy(int amount) {
+		return cauldron.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(null, cauldron.getPos(), cauldron.getWorld().provider.getDimension(), amount);
+	}
+	
+	private boolean hasRequiredFluidAmount(int potionAmountUsed) {
+		return cauldron.getFluid().isPresent() && cauldron.getFluid().get().amount >= potionAmountUsed;
 	}
 
 	@Override

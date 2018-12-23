@@ -237,10 +237,8 @@ public class VampireAbilityHandler {
 				evt.player.startRiding(bs);
 			}
 		} else if (evt.action == ModAbilities.MESMERIZE) {
-			if (evt.focusedEntity instanceof EntityLivingBase) {
-				if (CovensAPI.getAPI().addVampireBlood(evt.player, -150)) {
-					((EntityLivingBase) evt.focusedEntity).addPotionEffect(new PotionEffect(ModPotions.mesmerized, 100, 0, false, true));
-				}
+			if (evt.focusedEntity instanceof EntityLivingBase && CovensAPI.getAPI().addVampireBlood(evt.player, -150)) {
+				((EntityLivingBase) evt.focusedEntity).addPotionEffect(new PotionEffect(ModPotions.mesmerized, 100, 0, false, true));
 			}
 		} else if (evt.action == ModAbilities.HYPNOTIZE) {
 			evt.player.sendStatusMessage(new TextComponentString("Hypnotize ability not available yet"), true);
@@ -300,12 +298,13 @@ public class VampireAbilityHandler {
 
 	@SubscribeEvent
 	public static void checkHealing(LivingHealEvent evt) {
-		if (evt.getEntityLiving() instanceof EntityPlayer && !evt.getEntityLiving().world.isRemote) {
-			if (evt.getEntityLiving().getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) {
-				if (evt.getEntityLiving().getCapability(CapabilityVampire.CAPABILITY, null).getBlood() == 0) {
-					evt.setCanceled(true);
-				}
-			}
+		if	(
+				evt.getEntityLiving() instanceof EntityPlayer && 
+				!evt.getEntityLiving().world.isRemote && 
+				evt.getEntityLiving().getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE && 
+				evt.getEntityLiving().getCapability(CapabilityVampire.CAPABILITY, null).getBlood() == 0
+			) {
+				evt.setCanceled(true);
 		}
 	}
 

@@ -22,6 +22,7 @@ public abstract class GenericBrewDamageVS extends BrewMod {
 	protected abstract boolean shouldAffect(EntityLivingBase entity);
 
 	protected void applyExtraEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
+		//Override this when necessary
 	}
 
 	protected float getDamage(int amplifier) {
