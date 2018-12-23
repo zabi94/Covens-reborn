@@ -47,6 +47,7 @@ public class RenderBatSwarm extends Render<EntityBatSwarm> {
 
 	@Override
 	public void doRenderShadowAndFire(Entity entityIn, double x, double y, double z, float yaw, float partialTicks) {
+		//NO-OP
 	}
 
 	public static class PlayerHider {

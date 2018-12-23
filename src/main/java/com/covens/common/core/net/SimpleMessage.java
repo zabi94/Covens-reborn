@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.lang.reflect.Field;
@@ -61,8 +63,9 @@ public class SimpleMessage<REQ extends SimpleMessage> implements IMessage, IMess
 
 	private static Pair<Reader, Writer> getHandler(Class<?> clazz) {
 		Pair<Reader, Writer> pair = handlers.get(clazz);
-		if (pair == null)
-			throw new RuntimeException("No R/W handler for  " + clazz);
+		if (pair == null) {
+			throw new SerializationException("No R/W handler for  " + clazz);
+		}
 		return pair;
 	}
 
@@ -230,7 +233,7 @@ public class SimpleMessage<REQ extends SimpleMessage> implements IMessage, IMess
 					readField(f, type, buf);
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("Error at reading packet " + this, e);
+			throw new SerializationException("Error at reading packet " + this, e);
 		}
 	}
 
@@ -245,7 +248,7 @@ public class SimpleMessage<REQ extends SimpleMessage> implements IMessage, IMess
 					writeField(f, type, buf);
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("Error at writing packet " + this, e);
+			throw new SerializationException("Error at writing packet " + this, e);
 		}
 	}
 

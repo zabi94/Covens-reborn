@@ -50,47 +50,55 @@ public class EnergyHUD extends HudComponent {
 	@SubscribeEvent
 	public void onTick(TickEvent.ClientTickEvent event) {
 		if (event.phase == TickEvent.Phase.END && Minecraft.getMinecraft().player != null) {
-
 			IMagicPowerContainer storage = Minecraft.getMinecraft().player.getCapability(IMagicPowerContainer.CAPABILITY, null);
 			if (lastPulsed > 0) {
 				lastPulsed--;
 			}
-			boolean energyChanged = oldEnergy != storage.getAmount() || oldMaxEnergy != storage.getMaxAmount() || oldInfusion != CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture();
-			if (energyChanged) {
-				shouldPulse = lastPulsed == 0;
-			}
-			if (energyChanged || isItemEnergyUsing() || !ModConfig.CLIENT.ENERGY_HUD.autoHide) {
-				oldEnergy = storage.getAmount();
-				oldMaxEnergy = storage.getMaxAmount();
-				oldInfusion = CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture();
-				renderTime = 60;
-				visibilityLeft = 1F;
-			}
+			checkIfBarShouldStay(storage);
+			tickBarTimer(storage);
+			calculateWhitePulsation();
+		}
+	}
 
-			if (renderTime > 0 && storage.getAmount() == storage.getMaxAmount()) {
-				if (renderTime < 20) {
-					visibilityLeft -= 0.05F;
-					visibilityLeft = MathHelper.clamp(visibilityLeft, 0F, 1F);
+	private void tickBarTimer(IMagicPowerContainer storage) {
+		if (renderTime > 0 && storage.getAmount() == storage.getMaxAmount()) {
+			if (renderTime < 20) {
+				visibilityLeft -= 0.05F;
+				visibilityLeft = MathHelper.clamp(visibilityLeft, 0F, 1F);
+			}
+			renderTime--;
+		}
+	}
+
+	private void checkIfBarShouldStay(IMagicPowerContainer storage) {
+		boolean energyChanged = oldEnergy != storage.getAmount() || oldMaxEnergy != storage.getMaxAmount() || oldInfusion != CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture();
+		if (energyChanged) {
+			shouldPulse = lastPulsed == 0;
+		}
+		if (energyChanged || isItemEnergyUsing() || !ModConfig.CLIENT.ENERGY_HUD.autoHide) {
+			oldEnergy = storage.getAmount();
+			oldMaxEnergy = storage.getMaxAmount();
+			oldInfusion = CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture();
+			renderTime = 60;
+			visibilityLeft = 1F;
+		}
+	}
+
+	private void calculateWhitePulsation() {
+		if (shouldPulse) {
+			if (!reversePulse) {
+				barPulse += 0.15F;
+				if (barPulse > 1F) {
+					barPulse = 1F;
+					reversePulse = true;
 				}
-
-				renderTime--;
-			}
-
-			if (shouldPulse) {
-				if (!reversePulse) {
-					barPulse += 0.15F;
-					if (barPulse > 1F) {
-						barPulse = 1F;
-						reversePulse = true;
-					}
-				} else {
-					barPulse -= 0.15F;
-					if (barPulse < 0F) {
-						barPulse = 0;
-						reversePulse = false;
-						shouldPulse = false;
-						lastPulsed = 40;
-					}
+			} else {
+				barPulse -= 0.15F;
+				if (barPulse < 0F) {
+					barPulse = 0;
+					reversePulse = false;
+					shouldPulse = false;
+					lastPulsed = 40;
 				}
 			}
 		}
@@ -130,6 +138,7 @@ public class EnergyHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
+		//NO-OP
 	}
 
 	private void renderTexture(double x, double y, double width, double height, double vMin, double vMax) {

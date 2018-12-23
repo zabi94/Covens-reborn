@@ -358,6 +358,7 @@ public class EntityFlyingBroom extends Entity {
 
 	@Override
 	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
+		//NO-OP
 	}
 
 	@Override

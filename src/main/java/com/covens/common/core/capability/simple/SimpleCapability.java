@@ -31,6 +31,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.lang.annotation.ElementType;
@@ -334,7 +336,7 @@ public abstract class SimpleCapability {
 				}
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("Error at serializing capability " + this, e);
+			throw new SerializationException("Error at serializing capability " + this, e);
 		}
 		return tag;
 	}
@@ -350,7 +352,7 @@ public abstract class SimpleCapability {
 				}
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("Error at deserializing capability " + this, e);
+			throw new SerializationException("Error at deserializing capability " + this, e);
 		}
 	}
 
@@ -365,7 +367,7 @@ public abstract class SimpleCapability {
 				}
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("[Cap-Syn] Error at deserializing capability " + this, e);
+			throw new SerializationException("[Cap-Syn] Error at deserializing capability " + this, e);
 		}
 	}
 
@@ -380,7 +382,7 @@ public abstract class SimpleCapability {
 				}
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("[Cap-Syn] Error at serializing capability " + this, e);
+			throw new SerializationException("[Cap-Syn] Error at serializing capability " + this, e);
 		}
 	}
 

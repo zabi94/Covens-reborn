@@ -9,7 +9,7 @@ public class Watchdog {
 			property = "";
 		}
 		String hashKey = new String(Base64.getEncoder().encode(property.getBytes()));
-		if (!hashKey.equals("Y3ZyYl90ZXN0YnVpbGQ=")) {
+		if (!"Y3ZyYl90ZXN0YnVpbGQ=".equals(hashKey)) {
 			throw new WatchdogTrigger();
 		}
 	}

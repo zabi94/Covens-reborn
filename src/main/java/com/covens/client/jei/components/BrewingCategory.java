@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 public class BrewingCategory implements IRecipeCategory<BrewingWrapper> {
 
 	public static final String UID = LibMod.MOD_ID + ":cauldron_brewing";
-	public static IDrawable bg;
+	public final IDrawable bg;
 	private static ResourceLocation rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_brewing.png");
 
 	public BrewingCategory(IGuiHelper igh) {
@@ -52,19 +52,16 @@ public class BrewingCategory implements IRecipeCategory<BrewingWrapper> {
 
 		is.init(2, true, 18, 19);
 
-		if (l.getFocus() != null) {
-			if (l.getFocus().getValue() instanceof ItemStack && l.getFocus().getMode() == Mode.OUTPUT) {
-				if (((ItemStack) l.getFocus().getValue()).getItem() instanceof ItemBrewArrow) {
-					is.set(2, new ItemStack(Items.ARROW));
-				} else if (((ItemStack) l.getFocus().getValue()).getItem() == ModItems.brew_phial_drink) {
-					is.set(2, new ItemStack(ModItems.empty_brew_drink));
-				} else if (((ItemStack) l.getFocus().getValue()).getItem() == ModItems.brew_phial_linger) {
-					is.set(2, new ItemStack(ModItems.empty_brew_linger));
-				} else if (((ItemStack) l.getFocus().getValue()).getItem() == ModItems.brew_phial_splash) {
-					is.set(2, new ItemStack(ModItems.empty_brew_splash));
-				}
+		if (l.getFocus() != null && l.getFocus().getValue() instanceof ItemStack && l.getFocus().getMode() == Mode.OUTPUT) {
+			if (((ItemStack) l.getFocus().getValue()).getItem() instanceof ItemBrewArrow) {
+				is.set(2, new ItemStack(Items.ARROW));
+			} else if (((ItemStack) l.getFocus().getValue()).getItem() == ModItems.brew_phial_drink) {
+				is.set(2, new ItemStack(ModItems.empty_brew_drink));
+			} else if (((ItemStack) l.getFocus().getValue()).getItem() == ModItems.brew_phial_linger) {
+				is.set(2, new ItemStack(ModItems.empty_brew_linger));
+			} else if (((ItemStack) l.getFocus().getValue()).getItem() == ModItems.brew_phial_splash) {
+				is.set(2, new ItemStack(ModItems.empty_brew_splash));
 			}
-
 		}
 
 		is.init(0, true, 18, 0);

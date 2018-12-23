@@ -1,7 +1,12 @@
 package com.covens.common.block.decorations;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.block.BlockMod;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -17,16 +22,17 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemLead;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 /**
  * This class was created by Joseph on 3/4/2017.
@@ -107,7 +113,8 @@ public class BlockScornedBrickFence extends BlockMod {
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
+	public void addCollisionBoxToList(IBlockState stateIn, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
+		IBlockState state = stateIn;
 		if (!p_185477_7_) {
 			state = state.getActualState(worldIn, pos);
 		}
@@ -133,8 +140,7 @@ public class BlockScornedBrickFence extends BlockMod {
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		state = this.getActualState(state, source, pos);
-		return BOUNDING_BOXES[getBoundingBoxIdx(state)];
+		return BOUNDING_BOXES[getBoundingBoxIdx(this.getActualState(state, source, pos))];
 	}
 
 	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing p_176524_3_) {

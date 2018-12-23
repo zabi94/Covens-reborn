@@ -107,9 +107,11 @@ public class TileEntityCrystalBall extends ModTileEntity {
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
+		//NO-OP
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
+		//NO-OP
 	}
 }

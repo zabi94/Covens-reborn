@@ -72,12 +72,15 @@ public class BaublesEnchantment extends Enchantment {
 	}
 
 	public void onWornTick(EntityPlayer player) {
+		//Override this
 	}
 
 	public void onUnequipped(EntityPlayer player) {
+		//Override this
 	}
 
 	public void onEquipped(EntityPlayer player) {
+		//Override this
 	}
 
 }

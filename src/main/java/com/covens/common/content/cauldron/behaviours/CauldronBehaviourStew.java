@@ -97,12 +97,12 @@ public class CauldronBehaviourStew implements ICauldronBehaviour {
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override

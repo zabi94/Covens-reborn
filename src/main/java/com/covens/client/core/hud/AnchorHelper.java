@@ -50,7 +50,7 @@ public abstract class AnchorHelper {
 
 	public static class RelativeVersion extends AnchorHelper {
 
-		AnchorHelper used;
+		private AnchorHelper used;
 
 		public RelativeVersion(AnchorHelper helper) {
 			used = helper;

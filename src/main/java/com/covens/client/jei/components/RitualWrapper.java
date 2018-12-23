@@ -19,32 +19,30 @@ import net.minecraft.util.ResourceLocation;
 import java.util.List;
 
 public class RitualWrapper implements IRecipeWrapper {
-	private static IDrawable centerGlyph, circle1, circle2, circle3;
-	List<List<ItemStack>> input;
-	List<ItemStack> output;
+	private final IDrawable centerGlyph, circle1, circle2, circle3;
+	private List<List<ItemStack>> input;
+	private List<ItemStack> output;
 	private int circles, powerStart, powerTick;
 	private String name;
 
 	public RitualWrapper(AdapterIRitual ritual, IGuiHelper igh) {
-		output = ritual.getOutputRaw();
-		input = ritual.getJeiInput();
+		setOutput(ritual.getOutputRaw());
+		setInput(ritual.getJeiInput());
 		circles = ritual.getCircles();
 		powerStart = ritual.getRequiredStartingPower();
 		powerTick = ritual.getRunningPower();
 		name = I18n.format("ritual." + ritual.getRegistryName().toString().replace(':', '.') + ".name");
-		if (centerGlyph == null) {
-			centerGlyph = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			circle1 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			circle2 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			circle3 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-		}
+		centerGlyph = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+		circle1 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+		circle2 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+		circle3 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
 	}
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		ingredients.setInputLists(VanillaTypes.ITEM, input);
-		if (!output.isEmpty()) {
-			ingredients.setOutputs(VanillaTypes.ITEM, output);
+		ingredients.setInputLists(VanillaTypes.ITEM, getInput());
+		if (!getOutput().isEmpty()) {
+			ingredients.setOutputs(VanillaTypes.ITEM, getOutput());
 		}
 	}
 
@@ -120,6 +118,22 @@ public class RitualWrapper implements IRecipeWrapper {
 			default:
 				break;
 		}
+	}
+
+	public List<ItemStack> getOutput() {
+		return output;
+	}
+
+	private void setOutput(List<ItemStack> output) {
+		this.output = output;
+	}
+
+	public List<List<ItemStack>> getInput() {
+		return input;
+	}
+
+	private void setInput(List<List<ItemStack>> input) {
+		this.input = input;
 	}
 
 
