@@ -1,12 +1,20 @@
 package com.covens.common.block.natural.plants;
 
+import static com.covens.api.state.StateProperties.FERTILE;
+
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.block.BlockMod;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,9 +30,6 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.Random;
-
 /**
  * Created by Joseph on 11/7/2017.
  */
@@ -39,11 +44,27 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 		this.setLightLevel(0.1F);
 		this.setTickRandomly(true);
 		setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
+		this.setDefaultState(blockState.getBaseState().withProperty(FERTILE, false));
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(FERTILE, meta == 1);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FERTILE) ? 1 : 0;
+	}
+	
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FERTILE);
 	}
 
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		return true;
+		return !state.getValue(FERTILE);
 	}
 
 	@Override
@@ -58,12 +79,14 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return true;
+		return !state.getValue(FERTILE);
 	}
 
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-
+		if (!state.getValue(FERTILE)) {
+			worldIn.setBlockState(pos, state.withProperty(FERTILE, true), 2);
+		}
 	}
 
 	@Override
@@ -77,14 +100,13 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 	}
 
 	public boolean canSustainBush(IBlockState state) {
-		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND || state.getBlock() == Blocks.SAND || state.getBlock() == this;
+		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT;
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		IBlockState soil = worldIn.getBlockState(pos.down());
-		return super.canPlaceBlockAt(worldIn, pos)
-				&& soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
+		return super.canPlaceBlockAt(worldIn, pos) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 	}
 
 	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
@@ -96,45 +118,39 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
 		this.checkAndDropBlock(worldIn, pos, state);
 	}
 
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-		if (state.getBlock() == this) {
-			IBlockState soil = worldIn.getBlockState(pos.down());
-			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
-		}
-		return this.canSustainBush(worldIn.getBlockState(pos.down()));
+		IBlockState soil = worldIn.getBlockState(pos.down());
+		return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 	}
-
+	
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if (rand.nextInt(25) == 0) {
+		if (state.getValue(FERTILE) && rand.nextInt(25) == 0) {
 			int i = 5;
-
 			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
 				if (worldIn.getBlockState(blockpos).getBlock() == this) {
 					--i;
-
 					if (i <= 0) {
+						worldIn.setBlockState(pos, getDefaultState(), 2);
 						return;
 					}
 				}
 			}
-
 			BlockPos blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
-
+			BlockPos finalPos = pos;
 			for (int k = 0; k < 4; ++k) {
 				if (worldIn.isAirBlock(blockpos1) && this.canBlockStay(worldIn, blockpos1, this.getDefaultState())) {
-					pos = blockpos1;
+					finalPos = blockpos1;
 				}
-
-				blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
+				blockpos1 = finalPos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
 			}
 
 			if (worldIn.isAirBlock(blockpos1) && this.canBlockStay(worldIn, blockpos1, this.getDefaultState())) {
-				worldIn.setBlockState(blockpos1, this.getDefaultState(), 2);
+				worldIn.setBlockState(blockpos1, getDefaultState(), 3);
+				worldIn.setBlockState(pos, getDefaultState(), 2);
 			}
 		}
 	}

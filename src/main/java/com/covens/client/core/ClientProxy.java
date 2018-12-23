@@ -20,6 +20,7 @@ import com.covens.client.core.hud.HudController;
 import com.covens.client.core.hud.MoonHUD;
 import com.covens.client.core.hud.SelectedActionHUD;
 import com.covens.client.core.hud.VampireBloodBarHUD;
+import com.covens.client.core.statemappers.AllDefaultModelStateMapper;
 import com.covens.client.fx.ParticleF;
 import com.covens.client.gui.GuiTarots;
 import com.covens.client.handler.ColorPropertyHandler;
@@ -84,6 +85,7 @@ import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -105,6 +107,11 @@ public class ClientProxy implements ISidedProxy {
 
 	@SubscribeEvent
 	public static void registerItemModels(ModelRegistryEvent event) {
+		ModelLoader.setCustomStateMapper(ModBlocks.ember_grass, new AllDefaultModelStateMapper(ModBlocks.ember_grass));
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_cypress, new AllDefaultModelStateMapper(ModBlocks.leaves_cypress));
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_elder, new AllDefaultModelStateMapper(ModBlocks.leaves_elder));
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_juniper, new AllDefaultModelStateMapper(ModBlocks.leaves_juniper));
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_yew, new AllDefaultModelStateMapper(ModBlocks.leaves_yew));
 		ModelHandler.registerModels();
 	}
 
@@ -133,7 +140,7 @@ public class ClientProxy implements ISidedProxy {
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());
 		MinecraftForge.EVENT_BUS.register(new MiscEventHandler(Minecraft.getMinecraft()));
 	}
-
+	
 	@Override
 	public void init(FMLInitializationEvent event) {
 		Keybinds.registerKeys();

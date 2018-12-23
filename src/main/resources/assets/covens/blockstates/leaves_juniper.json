@@ -1,27 +1,7 @@
 {
-  "forge_marker": 1,
-  "parent": "block/block",
-  "defaults": {
+  "variants": {
     "normal": {
       "model": "covens:leaves_juniper"
-    }
-  },
-  "variants": {
-    "check_decay": {
-      "true": {
-        "model": "covens:leaves_juniper"
-      },
-      "false": {
-        "model": "covens:leaves_juniper"
-      }
-    },
-    "decayable": {
-      "true": {
-        "model": "covens:leaves_juniper"
-      },
-      "false": {
-        "model": "covens:leaves_juniper"
-      }
     }
   }
 }

@@ -2,6 +2,7 @@ package com.covens.api.state;
 
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.state.enums.EnumWoodType;
+
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
@@ -18,4 +19,6 @@ public class StateProperties {
 	public static final PropertyInteger MIRROR_VARIANTS = PropertyInteger.create("mirror", 0, 3);
 
 	public static final PropertyBool LOWER_HALF = PropertyBool.create("half");
+	
+	public static final PropertyBool FERTILE = PropertyBool.create("fertile");
 }
