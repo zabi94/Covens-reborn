@@ -4,6 +4,7 @@ import com.covens.api.hotbar.IHotbarAction;
 import com.covens.client.handler.Keybinds;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.actionbar.ModAbilities;
+import com.covens.common.core.helper.Log;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.PlayerUsedAbilityMessage;
 import com.covens.common.core.statics.ModConfig;
@@ -25,6 +26,7 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
@@ -61,11 +63,10 @@ public class ExtraBarButtonsHUD extends HudComponent {
 		}
 	};
 	public IHotbarAction[] actionScroller = new IHotbarAction[3];// 0: current, 1: prev, 2: next
-	// TODO reset these when the user closes the game, either MP or SP
-	int slotSelected = -1;
-	int cooldown = 0;
-	int selectedItemTemp = 0;
-	List<IHotbarAction> actions = new ArrayList<IHotbarAction>();
+	private int slotSelected = -1;
+	private int cooldown = 0;
+	private int selectedItemTemp = 0;
+	private List<IHotbarAction> actions = new ArrayList<IHotbarAction>();
 	private boolean isInExtraBar = false;
 
 	private ExtraBarButtonsHUD() {
@@ -86,10 +87,21 @@ public class ExtraBarButtonsHUD extends HudComponent {
 				if (Minecraft.getMinecraft().pointedEntity != null) {
 					e_id = Minecraft.getMinecraft().pointedEntity.getEntityId();
 				}
-				NetworkHandler.HANDLER.sendToServer(new PlayerUsedAbilityMessage(actions.get(slotSelected).getName().toString(), e_id));
 				cooldown = 5;
+				NetworkHandler.HANDLER.sendToServer(new PlayerUsedAbilityMessage(actions.get(slotSelected).getName().toString(), e_id));
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public void cleanupHUD(ClientDisconnectionFromServerEvent evt) {
+		Log.i("Cleaning up Covens's HUD");
+		actionScroller = new IHotbarAction[3];
+		slotSelected = -1;
+		cooldown = 0;
+		selectedItemTemp = 0;
+		actions = new ArrayList<IHotbarAction>();
+		isInExtraBar = false;
 	}
 
 	@SubscribeEvent
