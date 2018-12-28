@@ -25,9 +25,11 @@ import java.util.stream.Collectors;
 
 @JEIPlugin
 public class CovensJEIPlugin implements IModPlugin {
+	
 	protected static int compareRituals(AdapterIRitual a, AdapterIRitual b) {
-		if (a == b)
+		if (a.equals(b)) {
 			return 0;
+		}
 		int av = a.getInput().size() / 3;
 		int bv = b.getInput().size() / 3;
 		av += a.getCircles() & 3;

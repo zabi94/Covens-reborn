@@ -135,8 +135,7 @@ public class BlockFakeIceFence extends BlockMod {
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		state = this.getActualState(state, source, pos);
-		return BOUNDING_BOXES[getBoundingBoxIdx(state)];
+		return BOUNDING_BOXES[getBoundingBoxIdx(this.getActualState(state, source, pos))];
 	}
 
 	public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing p_176524_3_) {

@@ -17,11 +17,9 @@ public class EnchantmentDemonProtection extends BaublesEnchantment {
 
 	@SubscribeEvent
 	public void onDamageReceived(LivingHurtEvent evt) {
-		if (evt.getEntityLiving() instanceof EntityPlayer) {
-			if (evt.getSource().getTrueSource() instanceof EntityLivingBase && MobHelper.isDemon((EntityLivingBase) evt.getSource().getTrueSource())) {
-				int level = this.getTotalLevelOnPlayer((EntityPlayer) evt.getEntityLiving());
-				evt.setAmount(evt.getAmount() * (1f - 0.05f * level));
-			}
+		if (evt.getEntityLiving() instanceof EntityPlayer && evt.getSource().getTrueSource() instanceof EntityLivingBase && MobHelper.isDemon((EntityLivingBase) evt.getSource().getTrueSource())) {
+			int level = this.getTotalLevelOnPlayer((EntityPlayer) evt.getEntityLiving());
+			evt.setAmount(evt.getAmount() * (1f - 0.05f * level));
 		}
 	}
 }

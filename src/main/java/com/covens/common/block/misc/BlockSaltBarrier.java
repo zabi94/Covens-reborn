@@ -288,10 +288,8 @@ public class BlockSaltBarrier extends BlockMod {
 		if (entityIn instanceof EntityBlaze || entityIn instanceof EntityGhast || entityIn instanceof EntityVex || entityIn instanceof EntityBatSwarm) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
 		}
-		if ((entityIn instanceof EntityPlayer) && !((EntityPlayer) entityIn).isCreative()) {
-			if (!entityIn.getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt()) {
-				addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
-			}
+		if ((entityIn instanceof EntityPlayer) && !((EntityPlayer) entityIn).isCreative() && !entityIn.getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt()) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
 		}
 	}
 

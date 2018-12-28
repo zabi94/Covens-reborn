@@ -6,8 +6,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class SimpleInfusion implements IInfusion {
 
-	ResourceLocation rl, texture;
-	int dimension;
+	private ResourceLocation rl, texture;
+	private int dimension;
 
 	public SimpleInfusion(String name, int dim) {
 		dimension = dim;

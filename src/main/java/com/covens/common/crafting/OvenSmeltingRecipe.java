@@ -31,7 +31,7 @@ public class OvenSmeltingRecipe extends IForgeRegistryEntry.Impl<OvenSmeltingRec
 			throw new IllegalArgumentException("fumeChance must be between 0 and 1");
 		}
 		if (fumes == null) {
-			throw new NullPointerException("Fumes cannot be null, recipe: " + regName);
+			throw new IllegalArgumentException("Fumes cannot be null, recipe: " + regName);
 		}
 		this.setRegistryName(regName);
 		this.input = input;

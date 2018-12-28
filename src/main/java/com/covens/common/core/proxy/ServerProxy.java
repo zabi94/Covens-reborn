@@ -53,6 +53,6 @@ public class ServerProxy implements ISidedProxy {
 
 	@Override
 	public void stopMimicking(EntityPlayer p) {
-
+		//NO-OP
 	}
 }

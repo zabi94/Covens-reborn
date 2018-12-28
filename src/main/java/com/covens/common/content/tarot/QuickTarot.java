@@ -33,9 +33,11 @@ public class QuickTarot implements ITarot {
 	}
 
 	private static final void validateAll(Object... objects) {
-		for (Object o : objects)
-			if (o == null)
-				throw new RuntimeException("Arguments cannot be null");
+		for (Object o : objects) {
+			if (o == null) {
+				throw new IllegalArgumentException("Arguments cannot be null");
+			}
+		}
 	}
 
 	@Override

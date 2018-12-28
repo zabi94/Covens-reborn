@@ -7,13 +7,11 @@ import com.covens.common.content.cauldron.BrewModifierListImpl;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nonnull;
 
 /**
  * This class was created by <Arekkuusu> on 26/02/2017.
@@ -33,9 +31,6 @@ public final class ModCreativeTabs {
 	}
 
 	private static class CreativeTab extends CreativeTabs {
-
-		@Nonnull
-		private NonNullList<ItemStack> list;
 
 		CreativeTab(String name) {
 			super(LibMod.MOD_ID + name);

@@ -139,6 +139,7 @@ public class EntityRaven extends EntityMultiSkin {
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
+		//NO-OP
 	}
 
 	@Override
@@ -148,6 +149,7 @@ public class EntityRaven extends EntityMultiSkin {
 
 	@Override
 	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+		//NO-OP
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class RemoveFamiliarFromPlayer extends SyncTask<EntityPlayer> {
 	public void run() {
 		EntityPlayer p = PlayerHelper.getPlayerAcrossDimensions(pID);
 		if (p == null) {
-			throw new RuntimeException("Player was not found after sync task was triggered");
+			throw new IllegalStateException("Player was not found after sync task was triggered");
 		}
 		CapabilityFamiliarOwner cap = p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null);
 		cap.removeFamiliar();

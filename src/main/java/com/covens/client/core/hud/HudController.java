@@ -34,7 +34,8 @@ public class HudController {
 	public ArrayList<HudComponent> components = new ArrayList<>();
 	public HudComponent grabbed = null;
 	private boolean shouldShowHud = false;
-	private int grabX = 0, grabY = 0;
+	private int grabX = 0;
+	private int grabY = 0;
 
 	private HudController() {
 		MinecraftForge.EVENT_BUS.register(this);

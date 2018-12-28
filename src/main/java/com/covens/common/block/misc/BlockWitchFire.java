@@ -214,6 +214,7 @@ public class BlockWitchFire extends BlockMod {
 
 	@Override
 	public void registerModel() {
+		//NO-OP
 	}
 
 	@Override

@@ -106,7 +106,7 @@ public class EntityLingeringBrew extends Entity {
 		if (this.world.isRemote) {
 			handleParticles(radius);
 		} else {
-			updateLifetime(radius);
+			radius = updateLifetime(radius);
 			BrewData data = BrewData.fromStack(dataManager.get(BREW));
 			if (this.ticksExisted % 5 == 0) {
 				radius = applyToEntities(data, radius);
@@ -165,26 +165,26 @@ public class EntityLingeringBrew extends Entity {
 		return r;
 	}
 
-	private void updateLifetime(float f) {
+	private float updateLifetime(float radius) {
+		float r = radius;
 		if (this.ticksExisted >= this.waitTime + this.duration) {
 			this.setDead();
-			return;
+			return r;
 		}
 
 		if (this.ticksExisted < this.waitTime) {
-			return;
+			return r;
 		}
 
 		if (this.radiusPerTick != 0.0F) {
-			f += this.radiusPerTick;
+			radius += this.radiusPerTick;
 
-			if (f < 0.5F) {
+			if (radius < 0.5F) {
 				this.setDead();
-				return;
+				return 0;
 			}
-
-			this.setRadius(f);
 		}
+		return r;
 	}
 
 	private void handleParticles(float radius) {

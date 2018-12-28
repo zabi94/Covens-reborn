@@ -2,7 +2,8 @@ package com.covens.common.core.helper;
 
 public class ColorHelper {
 
-	public static int blendColor(int colorA, int colorB, float ratio) {
+	public static int blendColor(int colorA, int colorB, float ratioIn) {
+		float ratio = ratioIn;
 		if (ratio > 1f) {
 			ratio = 1f;
 		} else if (ratio < 0f) {
