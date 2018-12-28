@@ -109,12 +109,14 @@ public class EntityLingeringBrew extends Entity {
 			updateLifetime(radius);
 			BrewData data = BrewData.fromStack(dataManager.get(BREW));
 			if (this.ticksExisted % 5 == 0) {
-				applyToEntities(data, radius);
+				radius = applyToEntities(data, radius);
 			}
+			this.setRadius(radius);
 		}
 	}
 
-	private void applyToEntities(BrewData data, float radius) {
+	private float applyToEntities(BrewData data, float radius) {
+		float r = radius;
 		Iterator<Entry<Entity, Integer>> iterator = this.reapplicationDelayMap.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<Entity, Integer> entry = iterator.next();
@@ -124,41 +126,43 @@ public class EntityLingeringBrew extends Entity {
 		}
 		List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox());
 		for (EntityLivingBase entitylivingbase : list) {
-			applyTo(entitylivingbase, radius, data);
+			r = applyTo(entitylivingbase, r, data);
 		}
+		return r;
 	}
 
-	private void applyTo(EntityLivingBase entitylivingbase, float radius, BrewData data) {
+	private float applyTo(EntityLivingBase entitylivingbase, float radius, BrewData data) {
+		float r = radius;
 		if (!this.reapplicationDelayMap.containsKey(entitylivingbase) && entitylivingbase.canBeHitWithPotion()) {
 			double dx = entitylivingbase.posX - this.posX;
 			double dz = entitylivingbase.posZ - this.posZ;
 			double distanceSquared = dx * dx + dz * dz;
-			if (distanceSquared <= radius * radius) {
+			if (distanceSquared <= r * r) {
 				this.reapplicationDelayMap.put(entitylivingbase, Integer.valueOf(this.ticksExisted + this.reapplicationDelay));
 				data.applyToEntity(entitylivingbase, this, this.getOwner(), ApplicationType.LINGERING);
-				decreaseRadiusAndLifespan(radius);
+				r = decreaseRadiusAndLifespan(r);
 			}
 		}
-	
-		
+		return r;
 	}
 
-	private void decreaseRadiusAndLifespan(float radius) {
+	private float decreaseRadiusAndLifespan(float radius) {
+		float r = radius;
 		if (this.radiusOnUse != 0.0F) {
-			radius += this.radiusOnUse; //decrease radius on reapplication
-			if (radius < 0.5F) {
+			r += this.radiusOnUse; //decrease radius on reapplication
+			if (r < 0.5F) {
 				this.setDead();
-				return;
+				return 0;
 			}
-			this.setRadius(radius);
 		}
 		if (this.durationOnUse != 0) {
 			this.duration += this.durationOnUse; //Decrease lifespan on reapplication
 			if (this.duration <= 0) {
 				this.setDead();
-				return;
+				return 0;
 			}
 		}
+		return r;
 	}
 
 	private void updateLifetime(float f) {
