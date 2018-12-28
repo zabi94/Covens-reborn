@@ -53,10 +53,10 @@ import com.covens.common.crafting.ModSpinningThreadRecipes;
 import com.covens.common.entity.ModEntities;
 import com.covens.common.integration.extraalchemy.ExtraAlchemy;
 import com.covens.common.integration.patchouli.Patchouli;
+import com.covens.common.integration.thaumcraft.ThaumcraftLoader;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
-import com.covens.common.world.EntityPlacementHelper;
 
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.properties.PropertyEnum;
@@ -75,12 +75,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
- */
-@SuppressWarnings("WeakerAccess")
 @Mod(modid = LibMod.MOD_ID, name = MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.13]", certificateFingerprint = "@FINGERPRINT@")
 public class Covens {
 
@@ -132,7 +126,6 @@ public class Covens {
 		ModLootTables.registerLootTables();
 		FrostFireRecipe.init();
 		proxy.preInit(event);
-		EntityPlacementHelper.init();
 	}
 
 	@EventHandler
@@ -155,10 +148,10 @@ public class Covens {
 		ModOvenSmeltingRecipes.init();
 		ModRituals.init();
 		ModBrewModifiers.init();
+		ThaumcraftLoader.init();
 		Patchouli.init();
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
 		ExtraAlchemy.init();
