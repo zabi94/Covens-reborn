@@ -167,10 +167,6 @@ public class CreatureSyncHelper {
 			super(DATA_TAG);
 		}
 		
-		public TaskData(String s) {
-			this();
-		}
-
 		@Override
 		public void readFromNBT(NBTTagCompound tag) {
 			synchronized (playerLock) {

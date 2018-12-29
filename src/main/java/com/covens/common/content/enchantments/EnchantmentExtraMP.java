@@ -37,7 +37,7 @@ public class EnchantmentExtraMP extends BaublesEnchantment {
 		private int amount;
 
 		public EnchantmentExpander(int level) {
-			amount = (2 << amount) * 100;
+			amount = (1 << level) * 100;
 		}
 
 		@Override

@@ -188,9 +188,9 @@ public class EntityFlyingBroom extends Entity {
 		} else if (broomType == 2) {
 			handleJuniperMovement(front, up, strafe, look);
 		} else if (broomType == 3) {
-			handleYewMovement(front, up, strafe, look);
+			handleYewMovement(front, look);
 		} else if (broomType == 4) {
-			handleCypressMovement(front, up, strafe, look);
+			handleCypressMovement(front, look);
 		}
 		this.setRotationYawHead(rider.rotationYaw);
 	}
@@ -203,11 +203,11 @@ public class EntityFlyingBroom extends Entity {
 		}
 	}
 
-	private void handleCypressMovement(float front, float up, float strafe, Vec3d look) {
+	private void handleCypressMovement(float front, Vec3d look) {
 		handleMundaneMovement(front, look);
 	}
 
-	private void handleYewMovement(float front, float up, float strafe, Vec3d look) {
+	private void handleYewMovement(float front, Vec3d look) {
 		if (getDataManager().get(FUEL) > 1) {
 			getDataManager().set(FUEL, getDataManager().get(FUEL) - 2);
 			if (getDataManager().get(FUEL) < 5) {

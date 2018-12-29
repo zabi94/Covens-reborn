@@ -198,11 +198,10 @@ public class ModRituals {
 
 		shift_biome = new RitualBiomeShift(rl("shift_biome"), of(LibIngredients.anyGlass, LibIngredients.boline), ofs(new ItemStack(ModItems.boline)), 400, circles(NORMAL, NORMAL, NORMAL), 2000, 8);
 
-		ResourceLocation infusions = new ResourceLocation(LibMod.MOD_ID, "infusion");
-		infusion_overworld = new RitualInfusion(infusions, of(LibIngredients.fumePetrichorOdour), none, 60, circles(NORMAL, NORMAL, NORMAL), 6000, 1, DefaultInfusions.OVERWORLD);
-		infusion_nether = new RitualInfusion(infusions, of(LibIngredients.fumeFieryBreeze), none, 60, circles(NETHER, NETHER, NETHER), 6000, 1, DefaultInfusions.NETHER);
-		infusion_end = new RitualInfusion(infusions, of(LibIngredients.fumeHeavenlyWind), none, 60, circles(ENDER, ENDER, ENDER), 6000, 1, DefaultInfusions.END);
-		infusion_dream = new RitualInfusion(infusions, of(LibIngredients.fumeZephyrOfDepths), none, 60, circles(NORMAL, NETHER, ENDER), 6000, 1, DefaultInfusions.DREAM);
+		infusion_overworld = new RitualInfusion(of(LibIngredients.fumePetrichorOdour), none, 60, circles(NORMAL, NORMAL, NORMAL), 6000, 1, DefaultInfusions.OVERWORLD);
+		infusion_nether = new RitualInfusion(of(LibIngredients.fumeFieryBreeze), none, 60, circles(NETHER, NETHER, NETHER), 6000, 1, DefaultInfusions.NETHER);
+		infusion_end = new RitualInfusion(of(LibIngredients.fumeHeavenlyWind), none, 60, circles(ENDER, ENDER, ENDER), 6000, 1, DefaultInfusions.END);
+		infusion_dream = new RitualInfusion(of(LibIngredients.fumeZephyrOfDepths), none, 60, circles(NORMAL, NETHER, ENDER), 6000, 1, DefaultInfusions.DREAM);
 		flames = new RitualFlames(rl("flames"), of(LibIngredients.blazeRod, LibIngredients.coal), none, 3600, circles(NETHER, null, null), 300, 4);
 		sanctuary = new RitualImpl(rl("sanctuary"), of(LibIngredients.whiteSage, LibIngredients.sagebrush, LibIngredients.salt, LibIngredients.dirt, LibIngredients.dirt, LibIngredients.dirt), ofs(new ItemStack(ModBlocks.purifying_earth, 3)), 130, circles(NORMAL, NORMAL, null), 500, 4);
 		deck = new RitualImpl(rl("deck"), of(LibIngredients.anyDye, LibIngredients.anyDye, LibIngredients.paper, LibIngredients.fumeBirchSoul, LibIngredients.wax), ofs(new ItemStack(ModItems.tarots)), 50, circles(NORMAL, null, null), 350, 1);
@@ -247,7 +246,7 @@ public class ModRituals {
 		if (small == null) throw new IllegalArgumentException("Cannot have the smaller circle missing");
 		if (medium == null && big != null)
 			throw new IllegalArgumentException("Cannot have null middle circle when a big circle is present");
-		if (small == EnumGlyphType.GOLDEN || medium == EnumGlyphType.GOLDEN || big == EnumGlyphType.GOLDEN)
+		if (small == GOLDEN || medium == GOLDEN || big == GOLDEN)
 			throw new IllegalArgumentException("No golden circles allowed");
 		int circleNum = 0;
 		if (medium != null) circleNum++;

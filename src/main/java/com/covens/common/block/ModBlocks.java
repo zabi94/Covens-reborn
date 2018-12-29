@@ -193,7 +193,7 @@ public final class ModBlocks {
 				new BlockFakeIce(),
 				new BlockFakeIceFence(),
 				new BlockScornedBrickFence(),
-				new BlockFakeIceStairs("fake_ice_stairs", STAIRS_ICE.getDefaultState(), Material.ICE),
+				new BlockFakeIceStairs("fake_ice_stairs", STAIRS_ICE.getDefaultState()),
 				new BlockScornedBrickStairs("scorned_brick_stairs", STAIRS_SCORNED_BRICK.getDefaultState(), Material.ROCK),
 				new BlockFakeIceSlabDouble("fake_ice_slab_double"),
 				new BlockFakeIceSlabHalf("fake_ice_slab_half"),

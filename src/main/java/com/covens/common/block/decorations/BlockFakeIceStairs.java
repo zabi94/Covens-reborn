@@ -5,9 +5,9 @@ import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -27,7 +27,7 @@ public class BlockFakeIceStairs extends BlockStairs implements IModelRegister {
 
 	//FIXME: Make these less screwy.
 
-	public BlockFakeIceStairs(String unlocalizedName, IBlockState state, Material material) {
+	public BlockFakeIceStairs(String unlocalizedName, IBlockState state) {
 		super(state);
 		setTranslationKey(LibBlockName.FAKE_ICE_STAIRS);
 		setRegistryName(new ResourceLocation(LibMod.MOD_ID, unlocalizedName));
