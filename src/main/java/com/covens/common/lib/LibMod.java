@@ -1,10 +1,5 @@
 package com.covens.common.lib;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
- */
 public final class LibMod {
 
 	//ID for MOD
@@ -14,7 +9,7 @@ public final class LibMod {
 	public static final String MOD_NAME = "Covens";
 
 	//Version of MOD
-	public static final String MOD_VER = "0.0.1.3";
+	public static final String MOD_VER = "@VERSION@";
 
 	//Dependency
 	public static final String DEPENDENCIES = "required-after:forge@[14.23.4.2755,];"
@@ -30,6 +25,9 @@ public final class LibMod {
 	//Server proxy location
 	public static final String PROXY_COMMON = "com.covens.common.core.proxy.ServerProxy";
 
+	//SHA1 fingerprint
+	public static final String FINGERPRINT = "@FINGERPRINT@";
+	
 	private LibMod() {
 	}
 }

@@ -41,6 +41,7 @@ import com.covens.common.core.command.CommandTransformationModifier;
 import com.covens.common.core.event.LootTableEventHandler;
 import com.covens.common.core.gen.ModGen;
 import com.covens.common.core.helper.CropHelper;
+import com.covens.common.core.helper.Log;
 import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.proxy.ISidedProxy;
@@ -69,13 +70,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = LibMod.MOD_ID, name = MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.13]", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = LibMod.MOD_ID, name = MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.13]", certificateFingerprint = LibMod.FINGERPRINT)
 public class Covens {
 
 	public static final Logger logger = LogManager.getLogger(MOD_NAME);
@@ -175,5 +177,23 @@ public class Covens {
 	@EventHandler
 	public void setFlight(FMLServerStartedEvent evt) {
 		FMLCommonHandler.instance().getMinecraftServerInstance().setAllowFlight(true);
+	}
+	
+	@EventHandler
+	public void fingerprintViolation(FMLFingerprintViolationEvent evt) {
+		if (!"true".equals(System.getProperty("ignoreCovensFingerprint"))) {
+			throw new FingerprintViolationException();
+		} else {
+			Log.w("WARNING: Covens signature mismatch!");
+			Log.w("Ignoring as per launch option");
+		}
+	}
+	
+	@SuppressWarnings("serial")
+	private static class FingerprintViolationException extends RuntimeException {
+		public FingerprintViolationException() {
+			super("\n\n!! WARNING:\n\nThe mod "+LibMod.MOD_NAME+" has an invalid signature, this is likely due to someone messing with the jar without permission.\nThe execution will be stopped in order to prevent damages to your system.\n"
+					+ "If you wish to continue executing, please add -DignoreCovensFingerprint=true to your launch arguments\n\n");
+		}
 	}
 }
