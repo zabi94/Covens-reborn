@@ -71,10 +71,8 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 	private ItemStack growItem(int i) {
 		ItemStack is = hives_inventory.getStackInSlot(i);
 		Item item = is.getItem();
-		if (item == Items.AIR && rng.nextInt(3) == 0) {
-			if (getNeighbors(i).stream().anyMatch(n -> (hives_inventory.getStackInSlot(n).getItem() != Items.AIR))) {
-				return new ItemStack(ModItems.empty_honeycomb);
-			}
+		if (item == Items.AIR && rng.nextInt(3) == 0 && getNeighbors(i).stream().anyMatch(n -> (hives_inventory.getStackInSlot(n).getItem() != Items.AIR))) {
+			return new ItemStack(ModItems.empty_honeycomb);
 		}
 
 		if (item == ModItems.empty_honeycomb) {

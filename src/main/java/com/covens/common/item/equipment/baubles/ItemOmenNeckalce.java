@@ -63,10 +63,8 @@ public class ItemOmenNeckalce extends ItemMod implements IBauble {
 
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 40 == 0) {
-			if (player.getActivePotionEffect(MobEffects.UNLUCK) != null) {
-				player.removePotionEffect(MobEffects.UNLUCK);
-			}
+		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 40 == 0 && player.getActivePotionEffect(MobEffects.UNLUCK) != null) {
+			player.removePotionEffect(MobEffects.UNLUCK);
 		}
 	}
 
@@ -85,21 +83,10 @@ public class ItemOmenNeckalce extends ItemMod implements IBauble {
 		tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip." + getNameInefficiently(stack) + "_description.name"));
 	}
 
-	private boolean doesPlayerHaveAmulet(EntityPlayer e) {
-		IBaublesItemHandler ih = BaublesApi.getBaublesHandler(e);
-		for (int i = 0; i < ih.getSlots(); i++) {
-			if (ih.getStackInSlot(i).getItem() == this) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@SubscribeEvent
 	public void onEntityDamage(LivingHurtEvent event) {
-		if (event.getEntityLiving() instanceof EntityPlayer && doesPlayerHaveAmulet((EntityPlayer) event.getEntityLiving()))
-			if (event.getSource().isMagicDamage()) {
-				event.setAmount(event.getAmount() * 0.90F);
-			}
+		if (event.getEntityLiving() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), this) >= 0 && event.getSource().isMagicDamage()) {
+			event.setAmount(event.getAmount() * 0.90F);
+		}
 	}
 }

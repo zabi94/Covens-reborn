@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class CauldronCraftingWrapper implements IRecipeWrapper {
 
-	CauldronCraftingRecipe recipe;
+	private CauldronCraftingRecipe recipe;
 
 	public CauldronCraftingWrapper(CauldronCraftingRecipe in) {
 		recipe = in;

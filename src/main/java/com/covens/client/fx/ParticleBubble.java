@@ -24,7 +24,7 @@ class ParticleBubble extends Particle {
 	private final TextureManager textureManager;
 	private int life;
 
-	private ParticleBubble(TextureManager textureManagerIn, World world, double x, double y, double z, int rgb) {
+	private ParticleBubble(TextureManager textureManagerIn, World world, double x, double y, double z, int rgbIn) {
 		super(world, x, y, z, 0, 0, 0);
 		this.textureManager = textureManagerIn;
 		this.motionX *= 0.009999999776482582D;
@@ -33,7 +33,7 @@ class ParticleBubble extends Particle {
 
 		this.particleScale *= 0.015F;
 		this.particleMaxAge = 2;
-		rgb = new Color(rgb, false).brighter().brighter().brighter().brighter().hashCode();
+		int rgb = new Color(rgbIn, false).brighter().brighter().brighter().brighter().hashCode();
 		float r = (rgb >>> 16 & 0xFF) / 256.0F;
 		float g = (rgb >>> 8 & 0xFF) / 256.0F;
 		float b = (rgb & 0xFF) / 256.0F;

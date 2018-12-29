@@ -93,8 +93,7 @@ public class CropKelp extends BlockCrop {
 
 	@Override
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-		state = worldIn.getBlockState(pos.down());
-		return state.getMaterial().isSolid() || state.getBlock() == this;
+		return worldIn.getBlockState(pos.down()).getMaterial().isSolid() || worldIn.getBlockState(pos.down()).getBlock() == this;
 	}
 
 	@Override

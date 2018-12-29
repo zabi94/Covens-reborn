@@ -12,7 +12,7 @@ import vazkii.patchouli.api.VariableHolder;
 
 public class ItemListComponent implements ICustomComponent {
 
-	int x, y;
+	private int x, y;
 
 	@VariableHolder
 	public int slots;

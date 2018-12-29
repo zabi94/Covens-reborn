@@ -30,7 +30,7 @@ class AltarScanHelper {
 		this.te = te;
 	}
 
-	void scanNature() {
+	public void scanNature() {
 		if (upgradeCheckScheduled) {
 			te.refreshUpgrades();
 			upgradeCheckScheduled = false;

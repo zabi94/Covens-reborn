@@ -24,8 +24,7 @@ public class CropWormwood extends BlockCrop {
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		IBlockState state = worldIn.getBlockState(pos.down());
-		return canSustainBush(state);
+		return canSustainBush(worldIn.getBlockState(pos.down()));
 	}
 
 	@Override
@@ -34,11 +33,9 @@ public class CropWormwood extends BlockCrop {
 		if (isMaxAge(state) && state.getValue(AGE) != 7 && canSustainBush(worldIn.getBlockState(pos.down())) && worldIn.isAirBlock(pos.up())) {
 			if (worldIn.getBlockState(pos.down()).getBlock() == this) {
 				worldIn.setBlockState(pos, state.withProperty(AGE, 7), 2);
-			} else if (rand.nextInt(20) == 0) {
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-					worldIn.setBlockState(pos.up(), getDefaultState());
-					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-				}
+			} else if (rand.nextInt(20) == 0 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+				worldIn.setBlockState(pos.up(), getDefaultState());
+				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
 		}
 	}

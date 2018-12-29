@@ -138,8 +138,7 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 			}
 			return;
 		}
-		if (b == Blocks.FLOWER_POT) {
-			if (b.hasTileEntity(evt.getState())) {
+		if (b == Blocks.FLOWER_POT && b.hasTileEntity(evt.getState())) {
 				TileEntityFlowerPot tefp = (TileEntityFlowerPot) evt.getWorld().getTileEntity(evt.getPos());
 				if (!tefp.getFlowerItemStack().isEmpty()) {
 					evt.multiplier = 0.1;
@@ -147,7 +146,6 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 					evt.multiplier = 0.05;
 				}
 				return;
-			}
 		}
 		if (b == ModBlocks.goblet) {
 			if (evt.getState().getValue(BlockGoblet.FULL)) {

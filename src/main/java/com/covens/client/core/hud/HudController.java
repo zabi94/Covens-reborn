@@ -139,6 +139,7 @@ public class HudController {
 	}
 
 	private void drawAnchor(int i, int j, int w, int h, boolean fixed, EnumHudAnchor hor, EnumHudAnchor ver) {
+		int k = j;
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 
 		int sourceX = 0, sourceY = 0;
@@ -153,10 +154,10 @@ public class HudController {
 
 		if (ver == EnumHudAnchor.CENTER_ABSOLUTE || ver == EnumHudAnchor.CENTER_RELATIVE) {
 			sourceY = sr.getScaledHeight() / 2;
-			j += h / 2;
+			k += h / 2;
 		} else if (ver == EnumHudAnchor.END_ABSOLUTE || ver == EnumHudAnchor.END_RELATIVE) {
 			sourceY = sr.getScaledHeight();
-			j += h;
+			k += h;
 		}
 
 		GlStateManager.pushMatrix();
@@ -169,10 +170,10 @@ public class HudController {
 
 		if (fixed) {
 			buf.pos(sourceX, sourceY, 0).color(0f, 0.8f, 0f, 1f).endVertex();
-			buf.pos(i, j, 0).color(0f, 0.8f, 0f, 1f).endVertex();
+			buf.pos(i, k, 0).color(0f, 0.8f, 0f, 1f).endVertex();
 		} else {
 			buf.pos(sourceX, sourceY, 0).color(0.8f, 0.8f, 0f, 0.7f).endVertex();
-			buf.pos(i, j, 0).color(0.8f, 0.8f, 0f, 0.7f).endVertex();
+			buf.pos(i, k, 0).color(0.8f, 0.8f, 0f, 0.7f).endVertex();
 		}
 
 		tessellator.draw();
@@ -236,10 +237,8 @@ public class HudController {
 	@Nullable
 	public HudComponent getComponentAt(int x, int y, boolean onlyActive) {
 		for (HudComponent c : components) {
-			if (!onlyActive || c.isActive()) {
-				if (c.isHovered(x, y)) {
-					return c;
-				}
+			if ((!onlyActive || c.isActive()) && c.isHovered(x, y)) {
+				return c;
 			}
 		}
 		return null;

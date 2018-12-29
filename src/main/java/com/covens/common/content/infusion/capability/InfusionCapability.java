@@ -12,7 +12,7 @@ public class InfusionCapability implements IInfusionCapability {
 	@CapabilityInject(IInfusionCapability.class)
 	public static final Capability<IInfusionCapability> CAPABILITY = null;
 
-	IInfusion current = DefaultInfusions.NONE;
+	private IInfusion current = DefaultInfusions.NONE;
 
 	public static void init() {
 		CapabilityManager.INSTANCE.register(IInfusionCapability.class, new InfusionStorage(), InfusionCapability::new);

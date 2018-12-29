@@ -9,8 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class DefaultMPContainer implements IMagicPowerContainer {
 
-	int amount = 0;
-	int maxAmount;
+	private int amount = 0;
+	private int maxAmount;
 
 	public DefaultMPContainer(int max) {
 		maxAmount = max;

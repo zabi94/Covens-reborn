@@ -31,28 +31,26 @@ public class ItemVampireArmor extends ItemArmor implements IModelRegister {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (itemStack != ItemStack.EMPTY) {
-			if (itemStack.getItem() instanceof ItemArmor) {
+		if (itemStack.getItem() instanceof ItemArmor) {
 
-				ModelVampireArmor.INSTANCE.hatAnchor.showModel = armorSlot == EntityEquipmentSlot.HEAD;
-				ModelVampireArmor.INSTANCE.body.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelVampireArmor.INSTANCE.capeCollarBack1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelVampireArmor.INSTANCE.capeCollarRight1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelVampireArmor.INSTANCE.capeCollarLeft1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelVampireArmor.INSTANCE.capeBack1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelVampireArmor.INSTANCE.armLeft.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelVampireArmor.INSTANCE.armRight.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelVampireArmor.INSTANCE.legLeft.showModel = armorSlot == EntityEquipmentSlot.LEGS;
-				ModelVampireArmor.INSTANCE.legRight.showModel = armorSlot == EntityEquipmentSlot.LEGS;
+			ModelVampireArmor.INSTANCE.hatAnchor.showModel = armorSlot == EntityEquipmentSlot.HEAD;
+			ModelVampireArmor.INSTANCE.body.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelVampireArmor.INSTANCE.capeCollarBack1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelVampireArmor.INSTANCE.capeCollarRight1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelVampireArmor.INSTANCE.capeCollarLeft1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelVampireArmor.INSTANCE.capeBack1.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelVampireArmor.INSTANCE.armLeft.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelVampireArmor.INSTANCE.armRight.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelVampireArmor.INSTANCE.legLeft.showModel = armorSlot == EntityEquipmentSlot.LEGS;
+			ModelVampireArmor.INSTANCE.legRight.showModel = armorSlot == EntityEquipmentSlot.LEGS;
 
-				ModelVampireArmor.INSTANCE.isChild = _default.isChild;
-				ModelVampireArmor.INSTANCE.isRiding = _default.isRiding;
-				ModelVampireArmor.INSTANCE.isSneak = _default.isSneak;
-				ModelVampireArmor.INSTANCE.rightArmPose = _default.rightArmPose;
-				ModelVampireArmor.INSTANCE.leftArmPose = _default.leftArmPose;
+			ModelVampireArmor.INSTANCE.isChild = _default.isChild;
+			ModelVampireArmor.INSTANCE.isRiding = _default.isRiding;
+			ModelVampireArmor.INSTANCE.isSneak = _default.isSneak;
+			ModelVampireArmor.INSTANCE.rightArmPose = _default.rightArmPose;
+			ModelVampireArmor.INSTANCE.leftArmPose = _default.leftArmPose;
 
-				return ModelVampireArmor.INSTANCE;
-			}
+			return ModelVampireArmor.INSTANCE;
 		}
 
 		return null;

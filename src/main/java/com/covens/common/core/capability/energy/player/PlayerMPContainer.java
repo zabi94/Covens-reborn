@@ -6,7 +6,7 @@ public class PlayerMPContainer extends DefaultMPContainer {
 
 	public static final int STARTING_PLAYER_POWER = 800;
 
-	boolean dirty = false;
+	private boolean dirty = false;
 
 	public PlayerMPContainer() {
 		super(STARTING_PLAYER_POWER);

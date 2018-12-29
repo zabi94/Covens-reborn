@@ -83,10 +83,7 @@ public class ContainerDistillery extends ModContainer<TileEntityDistillery> {
 				progress = data;
 				break;
 			case 1:
-				if (data == 0) {
-					data = -1;
-				}
-				totalTime = data;
+				totalTime = (data==0?-1:data);
 				break;
 			case 2:
 				burnTime = data;

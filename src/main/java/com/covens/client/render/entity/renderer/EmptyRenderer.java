@@ -20,6 +20,7 @@ public class EmptyRenderer<T extends Entity> extends Render<T> {
 
 	@Override
 	public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+		//NO-OP
 	}
 
 	@Nullable

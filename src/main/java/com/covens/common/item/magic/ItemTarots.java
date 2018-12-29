@@ -36,15 +36,13 @@ public class ItemTarots extends ItemMod {
 
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-		if (!playerIn.isSneaking()) {
-			if (target instanceof EntityPlayer) {
-				if (!stack.hasTagCompound()) {
-					stack.setTagCompound(new NBTTagCompound());
-				}
-				stack.getTagCompound().setString("read_id", EntityPlayer.getUUID(((EntityPlayer) target).getGameProfile()).toString());
-				stack.getTagCompound().setString("read_name", ((EntityPlayer) target).getDisplayNameString());
-				return true;
+		if (!playerIn.isSneaking() && target instanceof EntityPlayer) {
+			if (!stack.hasTagCompound()) {
+				stack.setTagCompound(new NBTTagCompound());
 			}
+			stack.getTagCompound().setString("read_id", EntityPlayer.getUUID(((EntityPlayer) target).getGameProfile()).toString());
+			stack.getTagCompound().setString("read_name", ((EntityPlayer) target).getDisplayNameString());
+			return true;
 		}
 		return false;
 	}

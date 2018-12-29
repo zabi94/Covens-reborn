@@ -30,7 +30,7 @@ public class ModelToad extends ModelBase {
 	public ModelRenderer lLeg03;
 	public ModelRenderer rLeg02;
 	public ModelRenderer rLeg03;
-	float timer = 0;
+	private float timer = 0;
 
 	public ModelToad() {
 		this.textureWidth = 64;
@@ -134,10 +134,7 @@ public class ModelToad extends ModelBase {
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-
-
 		this.stomach.render(f5);
-
 	}
 
 	@Override

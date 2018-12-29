@@ -30,10 +30,12 @@ public class EntityBatSwarm extends Entity {
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound) {
+		//NO-OP
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound) {
+		//NO-OP
 	}
 
 	@Override
