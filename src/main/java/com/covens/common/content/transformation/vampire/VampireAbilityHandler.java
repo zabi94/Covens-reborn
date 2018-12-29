@@ -27,8 +27,10 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -123,16 +125,26 @@ public class VampireAbilityHandler {
 		return mult;
 	}
 
+	private static boolean shouldVampiresBurnHere(World world, BlockPos pos) {
+		return world.getTotalWorldTime() % 40 == 0 && world.canBlockSeeSky(pos) && world.isDaytime() && !world.isRainingAt(pos);
+	}
+	
+	private static boolean isPlayerOutsideLair(EntityPlayer player) {
+		return player.world.getBiome(player.getPosition()) != ModBiomes.VAMPIRE_LAIR;
+	}
+	
+	private static boolean canPlayerBurn(EntityPlayer player, CapabilityTransformation data) {
+		return player.getActivePotionEffect(ModPotions.sun_ward) == null && (data.getLevel() < 5 || !CovensAPI.getAPI().addVampireBlood(player, -(13 + data.getLevel())));
+	}
+	
 	@SubscribeEvent
 	public static void tickChecks(PlayerTickEvent evt) {
 		CapabilityTransformation data = evt.player.getCapability(CapabilityTransformation.CAPABILITY, null);
 		if (data.getType() == DefaultTransformations.VAMPIRE && evt.side.isServer()) {
 
 			// Check sun damage
-			if (evt.player.world.getTotalWorldTime() % 40 == 0 && evt.player.world.canBlockSeeSky(evt.player.getPosition()) && evt.player.world.isDaytime() && !evt.player.world.isRainingAt(evt.player.getPosition()) && evt.player.getActivePotionEffect(ModPotions.sun_ward) == null && evt.player.world.getBiome(evt.player.getPosition()) != ModBiomes.VAMPIRE_LAIR) {
-				if (data.getLevel() < 5 || !CovensAPI.getAPI().addVampireBlood(evt.player, -(13 + data.getLevel()))) {
+			if (shouldVampiresBurnHere(evt.player.world, evt.player.getPosition()) && isPlayerOutsideLair(evt.player) && canPlayerBurn(evt.player, data)) {
 					evt.player.attackEntityFrom(SUN_DAMAGE, 11 - data.getLevel());
-				}
 			}
 
 			// Replace hunger mechanics with blood mechanics

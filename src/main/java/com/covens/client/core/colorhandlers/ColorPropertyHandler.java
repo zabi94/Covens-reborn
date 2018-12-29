@@ -1,4 +1,4 @@
-package com.covens.client.handler;
+package com.covens.client.core.colorhandlers;
 
 import com.covens.common.Covens;
 import net.minecraft.block.state.IBlockState;

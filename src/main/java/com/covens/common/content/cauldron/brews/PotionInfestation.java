@@ -67,29 +67,33 @@ public class PotionInfestation extends BrewMod {
 		for (BlockPos spot : spots) {
 			if (spot.distanceSq(pos) < 2 + box * box / 2) {
 				IBlockState state = world.getBlockState(spot);
-				Block mushroom = (state.getBlock().getRegistryName().toString().length() + state.getBlock().getMetaFromState(state)) % 2 == 0 ? Blocks.RED_MUSHROOM_BLOCK : Blocks.BROWN_MUSHROOM_BLOCK;
-				Block mushroomSmall = world.rand.nextBoolean() ? Blocks.RED_MUSHROOM : Blocks.BROWN_MUSHROOM;
 				if (world.rand.nextInt(4) <= modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2) {
-					if (state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_PATH) {
-						world.setBlockState(spot, Blocks.MYCELIUM.getDefaultState(), 3);
-						if (world.isAirBlock(spot.up()) && world.rand.nextInt(10) == 0) {
-							world.setBlockState(spot.up(), mushroomSmall.getDefaultState(), 3);
-						}
-					} else if (state.getBlock() == Blocks.COBBLESTONE) {
-						world.setBlockState(spot, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 3);
-					} else if (state.getBlock() instanceof IPlantable) {
-						world.setBlockState(spot, mushroomSmall.getDefaultState(), 2);
-					} else if (state.getBlock() instanceof BlockLog) {
-						world.setBlockState(spot, mushroom.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, BlockHugeMushroom.EnumType.STEM), 3);
-					} else if (state.getBlock() instanceof BlockLeaves) {
-						world.setBlockState(spot, mushroom.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, BlockHugeMushroom.EnumType.ALL_OUTSIDE), 3);
-					} else if (state.getBlock() == Blocks.STONEBRICK) {
-						world.setBlockState(spot, Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY), 3);
-					}
-
-					// TODO add wheat to infested wheat
+					convertBlock(state, world, spot);
 				}
 			}
 		}
+	}
+	
+	private void convertBlock(IBlockState state, World world, BlockPos spot) {
+		Block mushroom = (state.getBlock().getRegistryName().toString().length() + state.getBlock().getMetaFromState(state)) % 2 == 0 ? Blocks.RED_MUSHROOM_BLOCK : Blocks.BROWN_MUSHROOM_BLOCK;
+		Block mushroomSmall = world.rand.nextBoolean() ? Blocks.RED_MUSHROOM : Blocks.BROWN_MUSHROOM;
+		if (state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_PATH) {
+			world.setBlockState(spot, Blocks.MYCELIUM.getDefaultState(), 3);
+			if (world.isAirBlock(spot.up()) && world.rand.nextInt(10) == 0) {
+				world.setBlockState(spot.up(), mushroomSmall.getDefaultState(), 3);
+			}
+		} else if (state.getBlock() == Blocks.COBBLESTONE) {
+			world.setBlockState(spot, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 3);
+		} else if (state.getBlock() instanceof IPlantable) {
+			world.setBlockState(spot, mushroomSmall.getDefaultState(), 2);
+		} else if (state.getBlock() instanceof BlockLog) {
+			world.setBlockState(spot, mushroom.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, BlockHugeMushroom.EnumType.STEM), 3);
+		} else if (state.getBlock() instanceof BlockLeaves) {
+			world.setBlockState(spot, mushroom.getDefaultState().withProperty(BlockHugeMushroom.VARIANT, BlockHugeMushroom.EnumType.ALL_OUTSIDE), 3);
+		} else if (state.getBlock() == Blocks.STONEBRICK) {
+			world.setBlockState(spot, Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY), 3);
+		}
+
+		// TODO add wheat to infested wheat
 	}
 }

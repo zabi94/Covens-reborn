@@ -32,10 +32,12 @@ public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
 	@Override
 	public void statusChanged(boolean isActiveBehaviour) {
+		//NO-OP
 	}
 
 	@Override
 	public void update(boolean isActiveBehaviour) {
+		//NO-OP
 	}
 
 	@Override
@@ -45,22 +47,22 @@ public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-
+		//NO-OP
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
 	@Override
 	public void onDeactivation() {
-
+		//NO-OP
 	}
 
 }

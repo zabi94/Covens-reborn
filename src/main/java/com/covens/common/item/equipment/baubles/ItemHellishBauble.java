@@ -43,12 +43,7 @@ public class ItemHellishBauble extends ItemMod implements IBauble, IMagicPowerEx
 	}
 
 	private static boolean isDemon(Entity e) {
-		if (e instanceof EntityLivingBase) {
-			if (((EntityLivingBase) e).getCreatureAttribute() == CovensAPI.getAPI().DEMON) {
-				return true;
-			}
-		}
-		return false;
+		return (e instanceof EntityLivingBase && ((EntityLivingBase) e).getCreatureAttribute() == CovensAPI.getAPI().DEMON);
 	}
 
 	@Override
@@ -105,22 +100,21 @@ public class ItemHellishBauble extends ItemMod implements IBauble, IMagicPowerEx
 
 	@SubscribeEvent
 	public void onEntityDamage(LivingHurtEvent event) {
-		if (event.getEntityLiving() instanceof EntityPlayer && doesPlayerHaveAmulet((EntityPlayer) event.getEntityLiving()))
-			if (event.getSource().isFireDamage() || event.getSource().isExplosion() || isDemon(event.getSource().getTrueSource())) {
-				if (event.getEntityLiving().getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
-					event.setAmount(event.getAmount() * 0.80F);
-				}
-			}
-	}
-
-	private boolean doesPlayerHaveAmulet(EntityPlayer e) {
-		IBaublesItemHandler ih = BaublesApi.getBaublesHandler(e);
-		for (int i = 0; i < ih.getSlots(); i++) {
-			if (ih.getStackInSlot(i).getItem() == this) {
-				return true;
-			}
+		if (hasAmulet(event.getEntityLiving()) && isValidDamageType(event.getSource()) && hasEnergy(event.getEntityLiving())) {
+			event.setAmount(event.getAmount() * 0.80F);
 		}
-		return false;
+	}
+	
+	private boolean hasAmulet(EntityLivingBase entity) {
+		return entity instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) entity, this) >= 0;
+	}
+	
+	private boolean isValidDamageType(DamageSource src) {
+		return src.isFireDamage() || src.isExplosion() || isDemon(src.getTrueSource());
+	}
+	
+	private boolean hasEnergy(EntityLivingBase entity) {
+		return entity.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50);
 	}
 
 	@Override

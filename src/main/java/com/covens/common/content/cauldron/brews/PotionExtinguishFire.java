@@ -34,7 +34,8 @@ public class PotionExtinguishFire extends BrewMod {
 	}
 
 	@Override
-	public void applyInWorld(World world, BlockPos pos, EnumFacing side, IBrewModifierList modifiers, EntityLivingBase thrower) {
+	public void applyInWorld(World world, BlockPos posIn, EnumFacing side, IBrewModifierList modifiers, EntityLivingBase thrower) {
+		BlockPos pos = posIn;
 		int amplifier = modifiers.getLevel(DefaultModifiers.POWER).orElse(0);
 		int radius = modifiers.getLevel(DefaultModifiers.RADIUS).orElse(0);
 		if (canExtinguish(world, amplifier)) {

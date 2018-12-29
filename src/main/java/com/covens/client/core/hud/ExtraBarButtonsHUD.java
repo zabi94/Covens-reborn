@@ -148,7 +148,7 @@ public class ExtraBarButtonsHUD extends HudComponent {
 				slotSelected = -1;
 			}
 			IHotbarAction current = refreshSelected();
-			if (current != null && current != lastSelected) {
+			if (current != null && !current.equals(lastSelected)) {
 				Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentTranslation(current.getName().getNamespace() + "." + current.getName().getPath()), true);
 			}
 		}
@@ -288,6 +288,7 @@ public class ExtraBarButtonsHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
+		//NO-OP
 	}
 
 	@Override

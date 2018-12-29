@@ -115,6 +115,7 @@ public class VampireBloodBarHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
+		//NO-OP
 	}
 
 	@Override

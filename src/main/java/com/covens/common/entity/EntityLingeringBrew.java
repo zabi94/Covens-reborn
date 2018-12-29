@@ -177,9 +177,9 @@ public class EntityLingeringBrew extends Entity {
 		}
 
 		if (this.radiusPerTick != 0.0F) {
-			radius += this.radiusPerTick;
+			r += this.radiusPerTick;
 
-			if (radius < 0.5F) {
+			if (r < 0.5F) {
 				this.setDead();
 				return 0;
 			}

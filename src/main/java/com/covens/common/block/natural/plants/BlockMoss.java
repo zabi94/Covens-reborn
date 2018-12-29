@@ -31,7 +31,7 @@ import java.util.Random;
 // FIXME placement (try and place it under a dangling piece while not connected laterally to any block)
 public class BlockMoss extends BlockVine implements IModelRegister {
 
-	boolean terminalPiece;
+	private boolean terminalPiece;
 
 	public BlockMoss(boolean terminal) {
 		String name = LibBlockName.SPANISH_MOSS + (terminal ? "_end" : "");
@@ -79,7 +79,8 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 		if (!worldIn.isRemote) {
 
 			IBlockState newState = state;
-			boolean foundValidAttachment = false, changed = false;
+			boolean foundValidAttachment = false;
+			boolean changed = false;
 			IBlockState upper = worldIn.getBlockState(pos.up());
 			for (EnumFacing f : EnumFacing.HORIZONTALS) {
 				PropertyBool visualSide = getPropertyFor(f);

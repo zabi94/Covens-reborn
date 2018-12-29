@@ -78,7 +78,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 
 		public Factory withBaseProcessingTime(int time) {
 			if (time <= 0) {
-				throw new RuntimeException("Time must be a positive integer");
+				throw new IllegalArgumentException("Time must be a positive integer");
 			}
 			recipe.time = time;
 			return this;
@@ -86,7 +86,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 
 		public Factory withOutput(ItemStack... stacks) {
 			if (stacks.length > 6) {
-				throw new RuntimeException("Too many outputs, you can only use 6 at most");
+				throw new IllegalArgumentException("Too many outputs, you can only use 6 at most");
 			}
 			recipe.outputs = NonNullList.from(ItemStack.EMPTY, stacks);
 			return this;
@@ -94,11 +94,11 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 
 		public Factory withInput(Ingredient... stacks) {
 			if (stacks.length > 6) {
-				throw new RuntimeException("Recipes cannot have more than 6 ingredients");
+				throw new IllegalArgumentException("Recipes cannot have more than 6 ingredients");
 			}
 			for (Ingredient i : stacks) {
 				if (i.getMatchingStacks().length == 0) {
-					throw new RuntimeException("No valid stack found");
+					throw new IllegalArgumentException("No valid stack found");
 				}
 			}
 			recipe.inputs = NonNullList.from(Ingredient.EMPTY, stacks);

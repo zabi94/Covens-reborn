@@ -85,7 +85,7 @@ public class SelectedActionHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
-		//For ease of extension
+		//NO-OP
 	}
 
 	@Override

@@ -21,13 +21,13 @@ public class GuiTarots extends GuiScreen {
 	protected static final ResourceLocation card_frame = new ResourceLocation(LibMod.MOD_ID, "textures/gui/tarot_frame.png");
 	protected static final ResourceLocation card_frame_number = new ResourceLocation(LibMod.MOD_ID, "textures/gui/tarot_frame_number.png");
 
-	ArrayList<TarotButton> buttons = new ArrayList<TarotButton>(0); // buttonList acts funky, I add a button but when drawScreen gets called the list is empty
-	ArrayList<TarotInfo> data = new ArrayList<TarotInfo>(0);
-	int pressed = -1;
-	boolean dataReceived = false;
+	private ArrayList<TarotButton> buttons = new ArrayList<TarotButton>(0); // buttonList acts funky, I add a button but when drawScreen gets called the list is empty
+	private ArrayList<TarotInfo> data = new ArrayList<TarotInfo>(0);
+	private int pressed = -1;
+	private boolean dataReceived = false;
 
 	public GuiTarots() {
-
+		//NO-OP
 	}
 
 	public void loadData(ArrayList<TarotInfo> fromNetwork) {

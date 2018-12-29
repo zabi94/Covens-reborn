@@ -36,7 +36,8 @@ public class PotionPlant extends BrewMod {
 	}
 
 	@Override
-	public void applyInWorld(World world, BlockPos pos, EnumFacing side, IBrewModifierList modifiers, EntityLivingBase thrower) {
+	public void applyInWorld(World world, BlockPos posIn, EnumFacing side, IBrewModifierList modifiers, EntityLivingBase thrower) {
+		BlockPos pos = posIn;
 		int amplifier = modifiers.getLevel(DefaultModifiers.POWER).orElse(0);
 		if (side != null) {
 			pos = pos.offset(side);

@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 public class CauldronBehaviourClean implements ICauldronBehaviour {
 
 	private static final String ID = "clean";
-	TileEntityCauldron cauldron;
+	private TileEntityCauldron cauldron;
 
 	@Override
 	public void setCauldron(TileEntityCauldron tile) {

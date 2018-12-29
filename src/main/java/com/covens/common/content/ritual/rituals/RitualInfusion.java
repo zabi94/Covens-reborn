@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 public class RitualInfusion extends RitualImpl {
 
-	IInfusion type;
+	private IInfusion type;
 
 	public RitualInfusion(ResourceLocation registryName, NonNullList<Ingredient> input, NonNullList<ItemStack> output, int timeInTicks, int circles, int altarStartingPower, int powerPerTick, IInfusion type) {
 		super(type.getRegistryName(), input, output, timeInTicks, circles, altarStartingPower, powerPerTick);

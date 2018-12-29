@@ -18,7 +18,7 @@ import java.util.List;
 public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftingWrapper> {
 
 	public static final String UID = LibMod.MOD_ID + ":cauldron_crafting";
-	public static IDrawable bg;
+	public IDrawable bg;
 	private static ResourceLocation rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_cauldron_crafting.png");
 
 	public CauldronCraftingCategory(IGuiHelper igh) {

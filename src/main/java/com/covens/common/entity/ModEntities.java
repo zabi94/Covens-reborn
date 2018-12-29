@@ -23,8 +23,11 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public final class ModEntities {
+	
+	private static int id = 0;
 
 	private ModEntities() {
+		//NO-OP
 	}
 
 	public static void init() {
@@ -82,8 +85,6 @@ public final class ModEntities {
 	private static ResourceLocation getResource(String name) {
 		return new ResourceLocation(LibMod.MOD_ID, name);
 	}
-	
-	private static int id = 0;
 	
 	private static void registerEntity(String name, Class<? extends Entity> clazz, int track_range, int update_frewuency, boolean sends_updates, int eggColor, int secundaryEggColor) {
 		checkContructor(clazz);

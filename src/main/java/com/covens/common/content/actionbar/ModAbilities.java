@@ -44,9 +44,11 @@ public class ModAbilities {
 	};
 
 	private ModAbilities() {
+		//NO-OP
 	}
 
 	public static void dummyMethodToLoadClass() {
+		//I only use this method to force the JVM to load this class
 	}
 
 	public static abstract class NightVisionAction extends HotbarAction {

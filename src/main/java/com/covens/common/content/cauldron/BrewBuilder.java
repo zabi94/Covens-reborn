@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class BrewBuilder {
 
-	List<ItemStack> list;
+	private List<ItemStack> list;
 
 	public BrewBuilder(List<ItemStack> list) {
 		this.list = list;

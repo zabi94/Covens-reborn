@@ -19,6 +19,7 @@ public class TarotHandler {
 	private static final int MAX_CARDS_PER_READING = 5;
 
 	private TarotHandler() {
+		//NO-OP
 	}
 
 	public static void registerTarot(ITarot tarot) {
@@ -37,17 +38,18 @@ public class TarotHandler {
 				.collect(Collectors.toList()));
 
 		// Remove random cards until we have less or equal than max per reading
-		while (res.size() > MAX_CARDS_PER_READING)
+		while (res.size() > MAX_CARDS_PER_READING) {
 			res.remove(player.getRNG().nextInt(res.size()));
+		}
 
 		return res;
 	}
 
 	public static class TarotInfo {
 
-		ITarot tarot;
-		boolean reversed;
-		int number = -1;
+		private ITarot tarot;
+		private boolean reversed;
+		private int number = -1;
 
 		private TarotInfo(ITarot tarot, boolean reversed, int number) {
 			this.tarot = tarot;

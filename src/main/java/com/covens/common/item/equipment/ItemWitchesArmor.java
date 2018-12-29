@@ -32,29 +32,23 @@ public class ItemWitchesArmor extends ItemArmor implements IModelRegister {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-		if (itemStack != ItemStack.EMPTY) {
-			if (itemStack.getItem() instanceof ItemArmor) {
+		if (itemStack.getItem() instanceof ItemArmor) {
+			ModelWitchesArmor.INSTANCE.hat1.showModel = armorSlot == EntityEquipmentSlot.HEAD;
+			ModelWitchesArmor.INSTANCE.body.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelWitchesArmor.INSTANCE.armLeft.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelWitchesArmor.INSTANCE.armRight.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+			ModelWitchesArmor.INSTANCE.legLeft.showModel = armorSlot == EntityEquipmentSlot.LEGS;
+			ModelWitchesArmor.INSTANCE.legRight.showModel = armorSlot == EntityEquipmentSlot.LEGS;
 
-				ModelWitchesArmor.INSTANCE.hat1.showModel = armorSlot == EntityEquipmentSlot.HEAD;
-				ModelWitchesArmor.INSTANCE.body.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelWitchesArmor.INSTANCE.armLeft.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelWitchesArmor.INSTANCE.armRight.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				ModelWitchesArmor.INSTANCE.legLeft.showModel = armorSlot == EntityEquipmentSlot.LEGS;
-				ModelWitchesArmor.INSTANCE.legRight.showModel = armorSlot == EntityEquipmentSlot.LEGS;
+			ModelWitchesArmor.INSTANCE.isChild = _default.isChild;
+			ModelWitchesArmor.INSTANCE.isRiding = _default.isRiding;
+			ModelWitchesArmor.INSTANCE.isSneak = _default.isSneak;
+			ModelWitchesArmor.INSTANCE.rightArmPose = _default.rightArmPose;
+			ModelWitchesArmor.INSTANCE.leftArmPose = _default.leftArmPose;
 
-				ModelWitchesArmor.INSTANCE.isChild = _default.isChild;
-				ModelWitchesArmor.INSTANCE.isRiding = _default.isRiding;
-				ModelWitchesArmor.INSTANCE.isSneak = _default.isSneak;
-				ModelWitchesArmor.INSTANCE.rightArmPose = _default.rightArmPose;
-				ModelWitchesArmor.INSTANCE.leftArmPose = _default.leftArmPose;
-
-				return ModelWitchesArmor.INSTANCE;
-			}
+			return ModelWitchesArmor.INSTANCE;
 		}
-
-
 		return null;
-
 	}
 
 }
