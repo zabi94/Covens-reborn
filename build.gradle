@@ -28,9 +28,9 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.matthewprenger.cursegradle'
 
-version = "${mc_version}-${cv_version}"
+version = "${cv_version}"
 group = "com.covens"
-archivesBaseName = "Covens"
+archivesBaseName = "Covens-${mc_version}"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
