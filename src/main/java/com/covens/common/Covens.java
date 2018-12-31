@@ -93,8 +93,8 @@ public class Covens {
 	public static Covens instance;
 
 	static {
-		FluidRegistry.enableUniversalBucket();
 		Watchdog.init();
+		FluidRegistry.enableUniversalBucket();
 	}
 
 	@EventHandler

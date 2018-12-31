@@ -1,16 +1,15 @@
 package com.covens.common.core.util;
 
-import java.util.Base64;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.LoaderException;
 
 public class Watchdog {
 	public static void init() {
-		String property = System.getProperty("ata");
-		if (property == null) {
-			property = "";
-		}
-		String hashKey = new String(Base64.getEncoder().encode(property.getBytes()));
-		if (!"Y3ZyYl90ZXN0YnVpbGQ=".equals(hashKey)) {
-			throw new WatchdogTrigger();
+		//OpenEye uses non lowercase modid, I can't put it inside the standard deps
+		if (!"true".equals(System.getProperty("ignoreMissingOpenEye")) && !Loader.isModLoaded("OpenEye")) {
+			LoaderException l = new LoaderException("\n\n\n\n\nMod OpenEye is required for alpha testing of Covens Reborn\n\n\n\n\n");
+			l.setStackTrace(new StackTraceElement[0]);
+			throw l;
 		}
 	}
 }
