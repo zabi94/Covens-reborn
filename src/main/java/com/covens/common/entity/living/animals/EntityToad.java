@@ -114,12 +114,10 @@ public class EntityToad extends EntityMultiSkin {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		super.attackEntityAsMob(entity);
-		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+		boolean flag = super.attackEntityAsMob(entity);
 		if (flag) {
-			this.applyEnchantments(this, entity);
 			if (entity instanceof EntityLivingBase) {
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2000, 1, false, false));
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 200, 1, true, false));
 			}
 		}
 		return flag;
