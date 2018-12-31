@@ -33,7 +33,7 @@ public class TileEntityCrystalBall extends ModTileEntity {
 	}
 
 	public boolean fortune(EntityPlayer reader) {
-		if (getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(reader, getPos(), world.provider.getDimension(), 5000)) {
+		if (getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(reader, getPos(), world.provider.getDimension(), 3000)) {
 			return readFortune(reader, null);
 		}
 		reader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.no_power"), true);
@@ -42,15 +42,11 @@ public class TileEntityCrystalBall extends ModTileEntity {
 
 	@SuppressWarnings({"deprecation", "null"})
 	private boolean readFortune(@Nonnull EntityPlayer endPlayer, @Nullable EntityPlayer externalReader) {
-
-		// This is here to support reading to others in the future
 		EntityPlayer messageRecpt = endPlayer;
-
 		if (endPlayer.getDistanceSq(this.getPos()) > 25) {
 			messageRecpt.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.too_far"), true);
 			return false;
 		}
-
 		IFortune fortune = endPlayer.getCapability(CapabilityFortune.CAPABILITY, null).getFortune();
 
 		if (fortune != null) {
