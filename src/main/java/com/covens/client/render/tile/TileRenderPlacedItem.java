@@ -1,5 +1,6 @@
 package com.covens.client.render.tile;
 
+import com.covens.common.block.ModBlocks;
 import com.covens.common.tile.tiles.TileEntityPlacedItem;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.client.Minecraft;
@@ -16,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 public class TileRenderPlacedItem extends TileEntitySpecialRenderer<TileEntityPlacedItem> {
 	@Override
 	public void render(TileEntityPlacedItem te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		if (!te.getItem().isEmpty()) {
+		if (te.getWorld().getBlockState(te.getPos()).getBlock() == ModBlocks.placed_item && !te.getItem().isEmpty()) {
 			ItemStack stack = te.getItem();
 			GlStateManager.enableRescaleNormal();
 			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
