@@ -36,6 +36,7 @@ public class WerewolfEventHandler {
 				GL11.glScaled(0.06, 0.06, 0.06);
 				GlStateManager.disableLighting();
 				WW_MODEL.render(p, p.limbSwing, p.limbSwingAmount / 3, p.ticksExisted, 0, p.rotationPitch, evt.getPartialRenderTick());
+				GlStateManager.enableLighting();
 				GlStateManager.popMatrix();
 			}
 		}
