@@ -450,5 +450,4 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
 		cooldown = tag.getInteger("cooldown");
 	}
-
 }

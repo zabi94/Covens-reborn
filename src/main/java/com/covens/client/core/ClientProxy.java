@@ -106,6 +106,7 @@ public class ClientProxy implements ISidedProxy {
 		ModelLoader.setCustomStateMapper(ModBlocks.leaves_elder, new AllDefaultModelStateMapper(ModBlocks.leaves_elder));
 		ModelLoader.setCustomStateMapper(ModBlocks.leaves_juniper, new AllDefaultModelStateMapper(ModBlocks.leaves_juniper));
 		ModelLoader.setCustomStateMapper(ModBlocks.leaves_yew, new AllDefaultModelStateMapper(ModBlocks.leaves_yew));
+		ModelLoader.setCustomStateMapper(ModBlocks.gem_bowl, new AllDefaultModelStateMapper(ModBlocks.gem_bowl));
 		ModelHandler.registerModels();
 	}
 

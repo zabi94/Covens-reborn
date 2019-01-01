@@ -30,6 +30,8 @@ public class BlockDistillery extends BlockModTileEntity {
 	public BlockDistillery(String id) {
 		super(id, Material.IRON);
 		this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
+		this.setHardness(1f);
+		this.setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override

@@ -1,9 +1,13 @@
 package com.covens.common.block.tiles;
 
+import java.util.Random;
+
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.tile.tiles.TileEntityCrystalBall;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -20,6 +24,7 @@ public class BlockCrystalBall extends BlockModTileEntity {
 		super(id, Material.GLASS);
 		this.setLightOpacity(0);
 		this.setLightLevel(0.3f);
+		this.setHardness(0.5f);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -72,4 +77,13 @@ public class BlockCrystalBall extends BlockModTileEntity {
 		return new TileEntityCrystalBall();
 	}
 
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(this);
+	}
+	
+	@Override
+	public int quantityDropped(IBlockState state, int fortune, Random random) {
+		return 1;
+	}
 }

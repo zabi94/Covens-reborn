@@ -132,6 +132,13 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 			heat = BURN_TIME;
 		}
 	}
+	
+	@Override
+	public void onBlockBroken(World worldIn, BlockPos pos, IBlockState state) {
+		dropInventory(fuelInventory);
+		dropInventory(inventoryInput);
+		dropInventory(inventoryOutput);
+	}
 
 
 	protected void contentsChanged() {

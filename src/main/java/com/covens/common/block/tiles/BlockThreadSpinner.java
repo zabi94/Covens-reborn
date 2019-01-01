@@ -27,6 +27,7 @@ public class BlockThreadSpinner extends BlockModTileEntity {
 		super(id, Material.WOOD);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
 		this.setSoundType(SoundType.WOOD);
+		this.setHardness(1f);
 	}
 
 	@Override

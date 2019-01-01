@@ -98,6 +98,11 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 		}
 		return super.getCapability(capability, facing);
 	}
+	
+	@Override
+	public void onBlockBroken(World worldIn, BlockPos pos, IBlockState state) {
+		dropInventory(hives_inventory);
+	}
 
 	private ArrayList<Integer> getNeighbors(int slot) {
 		int i = slot % COLUMNS;

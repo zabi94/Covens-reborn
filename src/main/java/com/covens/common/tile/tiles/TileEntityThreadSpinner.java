@@ -1,19 +1,18 @@
 package com.covens.common.tile.tiles;
 
+import javax.annotation.Nullable;
+
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.Covens;
-import com.covens.common.block.ModBlocks;
-import com.covens.common.core.helper.ItemHandlerHelper;
 import com.covens.common.crafting.SpinningThreadRecipe;
 import com.covens.common.lib.LibGui;
 import com.covens.common.tile.ModTileEntity;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
@@ -25,8 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-
-import javax.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 public class TileEntityThreadSpinner extends ModTileEntity implements ITickable, IWorldNameable {
@@ -67,13 +64,8 @@ public class TileEntityThreadSpinner extends ModTileEntity implements ITickable,
 	}
 
 	@Override
-	public void onBlockHarvested(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
-		if (worldIn.isRemote || player.isCreative()) {
-			return;
-		}
-		ItemHandlerHelper.dropItems(handler, world, pos);
-		final EntityItem item = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, new ItemStack(ModBlocks.thread_spinner));
-		world.spawnEntity(item);
+	public void onBlockBroken(World worldIn, BlockPos pos, IBlockState state) {
+		dropInventory(handler);
 	}
 
 	@Override
@@ -133,7 +125,6 @@ public class TileEntityThreadSpinner extends ModTileEntity implements ITickable,
 		return capability == IMagicPowerConsumer.CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == IMagicPowerConsumer.CAPABILITY) {
