@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "covens:blocks/scorned_bricks",
-    "top": "covens:blocks/scorned_bricks",
-    "side": "covens:blocks/scorned_bricks"
-  }
-}

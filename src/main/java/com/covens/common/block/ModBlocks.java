@@ -7,8 +7,6 @@ import com.covens.common.block.chisel.BlockNetherSteelChiseled.BlockSteelVariant
 import com.covens.common.block.chisel.BlockSilverChiseled;
 import com.covens.common.block.chisel.BlockSilverChiseled.BlockSilverVariant;
 import com.covens.common.block.decorations.BlockFakeIce;
-import com.covens.common.block.decorations.BlockScornedBrickFence;
-import com.covens.common.block.decorations.BlockScornedBrickStairs;
 import com.covens.common.block.misc.BlockCandleMedium;
 import com.covens.common.block.misc.BlockCandleSmall;
 import com.covens.common.block.misc.BlockGoblet;
@@ -102,7 +100,6 @@ public final class ModBlocks {
 	//--------------------------------Blocks--------------------------------//
 	public static final Block silver_block = null;
 	public static final Block silver_ore = null;
-	public static final Block coquina = null;
 	public static final Block gem_block = null;
 	public static final Block cauldron = null;
 	public static final Block magic_mirror = null;
@@ -120,7 +117,6 @@ public final class ModBlocks {
 	public static final Block gem_ore = null;
 	public static final Block nethersteel = null;
 	public static final Block fake_ice = null;
-	public static final Block scorned_brick_stairs = null;
 	public static final Block torchwood = null;
 	public static final Block ember_grass = null;
 	public static final Block log_elder = null;
@@ -141,8 +137,6 @@ public final class ModBlocks {
 	public static final Block thread_spinner = null;
 	public static final Block ritual_glyphs = null;
 	public static final Block crystal_ball = null;
-	public static final Block scorned_bricks = null;
-	public static final Block scorned_brick_fence = null;
 	public static final Block goblet = null;
 	public static final Block gem_bowl = null;
 	public static final Block tarot_table = null;
@@ -234,20 +228,15 @@ public final class ModBlocks {
 		);
 
 		//Decorative Blocks
-		final Block scorendBricks = new BlockMod(LibBlockName.SCORNED_BRICKS, Material.ROCK, SoundType.STONE).setHardness(5.0F);
 		registry.registerAll(
 				new BlockMod(LibBlockName.SILVER_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockFakeIce(),
-				scorendBricks,
-				new BlockScornedBrickFence(),
-				new BlockScornedBrickStairs("scorned_brick_stairs", scorendBricks.getDefaultState(), Material.ROCK),
 				new BlockSilverChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockColdIronChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockNetherSteelChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockMod(LibBlockName.COLD_IRON_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockMod(LibBlockName.NETHERSTEEL, Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockGem(),
-				new BlockMod(LibBlockName.COQUINA, Material.ROCK).setHardness(5.0F),
 				new BlockGraveyardDirt()
 		);
 
@@ -276,8 +265,6 @@ public final class ModBlocks {
 
 	private static void initOreDictionary() {
 		//Crystals, Minerals, and Metals
-		OreDictionary.registerOre("coquina", new ItemStack(ModBlocks.coquina));
-		OreDictionary.registerOre("limestone", new ItemStack(ModBlocks.coquina));
 		OreDictionary.registerOre("blockSilver", new ItemStack(ModBlocks.silver_block));
 		OreDictionary.registerOre("blockColdIron", new ItemStack(ModBlocks.cold_iron_block, 1, 0));
 		OreDictionary.registerOre("blockNethersteel", new ItemStack(ModBlocks.nethersteel, 1, 0));

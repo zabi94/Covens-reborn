@@ -1,9 +1,13 @@
 package com.covens.common.block.natural.plants;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.block.BlockMod;
-import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -19,9 +23,6 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.Random;
 
 /**
  * Created by Joseph on 11/4/2017.
@@ -55,7 +56,7 @@ public class BlockTorchwood extends BlockMod implements IGrowable, IPlantable {
 	}
 
 	public boolean canSustainBush(IBlockState state) {
-		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.FARMLAND || state.getBlock() == ModBlocks.coquina || state.getBlock() == Blocks.SAND || state.getBlock() == Blocks.GRAVEL || state.getBlock() == Blocks.COBBLESTONE || state.getBlock() == Blocks.NETHERRACK || state.getBlock() == Blocks.END_STONE || state.getBlock() == this;
+		return state.getMaterial() == Material.ROCK;
 	}
 
 	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
@@ -67,7 +68,6 @@ public class BlockTorchwood extends BlockMod implements IGrowable, IPlantable {
 
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
 		this.checkAndDropBlock(worldIn, pos, state);
 	}
 

@@ -93,20 +93,6 @@ public final class ModGen {
 				.setHeightRange(ModConfig.WORLD_GEN.alexandrite.alexandrite_min_height, ModConfig.WORLD_GEN.alexandrite.alexandrite_max_height)
 				.setBiomes(BiomeDictionary.Type.JUNGLE)
 				.build(block -> BlockGemOre.getStateById(Gem.ALEXANDRITE.ordinal())), 0);
-		GameRegistry.registerWorldGenerator(WorldGenOre.OreGenBuilder.forOre(ModBlocks.coquina, ModConfig.WORLD_GEN.coquina.coquina_gen_chance)
-				.generateOn(Blocks.STONE)
-				.setVeinSize(ModConfig.WORLD_GEN.coquina.coquina_min_vein, ModConfig.WORLD_GEN.coquina.coquina_max_vein)
-				.setHeightRange(ModConfig.WORLD_GEN.coquina.coquina_min_height, ModConfig.WORLD_GEN.coquina.coquina_max_height)
-				.setBiomes(BiomeDictionary.Type.BEACH)
-				.build(DEFAULT_STATE), 0);
-		//-------------------beehive-------------------//
-		/*
-		GameRegistry.registerWorldGenerator(WorldGenOre.OreGenBuilder.forOre(ModBlocks.beehive, ConfigHandler.WORLD_GEN.beehive.beehive_gen_chance)
-				.generateOn(Blocks.LEAVES)
-				.setVeinSize(ConfigHandler.WORLD_GEN.beehive.beehive_min_amount, ConfigHandler.WORLD_GEN.beehive.beehive_max_amount)
-				.setHeightRange(ConfigHandler.WORLD_GEN.beehive.beehive_min_height, ConfigHandler.WORLD_GEN.beehive.beehive_max_height)
-				.build(DEFAULT_STATE), 0);
-		*/
 		GameRegistry.registerWorldGenerator(new WorldGenBeehive(), 0);
 	}
 }

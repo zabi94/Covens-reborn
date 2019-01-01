@@ -79,12 +79,6 @@ public class PotionFireWorld extends BrewMod {
 								.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING))
 								.withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF));
 						world.setBlockState(spot, newState);
-					} else if (state.getBlock() == Blocks.BRICK_BLOCK) {
-						world.setBlockState(spot, ModBlocks.scorned_bricks.getDefaultState(), 3);
-					} else if (state.getBlock() == Blocks.STONEBRICK) {
-						world.setBlockState(spot, ModBlocks.scorned_bricks.getDefaultState(), 3);
-					} else if (state.getBlock() == Blocks.END_BRICKS) {
-						world.setBlockState(spot, ModBlocks.scorned_bricks.getDefaultState(), 3);
 					} else if (state.getBlock() instanceof BlockFence) {
 						world.setBlockState(spot, Blocks.NETHER_BRICK_FENCE.getDefaultState(), 3);
 					} else if (state.getBlock() instanceof BlockLog) {

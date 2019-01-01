@@ -53,7 +53,6 @@ public final class LibBlockName {
 	public static final String MAGIC_MIRROR_TOP = "magic_mirror_top";
 	public static final String OVEN = "oven";
 	public static final String BRAZIER = "brazier";
-	public static final String COQUINA = "coquina";
 	public static final String BEEHIVE = "beehive";
 	public static final String SALT_ORE = "salt_ore";
 	public static final String GEM_BLOCK = "gem_block";
@@ -70,9 +69,6 @@ public final class LibBlockName {
 	public static final String FAKE_ICE = "fake_ice";
 	public static final String TORCHWOOD = "torchwood";
 	public static final String EMBER_GRASS = "ember_grass";
-	public static final String SCORNED_BRICKS = "scorned_bricks";
-	public static final String SCORNED_BRICK_FENCE = "scorned_brick_fence";
-	public static final String SCORNED_BRICK_STAIRS = "scorned_brick_stairs";
 	public static final String LOG_ELDER = "log_elder";
 	public static final String LOG_JUNIPER = "log_juniper";
 	public static final String LOG_YEW = "log_yew";
