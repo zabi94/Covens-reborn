@@ -3,16 +3,20 @@ package com.covens.common.item.natural.seed;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModCrops;
 import com.covens.common.lib.LibItemName;
-import net.minecraft.block.Block;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.BlockSnapshot;
 
 /**
  * This class was created by Arekkuusu on 02/03/2017.
@@ -44,27 +48,15 @@ public class ItemKelpSeed extends ItemSeed {
 			final IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
 			if (iblockstate.getMaterial().isSolid()) {
-				// special case for handling block placement with water lilies
-				BlockPos I = up.add(-1, 0, -1);
-				BlockPos F = up.add(1, 1, 1);
-				for (BlockPos blockPos : BlockPos.getAllInBox(I, F)) {
-					Block block = worldIn.getBlockState(blockPos).getBlock();
-					if (block != ModBlocks.crop_kelp && block != Blocks.WATER) {
-						return ActionResult.newResult(EnumActionResult.FAIL, stack);
-					}
-				}
-				final net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(worldIn, up);
+				final BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, up);
 				if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP, hand).isCanceled()) {
 					blocksnapshot.restore(true, false);
 					return ActionResult.newResult(EnumActionResult.FAIL, stack);
 				}
-
 				worldIn.setBlockState(up, this.crop.getDefaultState(), 11);
-
 				if (!playerIn.capabilities.isCreativeMode) {
 					stack.shrink(1);
 				}
-
 				worldIn.playSound(playerIn, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 			}
