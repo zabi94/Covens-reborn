@@ -234,7 +234,6 @@ public final class ModItems {
 	public static final Item location_stone = null;
 
 	public static final Item snake_venom = null;
-	public static final Item filet_of_fenny_snake = null;
 	public static final Item adders_fork = null;
 
 	public static final Item toe_of_frog = null;
@@ -317,7 +316,6 @@ public final class ModItems {
 				new ItemMod(LibItemName.SANGUINE_FABRIC),
 				new ItemMod(LibItemName.PENTACLE),
 				new ItemMod(LibItemName.ADDERS_FORK),
-				new ItemMod(LibItemName.FILET_OF_FENNY_SNAKE),
 				new ItemMod(LibItemName.SNAKE_VENOM),
 				new ItemMod(LibItemName.TOE_OF_FROG),
 				new ItemMod(LibItemName.LIZARD_LEG),

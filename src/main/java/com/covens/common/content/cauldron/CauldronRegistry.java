@@ -276,7 +276,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.revealing, eyes);
 		registerCombinedBrewEffect(ModPotions.deaths_ebb, Ingredient.fromItem(ModItems.asphodel));
 		registerCombinedBrewEffect(ModPotions.power_boon, Ingredient.fromItem(ModItems.mandrake_root));
-		registerCombinedBrewEffect(ModPotions.power_drain, Ingredient.fromItem(ModItems.filet_of_fenny_snake));
+		registerCombinedBrewEffect(ModPotions.power_drain, Ingredient.fromItem(ModItems.adders_fork));
 		registerCombinedBrewEffect(ModPotions.power_dampening, Ingredient.fromItem(ModItems.graveyard_dust));
 		registerCombinedBrewEffect(ModPotions.power_boost, Ingredient.fromItem(ModItems.juniper_berries));
 		registerCombinedBrewEffect(ModPotions.holy_water, Ingredient.fromItem(ModItems.garlic));
