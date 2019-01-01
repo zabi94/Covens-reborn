@@ -68,6 +68,7 @@ import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.covens.common.tile.tiles.TileEntityGemBowl;
 import com.covens.common.tile.tiles.TileEntityPlacedItem;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -101,12 +102,13 @@ public class ClientProxy implements ISidedProxy {
 
 	@SubscribeEvent
 	public static void registerItemModels(ModelRegistryEvent event) {
-		ModelLoader.setCustomStateMapper(ModBlocks.ember_grass, new AllDefaultModelStateMapper(ModBlocks.ember_grass));
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_cypress, new AllDefaultModelStateMapper(ModBlocks.leaves_cypress));
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_elder, new AllDefaultModelStateMapper(ModBlocks.leaves_elder));
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_juniper, new AllDefaultModelStateMapper(ModBlocks.leaves_juniper));
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_yew, new AllDefaultModelStateMapper(ModBlocks.leaves_yew));
-		ModelLoader.setCustomStateMapper(ModBlocks.gem_bowl, new AllDefaultModelStateMapper(ModBlocks.gem_bowl));
+		unifyVariants(ModBlocks.ember_grass);
+		unifyVariants(ModBlocks.leaves_cypress);
+		unifyVariants(ModBlocks.leaves_elder);
+		unifyVariants(ModBlocks.leaves_juniper);
+		unifyVariants(ModBlocks.leaves_yew);
+		unifyVariants(ModBlocks.gem_bowl);
+		unifyVariants(ModBlocks.moonbell);
 		ModelHandler.registerModels();
 	}
 
@@ -134,6 +136,10 @@ public class ClientProxy implements ISidedProxy {
 		MinecraftForge.EVENT_BUS.register(new WerewolfEventHandler());
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());
 		MinecraftForge.EVENT_BUS.register(new MiscEventHandler(Minecraft.getMinecraft()));
+	}
+	
+	private static void unifyVariants(Block block) {
+		ModelLoader.setCustomStateMapper(block, new AllDefaultModelStateMapper(block));
 	}
 	
 	@Override
