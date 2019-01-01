@@ -43,7 +43,6 @@ public class PotionFireWorld extends BrewMod {
 		stateMap.put(Blocks.DARK_OAK_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
 		stateMap.put(Blocks.PACKED_ICE, Blocks.MAGMA.getDefaultState());
 		stateMap.put(Blocks.ICE, Blocks.MAGMA.getDefaultState());
-		stateMap.put(ModBlocks.fake_ice, Blocks.MAGMA.getDefaultState());
 		stateMap.put(Blocks.WOOL, Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED));
 		stateMap.put(Blocks.FARMLAND, Blocks.SOUL_SAND.getDefaultState());
 		stateMap.put(Blocks.DIRT, Blocks.NETHERRACK.getDefaultState());
@@ -86,9 +85,7 @@ public class PotionFireWorld extends BrewMod {
 						world.setBlockState(spot, ModBlocks.scorned_bricks.getDefaultState(), 3);
 					} else if (state.getBlock() == Blocks.END_BRICKS) {
 						world.setBlockState(spot, ModBlocks.scorned_bricks.getDefaultState(), 3);
-					} else if (state.getBlock() == ModBlocks.embittered_bricks) {
-						world.setBlockState(spot, ModBlocks.scorned_bricks.getDefaultState(), 3);
-					} else if (state.getBlock() == ModBlocks.fake_ice_fence) {
+					} else if (state.getBlock() instanceof BlockFence) {
 						world.setBlockState(spot, Blocks.NETHER_BRICK_FENCE.getDefaultState(), 3);
 					} else if (state.getBlock() instanceof BlockLog) {
 						EnumFacing.Axis bone_axis = EnumFacing.Axis.Y;

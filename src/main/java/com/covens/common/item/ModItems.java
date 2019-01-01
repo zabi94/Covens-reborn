@@ -66,11 +66,9 @@ import com.covens.common.lib.LibMod;
 
 import baubles.api.BaubleType;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.LoaderException;
@@ -385,15 +383,10 @@ public final class ModItems {
 				new ItemBlockColor(ModBlocks.candle_medium),
 				new ItemBlockColor(ModBlocks.candle_small),
 				itemBlock(ModBlocks.fake_ice),
-				itemBlock(ModBlocks.fake_ice_fence),
-				itemBlock(ModBlocks.fake_ice_stairs),
-				itemBlock(ModBlocks.embittered_bricks),
 				itemBlock(ModBlocks.scorned_bricks),
 				itemBlock(ModBlocks.scorned_brick_fence),
 				itemBlock(ModBlocks.scorned_brick_stairs),
-
 				new ItemGemOre(ModBlocks.gem_ore).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB),
-				new ItemSlab(ModBlocks.fake_ice_slab_half, (BlockSlab) ModBlocks.fake_ice_slab_half, (BlockSlab) ModBlocks.fake_ice_slab_double).setRegistryName(ModBlocks.fake_ice_slab_half.getRegistryName()),
 				itemBlock(ModBlocks.silver_block),
 				itemBlock(ModBlocks.silver_ore),
 				itemBlock(ModBlocks.coquina),

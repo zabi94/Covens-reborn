@@ -6,11 +6,34 @@ import com.covens.common.block.chisel.BlockNetherSteelChiseled;
 import com.covens.common.block.chisel.BlockNetherSteelChiseled.BlockSteelVariant;
 import com.covens.common.block.chisel.BlockSilverChiseled;
 import com.covens.common.block.chisel.BlockSilverChiseled.BlockSilverVariant;
-import com.covens.common.block.decorations.*;
-import com.covens.common.block.misc.*;
-import com.covens.common.block.natural.*;
+import com.covens.common.block.decorations.BlockFakeIce;
+import com.covens.common.block.decorations.BlockScornedBrickFence;
+import com.covens.common.block.decorations.BlockScornedBrickStairs;
+import com.covens.common.block.misc.BlockCandleMedium;
+import com.covens.common.block.misc.BlockCandleSmall;
+import com.covens.common.block.misc.BlockGoblet;
+import com.covens.common.block.misc.BlockGraveyardDirt;
+import com.covens.common.block.misc.BlockLantern;
+import com.covens.common.block.misc.BlockPlacedItem;
+import com.covens.common.block.misc.BlockPurifyingEarth;
+import com.covens.common.block.misc.BlockSaltBarrier;
+import com.covens.common.block.misc.BlockWitchFire;
+import com.covens.common.block.misc.BlockWitchesLight;
+import com.covens.common.block.natural.BlockBeehive;
+import com.covens.common.block.natural.BlockGem;
 import com.covens.common.block.natural.BlockGem.Gem;
-import com.covens.common.block.natural.crop.*;
+import com.covens.common.block.natural.BlockGemOre;
+import com.covens.common.block.natural.BlockInfestedFarmland;
+import com.covens.common.block.natural.BlockSaltOre;
+import com.covens.common.block.natural.BlockSilverOre;
+import com.covens.common.block.natural.crop.BlockCrop;
+import com.covens.common.block.natural.crop.CropBelladonna;
+import com.covens.common.block.natural.crop.CropKelp;
+import com.covens.common.block.natural.crop.CropKenaf;
+import com.covens.common.block.natural.crop.CropMint;
+import com.covens.common.block.natural.crop.CropSilphium;
+import com.covens.common.block.natural.crop.CropThistle;
+import com.covens.common.block.natural.crop.CropWormwood;
 import com.covens.common.block.natural.fluid.Fluids;
 import com.covens.common.block.natural.plants.BlockEmberGrass;
 import com.covens.common.block.natural.plants.BlockMoonbell;
@@ -20,11 +43,23 @@ import com.covens.common.block.natural.tree.BlockModLeaves;
 import com.covens.common.block.natural.tree.BlockModLog;
 import com.covens.common.block.natural.tree.BlockModSapling;
 import com.covens.common.block.natural.tree.BlockPlanks;
-import com.covens.common.block.tiles.*;
+import com.covens.common.block.tiles.BlockApiary;
+import com.covens.common.block.tiles.BlockBrazier;
+import com.covens.common.block.tiles.BlockCauldron;
+import com.covens.common.block.tiles.BlockCircleGlyph;
+import com.covens.common.block.tiles.BlockCrystalBall;
+import com.covens.common.block.tiles.BlockDistillery;
+import com.covens.common.block.tiles.BlockGemBowl;
+import com.covens.common.block.tiles.BlockMagicMirror;
+import com.covens.common.block.tiles.BlockOven;
+import com.covens.common.block.tiles.BlockTarotTable;
+import com.covens.common.block.tiles.BlockThreadSpinner;
+import com.covens.common.block.tiles.BlockWitchAltar;
 import com.covens.common.crafting.VanillaCrafting;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -85,10 +120,6 @@ public final class ModBlocks {
 	public static final Block gem_ore = null;
 	public static final Block nethersteel = null;
 	public static final Block fake_ice = null;
-	public static final Block fake_ice_fence = null;
-	public static final Block fake_ice_stairs = null;
-	public static final Block fake_ice_slab_half = null;
-	public static final Block fake_ice_slab_double = null;
 	public static final Block scorned_brick_stairs = null;
 	public static final Block torchwood = null;
 	public static final Block ember_grass = null;
@@ -110,7 +141,6 @@ public final class ModBlocks {
 	public static final Block thread_spinner = null;
 	public static final Block ritual_glyphs = null;
 	public static final Block crystal_ball = null;
-	public static final Block embittered_bricks = null;
 	public static final Block scorned_bricks = null;
 	public static final Block scorned_brick_fence = null;
 	public static final Block goblet = null;
@@ -133,9 +163,6 @@ public final class ModBlocks {
 	public static final Block cold_iron_block_chisel = null;
 	public static final Block nethersteel_chisel = null;
 
-	private static Block STAIRS_ICE = new Block(Material.ICE);
-	private static Block STAIRS_SCORNED_BRICK = new Block(Material.ROCK);
-
 	private ModBlocks() {
 
 	}
@@ -144,8 +171,7 @@ public final class ModBlocks {
 		for (final IFluidBlock fluidBlock : Fluids.MOD_FLUID_BLOCKS) {
 			registry.register((Block) fluidBlock);
 		}
-		//Crops
-		//Todo: Make the rest of the crops flammable.
+
 		registry.registerAll(
 				new BlockCrop(LibBlockName.CROP_ACONITUM),
 				new BlockCrop(LibBlockName.CROP_ASPHODEL),
@@ -176,6 +202,7 @@ public final class ModBlocks {
 		registry.register(new BlockSaltOre());
 		registry.register(new BlockGemOre());
 		registry.register(new BlockWitchFire());
+		
 		//Tool Blocks
 		registry.registerAll(
 				new BlockCauldron(),
@@ -190,13 +217,6 @@ public final class ModBlocks {
 				new BlockApiary(),
 				new BlockTorchwood(),
 				new BlockEmberGrass(),
-				new BlockFakeIce(),
-				new BlockFakeIceFence(),
-				new BlockScornedBrickFence(),
-				new BlockFakeIceStairs("fake_ice_stairs", STAIRS_ICE.getDefaultState()),
-				new BlockScornedBrickStairs("scorned_brick_stairs", STAIRS_SCORNED_BRICK.getDefaultState(), Material.ROCK),
-				new BlockFakeIceSlabDouble("fake_ice_slab_double"),
-				new BlockFakeIceSlabHalf("fake_ice_slab_half"),
 				new BlockBeehive(LibBlockName.BEEHIVE),
 				new BlockWitchAltar(LibBlockName.WITCH_ALTAR, Material.ROCK),
 				new BlockThreadSpinner(LibBlockName.THREAD_SPINNER),
@@ -207,16 +227,20 @@ public final class ModBlocks {
 				new BlockTarotTable(),
 				new BlockLantern(true),
 				new BlockLantern(false),
+				new BlockDistillery(LibBlockName.DISTILLERY),
 				new BlockWitchesLight(),
 				new BlockPurifyingEarth(),
 				new BlockPlacedItem()
 		);
 
-		registry.register(new BlockDistillery(LibBlockName.DISTILLERY));
-
-		//Normal Blocks
+		//Decorative Blocks
+		final Block scorendBricks = new BlockMod(LibBlockName.SCORNED_BRICKS, Material.ROCK, SoundType.STONE).setHardness(5.0F);
 		registry.registerAll(
 				new BlockMod(LibBlockName.SILVER_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F),
+				new BlockFakeIce(),
+				scorendBricks,
+				new BlockScornedBrickFence(),
+				new BlockScornedBrickStairs("scorned_brick_stairs", scorendBricks.getDefaultState(), Material.ROCK),
 				new BlockSilverChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockColdIronChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockNetherSteelChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
@@ -224,8 +248,6 @@ public final class ModBlocks {
 				new BlockMod(LibBlockName.NETHERSTEEL, Material.IRON, SoundType.METAL).setHardness(5.0F),
 				new BlockGem(),
 				new BlockMod(LibBlockName.COQUINA, Material.ROCK).setHardness(5.0F),
-				new BlockMod(LibBlockName.EMBITTERED_BRICKS, Material.ROCK, SoundType.STONE).setHardness(5.0F),
-				new BlockMod(LibBlockName.SCORNED_BRICKS, Material.ROCK, SoundType.STONE).setHardness(5.0F),
 				new BlockGraveyardDirt()
 		);
 

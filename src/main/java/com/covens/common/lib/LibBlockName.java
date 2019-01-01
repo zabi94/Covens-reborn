@@ -68,17 +68,11 @@ public final class LibBlockName {
 	public static final String NETHERSTEEL = "nethersteel";
 	public static final String SALT_BARRIER = "salt_barrier";
 	public static final String FAKE_ICE = "fake_ice";
-	public static final String FAKE_ICE_FENCE = "fake_ice_fence";
-	public static final String FAKE_ICE_STAIRS = "fake_ice_stairs";
 	public static final String TORCHWOOD = "torchwood";
 	public static final String EMBER_GRASS = "ember_grass";
-	public static final String FAKE_ICE_SLAB = "fake_ice_slab";
-	public static final String EMBITTERED_BRICKS = "embittered_bricks";
 	public static final String SCORNED_BRICKS = "scorned_bricks";
 	public static final String SCORNED_BRICK_FENCE = "scorned_brick_fence";
 	public static final String SCORNED_BRICK_STAIRS = "scorned_brick_stairs";
-	public static final String FAKE_ICE_SLAB_DOUBLE = "fake_ice_slab_double";
-	public static final String FAKE_ICE_SLAB_HALF = "fake_ice_slab_half";
 	public static final String LOG_ELDER = "log_elder";
 	public static final String LOG_JUNIPER = "log_juniper";
 	public static final String LOG_YEW = "log_yew";
