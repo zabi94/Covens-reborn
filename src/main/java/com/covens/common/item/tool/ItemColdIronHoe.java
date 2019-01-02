@@ -32,15 +32,15 @@ public class ItemColdIronHoe extends ItemHoe implements IModelRegister {
 	public ItemColdIronHoe() {
 		super(ModMaterials.TOOL_COLD_IRON);
 		this.setMaxStackSize(1);
-		setRegistryName(LibItemName.COLD_IRON_HOE);
-		setTranslationKey(LibItemName.COLD_IRON_HOE);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setRegistryName(LibItemName.COLD_IRON_HOE);
+		this.setTranslationKey(LibItemName.COLD_IRON_HOE);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, @Nonnull EntityLivingBase attacker) {
 		if (!target.world.isRemote) {
-			if ((MobHelper.isSpirit(target) || MobHelper.isDemon(target)) && attacker instanceof EntityPlayer) {
+			if ((MobHelper.isSpirit(target) || MobHelper.isDemon(target)) && (attacker instanceof EntityPlayer)) {
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), 12);
 				stack.damageItem(5, attacker);
 			} else {
@@ -52,13 +52,13 @@ public class ItemColdIronHoe extends ItemHoe implements IModelRegister {
 	}
 
 	public String getNameInefficiently(ItemStack stack) {
-		return getTranslationKey().substring(5);
+		return this.getTranslationKey().substring(5);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.GRAY + I18n.format("witch.tooltip." + getNameInefficiently(stack) + "_description.name"));
+		tooltip.add(TextFormatting.GRAY + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 
 	@SideOnly(Side.CLIENT)

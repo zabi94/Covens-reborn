@@ -1,9 +1,12 @@
 package com.covens.common.block.misc;
 
+import java.util.Random;
+
 import com.covens.common.Covens;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -24,8 +27,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-import java.util.Random;
-
 public class BlockLantern extends BlockMod {
 
 	private static final AxisAlignedBB bounding_box = new AxisAlignedBB(0.2, 0, 0.2, 0.8, 0.9375, 0.8);
@@ -43,7 +44,7 @@ public class BlockLantern extends BlockMod {
 
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return lit ? 15 : 0;
+		return this.lit ? 15 : 0;
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class BlockLantern extends BlockMod {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (lit) {
+		if (this.lit) {
 			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 0, 0, 0);
 		}
 	}

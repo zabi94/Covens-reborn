@@ -16,4 +16,3 @@ public class DefaultModifiers {
 	public static IBrewModifier COLOR;
 	public static IBrewModifier SUPPRESS_PARTICLES;
 }
-

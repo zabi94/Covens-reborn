@@ -32,12 +32,12 @@ public class BlockTorchwood extends BlockMod implements IGrowable, IPlantable {
 
 	public BlockTorchwood() {
 		super(LibBlockName.TORCHWOOD, Material.WOOD);
-		setResistance(0.3F);
-		setHardness(0.3F);
-		setSoundType(SoundType.WOOD);
+		this.setResistance(0.3F);
+		this.setHardness(0.3F);
+		this.setSoundType(SoundType.WOOD);
 		this.setLightLevel(0.7F);
 		this.setTickRandomly(true);
-		setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
+		this.setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
 	}
 
 	@Override
@@ -74,8 +74,7 @@ public class BlockTorchwood extends BlockMod implements IGrowable, IPlantable {
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		IBlockState soil = worldIn.getBlockState(pos.down());
-		return super.canPlaceBlockAt(worldIn, pos)
-				&& soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
+		return super.canPlaceBlockAt(worldIn, pos) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 	}
 
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
@@ -141,7 +140,7 @@ public class BlockTorchwood extends BlockMod implements IGrowable, IPlantable {
 
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override

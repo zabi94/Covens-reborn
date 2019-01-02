@@ -3,6 +3,7 @@ package com.covens.common.item.magic.brew;
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.ApplicationType;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;

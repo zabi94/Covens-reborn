@@ -2,6 +2,7 @@ package com.covens.common.core.net.messages;
 
 import com.covens.client.fx.ParticleF;
 import com.covens.common.Covens;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
@@ -10,9 +11,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 /**
- * This class was created by Arekkuusu on 04/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 04/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class ParticleMessage implements IMessage {
 
@@ -44,34 +44,34 @@ public class ParticleMessage implements IMessage {
 	@Override
 	public void fromBytes(ByteBuf byteBuf) {
 		PacketBuffer buf = new PacketBuffer(byteBuf);
-		particleF = buf.readEnumValue(ParticleF.class);
-		x = buf.readDouble();
-		y = buf.readDouble();
-		z = buf.readDouble();
-		amount = buf.readInt();
-		xSpeed = buf.readDouble();
-		ySpeed = buf.readDouble();
-		zSpeed = buf.readDouble();
+		this.particleF = buf.readEnumValue(ParticleF.class);
+		this.x = buf.readDouble();
+		this.y = buf.readDouble();
+		this.z = buf.readDouble();
+		this.amount = buf.readInt();
+		this.xSpeed = buf.readDouble();
+		this.ySpeed = buf.readDouble();
+		this.zSpeed = buf.readDouble();
 		int argCount = buf.readInt();
-		args = new int[argCount];
+		this.args = new int[argCount];
 		for (int i = 0; i < argCount; i++) {
-			args[i] = buf.readInt();
+			this.args[i] = buf.readInt();
 		}
 	}
 
 	@Override
 	public void toBytes(ByteBuf byteBuf) {
 		PacketBuffer buf = new PacketBuffer(byteBuf);
-		buf.writeEnumValue(particleF);
-		buf.writeDouble(x);
-		buf.writeDouble(y);
-		buf.writeDouble(z);
-		buf.writeInt(amount);
-		buf.writeDouble(xSpeed);
-		buf.writeDouble(ySpeed);
-		buf.writeDouble(zSpeed);
-		buf.writeInt(args.length);
-		for (int arg : args) {
+		buf.writeEnumValue(this.particleF);
+		buf.writeDouble(this.x);
+		buf.writeDouble(this.y);
+		buf.writeDouble(this.z);
+		buf.writeInt(this.amount);
+		buf.writeDouble(this.xSpeed);
+		buf.writeDouble(this.ySpeed);
+		buf.writeDouble(this.zSpeed);
+		buf.writeInt(this.args.length);
+		for (int arg : this.args) {
 			buf.writeInt(arg);
 		}
 	}

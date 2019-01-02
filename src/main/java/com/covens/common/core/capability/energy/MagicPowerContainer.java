@@ -2,6 +2,7 @@ package com.covens.common.core.capability.energy;
 
 import com.covens.api.mp.DefaultMPContainer;
 import com.covens.api.mp.IMagicPowerContainer;
+
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class MagicPowerContainer {

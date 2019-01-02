@@ -1,6 +1,9 @@
 package com.covens.client.render.entity.renderer;
 
+import java.util.UUID;
+
 import com.covens.common.Covens;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -9,7 +12,14 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.layers.*;
+import net.minecraft.client.renderer.entity.layers.LayerArrow;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.renderer.entity.layers.LayerCape;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
+import net.minecraft.client.renderer.entity.layers.LayerDeadmau5Head;
+import net.minecraft.client.renderer.entity.layers.LayerElytra;
+import net.minecraft.client.renderer.entity.layers.LayerEntityOnShoulder;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -22,8 +32,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.UUID;
 
 @SideOnly(Side.CLIENT)
 public class RenderMimicPlayer extends RenderLivingBase<AbstractClientPlayer> {
@@ -60,7 +68,7 @@ public class RenderMimicPlayer extends RenderLivingBase<AbstractClientPlayer> {
 
 	@Override
 	public void doRender(AbstractClientPlayer entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		if (!entity.isUser() || this.renderManager.renderViewEntity == entity) {
+		if (!entity.isUser() || (this.renderManager.renderViewEntity == entity)) {
 			double d0 = y;
 			if (entity.isSneaking()) {
 				d0 = y - 0.125D;
@@ -132,8 +140,9 @@ public class RenderMimicPlayer extends RenderLivingBase<AbstractClientPlayer> {
 
 	@Override
 	public ResourceLocation getEntityTexture(AbstractClientPlayer entity) {
-		//TODO: find a way to get skin without referencing the player (allowing for mimicking to occur when vitim offline)
-		AbstractClientPlayer newEntity = (AbstractClientPlayer) Minecraft.getMinecraft().world.getPlayerEntityByName(mimicName);
+		// TODO: find a way to get skin without referencing the player (allowing for
+		// mimicking to occur when vitim offline)
+		AbstractClientPlayer newEntity = (AbstractClientPlayer) Minecraft.getMinecraft().world.getPlayerEntityByName(this.mimicName);
 		if (newEntity == null) {
 			Covens.logger.info("Attempted mimicking but player not online. ");
 			return entity.getLocationSkin();
@@ -207,28 +216,27 @@ public class RenderMimicPlayer extends RenderLivingBase<AbstractClientPlayer> {
 		} else if (entityLiving.isElytraFlying()) {
 			super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
 			float f = entityLiving.getTicksElytraFlying() + partialTicks;
-			float f1 = MathHelper.clamp(f * f / 100.0F, 0.0F, 1.0F);
+			float f1 = MathHelper.clamp((f * f) / 100.0F, 0.0F, 1.0F);
 			GlStateManager.rotate(f1 * (-90.0F - entityLiving.rotationPitch), 1.0F, 0.0F, 0.0F);
 			Vec3d vec3d = entityLiving.getLook(partialTicks);
-			double d0 = entityLiving.motionX * entityLiving.motionX + entityLiving.motionZ * entityLiving.motionZ;
-			double d1 = vec3d.x * vec3d.x + vec3d.z * vec3d.z;
-			if (d0 > 0.0D && d1 > 0.0D) {
-				double d2 = (entityLiving.motionX * vec3d.x + entityLiving.motionZ * vec3d.z) / (Math.sqrt(d0) * Math.sqrt(d1));
-				double d3 = entityLiving.motionX * vec3d.z - entityLiving.motionZ * vec3d.x;
-				GlStateManager.rotate((float) (Math.signum(d3) * Math.acos(d2)) * 180.0F / 3.1415927F, 0.0F, 1.0F, 0.0F);
+			double d0 = (entityLiving.motionX * entityLiving.motionX) + (entityLiving.motionZ * entityLiving.motionZ);
+			double d1 = (vec3d.x * vec3d.x) + (vec3d.z * vec3d.z);
+			if ((d0 > 0.0D) && (d1 > 0.0D)) {
+				double d2 = ((entityLiving.motionX * vec3d.x) + (entityLiving.motionZ * vec3d.z)) / (Math.sqrt(d0) * Math.sqrt(d1));
+				double d3 = (entityLiving.motionX * vec3d.z) - (entityLiving.motionZ * vec3d.x);
+				GlStateManager.rotate(((float) (Math.signum(d3) * Math.acos(d2)) * 180.0F) / 3.1415927F, 0.0F, 1.0F, 0.0F);
 			}
 		} else {
 			super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
 		}
 
-
 	}
 
 	public UUID getMimicID() {
-		return mimicID;
+		return this.mimicID;
 	}
 
 	public String getMimicName() {
-		return mimicName;
+		return this.mimicName;
 	}
 }

@@ -1,14 +1,14 @@
 package com.covens.common.content.incantation;
 
 import com.covens.api.incantation.IIncantation;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
 /**
- * This class was created by Arekkuusu on 19/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 19/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class IncantationHeal implements IIncantation {
 

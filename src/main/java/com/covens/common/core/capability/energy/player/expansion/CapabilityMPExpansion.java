@@ -1,6 +1,11 @@
 package com.covens.common.core.capability.energy.player.expansion;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.covens.api.mp.IMagicPowerExpander;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,10 +15,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.Constants.NBT;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class CapabilityMPExpansion {
 
@@ -28,40 +29,40 @@ public class CapabilityMPExpansion {
 	}
 
 	public void expand(IMagicPowerExpander exp, EntityPlayer player) {
-		increaseMap.put(exp.getID().toString(), exp.getExtraAmount(player));
-		dirty = true;
+		this.increaseMap.put(exp.getID().toString(), exp.getExtraAmount(player));
+		this.dirty = true;
 	}
 
 	public void remove(ResourceLocation exp) {
-		increaseMap.remove(exp.toString());
-		dirty = true;
+		this.increaseMap.remove(exp.toString());
+		this.dirty = true;
 	}
 
 	public void clean() {
-		dirty = false;
+		this.dirty = false;
 	}
 
 	/**
 	 * @return whether or not it is synced with the player MP capability
 	 */
 	public boolean isDirty() {
-		return dirty;
+		return this.dirty;
 	}
 
 	public int getTotalIncrease() {
-		return increaseMap.values().parallelStream().reduce(0, (a, b) -> a + b);
+		return this.increaseMap.values().parallelStream().reduce(0, (a, b) -> a + b);
 	}
 
 	public void readFromNBT(NBTTagCompound tag) {
-		increaseMap.clear();
-		tag.getTagList("exps", NBT.TAG_COMPOUND).forEach(s -> loadCouple(s));
+		this.increaseMap.clear();
+		tag.getTagList("exps", NBT.TAG_COMPOUND).forEach(s -> this.loadCouple(s));
 	}
 
 	public NBTTagCompound writeToNBT() {
 		NBTTagCompound tag = new NBTTagCompound();
 		NBTTagList list = new NBTTagList();
 		tag.setTag("exps", list);
-		increaseMap.entrySet().stream().forEach(entry -> addNewCouple(entry, list));
+		this.increaseMap.entrySet().stream().forEach(entry -> this.addNewCouple(entry, list));
 		return tag;
 	}
 
@@ -74,6 +75,6 @@ public class CapabilityMPExpansion {
 
 	private void loadCouple(NBTBase s) {
 		NBTTagCompound tag = (NBTTagCompound) s;
-		increaseMap.put(tag.getString("id"), tag.getInteger("val"));
+		this.increaseMap.put(tag.getString("id"), tag.getInteger("val"));
 	}
 }

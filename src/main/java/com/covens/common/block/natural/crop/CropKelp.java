@@ -1,6 +1,11 @@
 package com.covens.common.block.natural.crop;
 
+import static net.minecraft.block.BlockLiquid.LEVEL;
+
+import java.util.Random;
+
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -9,15 +14,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import java.util.Random;
-
-import static net.minecraft.block.BlockLiquid.LEVEL;
+import net.minecraftforge.common.ForgeHooks;
 
 /**
- * This class was created by Arekkuusu on 02/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 02/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class CropKelp extends BlockCrop {
 
@@ -34,15 +35,9 @@ public class CropKelp extends BlockCrop {
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		super.updateTick(worldIn, pos, state, rand);
-
-		if (rand.nextInt(2) == 0 && isMaxAge(state) && canBlockStay(worldIn, pos, state)
-				&& canPlaceBlockAt(worldIn, pos)
-				&& canPlaceBlockAt(worldIn, pos.up())) {
-
-			if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-				worldIn.setBlockState(pos.up(), getDefaultState(), 2);
-				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-			}
+		if (this.isMaxAge(state) && this.canBlockStay(worldIn, pos, state) && this.canPlaceBlockAt(worldIn, pos.up()) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+			worldIn.setBlockState(pos.up(), this.getDefaultState(), 2);
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 		}
 	}
 
@@ -63,8 +58,8 @@ public class CropKelp extends BlockCrop {
 
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (!canBlockStay(worldIn, pos, state)) {
-			checkAndDropBlock(worldIn, pos, state);
+		if (!this.canBlockStay(worldIn, pos, state)) {
+			this.checkAndDropBlock(worldIn, pos, state);
 		}
 	}
 
@@ -83,13 +78,12 @@ public class CropKelp extends BlockCrop {
 
 	@Override
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-		return worldIn.getBlockState(pos.down()).getMaterial().isSolid() || worldIn.getBlockState(pos.down()).getBlock() == this;
+		return worldIn.getBlockState(pos.down()).getMaterial().isSolid() || (worldIn.getBlockState(pos.down()).getBlock() == this);
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, LEVEL, AGE);
 	}
-
 
 }

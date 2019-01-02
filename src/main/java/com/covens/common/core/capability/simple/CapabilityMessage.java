@@ -1,6 +1,7 @@
 package com.covens.common.core.capability.simple;
 
 import com.covens.common.core.net.SimpleMessage;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -25,7 +26,7 @@ public class CapabilityMessage extends SimpleMessage<CapabilityMessage> {
 
 	@Override
 	public IMessage handleMessage(MessageContext context) {
-		SimpleCapability.messageReceived(tag, capabilityId, entityID, dirt);
+		SimpleCapability.messageReceived(this.tag, this.capabilityId, this.entityID, this.dirt);
 		return null;
 	}
 

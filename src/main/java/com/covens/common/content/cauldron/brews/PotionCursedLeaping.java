@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;

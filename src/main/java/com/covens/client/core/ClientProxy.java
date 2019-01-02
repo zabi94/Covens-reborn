@@ -93,9 +93,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy implements ISidedProxy {
@@ -123,7 +122,7 @@ public class ClientProxy implements ISidedProxy {
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		registerRenders();
+		this.registerRenders();
 
 		HudController.registerNewComponent(new BloodViewerHUD());
 		HudController.registerNewComponent(new EnergyHUD());
@@ -137,27 +136,27 @@ public class ClientProxy implements ISidedProxy {
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());
 		MinecraftForge.EVENT_BUS.register(new MiscEventHandler(Minecraft.getMinecraft()));
 	}
-	
+
 	private static void unifyVariants(Block block) {
 		ModelLoader.setCustomStateMapper(block, new AllDefaultModelStateMapper(block));
 	}
-	
+
 	@Override
 	public void init(FMLInitializationEvent event) {
 		Keybinds.registerKeys();
-		addModelLayers();
-		registerColorHandlers();
+		this.addModelLayers();
+		this.registerColorHandlers();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Covens.instance, new GuiHandler());
 		ClientCommandHandler.instance.registerCommand(new ClientCommandGuiConfig());
 	}
-	
+
 	private void addModelLayers() {
 		RenderPlayer steveRenderPlayer = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		RenderPlayer alexRenderPlayer = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
 		steveRenderPlayer.addLayer(new MantleLayer(steveRenderPlayer.getMainModel()));
 		alexRenderPlayer.addLayer(new MantleLayer(alexRenderPlayer.getMainModel()));
 	}
-	
+
 	private void registerColorHandlers() {
 		// Block Colors
 		BlockColors blocks = Minecraft.getMinecraft().getBlockColors();
@@ -176,7 +175,7 @@ public class ClientProxy implements ISidedProxy {
 
 	@Override
 	public void spawnParticle(ParticleF particleF, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... args) {
-		if (doParticle()) {
+		if (this.doParticle()) {
 			Minecraft.getMinecraft().effectRenderer.addEffect(particleF.newInstance(x, y, z, xSpeed, ySpeed, zSpeed, args));
 		}
 	}
@@ -185,11 +184,10 @@ public class ClientProxy implements ISidedProxy {
 		float chance = 1F;
 		if (Minecraft.getMinecraft().gameSettings.particleSetting == 1) {
 			chance = 0.6F;
-		}
-		else if (Minecraft.getMinecraft().gameSettings.particleSetting == 2) {
+		} else if (Minecraft.getMinecraft().gameSettings.particleSetting == 2) {
 			chance = 0.2F;
 		}
-		return chance == 1F || Math.random() < chance;
+		return (chance == 1F) || (Math.random() < chance);
 	}
 
 	private void registerRenders() {
@@ -232,7 +230,7 @@ public class ClientProxy implements ISidedProxy {
 
 	@Override
 	public void loadActionsClient(ArrayList<IHotbarAction> actions, EntityPlayer player) {
-		if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getUniqueID() == player.getUniqueID()) {
+		if ((Minecraft.getMinecraft().player != null) && (Minecraft.getMinecraft().player.getUniqueID() == player.getUniqueID())) {
 			ExtraBarButtonsHUD.INSTANCE.setList(actions);
 		}
 	}
@@ -241,7 +239,7 @@ public class ClientProxy implements ISidedProxy {
 	public boolean isPlayerInEndFire() {
 		Minecraft mc = Minecraft.getMinecraft();
 		IBlockState ibs = mc.world.getBlockState(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ));
-		boolean res = (ibs.getBlock() == ModBlocks.witchfire && ibs.getValue(BlockWitchFire.TYPE) == BlockWitchFire.EnumFireType.ENDFIRE);
+		boolean res = ((ibs.getBlock() == ModBlocks.witchfire) && (ibs.getValue(BlockWitchFire.TYPE) == BlockWitchFire.EnumFireType.ENDFIRE));
 		return res;
 	}
 

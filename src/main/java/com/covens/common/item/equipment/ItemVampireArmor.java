@@ -4,6 +4,7 @@ import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.client.render.entity.model.ModelVampireArmor;
 import com.covens.common.core.statics.ModCreativeTabs;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -17,9 +18,9 @@ public class ItemVampireArmor extends ItemArmor implements IModelRegister {
 	public ItemVampireArmor(String id, ArmorMaterial materialIn, int renderIndex, EntityEquipmentSlot equipmentSlotIn) {
 		super(materialIn, renderIndex, equipmentSlotIn);
 		this.setMaxStackSize(1);
-		setRegistryName(id);
-		setTranslationKey(id);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setRegistryName(id);
+		this.setTranslationKey(id);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override

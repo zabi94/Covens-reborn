@@ -1,11 +1,26 @@
 package com.covens.common.content.cauldron.brews;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.cauldron.BrewMod;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockGlazedTerracotta;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockLog.EnumAxis;
+import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.BlockStainedGlass;
+import net.minecraft.block.BlockStainedGlassPane;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -18,9 +33,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by Joseph on 4/14/2018.
  */
@@ -31,30 +43,30 @@ public class PotionFireWorld extends BrewMod {
 	@SuppressWarnings("deprecation")
 	public PotionFireWorld() {
 		super("fireworld", true, 0xED2939, true, 0);
-		stateMap.put(Blocks.GRASS_PATH, Blocks.RED_NETHER_BRICK.getDefaultState());
-		stateMap.put(Blocks.GRAVEL, Blocks.SOUL_SAND.getDefaultState());
-		stateMap.put(Blocks.COBBLESTONE, Blocks.NETHERRACK.getDefaultState());
-		stateMap.put(Blocks.PLANKS, Blocks.NETHER_BRICK.getDefaultState());
-		stateMap.put(Blocks.OAK_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
-		stateMap.put(Blocks.SPRUCE_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
-		stateMap.put(Blocks.ACACIA_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
-		stateMap.put(Blocks.JUNGLE_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
-		stateMap.put(Blocks.BIRCH_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
-		stateMap.put(Blocks.DARK_OAK_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
-		stateMap.put(Blocks.PACKED_ICE, Blocks.MAGMA.getDefaultState());
-		stateMap.put(Blocks.ICE, Blocks.MAGMA.getDefaultState());
-		stateMap.put(Blocks.WOOL, Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED));
-		stateMap.put(Blocks.FARMLAND, Blocks.SOUL_SAND.getDefaultState());
-		stateMap.put(Blocks.DIRT, Blocks.NETHERRACK.getDefaultState());
-		stateMap.put(Blocks.GRASS, Blocks.NETHERRACK.getDefaultState());
-		stateMap.put(Blocks.IRON_BLOCK, ModBlocks.nethersteel.getDefaultState());
-		stateMap.put(Blocks.GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.RED));
-		stateMap.put(Blocks.STAINED_GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.RED));
-		stateMap.put(Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED));
-		stateMap.put(Blocks.STAINED_HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED));
-		stateMap.put(Blocks.WATER, Blocks.LAVA.getDefaultState());
-		stateMap.put(Blocks.GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.RED));
-		stateMap.put(Blocks.STAINED_GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.RED));
+		this.stateMap.put(Blocks.GRASS_PATH, Blocks.RED_NETHER_BRICK.getDefaultState());
+		this.stateMap.put(Blocks.GRAVEL, Blocks.SOUL_SAND.getDefaultState());
+		this.stateMap.put(Blocks.COBBLESTONE, Blocks.NETHERRACK.getDefaultState());
+		this.stateMap.put(Blocks.PLANKS, Blocks.NETHER_BRICK.getDefaultState());
+		this.stateMap.put(Blocks.OAK_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		this.stateMap.put(Blocks.SPRUCE_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		this.stateMap.put(Blocks.ACACIA_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		this.stateMap.put(Blocks.JUNGLE_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		this.stateMap.put(Blocks.BIRCH_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		this.stateMap.put(Blocks.DARK_OAK_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		this.stateMap.put(Blocks.PACKED_ICE, Blocks.MAGMA.getDefaultState());
+		this.stateMap.put(Blocks.ICE, Blocks.MAGMA.getDefaultState());
+		this.stateMap.put(Blocks.WOOL, Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED));
+		this.stateMap.put(Blocks.FARMLAND, Blocks.SOUL_SAND.getDefaultState());
+		this.stateMap.put(Blocks.DIRT, Blocks.NETHERRACK.getDefaultState());
+		this.stateMap.put(Blocks.GRASS, Blocks.NETHERRACK.getDefaultState());
+		this.stateMap.put(Blocks.IRON_BLOCK, ModBlocks.nethersteel.getDefaultState());
+		this.stateMap.put(Blocks.GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.RED));
+		this.stateMap.put(Blocks.STAINED_GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.RED));
+		this.stateMap.put(Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED));
+		this.stateMap.put(Blocks.STAINED_HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED));
+		this.stateMap.put(Blocks.WATER, Blocks.LAVA.getDefaultState());
+		this.stateMap.put(Blocks.GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.RED));
+		this.stateMap.put(Blocks.STAINED_GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.RED));
 	}
 
 	@Override
@@ -71,13 +83,11 @@ public class PotionFireWorld extends BrewMod {
 
 		Iterable<MutableBlockPos> spots = BlockPos.getAllInBoxMutable(posI, posF);
 		for (BlockPos spot : spots) {
-			if (spot.distanceSq(pos) < 2 + box * box / 2) {
+			if (spot.distanceSq(pos) < (2 + ((box * box) / 2))) {
 				IBlockState state = world.getBlockState(spot);
-				if (world.rand.nextInt(4) <= modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2) {
+				if (world.rand.nextInt(4) <= (modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2)) {
 					if (BlockStairs.isBlockStairs(state)) {
-						IBlockState newState = Blocks.NETHER_BRICK_STAIRS.getDefaultState()
-								.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING))
-								.withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF));
+						IBlockState newState = Blocks.NETHER_BRICK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING)).withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF));
 						world.setBlockState(spot, newState);
 					} else if (state.getBlock() instanceof BlockFence) {
 						world.setBlockState(spot, Blocks.NETHER_BRICK_FENCE.getDefaultState(), 3);
@@ -89,22 +99,22 @@ public class PotionFireWorld extends BrewMod {
 						} else if (log_axis == EnumAxis.Z) {
 							bone_axis = Axis.Z;
 						}
-						world.setBlockState(spot, Blocks.BONE_BLOCK.getDefaultState().withProperty(BlockBone.AXIS, bone_axis), 3);
-					} else if (stateMap.containsKey(state.getBlock())) {
-						world.setBlockState(spot, stateMap.get(state.getBlock()), 3);
+						world.setBlockState(spot, Blocks.BONE_BLOCK.getDefaultState().withProperty(BlockRotatedPillar.AXIS, bone_axis), 3);
+					} else if (this.stateMap.containsKey(state.getBlock())) {
+						world.setBlockState(spot, this.stateMap.get(state.getBlock()), 3);
 					} else if (state.getMaterial() == Material.SNOW) {
 						world.setBlockToAir(spot);
 					} else if (state.getBlock() == Blocks.WATER) {
 						world.setBlockState(spot, Blocks.LAVA.getDefaultState(), 3);
 					} else if (state.getBlock() == Blocks.FLOWING_WATER) {
-						world.setBlockState(spot, Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockDynamicLiquid.LEVEL, state.getValue(BlockDynamicLiquid.LEVEL)), 2);
+						world.setBlockState(spot, Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockLiquid.LEVEL, state.getValue(BlockLiquid.LEVEL)), 2);
 					} else if (state.getBlock() instanceof BlockLeaves) {
 						world.setBlockState(spot, Blocks.NETHER_WART_BLOCK.getDefaultState(), 3);
 					} else if (state.getBlock() instanceof BlockGlazedTerracotta) {
-						world.setBlockState(spot, Blocks.RED_GLAZED_TERRACOTTA.getDefaultState().withProperty(BlockGlazedTerracotta.FACING, state.getValue(BlockGlazedTerracotta.FACING)), 3);
+						world.setBlockState(spot, Blocks.RED_GLAZED_TERRACOTTA.getDefaultState().withProperty(BlockHorizontal.FACING, state.getValue(BlockHorizontal.FACING)), 3);
 					}
 
-					if (state.getBlock() != Blocks.NETHERRACK && world.getBlockState(spot).getBlock() == Blocks.NETHERRACK && world.isAirBlock(spot.up()) && world.rand.nextInt(10) == 0) {
+					if ((state.getBlock() != Blocks.NETHERRACK) && (world.getBlockState(spot).getBlock() == Blocks.NETHERRACK) && world.isAirBlock(spot.up()) && (world.rand.nextInt(10) == 0)) {
 						world.setBlockState(spot.up(), Blocks.FIRE.getDefaultState(), 3);
 					}
 

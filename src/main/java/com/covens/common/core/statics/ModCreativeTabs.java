@@ -14,13 +14,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class ModCreativeTabs {
 
-	//Todo: Organize the tabs. They are very messy.
+	// Todo: Organize the tabs. They are very messy.
 
 	public static final PlantsCreativeTab PLANTS_CREATIVE_TAB = new PlantsCreativeTab();
 	public static final ItemsCreativeTab ITEMS_CREATIVE_TAB = new ItemsCreativeTab();
@@ -39,7 +38,7 @@ public final class ModCreativeTabs {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public ItemStack createIcon() {
-			return getIcon();
+			return this.getIcon();
 		}
 	}
 

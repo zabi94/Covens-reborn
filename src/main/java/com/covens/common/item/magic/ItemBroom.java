@@ -5,11 +5,17 @@ import com.covens.common.block.natural.tree.BlockModSapling.EnumSaplingType;
 import com.covens.common.core.statics.ModSounds;
 import com.covens.common.entity.EntityFlyingBroom;
 import com.covens.common.item.ItemMod;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -22,8 +28,7 @@ public class ItemBroom extends ItemMod {
 		this.setMaxStackSize(1);
 	}
 
-
-	//Todo: Special effects for cypress broom
+	// Todo: Special effects for cypress broom
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
@@ -43,14 +48,14 @@ public class ItemBroom extends ItemMod {
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (world.getBlockState(pos).getBlock().equals(ModBlocks.ritual_glyphs) || (world.getBlockState(pos).getBlock().equals(ModBlocks.salt_barrier) && player.getHeldItem(hand).getMetadata() != 0)) {
+		if (world.getBlockState(pos).getBlock().equals(ModBlocks.ritual_glyphs) || (world.getBlockState(pos).getBlock().equals(ModBlocks.salt_barrier) && (player.getHeldItem(hand).getMetadata() != 0))) {
 			world.setBlockToAir(pos);
 			player.swingArm(hand);
-			world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.BROOM_SWEEP, SoundCategory.BLOCKS, 0.8f, world.rand.nextFloat() * 0.4f + 0.8f, false);
+			world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.BROOM_SWEEP, SoundCategory.BLOCKS, 0.8f, (world.rand.nextFloat() * 0.4f) + 0.8f, false);
 			world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1, pos.getZ() + world.rand.nextDouble(), 0, 0, 0);
 			world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1, pos.getZ() + world.rand.nextDouble(), 0, 0, 0);
 		} else if (player.getHeldItem(hand).getMetadata() != 0) {
-			spawnBroom(player, world, pos.offset(side), player.getHeldItem(hand));
+			this.spawnBroom(player, world, pos.offset(side), player.getHeldItem(hand));
 			player.setHeldItem(hand, ItemStack.EMPTY);
 		} else {
 			return EnumActionResult.PASS;
@@ -68,7 +73,7 @@ public class ItemBroom extends ItemMod {
 
 	@Override
 	public void registerModel() {
-		for (int i = 0; i < EnumSaplingType.values().length + 1; i++) {
+		for (int i = 0; i < (EnumSaplingType.values().length + 1); i++) {
 			String ext = i == 0 ? "mundane" : EnumSaplingType.values()[i - 1].getName();
 			ModelResourceLocation modelResourceLocation = new ModelResourceLocation(this.getRegistryName() + "_" + ext, "inventory");
 			ModelLoader.setCustomModelResourceLocation(this, i, modelResourceLocation);

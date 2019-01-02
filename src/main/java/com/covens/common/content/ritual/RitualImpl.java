@@ -1,6 +1,9 @@
 package com.covens.common.content.ritual;
 
+import javax.annotation.Nonnull;
+
 import com.covens.api.ritual.IRitual;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -10,8 +13,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
 
 public class RitualImpl implements IRitual {
 
@@ -27,22 +28,22 @@ public class RitualImpl implements IRitual {
 		this.circles = circles;
 		this.altarStartingPower = altarStartingPower;
 		this.tickPower = powerPerTick;
-		setRegistryName(registryName);
+		this.setRegistryName(registryName);
 	}
 
 	@Override
 	public IRitual setRegistryName(ResourceLocation name) {
-		rl = name;
+		this.rl = name;
 		return this;
 	}
 
 	public IRitual setRegistryName(String domain, String name) {
-		return setRegistryName(new ResourceLocation(domain, name));
+		return this.setRegistryName(new ResourceLocation(domain, name));
 	}
 
 	@Override
 	public ResourceLocation getRegistryName() {
-		return rl;
+		return this.rl;
 	}
 
 	@Override
@@ -53,14 +54,14 @@ public class RitualImpl implements IRitual {
 	@Override
 	public NonNullList<Ingredient> getInput() {
 		NonNullList<Ingredient> stacks = NonNullList.create();
-		stacks.addAll(input);
+		stacks.addAll(this.input);
 		return stacks;
 	}
 
 	@Override
 	public NonNullList<ItemStack> getOutputRaw() {
 		NonNullList<ItemStack> copy = NonNullList.<ItemStack>create();
-		for (ItemStack i : output) {
+		for (ItemStack i : this.output) {
 			copy.add(i);
 		}
 		return copy;
@@ -68,7 +69,7 @@ public class RitualImpl implements IRitual {
 
 	@Override
 	public int getTime() {
-		return time;
+		return this.time;
 	}
 
 	@Override
@@ -94,17 +95,17 @@ public class RitualImpl implements IRitual {
 
 	@Override
 	public int getCircles() {
-		return circles;
+		return this.circles;
 	}
 
 	@Override
 	public int getRunningPower() {
-		return tickPower;
+		return this.tickPower;
 	}
 
 	@Override
 	public int getRequiredStartingPower() {
-		return altarStartingPower;
+		return this.altarStartingPower;
 	}
 
 }

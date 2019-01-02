@@ -1,18 +1,23 @@
 package com.covens.common.core.command;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.covens.api.divination.IFortune;
 import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
-import net.minecraft.command.*;
+
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CommandForceFortune extends CommandBase {
 
@@ -40,8 +45,9 @@ public class CommandForceFortune extends CommandBase {
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-		if (args.length == 0)
+		if (args.length == 0) {
 			throw new WrongUsageException("commands.set_fortune.usage");
+		}
 		if (sender instanceof EntityPlayer) {
 			CapabilityFortune dc = ((EntityPlayer) sender).getCapability(CapabilityFortune.CAPABILITY, null);
 			IFortune add = Fortune.REGISTRY.getValue(new ResourceLocation(args[0]));
@@ -62,8 +68,9 @@ public class CommandForceFortune extends CommandBase {
 
 	@Override
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos targetPos) {
-		if (args.length == 1)
+		if (args.length == 1) {
 			return Fortune.REGISTRY.getKeys().stream().map(t -> t.toString()).filter(s -> s.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).collect(Collectors.toList());
+		}
 		return super.getTabCompletions(server, sender, args, targetPos);
 	}
 

@@ -39,7 +39,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EntityFlyingBroom extends Entity {
 
 	private static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(EntityFlyingBroom.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> FUEL = EntityDataManager.<Integer>createKey(EntityFlyingBroom.class, DataSerializers.VARINT); //ONLY SYNCHRONIZED WHEN EMPTY OR FULL
+	private static final DataParameter<Integer> FUEL = EntityDataManager.<Integer>createKey(EntityFlyingBroom.class, DataSerializers.VARINT); // ONLY SYNCHRONIZED WHEN EMPTY OR FULL
 	private static final int MAX_FUEL = 100;
 	Field isJumping = LibReflection.field("isJumping", "field_70703_bu", EntityLivingBase.class);
 	private DimensionalPosition orig_position;
@@ -53,14 +53,14 @@ public class EntityFlyingBroom extends Entity {
 		this(world);
 		this.setPosition(x, y, z);
 		this.setType(type);
-		this.prevPosX = posX;
-		this.prevPosY = posY;
-		this.prevPosZ = posZ;
+		this.prevPosX = this.posX;
+		this.prevPosY = this.posY;
+		this.prevPosZ = this.posZ;
 	}
 
 	@SubscribeEvent(receiveCanceled = false, priority = EventPriority.LOWEST)
 	public static void onUnmounting(EntityMountEvent evt) {
-		if (evt.getEntityBeingMounted() instanceof EntityFlyingBroom && evt.isDismounting()) {
+		if ((evt.getEntityBeingMounted() instanceof EntityFlyingBroom) && evt.isDismounting()) {
 			EntityFlyingBroom broom = (EntityFlyingBroom) evt.getEntityBeingMounted();
 			EntityPlayer source = (EntityPlayer) evt.getEntityMounting();
 			if (!source.isDead) {
@@ -87,22 +87,22 @@ public class EntityFlyingBroom extends Entity {
 	}
 
 	private BlockPos getMountPos() {
-		return orig_position == null ? null : orig_position.getPosition();
+		return this.orig_position == null ? null : this.orig_position.getPosition();
 	}
 
 	private int getMountDim() {
-		return orig_position == null ? 0 : orig_position.getDim();
+		return this.orig_position == null ? 0 : this.orig_position.getDim();
 	}
 
 	public void setMountPos(BlockPos pos, int dim) {
-		orig_position = new DimensionalPosition(pos, dim);
+		this.orig_position = new DimensionalPosition(pos, dim);
 	}
 
 	@Override
 	protected void entityInit() {
 		this.getDataManager().register(TYPE, 0);
 		this.getDataManager().register(FUEL, 0);
-		this.setEntityBoundingBox(new AxisAlignedBB(getPosition()).contract(0, 1, 0));
+		this.setEntityBoundingBox(new AxisAlignedBB(this.getPosition()).contract(0, 1, 0));
 	}
 
 	@Override
@@ -124,25 +124,27 @@ public class EntityFlyingBroom extends Entity {
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
 		this.doBlockCollisions();
-		int broomType = getType();
-		applyFriction(broomType);
+		int broomType = this.getType();
+		this.applyFriction(broomType);
 		if (this.isBeingRidden()) {
-			updateFromRider(broomType);
+			this.updateFromRider(broomType);
 		} else {
 			if (!this.collidedVertically) {
-				motionY -= 0.009;
-				if (motionY < -0.5) motionY = -0.5;
+				this.motionY -= 0.009;
+				if (this.motionY < -0.5) {
+					this.motionY = -0.5;
+				}
 			}
 		}
-		handleCollisions();
-		setSizeAndMove();
+		this.handleCollisions();
+		this.setSizeAndMove();
 	}
 
 	private void setSizeAndMove() {
 		if (this.isBeingRidden()) {
 			this.setSize(1f, 2f);// If a player is riding, account for the height of the player
 		}
-		this.move(MoverType.SELF, motionX, motionY, motionZ);
+		this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 		if (this.isBeingRidden()) {
 			this.setSize(1f, 1f);
 		}
@@ -150,15 +152,21 @@ public class EntityFlyingBroom extends Entity {
 
 	private void handleCollisions() {
 		if (this.collidedHorizontally) {
-			if (this.prevPosX == this.posX) motionX = 0;
-			if (this.prevPosZ == this.posZ) motionZ = 0;
+			if (this.prevPosX == this.posX) {
+				this.motionX = 0;
+			}
+			if (this.prevPosZ == this.posZ) {
+				this.motionZ = 0;
+			}
 		}
-		if (this.collidedVertically && this.prevPosY == this.posY) motionY = 0;
+		if (this.collidedVertically && (this.prevPosY == this.posY)) {
+			this.motionY = 0;
+		}
 	}
 
 	private void applyFriction(int broomType) {
 		float friction = broomType == 0 ? 0.99f : 0.98f;
-		if (onGround) {
+		if (this.onGround) {
 			friction = 0.8f;
 		}
 		this.motionX *= friction;
@@ -172,25 +180,25 @@ public class EntityFlyingBroom extends Entity {
 			Covens.logger.warn(this + " is being ridden by a null rider!");
 			return;
 		}
-		if (getDataManager().get(FUEL) < 5) {
-			refuel(rider);
+		if (this.getDataManager().get(FUEL) < 5) {
+			this.refuel(rider);
 		}
 		float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
 		try {
-			up = isJumping.getBoolean(rider) ? 1 : 0;
+			up = this.isJumping.getBoolean(rider) ? 1 : 0;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Vec3d look = rider.getLookVec();
 		if (broomType == 1) {
-			handleElderMovement(front, up, strafe, look);
+			this.handleElderMovement(front, up, strafe, look);
 			this.motionY -= 0.005;
 		} else if (broomType == 2) {
-			handleJuniperMovement(front, up, strafe, look);
+			this.handleJuniperMovement(front, up, strafe, look);
 		} else if (broomType == 3) {
-			handleYewMovement(front, look);
+			this.handleYewMovement(front, look);
 		} else if (broomType == 4) {
-			handleCypressMovement(front, look);
+			this.handleCypressMovement(front, look);
 		}
 		this.setRotationYawHead(rider.rotationYaw);
 	}
@@ -198,69 +206,69 @@ public class EntityFlyingBroom extends Entity {
 	private void refuel(EntityPlayer rider) {
 		IMagicPowerContainer pmp = rider.getCapability(IMagicPowerContainer.CAPABILITY, null);
 		if (pmp.drain(30)) {
-			getDataManager().set(FUEL, MAX_FUEL);
-			getDataManager().setDirty(FUEL);
+			this.getDataManager().set(FUEL, MAX_FUEL);
+			this.getDataManager().setDirty(FUEL);
 		}
 	}
 
 	private void handleCypressMovement(float front, Vec3d look) {
-		handleMundaneMovement(front, look);
+		this.handleMundaneMovement(front, look);
 	}
 
 	private void handleYewMovement(float front, Vec3d look) {
-		if (getDataManager().get(FUEL) > 1) {
-			getDataManager().set(FUEL, getDataManager().get(FUEL) - 2);
-			if (getDataManager().get(FUEL) < 5) {
-				getDataManager().setDirty(FUEL);
+		if (this.getDataManager().get(FUEL) > 1) {
+			this.getDataManager().set(FUEL, this.getDataManager().get(FUEL) - 2);
+			if (this.getDataManager().get(FUEL) < 5) {
+				this.getDataManager().setDirty(FUEL);
 			}
-			handleMundaneMovement(front, look);
+			this.handleMundaneMovement(front, look);
 		}
 	}
 
 	private void handleJuniperMovement(float front, float up, float strafe, Vec3d look) {
-		if (getDataManager().get(FUEL) > 0) {
-			getDataManager().set(FUEL, getDataManager().get(FUEL) - 1);
-			if (getDataManager().get(FUEL) < 5) {
-				getDataManager().setDirty(FUEL);
+		if (this.getDataManager().get(FUEL) > 0) {
+			this.getDataManager().set(FUEL, this.getDataManager().get(FUEL) - 1);
+			if (this.getDataManager().get(FUEL) < 5) {
+				this.getDataManager().setDirty(FUEL);
 			}
 			if (front >= 0) {
 				Vec3d horAxis = look.crossProduct(new Vec3d(0, 1, 0)).normalize().scale(-strafe / 10);
-				motionX += front * (horAxis.x + look.x) / 80;
-				motionZ += front * (horAxis.z + look.z) / 80;
-				motionY += (up / 80 + front * (horAxis.y + look.y) / 80);
+				this.motionX += (front * (horAxis.x + look.x)) / 80;
+				this.motionZ += (front * (horAxis.z + look.z)) / 80;
+				this.motionY += ((up / 80) + ((front * (horAxis.y + look.y)) / 80));
 
-				if (motionX * motionX + motionY * motionY + motionZ * motionZ > 1) {
-					Vec3d limit = new Vec3d(motionX, motionY, motionZ).normalize().scale(2);
-					motionX = limit.x;
-					motionY = limit.y;
-					motionZ = limit.z;
+				if (((this.motionX * this.motionX) + (this.motionY * this.motionY) + (this.motionZ * this.motionZ)) > 1) {
+					Vec3d limit = new Vec3d(this.motionX, this.motionY, this.motionZ).normalize().scale(2);
+					this.motionX = limit.x;
+					this.motionY = limit.y;
+					this.motionZ = limit.z;
 				}
 			} else {
-				motionX /= 1.1;
-				motionY /= 1.1;
-				motionZ /= 1.1;
+				this.motionX /= 1.1;
+				this.motionY /= 1.1;
+				this.motionZ /= 1.1;
 			}
 		} else {
-			motionY -= 0.002;
+			this.motionY -= 0.002;
 		}
 	}
 
 	private void handleElderMovement(float front, float up, float strafe, Vec3d look) {
-		if (getDataManager().get(FUEL) > 0) {
-			getDataManager().set(FUEL, getDataManager().get(FUEL) - 1);
-			if (getDataManager().get(FUEL) < 5) {
-				getDataManager().setDirty(FUEL);
+		if (this.getDataManager().get(FUEL) > 0) {
+			this.getDataManager().set(FUEL, this.getDataManager().get(FUEL) - 1);
+			if (this.getDataManager().get(FUEL) < 5) {
+				this.getDataManager().setDirty(FUEL);
 			}
 			Vec3d horAxis = look.crossProduct(new Vec3d(0, 1, 0)).normalize().scale(-strafe / 10);
-			motionX += front * (horAxis.x + look.x) / 20;
-			motionZ += front * (horAxis.z + look.z) / 20;
-			motionY += (up / 60) - 0.005;
+			this.motionX += (front * (horAxis.x + look.x)) / 20;
+			this.motionZ += (front * (horAxis.z + look.z)) / 20;
+			this.motionY += (up / 60) - 0.005;
 
-			if (motionX * motionX + motionY * motionY + motionZ * motionZ > 8) {
-				Vec3d limit = new Vec3d(motionX, motionY, motionZ).normalize().scale(2);
-				motionX = limit.x;
-				motionY = limit.y;
-				motionZ = limit.z;
+			if (((this.motionX * this.motionX) + (this.motionY * this.motionY) + (this.motionZ * this.motionZ)) > 8) {
+				Vec3d limit = new Vec3d(this.motionX, this.motionY, this.motionZ).normalize().scale(2);
+				this.motionX = limit.x;
+				this.motionY = limit.y;
+				this.motionZ = limit.z;
 			}
 		}
 	}
@@ -273,15 +281,15 @@ public class EntityFlyingBroom extends Entity {
 
 	private void handleMundaneMovement(float front, Vec3d look) {
 		if (front >= 0) {
-			motionX += (0.1) * look.x / 8;
-			motionY += (0.1) * look.y / 8;
-			motionZ += (0.1) * look.z / 8;
+			this.motionX += ((0.1) * look.x) / 8;
+			this.motionY += ((0.1) * look.y) / 8;
+			this.motionZ += ((0.1) * look.z) / 8;
 		}
 
-		if (motionX * motionX + motionZ * motionZ > 1) {
-			Vec3d limit = new Vec3d(motionX, 0, motionZ).normalize();
-			motionX = limit.x;
-			motionZ = limit.z;
+		if (((this.motionX * this.motionX) + (this.motionZ * this.motionZ)) > 1) {
+			Vec3d limit = new Vec3d(this.motionX, 0, this.motionZ).normalize();
+			this.motionX = limit.x;
+			this.motionZ = limit.z;
 		}
 	}
 
@@ -297,7 +305,9 @@ public class EntityFlyingBroom extends Entity {
 	@Nullable
 	@Override
 	public Entity getControllingPassenger() {
-		if (this.getPassengers().size() == 0) return null;
+		if (this.getPassengers().size() == 0) {
+			return null;
+		}
 		return this.getPassengers().get(0);
 	}
 
@@ -313,7 +323,7 @@ public class EntityFlyingBroom extends Entity {
 		if (tag.hasKey("orig")) {
 			this.orig_position = new DimensionalPosition(tag.getCompoundTag("orig"));
 		}
-		getDataManager().set(FUEL, tag.getInteger("fuel"));
+		this.getDataManager().set(FUEL, tag.getInteger("fuel"));
 	}
 
 	@Override
@@ -323,24 +333,24 @@ public class EntityFlyingBroom extends Entity {
 		compound.setDouble("z", this.posZ);
 		compound.setFloat("yaw", this.rotationYaw);
 		compound.setFloat("pitch", this.rotationPitch);
-		compound.setInteger("type", getType());
+		compound.setInteger("type", this.getType());
 		if (this.orig_position != null) {
 			compound.setTag("orig", this.orig_position.writeToNBT());
 		}
-		compound.setInteger("fuel", getDataManager().get(FUEL));
+		compound.setInteger("fuel", this.getDataManager().get(FUEL));
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (isEntityInvulnerable(source)) {
+		if (this.isEntityInvulnerable(source)) {
 			return false;
 		}
-		if (getControllingPassenger() != null) {
+		if (this.getControllingPassenger() != null) {
 			return false;
 		}
-		if (!world.isRemote && source.getTrueSource() instanceof EntityPlayer) {
-			EntityItem ei = new EntityItem(world, source.getTrueSource().posX, source.getTrueSource().posY, source.getTrueSource().posZ, new ItemStack(ModItems.broom, 1, getType()));
-			world.spawnEntity(ei);
+		if (!this.world.isRemote && (source.getTrueSource() instanceof EntityPlayer)) {
+			EntityItem ei = new EntityItem(this.world, source.getTrueSource().posX, source.getTrueSource().posY, source.getTrueSource().posZ, new ItemStack(ModItems.broom, 1, this.getType()));
+			this.world.spawnEntity(ei);
 			this.setDead();
 			ei.onCollideWithPlayer((EntityPlayer) source.getTrueSource());
 			return true;
@@ -354,7 +364,7 @@ public class EntityFlyingBroom extends Entity {
 			player.rotationYaw = this.rotationYaw;
 			player.rotationPitch = this.rotationPitch;
 			player.startRiding(this);
-			if (getType() == 3) {
+			if (this.getType() == 3) {
 				this.setMountPos(player.getPosition(), player.world.provider.getDimension());
 			}
 			return EnumActionResult.SUCCESS;
@@ -369,11 +379,11 @@ public class EntityFlyingBroom extends Entity {
 
 	@Override
 	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
-		//No fall
+		// No fall
 	}
 }

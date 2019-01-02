@@ -6,6 +6,7 @@ import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExp
 import com.covens.common.core.helper.CapabilityHelper;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EnergySync;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -14,9 +15,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 /**
- * This class was created by Arekkuusu on 20/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 20/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 @Mod.EventBusSubscriber
 public class EnergyEvents {
@@ -44,7 +44,7 @@ public class EnergyEvents {
 		if (event.getEntity() instanceof EntityPlayerMP) {
 			final EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
 			final PlayerMPContainer energy = (PlayerMPContainer) player.getCapability(IMagicPowerContainer.CAPABILITY, null);
-			if (energy.getAmount() < energy.getMaxAmount() && player.ticksExisted % (10 * getRegenTime(player)) == 0) {
+			if ((energy.getAmount() < energy.getMaxAmount()) && ((player.ticksExisted % (10 * getRegenTime(player))) == 0)) {
 				energy.fill(getRegenBurst(player));
 			}
 			if (energy.isDirty()) {

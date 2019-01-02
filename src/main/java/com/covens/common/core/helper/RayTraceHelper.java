@@ -1,17 +1,16 @@
 package com.covens.common.core.helper;
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 /**
- * This class was created by Arekkuusu on 20/05/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 20/05/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class RayTraceHelper {
 
@@ -45,7 +44,7 @@ public final class RayTraceHelper {
 					if (raytraceresult1 != null) {
 						double d7 = vec3d.squareDistanceTo(raytraceresult1.hitVec);
 
-						if (d7 < d6 || d6 == 0.0D) {
+						if ((d7 < d6) || (d6 == 0.0D)) {
 							entity = ent;
 							d6 = d7;
 						}
@@ -71,6 +70,6 @@ public final class RayTraceHelper {
 
 	public static Vec3d fromLookVec(Entity entity, double range) {
 		Vec3d look = entity.getLookVec();
-		return new Vec3d(look.x * range, entity.getEyeHeight() + look.y * range, look.z * range);
+		return new Vec3d(look.x * range, entity.getEyeHeight() + (look.y * range), look.z * range);
 	}
 }

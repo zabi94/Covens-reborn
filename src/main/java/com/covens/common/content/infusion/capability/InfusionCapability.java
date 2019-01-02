@@ -3,6 +3,7 @@ package com.covens.common.content.infusion.capability;
 import com.covens.api.infusion.DefaultInfusions;
 import com.covens.api.infusion.IInfusion;
 import com.covens.api.infusion.IInfusionCapability;
+
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -20,12 +21,12 @@ public class InfusionCapability implements IInfusionCapability {
 
 	@Override
 	public IInfusion getType() {
-		return current == null ? DefaultInfusions.NONE : current;
+		return this.current == null ? DefaultInfusions.NONE : this.current;
 	}
 
 	@Override
 	public void setType(IInfusion infusion) {
-		current = infusion;
+		this.current = infusion;
 	}
 
 }

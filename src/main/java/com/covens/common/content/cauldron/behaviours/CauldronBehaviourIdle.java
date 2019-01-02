@@ -1,5 +1,7 @@
 package com.covens.common.content.cauldron.behaviours;
 
+import java.util.Random;
+
 import com.covens.client.fx.ParticleF;
 import com.covens.common.Covens;
 import com.covens.common.block.natural.fluid.Fluids;
@@ -8,6 +10,7 @@ import com.covens.common.core.statics.ModSounds;
 import com.covens.common.item.ModItems;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.covens.common.tile.util.CauldronFluidTank;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -23,8 +26,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
-import java.util.Random;
-
 public class CauldronBehaviourIdle implements ICauldronBehaviour {
 
 	private static final int MAX_HEAT = 150, BOIL_THRESHOLD = 100;
@@ -35,38 +36,38 @@ public class CauldronBehaviourIdle implements ICauldronBehaviour {
 
 	@Override
 	public void setCauldron(TileEntityCauldron tile) {
-		cauldron = tile;
+		this.cauldron = tile;
 	}
 
 	@Override
 	public void handleParticles(boolean active) {
-		BlockPos pos = cauldron.getPos();
-		World world = cauldron.getWorld();
+		BlockPos pos = this.cauldron.getPos();
+		World world = this.cauldron.getWorld();
 		Random rand = world.rand;
-		CauldronFluidTank tank = (CauldronFluidTank) cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+		CauldronFluidTank tank = (CauldronFluidTank) this.cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 		float level = tank.getFluidAmount() / (Fluid.BUCKET_VOLUME * 2F);
 		level = pos.getY() + 0.1F + level;
-		if (heat >= BOIL_THRESHOLD) {
+		if (this.heat >= BOIL_THRESHOLD) {
 			Fluid fluid = tank.getInnerFluid();
-			if (fluid == FluidRegistry.WATER || fluid == Fluids.MUNDANE_OIL || fluid == Fluids.BW_HONEY) {
+			if ((fluid == FluidRegistry.WATER) || (fluid == Fluids.MUNDANE_OIL) || (fluid == Fluids.BW_HONEY)) {
 				for (int i = 0; i < 2; i++) {
-					double posX = pos.getX() + 0.2D + world.rand.nextDouble() * 0.6D;
-					double posZ = pos.getZ() + 0.2D + world.rand.nextDouble() * 0.6D;
-					Covens.proxy.spawnParticle(ParticleF.CAULDRON_BUBBLE, posX, level, posZ, 0, 0, 0, cauldron.getColorRGB());
+					double posX = pos.getX() + 0.2D + (world.rand.nextDouble() * 0.6D);
+					double posZ = pos.getZ() + 0.2D + (world.rand.nextDouble() * 0.6D);
+					Covens.proxy.spawnParticle(ParticleF.CAULDRON_BUBBLE, posX, level, posZ, 0, 0, 0, this.cauldron.getColorRGB());
 				}
 				if (rand.nextInt(4) == 0) {
-					world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.BOIL, SoundCategory.BLOCKS, rand.nextFloat() * 0.1F, 0.5F + rand.nextFloat() * 0.8f, true);
+					world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.BOIL, SoundCategory.BLOCKS, rand.nextFloat() * 0.1F, 0.5F + (rand.nextFloat() * 0.8f), true);
 				}
 			} else if (fluid == FluidRegistry.LAVA) {
 				if (rand.nextInt(5) == 0) {
-					double posX = pos.getX() + 0.2D + world.rand.nextDouble() * 0.6D;
-					double posZ = pos.getZ() + 0.2D + world.rand.nextDouble() * 0.6D;
+					double posX = pos.getX() + 0.2D + (world.rand.nextDouble() * 0.6D);
+					double posZ = pos.getZ() + 0.2D + (world.rand.nextDouble() * 0.6D);
 					world.spawnParticle(EnumParticleTypes.LAVA, posX, level, posZ, 0, 0.1, 0);
 				}
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + rand.nextFloat() * 0.6F, 0.9F + rand.nextFloat() * 0.15F, false);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + (rand.nextFloat() * 0.6F), 0.9F + (rand.nextFloat() * 0.15F), false);
 			} else {
 				if (rand.nextInt(4) == 0) {
-					world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.BOIL, SoundCategory.BLOCKS, 0.2F + rand.nextFloat() * 0.2F, 1F + rand.nextFloat() * 0.8f, true);
+					world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.BOIL, SoundCategory.BLOCKS, 0.2F + (rand.nextFloat() * 0.2F), 1F + (rand.nextFloat() * 0.8f), true);
 				}
 			}
 		}
@@ -84,30 +85,30 @@ public class CauldronBehaviourIdle implements ICauldronBehaviour {
 
 	@Override
 	public boolean shouldInputsBeBlocked() {
-		return heat < BOIL_THRESHOLD || !cauldron.getFluid().isPresent() || cauldron.getFluid().get().amount <= 0;
+		return (this.heat < BOIL_THRESHOLD) || !this.cauldron.getFluid().isPresent() || (this.cauldron.getFluid().get().amount <= 0);
 	}
 
 	@Override
 	public void update(boolean isActive) {
-		IBlockState below = cauldron.getWorld().getBlockState(cauldron.getPos().down());
-		boolean wasBoiling = heat >= MAX_HEAT;
-		if (cauldron.getFluid().isPresent()) {
-			if (below.getMaterial() == Material.FIRE || below.getMaterial() == Material.LAVA) {
-				if (heat < MAX_HEAT) {
-					heat++;
+		IBlockState below = this.cauldron.getWorld().getBlockState(this.cauldron.getPos().down());
+		boolean wasBoiling = this.heat >= MAX_HEAT;
+		if (this.cauldron.getFluid().isPresent()) {
+			if ((below.getMaterial() == Material.FIRE) || (below.getMaterial() == Material.LAVA)) {
+				if (this.heat < MAX_HEAT) {
+					this.heat++;
 				}
 			} else {
-				if (heat > 0) {
-					heat--;
+				if (this.heat > 0) {
+					this.heat--;
 				}
 			}
-			if (cauldron.getFluid().get().getFluid().getTemperature() > 800) {
-				heat = MAX_HEAT;
+			if (this.cauldron.getFluid().get().getFluid().getTemperature() > 800) {
+				this.heat = MAX_HEAT;
 			}
-			cauldron.markDirty();
-			boolean isBoilingNow = heat >= MAX_HEAT;
+			this.cauldron.markDirty();
+			boolean isBoilingNow = this.heat >= MAX_HEAT;
 			if (isBoilingNow != wasBoiling) {
-				cauldron.syncToClient();
+				this.cauldron.syncToClient();
 			}
 		}
 	}
@@ -119,22 +120,22 @@ public class CauldronBehaviourIdle implements ICauldronBehaviour {
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-		tag.setInteger("heat", heat);
+		tag.setInteger("heat", this.heat);
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-		heat = tag.getInteger("heat");
+		this.heat = tag.getInteger("heat");
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-		saveToNBT(tag);
+		this.saveToNBT(tag);
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-		loadFromNBT(tag);
+		this.loadFromNBT(tag);
 	}
 
 	@Override
@@ -144,37 +145,36 @@ public class CauldronBehaviourIdle implements ICauldronBehaviour {
 
 	@Override
 	public void statusChanged(boolean isActive) {
-		if (cauldron.getInputs().size() > 0 && cauldron.getInputs().get(cauldron.getInputs().size() - 1).getItem() == ModItems.wood_ash) {
-			cauldron.setBehaviour(cauldron.getDefaultBehaviours().CLEANING);
-			cauldron.setTankLock(false);
+		if ((this.cauldron.getInputs().size() > 0) && (this.cauldron.getInputs().get(this.cauldron.getInputs().size() - 1).getItem() == ModItems.wood_ash)) {
+			this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().CLEANING);
+			this.cauldron.setTankLock(false);
 		} else if (isActive) {
-			if (cauldron.getInputs().size() > 0) {
-				ItemStack stack = cauldron.getInputs().get(cauldron.getInputs().size() - 1);
-				if (cauldron.getFluid().isPresent() && cauldron.getFluid().get().getFluid() == FluidRegistry.LAVA) {
-					cauldron.setBehaviour(cauldron.getDefaultBehaviours().LAVA);
-				} else if (stack.getItem() == Items.NETHER_WART && cauldron.getFluid().get().getFluid() == FluidRegistry.WATER) {
-					cauldron.setBehaviour(cauldron.getDefaultBehaviours().BREWING);
-					cauldron.setTankLock(false);
-				} else if (CauldronRegistry.getCauldronFoodValue(stack) != null && cauldron.getFluid().get().getFluid() == FluidRegistry.WATER) {
-					cauldron.setBehaviour(cauldron.getDefaultBehaviours().STEW);
-					cauldron.setTankLock(false);
+			if (this.cauldron.getInputs().size() > 0) {
+				ItemStack stack = this.cauldron.getInputs().get(this.cauldron.getInputs().size() - 1);
+				if (this.cauldron.getFluid().isPresent() && (this.cauldron.getFluid().get().getFluid() == FluidRegistry.LAVA)) {
+					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().LAVA);
+				} else if ((stack.getItem() == Items.NETHER_WART) && (this.cauldron.getFluid().get().getFluid() == FluidRegistry.WATER)) {
+					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().BREWING);
+					this.cauldron.setTankLock(false);
+				} else if ((CauldronRegistry.getCauldronFoodValue(stack) != null) && (this.cauldron.getFluid().get().getFluid() == FluidRegistry.WATER)) {
+					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().STEW);
+					this.cauldron.setTankLock(false);
 				} else {
-					cauldron.setBehaviour(cauldron.getDefaultBehaviours().CRAFTING);
-					cauldron.setTankLock(false);
+					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().CRAFTING);
+					this.cauldron.setTankLock(false);
 				}
 			}
 		}
 
-
-		if (!cauldron.getFluid().isPresent() || cauldron.getFluid().get().amount <= 0) {
-			if (cauldron.getInputs().size() > 0) {
-				cauldron.clearItemInputs();
+		if (!this.cauldron.getFluid().isPresent() || (this.cauldron.getFluid().get().amount <= 0)) {
+			if (this.cauldron.getInputs().size() > 0) {
+				this.cauldron.clearItemInputs();
 			}
-			heat = 0;
-			cauldron.setBehaviour(this);
-			cauldron.setTankLock(true);
-			cauldron.markDirty();
-			cauldron.syncToClient();
+			this.heat = 0;
+			this.cauldron.setBehaviour(this);
+			this.cauldron.setTankLock(true);
+			this.cauldron.markDirty();
+			this.cauldron.syncToClient();
 		}
 	}
 
@@ -182,6 +182,5 @@ public class CauldronBehaviourIdle implements ICauldronBehaviour {
 	public void onDeactivation() {
 
 	}
-
 
 }

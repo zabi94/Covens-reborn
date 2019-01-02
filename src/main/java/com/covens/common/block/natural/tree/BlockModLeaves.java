@@ -6,6 +6,11 @@
 
 package com.covens.common.block.natural.tree;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.Covens;
@@ -13,6 +18,7 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.IProperty;
@@ -32,16 +38,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-
 public class BlockModLeaves extends BlockLeaves implements IModelRegister {
 
 	public BlockModLeaves(String id) {
-		setTranslationKey(id);
-		setRegistryName(LibMod.MOD_ID, id);
-		setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
+		this.setTranslationKey(id);
+		this.setRegistryName(LibMod.MOD_ID, id);
+		this.setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 	}
 
@@ -57,9 +59,9 @@ public class BlockModLeaves extends BlockLeaves implements IModelRegister {
 
 	@Override
 	protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
-		if (this.getBlockState().getBlock() == ModBlocks.leaves_juniper && worldIn.rand.nextInt(chance) == 0) {
+		if ((this.getBlockState().getBlock() == ModBlocks.leaves_juniper) && (worldIn.rand.nextInt(chance) == 0)) {
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.juniper_berries));
-		} else if (this.getBlockState().getBlock() == ModBlocks.leaves_yew && worldIn.rand.nextInt(chance) == 0) {
+		} else if ((this.getBlockState().getBlock() == ModBlocks.leaves_yew) && (worldIn.rand.nextInt(chance) == 0)) {
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.yew_aril));
 		}
 	}
@@ -72,7 +74,7 @@ public class BlockModLeaves extends BlockLeaves implements IModelRegister {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(DECAYABLE, ((meta) & 1) == 1).withProperty(CHECK_DECAY, ((meta) & 2) > 0);
+		return this.getDefaultState().withProperty(DECAYABLE, ((meta) & 1) == 1).withProperty(CHECK_DECAY, ((meta) & 2) > 0);
 	}
 
 	@Override
@@ -85,12 +87,14 @@ public class BlockModLeaves extends BlockLeaves implements IModelRegister {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty<?>[]{CHECK_DECAY, DECAYABLE});
+		return new BlockStateContainer(this, new IProperty<?>[] {
+				CHECK_DECAY, DECAYABLE
+		});
 	}
 
 	@Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-		if (!worldIn.isRemote && stack.getItem() instanceof ItemShears) {
+		if (!worldIn.isRemote && (stack.getItem() instanceof ItemShears)) {
 			player.addStat(StatList.getBlockStats(this));
 			spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(this)));
 		} else {
@@ -105,16 +109,26 @@ public class BlockModLeaves extends BlockLeaves implements IModelRegister {
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		if (this == ModBlocks.leaves_elder) return 0;
-		if (this == ModBlocks.leaves_juniper) return 1;
-		if (this == ModBlocks.leaves_yew) return 2;
-		if (this == ModBlocks.leaves_cypress) return 3;
+		if (this == ModBlocks.leaves_elder) {
+			return 0;
+		}
+		if (this == ModBlocks.leaves_juniper) {
+			return 1;
+		}
+		if (this == ModBlocks.leaves_yew) {
+			return 2;
+		}
+		if (this == ModBlocks.leaves_cypress) {
+			return 3;
+		}
 		return 4; // give a useless item, but should never happen
 	}
 
 	@Override
 	protected int getSaplingDropChance(IBlockState state) {
-		if (state.getBlock() == ModBlocks.leaves_juniper) return super.getSaplingDropChance(state) * 3;
+		if (state.getBlock() == ModBlocks.leaves_juniper) {
+			return super.getSaplingDropChance(state) * 3;
+		}
 		return super.getSaplingDropChance(state);
 	}
 
@@ -129,14 +143,17 @@ public class BlockModLeaves extends BlockLeaves implements IModelRegister {
 	public void registerModel() {
 		ModelHandler.registerModel(this, 0);
 
-		// I'm not really sure why, but removing the following code messes up hwyla block model rendering
-		// I probably left some code dealing with metadata around and I cannot find it anymore
-		if (this == ModBlocks.leaves_juniper)
+		// I'm not really sure why, but removing the following code messes up hwyla
+		// block model rendering
+		// I probably left some code dealing with metadata around and I cannot find it
+		// anymore
+		if (this == ModBlocks.leaves_juniper) {
 			ModelHandler.registerModel(this, 1);
-		else if (this == ModBlocks.leaves_yew)
+		} else if (this == ModBlocks.leaves_yew) {
 			ModelHandler.registerModel(this, 2);
-		else if (this == ModBlocks.leaves_cypress)
+		} else if (this == ModBlocks.leaves_cypress) {
 			ModelHandler.registerModel(this, 3);
+		}
 	}
 
 }

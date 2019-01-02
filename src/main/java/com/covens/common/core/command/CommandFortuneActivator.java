@@ -1,6 +1,10 @@
 package com.covens.common.core.command;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -8,9 +12,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class CommandFortuneActivator extends CommandBase {
 

@@ -14,25 +14,25 @@ public class PlayerMPContainer extends DefaultMPContainer {
 
 	@Override
 	public void setAmount(int newAmount) {
-		dirty = true;
+		this.dirty = true;
 		super.setAmount(newAmount);
 	}
 
 	@Override
 	public void setMaxAmount(int newMaxAmount) {
-		dirty = true;
+		this.dirty = true;
 		super.setMaxAmount(newMaxAmount);
 	}
 
 	public void setClean() {
-		dirty = false;
+		this.dirty = false;
 	}
 
 	public boolean isDirty() {
-		return dirty;
+		return this.dirty;
 	}
 
 	public void markDirty() {
-		dirty = true;
+		this.dirty = true;
 	}
 }

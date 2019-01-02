@@ -27,9 +27,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
- * This class was created by <Arekkuusu> on 27/06/2017.
- * It's distributed as part of Solar Epiphany under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 27/06/2017. It's distributed as part
+ * of Solar Epiphany under the MIT license.
  */
 public class BlockGemOre extends BlockMod {
 
@@ -37,14 +36,14 @@ public class BlockGemOre extends BlockMod {
 
 	public BlockGemOre() {
 		super(LibBlockName.GEM_ORE, Material.ROCK);
-		setHardness(2.0F);
-		setCreativeTab(BLOCKS_CREATIVE_TAB);
+		this.setHardness(2.0F);
+		this.setCreativeTab(BLOCKS_CREATIVE_TAB);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(GEM, Gem.values()[meta]);
+		return this.getDefaultState().withProperty(GEM, Gem.values()[meta]);
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class BlockGemOre extends BlockMod {
 
 	@Override
 	public int quantityDroppedWithBonus(int fortune, Random random) {
-		if (fortune > 0 && Item.getItemFromBlock(this) != this.getItemDropped(this.getBlockState().getValidStates().iterator().next(), random, fortune)) {
+		if ((fortune > 0) && (Item.getItemFromBlock(this) != this.getItemDropped(this.getBlockState().getValidStates().iterator().next(), random, fortune))) {
 			int i = random.nextInt(fortune + 2) - 1;
 			if (i < 0) {
 				i = 0;

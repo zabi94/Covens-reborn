@@ -38,25 +38,25 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 
 	public BlockEmberGrass() {
 		super(LibBlockName.EMBER_GRASS, Material.PLANTS);
-		setResistance(0.1F);
-		setHardness(0.1F);
-		setSoundType(SoundType.PLANT);
+		this.setResistance(0.1F);
+		this.setHardness(0.1F);
+		this.setSoundType(SoundType.PLANT);
 		this.setLightLevel(0.1F);
 		this.setTickRandomly(true);
-		setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
-		this.setDefaultState(blockState.getBaseState().withProperty(FERTILE, false));
+		this.setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FERTILE, false));
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FERTILE, meta == 1);
+		return this.getDefaultState().withProperty(FERTILE, meta == 1);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(FERTILE) ? 1 : 0;
 	}
-	
+
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FERTILE);
@@ -100,7 +100,7 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 	}
 
 	public boolean canSustainBush(IBlockState state) {
-		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT;
+		return (state.getBlock() == Blocks.GRASS) || (state.getBlock() == Blocks.DIRT);
 	}
 
 	@Override
@@ -125,16 +125,16 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 		IBlockState soil = worldIn.getBlockState(pos.down());
 		return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 	}
-	
+
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if (state.getValue(FERTILE) && rand.nextInt(25) == 0) {
+		if (state.getValue(FERTILE) && (rand.nextInt(25) == 0)) {
 			int i = 5;
 			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
 				if (worldIn.getBlockState(blockpos).getBlock() == this) {
 					--i;
 					if (i <= 0) {
-						worldIn.setBlockState(pos, getDefaultState(), 2);
+						worldIn.setBlockState(pos, this.getDefaultState(), 2);
 						return;
 					}
 				}
@@ -149,12 +149,11 @@ public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 			}
 
 			if (worldIn.isAirBlock(blockpos1) && this.canBlockStay(worldIn, blockpos1, this.getDefaultState())) {
-				worldIn.setBlockState(blockpos1, getDefaultState(), 3);
-				worldIn.setBlockState(pos, getDefaultState(), 2);
+				worldIn.setBlockState(blockpos1, this.getDefaultState(), 3);
+				worldIn.setBlockState(pos, this.getDefaultState(), 2);
 			}
 		}
 	}
-
 
 	@Override
 	public Block.EnumOffsetType getOffsetType() {

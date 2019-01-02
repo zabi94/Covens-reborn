@@ -64,12 +64,17 @@ public abstract class CovensAPI {
 
 	/**
 	 * @param player The player whose blood reserve is being modified
-	 * @param amount The amount of blood to add (negative values will decrease the total)
-	 * @return <i>When adding</i> blood this will return true if the value changed and false otherwise: this is <b>true</b> if there was
-	 * even a little bit of space in the pool, but the blood added was greater than the amount that could be inserted,
-	 * and <b>false</b> if the pool was maxed.<br>
-	 * <i>When removing</i> blood this will return true if ALL the blood requested was drained.
-	 * If the amount drained is greater than the amount available this will return false, and no blood will be drained from the pool
+	 * @param amount The amount of blood to add (negative values will decrease the
+	 *               total)
+	 * @return <i>When adding</i> blood this will return true if the value changed
+	 *         and false otherwise: this is <b>true</b> if there was even a little
+	 *         bit of space in the pool, but the blood added was greater than the
+	 *         amount that could be inserted, and <b>false</b> if the pool was
+	 *         maxed.<br>
+	 *         <i>When removing</i> blood this will return true if ALL the blood
+	 *         requested was drained. If the amount drained is greater than the
+	 *         amount available this will return false, and no blood will be drained
+	 *         from the pool
 	 * @throws UnsupportedOperationException if the player is not a vampire
 	 */
 	public abstract boolean addVampireBlood(EntityPlayer player, int amount);
@@ -79,15 +84,17 @@ public abstract class CovensAPI {
 	public abstract int getCirclesIntegerForRitual(EnumGlyphType small, EnumGlyphType medium, EnumGlyphType large);
 
 	/**
-	 * Register a new modifier for brews. This modifiers extend the idea of using glowstone/redstone to extend power and duration
-	 * and allow you to register new types of modifiers for them. See {@link com.covens.api.cauldron.modifiers}
+	 * Register a new modifier for brews. This modifiers extend the idea of using
+	 * glowstone/redstone to extend power and duration and allow you to register new
+	 * types of modifiers for them. See {@link com.covens.api.cauldron.modifiers}
 	 *
 	 * @param modifier The modifier to register
 	 */
 	public abstract void registerBrewModifier(IBrewModifier modifier);
 
 	/**
-	 * Links a brew effect, a potion and a crafting ingredient together, for crafting and application on brew itemstacks
+	 * Links a brew effect, a potion and a crafting ingredient together, for
+	 * crafting and application on brew itemstacks
 	 */
 	public abstract void registerBrewEffect(IBrewEffect effect, Potion potion, Ingredient ingredient);
 
@@ -110,6 +117,6 @@ public abstract class CovensAPI {
 	public abstract void drainBloodFromEntity(EntityPlayer player, EntityLivingBase entity);
 
 	public abstract void bindFamiliar(EntityPlayer player, Entity familiar);
-	
+
 	public abstract void unbindFamiliar(Entity entity);
 }

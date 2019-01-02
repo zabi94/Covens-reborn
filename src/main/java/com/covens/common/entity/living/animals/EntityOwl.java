@@ -50,7 +50,11 @@ public class EntityOwl extends EntityMultiSkin {
 
 	private static final ResourceLocation loot = new ResourceLocation(LibMod.MOD_ID, "entities/owl");
 	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.RABBIT, Items.CHICKEN);
-	//	private static final String[] names = {"Owlmighty", "Owliver", "Owl Capone", "Owleister Crowley", "Owlie", "Owlivia", "Owlive", "Hedwig", "Archimedes", "Owlexander", "Robin Hoot", "Owlex", "Athena", "Strix", "Minerva", "Ascalaphus", "Lechuza", "Stolas", "Andras", "Kikiyaon", "Chickcharney", "Hootling"};
+	// private static final String[] names = {"Owlmighty", "Owliver", "Owl Capone",
+	// "Owleister Crowley", "Owlie", "Owlivia", "Owlive", "Hedwig", "Archimedes",
+	// "Owlexander", "Robin Hoot", "Owlex", "Athena", "Strix", "Minerva",
+	// "Ascalaphus", "Lechuza", "Stolas", "Andras", "Kikiyaon", "Chickcharney",
+	// "Hootling"};
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntityOwl.class, DataSerializers.VARINT);
 
 	public EntityOwl(World worldIn) {
@@ -77,7 +81,7 @@ public class EntityOwl extends EntityMultiSkin {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataManager.register(TINT, 0xFFFFFF);
+		this.dataManager.register(TINT, 0xFFFFFF);
 		this.aiSit = new EntityAISit(this);
 	}
 
@@ -120,11 +124,11 @@ public class EntityOwl extends EntityMultiSkin {
 				}
 
 				if (!this.isSilent()) {
-					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
 				}
 
 				if (!this.world.isRemote) {
-					if (this.rand.nextInt(10) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+					if ((this.rand.nextInt(10) == 0) && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 						this.setTamedBy(player);
 						this.playTameEffect(true);
 						this.world.setEntityState(this, (byte) 7);
@@ -141,12 +145,12 @@ public class EntityOwl extends EntityMultiSkin {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityOwl(world);
+		return new EntityOwl(this.world);
 	}
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -161,7 +165,7 @@ public class EntityOwl extends EntityMultiSkin {
 
 	@Override
 	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -197,7 +201,7 @@ public class EntityOwl extends EntityMultiSkin {
 		int k = MathHelper.floor(this.posZ);
 		BlockPos blockpos = new BlockPos(i, j, k);
 		Block block = this.world.getBlockState(blockpos.down()).getBlock();
-		return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+		return (block instanceof BlockLeaves) || (block == Blocks.GRASS) || (block instanceof BlockLog) || ((block == Blocks.AIR) && (this.world.getLight(blockpos) > 8) && super.getCanSpawnHere());
 	}
 
 	@Override
@@ -217,7 +221,7 @@ public class EntityOwl extends EntityMultiSkin {
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
-		if (!entityIn.equals(getOwner())) {
+		if (!entityIn.equals(this.getOwner())) {
 			super.collideWithEntity(entityIn);
 		}
 	}

@@ -1,12 +1,13 @@
 package com.covens.client.core.hud;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 /**
@@ -17,10 +18,11 @@ public abstract class HudComponent {
 	protected int w, h;
 
 	/**
-	 * This class represents hud components for the mod.
-	 * A single instance should be created per hud component
+	 * This class represents hud components for the mod. A single instance should be
+	 * created per hud component
 	 * <p>
-	 * All components should be registered once during startup on the client side via HudController.registerNewComponent(HudComponent)
+	 * All components should be registered once during startup on the client side
+	 * via HudController.registerNewComponent(HudComponent)
 	 *
 	 * @see HudController#registerNewComponent(HudComponent)
 	 */
@@ -43,11 +45,11 @@ public abstract class HudComponent {
 	}
 
 	public int getWidth() {
-		return w;
+		return this.w;
 	}
 
 	public int getHeight() {
-		return h;
+		return this.h;
 	}
 
 	/**
@@ -93,57 +95,64 @@ public abstract class HudComponent {
 	/**
 	 * This only gets called when the cursor is hovering on the hud element
 	 *
-	 * @param mouseX is given only to provide a way to give different tooltips depending on the cursor position inside the hud
-	 * @param mouseY is given only to provide a way to give different tooltips depending on the cursor position inside the hud
-	 * @return A string to be displayed as tooltip, or a null or empty string to not show anything
+	 * @param mouseX is given only to provide a way to give different tooltips
+	 *               depending on the cursor position inside the hud
+	 * @param mouseY is given only to provide a way to give different tooltips
+	 *               depending on the cursor position inside the hud
+	 * @return A string to be displayed as tooltip, or a null or empty string to not
+	 *         show anything
 	 */
 	public abstract String getTooltip(int mouseX, int mouseY);
 
 	/**
-	 * This only gets called when the cursor is hovering on the hud element and a mouse button is pressed
+	 * This only gets called when the cursor is hovering on the hud element and a
+	 * mouse button is pressed
 	 *
-	 * @param mouseX is given only to provide a way to act differently depending on the cursor position inside the hud
-	 * @param mouseY is given only to provide a way to act differently depending on the cursor position inside the hud
+	 * @param mouseX is given only to provide a way to act differently depending on
+	 *               the cursor position inside the hud
+	 * @param mouseY is given only to provide a way to act differently depending on
+	 *               the cursor position inside the hud
 	 */
 	public abstract void onClick(int mouseX, int mouseY);
 
 	/**
-	 * Actually do the rendering on the screen. Anything drawn should always be inside the rectangle described by
-	 * {@link #getX()}, {@link #getY()}, {@link #getX()}+{@link #getWidth()}, {@link #getY()}+{@link #getHeight()}.
-	 * <br><br>If the element is not active when using {@link #isActive()}, this method won't be called at all, except
-	 * for dummy renders
+	 * Actually do the rendering on the screen. Anything drawn should always be
+	 * inside the rectangle described by {@link #getX()}, {@link #getY()},
+	 * {@link #getX()}+{@link #getWidth()}, {@link #getY()}+{@link #getHeight()}.
+	 * <br>
+	 * <br>
+	 * If the element is not active when using {@link #isActive()}, this method
+	 * won't be called at all, except for dummy renders
 	 *
 	 * @param resolution   The current resolution of the minecraft window
 	 * @param partialTicks A float representing half ticks progress
-	 * @param renderDummy  if true, the hud should display sample data that causes it to be visible, and not real data. This is used by the bwguicfg command to show all huds even when they are not active
+	 * @param renderDummy  if true, the hud should display sample data that causes
+	 *                     it to be visible, and not real data. This is used by the
+	 *                     bwguicfg command to show all huds even when they are not
+	 *                     active
 	 */
 	public abstract void render(ScaledResolution resolution, float partialTicks, boolean renderDummy);
 
 	public boolean isHovered(int mx, int my) {
-		return (getX() < mx && getX() + getWidth() > mx && getY() < my && getY() + getHeight() > my);
+		return ((this.getX() < mx) && ((this.getX() + this.getWidth()) > mx) && (this.getY() < my) && ((this.getY() + this.getHeight()) > my));
 	}
 
 	public static enum EnumHudAnchor {
 
-		START_RELATIVE(new AnchorHelper.RelativeVersion(new AnchorHelper.AbsoluteStartHelper())),
-		CENTER_RELATIVE(new AnchorHelper.RelativeVersion(new AnchorHelper.AbsoluteCenterHelper())),
-		END_RELATIVE(new AnchorHelper.RelativeVersion(new AnchorHelper.AbsoluteEndHelper())),
-		START_ABSOULTE(new AnchorHelper.AbsoluteStartHelper()),
-		CENTER_ABSOLUTE(new AnchorHelper.AbsoluteCenterHelper()),
-		END_ABSOLUTE(new AnchorHelper.AbsoluteEndHelper());
+		START_RELATIVE(new AnchorHelper.RelativeVersion(new AnchorHelper.AbsoluteStartHelper())), CENTER_RELATIVE(new AnchorHelper.RelativeVersion(new AnchorHelper.AbsoluteCenterHelper())), END_RELATIVE(new AnchorHelper.RelativeVersion(new AnchorHelper.AbsoluteEndHelper())), START_ABSOULTE(new AnchorHelper.AbsoluteStartHelper()), CENTER_ABSOLUTE(new AnchorHelper.AbsoluteCenterHelper()), END_ABSOLUTE(new AnchorHelper.AbsoluteEndHelper());
 
 		private AnchorHelper ah = null;
 
 		private EnumHudAnchor(AnchorHelper helper) {
-			ah = helper;
+			this.ah = helper;
 		}
 
 		public double dataToPixel(double data, int componentSize, int screeScaledSize) {
-			return ah.getPixel(data, screeScaledSize, componentSize);
+			return this.ah.getPixel(data, screeScaledSize, componentSize);
 		}
 
 		public double pixelToData(double pixel, int componentSize, int screeScaledSize) {
-			return ah.getData(pixel, screeScaledSize, componentSize);
+			return this.ah.getData(pixel, screeScaledSize, componentSize);
 		}
 	}
 

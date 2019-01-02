@@ -1,10 +1,17 @@
 package com.covens.common.tile.tiles;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.covens.api.divination.IFortune;
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
 import com.covens.common.tile.ModTileEntity;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,31 +23,32 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class TileEntityCrystalBall extends ModTileEntity {
 
 	private IMagicPowerConsumer altarTracker = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (hand == EnumHand.OFF_HAND) return false;
-		if (worldIn.isRemote) return true;
-		return fortune(playerIn);
+		if (hand == EnumHand.OFF_HAND) {
+			return false;
+		}
+		if (worldIn.isRemote) {
+			return true;
+		}
+		return this.fortune(playerIn);
 	}
 
 	public boolean fortune(EntityPlayer reader) {
-		if (getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(reader, getPos(), world.provider.getDimension(), 3000)) {
-			return readFortune(reader, null);
+		if (this.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(reader, this.getPos(), this.world.provider.getDimension(), 3000)) {
+			return this.readFortune(reader, null);
 		}
 		reader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.no_power"), true);
 		return false;
 	}
 
-	@SuppressWarnings({"deprecation", "null"})
+	@SuppressWarnings({
+			"deprecation", "null"
+	})
 	private boolean readFortune(@Nonnull EntityPlayer endPlayer, @Nullable EntityPlayer externalReader) {
 		EntityPlayer messageRecpt = endPlayer;
 		if (endPlayer.getDistanceSq(this.getPos()) > 25) {
@@ -63,7 +71,7 @@ public class TileEntityCrystalBall extends ModTileEntity {
 		int current = 0;
 		for (IFortune f : valid) {
 			int entries = f.getDrawingWeight();
-			if (current <= draw && draw < current + entries) {
+			if ((current <= draw) && (draw < (current + entries))) {
 				fortune = f;
 				break;
 			}
@@ -89,28 +97,28 @@ public class TileEntityCrystalBall extends ModTileEntity {
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(altarTracker);
+			return IMagicPowerConsumer.CAPABILITY.cast(this.altarTracker);
 		}
 		return super.getCapability(capability, facing);
 	}
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound tag) {
-		altarTracker.readFromNbt(tag.getCompoundTag("altar"));
+		this.altarTracker.readFromNbt(tag.getCompoundTag("altar"));
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
-		tag.setTag("altar", altarTracker.writeToNbt());
+		tag.setTag("altar", this.altarTracker.writeToNbt());
 	}
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 }

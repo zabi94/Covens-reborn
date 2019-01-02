@@ -1,6 +1,12 @@
 package com.covens.common.crafting;
 
+import java.util.ArrayList;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.covens.common.lib.LibMod;
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -9,10 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -25,9 +27,12 @@ public class SpinningThreadRecipe extends IForgeRegistryEntry.Impl<SpinningThrea
 	private final Ingredient[] inputs;
 
 	/**
-	 * @param regName The name of this entry in the forge registry with the format "mod:regName". Cannot be null.
-	 * @param output  The output that will be produced by this recipe. Cannot be null.
-	 * @param inputs  The inputs needed for this recipe. Cannot be null or have a size greater than four.
+	 * @param regName The name of this entry in the forge registry with the format
+	 *                "mod:regName". Cannot be null.
+	 * @param output  The output that will be produced by this recipe. Cannot be
+	 *                null.
+	 * @param inputs  The inputs needed for this recipe. Cannot be null or have a
+	 *                size greater than four.
 	 */
 	public SpinningThreadRecipe(ResourceLocation regName, ItemStack output, Ingredient... inputs) {
 		if (inputs.length > 4) {
@@ -42,7 +47,8 @@ public class SpinningThreadRecipe extends IForgeRegistryEntry.Impl<SpinningThrea
 	 * Finds any registry entries that contains has this list as it's input.
 	 *
 	 * @param list The list of potential ingredients. Cannot be null.
-	 * @return the recipe associated with the list of ingredients. Returns null if not recipe is found.
+	 * @return the recipe associated with the list of ingredients. Returns null if
+	 *         not recipe is found.
 	 */
 	@Nullable
 	public static SpinningThreadRecipe getRecipe(NonNullList<ItemStack> list) {
@@ -58,14 +64,14 @@ public class SpinningThreadRecipe extends IForgeRegistryEntry.Impl<SpinningThrea
 	 * @return the input ingredients.
 	 */
 	public Ingredient[] getInputs() {
-		return inputs;
+		return this.inputs;
 	}
 
 	/**
 	 * @return a copy of the output stack.
 	 */
 	public ItemStack getOutput() {
-		return output.copy();
+		return this.output.copy();
 	}
 
 	/**
@@ -77,15 +83,17 @@ public class SpinningThreadRecipe extends IForgeRegistryEntry.Impl<SpinningThrea
 	public boolean matches(NonNullList<ItemStack> list) {
 		int nonEmpty = 0;
 		for (ItemStack is : list) {
-			if (is.getCount() > 0) nonEmpty++;
+			if (is.getCount() > 0) {
+				nonEmpty++;
+			}
 		}
-		if (nonEmpty != inputs.length) {
+		if (nonEmpty != this.inputs.length) {
 			return false;
 		}
-		boolean[] found = new boolean[inputs.length];
+		boolean[] found = new boolean[this.inputs.length];
 		ArrayList<ItemStack> comp = new ArrayList<>(list);
-		for (int i = 0; i < inputs.length; i++) {
-			Ingredient current = inputs[i];
+		for (int i = 0; i < this.inputs.length; i++) {
+			Ingredient current = this.inputs[i];
 			for (int j = 0; j < comp.size(); j++) {
 				ItemStack is = comp.get(j);
 				if (current.apply(is)) {

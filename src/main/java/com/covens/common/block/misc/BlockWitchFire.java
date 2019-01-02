@@ -1,5 +1,10 @@
 package com.covens.common.block.misc;
 
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Random;
+import java.util.function.Supplier;
+
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.Covens;
 import com.covens.common.block.BlockMod;
@@ -10,7 +15,13 @@ import com.covens.common.core.util.CachedSupplier;
 import com.covens.common.crafting.FrostFireRecipe;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGravel;
+import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockStone;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -23,7 +34,12 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -34,11 +50,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.Random;
-import java.util.function.Supplier;
-
 public class BlockWitchFire extends BlockMod {
 
 	public static final PropertyEnum<EnumFireType> TYPE = new PropertyEnum<EnumFireType>("type", EnumFireType.class, Arrays.asList(EnumFireType.values())) {
@@ -46,9 +57,9 @@ public class BlockWitchFire extends BlockMod {
 
 	public BlockWitchFire() {
 		super(LibBlockName.WITCHFIRE, Material.FIRE);
-		setTickRandomly(false);
+		this.setTickRandomly(false);
 		MinecraftForge.EVENT_BUS.register(this);
-		this.setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumFireType.NORMAL));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumFireType.NORMAL));
 		this.setSoundType(new SoundType(0.6f, 0.9f, SoundEvents.BLOCK_FIRE_EXTINGUISH, null, null, null, null));
 	}
 
@@ -107,7 +118,7 @@ public class BlockWitchFire extends BlockMod {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(TYPE, EnumFireType.values()[meta]);
+		return this.getDefaultState().withProperty(TYPE, EnumFireType.values()[meta]);
 	}
 
 	@Override
@@ -129,34 +140,25 @@ public class BlockWitchFire extends BlockMod {
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		if (rand.nextInt(10) < 3) {
-			world.playSound(null, pos, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.4f, 0.9f + 0.2f * rand.nextFloat());
+			world.playSound(null, pos, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.4f, 0.9f + (0.2f * rand.nextFloat()));
 		}
 		if (!world.isRemote) {
 			world.scheduleBlockUpdate(pos, state.getBlock(), 1, 1);
 
 			AxisAlignedBB aa = new AxisAlignedBB(pos);
-			world.getEntitiesWithinAABB(EntityPlayer.class, aa).stream()
-					.filter(p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE)
-					.forEach(p -> p.attackEntityFrom(DamageSource.IN_FIRE, 1f));
+			world.getEntitiesWithinAABB(EntityPlayer.class, aa).stream().filter(p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE).forEach(p -> p.attackEntityFrom(DamageSource.IN_FIRE, 1f));
 			switch (state.getValue(TYPE)) {
 				case NORMAL:
-					world.getEntitiesWithinAABB(EntityItem.class, aa).stream()
-							.filter(i -> !i.isDead)
-							.forEach(i -> itemInFire(i, world, pos, state));
+					world.getEntitiesWithinAABB(EntityItem.class, aa).stream().filter(i -> !i.isDead).forEach(i -> this.itemInFire(i, world, pos, state));
 					if (world.getBlockState(pos.down()).getBlock() == Blocks.OBSIDIAN) {
 						world.setBlockState(pos, Blocks.FIRE.getDefaultState(), 3);
 					}
 					break;
 				case FROSTFIRE:
-					world.getEntitiesWithinAABB(EntityItem.class, aa).stream()
-							.filter(i -> !i.isDead)
-							.forEach(is -> spawnItemInWorld(is));
+					world.getEntitiesWithinAABB(EntityItem.class, aa).stream().filter(i -> !i.isDead).forEach(is -> this.spawnItemInWorld(is));
 					break;
 				case SIGHTFIRE:
-					world.getEntitiesWithinAABB(EntityItem.class, aa).stream()
-							.filter(i -> !i.isDead)
-							.filter(i -> i.getItem().getItem() == Items.PAPER)
-							.forEach(i -> i.setDead());
+					world.getEntitiesWithinAABB(EntityItem.class, aa).stream().filter(i -> !i.isDead).filter(i -> i.getItem().getItem() == Items.PAPER).forEach(i -> i.setDead());
 					break;
 				default:
 					break;
@@ -175,7 +177,7 @@ public class BlockWitchFire extends BlockMod {
 	}
 
 	private void itemInFire(EntityItem i, World world, BlockPos pos, IBlockState state) {
-		if (isMundane(i)) {
+		if (this.isMundane(i)) {
 			i.setDead();
 		} else {
 			for (EnumFireType ft : EnumFireType.values()) {
@@ -188,10 +190,9 @@ public class BlockWitchFire extends BlockMod {
 		}
 	}
 
-
 	private boolean isMundane(EntityItem i) {
 		Block b = Block.getBlockFromItem(i.getItem().getItem());
-		return (b instanceof BlockStone || b instanceof BlockDirt || b instanceof BlockSand || b instanceof BlockGravel);
+		return ((b instanceof BlockStone) || (b instanceof BlockDirt) || (b instanceof BlockSand) || (b instanceof BlockGravel));
 	}
 
 	@Override
@@ -214,7 +215,7 @@ public class BlockWitchFire extends BlockMod {
 
 	@Override
 	public void registerModel() {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -234,21 +235,21 @@ public class BlockWitchFire extends BlockMod {
 		private CachedSupplier<Ingredient> ingredient;
 
 		EnumFireType(int lightValue, int color, Supplier<Ingredient> supplier) {
-			light = lightValue;
+			this.light = lightValue;
 			this.color = color;
 			this.ingredient = new CachedSupplier<>(supplier);
 		}
 
 		public int getLight() {
-			return light;
+			return this.light;
 		}
 
 		public int getColor() {
-			return color;
+			return this.color;
 		}
 
 		public boolean isIngredient(ItemStack stack) {
-			return ingredient.get().apply(stack);
+			return this.ingredient.get().apply(stack);
 		}
 
 		@Override

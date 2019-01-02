@@ -1,8 +1,11 @@
 package com.covens.common.item.magic;
 
+import java.util.List;
+
 import com.covens.common.block.ModBlocks;
 import com.covens.common.item.ItemMod;
 import com.covens.common.tile.tiles.TileEntityTarotsTable;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,8 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemTarots extends ItemMod {
 
@@ -36,7 +37,7 @@ public class ItemTarots extends ItemMod {
 
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-		if (!playerIn.isSneaking() && target instanceof EntityPlayer) {
+		if (!playerIn.isSneaking() && (target instanceof EntityPlayer)) {
 			if (!stack.hasTagCompound()) {
 				stack.setTagCompound(new NBTTagCompound());
 			}

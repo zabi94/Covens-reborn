@@ -1,9 +1,15 @@
 package com.covens.common.block.tiles;
 
+import static com.covens.api.state.StateProperties.LOWER_HALF;
+import static com.covens.api.state.StateProperties.MIRROR_VARIANTS;
+
+import java.util.Random;
+
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.tile.tiles.TileEntityMagicMirror;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -21,16 +27,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-import static com.covens.api.state.StateProperties.LOWER_HALF;
-import static com.covens.api.state.StateProperties.MIRROR_VARIANTS;
-
 public class BlockMagicMirror extends BlockModTileEntity {
 
 	private static final AxisAlignedBB BOUNDING_BOX_NORTH = new AxisAlignedBB(0.0f, 0.0f, 13.0f / 16.0f, 1.0f, 1.0f, 1.0f);
-	private static final AxisAlignedBB BOUNDING_BOX_SOUTH = new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f - 13.0f / 16.0f);
-	private static final AxisAlignedBB BOUNDING_BOX_EAST = new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f - 13.0f / 16.0f, 1.0f, 1.0f);
+	private static final AxisAlignedBB BOUNDING_BOX_SOUTH = new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f - (13.0f / 16.0f));
+	private static final AxisAlignedBB BOUNDING_BOX_EAST = new AxisAlignedBB(0.0f, 0.0f, 0.0f, 1.0f - (13.0f / 16.0f), 1.0f, 1.0f);
 	private static final AxisAlignedBB BOUNDING_BOX_WEST = new AxisAlignedBB(13.0f / 16.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 
 	public BlockMagicMirror() {
@@ -49,7 +50,7 @@ public class BlockMagicMirror extends BlockModTileEntity {
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		EnumFacing dir = EnumFacing.getDirectionFromEntityLiving(pos, placer);
-		if (dir == EnumFacing.DOWN || dir == EnumFacing.UP) {
+		if ((dir == EnumFacing.DOWN) || (dir == EnumFacing.UP)) {
 			dir = EnumFacing.fromAngle(placer.rotationYaw).getOpposite();
 		}
 		return this.getDefaultState().withProperty(BlockHorizontal.FACING, dir);
@@ -65,7 +66,7 @@ public class BlockMagicMirror extends BlockModTileEntity {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		//BitMap: xHFF, Half, Facing
+		// BitMap: xHFF, Half, Facing
 		return state.getValue(BlockHorizontal.FACING).getHorizontalIndex() | (state.getValue(LOWER_HALF) ? 4 : 0);
 	}
 
@@ -146,7 +147,7 @@ public class BlockMagicMirror extends BlockModTileEntity {
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		IBlockState neighborState = world.getBlockState(fromPos);
 		if (neighborState.getBlock() == ModBlocks.magic_mirror) {
-			if (neighborState.getValue(LOWER_HALF) == state.getValue(LOWER_HALF) && fromPos.getX() == pos.getX() && fromPos.getZ() == pos.getZ()) {
+			if ((neighborState.getValue(LOWER_HALF) == state.getValue(LOWER_HALF)) && (fromPos.getX() == pos.getX()) && (fromPos.getZ() == pos.getZ())) {
 				world.setBlockToAir(fromPos);
 				world.setBlockToAir(pos);
 			}
@@ -183,7 +184,7 @@ public class BlockMagicMirror extends BlockModTileEntity {
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		IBlockState state = getStateFromMeta(meta);
+		IBlockState state = this.getStateFromMeta(meta);
 		if (!state.getValue(LOWER_HALF)) {
 			return null;
 		}
@@ -194,6 +195,5 @@ public class BlockMagicMirror extends BlockModTileEntity {
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
-
 
 }

@@ -2,6 +2,7 @@ package com.covens.common.container;
 
 import com.covens.common.container.slots.SlotFiltered;
 import com.covens.common.tile.tiles.TileEntityApiary;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,8 +10,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 /**
- * This class was created by Zabi94.
- * It's distributed as part of Covens under
+ * This class was created by Zabi94. It's distributed as part of Covens under
  * the MIT license.
  */
 @SuppressWarnings("ConstantConditions")
@@ -21,7 +21,7 @@ public class ContainerApiary extends ModContainer<TileEntityApiary> {
 		IItemHandler ih = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for (int i = 0; i < TileEntityApiary.ROWS; i++) {
 			for (int j = 0; j < TileEntityApiary.COLUMNS; j++) {
-				this.addSlotToContainer(new SlotOneItem(tileEntity, ih, j + i * TileEntityApiary.COLUMNS, 8 + j * 18, 16 + i * 18));
+				this.addSlotToContainer(new SlotOneItem(tileEntity, ih, j + (i * TileEntityApiary.COLUMNS), 8 + (j * 18), 16 + (i * 18)));
 			}
 		}
 		this.addPlayerSlots(playerInventory);

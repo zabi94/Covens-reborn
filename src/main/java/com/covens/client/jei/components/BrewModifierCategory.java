@@ -1,6 +1,7 @@
 package com.covens.client.jei.components;
 
 import com.covens.common.lib.LibMod;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -18,7 +19,7 @@ public class BrewModifierCategory implements IRecipeCategory<BrewModifierWrapper
 	private IDrawable bg;
 
 	public BrewModifierCategory(IGuiHelper igh) {
-		bg = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_brewing_modifier.png"), 0, 0, 140, 80).setTextureSize(140, 80).build();
+		this.bg = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_brewing_modifier.png"), 0, 0, 140, 80).setTextureSize(140, 80).build();
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class BrewModifierCategory implements IRecipeCategory<BrewModifierWrapper
 
 	@Override
 	public IDrawable getBackground() {
-		return bg;
+		return this.bg;
 	}
 
 	@Override
@@ -52,6 +53,5 @@ public class BrewModifierCategory implements IRecipeCategory<BrewModifierWrapper
 		sg.init(1, true, 61, 33);
 		sg.set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 	}
-
 
 }

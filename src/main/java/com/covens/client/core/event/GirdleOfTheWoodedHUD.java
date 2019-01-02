@@ -1,7 +1,10 @@
 package com.covens.client.core.event;
 
+import org.lwjgl.opengl.GL11;
+
 import com.covens.common.item.equipment.baubles.ItemGirdleOfTheWooded;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,7 +17,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GirdleOfTheWoodedHUD {
@@ -42,9 +44,9 @@ public class GirdleOfTheWoodedHUD {
 			GlStateManager.enableAlpha();
 			Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
 			int pieces = ItemGirdleOfTheWooded.getBarkPieces(Minecraft.getMinecraft().player);
-			int dx = 8 * (10 - pieces) - 91 + evt.getResolution().getScaledWidth() / 2;
+			int dx = ((8 * (10 - pieces)) - 91) + (evt.getResolution().getScaledWidth() / 2);
 			for (int i = 0; i < pieces; i++) {
-				renderTexture(dx + (8 * i), evt.getResolution().getScaledHeight() + 10 - GuiIngameForge.left_height, 9, 9, 0, 1);
+				renderTexture(dx + (8 * i), (evt.getResolution().getScaledHeight() + 10) - GuiIngameForge.left_height, 9, 9, 0, 1);
 			}
 			Minecraft.getMinecraft().renderEngine.bindTexture(ICONS);
 			GL11.glPopMatrix();

@@ -21,10 +21,10 @@ public class ContainerDistillery extends ModContainer<TileEntityDistillery> {
 		super(tileEntity);
 		IItemHandler c = tileEntity.getGuiHandler();
 		for (int i = 0; i < 3; i++) {
-			this.addSlotToContainer(new ModSlot<>(tileEntity, c, 0 + i * 4, 18, 18 * (i + 1) - 1));
-			this.addSlotToContainer(new SlotOutput<>(tileEntity, c, 1 + i * 4, 124, 18 * (i + 1) - 1));
-			this.addSlotToContainer(new ModSlot<>(tileEntity, c, 2 + i * 4, 36, 18 * (i + 1) - 1));
-			this.addSlotToContainer(new SlotOutput<>(tileEntity, c, 3 + i * 4, 142, 18 * (i + 1) - 1));
+			this.addSlotToContainer(new ModSlot<>(tileEntity, c, 0 + (i * 4), 18, (18 * (i + 1)) - 1));
+			this.addSlotToContainer(new SlotOutput<>(tileEntity, c, 1 + (i * 4), 124, (18 * (i + 1)) - 1));
+			this.addSlotToContainer(new ModSlot<>(tileEntity, c, 2 + (i * 4), 36, (18 * (i + 1)) - 1));
+			this.addSlotToContainer(new SlotOutput<>(tileEntity, c, 3 + (i * 4), 142, (18 * (i + 1)) - 1));
 		}
 
 		this.addSlotToContainer(new SlotFiltered<>(tileEntity, c, 12, 80, 58, is -> is.getItem() == Items.BLAZE_POWDER));
@@ -80,13 +80,13 @@ public class ContainerDistillery extends ModContainer<TileEntityDistillery> {
 	protected void onFieldUpdated(int id, int data) {
 		switch (id) {
 			case 0:
-				progress = data;
+				this.progress = data;
 				break;
 			case 1:
-				totalTime = (data==0?-1:data);
+				this.totalTime = (data == 0 ? -1 : data);
 				break;
 			case 2:
-				burnTime = data;
+				this.burnTime = data;
 				break;
 			default:
 				break;

@@ -1,6 +1,7 @@
 package com.covens.common.item.magic;
 
 import com.covens.common.item.ItemMod;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class ItemGemPowder extends ItemMod {
 
-	public static final String[] names = new String[]{
+	public static final String[] names = new String[] {
 			"garnet", // 0
 			"nuummite", // 1
 			"tigers_eye", // 2
@@ -43,8 +44,9 @@ public class ItemGemPowder extends ItemMod {
 	@Override
 	public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> tab) {
 		if (this.isInCreativeTab(itemIn)) {
-			for (int i = 0; i < names.length; i++)
+			for (int i = 0; i < names.length; i++) {
 				tab.add(new ItemStack(this, 1, i));
+			}
 		}
 	}
 

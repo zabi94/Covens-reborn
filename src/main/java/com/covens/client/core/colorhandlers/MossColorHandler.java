@@ -9,6 +9,6 @@ import net.minecraft.world.biome.BiomeColorHelper;
 public final class MossColorHandler implements IBlockColor {
 	@Override
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
-		return (worldIn != null && pos != null ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos) : -1);
+		return ((worldIn != null) && (pos != null) ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos) : -1);
 	}
 }

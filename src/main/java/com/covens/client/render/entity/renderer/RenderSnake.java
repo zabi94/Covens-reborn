@@ -3,6 +3,7 @@ package com.covens.client.render.entity.renderer;
 import com.covens.client.render.entity.model.ModelSnake;
 import com.covens.common.entity.living.animals.EntitySnake;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -44,4 +45,3 @@ public class RenderSnake extends RenderLiving<EntitySnake> {
 	}
 
 }
-

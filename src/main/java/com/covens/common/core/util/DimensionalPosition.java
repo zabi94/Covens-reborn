@@ -10,10 +10,10 @@ public class DimensionalPosition {
 	private int dim, x, y, z;
 
 	public DimensionalPosition(int xIn, int yIn, int zIn, int dimension) {
-		x = xIn;
-		y = yIn;
-		z = zIn;
-		dim = dimension;
+		this.x = xIn;
+		this.y = yIn;
+		this.z = zIn;
+		this.dim = dimension;
 	}
 
 	public DimensionalPosition(NBTTagCompound tag) {
@@ -33,23 +33,23 @@ public class DimensionalPosition {
 	}
 
 	public BlockPos getPosition() {
-		return new BlockPos(getX(), getY(), getZ());
+		return new BlockPos(this.getX(), this.getY(), this.getZ());
 	}
 
 	public int getX() {
-		return x;
+		return this.x;
 	}
 
 	public int getDim() {
-		return dim;
+		return this.dim;
 	}
 
 	public int getY() {
-		return y;
+		return this.y;
 	}
 
 	public int getZ() {
-		return z;
+		return this.z;
 	}
 
 	public double getDistanceSqFrom(DimensionalPosition pos) {
@@ -60,15 +60,15 @@ public class DimensionalPosition {
 		int diffy = this.getY() - pos.getY();
 		int diffz = this.getZ() - pos.getZ();
 
-		return diffx * diffx + diffy * diffy + diffz * diffz;
+		return (diffx * diffx) + (diffy * diffy) + (diffz * diffz);
 	}
 
 	public NBTTagCompound writeToNBT() {
 		NBTTagCompound tag = new NBTTagCompound();
-		tag.setInteger("x", x);
-		tag.setInteger("y", y);
-		tag.setInteger("z", z);
-		tag.setInteger("d", dim);
+		tag.setInteger("x", this.x);
+		tag.setInteger("y", this.y);
+		tag.setInteger("z", this.z);
+		tag.setInteger("d", this.dim);
 		return tag;
 	}
 }

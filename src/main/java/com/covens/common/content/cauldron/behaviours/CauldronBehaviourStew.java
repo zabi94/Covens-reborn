@@ -1,18 +1,19 @@
 package com.covens.common.content.cauldron.behaviours;
 
+import java.util.Random;
+
 import com.covens.common.content.cauldron.CauldronFoodValue;
 import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.core.helper.Log;
 import com.covens.common.item.ModItems;
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-
-import java.util.Random;
 
 public class CauldronBehaviourStew implements ICauldronBehaviour {
 
@@ -26,14 +27,14 @@ public class CauldronBehaviourStew implements ICauldronBehaviour {
 
 	@Override
 	public void setCauldron(TileEntityCauldron tile) {
-		cauldron = tile;
+		this.cauldron = tile;
 	}
 
 	@Override
 	public void handleParticles(boolean isActiveBehaviour) {
-		if (isActiveBehaviour && progress >= COOK_TIME) {
-			Random r = cauldron.getWorld().rand;
-			cauldron.getWorld().spawnParticle(EnumParticleTypes.SPELL_INSTANT, cauldron.getPos().getX() + 0.4 + 0.2 * r.nextDouble(), cauldron.getPos().getY() + 0.5, cauldron.getPos().getZ() + 0.4 + 0.2 * r.nextDouble(), 0, 0, 0);
+		if (isActiveBehaviour && (this.progress >= COOK_TIME)) {
+			Random r = this.cauldron.getWorld().rand;
+			this.cauldron.getWorld().spawnParticle(EnumParticleTypes.SPELL_INSTANT, this.cauldron.getPos().getX() + 0.4 + (0.2 * r.nextDouble()), this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.4 + (0.2 * r.nextDouble()), 0, 0, 0);
 		}
 	}
 
@@ -45,74 +46,74 @@ public class CauldronBehaviourStew implements ICauldronBehaviour {
 	@Override
 	public void statusChanged(boolean isActiveBehaviour) {
 		if (isActiveBehaviour) {
-			clientSideItemNumber = cauldron.getInputs().size();
-			if (clientSideItemNumber != 0) {
-				if (cauldron.getInputs().size() > 10) {
-					cauldron.setBehaviour(cauldron.getDefaultBehaviours().FAILING);
+			this.clientSideItemNumber = this.cauldron.getInputs().size();
+			if (this.clientSideItemNumber != 0) {
+				if (this.cauldron.getInputs().size() > 10) {
+					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
 				} else {
-					ItemStack last = cauldron.getInputs().get(clientSideItemNumber - 1);
+					ItemStack last = this.cauldron.getInputs().get(this.clientSideItemNumber - 1);
 					if (CauldronRegistry.getCauldronFoodValue(last) == null) {
-						cauldron.setBehaviour(cauldron.getDefaultBehaviours().FAILING);
+						this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
 					} else {
-						progress = 0;
-						currentlyCooking = getSoup();
-						clientSideItemNumber++;
-						cauldron.setColor(this.getColor());
+						this.progress = 0;
+						this.currentlyCooking = this.getSoup();
+						this.clientSideItemNumber++;
+						this.cauldron.setColor(this.getColor());
 					}
 				}
 			}
-			cauldron.markDirty();
-			cauldron.syncToClient();
+			this.cauldron.markDirty();
+			this.cauldron.syncToClient();
 		}
 	}
 
 	@Override
 	public void playerInteract(EntityPlayer player, EnumHand hand) {
-		if (player.getHeldItem(hand).getItem().equals(Items.BOWL) && (progress >= COOK_TIME || player.isCreative())) {
+		if (player.getHeldItem(hand).getItem().equals(Items.BOWL) && ((this.progress >= COOK_TIME) || player.isCreative())) {
 			player.getHeldItem(hand).splitStack(1);
-			ItemStack soup = currentlyCooking;
-			currentlyCooking = ItemStack.EMPTY;
-			progress = 0;
-			cauldron.clearTanks();
-			cauldron.clearItemInputs();
-			cauldron.setBehaviour(cauldron.getDefaultBehaviours().IDLE);
+			ItemStack soup = this.currentlyCooking;
+			this.currentlyCooking = ItemStack.EMPTY;
+			this.progress = 0;
+			this.cauldron.clearTanks();
+			this.cauldron.clearItemInputs();
+			this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().IDLE);
 			TileEntityCauldron.giveItemToPlayer(player, soup);
-			clientSideItemNumber = 0;
-			cauldron.markDirty();
-			cauldron.syncToClient();
+			this.clientSideItemNumber = 0;
+			this.cauldron.markDirty();
+			this.cauldron.syncToClient();
 		}
 	}
 
 	@Override
 	public void update(boolean isActiveBehaviour) {
-		if (isActiveBehaviour && !currentlyCooking.isEmpty() && progress < COOK_TIME) {
-			++progress;
+		if (isActiveBehaviour && !this.currentlyCooking.isEmpty() && (this.progress < COOK_TIME)) {
+			++this.progress;
 		}
 	}
 
 	@Override
 	public int getColor() {
-		return (int) (0xa76e00 * (1 - (clientSideItemNumber / 14d)));
+		return (int) (0xa76e00 * (1 - (this.clientSideItemNumber / 14d)));
 	}
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-		tag.setInteger("soupNum", clientSideItemNumber);
+		tag.setInteger("soupNum", this.clientSideItemNumber);
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-		clientSideItemNumber = tag.getInteger("soupNum");
+		this.clientSideItemNumber = tag.getInteger("soupNum");
 	}
 
 	@Override
@@ -126,13 +127,13 @@ public class CauldronBehaviourStew implements ICauldronBehaviour {
 		float multiplier = 1;
 		float decay = 0.6f;
 
-		long differentItems = cauldron.getInputs().stream().map(is -> is.toString()).distinct().count();
+		long differentItems = this.cauldron.getInputs().stream().map(is -> is.toString()).distinct().count();
 
-		for (ItemStack i : cauldron.getInputs()) {
+		for (ItemStack i : this.cauldron.getInputs()) {
 			CauldronFoodValue next = CauldronRegistry.getCauldronFoodValue(i);
 			if (next == null) {
 				Log.w(i + " is not a valid food, this shouldn't happen! Report to https://github.com/Um-Mitternacht/Covens/issues");
-				cauldron.setBehaviour(cauldron.getDefaultBehaviours().FAILING);
+				this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
 				return ItemStack.EMPTY;
 			}
 			hunger += (next.hunger * multiplier);
@@ -153,10 +154,10 @@ public class CauldronBehaviourStew implements ICauldronBehaviour {
 
 	@Override
 	public void onDeactivation() {
-		progress = 0;
-		currentlyCooking = ItemStack.EMPTY;
-		cauldron.markDirty();
-		cauldron.syncToClient();
+		this.progress = 0;
+		this.currentlyCooking = ItemStack.EMPTY;
+		this.cauldron.markDirty();
+		this.cauldron.syncToClient();
 	}
 
 }

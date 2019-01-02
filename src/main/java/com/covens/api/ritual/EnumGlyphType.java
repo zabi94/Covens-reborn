@@ -9,17 +9,18 @@ public enum EnumGlyphType implements IStringSerializable {
 	int meta;
 
 	EnumGlyphType(int metadata) {
-		meta = metadata;
+		this.meta = metadata;
 	}
 
 	public static EnumGlyphType fromMeta(int meta) {
-		if (meta == 1 || meta == 5)
+		if ((meta == 1) || (meta == 5)) {
 			return ANY;
+		}
 		return values()[meta];
 	}
 
 	public int meta() {
-		return meta;
+		return this.meta;
 	}
 
 	@Override

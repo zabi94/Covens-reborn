@@ -15,19 +15,17 @@ public class ModEnchantments {
 	public static Enchantment potentWard = new EnchantmentPotentWard();
 	public static Enchantment desperateWard = new EnchantmentDesperateWard();
 
-	//Placeholders
+	// Placeholders
 	public static Enchantment hexProtection = new EnchantmentPlaceholder("hex_protection", Rarity.UNCOMMON, 3);
 	public static Enchantment occultation = new EnchantmentPlaceholder("occultation", Rarity.UNCOMMON, 3);
 	public static Enchantment taglockProtection = new EnchantmentPlaceholder("taglock_protection", Rarity.RARE, 3);
 
 	@SubscribeEvent
 	public static void enchantmentRegistration(RegistryEvent.Register<Enchantment> evt) {
-		evt.getRegistry().registerAll(
-				mpExpansion, spiritProtection, demonProtection, potentWard, desperateWard,
+		evt.getRegistry().registerAll(mpExpansion, spiritProtection, demonProtection, potentWard, desperateWard,
 
-				//Placeholders
-				hexProtection, occultation, taglockProtection
-		);
+				// Placeholders
+				hexProtection, occultation, taglockProtection);
 	}
 
 }

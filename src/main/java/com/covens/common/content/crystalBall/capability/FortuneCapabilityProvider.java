@@ -1,11 +1,11 @@
 package com.covens.common.content.crystalBall.capability;
 
+import static com.covens.common.content.crystalBall.capability.CapabilityFortune.CAPABILITY;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-
-import static com.covens.common.content.crystalBall.capability.CapabilityFortune.CAPABILITY;
 
 public class FortuneCapabilityProvider implements ICapabilitySerializable<NBTBase> {
 
@@ -18,19 +18,20 @@ public class FortuneCapabilityProvider implements ICapabilitySerializable<NBTBas
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == CAPABILITY)
-			return CAPABILITY.<T>cast(default_capability);
+		if (capability == CAPABILITY) {
+			return CAPABILITY.<T>cast(this.default_capability);
+		}
 		return null;
 	}
 
 	@Override
 	public NBTBase serializeNBT() {
-		return CAPABILITY.getStorage().writeNBT(CAPABILITY, default_capability, null);
+		return CAPABILITY.getStorage().writeNBT(CAPABILITY, this.default_capability, null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt) {
-		CAPABILITY.getStorage().readNBT(CAPABILITY, default_capability, null, nbt);
+		CAPABILITY.getStorage().readNBT(CAPABILITY, this.default_capability, null, nbt);
 	}
 
 }

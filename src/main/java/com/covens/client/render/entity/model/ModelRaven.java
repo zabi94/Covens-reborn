@@ -1,6 +1,7 @@
 package com.covens.client.render.entity.model;
 
 import com.covens.common.entity.living.animals.EntityRaven;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -8,8 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
 /**
- * ravenv2 - Ingoleth, Cybercat5555
- * Created using Tabula 5.1.0
+ * ravenv2 - Ingoleth, Cybercat5555 Created using Tabula 5.1.0
  */
 public class ModelRaven extends ModelBase {
 	public ModelRenderer ravenBody;
@@ -50,7 +50,7 @@ public class ModelRaven extends ModelBase {
 		this.ravenBeak2 = new ModelRenderer(this, 42, 12);
 		this.ravenBeak2.setRotationPoint(0.0F, 0.0F, -3.0F);
 		this.ravenBeak2.addBox(-1.0F, 0.0F, 0.0F, 2, 2, 3, 0.0F);
-		this.setRotateAngle(ravenBeak2, -0.2617993877991494F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenBeak2, -0.2617993877991494F, 0.0F, 0.0F);
 		this.tailRight = new ModelRenderer(this, 2, 21);
 		this.tailRight.setRotationPoint(-1.5F, -2.0999999046325684F, 3.0F);
 		this.tailRight.addBox(-1.0F, -0.5F, 0.0F, 2, 1, 7, 0.0F);
@@ -83,7 +83,7 @@ public class ModelRaven extends ModelBase {
 		this.rumpRuff = new ModelRenderer(this, 19, 12);
 		this.rumpRuff.setRotationPoint(0.0F, -0.4000000059604645F, -0.20000000298023224F);
 		this.rumpRuff.addBox(-2.0F, -1.5F, 0.0F, 4, 3, 3, 0.0F);
-		this.setRotateAngle(rumpRuff, -0.19198621771937624F, 0.0F, 0.0F);
+		this.setRotateAngle(this.rumpRuff, -0.19198621771937624F, 0.0F, 0.0F);
 		this.ravenBody = new ModelRenderer(this, 1, 30);
 		this.ravenBody.setRotationPoint(0.0F, 18.200000762939453F, 0.0F);
 		this.ravenBody.addBox(-3.0F, -6.0F, -5.0F, 6, 6, 10, 0.0F);
@@ -101,7 +101,7 @@ public class ModelRaven extends ModelBase {
 		this.ravenBeak1 = new ModelRenderer(this, 42, 12);
 		this.ravenBeak1.setRotationPoint(0.0F, -1.0F, -5.199999809265137F);
 		this.ravenBeak1.addBox(-0.8999999761581421F, 0.0F, -3.0F, 2, 2, 3, 0.0F);
-		this.setRotateAngle(ravenBeak1, 0.3490658503988659F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenBeak1, 0.3490658503988659F, 0.0F, 0.0F);
 		this.wingRight2 = new ModelRenderer(this, 1, 11);
 		this.wingRight2.mirror = true;
 		this.wingRight2.setRotationPoint(-5.0F, 0.0F, 0.0F);
@@ -115,7 +115,7 @@ public class ModelRaven extends ModelBase {
 		this.feathers01 = new ModelRenderer(this, 36, 23);
 		this.feathers01.setRotationPoint(0.0F, 2.299999952316284F, -1.7999999523162842F);
 		this.feathers01.addBox(-2.0F, -1.0F, -1.0F, 4, 2, 4, 0.0F);
-		this.setRotateAngle(feathers01, -0.6981317007977318F, 0.0F, 0.0F);
+		this.setRotateAngle(this.feathers01, -0.6981317007977318F, 0.0F, 0.0F);
 		this.tailLeft = new ModelRenderer(this, 2, 21);
 		this.tailLeft.setRotationPoint(1.5F, -2.0F, 3.0F);
 		this.tailLeft.addBox(-1.0F, -0.5F, 0.0F, 2, 1, 7, 0.0F);
@@ -137,7 +137,7 @@ public class ModelRaven extends ModelBase {
 		this.feathers02 = new ModelRenderer(this, 36, 30);
 		this.feathers02.setRotationPoint(0.0F, 2.0999999046325684F, 0.20000000298023224F);
 		this.feathers02.addBox(-2.5F, -1.0F, -1.0F, 5, 2, 4, 0.0F);
-		this.setRotateAngle(feathers02, -0.6108652381980153F, 0.0F, 0.0F);
+		this.setRotateAngle(this.feathers02, -0.6108652381980153F, 0.0F, 0.0F);
 		this.ravenHead = new ModelRenderer(this, 42, 0);
 		this.ravenHead.setRotationPoint(0.0F, -1.0F, -2.0F);
 		this.ravenHead.addBox(-2.5F, -2.5F, -5.599999904632568F, 5, 5, 6, 0.0F);
@@ -192,7 +192,7 @@ public class ModelRaven extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
 		if (entityIn.onGround) {
-			setRotateAngle(ravenHead, (float) (0.6981317007977318F + headPitch * Math.PI / 360), (float) (netHeadYaw * Math.PI / 360), 0);
+			this.setRotateAngle(this.ravenHead, (float) (0.6981317007977318F + ((headPitch * Math.PI) / 360)), (float) ((netHeadYaw * Math.PI) / 360), 0);
 		}
 	}
 
@@ -202,27 +202,26 @@ public class ModelRaven extends ModelBase {
 		EntityRaven raven = (EntityRaven) entitylivingbaseIn;
 		if (raven.onGround) {
 			if (raven.isSitting()) {
-				setSittingStance();
+				this.setSittingStance();
 				float time = (raven.ticksExisted + partialTickTime) * 0.10471975512F;
-				ravenBody.rotateAngleX = -0.64577182323F + 0.00484813681f * MathHelper.sin(time);
-
+				this.ravenBody.rotateAngleX = -0.64577182323F + (0.00484813681f * MathHelper.sin(time));
 
 			} else {
-				setWanderingStance();
+				this.setWanderingStance();
 				float time = (raven.ticksExisted + partialTickTime) * 0.10471975512F;
-				ravenBody.rotateAngleX = -0.64577182323F + 0.00484813681f * MathHelper.sin(time);
+				this.ravenBody.rotateAngleX = -0.64577182323F + (0.00484813681f * MathHelper.sin(time));
 			}
 		} else {
-			setFlyingStance();
+			this.setFlyingStance();
 			float time = (raven.ticksExisted + partialTickTime) / 4.71238898F;
-			wingRight1.rotateAngleZ = 0.26179938779914943f + 1.047166666666666f * MathHelper.cos(time);
-			wingLeft1.rotateAngleZ = -wingRight1.rotateAngleZ;
-			wingRight2.rotateAngleZ = -0.52359877559F + 0.34906585039f * MathHelper.sin(time);
-			wingLeft2.rotateAngleZ = -wingRight2.rotateAngleZ;
-			wingRight3.rotateAngleZ = wingRight1.rotateAngleZ / 4;
-			wingLeft3.rotateAngleZ = -wingRight3.rotateAngleZ;
-			ravenRightLeg2.rotateAngleX = 1.0471975511965976F + tail.rotateAngleX;
-			ravenLeftLeg2.rotateAngleX = ravenRightLeg2.rotateAngleX;
+			this.wingRight1.rotateAngleZ = 0.26179938779914943f + (1.047166666666666f * MathHelper.cos(time));
+			this.wingLeft1.rotateAngleZ = -this.wingRight1.rotateAngleZ;
+			this.wingRight2.rotateAngleZ = -0.52359877559F + (0.34906585039f * MathHelper.sin(time));
+			this.wingLeft2.rotateAngleZ = -this.wingRight2.rotateAngleZ;
+			this.wingRight3.rotateAngleZ = this.wingRight1.rotateAngleZ / 4;
+			this.wingLeft3.rotateAngleZ = -this.wingRight3.rotateAngleZ;
+			this.ravenRightLeg2.rotateAngleX = 1.0471975511965976F + this.tail.rotateAngleX;
+			this.ravenLeftLeg2.rotateAngleX = this.ravenRightLeg2.rotateAngleX;
 
 		}
 	}
@@ -243,20 +242,20 @@ public class ModelRaven extends ModelBase {
 	}
 
 	private void setFlyingStance() {
-		this.setRotateAngle(ravenBody, 0.08726646259971647F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenHead, -0.06981317007977318F, 0.0F, 0.0F);
-		this.setRotateAngle(wingLeft1, -0.08726646259971647F, 0F, 1.2217304763960306F);
-		this.setRotateAngle(wingLeft2, 0.0F, 0.0F, 0.4363323129985824F);
-		this.setRotateAngle(wingLeft3, 0.0F, 0.0F, 0.3490658503988659F);
-		this.setRotateAngle(wingRight1, -0.08726646259971647F, 0F, -1.2217304763960306F);
-		this.setRotateAngle(wingRight2, 0.0F, 0.0F, -0.4363323129985824F);
-		this.setRotateAngle(wingRight3, 0.0F, 0.0F, -0.3490658503988659F);
-		this.setRotateAngle(ravenLeftLeg1, 0.61086523819F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenLeftLeg2, 0.0F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenLeftLeg3, 0.87266462599F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenRightLeg, 0.61086523819F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenRightLeg2, 0.0F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenRightLeg3, 0.87266462599F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenBody, 0.08726646259971647F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenHead, -0.06981317007977318F, 0.0F, 0.0F);
+		this.setRotateAngle(this.wingLeft1, -0.08726646259971647F, 0F, 1.2217304763960306F);
+		this.setRotateAngle(this.wingLeft2, 0.0F, 0.0F, 0.4363323129985824F);
+		this.setRotateAngle(this.wingLeft3, 0.0F, 0.0F, 0.3490658503988659F);
+		this.setRotateAngle(this.wingRight1, -0.08726646259971647F, 0F, -1.2217304763960306F);
+		this.setRotateAngle(this.wingRight2, 0.0F, 0.0F, -0.4363323129985824F);
+		this.setRotateAngle(this.wingRight3, 0.0F, 0.0F, -0.3490658503988659F);
+		this.setRotateAngle(this.ravenLeftLeg1, 0.61086523819F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenLeftLeg2, 0.0F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenLeftLeg3, 0.87266462599F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenRightLeg, 0.61086523819F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenRightLeg2, 0.0F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenRightLeg3, 0.87266462599F, 0.0F, 0.0F);
 		this.wingLeft1Feathers.isHidden = false;
 		this.wingRight1Feathers.isHidden = false;
 		this.wingLeft2Feathers.isHidden = false;
@@ -267,25 +266,25 @@ public class ModelRaven extends ModelBase {
 	}
 
 	private void setWanderingStance() {
-		this.setRotateAngle(tailRight, -0.17453292519943295F, -0.12217304763960307F, -0.2617993877991494F);
-		this.setRotateAngle(wingRight3, 0.0F, 0.2617993877991494F, 0.0F);
-		this.setRotateAngle(ravenBodyTail, 0.22689280275926282F, 0.0F, 0.0F);
-		this.setRotateAngle(tail, -0.15707963267948966F, 0.0F, 0.0F);
-		this.setRotateAngle(wingLeft1, -0.03490658503988659F, -0.7853981633974483F, 0.5235987755982988F);
-		this.setRotateAngle(ravenLeftLeg1, 0.41887902047863906F, 0.0F, 0.0F);
-		this.setRotateAngle(wingLeft2, 0.0F, -0.9948376736367678F, 0.0F);
-		this.setRotateAngle(ravenRightLeg2, -0.08726646259971647F, 0.03490658503988659F, 0.0F);
-		this.setRotateAngle(ravenBody, -0.6457718232379019F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenRightLeg3, 0.3141592653589793F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenLeftLeg3, 0.3141592653589793F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenRightLeg, 0.4363323129985824F, 0.0F, 0.0F);
-		this.setRotateAngle(wingRight2, 0.0F, 1.0122909661567112F, 0.0F);
-		this.setRotateAngle(wingLeft3, 0.0F, -0.2617993877991494F, 0.0F);
-		this.setRotateAngle(tailLeft, -0.17453292519943295F, 0.12217304763960307F, 0.2617993877991494F);
-		this.setRotateAngle(wingRight1, -0.03490658503988659F, 0.7853981633974483F, -0.5235987755982988F);
-		this.setRotateAngle(ravenHead, 0.6981317007977318F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenNeck, 0.2617993877991494F, 0.0F, 0.0F);
-		this.setRotateAngle(ravenLeftLeg2, -0.08726646259971647F, -0.03490658503988659F, 0.0F);
+		this.setRotateAngle(this.tailRight, -0.17453292519943295F, -0.12217304763960307F, -0.2617993877991494F);
+		this.setRotateAngle(this.wingRight3, 0.0F, 0.2617993877991494F, 0.0F);
+		this.setRotateAngle(this.ravenBodyTail, 0.22689280275926282F, 0.0F, 0.0F);
+		this.setRotateAngle(this.tail, -0.15707963267948966F, 0.0F, 0.0F);
+		this.setRotateAngle(this.wingLeft1, -0.03490658503988659F, -0.7853981633974483F, 0.5235987755982988F);
+		this.setRotateAngle(this.ravenLeftLeg1, 0.41887902047863906F, 0.0F, 0.0F);
+		this.setRotateAngle(this.wingLeft2, 0.0F, -0.9948376736367678F, 0.0F);
+		this.setRotateAngle(this.ravenRightLeg2, -0.08726646259971647F, 0.03490658503988659F, 0.0F);
+		this.setRotateAngle(this.ravenBody, -0.6457718232379019F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenRightLeg3, 0.3141592653589793F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenLeftLeg3, 0.3141592653589793F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenRightLeg, 0.4363323129985824F, 0.0F, 0.0F);
+		this.setRotateAngle(this.wingRight2, 0.0F, 1.0122909661567112F, 0.0F);
+		this.setRotateAngle(this.wingLeft3, 0.0F, -0.2617993877991494F, 0.0F);
+		this.setRotateAngle(this.tailLeft, -0.17453292519943295F, 0.12217304763960307F, 0.2617993877991494F);
+		this.setRotateAngle(this.wingRight1, -0.03490658503988659F, 0.7853981633974483F, -0.5235987755982988F);
+		this.setRotateAngle(this.ravenHead, 0.6981317007977318F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenNeck, 0.2617993877991494F, 0.0F, 0.0F);
+		this.setRotateAngle(this.ravenLeftLeg2, -0.08726646259971647F, -0.03490658503988659F, 0.0F);
 		this.wingLeft1Feathers.isHidden = true;
 		this.wingRight1Feathers.isHidden = true;
 		this.wingLeft2Feathers.isHidden = true;
@@ -296,8 +295,8 @@ public class ModelRaven extends ModelBase {
 	}
 
 	private void setSittingStance() {
-		setWanderingStance();
-		this.setRotateAngle(ravenLeftLeg2, -0.08726646259971647F, -0.26179938779F, 0.0F);
-		this.setRotateAngle(ravenRightLeg2, -0.08726646259971647F, 0.26179938779F, 0.0F);
+		this.setWanderingStance();
+		this.setRotateAngle(this.ravenLeftLeg2, -0.08726646259971647F, -0.26179938779F, 0.0F);
+		this.setRotateAngle(this.ravenRightLeg2, -0.08726646259971647F, 0.26179938779F, 0.0F);
 	}
 }

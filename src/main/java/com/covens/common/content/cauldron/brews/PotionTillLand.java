@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -28,7 +29,7 @@ public class PotionTillLand extends BrewMod {
 		for (BlockPos spot : spots) {
 			IBlockState state = world.getBlockState(spot);
 			boolean place = world.rand.nextInt(6) <= amplifier;
-			if (place && state.getBlock() == Blocks.GRASS && world.isAirBlock(spot.up())) {
+			if (place && (state.getBlock() == Blocks.GRASS) && world.isAirBlock(spot.up())) {
 				world.setBlockState(spot, Blocks.FARMLAND.getDefaultState(), 3);
 			}
 		}

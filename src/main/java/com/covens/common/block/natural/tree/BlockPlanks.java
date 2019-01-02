@@ -1,6 +1,7 @@
 package com.covens.common.block.natural.tree;
 
 import com.covens.common.block.BlockMod;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumFacing;

@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.potion.PotionMod;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
@@ -35,17 +36,17 @@ public class BrewMod extends PotionMod implements IBrewEffect {
 
 	@Override
 	public int getDefaultDuration() {
-		return defaultDuration;
+		return this.defaultDuration;
 	}
 
 	@Override
 	public int getArrowDuration() {
-		return defaultDuration / 6;
+		return this.defaultDuration / 6;
 	}
 
 	@Override
 	public int getLingeringDuration() {
-		return defaultDuration / 5;
+		return this.defaultDuration / 5;
 	}
 
 }

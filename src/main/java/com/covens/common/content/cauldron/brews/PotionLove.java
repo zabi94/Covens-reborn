@@ -1,14 +1,15 @@
 package com.covens.common.content.cauldron.brews;
 
+import javax.annotation.Nullable;
+
 import com.covens.common.content.cauldron.BrewMod;
 import com.covens.common.entity.EntityBrew;
 import com.covens.common.entity.EntityLingeringBrew;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-
-import javax.annotation.Nullable;
 
 public class PotionLove extends BrewMod {
 	public PotionLove() {
@@ -19,7 +20,7 @@ public class PotionLove extends BrewMod {
 	public void affectEntity(@Nullable Entity source, @Nullable Entity indirectSource, EntityLivingBase entityLivingBaseIn, int amplifier, double health) {
 		if (entityLivingBaseIn instanceof EntityAnimal) {
 			EntityAnimal animal = (EntityAnimal) entityLivingBaseIn;
-			if (animal.getGrowingAge() == 0 && !animal.isInLove()) {
+			if ((animal.getGrowingAge() == 0) && !animal.isInLove()) {
 				if (source instanceof EntityLingeringBrew) {
 					EntityLingeringBrew brew = (EntityLingeringBrew) source;
 					animal.setInLove((EntityPlayer) brew.getOwner());

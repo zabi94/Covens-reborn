@@ -7,6 +7,7 @@
 package com.covens.common.content.spell.spells;
 
 import com.covens.common.content.spell.Spell;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +23,7 @@ public class SpellInfuseLife extends Spell {
 
 	@Override
 	public void performEffect(RayTraceResult rtrace, EntityLivingBase caster, World world) {
-		if (caster != null && rtrace.typeOfHit == Type.ENTITY && rtrace.entityHit instanceof EntityLivingBase) {
+		if ((caster != null) && (rtrace.typeOfHit == Type.ENTITY) && (rtrace.entityHit instanceof EntityLivingBase)) {
 			caster.attackEntityFrom(DamageSource.causeIndirectMagicDamage(caster, null), 1f);
 			((EntityLivingBase) rtrace.entityHit).heal(1f);
 		}

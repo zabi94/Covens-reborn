@@ -1,12 +1,13 @@
 package com.covens.api.event;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.covens.api.hotbar.IHotbarAction;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.Event;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HotbarActionCollectionEvent extends Event {
 
@@ -20,7 +21,7 @@ public class HotbarActionCollectionEvent extends Event {
 	}
 
 	public List<IHotbarAction> getList() {
-		return list;
+		return this.list;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.covens.common.content.cauldron.brews;
 
 import com.covens.api.mp.IMagicPowerContainer;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -14,7 +15,7 @@ public class PotionPowerRegen extends BrewMod {
 
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		return duration % 20 == 0;
+		return (duration % 20) == 0;
 	}
 
 	@Override

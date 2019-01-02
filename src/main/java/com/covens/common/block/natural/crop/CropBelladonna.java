@@ -1,6 +1,9 @@
 package com.covens.common.block.natural.crop;
 
+import java.util.Random;
+
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -8,16 +11,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
- * This class was created by Arekkuusu on 20/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 20/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class CropBelladonna extends BlockCrop {
 
-	private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[]{new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
+	private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)
+	};
 
 	public CropBelladonna() {
 		super(LibBlockName.CROP_BELLADONNA, 5);
@@ -35,7 +37,7 @@ public class CropBelladonna extends BlockCrop {
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		checkAndDropBlock(worldIn, pos, state);
+		this.checkAndDropBlock(worldIn, pos, state);
 
 		if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
 			int i = this.getAge(state);

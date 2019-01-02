@@ -1,6 +1,7 @@
 package com.covens.common.content.infusion.capability;
 
 import com.covens.api.infusion.IInfusionCapability;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -18,19 +19,19 @@ public class InfusionProvider implements ICapabilitySerializable<NBTBase> {
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == InfusionCapability.CAPABILITY) {
-			return InfusionCapability.CAPABILITY.cast(default_capability);
+			return InfusionCapability.CAPABILITY.cast(this.default_capability);
 		}
 		return null;
 	}
 
 	@Override
 	public NBTBase serializeNBT() {
-		return InfusionCapability.CAPABILITY.getStorage().writeNBT(InfusionCapability.CAPABILITY, default_capability, null);
+		return InfusionCapability.CAPABILITY.getStorage().writeNBT(InfusionCapability.CAPABILITY, this.default_capability, null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt) {
-		InfusionCapability.CAPABILITY.getStorage().readNBT(InfusionCapability.CAPABILITY, default_capability, null, nbt);
+		InfusionCapability.CAPABILITY.getStorage().readNBT(InfusionCapability.CAPABILITY, this.default_capability, null, nbt);
 	}
 
 }

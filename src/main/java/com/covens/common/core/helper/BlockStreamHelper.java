@@ -1,11 +1,11 @@
 package com.covens.common.core.helper;
 
+import java.util.stream.Stream;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.stream.Stream;
 
 public class BlockStreamHelper {
 

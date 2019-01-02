@@ -1,5 +1,8 @@
 package com.covens.common.item.magic.brew;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewEffect;
@@ -12,6 +15,7 @@ import com.covens.common.core.helper.RomanNumberHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
 import com.covens.common.item.ModItems;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -24,9 +28,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-import java.util.Optional;
 
 public class ItemBrew extends ItemMod {
 
@@ -56,7 +57,7 @@ public class ItemBrew extends ItemMod {
 				int lengthMod = list.getLevel(DefaultModifiers.DURATION).orElse(0);
 				String powerString = "";
 				String lengthString = "";
-				if (power.isPresent() && power.get() > 1) {
+				if (power.isPresent() && (power.get() > 1)) {
 					powerString = RomanNumberHelper.getRoman(power.get());
 				}
 				lengthString = getLengthTTip(lengthMod, brewEntry.getPotion(), stack.getItem());
@@ -91,7 +92,7 @@ public class ItemBrew extends ItemMod {
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
-			CauldronRegistry.BREW_POTION_MAP.values().forEach(p -> addPotionType(items, p));
+			CauldronRegistry.BREW_POTION_MAP.values().forEach(p -> this.addPotionType(items, p));
 		}
 	}
 
@@ -109,6 +110,5 @@ public class ItemBrew extends ItemMod {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		addTooltip(stack, worldIn, tooltip, flagIn);
 	}
-
 
 }

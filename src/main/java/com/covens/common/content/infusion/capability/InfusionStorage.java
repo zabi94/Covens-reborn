@@ -4,6 +4,7 @@ import com.covens.api.infusion.DefaultInfusions;
 import com.covens.api.infusion.IInfusion;
 import com.covens.api.infusion.IInfusionCapability;
 import com.covens.common.content.infusion.ModInfusions;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumFacing;

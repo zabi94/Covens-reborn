@@ -1,7 +1,16 @@
 package com.covens.common.content.crystalBall;
 
-
-import com.covens.common.content.crystalBall.fortunes.*;
+import com.covens.common.content.crystalBall.fortunes.FortuneDeath;
+import com.covens.common.content.crystalBall.fortunes.FortuneDropItem;
+import com.covens.common.content.crystalBall.fortunes.FortuneIron;
+import com.covens.common.content.crystalBall.fortunes.FortuneMeetDireWolf;
+import com.covens.common.content.crystalBall.fortunes.FortuneMeetDog;
+import com.covens.common.content.crystalBall.fortunes.FortuneMeetMerchant;
+import com.covens.common.content.crystalBall.fortunes.FortuneMeetParrot;
+import com.covens.common.content.crystalBall.fortunes.FortuneMeetWitch;
+import com.covens.common.content.crystalBall.fortunes.FortuneMeetZombie;
+import com.covens.common.content.crystalBall.fortunes.FortuneShinies;
+import com.covens.common.content.crystalBall.fortunes.FortuneTreasure;
 import com.covens.common.lib.LibMod;
 
 public class ModFortunes {
@@ -34,18 +43,6 @@ public class ModFortunes {
 	}
 
 	public static void registerAll() {
-		Fortune.REGISTRY.registerAll(
-				zombie,
-				dropBow,
-				death,
-				witch,
-				treasure,
-				shinies,
-				iron,
-				direwolf,
-				dog,
-				parrot,
-				merchant
-		);
+		Fortune.REGISTRY.registerAll(zombie, dropBow, death, witch, treasure, shinies, iron, direwolf, dog, parrot, merchant);
 	}
 }

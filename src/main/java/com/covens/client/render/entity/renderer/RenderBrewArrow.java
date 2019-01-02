@@ -1,6 +1,7 @@
 package com.covens.client.render.entity.renderer;
 
 import com.covens.common.entity.EntityBrewArrow;
+
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

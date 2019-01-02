@@ -3,6 +3,7 @@ package com.covens.common.content.transformation;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.api.transformation.ITransformation;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;

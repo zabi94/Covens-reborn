@@ -5,6 +5,7 @@ import com.covens.api.transformation.ITransformation;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -38,11 +39,12 @@ public class MoonHUD extends HudComponent {
 	public String getTooltip(int mouseX, int mouseY) {
 		if (Minecraft.getMinecraft().world.getMoonPhase() == 0) {
 			int warn = 0;
-			if (Minecraft.getMinecraft().world.getWorldTime() < minWarn) {
-			} else if (Minecraft.getMinecraft().world.getWorldTime() > transform) {
-				warn = 2;
-			} else {
-				warn = 1;
+			if (Minecraft.getMinecraft().world.getWorldTime() >= minWarn) {
+				if (Minecraft.getMinecraft().world.getWorldTime() > transform) {
+					warn = 2;
+				} else {
+					warn = 1;
+				}
 			}
 			return I18n.format("moon.tooltip." + warn);
 		}
@@ -51,7 +53,7 @@ public class MoonHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -62,10 +64,10 @@ public class MoonHUD extends HudComponent {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(MOON);
 		if (renderDummy) {
 			GlStateManager.color(1, 1f, 1f, 1);
-			renderTextureAt(getX(), getY(), 24, 24);
+			renderTextureAt(this.getX(), this.getY(), 24, 24);
 			GlStateManager.color(1f, 0.5f, 0.5f);
-			renderTextureAt(getX(), getY(), 16, 16);
-		} else if (t == DefaultTransformations.WEREWOLF && world.getMoonPhase() == 0) {
+			renderTextureAt(this.getX(), this.getY(), 16, 16);
+		} else if ((t == DefaultTransformations.WEREWOLF) && (world.getMoonPhase() == 0)) {
 			if (world.getWorldTime() < minWarn) {
 				float state = 1f - ((minWarn - world.getWorldTime()) / (2 * minWarn));
 				GlStateManager.disableAlpha();
@@ -74,10 +76,10 @@ public class MoonHUD extends HudComponent {
 			} else if (world.getWorldTime() > transform) {
 				GlStateManager.color(1, 1f, 1f, 1);
 			} else {
-				float shade = 0.75f + 0.25f * (float) Math.sin(Math.PI * (Minecraft.getMinecraft().player.ticksExisted / 5f));
+				float shade = 0.75f + (0.25f * (float) Math.sin(Math.PI * (Minecraft.getMinecraft().player.ticksExisted / 5f)));
 				GlStateManager.color(1, shade, shade, 1);
 			}
-			renderTextureAt(getX(), getY(), getWidth(), getHeight());
+			renderTextureAt(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 		}
 
 		GlStateManager.disableRescaleNormal();
@@ -88,7 +90,7 @@ public class MoonHUD extends HudComponent {
 
 	@Override
 	public int getWidth() {
-		return getHeight();
+		return this.getHeight();
 	}
 
 	@Override
@@ -113,13 +115,13 @@ public class MoonHUD extends HudComponent {
 	@Override
 	public double getX() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.MOON_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.MOON_HUD.x, getWidth(), sr.getScaledWidth());
+		return ModConfig.CLIENT.MOON_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.MOON_HUD.x, this.getWidth(), sr.getScaledWidth());
 	}
 
 	@Override
 	public double getY() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.MOON_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.MOON_HUD.y, getHeight(), sr.getScaledHeight());
+		return ModConfig.CLIENT.MOON_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.MOON_HUD.y, this.getHeight(), sr.getScaledHeight());
 	}
 
 	@Override
@@ -127,11 +129,10 @@ public class MoonHUD extends HudComponent {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 		ModConfig.CLIENT.MOON_HUD.v_anchor = vertical;
 		ModConfig.CLIENT.MOON_HUD.h_anchor = horizontal;
-		ModConfig.CLIENT.MOON_HUD.x = horizontal.pixelToData(x, getWidth(), sr.getScaledWidth());
-		ModConfig.CLIENT.MOON_HUD.y = vertical.pixelToData(y, getHeight(), sr.getScaledHeight());
+		ModConfig.CLIENT.MOON_HUD.x = horizontal.pixelToData(x, this.getWidth(), sr.getScaledWidth());
+		ModConfig.CLIENT.MOON_HUD.y = vertical.pixelToData(y, this.getHeight(), sr.getScaledHeight());
 		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
 	}
-
 
 	@Override
 	public EnumHudAnchor getAnchorHorizontal() {

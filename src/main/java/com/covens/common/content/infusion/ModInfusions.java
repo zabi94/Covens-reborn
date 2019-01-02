@@ -3,6 +3,7 @@ package com.covens.common.content.infusion;
 import com.covens.api.infusion.DefaultInfusions;
 import com.covens.api.infusion.IInfusion;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;

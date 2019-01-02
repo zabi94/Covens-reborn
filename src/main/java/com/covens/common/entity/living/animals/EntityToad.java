@@ -45,19 +45,22 @@ import net.minecraft.world.World;
 public class EntityToad extends EntityMultiSkin {
 
 	private static final ResourceLocation loot = new ResourceLocation(LibMod.MOD_ID, "entities/toad");
-	//	private static final String[] names = {"Iron Henry", "Jimmy", "Kermit", "Frog-n-stein", "Prince Charming", "Heqet", "Hapi", "Aphrodite", "Physignathus", "Jiraiya", "Dat Boi", "Llamhigyn Y Dwr", "Michigan", "Wednesday", "Trevor", "Odin", "Woden"};
+	// private static final String[] names = {"Iron Henry", "Jimmy", "Kermit",
+	// "Frog-n-stein", "Prince Charming", "Heqet", "Hapi", "Aphrodite",
+	// "Physignathus", "Jiraiya", "Dat Boi", "Llamhigyn Y Dwr", "Michigan",
+	// "Wednesday", "Trevor", "Odin", "Woden"};
 	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModItems.silver_scales, ModItems.envenomed_fang);
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntityToad.class, DataSerializers.VARINT);
 
 	public EntityToad(World worldIn) {
 		super(worldIn);
-		setSize(1F, 0.3F);
+		this.setSize(1F, 0.3F);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataManager.register(TINT, 0xFFFFFF);
+		this.dataManager.register(TINT, 0xFFFFFF);
 		this.aiSit = new EntityAISit(this);
 	}
 
@@ -79,7 +82,7 @@ public class EntityToad extends EntityMultiSkin {
 		int k = MathHelper.floor(this.posZ);
 		BlockPos blockpos = new BlockPos(i, j, k);
 		Block block = this.world.getBlockState(blockpos.down()).getBlock();
-		return block instanceof BlockGrass && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+		return (block instanceof BlockGrass) && (this.world.getLight(blockpos) > 8) && super.getCanSpawnHere();
 	}
 
 	@Override
@@ -155,11 +158,11 @@ public class EntityToad extends EntityMultiSkin {
 				}
 
 				if (!this.isSilent()) {
-					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
 				}
 
 				if (!this.world.isRemote) {
-					if (this.rand.nextInt(10) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+					if ((this.rand.nextInt(10) == 0) && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 						this.setTamedBy(player);
 						this.playTameEffect(true);
 						this.world.setEntityState(this, (byte) 7);
@@ -176,7 +179,7 @@ public class EntityToad extends EntityMultiSkin {
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
-		if (!entityIn.equals(getOwner())) {
+		if (!entityIn.equals(this.getOwner())) {
 			super.collideWithEntity(entityIn);
 		}
 	}
@@ -188,7 +191,7 @@ public class EntityToad extends EntityMultiSkin {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityToad(world);
+		return new EntityToad(this.world);
 	}
 
 	@Override

@@ -1,5 +1,12 @@
 package com.covens.common.content.cauldron;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+import javax.annotation.Nullable;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewData;
@@ -10,6 +17,7 @@ import com.covens.common.core.helper.ColorHelper;
 import com.covens.common.entity.EntityLingeringBrew;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.google.common.collect.ImmutableList;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -24,12 +32,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 
@@ -46,7 +48,7 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 	}
 
 	public void addEntry(BrewEntry entry) {
-		effects.add(entry);
+		this.effects.add(entry);
 	}
 
 	public void saveToStack(ItemStack stack) {
@@ -60,24 +62,24 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 
 	@Override
 	public List<IBrewEntry> getEffects() {
-		return ImmutableList.copyOf(effects);
+		return ImmutableList.copyOf(this.effects);
 	}
 
 	@Override
 	public NBTTagList serializeNBT() {
 		NBTTagList list = new NBTTagList();
-		effects.forEach(ef -> list.appendTag(((BrewEntry) ef).serializeNBT()));
+		this.effects.forEach(ef -> list.appendTag(((BrewEntry) ef).serializeNBT()));
 		return list;
 	}
 
 	@Override
 	public void deserializeNBT(NBTTagList nbt) {
-		effects.clear();
-		nbt.forEach(nbtb -> effects.add(new BrewEntry((NBTTagCompound) nbtb)));
+		this.effects.clear();
+		nbt.forEach(nbtb -> this.effects.add(new BrewEntry((NBTTagCompound) nbtb)));
 	}
 
 	public int getColor() {
-		return this.getEffects().stream().map(be -> getColorFromEntry(be)).reduce((a, b) -> ColorHelper.blendColor(a, b, 0.5f + (0.5f / getEffects().size()))).orElse(TileEntityCauldron.DEFAULT_COLOR);
+		return this.getEffects().stream().map(be -> this.getColorFromEntry(be)).reduce((a, b) -> ColorHelper.blendColor(a, b, 0.5f + (0.5f / this.getEffects().size()))).orElse(TileEntityCauldron.DEFAULT_COLOR);
 	}
 
 	private int getColorFromEntry(IBrewEntry be) {
@@ -92,16 +94,14 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 	}
 
 	public void applyToEntity(EntityLivingBase entity, Entity indirectSource, Entity thrower, ApplicationType type) {
-		this.getEffects().stream()
-				.filter(be -> !be.getModifierList().getLevel(DefaultModifiers.SUPPRESS_ENTITY_EFFECT).isPresent())
-				.forEach(be -> applyEffect(be, entity, indirectSource, thrower, type));
+		this.getEffects().stream().filter(be -> !be.getModifierList().getLevel(DefaultModifiers.SUPPRESS_ENTITY_EFFECT).isPresent()).forEach(be -> this.applyEffect(be, entity, indirectSource, thrower, type));
 	}
 
 	private void applyEffect(IBrewEntry be, EntityLivingBase entity, Entity carrier, Entity thrower, ApplicationType type) {
 		if (be.getPotion() != null) {
 			IBrewEffect brew = CovensAPI.getAPI().getBrewFromPotion(be.getPotion());
 			if (!be.getModifierList().getLevel(DefaultModifiers.SUPPRESS_ENTITY_EFFECT).isPresent()) {
-				int duration = (int) (0.5d * getDuration(type, brew)) * (be.getPotion().isInstant() ? 0 : 1);
+				int duration = (int) (0.5d * this.getDuration(type, brew)) * (be.getPotion().isInstant() ? 0 : 1);
 				duration *= 1 + (be.getModifierList().getLevel(DefaultModifiers.DURATION).orElse(0) * 1.1);
 				int amplifier = be.getModifierList().getLevel(DefaultModifiers.POWER).orElse(0);
 				boolean particles = !be.getModifierList().getLevel(DefaultModifiers.SUPPRESS_PARTICLES).isPresent();
@@ -162,26 +162,26 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 		}
 
 		public BrewEntry(NBTTagCompound tag) {
-			deserializeNBT(tag);
+			this.deserializeNBT(tag);
 		}
 
 		@Override
 		@Nullable
 		public Potion getPotion() {
-			return pot;
+			return this.pot;
 		}
 
 		@Override
 		public IBrewModifierList getModifierList() {
-			return mods;
+			return this.mods;
 		}
 
 		@Override
 		public NBTTagCompound serializeNBT() {
-			if (pot != null) {
+			if (this.pot != null) {
 				NBTTagCompound tag = new NBTTagCompound();
-				tag.setString("potion", pot.getRegistryName().toString());
-				tag.setTag("modifiers", mods.serializeNBT());
+				tag.setString("potion", this.pot.getRegistryName().toString());
+				tag.setTag("modifiers", this.mods.serializeNBT());
 				return tag;
 			}
 			return new NBTTagCompound();
@@ -189,10 +189,10 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 
 		@Override
 		public void deserializeNBT(NBTTagCompound nbt) {
-			pot = ForgeRegistries.POTIONS.getValue(new ResourceLocation(nbt.getString("potion")));
-			if (pot != null) {
-				mods = new BrewModifierListImpl();
-				mods.deserializeNBT(nbt.getTagList("modifiers", NBT.TAG_COMPOUND));
+			this.pot = ForgeRegistries.POTIONS.getValue(new ResourceLocation(nbt.getString("potion")));
+			if (this.pot != null) {
+				this.mods = new BrewModifierListImpl();
+				this.mods.deserializeNBT(nbt.getTagList("modifiers", NBT.TAG_COMPOUND));
 			}
 		}
 

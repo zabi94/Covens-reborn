@@ -23,7 +23,7 @@ public class ParticleColoredflame extends ParticleFlame {
 
 	@Override
 	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-		this.setRBGColorF(fv(color, 16), fv(color, 8), fv(color, 0));
+		this.setRBGColorF(fv(this.color, 16), fv(this.color, 8), fv(this.color, 0));
 		super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
 	}
 
@@ -32,7 +32,9 @@ public class ParticleColoredflame extends ParticleFlame {
 		@Override
 		public Particle createParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... args) {
 			if (args.length == 0) {
-				args = new int[]{0xFFFFFF};
+				args = new int[] {
+						0xFFFFFF
+				};
 			}
 			return new ParticleColoredflame(worldIn, xCoordIn, yCoordIn, zCoordIn, zSpeedIn, zSpeedIn, zSpeedIn, args[0]);
 		}

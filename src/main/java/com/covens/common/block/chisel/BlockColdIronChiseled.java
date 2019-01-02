@@ -3,6 +3,7 @@ package com.covens.common.block.chisel;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockMod;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -28,7 +29,7 @@ public class BlockColdIronChiseled extends BlockMod {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(VARIANT, BlockColdIronVariant.values()[meta]);
+		return this.getDefaultState().withProperty(VARIANT, BlockColdIronVariant.values()[meta]);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class BlockColdIronChiseled extends BlockMod {
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		return getMetaFromState(state);
+		return this.getMetaFromState(state);
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class BlockColdIronChiseled extends BlockMod {
 
 		@Override
 		public String getName() {
-			return name().toLowerCase();
+			return this.name().toLowerCase();
 		}
 	}
 }

@@ -4,6 +4,7 @@ import com.covens.api.transformation.DefaultTransformations;
 import com.covens.api.transformation.ITransformation;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.core.capability.simple.SimpleCapability;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,26 +26,26 @@ public class CapabilityTransformation extends SimpleCapability {
 
 	public CapabilityTransformation() {
 		if (DefaultTransformations.NONE != null) {
-			type = DefaultTransformations.NONE.getRegistryName().toString();
+			this.type = DefaultTransformations.NONE.getRegistryName().toString();
 		}
 	}
 
 	public ITransformation getType() {
-		return ModTransformations.REGISTRY.getValue(new ResourceLocation(type));
+		return ModTransformations.REGISTRY.getValue(new ResourceLocation(this.type));
 	}
 
 	public void setType(ITransformation type) {
 		this.type = type.getRegistryName().toString();
-		markDirty((byte) 1);
+		this.markDirty((byte) 1);
 	}
 
 	public int getLevel() {
-		return level;
+		return this.level;
 	}
 
 	public void setLevel(int level) {
 		this.level = level;
-		markDirty((byte) 2);
+		this.markDirty((byte) 2);
 	}
 
 	@Override

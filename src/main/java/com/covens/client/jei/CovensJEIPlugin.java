@@ -1,9 +1,24 @@
 package com.covens.client.jei;
 
+import java.util.stream.Collectors;
+
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.ritual.EnumGlyphType;
-import com.covens.client.jei.components.*;
+import com.covens.client.jei.components.BrewModifierCategory;
+import com.covens.client.jei.components.BrewModifierWrapper;
+import com.covens.client.jei.components.BrewingCategory;
+import com.covens.client.jei.components.BrewingWrapper;
+import com.covens.client.jei.components.CauldronCraftingCategory;
+import com.covens.client.jei.components.CauldronCraftingWrapper;
+import com.covens.client.jei.components.DistilleryCategory;
+import com.covens.client.jei.components.DistilleryWrapper;
+import com.covens.client.jei.components.OvenCategory;
+import com.covens.client.jei.components.OvenWrapper;
+import com.covens.client.jei.components.RitualCategory;
+import com.covens.client.jei.components.RitualWrapper;
+import com.covens.client.jei.components.SpinnerCategory;
+import com.covens.client.jei.components.SpinnerWrapper;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.CauldronCraftingRecipe;
@@ -14,18 +29,21 @@ import com.covens.common.crafting.ModDistilleryRecipes;
 import com.covens.common.crafting.OvenSmeltingRecipe;
 import com.covens.common.crafting.SpinningThreadRecipe;
 import com.covens.common.item.ModItems;
-import mezz.jei.api.*;
+
+import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.ISubtypeRegistry.ISubtypeInterpreter;
+import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IRecipeWrapperFactory;
 import net.minecraft.item.ItemStack;
 
-import java.util.stream.Collectors;
-
 @JEIPlugin
 public class CovensJEIPlugin implements IModPlugin {
-	
+
 	protected static int compareRituals(AdapterIRitual a, AdapterIRitual b) {
 		if (a.equals(b)) {
 			return 0;
@@ -73,7 +91,7 @@ public class CovensJEIPlugin implements IModPlugin {
 		registry.handleRecipes(CauldronCraftingRecipe.class, CauldronCraftingWrapper::new, CauldronCraftingCategory.UID);
 		registry.addRecipes(CauldronRegistry.CRAFTING_REGISTRY, CauldronCraftingCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.cauldron), CauldronCraftingCategory.UID);
-		
+
 		registry.handleRecipes(DistilleryRecipe.class, DistilleryWrapper::new, DistilleryCategory.UID);
 		registry.addRecipes(ModDistilleryRecipes.REGISTRY.getValuesCollection(), DistilleryCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.distillery), DistilleryCategory.UID);
@@ -112,7 +130,7 @@ public class CovensJEIPlugin implements IModPlugin {
 
 		@Override
 		public IRecipeWrapper getRecipeWrapper(AdapterIRitual recipe) {
-			return new RitualWrapper(recipe, igh);
+			return new RitualWrapper(recipe, this.igh);
 		}
 	}
 }

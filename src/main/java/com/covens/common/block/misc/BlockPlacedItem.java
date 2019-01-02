@@ -1,9 +1,14 @@
 package com.covens.common.block.misc;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.core.util.MaterialItemPlaced;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.tile.tiles.TileEntityPlacedItem;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -23,9 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import java.util.Random;
 
 public class BlockPlacedItem extends BlockModTileEntity {
 
@@ -52,13 +54,13 @@ public class BlockPlacedItem extends BlockModTileEntity {
 
 	@Override
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
-		return side == EnumFacing.UP && worldIn.getBlockState(pos.down()).getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+		return (side == EnumFacing.UP) && (worldIn.getBlockState(pos.down()).getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (!canPlaceBlockOnSide(worldIn, pos, EnumFacing.UP)) {
+		if (!this.canPlaceBlockOnSide(worldIn, pos, EnumFacing.UP)) {
 			worldIn.destroyBlock(pos, true);
 		}
 	}
@@ -71,7 +73,7 @@ public class BlockPlacedItem extends BlockModTileEntity {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
+		return this.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.covens.client.render.entity.renderer;
 import com.covens.client.render.entity.model.ModelToad;
 import com.covens.common.entity.living.animals.EntityToad;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -42,4 +43,3 @@ public class RenderToad extends RenderLiving<EntityToad> {
 	}
 
 }
-

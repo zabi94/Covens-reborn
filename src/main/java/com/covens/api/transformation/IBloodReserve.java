@@ -1,9 +1,10 @@
 package com.covens.api.transformation;
 
-import net.minecraft.world.World;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
+
+import net.minecraft.world.World;
 
 public interface IBloodReserve {
 	int getMaxBlood();

@@ -10,6 +10,7 @@ package com.covens.common.core.statics;
 
 import com.covens.client.core.hud.HudComponent.EnumHudAnchor;
 import com.covens.common.lib.LibMod;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Type;
@@ -19,11 +20,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
-@SuppressWarnings({"WeakerAccess"})
+@SuppressWarnings({
+		"WeakerAccess"
+})
 @Config(modid = LibMod.MOD_ID)
 @Mod.EventBusSubscriber
 public final class ModConfig {
@@ -37,7 +39,8 @@ public final class ModConfig {
 	public static ClientConfig CLIENT = new ClientConfig();
 	@Comment("The lower this number, the more time it takes for an altar to realize something has changed around it, the better the TPS")
 	@Config.RangeInt(min = 1, max = 46656)
-	//46656 is the max amount of blocks in altar range, meaning it will scan once per tick. More than that is useless
+	// 46656 is the max amount of blocks in altar range, meaning it will scan once
+	// per tick. More than that is useless
 	public static int altar_scan_blocks_per_tick = 80;
 
 	@SubscribeEvent
@@ -198,7 +201,6 @@ public final class ModConfig {
 		@Config.LangKey("covens.config.action_bar")
 		public AbilityBarHUD ACTION_BAR_HUD = new AbilityBarHUD();
 
-
 		@Comment("Customize the vampire blood meter HUD positions in the screen")
 		@Config.LangKey("covens.config.vampire_blood_meter")
 		public VampireBloodHUD VAMPIRE_METER_HUD = new VampireBloodHUD();
@@ -206,7 +208,7 @@ public final class ModConfig {
 		@Comment("The amount of visual imprecision to give to chalk runes. Use 0 to have them perfectly aligned to the block")
 		@Config.RangeDouble(min = 0d, max = 1d)
 		public double glyphImprecision = 0.3d;
-		
+
 		@Comment("Set this to false to disable ritual circles from emitting particles on non-golden circles. Might increase client performance")
 		public boolean allGlyphParticles = true;
 

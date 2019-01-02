@@ -1,6 +1,9 @@
 package com.covens.client.jei.components;
 
+import java.util.List;
+
 import com.covens.common.lib.LibMod;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
@@ -13,8 +16,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.List;
-
 public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftingWrapper> {
 
 	public static final String UID = LibMod.MOD_ID + ":cauldron_crafting";
@@ -22,7 +23,7 @@ public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftin
 	private static ResourceLocation rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_cauldron_crafting.png");
 
 	public CauldronCraftingCategory(IGuiHelper igh) {
-		bg = igh.drawableBuilder(rl, 0, 0, 120, 88).setTextureSize(120, 88).build();
+		this.bg = igh.drawableBuilder(rl, 0, 0, 120, 88).setTextureSize(120, 88).build();
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftin
 
 	@Override
 	public IDrawable getBackground() {
-		return bg;
+		return this.bg;
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftin
 		recipeLayout.setShapeless();
 		List<List<ItemStack>> isList = recipeWrapper.getOriginal().getJEIInput();
 		for (int i = 0; i < isList.size(); i++) {
-			is.init(i + 3, true, 18 * i + (120 - 18 * isList.size()) / 2, 5);
+			is.init(i + 3, true, (18 * i) + ((120 - (18 * isList.size())) / 2), 5);
 			is.set(i + 3, isList.get(i));
 		}
 		IGuiFluidStackGroup fs = recipeLayout.getFluidStacks();

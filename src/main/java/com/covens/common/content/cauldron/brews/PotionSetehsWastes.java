@@ -1,8 +1,12 @@
 package com.covens.common.content.cauldron.brews;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedSandstone;
 import net.minecraft.block.BlockSandStone;
@@ -15,15 +19,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class PotionSetehsWastes extends BrewMod {
 	private final Map<Block, IBlockState> stateMap = new HashMap<>();
 
 	public PotionSetehsWastes() {
 		super("setehs_wastes", false, 0xD2691E, true, 0);
-		stateMap.put(Blocks.SAND, Blocks.SAND.getStateFromMeta(1));
+		this.stateMap.put(Blocks.SAND, Blocks.SAND.getStateFromMeta(1));
 	}
 
 	@Override
@@ -37,19 +38,17 @@ public class PotionSetehsWastes extends BrewMod {
 		Iterable<MutableBlockPos> spots = BlockPos.getAllInBoxMutable(posI, posF);
 		for (BlockPos spot : spots) {
 			boolean place = world.rand.nextInt(7) <= amplifier;
-			if (place && spot.distanceSq(pos) < 2 + box * box / 2) {
+			if (place && (spot.distanceSq(pos) < (2 + ((box * box) / 2)))) {
 				IBlockState state = world.getBlockState(spot);
 				Block block = state.getBlock();
 				if (block == Blocks.SANDSTONE_STAIRS) {
-					IBlockState newState = Blocks.RED_SANDSTONE_STAIRS.getDefaultState()
-							.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING))
-							.withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF));
+					IBlockState newState = Blocks.RED_SANDSTONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING)).withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF));
 					world.setBlockState(spot, newState);
-				} else if (stateMap.containsKey(block)) {
-					world.setBlockState(spot, stateMap.get(block), 3);
+				} else if (this.stateMap.containsKey(block)) {
+					world.setBlockState(spot, this.stateMap.get(block), 3);
 				} else if (block == Blocks.SANDSTONE) {
 					BlockSandStone.EnumType type = state.getValue(BlockSandStone.TYPE);
-					IBlockState other = getSandStone(type);
+					IBlockState other = this.getSandStone(type);
 					world.setBlockState(spot, other, 3);
 				}
 			}

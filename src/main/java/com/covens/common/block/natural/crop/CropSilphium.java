@@ -1,6 +1,9 @@
 package com.covens.common.block.natural.crop;
 
+import java.util.Random;
+
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -10,12 +13,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
- * This class was created by Arekkuusu on 19/05/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 19/05/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class CropSilphium extends BlockCrop {
 
@@ -26,12 +26,12 @@ public class CropSilphium extends BlockCrop {
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		IBlockState state = worldIn.getBlockState(pos.down());
-		return canSustainBush(state);
+		return this.canSustainBush(state);
 	}
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		checkAndDropBlock(worldIn, pos, state);
+		this.checkAndDropBlock(worldIn, pos, state);
 
 		if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
 			int age = this.getAge(state);
@@ -46,23 +46,28 @@ public class CropSilphium extends BlockCrop {
 			}
 		}
 
-		//State 6 means its a top block, so it cannot grow.
-		//We give it a chance of happening, if it can DO IT :tm:, check if the biome is NOT dry (aka can rain).
-		if (state.getValue(AGE) == 6 || rand.nextBoolean() || !worldIn.getBiome(pos).canRain()) return;
+		// State 6 means its a top block, so it cannot grow.
+		// We give it a chance of happening, if it can DO IT :tm:, check if the biome is
+		// NOT dry (aka can rain).
+		if ((state.getValue(AGE) == 6) || rand.nextBoolean() || !worldIn.getBiome(pos).canRain()) {
+			return;
+		}
 
-		//Now we check if we can grow on top of this block.
-		if (canSustainBush(worldIn.getBlockState(pos.down())) && worldIn.isAirBlock(pos.up())) {
+		// Now we check if we can grow on top of this block.
+		if (this.canSustainBush(worldIn.getBlockState(pos.down())) && worldIn.isAirBlock(pos.up())) {
 			IBlockState down = worldIn.getBlockState(pos.down());
 
-			//If the block below is Silphium and the age is 3 we place a top block in this position so it stops growing.
-			if (down.getBlock() == this && down.getValue(AGE) >= 3) {
+			// If the block below is Silphium and the age is 3 we place a top block in this
+			// position so it stops growing.
+			if ((down.getBlock() == this) && (down.getValue(AGE) >= 3)) {
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-					worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, 6), 3);
+					worldIn.setBlockState(pos, this.getDefaultState().withProperty(AGE, 6), 3);
 					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 				}
-				//If it isn't then we place a new Silphium stem on top, only if the crop below is is full grown.
-			} else if (state.getValue(AGE) == 5 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-				worldIn.setBlockState(pos.up(), getDefaultState(), 3);
+				// If it isn't then we place a new Silphium stem on top, only if the crop below
+				// is is full grown.
+			} else if ((state.getValue(AGE) == 5) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+				worldIn.setBlockState(pos.up(), this.getDefaultState(), 3);
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
 		}
@@ -75,7 +80,9 @@ public class CropSilphium extends BlockCrop {
 
 	@Override
 	public void grow(World worldIn, BlockPos pos, IBlockState state) {
-		if (state.getValue(AGE) == 6) return;
+		if (state.getValue(AGE) == 6) {
+			return;
+		}
 		int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
 		int j = 5;
 
@@ -101,6 +108,6 @@ public class CropSilphium extends BlockCrop {
 
 	@Override
 	protected boolean canSustainBush(IBlockState state) {
-		return state.getBlock() == Blocks.FARMLAND || (state.getBlock() == this && isMaxAge(state));
+		return (state.getBlock() == Blocks.FARMLAND) || ((state.getBlock() == this) && this.isMaxAge(state));
 	}
 }

@@ -1,14 +1,15 @@
 package com.covens.common.content.cauldron.brews;
 
+import java.util.Random;
+
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class PotionVolatility extends BrewMod {
 

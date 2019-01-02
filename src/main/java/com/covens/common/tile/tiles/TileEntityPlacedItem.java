@@ -13,45 +13,45 @@ public class TileEntityPlacedItem extends ModTileEntity {
 	private ItemStack stack = ItemStack.EMPTY;
 
 	public void setItem(ItemStack itemstack) {
-		stack = itemstack;
-		markDirty();
-		syncToClient();
+		this.stack = itemstack;
+		this.markDirty();
+		this.syncToClient();
 	}
-	
+
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
 		return true;
 	}
 
 	public ItemStack getItem() {
-		return stack.copy();
+		return this.stack.copy();
 	}
 
 	public ItemStack pop() {
-		ItemStack stackOut = stack.copy();
-		world.destroyBlock(pos, false);
+		ItemStack stackOut = this.stack.copy();
+		this.world.destroyBlock(this.pos, false);
 		return stackOut;
 	}
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound tag) {
-		readModSyncDataNBT(tag);
+		this.readModSyncDataNBT(tag);
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
-		writeModSyncDataNBT(tag);
+		this.writeModSyncDataNBT(tag);
 	}
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
 		NBTTagCompound nbt = new NBTTagCompound();
-		stack.writeToNBT(nbt);
+		this.stack.writeToNBT(nbt);
 		tag.setTag("item", nbt);
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
-		stack = new ItemStack(tag.getCompoundTag("item"));
+		this.stack = new ItemStack(tag.getCompoundTag("item"));
 	}
 }

@@ -1,7 +1,10 @@
 package com.covens.common.block.tiles;
 
+import static net.minecraft.block.BlockHorizontal.FACING;
+
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.tile.tiles.TileEntityThreadSpinner;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -18,8 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import static net.minecraft.block.BlockHorizontal.FACING;
 
 public class BlockThreadSpinner extends BlockModTileEntity {
 

@@ -1,6 +1,7 @@
 package com.covens.client.handler;
 
 import com.covens.client.core.IModelRegister;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
@@ -12,11 +13,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
-@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
+@SuppressWarnings({
+		"WeakerAccess", "ConstantConditions"
+})
 @SideOnly(Side.CLIENT)
 public final class ModelHandler {
 
@@ -28,19 +30,23 @@ public final class ModelHandler {
 	 */
 	public static void registerModels() {
 		for (Block block : Block.REGISTRY) {
-			if (block instanceof IModelRegister)
+			if (block instanceof IModelRegister) {
 				((IModelRegister) block).registerModel();
+			}
 		}
 
 		for (Item item : Item.REGISTRY) {
-			if (item instanceof IModelRegister)
+			if (item instanceof IModelRegister) {
 				((IModelRegister) item).registerModel();
+			}
 		}
 	}
 
 	public static void registerForgeModel(Block block, int meta, String variant) {
 		Item item = Item.getItemFromBlock(block);
-		if (item == Items.AIR) throw new UnsupportedOperationException("This block has no Item!");
+		if (item == Items.AIR) {
+			throw new UnsupportedOperationException("This block has no Item!");
+		}
 		ModelResourceLocation modelResourceLocation = new ModelResourceLocation(item.getRegistryName(), variant);
 		ModelLoader.setCustomModelResourceLocation(item, meta, modelResourceLocation);
 	}
@@ -64,7 +70,9 @@ public final class ModelHandler {
 
 	public static <T extends Enum<T> & IStringSerializable> void registerModel(Block block, Class<T> clazz) {
 		Item item = Item.getItemFromBlock(block);
-		if (item == Items.AIR) throw new UnsupportedOperationException("This block has no Item!");
+		if (item == Items.AIR) {
+			throw new UnsupportedOperationException("This block has no Item!");
+		}
 		registerModel(item, clazz);
 	}
 

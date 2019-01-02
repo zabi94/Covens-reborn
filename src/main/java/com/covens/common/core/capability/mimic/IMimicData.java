@@ -1,8 +1,8 @@
 package com.covens.common.core.capability.mimic;
 
-import net.minecraft.entity.player.EntityPlayer;
-
 import java.util.UUID;
+
+import net.minecraft.entity.player.EntityPlayer;
 
 public interface IMimicData {
 	boolean isMimicking();
@@ -18,8 +18,9 @@ public interface IMimicData {
 	void setMimickedPlayerName(String mimickedPlayerName);
 
 	/**
-	 * Calling this won't call cleanup methods, and should only be used when restoring data from NBT
-	 * Prefer the use of {@link IMimicData#setMimicking(boolean, EntityPlayer)}
+	 * Calling this won't call cleanup methods, and should only be used when
+	 * restoring data from NBT Prefer the use of
+	 * {@link IMimicData#setMimicking(boolean, EntityPlayer)}
 	 */
 	void setMimickingDirect(boolean mimicking);
 }

@@ -1,6 +1,9 @@
 package com.covens.common.block.natural.crop;
 
+import java.util.Random;
+
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -9,12 +12,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
- * This class was created by Arekkuusu on 19/05/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 19/05/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class CropWormwood extends BlockCrop {
 
@@ -24,17 +24,19 @@ public class CropWormwood extends BlockCrop {
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return canSustainBush(worldIn.getBlockState(pos.down()));
+		return this.canSustainBush(worldIn.getBlockState(pos.down()));
 	}
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if (rand.nextBoolean() || !worldIn.getBiome(pos).canRain()) return;
-		if (isMaxAge(state) && state.getValue(AGE) != 7 && canSustainBush(worldIn.getBlockState(pos.down())) && worldIn.isAirBlock(pos.up())) {
+		if (rand.nextBoolean() || !worldIn.getBiome(pos).canRain()) {
+			return;
+		}
+		if (this.isMaxAge(state) && (state.getValue(AGE) != 7) && this.canSustainBush(worldIn.getBlockState(pos.down())) && worldIn.isAirBlock(pos.up())) {
 			if (worldIn.getBlockState(pos.down()).getBlock() == this) {
 				worldIn.setBlockState(pos, state.withProperty(AGE, 7), 2);
-			} else if (rand.nextInt(20) == 0 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-				worldIn.setBlockState(pos.up(), getDefaultState());
+			} else if ((rand.nextInt(20) == 0) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+				worldIn.setBlockState(pos.up(), this.getDefaultState());
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
 		}
@@ -59,9 +61,8 @@ public class CropWormwood extends BlockCrop {
 		return false;
 	}
 
-
 	@Override
 	protected boolean canSustainBush(IBlockState state) {
-		return state.getBlock() == Blocks.FARMLAND || (state.getBlock() == this && isMaxAge(state));
+		return (state.getBlock() == Blocks.FARMLAND) || ((state.getBlock() == this) && this.isMaxAge(state));
 	}
 }

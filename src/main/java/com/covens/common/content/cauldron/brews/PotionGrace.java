@@ -6,6 +6,7 @@ import com.covens.common.content.cauldron.BrewMod;
 import com.covens.common.content.cauldron.BrewModifierListImpl;
 import com.covens.common.entity.EntityAoE;
 import com.covens.common.entity.EntityAoE.IBrewEffectAoEOverTime;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
@@ -21,7 +22,7 @@ public class PotionGrace extends BrewMod implements IBrewEffectAoEOverTime {
 
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
-		apply(entity, amplifier);
+		this.apply(entity, amplifier);
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class PotionGrace extends BrewMod implements IBrewEffectAoEOverTime {
 
 	@Override
 	public void performEffectAoEOverTime(Entity entity, IBrewModifierList modifiers) {
-		apply(entity, 0);
+		this.apply(entity, 0);
 	}
 
 	private void apply(Entity entity, int amplifier) {

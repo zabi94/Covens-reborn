@@ -1,10 +1,14 @@
 package com.covens.common.item.magic;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.covens.client.core.ModelResourceLocations;
 import com.covens.common.Covens;
 import com.covens.common.core.util.DimensionalPosition;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -22,9 +26,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-import java.util.Optional;
 
 public class ItemLocationStone extends ItemMod {
 
@@ -121,9 +122,7 @@ public class ItemLocationStone extends ItemMod {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerModel() {
-		ModelBakery.registerItemVariants(this,
-				ModelResourceLocations.BOUND_LOCATION_STONE,
-				ModelResourceLocations.UNBOUND_LOCATION_STONE);
+		ModelBakery.registerItemVariants(this, ModelResourceLocations.BOUND_LOCATION_STONE, ModelResourceLocations.UNBOUND_LOCATION_STONE);
 		ModelLoader.setCustomMeshDefinition(this, new ItemMeshDefinition() {
 
 			@Override

@@ -1,6 +1,7 @@
 package com.covens.common.core.statics;
 
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 
@@ -9,7 +10,7 @@ import net.minecraft.world.storage.loot.LootTableList;
  */
 public class ModLootTables {
 
-	//Fortunes and chests
+	// Fortunes and chests
 	public static final ResourceLocation JEWELS = new ResourceLocation(LibMod.MOD_ID, "chests/jewels");
 	public static final ResourceLocation METALS = new ResourceLocation(LibMod.MOD_ID, "chests/metals");
 	public static final ResourceLocation SAPLINGS = new ResourceLocation(LibMod.MOD_ID, "chests/saplings");

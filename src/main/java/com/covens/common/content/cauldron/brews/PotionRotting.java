@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.util.DamageSource;
@@ -15,13 +16,13 @@ public class PotionRotting extends BrewMod {
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
 		if (entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
-			entity.attackEntityFrom(DamageSource.MAGIC, 0.5f + amplifier / 2.5f);
+			entity.attackEntityFrom(DamageSource.MAGIC, 0.5f + (amplifier / 2.5f));
 		}
 	}
 
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		return duration % 40 == 0;
+		return (duration % 40) == 0;
 	}
 
 }

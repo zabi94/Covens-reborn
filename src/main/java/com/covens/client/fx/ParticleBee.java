@@ -1,6 +1,7 @@
 package com.covens.client.fx;
 
 import com.covens.client.ResourceLocations;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -9,9 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by Arekkuusu on 08/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 08/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 @SideOnly(Side.CLIENT)
 class ParticleBee extends Particle {
@@ -29,7 +29,7 @@ class ParticleBee extends Particle {
 		this.z = posZIn;
 
 		final TextureAtlasSprite atlasSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(ResourceLocations.BEE.toString());
-		setParticleTexture(atlasSprite);
+		this.setParticleTexture(atlasSprite);
 	}
 
 	@Override
@@ -41,20 +41,20 @@ class ParticleBee extends Particle {
 		this.move(this.motionX, this.motionY, this.motionZ);
 
 		if (this.particleMaxAge-- > 0) {
-			final double d0 = x + 0.5D - this.posX;
-			final double d1 = y + 0.1D - this.posY;
-			final double d2 = z + 0.5D - this.posZ;
-			if (rand.nextBoolean()) {
-				this.motionX += (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
-				this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
-				this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
+			final double d0 = (this.x + 0.5D) - this.posX;
+			final double d1 = (this.y + 0.1D) - this.posY;
+			final double d2 = (this.z + 0.5D) - this.posZ;
+			if (this.rand.nextBoolean()) {
+				this.motionX += ((Math.signum(d0) * 0.5D) - this.motionX) * 0.10000000149011612D;
+				this.motionY += ((Math.signum(d1) * 0.699999988079071D) - this.motionY) * 0.10000000149011612D;
+				this.motionZ += ((Math.signum(d2) * 0.5D) - this.motionZ) * 0.10000000149011612D;
 			} else {
-				this.motionX -= (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
-				this.motionY -= (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
-				this.motionZ -= (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
+				this.motionX -= ((Math.signum(d0) * 0.5D) - this.motionX) * 0.10000000149011612D;
+				this.motionY -= ((Math.signum(d1) * 0.699999988079071D) - this.motionY) * 0.10000000149011612D;
+				this.motionZ -= ((Math.signum(d2) * 0.5D) - this.motionZ) * 0.10000000149011612D;
 			}
 		} else {
-			setExpired();
+			this.setExpired();
 		}
 	}
 

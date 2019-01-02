@@ -77,9 +77,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 @SuppressWarnings("ConstantConditions")
 @ObjectHolder(LibMod.MOD_ID)
@@ -248,7 +247,6 @@ public final class ModItems {
 	public static final Item cold_iron_spade = null;
 	public static final Item cold_iron_pickaxe = null;
 
-
 	private ModItems() {
 	}
 
@@ -269,168 +267,28 @@ public final class ModItems {
 
 		registry.register(new ItemSpellPage(LibItemName.SPELL_PAGE));
 
-		//Misc
-		registry.registerAll(
-				new ItemHoney(),
-				new ItemSalt(),
-				new ItemMod(LibItemName.WAX),
-				new ItemMod(LibItemName.HONEYCOMB),
-				new ItemMod(LibItemName.EMPTY_HONEYCOMB),
-				new ItemMod(LibItemName.MORTAR_AND_PESTLE),
-				new ItemMod(LibItemName.MORTAR_AND_PESTLE_STONE),
-				new ItemBrewDrinkable(),
-				new ItemBrewThrowable(LibItemName.BREW_PHIAL_SPLASH),
-				new ItemBrewThrowable(LibItemName.BREW_PHIAL_LINGER),
-				new ItemMod(LibItemName.EMPTY_BREW_DRINK),
-				new ItemMod(LibItemName.EMPTY_BREW_SPLASH),
-				new ItemMod(LibItemName.EMPTY_BREW_LINGER),
-				new ItemBrewArrow(),
-				new ItemMod(LibItemName.GLASS_JAR),
-				new ItemAthame(),
-				new ItemBoline(),
-				new ItemTaglock(),
-				new ItemMod(LibItemName.NEEDLE_BONE),
-				new ItemMod(LibItemName.WOOL_OF_BAT),
-				new ItemMod(LibItemName.TONGUE_OF_DOG),
-				new ItemMod(LibItemName.WOOD_ASH),
-				new ItemMod(LibItemName.SPECTRAL_DUST),
-				new ItemMod(LibItemName.SILVER_SCALES),
-				new ItemMod(LibItemName.ENVENOMED_FANG),
-				new ItemMod(LibItemName.DIMENSIONAL_SAND),
-				new ItemMod(LibItemName.EQUINE_TAIL),
-				new ItemMod(LibItemName.CATECHU),
-				new ItemMod(LibItemName.OAK_APPLE_GALL),
-				new ItemMod(LibItemName.IRON_GALL_INK),
-				new ItemMod(LibItemName.GOLDEN_THREAD),
-				new ItemMod(LibItemName.COLD_IRON_NUGGET),
-				new ItemMod(LibItemName.OWLETS_WING),
-				new ItemMod(LibItemName.RAVENS_FEATHER),
-				new ItemMod(LibItemName.COLD_IRON_DUST),
-				new ItemMod(LibItemName.COLD_IRON_DUST_SMALL),
-				new ItemMod(LibItemName.REGAL_SILK),
-				new ItemMod(LibItemName.WITCHES_STITCHING),
-				new ItemMod(LibItemName.DIABOLIC_VEIN),
-				new ItemMod(LibItemName.PURE_FILAMENT),
-				new ItemMod(LibItemName.SOUL_STRING),
-				new ItemMod(LibItemName.GRAVEYARD_DUST),
-				new ItemMod(LibItemName.SANGUINE_FABRIC),
-				new ItemMod(LibItemName.PENTACLE),
-				new ItemMod(LibItemName.ADDERS_FORK),
-				new ItemMod(LibItemName.SNAKE_VENOM),
-				new ItemMod(LibItemName.TOE_OF_FROG),
-				new ItemMod(LibItemName.LIZARD_LEG),
-				new ItemMod(LibItemName.EYE_OF_NEWT),
-				new ItemMod(LibItemName.QUARTZ_POWDER),
-				new ItemMod(LibItemName.LAPIS_POWDER),
-				new ItemHeart(),
-				new ItemGrilledWatermelon(),
-				new ItemJuniperBerries(),
-				new ItemYewAril(),
-				new ItemFilledBowl(),
-				new ItemRitualChalk(LibItemName.RITUAL_CHALK),
-				new ItemRemedyTalisman(),
-				new ItemMagicSalve(),
-				new ItemLocationStone(),
-				new ItemTarots(LibItemName.TAROTS),
-				new ItemBroom(LibItemName.BROOM)// ,
-				// new ItemMod(LibItemName.WITCHWEED),
-				// new ItemMod(LibItemName.INFESTED_WHEAT)
+		// Misc
+		registry.registerAll(new ItemHoney(), new ItemSalt(), new ItemMod(LibItemName.WAX), new ItemMod(LibItemName.HONEYCOMB), new ItemMod(LibItemName.EMPTY_HONEYCOMB), new ItemMod(LibItemName.MORTAR_AND_PESTLE), new ItemMod(LibItemName.MORTAR_AND_PESTLE_STONE), new ItemBrewDrinkable(), new ItemBrewThrowable(LibItemName.BREW_PHIAL_SPLASH), new ItemBrewThrowable(LibItemName.BREW_PHIAL_LINGER), new ItemMod(LibItemName.EMPTY_BREW_DRINK), new ItemMod(LibItemName.EMPTY_BREW_SPLASH), new ItemMod(LibItemName.EMPTY_BREW_LINGER), new ItemBrewArrow(), new ItemMod(LibItemName.GLASS_JAR), new ItemAthame(), new ItemBoline(), new ItemTaglock(), new ItemMod(LibItemName.NEEDLE_BONE), new ItemMod(LibItemName.WOOL_OF_BAT), new ItemMod(LibItemName.TONGUE_OF_DOG), new ItemMod(LibItemName.WOOD_ASH), new ItemMod(LibItemName.SPECTRAL_DUST), new ItemMod(LibItemName.SILVER_SCALES), new ItemMod(LibItemName.ENVENOMED_FANG), new ItemMod(LibItemName.DIMENSIONAL_SAND), new ItemMod(LibItemName.EQUINE_TAIL), new ItemMod(LibItemName.CATECHU), new ItemMod(LibItemName.OAK_APPLE_GALL), new ItemMod(LibItemName.IRON_GALL_INK), new ItemMod(LibItemName.GOLDEN_THREAD), new ItemMod(LibItemName.COLD_IRON_NUGGET),
+				new ItemMod(LibItemName.OWLETS_WING), new ItemMod(LibItemName.RAVENS_FEATHER), new ItemMod(LibItemName.COLD_IRON_DUST), new ItemMod(LibItemName.COLD_IRON_DUST_SMALL), new ItemMod(LibItemName.REGAL_SILK), new ItemMod(LibItemName.WITCHES_STITCHING), new ItemMod(LibItemName.DIABOLIC_VEIN), new ItemMod(LibItemName.PURE_FILAMENT), new ItemMod(LibItemName.SOUL_STRING), new ItemMod(LibItemName.GRAVEYARD_DUST), new ItemMod(LibItemName.SANGUINE_FABRIC), new ItemMod(LibItemName.PENTACLE), new ItemMod(LibItemName.ADDERS_FORK), new ItemMod(LibItemName.SNAKE_VENOM), new ItemMod(LibItemName.TOE_OF_FROG), new ItemMod(LibItemName.LIZARD_LEG), new ItemMod(LibItemName.EYE_OF_NEWT), new ItemMod(LibItemName.QUARTZ_POWDER), new ItemMod(LibItemName.LAPIS_POWDER), new ItemHeart(), new ItemGrilledWatermelon(), new ItemJuniperBerries(), new ItemYewAril(), new ItemFilledBowl(), new ItemRitualChalk(LibItemName.RITUAL_CHALK), new ItemRemedyTalisman(), new ItemMagicSalve(), new ItemLocationStone(), new ItemTarots(LibItemName.TAROTS), new ItemBroom(LibItemName.BROOM)// ,
+		// new ItemMod(LibItemName.WITCHWEED),
+		// new ItemMod(LibItemName.INFESTED_WHEAT)
 		);
 
 		// Baubles
 		registry.registerAll(//
-				new ItemOmenNeckalce(),
-				new ItemHorseshoe(),
-				new ItemTriskelionAmulet(),
-				new ItemHellishBauble(),
-				new ItemWrathfulEye(),
-				new ItemTalisman(BaubleType.HEAD, 35, LibItemName.TALISMAN_AQUAMARINE_CROWN),
-				new ItemTalisman(BaubleType.RING, 18, LibItemName.TALISMAN_ADAMANTINE_STAR_RING),
-				new ItemTalisman(BaubleType.AMULET, 18, LibItemName.TALISMAN_EMERALD_PENDANT),
-				new ItemTalisman(BaubleType.BELT, 30, LibItemName.TALISMAN_RUBY_ORB),
-				new ItemTalisman(BaubleType.CHARM, 18, LibItemName.TALISMAN_WATCHING_EYE),
-				new ItemGirdleOfTheWooded(LibItemName.GIRDLE_OF_THE_WOODED),
-				new ItemMantle(LibItemName.MANTLE), new ItemPouch(LibItemName.POUCH)
-		);
+				new ItemOmenNeckalce(), new ItemHorseshoe(), new ItemTriskelionAmulet(), new ItemHellishBauble(), new ItemWrathfulEye(), new ItemTalisman(BaubleType.HEAD, 35, LibItemName.TALISMAN_AQUAMARINE_CROWN), new ItemTalisman(BaubleType.RING, 18, LibItemName.TALISMAN_ADAMANTINE_STAR_RING), new ItemTalisman(BaubleType.AMULET, 18, LibItemName.TALISMAN_EMERALD_PENDANT), new ItemTalisman(BaubleType.BELT, 30, LibItemName.TALISMAN_RUBY_ORB), new ItemTalisman(BaubleType.CHARM, 18, LibItemName.TALISMAN_WATCHING_EYE), new ItemGirdleOfTheWooded(LibItemName.GIRDLE_OF_THE_WOODED), new ItemMantle(LibItemName.MANTLE), new ItemPouch(LibItemName.POUCH));
 
-		//Equipment
-		registry.registerAll(
-				new ItemSilverPickaxe(),
-				new ItemSilverAxe(),
-				new ItemSilverSpade(),
-				new ItemSilverHoe(),
-				new ItemSilverSword(), new ItemSilverArmor(LibItemName.SILVER_HELMET, ModMaterials.ARMOR_SILVER, 1, EntityEquipmentSlot.HEAD),
-				new ItemSilverArmor(LibItemName.SILVER_CHESTPLATE, ModMaterials.ARMOR_SILVER, 1, EntityEquipmentSlot.CHEST),
-				new ItemSilverArmor(LibItemName.SILVER_LEGGINGS, ModMaterials.ARMOR_SILVER, 2, EntityEquipmentSlot.LEGS),
-				new ItemSilverArmor(LibItemName.SILVER_BOOTS, ModMaterials.ARMOR_SILVER, 1, EntityEquipmentSlot.FEET),
-				new ItemWitchesArmor(LibItemName.WITCHES_HAT, ModMaterials.ARMOR_BEWITCHED_LEATHER, 1, EntityEquipmentSlot.HEAD),
-				new ItemWitchesArmor(LibItemName.WITCHES_ROBES, ModMaterials.ARMOR_BEWITCHED_LEATHER, 1, EntityEquipmentSlot.CHEST),
-				new ItemWitchesArmor(LibItemName.WITCHES_PANTS, ModMaterials.ARMOR_BEWITCHED_LEATHER, 2, EntityEquipmentSlot.LEGS),
-				new ItemVampireArmor(LibItemName.VAMPIRE_HAT, ModMaterials.ARMOR_VAMPIRE, 1, EntityEquipmentSlot.HEAD),
-				new ItemVampireArmor(LibItemName.VAMPIRE_VEST, ModMaterials.ARMOR_VAMPIRE, 2, EntityEquipmentSlot.CHEST),
+		// Equipment
+		registry.registerAll(new ItemSilverPickaxe(), new ItemSilverAxe(), new ItemSilverSpade(), new ItemSilverHoe(), new ItemSilverSword(), new ItemSilverArmor(LibItemName.SILVER_HELMET, ModMaterials.ARMOR_SILVER, 1, EntityEquipmentSlot.HEAD), new ItemSilverArmor(LibItemName.SILVER_CHESTPLATE, ModMaterials.ARMOR_SILVER, 1, EntityEquipmentSlot.CHEST), new ItemSilverArmor(LibItemName.SILVER_LEGGINGS, ModMaterials.ARMOR_SILVER, 2, EntityEquipmentSlot.LEGS), new ItemSilverArmor(LibItemName.SILVER_BOOTS, ModMaterials.ARMOR_SILVER, 1, EntityEquipmentSlot.FEET), new ItemWitchesArmor(LibItemName.WITCHES_HAT, ModMaterials.ARMOR_BEWITCHED_LEATHER, 1, EntityEquipmentSlot.HEAD), new ItemWitchesArmor(LibItemName.WITCHES_ROBES, ModMaterials.ARMOR_BEWITCHED_LEATHER, 1, EntityEquipmentSlot.CHEST), new ItemWitchesArmor(LibItemName.WITCHES_PANTS, ModMaterials.ARMOR_BEWITCHED_LEATHER, 2, EntityEquipmentSlot.LEGS), new ItemVampireArmor(LibItemName.VAMPIRE_HAT, ModMaterials.ARMOR_VAMPIRE, 1, EntityEquipmentSlot.HEAD), new ItemVampireArmor(LibItemName.VAMPIRE_VEST, ModMaterials.ARMOR_VAMPIRE, 2, EntityEquipmentSlot.CHEST),
 				new ItemVampireArmor(LibItemName.VAMPIRE_PANTS, ModMaterials.ARMOR_VAMPIRE, 2, EntityEquipmentSlot.LEGS),
 
-				new ItemColdIronSword(),
-				new ItemColdIronAxe(),
-				new ItemColdIronHoe(),
-				new ItemColdIronPickaxe(),
-				new ItemColdIronSpade()
-		);
+				new ItemColdIronSword(), new ItemColdIronAxe(), new ItemColdIronHoe(), new ItemColdIronPickaxe(), new ItemColdIronSpade());
 		// Item Blocks
-		registry.registerAll(
-				new ItemBlockColor(ModBlocks.candle_medium),
-				new ItemBlockColor(ModBlocks.candle_small),
-				itemBlock(ModBlocks.fake_ice),
-				new ItemGemOre(ModBlocks.gem_ore).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB),
-				itemBlock(ModBlocks.silver_block),
-				itemBlock(ModBlocks.silver_ore),
-				itemBlock(ModBlocks.cauldron),
-				itemBlock(ModBlocks.oven),
-				itemBlock(ModBlocks.distillery),
-				itemBlock(ModBlocks.apiary),
-				itemBlock(ModBlocks.brazier),
-				itemBlock(ModBlocks.torchwood),
-				itemBlock(ModBlocks.ember_grass),
-				itemBlock(ModBlocks.beehive),
-				new ItemGemBlock(ModBlocks.gem_block).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB),
-				itemBlock(ModBlocks.salt_ore),
-				itemBlock(ModBlocks.nethersteel),
-				itemBlock(ModBlocks.log_elder),
-				itemBlock(ModBlocks.log_juniper),
-				itemBlock(ModBlocks.log_yew),
-				itemBlock(ModBlocks.log_cypress),
-				itemBlock(ModBlocks.leaves_elder),
-				itemBlock(ModBlocks.leaves_juniper),
-				itemBlock(ModBlocks.leaves_yew),
-				itemBlock(ModBlocks.leaves_cypress),
-				itemBlock(ModBlocks.planks_elder),
-				itemBlock(ModBlocks.planks_juniper),
-				itemBlock(ModBlocks.planks_yew),
-				itemBlock(ModBlocks.planks_cypress),
-				itemBlock(ModBlocks.purifying_earth),
-				new ItemBlockSapling(),
-				itemBlock(ModBlocks.moonbell),
-				itemBlock(ModBlocks.witch_altar),
-				itemBlock(ModBlocks.thread_spinner),
-				itemBlock(ModBlocks.infested_farmland),
-				itemBlock(ModBlocks.crystal_ball),
-				new ItemGoblet(),
-				itemBlock(ModBlocks.gem_bowl),
-				itemBlock(ModBlocks.magic_mirror),
-				itemBlock(ModBlocks.tarot_table),
-				itemBlock(ModBlocks.cold_iron_block),
-				itemBlock(ModBlocks.graveyard_dirt),
-				new ItemBlockRevealingLantern(ModBlocks.lantern, false),
-				new ItemBlockRevealingLantern(ModBlocks.revealing_lantern, true),
-				itemBlock(ModBlocks.spanish_moss)
-		);
+		registry.registerAll(new ItemBlockColor(ModBlocks.candle_medium), new ItemBlockColor(ModBlocks.candle_small), itemBlock(ModBlocks.fake_ice), new ItemGemOre(ModBlocks.gem_ore).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB), itemBlock(ModBlocks.silver_block), itemBlock(ModBlocks.silver_ore), itemBlock(ModBlocks.cauldron), itemBlock(ModBlocks.oven), itemBlock(ModBlocks.distillery), itemBlock(ModBlocks.apiary), itemBlock(ModBlocks.brazier), itemBlock(ModBlocks.torchwood), itemBlock(ModBlocks.ember_grass), itemBlock(ModBlocks.beehive), new ItemGemBlock(ModBlocks.gem_block).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB), itemBlock(ModBlocks.salt_ore), itemBlock(ModBlocks.nethersteel), itemBlock(ModBlocks.log_elder), itemBlock(ModBlocks.log_juniper), itemBlock(ModBlocks.log_yew), itemBlock(ModBlocks.log_cypress), itemBlock(ModBlocks.leaves_elder), itemBlock(ModBlocks.leaves_juniper), itemBlock(ModBlocks.leaves_yew), itemBlock(ModBlocks.leaves_cypress), itemBlock(ModBlocks.planks_elder), itemBlock(ModBlocks.planks_juniper), itemBlock(ModBlocks.planks_yew), itemBlock(ModBlocks.planks_cypress), itemBlock(ModBlocks.purifying_earth), new ItemBlockSapling(),
+				itemBlock(ModBlocks.moonbell), itemBlock(ModBlocks.witch_altar), itemBlock(ModBlocks.thread_spinner), itemBlock(ModBlocks.infested_farmland), itemBlock(ModBlocks.crystal_ball), new ItemGoblet(), itemBlock(ModBlocks.gem_bowl), itemBlock(ModBlocks.magic_mirror), itemBlock(ModBlocks.tarot_table), itemBlock(ModBlocks.cold_iron_block), itemBlock(ModBlocks.graveyard_dirt), new ItemBlockRevealingLantern(ModBlocks.lantern, false), new ItemBlockRevealingLantern(ModBlocks.revealing_lantern, true), itemBlock(ModBlocks.spanish_moss));
 
-		//Chisel
-		registry.registerAll(
-				new ItemBlockMeta<>(ModBlocks.silver_block_chisel, BlockSilverChiseled.BlockSilverVariant.values(), EnumNameMode.TOOLTIP),
-				new ItemBlockMeta<>(ModBlocks.cold_iron_block_chisel, BlockColdIronChiseled.BlockColdIronVariant.values(), EnumNameMode.TOOLTIP),
-				new ItemBlockMeta<>(ModBlocks.nethersteel_chisel, BlockNetherSteelChiseled.BlockSteelVariant.values(), EnumNameMode.TOOLTIP)
-		);
+		// Chisel
+		registry.registerAll(new ItemBlockMeta<>(ModBlocks.silver_block_chisel, BlockSilverChiseled.BlockSilverVariant.values(), EnumNameMode.TOOLTIP), new ItemBlockMeta<>(ModBlocks.cold_iron_block_chisel, BlockColdIronChiseled.BlockColdIronVariant.values(), EnumNameMode.TOOLTIP), new ItemBlockMeta<>(ModBlocks.nethersteel_chisel, BlockNetherSteelChiseled.BlockSteelVariant.values(), EnumNameMode.TOOLTIP));
 
 	}
 
@@ -463,7 +321,7 @@ public final class ModItems {
 		OreDictionary.registerOre("gemMalachite", new ItemStack(ModItems.gem, 1, Gem.MALACHITE.ordinal()));
 		OreDictionary.registerOre("gemAmethyst", new ItemStack(ModItems.gem, 1, Gem.AMETHYST.ordinal()));
 		OreDictionary.registerOre("gemAlexandrite", new ItemStack(ModItems.gem, 1, Gem.ALEXANDRITE.ordinal()));
-		
+
 		OreDictionary.registerOre("nuggetSilver", new ItemStack(ModItems.silver_nugget));
 		OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.silver_ingot));
 		OreDictionary.registerOre("honeyDrop", new ItemStack(ModItems.honey));

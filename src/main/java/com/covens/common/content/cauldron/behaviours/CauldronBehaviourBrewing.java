@@ -1,10 +1,13 @@
 package com.covens.common.content.cauldron.behaviours;
 
+import java.util.Optional;
+
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.content.cauldron.BrewBuilder;
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.item.ModItems;
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -12,8 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-
-import java.util.Optional;
 
 public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 
@@ -24,12 +25,12 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 
 	@Override
 	public void setCauldron(TileEntityCauldron tile) {
-		cauldron = tile;
+		this.cauldron = tile;
 	}
 
 	@Override
 	public void handleParticles(boolean isActiveBehaviour) {
-		//TODO particle indicators for energy missing
+		// TODO particle indicators for energy missing
 	}
 
 	@Override
@@ -40,9 +41,9 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 	@Override
 	public void statusChanged(boolean isActiveBehaviour) {
 		if (isActiveBehaviour) {
-			checkBrew();
-			if (cauldron.getInputs().size() == 1) {
-				color = 0xe050a0;
+			this.checkBrew();
+			if (this.cauldron.getInputs().size() == 1) {
+				this.color = 0xe050a0;
 			}
 		}
 	}
@@ -59,67 +60,67 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 				potionAmountUsed = 300;
 			}
 
-			if (hasEnergy(1000) && hasRequiredFluidAmount(potionAmountUsed)) { //TODO make energy dependent on brew
+			if (this.hasEnergy(1000) && this.hasRequiredFluidAmount(potionAmountUsed)) { // TODO make energy dependent on brew
 				if (heldItem == ModItems.empty_brew_drink) {
-					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_drink)));
+					TileEntityCauldron.giveItemToPlayer(player, this.getBrewStackFor(new ItemStack(ModItems.brew_phial_drink)));
 				} else if (heldItem == ModItems.empty_brew_linger) {
-					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_linger)));
+					TileEntityCauldron.giveItemToPlayer(player, this.getBrewStackFor(new ItemStack(ModItems.brew_phial_linger)));
 				} else if (heldItem == ModItems.empty_brew_splash) {
-					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_phial_splash)));
+					TileEntityCauldron.giveItemToPlayer(player, this.getBrewStackFor(new ItemStack(ModItems.brew_phial_splash)));
 				} else if (heldItem == Items.ARROW) {
-					TileEntityCauldron.giveItemToPlayer(player, getBrewStackFor(new ItemStack(ModItems.brew_arrow)));
+					TileEntityCauldron.giveItemToPlayer(player, this.getBrewStackFor(new ItemStack(ModItems.brew_arrow)));
 				}
-				cauldron.setTankLock(true);
-				cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null).drain(potionAmountUsed, true);
-				cauldron.setTankLock(false);
+				this.cauldron.setTankLock(true);
+				this.cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null).drain(potionAmountUsed, true);
+				this.cauldron.setTankLock(false);
 			}
 
-			if (!cauldron.getFluid().isPresent() || cauldron.getFluid().get().amount <= 0) {
-				cauldron.setTankLock(true);
-				cauldron.clearItemInputs();
-				cauldron.setBehaviour(cauldron.getDefaultBehaviours().IDLE);
+			if (!this.cauldron.getFluid().isPresent() || (this.cauldron.getFluid().get().amount <= 0)) {
+				this.cauldron.setTankLock(true);
+				this.cauldron.clearItemInputs();
+				this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().IDLE);
 			}
-			cauldron.markDirty();
-			cauldron.syncToClient();
+			this.cauldron.markDirty();
+			this.cauldron.syncToClient();
 		}
 	}
-	
+
 	private boolean hasEnergy(int amount) {
-		return cauldron.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(null, cauldron.getPos(), cauldron.getWorld().provider.getDimension(), amount);
+		return this.cauldron.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), amount);
 	}
-	
+
 	private boolean hasRequiredFluidAmount(int potionAmountUsed) {
-		return cauldron.getFluid().isPresent() && cauldron.getFluid().get().amount >= potionAmountUsed;
+		return this.cauldron.getFluid().isPresent() && (this.cauldron.getFluid().get().amount >= potionAmountUsed);
 	}
 
 	@Override
 	public void update(boolean isActiveBehaviour) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public int getColor() {
-		return color;
+		return this.color;
 	}
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-		tag.setInteger("potColor", color);
+		tag.setInteger("potColor", this.color);
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-		color = tag.getInteger("potColor");
+		this.color = tag.getInteger("potColor");
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-		saveToNBT(tag);
+		this.saveToNBT(tag);
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-		loadFromNBT(tag);
+		this.loadFromNBT(tag);
 	}
 
 	@Override
@@ -129,24 +130,24 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 
 	@Override
 	public void onDeactivation() {
-		color = TileEntityCauldron.DEFAULT_COLOR;
+		this.color = TileEntityCauldron.DEFAULT_COLOR;
 	}
 
 	private void checkBrew() {
-		if (cauldron.getInputs().size() > 1) { //Ignore the wart
-			Optional<BrewData> data = new BrewBuilder(cauldron.getInputs()).build();
+		if (this.cauldron.getInputs().size() > 1) { // Ignore the wart
+			Optional<BrewData> data = new BrewBuilder(this.cauldron.getInputs()).build();
 			if (data.isPresent()) {
-				color = data.get().getColor();
+				this.color = data.get().getColor();
 			} else {
-				cauldron.setBehaviour(cauldron.getDefaultBehaviours().FAILING);
+				this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
 			}
-			cauldron.markDirty();
-			cauldron.syncToClient();
+			this.cauldron.markDirty();
+			this.cauldron.syncToClient();
 		}
 	}
 
 	private ItemStack getBrewStackFor(ItemStack stack) {
-		Optional<BrewData> data = new BrewBuilder(cauldron.getInputs()).build();
+		Optional<BrewData> data = new BrewBuilder(this.cauldron.getInputs()).build();
 		if (data.isPresent()) {
 			data.get().saveToStack(stack);
 		}

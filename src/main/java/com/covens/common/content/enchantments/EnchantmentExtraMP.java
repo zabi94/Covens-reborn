@@ -3,6 +3,7 @@ package com.covens.common.content.enchantments;
 import com.covens.api.CovensAPI;
 import com.covens.api.mp.IMagicPowerExpander;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -16,12 +17,12 @@ public class EnchantmentExtraMP extends BaublesEnchantment {
 
 	@Override
 	public void onEquipped(EntityPlayer player) {
-		updateExpansion(player);
+		this.updateExpansion(player);
 	}
 
 	@Override
 	public void onUnequipped(EntityPlayer player) {
-		updateExpansion(player);
+		this.updateExpansion(player);
 	}
 
 	public void updateExpansion(EntityPlayer player) {
@@ -37,7 +38,7 @@ public class EnchantmentExtraMP extends BaublesEnchantment {
 		private int amount;
 
 		public EnchantmentExpander(int level) {
-			amount = (1 << level) * 100;
+			this.amount = (1 << level) * 100;
 		}
 
 		@Override
@@ -47,7 +48,7 @@ public class EnchantmentExtraMP extends BaublesEnchantment {
 
 		@Override
 		public int getExtraAmount(EntityPlayer p) {
-			return amount;
+			return this.amount;
 		}
 
 	}

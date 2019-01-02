@@ -1,6 +1,9 @@
 package com.covens.client.jei.components;
 
+import java.util.Arrays;
+
 import com.covens.common.lib.LibMod;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -9,15 +12,13 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Arrays;
-
 public class DistilleryCategory implements IRecipeCategory<DistilleryWrapper> {
 
 	public static final String UID = LibMod.MOD_ID + ":distillery";
 	private IDrawable bg;
 
 	public DistilleryCategory(IGuiHelper igh) {
-		bg = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_distillery.png"), 0, 0, 93, 54).setTextureSize(93, 54).build();
+		this.bg = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_distillery.png"), 0, 0, 93, 54).setTextureSize(93, 54).build();
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class DistilleryCategory implements IRecipeCategory<DistilleryWrapper> {
 
 	@Override
 	public IDrawable getBackground() {
-		return bg;
+		return this.bg;
 	}
 
 	@Override
@@ -47,9 +48,9 @@ public class DistilleryCategory implements IRecipeCategory<DistilleryWrapper> {
 			recipeLayout.getItemStacks().set(i, Arrays.asList(recipeWrapper.input.get(i).getMatchingStacks()));
 		}
 		for (int i = 0; i < recipeWrapper.output.size(); i++) {
-			recipeLayout.getItemStacks().init(recipeWrapper.input.size()+i, false, 57 + (i % 2) * 18, (i / 2) * 18);
-			recipeLayout.getItemStacks().set(recipeWrapper.input.size()+i, recipeWrapper.output.get(i));
+			recipeLayout.getItemStacks().init(recipeWrapper.input.size() + i, false, 57 + ((i % 2) * 18), (i / 2) * 18);
+			recipeLayout.getItemStacks().set(recipeWrapper.input.size() + i, recipeWrapper.output.get(i));
 		}
-		
+
 	}
 }

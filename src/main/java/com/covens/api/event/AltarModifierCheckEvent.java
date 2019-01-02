@@ -15,7 +15,7 @@ public class AltarModifierCheckEvent extends BlockEvent {
 	}
 
 	public AltarUpgradeController getController() {
-		return controller;
+		return this.controller;
 	}
 
 }

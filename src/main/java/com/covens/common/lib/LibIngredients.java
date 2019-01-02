@@ -3,6 +3,7 @@ package com.covens.common.lib;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemFumes;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -12,7 +13,8 @@ import net.minecraftforge.oredict.OreIngredient;
 
 public class LibIngredients {
 
-	//TODO any time we call Ingredient.from*, the call should be cached here and used multiple times
+	// TODO any time we call Ingredient.from*, the call should be cached here and
+	// used multiple times
 
 	public static Ingredient blazePowder = Ingredient.fromItem(Items.BLAZE_POWDER);
 	public static Ingredient goldNugget = Ingredient.fromItem(Items.GOLD_NUGGET);
@@ -94,7 +96,7 @@ public class LibIngredients {
 	public static Ingredient tulsi = Ingredient.fromItem(ModItems.tulsi);
 	public static Ingredient oakAppleGall = Ingredient.fromItem(ModItems.oak_apple_gall);
 	public static Ingredient empty_jar = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.empty_jar.ordinal()));
-	public static Ingredient anySeed = new OreIngredient("listAllSeeds");//TODO check
+	public static Ingredient anySeed = new OreIngredient("listAllSeeds");// TODO check
 	public static Ingredient feather = Ingredient.fromItem(Items.FEATHER);
 	public static Ingredient spider_web = Ingredient.fromStacks(new ItemStack(Blocks.WEB));
 	public static Ingredient hay = Ingredient.fromStacks(new ItemStack(Blocks.HAY_BLOCK));

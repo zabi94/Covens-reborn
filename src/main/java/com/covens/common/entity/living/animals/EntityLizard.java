@@ -1,14 +1,22 @@
 package com.covens.common.entity.living.animals;
 
+import java.util.Set;
+
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAISit;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,8 +35,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.Set;
-
 /**
  * Created by Joseph on 10/2/2018.
  */
@@ -41,19 +47,19 @@ public class EntityLizard extends EntityTameable {
 
 	public EntityLizard(World worldIn) {
 		super(worldIn);
-		setSize(1F, .3F);
+		this.setSize(1F, .3F);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		this.aiSit = new EntityAISit(this);
-		this.dataManager.register(SKIN_TYPE, getRNG().nextInt(4));
+		this.dataManager.register(SKIN_TYPE, this.getRNG().nextInt(4));
 		this.dataManager.setDirty(SKIN_TYPE);
 	}
 
 	public int getSkinIndex() {
-		return dataManager.get(SKIN_TYPE);
+		return this.dataManager.get(SKIN_TYPE);
 	}
 
 	@Override
@@ -74,7 +80,7 @@ public class EntityLizard extends EntityTameable {
 		int k = MathHelper.floor(this.posZ);
 		BlockPos blockpos = new BlockPos(i, j, k);
 		Block block = this.world.getBlockState(blockpos.down()).getBlock();
-		return block instanceof BlockGrass && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+		return (block instanceof BlockGrass) && (this.world.getLight(blockpos) > 8) && super.getCanSpawnHere();
 	}
 
 	@Override
@@ -139,11 +145,11 @@ public class EntityLizard extends EntityTameable {
 				}
 
 				if (!this.isSilent()) {
-					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
 				}
 
 				if (!this.world.isRemote) {
-					if (this.rand.nextInt(10) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+					if ((this.rand.nextInt(10) == 0) && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 						this.setTamedBy(player);
 						this.playTameEffect(true);
 						this.world.setEntityState(this, (byte) 7);
@@ -160,7 +166,7 @@ public class EntityLizard extends EntityTameable {
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
-		if (!entityIn.equals(getOwner())) {
+		if (!entityIn.equals(this.getOwner())) {
 			super.collideWithEntity(entityIn);
 		}
 	}
@@ -172,19 +178,19 @@ public class EntityLizard extends EntityTameable {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityLizard(world);
+		return new EntityLizard(this.world);
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
-		compound.setInteger("skin", getSkinIndex());
+		compound.setInteger("skin", this.getSkinIndex());
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
-		dataManager.set(SKIN_TYPE, compound.getInteger("skin"));
-		dataManager.setDirty(SKIN_TYPE);
+		this.dataManager.set(SKIN_TYPE, compound.getInteger("skin"));
+		this.dataManager.setDirty(SKIN_TYPE);
 	}
 }

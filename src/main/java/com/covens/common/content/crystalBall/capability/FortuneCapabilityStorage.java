@@ -1,6 +1,7 @@
 package com.covens.common.content.crystalBall.capability;
 
 import com.covens.common.content.crystalBall.Fortune;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -25,10 +26,12 @@ public class FortuneCapabilityStorage implements IStorage<CapabilityFortune> {
 		NBTTagCompound tag = (NBTTagCompound) nbt;
 		if (tag.hasKey("fortune")) {
 			instance.setFortune(Fortune.REGISTRY.getValue(new ResourceLocation(tag.getString("fortune"))));
-			if (tag.getBoolean("active"))
+			if (tag.getBoolean("active")) {
 				instance.setActive();
-			if (tag.getBoolean("removable"))
+			}
+			if (tag.getBoolean("removable")) {
 				instance.setRemovable();
+			}
 		}
 	}
 }

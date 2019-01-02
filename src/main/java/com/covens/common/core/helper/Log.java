@@ -31,7 +31,7 @@ public class Log {
 	public static void askForReport() {
 		StringBuilder sb = new StringBuilder();
 		String s = "This is a bug in the mod Covens. Update it or report it if already using the latest version";
-		for (int i = 0; i < s.length() + 10; i++) {
+		for (int i = 0; i < (s.length() + 10); i++) {
 			sb.append("#");
 		}
 		String frame = sb.toString();

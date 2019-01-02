@@ -5,6 +5,7 @@ import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.core.helper.RomanNumberHelper;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -30,7 +31,7 @@ public abstract class SimpleModifier implements IBrewModifier {
 
 	@Override
 	public ResourceLocation getRegistryName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public abstract class SimpleModifier implements IBrewModifier {
 	@Override
 	public ModifierResult acceptIngredient(IBrewEffect brew, ItemStack stack, IBrewModifierList currentModifiers) {
 		int currentLevel = currentModifiers.getLevel(this).orElse(0);
-		if (ingredient.apply(stack)) {
+		if (this.ingredient.apply(stack)) {
 			if (currentLevel < 5) {
 				return new ModifierResult(currentLevel + 1, ResultType.SUCCESS);
 			}
@@ -52,7 +53,7 @@ public abstract class SimpleModifier implements IBrewModifier {
 
 	@Override
 	public Ingredient getJEIStackRepresentative() {
-		return ingredient;
+		return this.ingredient;
 	}
 
 	@Override
@@ -70,9 +71,9 @@ public abstract class SimpleModifier implements IBrewModifier {
 
 	@Override
 	public String getTooltipString(int lvl) {
-		if (hasMultipleLevels()) {
-			return I18n.format("modifier." + getRegistryName().toString().replace(':', '.'), RomanNumberHelper.getRoman(lvl));
+		if (this.hasMultipleLevels()) {
+			return I18n.format("modifier." + this.getRegistryName().toString().replace(':', '.'), RomanNumberHelper.getRoman(lvl));
 		}
-		return I18n.format("modifier." + getRegistryName().toString().replace(':', '.'));
+		return I18n.format("modifier." + this.getRegistryName().toString().replace(':', '.'));
 	}
 }

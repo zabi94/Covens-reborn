@@ -11,22 +11,23 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicPowerExpander {
-	
+
 	@CapabilityInject(CapabilityFamiliarOwner.class)
 	public static final Capability<CapabilityFamiliarOwner> CAPABILITY = null;
 	public static final CapabilityFamiliarOwner DEFAULT_INSTANCE = new CapabilityFamiliarOwner();
 	private static final ResourceLocation EXPANDER_ID = new ResourceLocation(LibMod.MOD_ID, "familiars");
-	
-	@DontSync public int familiarCount = 0;
-	
+
+	@DontSync
+	public int familiarCount = 0;
+
 	public void addFamiliar() {
-		familiarCount++;
+		this.familiarCount++;
 	}
-	
+
 	public void removeFamiliar() {
-		familiarCount--;
+		this.familiarCount--;
 	}
-	
+
 	@Override
 	public boolean isRelevantFor(Entity object) {
 		return object instanceof EntityPlayer;
@@ -44,7 +45,7 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 
 	@Override
 	public int getExtraAmount(EntityPlayer p) {
-		return familiarCount * 100;
+		return this.familiarCount * 100;
 	}
 
 }

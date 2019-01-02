@@ -1,18 +1,18 @@
 package com.covens.common.core.proxy;
 
+import java.util.ArrayList;
+
 import com.covens.api.hotbar.IHotbarAction;
 import com.covens.client.fx.ParticleF;
 import com.covens.common.content.tarot.TarotHandler.TarotInfo;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.util.ArrayList;
-
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public interface ISidedProxy {
 

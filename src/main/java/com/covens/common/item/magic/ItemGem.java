@@ -13,17 +13,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 /**
- * This class was created by <Arekkuusu> on 28/06/2017.
- * It's distributed as part of Solar Epiphany under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 28/06/2017. It's distributed as part
+ * of Solar Epiphany under the MIT license.
  */
 public class ItemGem extends ItemMod {
 
 	public ItemGem() {
 		super(LibItemName.GEM);
-		setHasSubtypes(true);
-		setMaxDamage(0);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setHasSubtypes(true);
+		this.setMaxDamage(0);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class ItemGem extends ItemMod {
 
 	@Override
 	public String getTranslationKey(ItemStack stack) {
-		if (stack.getMetadata() < 0 || stack.getMetadata() >= Gem.values().length) {
+		if ((stack.getMetadata() < 0) || (stack.getMetadata() >= Gem.values().length)) {
 			return super.getTranslationKey(stack);
 		}
 		return super.getTranslationKey(stack) + "_" + Gem.values()[stack.getMetadata()].getName();

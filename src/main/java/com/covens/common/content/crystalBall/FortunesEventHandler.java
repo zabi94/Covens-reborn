@@ -3,6 +3,7 @@ package com.covens.common.content.crystalBall;
 import com.covens.api.divination.IFortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
 import com.covens.common.core.helper.CapabilityHelper;
+
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -19,7 +20,7 @@ public class FortunesEventHandler {
 
 	@SubscribeEvent
 	public static void onLivingTick(PlayerTickEvent evt) {
-		if (!evt.player.world.isRemote && evt.phase == Phase.END) {
+		if (!evt.player.world.isRemote && (evt.phase == Phase.END)) {
 			CapabilityFortune data = evt.player.getCapability(CapabilityFortune.CAPABILITY, null);
 			IFortune f = data.getFortune();
 			if (f != null) {
@@ -31,8 +32,9 @@ public class FortunesEventHandler {
 					}
 
 					if (data.isActive()) {
-						if (f.apply(evt.player))
+						if (f.apply(evt.player)) {
 							data.setFortune(null);
+						}
 					}
 				}
 			}

@@ -3,6 +3,7 @@ package com.covens.client.render.entity.renderer;
 import com.covens.client.render.entity.model.ModelBroom;
 import com.covens.common.entity.EntityFlyingBroom;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,11 +13,8 @@ public class RenderBroom extends Render<EntityFlyingBroom> {
 
 	private static final ModelBroom model = new ModelBroom();
 
-	private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
-			new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_elder.png"),
-			new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_juniper.png"),
-			new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_yew.png"),
-			new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_cypress.png")
+	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
+			new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_elder.png"), new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_juniper.png"), new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_yew.png"), new ResourceLocation(LibMod.MOD_ID, "textures/entity/broom_cypress.png")
 	};
 
 	public RenderBroom(RenderManager renderManager) {
@@ -32,9 +30,9 @@ public class RenderBroom extends Render<EntityFlyingBroom> {
 	public void doRender(EntityFlyingBroom entity, double x, double y, double z, float entityYaw, float partialTicks) {
 
 		GlStateManager.pushMatrix();
-		bindEntityTexture(entity);
+		this.bindEntityTexture(entity);
 
-		float smoothYaw = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
+		float smoothYaw = entity.prevRotationYaw + ((entity.rotationYaw - entity.prevRotationYaw) * partialTicks);
 
 		GlStateManager.translate(x, y - 0.5d, z);
 		GlStateManager.scale(0.0625d, 0.0625d, 0.0625d);

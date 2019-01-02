@@ -49,7 +49,14 @@ import net.minecraft.world.World;
 public class EntitySnake extends EntityMultiSkin {
 
 	private static final ResourceLocation loot = new ResourceLocation(LibMod.MOD_ID, "entities/snake");
-	//	private static final String[] names = {"David Hisslehoff", "Strangles", "Julius Squeezer", "William Snakespeare", "Medusa", "Sir Hiss", "Nagini", "Naga", "Slithers", "Rumplesnakeskin", "Monty the Python", "Shesha", "Nagaraja", "Stheno", "Euryale", "Vasuki", "Bakunawa", "Kaliya", "Karkotaka", "Manasa", "Mucalinda", "Padmavati", "Paravataksha", "Takshaka", "Ulupi", "Yulong", "Sir Booplesnoot", "Cobra", "Angus Snake", "Anguis", "Python", "Fafnir", "Echidna", "Anaconda", "Madame White Snake", "Meretseger", "Kaa", "Snape", "Solid Snake", "Apophis", "Ouroboros"};
+	// private static final String[] names = {"David Hisslehoff", "Strangles",
+	// "Julius Squeezer", "William Snakespeare", "Medusa", "Sir Hiss", "Nagini",
+	// "Naga", "Slithers", "Rumplesnakeskin", "Monty the Python", "Shesha",
+	// "Nagaraja", "Stheno", "Euryale", "Vasuki", "Bakunawa", "Kaliya", "Karkotaka",
+	// "Manasa", "Mucalinda", "Padmavati", "Paravataksha", "Takshaka", "Ulupi",
+	// "Yulong", "Sir Booplesnoot", "Cobra", "Angus Snake", "Anguis", "Python",
+	// "Fafnir", "Echidna", "Anaconda", "Madame White Snake", "Meretseger", "Kaa",
+	// "Snape", "Solid Snake", "Apophis", "Ouroboros"};
 	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.RABBIT, Items.CHICKEN);
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntitySnake.class, DataSerializers.VARINT);
 	private static final int TIME_BETWEEN_MILK = 3600;
@@ -58,14 +65,14 @@ public class EntitySnake extends EntityMultiSkin {
 
 	public EntitySnake(World worldIn) {
 		super(worldIn);
-		setSize(1F, .3F);
+		this.setSize(1F, .3F);
 		this.stepHeight = 0.2f;
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataManager.register(TINT, 0xFFFFFF);
+		this.dataManager.register(TINT, 0xFFFFFF);
 		this.aiSit = new EntityAISit(this);
 	}
 
@@ -87,7 +94,7 @@ public class EntitySnake extends EntityMultiSkin {
 		int k = MathHelper.floor(this.posZ);
 		BlockPos blockpos = new BlockPos(i, j, k);
 		Block block = this.world.getBlockState(blockpos.down()).getBlock();
-		return block instanceof BlockGrass && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+		return (block instanceof BlockGrass) && (this.world.getLight(blockpos) > 8) && super.getCanSpawnHere();
 	}
 
 	@Override
@@ -123,8 +130,8 @@ public class EntitySnake extends EntityMultiSkin {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (milkCooldown > 0) {
-			milkCooldown--;
+		if (this.milkCooldown > 0) {
+			this.milkCooldown--;
 		}
 	}
 
@@ -169,27 +176,27 @@ public class EntitySnake extends EntityMultiSkin {
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		//DEV ONLY CODE -- REMOVE BEFORE COMPILATION
-		//TODO
+		// DEV ONLY CODE -- REMOVE BEFORE COMPILATION
+		// TODO
 		this.setTamedBy(player);
 		this.setSitting(!player.isSneaking());
-		//---- ^^^^ ----
-		if (this.getAttackTarget() == null || this.getAttackTarget().isDead || this.getRevengeTarget() == null || this.getRevengeTarget().isDead) {
+		// ---- ^^^^ ----
+		if ((this.getAttackTarget() == null) || this.getAttackTarget().isDead || (this.getRevengeTarget() == null) || this.getRevengeTarget().isDead) {
 			ItemStack itemstack = player.getHeldItem(hand);
 			if (itemstack.getItem() == ModItems.glass_jar) {
-				if (milkCooldown == 0 && getRNG().nextBoolean()) {
-					if (this.getGrowingAge() >= 0 && !player.capabilities.isCreativeMode) {
+				if ((this.milkCooldown == 0) && this.getRNG().nextBoolean()) {
+					if ((this.getGrowingAge() >= 0) && !player.capabilities.isCreativeMode) {
 						itemstack.shrink(1);
 						if (itemstack.isEmpty()) {
 							player.setHeldItem(hand, new ItemStack(ModItems.snake_venom));
 						} else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.snake_venom))) {
 							player.dropItem(new ItemStack(ModItems.snake_venom), false);
 						}
-						milkCooldown = TIME_BETWEEN_MILK;
+						this.milkCooldown = TIME_BETWEEN_MILK;
 						return true;
 					}
 				} else {
-					//if milk not ready, or randomly 1/2 of the times
+					// if milk not ready, or randomly 1/2 of the times
 					this.setAttackTarget(player);
 					this.setRevengeTarget(player);
 				}
@@ -201,11 +208,11 @@ public class EntitySnake extends EntityMultiSkin {
 				}
 
 				if (!this.isSilent()) {
-					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
 				}
 
 				if (!this.world.isRemote) {
-					if (this.rand.nextInt(10) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+					if ((this.rand.nextInt(10) == 0) && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 						this.setTamedBy(player);
 						this.playTameEffect(true);
 						this.world.setEntityState(this, (byte) 7);
@@ -222,7 +229,7 @@ public class EntitySnake extends EntityMultiSkin {
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
-		if (!entityIn.equals(getOwner())) {
+		if (!entityIn.equals(this.getOwner())) {
 			super.collideWithEntity(entityIn);
 		}
 	}
@@ -234,19 +241,19 @@ public class EntitySnake extends EntityMultiSkin {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntitySnake(world);
+		return new EntitySnake(this.world);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
-		milkCooldown = compound.getInteger("milkCooldown");
+		this.milkCooldown = compound.getInteger("milkCooldown");
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
-		compound.setInteger("milkCooldown", milkCooldown);
+		compound.setInteger("milkCooldown", this.milkCooldown);
 	}
 
 	@Override

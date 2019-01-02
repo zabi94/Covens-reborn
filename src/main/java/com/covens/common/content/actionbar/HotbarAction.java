@@ -1,17 +1,18 @@
 package com.covens.common.content.actionbar;
 
+import java.util.ArrayList;
+
 import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.hotbar.IHotbarAction;
 import com.covens.common.Covens;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
 
 public class HotbarAction implements IHotbarAction {
 
@@ -37,8 +38,9 @@ public class HotbarAction implements IHotbarAction {
 
 	public static IHotbarAction getFromRegistryName(String name) {
 		for (IHotbarAction act : ACTIONS) {
-			if (act.getName().toString().equals(name))
+			if (act.getName().toString().equals(name)) {
 				return act;
+			}
 		}
 		throw new RuntimeException(name + " was never created as an IHotbarAction");
 	}
@@ -49,19 +51,19 @@ public class HotbarAction implements IHotbarAction {
 
 	@Override
 	public ResourceLocation getName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getIconIndexX() {
-		return xIconIndex;
+		return this.xIconIndex;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getIconIndexY() {
-		return yIconIndex;
+		return this.yIconIndex;
 	}
 
 	@Override

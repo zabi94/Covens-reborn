@@ -8,6 +8,7 @@ import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
 import com.covens.common.core.net.messages.PlayerTransformationChangedMessage;
 import com.covens.common.potion.ModPotions;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.player.PlayerEvent;

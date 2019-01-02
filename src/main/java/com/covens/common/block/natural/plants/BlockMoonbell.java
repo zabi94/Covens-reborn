@@ -50,7 +50,7 @@ public class BlockMoonbell extends BlockModFlower {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(PLACED, meta == 0);
+		return this.getDefaultState().withProperty(PLACED, meta == 0);
 	}
 
 	@Override
@@ -68,44 +68,46 @@ public class BlockMoonbell extends BlockModFlower {
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return getDefaultState().withProperty(PLACED, true);
+		return this.getDefaultState().withProperty(PLACED, true);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		if (rand.nextDouble() < 0.2) {
-			worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5 + rand.nextGaussian() * 0.2, 0.1 + pos.getY() + rand.nextGaussian() * 0.2, pos.getZ() + 0.5 + rand.nextGaussian() * 0.2, 0, 0.1, 0);
+			worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5 + (rand.nextGaussian() * 0.2), 0.1 + pos.getY() + (rand.nextGaussian() * 0.2), pos.getZ() + 0.5 + (rand.nextGaussian() * 0.2), 0, 0.1, 0);
 		}
 	}
 
 	@Override
 	public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
-		if (player == null) return world.getBlockState(pos).getValue(PLACED);
-		return super.canHarvestBlock(world, pos, player) && ((!player.world.isDaytime() && player.world.getMoonPhase() == 4) || world.getBlockState(pos).getValue(PLACED));
+		if (player == null) {
+			return world.getBlockState(pos).getValue(PLACED);
+		}
+		return super.canHarvestBlock(world, pos, player) && ((!player.world.isDaytime() && (player.world.getMoonPhase() == 4)) || world.getBlockState(pos).getValue(PLACED));
 	}
 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random r) {
-		if (!state.getValue(PLACED) && (world.isDaytime() || world.getMoonPhase() != 4)) {
+		if (!state.getValue(PLACED) && (world.isDaytime() || (world.getMoonPhase() != 4))) {
 			world.setBlockToAir(pos);
 			for (int i = 0; i < 7; i++) {
 				world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + r.nextDouble(), pos.getY() + r.nextDouble(), pos.getZ() + r.nextDouble(), r.nextGaussian() * 0.01, r.nextDouble() * 0.01, r.nextGaussian() * 0.01);
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void spawnFlowers(PlayerTickEvent evt) {
-		if (evt.side == Side.SERVER && evt.phase == Phase.START) {
+		if ((evt.side == Side.SERVER) && (evt.phase == Phase.START)) {
 			World w = evt.player.world;
-			if (w.getTotalWorldTime() % 20 == 0 && validBiomesMoonBell.contains(w.getBiome(evt.player.getPosition()))) {
+			if (((w.getTotalWorldTime() % 20) == 0) && validBiomesMoonBell.contains(w.getBiome(evt.player.getPosition()))) {
 				Random r = evt.player.getRNG();
-				if (w.provider.getDimension() == 0 && w.provider.getMoonPhase(w.getWorldTime()) == 4 && !w.isDaytime() && evt.player.getRNG().nextDouble() < 0.2) {
+				if ((w.provider.getDimension() == 0) && (w.provider.getMoonPhase(w.getWorldTime()) == 4) && !w.isDaytime() && (evt.player.getRNG().nextDouble() < 0.2)) {
 					int dx = (r.nextInt(7) - 3) * 10;
 					int dz = (r.nextInt(7) - 3) * 10;
 					MutableBlockPos pos = new MutableBlockPos(evt.player.getPosition().add(dx, 0, dz));
-					tryAndSpawn(w, pos);
+					this.tryAndSpawn(w, pos);
 				}
 			}
 		}
@@ -115,7 +117,7 @@ public class BlockMoonbell extends BlockModFlower {
 		int oy = p.getY();
 		for (int dy = -5; dy <= 5; dy++) {
 			p.setY(oy + dy);
-			if ((w.isAirBlock(p) || w.getBlockState(p).getBlock().isReplaceable(w, p)) && w.getBlockState(p.down()).getBlock() == Blocks.DIRT) {
+			if ((w.isAirBlock(p) || w.getBlockState(p).getBlock().isReplaceable(w, p)) && (w.getBlockState(p.down()).getBlock() == Blocks.DIRT)) {
 				w.setBlockState(p, this.getDefaultState().withProperty(PLACED, false), 3);
 				return;
 			}

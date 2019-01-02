@@ -49,7 +49,11 @@ public class EntityRaven extends EntityMultiSkin {
 
 	private static final ResourceLocation loot = new ResourceLocation(LibMod.MOD_ID, "entities/raven");
 	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.GOLD_NUGGET, ModItems.silver_nugget);
-	//	private static final String[] names = {"Huginn", "Muninn", "Morrigan", "Bhusunda", "Pallas", "Qrow", "Nevermore", "Corvus", "Apollo", "Odin", "Badhbh", "Bran", "Crowe", "Scarecrow", "Santa Caws", "Valravn", "Cain", "Mabel", "Grip", "Harbinger", "Shani", "Diablo", "Raven", "Charlie", "Unidan", "Yatagarasu", "Samjokgo", "Ischys"}; //I'm trash lmao
+	// private static final String[] names = {"Huginn", "Muninn", "Morrigan",
+	// "Bhusunda", "Pallas", "Qrow", "Nevermore", "Corvus", "Apollo", "Odin",
+	// "Badhbh", "Bran", "Crowe", "Scarecrow", "Santa Caws", "Valravn", "Cain",
+	// "Mabel", "Grip", "Harbinger", "Shani", "Diablo", "Raven", "Charlie",
+	// "Unidan", "Yatagarasu", "Samjokgo", "Ischys"}; //I'm trash lmao
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntityRaven.class, DataSerializers.VARINT);
 
 	public EntityRaven(World worldIn) {
@@ -76,7 +80,7 @@ public class EntityRaven extends EntityMultiSkin {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataManager.register(TINT, 0xFFFFFF);
+		this.dataManager.register(TINT, 0xFFFFFF);
 		this.aiSit = new EntityAISit(this);
 	}
 
@@ -91,7 +95,7 @@ public class EntityRaven extends EntityMultiSkin {
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(3, new EntityAIMate(this, 0.8d));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
+		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(4, new EntityAIWatchClosest2(this, EntityPlayer.class, 5f, 1f));
 		this.tasks.addTask(5, new EntityAILookIdle(this));
 	}
@@ -114,11 +118,11 @@ public class EntityRaven extends EntityMultiSkin {
 			}
 
 			if (!this.isSilent()) {
-				this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+				this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
 			}
 
 			if (!this.world.isRemote) {
-				if (this.rand.nextInt(10) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+				if ((this.rand.nextInt(10) == 0) && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 					this.setTamedBy(player);
 					this.playTameEffect(true);
 					this.world.setEntityState(this, (byte) 7);
@@ -134,12 +138,12 @@ public class EntityRaven extends EntityMultiSkin {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityRaven(world);
+		return new EntityRaven(this.world);
 	}
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -149,7 +153,7 @@ public class EntityRaven extends EntityMultiSkin {
 
 	@Override
 	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -185,7 +189,7 @@ public class EntityRaven extends EntityMultiSkin {
 		int k = MathHelper.floor(this.posZ);
 		BlockPos blockpos = new BlockPos(i, j, k);
 		Block block = this.world.getBlockState(blockpos.down()).getBlock();
-		return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+		return (block instanceof BlockLeaves) || (block == Blocks.GRASS) || (block instanceof BlockLog) || ((block == Blocks.AIR) && (this.world.getLight(blockpos) > 8) && super.getCanSpawnHere());
 	}
 
 	@Override
@@ -200,7 +204,7 @@ public class EntityRaven extends EntityMultiSkin {
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
-		if (!entityIn.equals(getOwner())) {
+		if (!entityIn.equals(this.getOwner())) {
 			super.collideWithEntity(entityIn);
 		}
 	}

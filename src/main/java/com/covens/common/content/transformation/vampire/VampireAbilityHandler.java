@@ -1,5 +1,8 @@
 package com.covens.common.content.transformation.vampire;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.event.HotbarActionTriggeredEvent;
@@ -12,6 +15,7 @@ import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.potion.ModPotions;
 import com.covens.common.world.biome.ModBiomes;
 import com.google.common.collect.Lists;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -43,9 +47,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreIngredient;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 @Mod.EventBusSubscriber
 public class VampireAbilityHandler {
 
@@ -55,17 +56,20 @@ public class VampireAbilityHandler {
 	public static final Ingredient SILVER_WEAPON = new OreIngredient("weaponSilver");
 
 	public static final UUID ATTACK_SPEED_MODIFIER_UUID = UUID.fromString("c73f6d26-65ed-4ba5-ada8-9a96f8712424");
-	// TODO Check: can two different living hurt events run down the subscriber list in parallel?
-	// If so this doesn't work and one entity might end up receiving the damage amount meant for someone else in some cases
+	// TODO Check: can two different living hurt events run down the subscriber list
+	// in parallel?
+	// If so this doesn't work and one entity might end up receiving the damage
+	// amount meant for someone else in some cases
 	public static float lastDamage = 0;
 
 	/**
-	 * Modifies damage depending on the type. Fire and explosion make it 150%of the original,
-	 * all the other types make it 10% of the original provided there's blood in the pool
+	 * Modifies damage depending on the type. Fire and explosion make it 150%of the
+	 * original, all the other types make it 10% of the original provided there's
+	 * blood in the pool
 	 */
 	@SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
 	public static void incomingDamageModifier(LivingHurtEvent evt) {
-		if (!evt.getEntity().world.isRemote && evt.getEntityLiving() instanceof EntityPlayer) {
+		if (!evt.getEntity().world.isRemote && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			EntityPlayer player = (EntityPlayer) evt.getEntityLiving();
 			CapabilityTransformation data = player.getCapability(CapabilityTransformation.CAPABILITY, null);
 			if (data.getType() == DefaultTransformations.VAMPIRE) {
@@ -80,7 +84,7 @@ public class VampireAbilityHandler {
 				if (multiplier > 1) {
 					evt.setAmount(evt.getAmount() * multiplier);
 				} else if (player.getCapability(CapabilityVampire.CAPABILITY, null).getBlood() > 0) { // Don't mitigate damage when there is no blood in the pool
-					evt.setAmount(evt.getAmount() * (1f - 0.1f * data.getLevel()));
+					evt.setAmount(evt.getAmount() * (1f - (0.1f * data.getLevel())));
 				}
 				if (player.getRidingEntity() instanceof EntityBatSwarm) {
 					evt.setCanceled(true);
@@ -91,7 +95,7 @@ public class VampireAbilityHandler {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
 	public static void dropInvalidGear(LivingHurtEvent evt) {
-		if (!evt.getEntity().world.isRemote && evt.getEntityLiving() instanceof EntityPlayer) {
+		if (!evt.getEntity().world.isRemote && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			CapabilityTransformation data = evt.getEntityLiving().getCapability(CapabilityTransformation.CAPABILITY, null);
 			if (data.getType() == DefaultTransformations.VAMPIRE) {
 				lastDamage = evt.getAmount();
@@ -126,35 +130,35 @@ public class VampireAbilityHandler {
 	}
 
 	private static boolean shouldVampiresBurnHere(World world, BlockPos pos) {
-		return world.getTotalWorldTime() % 40 == 0 && world.canBlockSeeSky(pos) && world.isDaytime() && !world.isRainingAt(pos);
+		return ((world.getTotalWorldTime() % 40) == 0) && world.canBlockSeeSky(pos) && world.isDaytime() && !world.isRainingAt(pos);
 	}
-	
+
 	private static boolean isPlayerOutsideLair(EntityPlayer player) {
 		return player.world.getBiome(player.getPosition()) != ModBiomes.VAMPIRE_LAIR;
 	}
-	
+
 	private static boolean canPlayerBurn(EntityPlayer player, CapabilityTransformation data) {
-		return player.getActivePotionEffect(ModPotions.sun_ward) == null && (data.getLevel() < 5 || !CovensAPI.getAPI().addVampireBlood(player, -(13 + data.getLevel())));
+		return (player.getActivePotionEffect(ModPotions.sun_ward) == null) && ((data.getLevel() < 5) || !CovensAPI.getAPI().addVampireBlood(player, -(13 + data.getLevel())));
 	}
-	
+
 	@SubscribeEvent
 	public static void tickChecks(PlayerTickEvent evt) {
 		CapabilityTransformation data = evt.player.getCapability(CapabilityTransformation.CAPABILITY, null);
-		if (data.getType() == DefaultTransformations.VAMPIRE && evt.side.isServer()) {
+		if ((data.getType() == DefaultTransformations.VAMPIRE) && evt.side.isServer()) {
 
 			// Check sun damage
 			if (shouldVampiresBurnHere(evt.player.world, evt.player.getPosition()) && isPlayerOutsideLair(evt.player) && canPlayerBurn(evt.player, data)) {
-					evt.player.attackEntityFrom(SUN_DAMAGE, 11 - data.getLevel());
+				evt.player.attackEntityFrom(SUN_DAMAGE, 11 - data.getLevel());
 			}
 
 			// Replace hunger mechanics with blood mechanics
-			if (evt.player.ticksExisted % 30 == 0) {
+			if ((evt.player.ticksExisted % 30) == 0) {
 				evt.player.getFoodStats().setFoodLevel(10); // No healing from food
 				if (evt.player.getCapability(CapabilityVampire.CAPABILITY, null).getBlood() == 0) {
 					evt.player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 2, false, false));
 					evt.player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 2, false, false));
 				} else {
-					if (evt.player.getHealth() < evt.player.getMaxHealth() && CovensAPI.getAPI().addVampireBlood(evt.player, -20)) {
+					if ((evt.player.getHealth() < evt.player.getMaxHealth()) && CovensAPI.getAPI().addVampireBlood(evt.player, -20)) {
 						evt.player.heal(1);
 					}
 				}
@@ -182,7 +186,7 @@ public class VampireAbilityHandler {
 	@SubscribeEvent
 	public static void sleepBed(RightClickBlock evt) {
 		CapabilityTransformation data = evt.getEntityPlayer().getCapability(CapabilityTransformation.CAPABILITY, null);
-		if (data.getType() == DefaultTransformations.VAMPIRE && evt.getEntityPlayer().world.getBlockState(evt.getPos()).getBlock() == Blocks.BED) {
+		if ((data.getType() == DefaultTransformations.VAMPIRE) && (evt.getEntityPlayer().world.getBlockState(evt.getPos()).getBlock() == Blocks.BED)) {
 			evt.setCancellationResult(EnumActionResult.FAIL);
 			evt.setCanceled(true);
 			evt.getEntityPlayer().sendStatusMessage(new TextComponentTranslation("vampire.bed_blocked"), true);
@@ -191,7 +195,7 @@ public class VampireAbilityHandler {
 
 	@SubscribeEvent
 	public static void foodEaten(LivingEntityUseItemEvent.Finish evt) {
-		if (evt.getEntityLiving() instanceof EntityPlayer && evt.getItem().getItem() instanceof ItemFood) {
+		if ((evt.getEntityLiving() instanceof EntityPlayer) && (evt.getItem().getItem() instanceof ItemFood)) {
 			CapabilityTransformation data = ((EntityPlayer) evt.getEntityLiving()).getCapability(CapabilityTransformation.CAPABILITY, null);
 			if (data.getType() == DefaultTransformations.VAMPIRE) {
 				evt.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 2, false, true));
@@ -249,7 +253,7 @@ public class VampireAbilityHandler {
 				evt.player.startRiding(bs);
 			}
 		} else if (evt.action == ModAbilities.MESMERIZE) {
-			if (evt.focusedEntity instanceof EntityLivingBase && CovensAPI.getAPI().addVampireBlood(evt.player, -150)) {
+			if ((evt.focusedEntity instanceof EntityLivingBase) && CovensAPI.getAPI().addVampireBlood(evt.player, -150)) {
 				((EntityLivingBase) evt.focusedEntity).addPotionEffect(new PotionEffect(ModPotions.mesmerized, 100, 0, false, true));
 			}
 		} else if (evt.action == ModAbilities.HYPNOTIZE) {
@@ -261,7 +265,7 @@ public class VampireAbilityHandler {
 		if (entity.getActivePotionEffect(ModPotions.mesmerized) != null) {
 			return true;
 		}
-		if (player.getLastAttackedEntity() == entity || entity.getAttackingEntity() == player) {
+		if ((player.getLastAttackedEntity() == entity) || (entity.getAttackingEntity() == player)) {
 			return false;
 		}
 		return Math.abs(player.rotationYawHead - entity.rotationYawHead) < 30;
@@ -269,9 +273,9 @@ public class VampireAbilityHandler {
 
 	@SubscribeEvent
 	public static void abilityHandler(PlayerTickEvent evt) {
-		if (evt.phase == Phase.START && !evt.player.world.isRemote && evt.player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) {
+		if ((evt.phase == Phase.START) && !evt.player.world.isRemote && (evt.player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE)) {
 			PotionEffect nv = evt.player.getActivePotionEffect(MobEffects.NIGHT_VISION);
-			if ((nv == null || nv.getDuration() <= 220) && evt.player.getCapability(CapabilityVampire.CAPABILITY, null).nightVision) {
+			if (((nv == null) || (nv.getDuration() <= 220)) && evt.player.getCapability(CapabilityVampire.CAPABILITY, null).nightVision) {
 				if (evt.player.isCreative() || CovensAPI.getAPI().addVampireBlood(evt.player, -2)) {
 					evt.player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0, true, false));
 				} else {
@@ -300,9 +304,7 @@ public class VampireAbilityHandler {
 		if (evt.getEntity() instanceof EntityLiving) {
 			EntityLiving living = (EntityLiving) evt.getEntity();
 			ArrayList<EntityAITaskEntry> tasks = Lists.newArrayList();
-			living.tasks.taskEntries.stream()
-					.filter(t -> t.action instanceof EntityAIWatchClosest)
-					.forEach(t -> tasks.add(t));
+			living.tasks.taskEntries.stream().filter(t -> t.action instanceof EntityAIWatchClosest).forEach(t -> tasks.add(t));
 			tasks.forEach(t -> living.tasks.taskEntries.remove(t));
 			tasks.forEach(t -> living.tasks.taskEntries.add(living.tasks.new EntityAITaskEntry(t.priority, new AIWatchClosestWrapper((EntityAIWatchClosest) t.action))));
 		}
@@ -310,13 +312,8 @@ public class VampireAbilityHandler {
 
 	@SubscribeEvent
 	public static void checkHealing(LivingHealEvent evt) {
-		if	(
-				evt.getEntityLiving() instanceof EntityPlayer && 
-				!evt.getEntityLiving().world.isRemote && 
-				evt.getEntityLiving().getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE && 
-				evt.getEntityLiving().getCapability(CapabilityVampire.CAPABILITY, null).getBlood() == 0
-			) {
-				evt.setCanceled(true);
+		if ((evt.getEntityLiving() instanceof EntityPlayer) && !evt.getEntityLiving().world.isRemote && (evt.getEntityLiving().getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) && (evt.getEntityLiving().getCapability(CapabilityVampire.CAPABILITY, null).getBlood() == 0)) {
+			evt.setCanceled(true);
 		}
 	}
 

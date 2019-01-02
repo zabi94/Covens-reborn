@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,7 +32,7 @@ public class PotionPruneLeaves extends BrewMod {
 		for (BlockPos spot : spots) {
 			IBlockState state = world.getBlockState(spot);
 			boolean place = world.rand.nextInt(5) <= amplifier;
-			if (place && state.getBlock() instanceof BlockLeaves) {
+			if (place && (state.getBlock() instanceof BlockLeaves)) {
 				if (thrower instanceof EntityPlayer) {
 					state.getBlock().removedByPlayer(state, world, spot, (EntityPlayer) thrower, true);
 					state.getBlock().harvestBlock(world, (EntityPlayer) thrower, spot, state, world.getTileEntity(spot), ItemStack.EMPTY);

@@ -3,6 +3,7 @@ package com.covens.client.render.entity.renderer;
 import com.covens.client.render.entity.model.ModelLizard;
 import com.covens.common.entity.living.animals.EntityLizard;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

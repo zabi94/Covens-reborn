@@ -11,19 +11,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class RemoveFamiliarFromPlayer extends SyncTask<EntityPlayer> {
-	
+
 	private UUID pID;
 
 	public RemoveFamiliarFromPlayer() {
 	}
-	
+
 	public RemoveFamiliarFromPlayer(UUID player) {
-		pID = player;
+		this.pID = player;
 	}
-	
+
 	@Override
 	public void run() {
-		EntityPlayer p = PlayerHelper.getPlayerAcrossDimensions(pID);
+		EntityPlayer p = PlayerHelper.getPlayerAcrossDimensions(this.pID);
 		if (p == null) {
 			throw new IllegalStateException("Player was not found after sync task was triggered");
 		}
@@ -35,13 +35,13 @@ public class RemoveFamiliarFromPlayer extends SyncTask<EntityPlayer> {
 
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) {
-		pID = new UUID(nbt.getLong("msb"), nbt.getLong("lsb"));
+		this.pID = new UUID(nbt.getLong("msb"), nbt.getLong("lsb"));
 	}
 
 	@Override
 	protected void writeToNBT(NBTTagCompound tag) {
-		tag.setLong("msb", pID.getMostSignificantBits());
-		tag.setLong("lsb", pID.getLeastSignificantBits());
+		tag.setLong("msb", this.pID.getMostSignificantBits());
+		tag.setLong("lsb", this.pID.getLeastSignificantBits());
 	}
 
 }

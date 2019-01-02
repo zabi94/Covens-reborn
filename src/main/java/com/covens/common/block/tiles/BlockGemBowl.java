@@ -18,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockGemBowl extends BlockModTileEntity {
-	
+
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.25f, 0.0f, 0.25f, 0.75f, 0.1875f, 0.75f);
 
 	public BlockGemBowl(String id) {
@@ -26,7 +26,7 @@ public class BlockGemBowl extends BlockModTileEntity {
 		this.setHarvestLevel("pickaxe", 0);
 		this.setLightOpacity(0);
 		this.setHardness(1f);
-		this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
 	@Override
@@ -38,22 +38,22 @@ public class BlockGemBowl extends BlockModTileEntity {
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACING);
 	}
-	
+
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(FACING).getHorizontalIndex();
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
 	}
-	
+
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return getDefaultState().withProperty(FACING, EnumFacing.fromAngle(placer.rotationYaw).getOpposite());
+		return this.getDefaultState().withProperty(FACING, EnumFacing.fromAngle(placer.rotationYaw).getOpposite());
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullBlock(IBlockState state) {

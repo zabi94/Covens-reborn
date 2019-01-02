@@ -1,9 +1,12 @@
 package com.covens.client.jei.components;
 
+import java.util.List;
+
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.common.Covens;
 import com.covens.common.content.ritual.AdapterIRitual;
 import com.covens.common.lib.LibMod;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.ingredients.IIngredients;
@@ -16,8 +19,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.List;
-
 public class RitualWrapper implements IRecipeWrapper {
 	private final IDrawable centerGlyph, circle1, circle2, circle3;
 	private List<List<ItemStack>> input;
@@ -26,57 +27,58 @@ public class RitualWrapper implements IRecipeWrapper {
 	private String name;
 
 	public RitualWrapper(AdapterIRitual ritual, IGuiHelper igh) {
-		setOutput(ritual.getOutputRaw());
-		setInput(ritual.getJeiInput());
-		circles = ritual.getCircles();
-		powerStart = ritual.getRequiredStartingPower();
-		powerTick = ritual.getRunningPower();
-		name = I18n.format("ritual." + ritual.getRegistryName().toString().replace(':', '.') + ".name");
-		centerGlyph = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-		circle1 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-		circle2 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-		circle3 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+		this.setOutput(ritual.getOutputRaw());
+		this.setInput(ritual.getJeiInput());
+		this.circles = ritual.getCircles();
+		this.powerStart = ritual.getRequiredStartingPower();
+		this.powerTick = ritual.getRunningPower();
+		this.name = I18n.format("ritual." + ritual.getRegistryName().toString().replace(':', '.') + ".name");
+		this.centerGlyph = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+		this.circle1 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+		this.circle2 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+		this.circle3 = igh.drawableBuilder(new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
 	}
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		ingredients.setInputLists(VanillaTypes.ITEM, getInput());
-		if (!getOutput().isEmpty()) {
-			ingredients.setOutputs(VanillaTypes.ITEM, getOutput());
+		ingredients.setInputLists(VanillaTypes.ITEM, this.getInput());
+		if (!this.getOutput().isEmpty()) {
+			ingredients.setOutputs(VanillaTypes.ITEM, this.getOutput());
 		}
 	}
 
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		FontRenderer fr = minecraft.fontRenderer;
-		String powerFlatDesc = I18n.format("jei.ritual.power.flat", powerStart);
-		String powerTickDesc = I18n.format("jei.ritual.power.tick", powerTick * 20);
-		int mult = (int) (powerTick > 0 ? 3.1 : 2);
-		if (powerStart > 0)
-			fr.drawString(powerFlatDesc, (recipeWidth - fr.getStringWidth(powerFlatDesc)) / 2, recipeHeight - mult * fr.FONT_HEIGHT, 0, false);
-		if (powerTick > 0)
-			fr.drawString(powerTickDesc, (recipeWidth - fr.getStringWidth(powerTickDesc)) / 2, recipeHeight - 2 * fr.FONT_HEIGHT, 0, false);
-		fr.drawString(name, (recipeWidth - fr.getStringWidth(name)) / 2, 0, 0);
+		String powerFlatDesc = I18n.format("jei.ritual.power.flat", this.powerStart);
+		String powerTickDesc = I18n.format("jei.ritual.power.tick", this.powerTick * 20);
+		int mult = (int) (this.powerTick > 0 ? 3.1 : 2);
+		if (this.powerStart > 0) {
+			fr.drawString(powerFlatDesc, (recipeWidth - fr.getStringWidth(powerFlatDesc)) / 2, recipeHeight - (mult * fr.FONT_HEIGHT), 0, false);
+		}
+		if (this.powerTick > 0) {
+			fr.drawString(powerTickDesc, (recipeWidth - fr.getStringWidth(powerTickDesc)) / 2, recipeHeight - (2 * fr.FONT_HEIGHT), 0, false);
+		}
+		fr.drawString(this.name, (recipeWidth - fr.getStringWidth(this.name)) / 2, 0, 0);
 
-
-		int requiredCircles = circles & 3;
-		EnumGlyphType typeFirst = EnumGlyphType.fromMeta(circles >> 2 & 3);
-		EnumGlyphType typeSecond = EnumGlyphType.fromMeta(circles >> 4 & 3);
-		EnumGlyphType typeThird = EnumGlyphType.fromMeta(circles >> 6 & 3);
-		color(EnumGlyphType.GOLDEN, null, 0);
+		int requiredCircles = this.circles & 3;
+		EnumGlyphType typeFirst = EnumGlyphType.fromMeta((this.circles >> 2) & 3);
+		EnumGlyphType typeSecond = EnumGlyphType.fromMeta((this.circles >> 4) & 3);
+		EnumGlyphType typeThird = EnumGlyphType.fromMeta((this.circles >> 6) & 3);
+		this.color(EnumGlyphType.GOLDEN, null, 0);
 
 		int dx = 53, dy = 35;
 
-		centerGlyph.draw(minecraft, dx, dy);
-		color(typeFirst, minecraft, 0);
-		circle1.draw(minecraft, dx, dy);
+		this.centerGlyph.draw(minecraft, dx, dy);
+		this.color(typeFirst, minecraft, 0);
+		this.circle1.draw(minecraft, dx, dy);
 		if (requiredCircles > 0) {
-			color(typeSecond, minecraft, 1);
-			circle2.draw(minecraft, dx, dy);
+			this.color(typeSecond, minecraft, 1);
+			this.circle2.draw(minecraft, dx, dy);
 		}
 		if (requiredCircles > 1) {
-			color(typeThird, minecraft, 2);
-			circle3.draw(minecraft, dx, dy);
+			this.color(typeThird, minecraft, 2);
+			this.circle3.draw(minecraft, dx, dy);
 		}
 	}
 
@@ -95,7 +97,7 @@ public class RitualWrapper implements IRecipeWrapper {
 				GlStateManager.color(0.9f, 0.9f, 0.9f);
 				break;
 			case ANY:
-				colorRandom(minecraft.world.getTotalWorldTime(), circle);
+				this.colorRandom(minecraft.world.getTotalWorldTime(), circle);
 				break;
 			default:
 				Covens.logger.warn("Probable bug in Covens [RitualWrapper.java]");
@@ -104,16 +106,16 @@ public class RitualWrapper implements IRecipeWrapper {
 	}
 
 	private void colorRandom(long v, int circle) {
-		int r = (int) (v % 60 / 20);
+		int r = (int) ((v % 60) / 20);
 		switch ((r + circle) % 3) {
 			case 1:
-				color(EnumGlyphType.NORMAL, null, 0);
+				this.color(EnumGlyphType.NORMAL, null, 0);
 				break;
 			case 2:
-				color(EnumGlyphType.ENDER, null, 0);
+				this.color(EnumGlyphType.ENDER, null, 0);
 				break;
 			case 0:
-				color(EnumGlyphType.NETHER, null, 0);
+				this.color(EnumGlyphType.NETHER, null, 0);
 				break;
 			default:
 				break;
@@ -121,7 +123,7 @@ public class RitualWrapper implements IRecipeWrapper {
 	}
 
 	public List<ItemStack> getOutput() {
-		return output;
+		return this.output;
 	}
 
 	private void setOutput(List<ItemStack> output) {
@@ -129,12 +131,11 @@ public class RitualWrapper implements IRecipeWrapper {
 	}
 
 	public List<List<ItemStack>> getInput() {
-		return input;
+		return this.input;
 	}
 
 	private void setInput(List<List<ItemStack>> input) {
 		this.input = input;
 	}
-
 
 }

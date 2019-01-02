@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.init.Blocks;
@@ -25,7 +26,7 @@ public class PotionSpiderNightmare extends BrewMod {
 		BlockPos posI = pos.add(box, box, box);
 		BlockPos posF = pos.add(-box, -box, -box);
 		BlockPos.getAllInBox(posI, posF).forEach(pos1 -> {
-			if (pos1.distanceSq(pos.getX(), pos.getY(), pos.getZ()) < 1 + box * box / 2 && world.getBlockState(pos1).getBlock().isReplaceable(world, pos1)) {
+			if ((pos1.distanceSq(pos.getX(), pos.getY(), pos.getZ()) < (1 + ((box * box) / 2))) && world.getBlockState(pos1).getBlock().isReplaceable(world, pos1)) {
 				world.setBlockState(pos1, Blocks.WEB.getDefaultState());
 			}
 		});
@@ -34,7 +35,7 @@ public class PotionSpiderNightmare extends BrewMod {
 
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		return duration % (20 + 60 * Math.max(0, 5 - amplifier)) == 0; // The higher the amplifier, the higher frequency of spawns
+		return (duration % (20 + (60 * Math.max(0, 5 - amplifier)))) == 0; // The higher the amplifier, the higher frequency of spawns
 	}
 
 	@Override
@@ -45,7 +46,8 @@ public class PotionSpiderNightmare extends BrewMod {
 			EntityCaveSpider spider = new EntityCaveSpider(world);
 			spider.setPosition(pos.getX(), pos.getY(), pos.getZ());
 			world.spawnEntity(spider);
-			if (entity.getRNG().nextInt(Math.max(1, 7 - amplifier)) == 0) { // The higher the amplifier, the higher the chance of decreasing the potion level
+			if (entity.getRNG().nextInt(Math.max(1, 7 - amplifier)) == 0) { // The higher the amplifier, the higher the chance of decreasing the potion
+																			// level
 				PotionEffect pe = new PotionEffect(entity.getActivePotionEffect(this));
 				entity.removePotionEffect(this);
 				if (amplifier > 0) {
@@ -54,6 +56,5 @@ public class PotionSpiderNightmare extends BrewMod {
 			}
 		}
 	}
-
 
 }

@@ -81,10 +81,10 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 public class Covens {
 
 	public static final Logger logger = LogManager.getLogger(MOD_NAME);
-	//Constants
+	// Constants
 	public static final String TAGLOCK_ENTITY = "tag_entity";
 	public static final String TAGLOCK_ENTITY_NAME = "tag_entity_name";
-	//States
+	// States
 	public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 	public static final PropertyEnum<BlockStairs.EnumHalf> HALF = PropertyEnum.create("half", BlockStairs.EnumHalf.class);
 	@SidedProxy(serverSide = LibMod.PROXY_COMMON, clientSide = LibMod.PROXY_CLIENT)
@@ -178,7 +178,7 @@ public class Covens {
 	public void setFlight(FMLServerStartedEvent evt) {
 		FMLCommonHandler.instance().getMinecraftServerInstance().setAllowFlight(true);
 	}
-	
+
 	@EventHandler
 	public void fingerprintViolation(FMLFingerprintViolationEvent evt) {
 		if (!"true".equals(System.getProperty("ignoreCovensFingerprint"))) {
@@ -188,12 +188,11 @@ public class Covens {
 			Log.w("Ignoring as per launch option");
 		}
 	}
-	
+
 	@SuppressWarnings("serial")
 	private static class FingerprintViolationException extends RuntimeException {
 		public FingerprintViolationException() {
-			super("\n\n!! WARNING:\n\nThe mod "+LibMod.MOD_NAME+" has an invalid signature, this is likely due to someone messing with the jar without permission.\nThe execution will be stopped in order to prevent damages to your system.\n"
-					+ "If you wish to continue executing, please add -DignoreCovensFingerprint=true to your launch arguments\n\n");
+			super("\n\n!! WARNING:\n\nThe mod " + LibMod.MOD_NAME + " has an invalid signature, this is likely due to someone messing with the jar without permission.\nThe execution will be stopped in order to prevent damages to your system.\n" + "If you wish to continue executing, please add -DignoreCovensFingerprint=true to your launch arguments\n\n");
 		}
 	}
 }

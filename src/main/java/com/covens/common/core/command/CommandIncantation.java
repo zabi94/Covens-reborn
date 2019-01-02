@@ -19,13 +19,12 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
 /**
- * This class was created by BerciTheBeast on 19.4.2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by BerciTheBeast on 19.4.2017. It's distributed as
+ * part of Covens under the MIT license.
  */
 public class CommandIncantation implements ICommand {
-	
-	List<String> alias = Lists.newArrayList();
+
+	private static final List<String> alias = Lists.newArrayList();
 
 	@Override
 	public int compareTo(ICommand o) {
@@ -50,8 +49,12 @@ public class CommandIncantation implements ICommand {
 	@SuppressWarnings("unused")
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-		if (args.length < 1) throw new WrongUsageException("commands.incantation.usage");
-		if (sender.getCommandSenderEntity() == null) return;
+		if (args.length < 1) {
+			throw new WrongUsageException("commands.incantation.usage");
+		}
+		if (sender.getCommandSenderEntity() == null) {
+			return;
+		}
 		final String command = args[0];
 		if (ModIncantations.getCommands().containsKey(command)) {
 			IIncantation incantation = ModIncantations.getCommands().get(command);
@@ -75,13 +78,12 @@ public class CommandIncantation implements ICommand {
 
 	@Override
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
-		return Lists.newArrayList(ModIncantations.getCommands().keySet().stream().filter(s -> args.length == 0 || s.startsWith(args[args.length - 1])).collect(Collectors.toList()));
+		return Lists.newArrayList(ModIncantations.getCommands().keySet().stream().filter(s -> (args.length == 0) || s.startsWith(args[args.length - 1])).collect(Collectors.toList()));
 	}
 
 	@Override
 	public boolean isUsernameIndex(String[] args, int index) {
 		return false;
 	}
-
 
 }

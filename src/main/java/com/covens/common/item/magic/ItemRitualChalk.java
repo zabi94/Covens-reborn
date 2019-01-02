@@ -5,6 +5,7 @@ import com.covens.api.state.StateProperties;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModSounds;
 import com.covens.common.item.ItemMod;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -13,7 +14,12 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -56,7 +62,7 @@ public class ItemRitualChalk extends ItemMod {
 
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
-		return getDurabilityForDisplay(stack) > 0;
+		return this.getDurabilityForDisplay(stack) > 0;
 	}
 
 	@Override
@@ -70,8 +76,8 @@ public class ItemRitualChalk extends ItemMod {
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		boolean isReplacing = worldIn.getBlockState(pos).getBlock().equals(ModBlocks.ritual_glyphs) && worldIn.getBlockState(pos).getValue(StateProperties.GLYPH_TYPE) != EnumGlyphType.GOLDEN;
-		if (!worldIn.isRemote && (facing == EnumFacing.UP && ModBlocks.ritual_glyphs.canPlaceBlockAt(worldIn, pos.up()) || isReplacing)) {
+		boolean isReplacing = worldIn.getBlockState(pos).getBlock().equals(ModBlocks.ritual_glyphs) && (worldIn.getBlockState(pos).getValue(StateProperties.GLYPH_TYPE) != EnumGlyphType.GOLDEN);
+		if (!worldIn.isRemote && (((facing == EnumFacing.UP) && ModBlocks.ritual_glyphs.canPlaceBlockAt(worldIn, pos.up())) || isReplacing)) {
 			ItemStack chalk = player.getHeldItem(hand);
 			if (!chalk.hasTagCompound()) {
 				chalk.setTagCompound(new NBTTagCompound());
@@ -81,13 +87,15 @@ public class ItemRitualChalk extends ItemMod {
 			if (!player.isCreative()) {
 				int usesLeft = chalk.getTagCompound().getInteger("usesLeft") - 1;
 				chalk.getTagCompound().setInteger("usesLeft", usesLeft);
-				if (usesLeft < 1) chalk.setCount(0);
+				if (usesLeft < 1) {
+					chalk.setCount(0);
+				}
 			}
 			IBlockState state = ModBlocks.ritual_glyphs.getExtendedState(ModBlocks.ritual_glyphs.getDefaultState(), worldIn, pos);
 			state = state.withProperty(BlockHorizontal.FACING, EnumFacing.HORIZONTALS[(int) (Math.random() * 4)]);
 			state = state.withProperty(StateProperties.GLYPH_TYPE, EnumGlyphType.values()[type]);
 			worldIn.setBlockState(isReplacing ? pos : pos.up(), state, 3);
-			worldIn.playSound(null, pos, ModSounds.CHALK_SCRIBBLE, SoundCategory.BLOCKS, 0.5f, 1f + 0.5f * player.getRNG().nextFloat());
+			worldIn.playSound(null, pos, ModSounds.CHALK_SCRIBBLE, SoundCategory.BLOCKS, 0.5f, 1f + (0.5f * player.getRNG().nextFloat()));
 		}
 		return EnumActionResult.SUCCESS;
 	}
@@ -95,7 +103,7 @@ public class ItemRitualChalk extends ItemMod {
 	@Override
 	public void registerModel() {
 		for (int meta = 0; meta < 4; meta++) {
-			ResourceLocation rl = new ResourceLocation(getRegistryName() + "_" + EnumGlyphType.values()[meta].name().toLowerCase());
+			ResourceLocation rl = new ResourceLocation(this.getRegistryName() + "_" + EnumGlyphType.values()[meta].name().toLowerCase());
 			ModelResourceLocation mrl = new ModelResourceLocation(rl, "inventory");
 			ModelLoader.setCustomModelResourceLocation(this, meta, mrl);
 		}

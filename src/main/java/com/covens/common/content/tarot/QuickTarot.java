@@ -1,12 +1,13 @@
 package com.covens.common.content.tarot;
 
-import com.covens.api.divination.ITarot;
-import com.covens.common.lib.LibMod;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import com.covens.api.divination.ITarot;
+import com.covens.common.lib.LibMod;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class QuickTarot implements ITarot {
 
@@ -19,7 +20,7 @@ public class QuickTarot implements ITarot {
 	public QuickTarot(String name, Predicate<EntityPlayer> apply, Predicate<EntityPlayer> reverse, Function<EntityPlayer, Integer> getNum) {
 		validateAll(name, apply);
 		this.unlocalizedName = "tarot." + name + ".name";
-		rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/tarots/" + name + ".png");
+		this.rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/tarots/" + name + ".png");
 		this.reverse = reverse;
 		if (reverse == null) {
 			this.reverse = p -> p.getRNG().nextBoolean();
@@ -42,43 +43,43 @@ public class QuickTarot implements ITarot {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return rl;
+		return this.rl;
 	}
 
 	@Override
 	public boolean isApplicableToPlayer(EntityPlayer player) {
-		return apply.test(player);
+		return this.apply.test(player);
 	}
 
 	@Override
 	public boolean hasNumber(EntityPlayer player) {
-		return getNum.apply(player) >= 0;
+		return this.getNum.apply(player) >= 0;
 	}
 
 	@Override
 	public boolean isReversed(EntityPlayer player) {
-		return reverse.test(player);
+		return this.reverse.test(player);
 	}
 
 	@Override
 	public String getTranslationKey() {
-		return unlocalizedName;
+		return this.unlocalizedName;
 	}
 
 	@Override
 	public int getNumber(EntityPlayer player) {
-		return getNum.apply(player);
+		return this.getNum.apply(player);
 	}
 
 	@Override
 	public ITarot setRegistryName(ResourceLocation nameIn) {
-		regName = nameIn;
+		this.regName = nameIn;
 		return this;
 	}
 
 	@Override
 	public ResourceLocation getRegistryName() {
-		return regName;
+		return this.regName;
 	}
 
 	@Override

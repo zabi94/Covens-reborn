@@ -7,6 +7,7 @@ import com.covens.common.core.capability.energy.player.PlayerMPContainerProvider
 import com.covens.common.core.capability.energy.player.expansion.MagicPowerExpansionProvider;
 import com.covens.common.core.capability.mimic.MimicDataProvider;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

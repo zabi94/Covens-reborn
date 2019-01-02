@@ -1,10 +1,23 @@
 package com.covens.common.content.cauldron.brews;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.cauldron.BrewMod;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGlazedTerracotta;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockStainedGlass;
+import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,34 +30,31 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class PotionIceWorld extends BrewMod {
 
 	private final Map<Block, IBlockState> stateMap = new HashMap<>();
 
 	public PotionIceWorld() {
 		super("ice_world", true, 0xB0E0E6, true, 0);
-		stateMap.put(Blocks.GRASS_PATH, Blocks.PACKED_ICE.getDefaultState());
-		stateMap.put(Blocks.GRAVEL, Blocks.PACKED_ICE.getDefaultState());
-		stateMap.put(Blocks.COBBLESTONE, Blocks.PACKED_ICE.getDefaultState());
-		stateMap.put(Blocks.LOG, Blocks.PACKED_ICE.getDefaultState());
-		stateMap.put(Blocks.LOG2, Blocks.PACKED_ICE.getDefaultState());
-		stateMap.put(Blocks.DIRT, Blocks.SNOW.getDefaultState());
-		stateMap.put(Blocks.GRASS, Blocks.SNOW.getDefaultState());
-		stateMap.put(Blocks.SAND, Blocks.SNOW.getDefaultState());
-		stateMap.put(Blocks.MYCELIUM, Blocks.SNOW.getDefaultState());
-		stateMap.put(Blocks.OBSIDIAN, Blocks.PACKED_ICE.getDefaultState());
-		stateMap.put(Blocks.SOUL_SAND, Blocks.SNOW.getDefaultState());
-		stateMap.put(Blocks.WOOL, Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE));
-		stateMap.put(Blocks.FARMLAND, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
-		stateMap.put(Blocks.GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.BLUE));
-		stateMap.put(Blocks.GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.BLUE));
-		stateMap.put(Blocks.STAINED_GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.BLUE));
-		stateMap.put(Blocks.STAINED_GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.BLUE));
-		stateMap.put(Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE));
-		stateMap.put(Blocks.STAINED_HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE));
+		this.stateMap.put(Blocks.GRASS_PATH, Blocks.PACKED_ICE.getDefaultState());
+		this.stateMap.put(Blocks.GRAVEL, Blocks.PACKED_ICE.getDefaultState());
+		this.stateMap.put(Blocks.COBBLESTONE, Blocks.PACKED_ICE.getDefaultState());
+		this.stateMap.put(Blocks.LOG, Blocks.PACKED_ICE.getDefaultState());
+		this.stateMap.put(Blocks.LOG2, Blocks.PACKED_ICE.getDefaultState());
+		this.stateMap.put(Blocks.DIRT, Blocks.SNOW.getDefaultState());
+		this.stateMap.put(Blocks.GRASS, Blocks.SNOW.getDefaultState());
+		this.stateMap.put(Blocks.SAND, Blocks.SNOW.getDefaultState());
+		this.stateMap.put(Blocks.MYCELIUM, Blocks.SNOW.getDefaultState());
+		this.stateMap.put(Blocks.OBSIDIAN, Blocks.PACKED_ICE.getDefaultState());
+		this.stateMap.put(Blocks.SOUL_SAND, Blocks.SNOW.getDefaultState());
+		this.stateMap.put(Blocks.WOOL, Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE));
+		this.stateMap.put(Blocks.FARMLAND, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
+		this.stateMap.put(Blocks.GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.BLUE));
+		this.stateMap.put(Blocks.GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.BLUE));
+		this.stateMap.put(Blocks.STAINED_GLASS, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.BLUE));
+		this.stateMap.put(Blocks.STAINED_GLASS_PANE, Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.BLUE));
+		this.stateMap.put(Blocks.HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE));
+		this.stateMap.put(Blocks.STAINED_HARDENED_CLAY, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE));
 	}
 
 	@Override
@@ -61,9 +71,9 @@ public class PotionIceWorld extends BrewMod {
 
 		Iterable<MutableBlockPos> spots = BlockPos.getAllInBoxMutable(posI, posF);
 		for (BlockPos spot : spots) {
-			if (spot.distanceSq(pos) < 2 + box * box / 2) {
+			if (spot.distanceSq(pos) < (2 + ((box * box) / 2))) {
 				IBlockState state = world.getBlockState(spot);
-				if (world.rand.nextInt(4) <= modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2) {
+				if (world.rand.nextInt(4) <= (modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2)) {
 					if (state.getBlock() instanceof BlockLeaves) {
 						world.setBlockState(spot, ModBlocks.fake_ice.getDefaultState(), 3);
 					} else if (state.getBlock() instanceof BlockPlanks) {
@@ -76,10 +86,10 @@ public class PotionIceWorld extends BrewMod {
 						world.setBlockState(spot, Blocks.PACKED_ICE.getDefaultState(), 3);
 					} else if (state.getBlock() instanceof BlockLog) {
 						world.setBlockState(spot, Blocks.PACKED_ICE.getDefaultState(), 3);
-					} else if (stateMap.containsKey(state.getBlock())) {
-						world.setBlockState(spot, stateMap.get(state.getBlock()), 3);
+					} else if (this.stateMap.containsKey(state.getBlock())) {
+						world.setBlockState(spot, this.stateMap.get(state.getBlock()), 3);
 					} else if (state.getBlock() instanceof BlockGlazedTerracotta) {
-						world.setBlockState(spot, Blocks.BLUE_GLAZED_TERRACOTTA.getDefaultState().withProperty(BlockGlazedTerracotta.FACING, state.getValue(BlockGlazedTerracotta.FACING)), 3);
+						world.setBlockState(spot, Blocks.BLUE_GLAZED_TERRACOTTA.getDefaultState().withProperty(BlockHorizontal.FACING, state.getValue(BlockHorizontal.FACING)), 3);
 					}
 				}
 			}

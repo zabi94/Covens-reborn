@@ -2,6 +2,7 @@ package com.covens.common.core.event;
 
 import com.covens.common.core.capability.mimic.CapabilityMimicData;
 import com.covens.common.core.capability.mimic.IMimicData;
+
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -17,8 +18,7 @@ public class MimicEvents {
 			final IMimicData capability = event.getPlayer().getCapability(CapabilityMimicData.CAPABILITY, null);
 			if (capability.isMimicking()) {
 				event.setCanceled(true);
-				event.getPlayer().getServerWorld().playerEntities.stream().forEach(player ->
-						player.sendMessage(new TextComponentString("<" + capability.getMimickedPlayerName() + "> " + event.getMessage())));
+				event.getPlayer().getServerWorld().playerEntities.stream().forEach(player -> player.sendMessage(new TextComponentString("<" + capability.getMimickedPlayerName() + "> " + event.getMessage())));
 			}
 		}
 	}

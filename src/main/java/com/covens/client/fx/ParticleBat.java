@@ -1,6 +1,7 @@
 package com.covens.client.fx;
 
 import com.covens.client.ResourceLocations;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -17,17 +18,17 @@ class ParticleBat extends Particle {
 
 	private ParticleBat(World worldIn, double posXIn, double posYIn, double posZIn, boolean endAnimation) {
 		super(worldIn, posXIn, posYIn, posZIn);
-		this.particleScale = (float) (1 + rand.nextDouble() * 0.3);
+		this.particleScale = (float) (1 + (this.rand.nextDouble() * 0.3));
 		this.particleMaxAge = endAnimation ? 40 : 10;
-		acc = new Vec3d(rand.nextGaussian(), rand.nextGaussian(), rand.nextGaussian());
+		this.acc = new Vec3d(this.rand.nextGaussian(), this.rand.nextGaussian(), this.rand.nextGaussian());
 		this.decay = 1d;
-		this.motionX = rand.nextGaussian() * 0.1;
-		this.motionY = rand.nextDouble() * (endAnimation ? 0.5 : 0.1);
-		this.motionZ = rand.nextGaussian() * 0.1;
-		this.prevParticleAngle = (float) rand.nextDouble();
+		this.motionX = this.rand.nextGaussian() * 0.1;
+		this.motionY = this.rand.nextDouble() * (endAnimation ? 0.5 : 0.1);
+		this.motionZ = this.rand.nextGaussian() * 0.1;
+		this.prevParticleAngle = (float) this.rand.nextDouble();
 		this.particleAngle = this.prevParticleAngle;
 		final TextureAtlasSprite atlasSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(ResourceLocations.BAT.toString());
-		setParticleTexture(atlasSprite);
+		this.setParticleTexture(atlasSprite);
 	}
 
 	@Override
@@ -36,22 +37,21 @@ class ParticleBat extends Particle {
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 
-		Vec3d movement = new Vec3d(motionX, motionY, motionZ);
+		Vec3d movement = new Vec3d(this.motionX, this.motionY, this.motionZ);
 		double size = movement.length();
-		movement = movement.add(acc).normalize().scale(size * decay);
-		motionX = movement.x;
-		motionY = movement.y;
-		motionZ = movement.z;
+		movement = movement.add(this.acc).normalize().scale(size * this.decay);
+		this.motionX = movement.x;
+		this.motionY = movement.y;
+		this.motionZ = movement.z;
 
 		this.move(this.motionX, this.motionY, this.motionZ);
 
-		this.setAlphaF(1f - ((float) particleAge / particleMaxAge));
+		this.setAlphaF(1f - ((float) this.particleAge / this.particleMaxAge));
 
-		if (this.particleAge++ > particleMaxAge) {
-			setExpired();
+		if (this.particleAge++ > this.particleMaxAge) {
+			this.setExpired();
 		}
 	}
-
 
 	@Override
 	public int getFXLayer() {

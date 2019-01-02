@@ -1,6 +1,7 @@
 package com.covens.common.world.biome;
 
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 
@@ -35,7 +36,7 @@ public class BiomeVampireLair extends Biome {
 
 	@Override
 	public int getFoliageColorAtPos(BlockPos pos) {
-		return getModdedBiomeFoliageColor(0x1a2d00);
+		return this.getModdedBiomeFoliageColor(0x1a2d00);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.Covens;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
@@ -19,17 +20,17 @@ public class BrewVanilla implements IBrewEffect {
 	public BrewVanilla(Potion potion) {
 		for (PotionType p : PotionType.REGISTRY) {
 			for (PotionEffect pe : p.getEffects()) {
-				if (pe.getPotion() == potion && pe.getAmplifier() == 0) {
-					if (pe.getDuration() < duration || duration == 0) {
-						duration = pe.getDuration();
+				if ((pe.getPotion() == potion) && (pe.getAmplifier() == 0)) {
+					if ((pe.getDuration() < this.duration) || (this.duration == 0)) {
+						this.duration = pe.getDuration();
 					}
 				}
 			}
 		}
 
-		if (duration == 0) {
+		if (this.duration == 0) {
 			Covens.logger.warn("Couldn't find the correct default duration for " + potion.getName());
-			duration = 1800;
+			this.duration = 1800;
 		}
 	}
 
@@ -53,17 +54,17 @@ public class BrewVanilla implements IBrewEffect {
 
 	@Override
 	public int getDefaultDuration() {
-		return duration;
+		return this.duration;
 	}
 
 	@Override
 	public int getArrowDuration() {
-		return getDefaultDuration() / 16;
+		return this.getDefaultDuration() / 16;
 	}
 
 	@Override
 	public int getLingeringDuration() {
-		return getDefaultDuration() / 8;
+		return this.getDefaultDuration() / 8;
 	}
 
 }

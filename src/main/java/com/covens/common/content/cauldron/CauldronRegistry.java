@@ -1,5 +1,42 @@
 package com.covens.common.content.cauldron;
 
+import static com.covens.common.lib.LibIngredients.acaciaLog;
+import static com.covens.common.lib.LibIngredients.anyLeaf;
+import static com.covens.common.lib.LibIngredients.anyLog;
+import static com.covens.common.lib.LibIngredients.blazePowder;
+import static com.covens.common.lib.LibIngredients.dimensionalSand;
+import static com.covens.common.lib.LibIngredients.dirt;
+import static com.covens.common.lib.LibIngredients.emptyGoblet;
+import static com.covens.common.lib.LibIngredients.empty_honeycomb;
+import static com.covens.common.lib.LibIngredients.eyes;
+import static com.covens.common.lib.LibIngredients.fumeCleansingAura;
+import static com.covens.common.lib.LibIngredients.fumeCloudyOil;
+import static com.covens.common.lib.LibIngredients.fumeFieryBreeze;
+import static com.covens.common.lib.LibIngredients.fumeHeavenlyWind;
+import static com.covens.common.lib.LibIngredients.fumeReekOfDeath;
+import static com.covens.common.lib.LibIngredients.ghastTear;
+import static com.covens.common.lib.LibIngredients.glowstoneDust;
+import static com.covens.common.lib.LibIngredients.goldNugget;
+import static com.covens.common.lib.LibIngredients.graveyardDust;
+import static com.covens.common.lib.LibIngredients.honeycomb;
+import static com.covens.common.lib.LibIngredients.normalRitualChalk;
+import static com.covens.common.lib.LibIngredients.potato;
+import static com.covens.common.lib.LibIngredients.redstone;
+import static com.covens.common.lib.LibIngredients.salt;
+import static com.covens.common.lib.LibIngredients.spider_web;
+import static com.covens.common.lib.LibIngredients.sponge;
+import static com.covens.common.lib.LibIngredients.stickyPiston;
+import static com.covens.common.lib.LibIngredients.wormwood;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
@@ -14,6 +51,7 @@ import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 import com.google.common.collect.HashBiMap;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -30,10 +68,6 @@ import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-import java.util.*;
-
-import static com.covens.common.lib.LibIngredients.*;
-
 public class CauldronRegistry {
 
 	public static final HashBiMap<IBrewEffect, Potion> BREW_POTION_MAP = HashBiMap.<IBrewEffect, Potion>create(90);
@@ -41,7 +75,8 @@ public class CauldronRegistry {
 	public static final ArrayList<CauldronCraftingRecipe> CRAFTING_REGISTRY = new ArrayList<>();
 	private static final HashMap<Ingredient, CauldronFoodValue> STEW_REGISTRY = new HashMap<>();
 	private static final HashMap<Ingredient, IBrewEffect> BREW_INGREDIENT_REGISTRY = new HashMap<>();
-	// The less entries an Ingredient has, the higher priority it will be in the list
+	// The less entries an Ingredient has, the higher priority it will be in the
+	// list
 	private static final Comparator<Map.Entry<Ingredient, CauldronFoodValue>> STEW_INGREDIENT_PRIORITY = Map.Entry.<Ingredient, CauldronFoodValue>comparingByKey(Comparator.comparing(i -> i.getMatchingStacks().length)).reversed();
 
 	public static void registerFoodValue(Ingredient ingredient, CauldronFoodValue value) {
@@ -135,11 +170,9 @@ public class CauldronRegistry {
 	}
 
 	public static Optional<Ingredient> getIngredientFromBrew(IBrewEffect effect) {
-		return BREW_INGREDIENT_REGISTRY.keySet().parallelStream()
-				.filter(ing -> BREW_INGREDIENT_REGISTRY.get(ing) == effect)
-				.findFirst();
+		return BREW_INGREDIENT_REGISTRY.keySet().parallelStream().filter(ing -> BREW_INGREDIENT_REGISTRY.get(ing) == effect).findFirst();
 	}
-	
+
 	public static void init() {
 
 		registerFood(Ingredient.fromItem(Items.APPLE), 4, 2.4f);
@@ -192,7 +225,7 @@ public class CauldronRegistry {
 		registerFood(new IngredientMultiOreDict("listAllmuttoncooked"), 6, 9.6f);
 		registerFood(new IngredientMultiOreDict("listAllrabbitcooked"), 5, 6f);
 		registerFood(new IngredientMultiOreDict("listAllfishcooked"), 5, 6f);
-		//Todo: Support for more modded foods.
+		// Todo: Support for more modded foods.
 
 		// Miscellaneous water-based recipes
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(Blocks.PISTON, 1, 0), stickyPiston);
@@ -315,4 +348,3 @@ public class CauldronRegistry {
 		registerFoodValue(ingredient, new CauldronFoodValue(hunger, saturation));
 	}
 }
-

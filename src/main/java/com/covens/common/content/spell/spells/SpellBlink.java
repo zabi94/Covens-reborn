@@ -7,6 +7,7 @@
 package com.covens.common.content.spell.spells;
 
 import com.covens.common.content.spell.Spell;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +23,7 @@ public class SpellBlink extends Spell {
 
 	@Override
 	public void performEffect(RayTraceResult rtrace, EntityLivingBase caster, World world) {
-		if (caster != null && rtrace.typeOfHit == Type.BLOCK) {
+		if ((caster != null) && (rtrace.typeOfHit == Type.BLOCK)) {
 			BlockPos dest = rtrace.getBlockPos().offset(EnumFacing.UP);
 			caster.attemptTeleport(dest.getX() + 0.5, dest.getY() + 0.5, dest.getZ() + 0.5);
 		}

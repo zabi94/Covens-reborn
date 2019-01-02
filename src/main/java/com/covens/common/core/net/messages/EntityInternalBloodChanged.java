@@ -1,17 +1,18 @@
 package com.covens.common.core.net.messages;
 
+import java.util.UUID;
+
 import com.covens.api.transformation.IBloodReserve;
 import com.covens.common.Covens;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
 import com.covens.common.core.net.SimpleMessage;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.UUID;
 
 public class EntityInternalBloodChanged extends SimpleMessage<EntityInternalBloodChanged> {
 
@@ -22,11 +23,11 @@ public class EntityInternalBloodChanged extends SimpleMessage<EntityInternalBloo
 	}
 
 	public EntityInternalBloodChanged(EntityLivingBase entity) {
-		entity_id = entity.getEntityId();
+		this.entity_id = entity.getEntityId();
 		IBloodReserve data = entity.getCapability(CapabilityBloodReserve.CAPABILITY, null);
-		amount = data.getBlood();
-		max = data.getMaxBlood();
-		id_drainer = data.getDrinkerUUID();
+		this.amount = data.getBlood();
+		this.max = data.getMaxBlood();
+		this.id_drainer = data.getDrinkerUUID();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -34,15 +35,15 @@ public class EntityInternalBloodChanged extends SimpleMessage<EntityInternalBloo
 	public IMessage handleMessage(MessageContext context) {
 		Minecraft.getMinecraft().addScheduledTask(() -> {
 			if (Minecraft.getMinecraft().world != null) {
-				EntityLivingBase ent = (EntityLivingBase) Minecraft.getMinecraft().world.getEntityByID(entity_id);
+				EntityLivingBase ent = (EntityLivingBase) Minecraft.getMinecraft().world.getEntityByID(this.entity_id);
 				if (ent != null) {
 					IBloodReserve br = ent.getCapability(CapabilityBloodReserve.CAPABILITY, null);
-					br.setMaxBlood(max); // Max blood before blood!
-					br.setBlood(amount);// Blood after max blood!
-					br.setDrinker(id_drainer);
+					br.setMaxBlood(this.max); // Max blood before blood!
+					br.setBlood(this.amount);// Blood after max blood!
+					br.setDrinker(this.id_drainer);
 				}
 			} else {
-				Covens.logger.warn("Couldn't find entity " + entity_id + " for EntityInternalBloodChanged message");
+				Covens.logger.warn("Couldn't find entity " + this.entity_id + " for EntityInternalBloodChanged message");
 			}
 		});
 		return null;

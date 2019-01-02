@@ -28,10 +28,10 @@ public class MimicEventHandler {
 
 	@SideOnly(Side.CLIENT)
 	private static final Field playerTextures = LibReflection.field("playerTextures", LibReflection.NETWORK_PLAYER_INFO__PLAYER_TEXTURES, NetworkPlayerInfo.class);
-	
+
 	@SideOnly(Side.CLIENT)
 	private static final HashMap<UUID, ResourceLocation> skinMap = new HashMap<>();
-	
+
 	@SideOnly(Side.CLIENT)
 	private static final HashMap<UUID, String> modelType = new HashMap<>();
 

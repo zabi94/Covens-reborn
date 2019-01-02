@@ -8,6 +8,7 @@ package com.covens.common.content.spell;
 
 import com.covens.api.spell.ISpell;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -31,27 +32,27 @@ public abstract class Spell implements ISpell {
 
 	@Override
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public int getColor() {
-		return color;
+		return this.color;
 	}
 
 	@Override
 	public int getCost() {
-		return cost;
+		return this.cost;
 	}
 
 	@Override
 	public EnumSpellType getType() {
-		return type;
+		return this.type;
 	}
 
 	@Override
 	public ResourceLocation getRegistryName() {
-		return regName;
+		return this.regName;
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public abstract class Spell implements ISpell {
 
 	@Override
 	public ISpell setRegistryName(ResourceLocation nameIn) {
-		regName = nameIn;
+		this.regName = nameIn;
 		return this;
 	}
 

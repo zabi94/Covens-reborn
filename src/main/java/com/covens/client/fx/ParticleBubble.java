@@ -1,6 +1,9 @@
 package com.covens.client.fx;
 
+import java.awt.Color;
+
 import com.covens.client.ResourceLocations;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -15,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.awt.*;
-
 @SideOnly(Side.CLIENT)
 class ParticleBubble extends Particle {
 
@@ -28,16 +29,16 @@ class ParticleBubble extends Particle {
 		super(world, x, y, z, 0, 0, 0);
 		this.textureManager = textureManagerIn;
 		this.motionX *= 0.009999999776482582D;
-		this.motionY = 0.1D * 0.20000000298023224D + (Math.random() * 2.0D - 1.0D) * 0.019999999552965164D;
+		this.motionY = (0.1D * 0.20000000298023224D) + (((Math.random() * 2.0D) - 1.0D) * 0.019999999552965164D);
 		this.motionZ *= 0.009999999776482582D;
 
 		this.particleScale *= 0.015F;
 		this.particleMaxAge = 2;
 		int rgb = new Color(rgbIn, false).brighter().brighter().brighter().brighter().hashCode();
-		float r = (rgb >>> 16 & 0xFF) / 256.0F;
-		float g = (rgb >>> 8 & 0xFF) / 256.0F;
+		float r = ((rgb >>> 16) & 0xFF) / 256.0F;
+		float g = ((rgb >>> 8) & 0xFF) / 256.0F;
 		float b = (rgb & 0xFF) / 256.0F;
-		setRBGColorF(r, g, b);
+		this.setRBGColorF(r, g, b);
 	}
 
 	@Override
@@ -57,7 +58,7 @@ class ParticleBubble extends Particle {
 		this.motionY *= 0.4500000238418579D;
 		this.motionZ *= 0.6600000262260437D;
 
-		if (life++ >= 16) {
+		if (this.life++ >= 16) {
 			this.setExpired();
 		}
 	}
@@ -74,15 +75,15 @@ class ParticleBubble extends Particle {
 		float maxY = minY + 0.5F;
 
 		float scale = 1.0F * this.particleScale;
-		float x = (float) (this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX);
-		float y = (float) (this.prevPosY + (this.posY - this.prevPosY) * partialTicks - interpPosY);
-		float z = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * partialTicks - interpPosZ);
-		Vec3d vec0 = new Vec3d(-rotationX * scale - rotationXY * scale, -rotationZ * scale, -rotationYZ * scale - rotationXZ * scale);
-		Vec3d vec1 = new Vec3d(-rotationX * scale + rotationXY * scale, rotationZ * scale, -rotationYZ * scale + rotationXZ * scale);
-		Vec3d vec2 = new Vec3d(rotationX * scale + rotationXY * scale, rotationZ * scale, rotationYZ * scale + rotationXZ * scale);
-		Vec3d vec3 = new Vec3d(rotationX * scale - rotationXY * scale, -rotationZ * scale, rotationYZ * scale - rotationXZ * scale);
+		float x = (float) ((this.prevPosX + ((this.posX - this.prevPosX) * partialTicks)) - interpPosX);
+		float y = (float) ((this.prevPosY + ((this.posY - this.prevPosY) * partialTicks)) - interpPosY);
+		float z = (float) ((this.prevPosZ + ((this.posZ - this.prevPosZ) * partialTicks)) - interpPosZ);
+		Vec3d vec0 = new Vec3d((-rotationX * scale) - (rotationXY * scale), -rotationZ * scale, (-rotationYZ * scale) - (rotationXZ * scale));
+		Vec3d vec1 = new Vec3d((-rotationX * scale) + (rotationXY * scale), rotationZ * scale, (-rotationYZ * scale) + (rotationXZ * scale));
+		Vec3d vec2 = new Vec3d((rotationX * scale) + (rotationXY * scale), rotationZ * scale, (rotationYZ * scale) + (rotationXZ * scale));
+		Vec3d vec3 = new Vec3d((rotationX * scale) - (rotationXY * scale), -rotationZ * scale, (rotationYZ * scale) - (rotationXZ * scale));
 
-		GlStateManager.color(getRedColorF(), getGreenColorF(), getBlueColorF(), 1.0F);
+		GlStateManager.color(this.getRedColorF(), this.getGreenColorF(), this.getBlueColorF(), 1.0F);
 		buffer.begin(7, VERTEX_FORMAT);
 		buffer.pos(x + vec0.x, y + vec0.y, z + vec0.z).tex(maxX, maxY).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
 		buffer.pos(x + vec1.x, y + vec1.y, z + vec1.z).tex(maxX, minY).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();

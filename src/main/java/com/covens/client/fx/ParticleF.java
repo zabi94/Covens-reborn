@@ -12,12 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 
 public enum ParticleF {
-	CAULDRON_BUBBLE(new ParticleBubble.Factory()),
-	STEAM(new ParticleSteam.Factory()),
-	BEE(new ParticleBee.Factory()),
-	SPARK(new ParticleSpark.Factory()),
-	FLAME(new ParticleOvenFlame.Factory()),
-	COLORED_FLAME(new ParticleColoredflame.Factory()), BAT(new ParticleBat.Factory());
+	CAULDRON_BUBBLE(new ParticleBubble.Factory()), STEAM(new ParticleSteam.Factory()), BEE(new ParticleBee.Factory()), SPARK(new ParticleSpark.Factory()), FLAME(new ParticleOvenFlame.Factory()), COLORED_FLAME(new ParticleColoredflame.Factory()), BAT(new ParticleBat.Factory());
 
 	private final IParticleF factory;
 
@@ -26,6 +21,6 @@ public enum ParticleF {
 	}
 
 	public Particle newInstance(double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... args) {
-		return factory.createParticle(Minecraft.getMinecraft().world, x, y, z, xSpeed, ySpeed, zSpeed, args);
+		return this.factory.createParticle(Minecraft.getMinecraft().world, x, y, z, xSpeed, ySpeed, zSpeed, args);
 	}
 }

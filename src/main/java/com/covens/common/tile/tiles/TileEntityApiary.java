@@ -33,45 +33,44 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 		@Override
 		protected void onContentsChanged(int slot) {
 			super.onContentsChanged(slot);
-			markDirty();
+			TileEntityApiary.this.markDirty();
 			int hivesCount = 0;
-			for (int i = 0; i < COLUMNS * ROWS; i++) {
-				if (hives_inventory.getStackInSlot(i).getItem() == ModItems.honeycomb || hives_inventory.getStackInSlot(i).getItem() == ModItems.empty_honeycomb) {
+			for (int i = 0; i < (COLUMNS * ROWS); i++) {
+				if ((TileEntityApiary.this.hives_inventory.getStackInSlot(i).getItem() == ModItems.honeycomb) || (TileEntityApiary.this.hives_inventory.getStackInSlot(i).getItem() == ModItems.empty_honeycomb)) {
 					hivesCount++;
 				}
 			}
-			if (hivesCount != beesSlots) {
-				beesSlots = hivesCount;
-				syncToClient();
+			if (hivesCount != TileEntityApiary.this.beesSlots) {
+				TileEntityApiary.this.beesSlots = hivesCount;
+				TileEntityApiary.this.syncToClient();
 			}
 		}
 	};
 
 	@Override
 	public void update() {
-		if (!world.isRemote && world.getTotalWorldTime() % 80 == 0) {
+		if (!this.world.isRemote && ((this.world.getTotalWorldTime() % 80) == 0)) {
 			int hivesCount = 0;
-			for (int i = 0; i < COLUMNS * ROWS; i++) {
+			for (int i = 0; i < (COLUMNS * ROWS); i++) {
 				if (rng.nextInt(500) == 0) { // this is once every 1m14s on average: (500 chance*(80 ticks/20tps))/27 slots
-					hives_inventory.setStackInSlot(i, growItem(i));
-					if (hives_inventory.getStackInSlot(i).getItem() == ModItems.honeycomb || hives_inventory.getStackInSlot(i).getItem() == ModItems.empty_honeycomb) {
+					this.hives_inventory.setStackInSlot(i, this.growItem(i));
+					if ((this.hives_inventory.getStackInSlot(i).getItem() == ModItems.honeycomb) || (this.hives_inventory.getStackInSlot(i).getItem() == ModItems.empty_honeycomb)) {
 						hivesCount++;
 					}
 				}
 			}
-			markDirty();
-			if (hivesCount != beesSlots) {
-				beesSlots = hivesCount;
-				syncToClient();
+			this.markDirty();
+			if (hivesCount != this.beesSlots) {
+				this.beesSlots = hivesCount;
+				this.syncToClient();
 			}
 		}
 	}
 
-
 	private ItemStack growItem(int i) {
-		ItemStack is = hives_inventory.getStackInSlot(i);
+		ItemStack is = this.hives_inventory.getStackInSlot(i);
 		Item item = is.getItem();
-		if (item == Items.AIR && rng.nextInt(3) == 0 && getNeighbors(i).stream().anyMatch(n -> (hives_inventory.getStackInSlot(n).getItem() != Items.AIR))) {
+		if ((item == Items.AIR) && (rng.nextInt(3) == 0) && this.getNeighbors(i).stream().anyMatch(n -> (this.hives_inventory.getStackInSlot(n).getItem() != Items.AIR))) {
 			return new ItemStack(ModItems.empty_honeycomb);
 		}
 
@@ -79,62 +78,69 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 			return new ItemStack(ModItems.honeycomb);
 		}
 
-		if (item == Items.PAPER || item == Item.getItemFromBlock(Blocks.CARPET)) {
+		if ((item == Items.PAPER) || (item == Item.getItemFromBlock(Blocks.CARPET))) {
 			return new ItemStack(ModItems.empty_honeycomb);
 		}
 		return is;
 	}
 
-
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing));
+		return ((capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing));
 	}
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(hives_inventory);
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.hives_inventory);
 		}
 		return super.getCapability(capability, facing);
 	}
-	
+
 	@Override
 	public void onBlockBroken(World worldIn, BlockPos pos, IBlockState state) {
-		dropInventory(hives_inventory);
+		this.dropInventory(this.hives_inventory);
 	}
 
 	private ArrayList<Integer> getNeighbors(int slot) {
 		int i = slot % COLUMNS;
 		int j = slot / COLUMNS;
 		ArrayList<Integer> res = Lists.newArrayList();
-		if (i > 0) res.add(slot - 1);
-		if (i < COLUMNS - 1) res.add(slot + 1);
-		if (j > 0) res.add(slot - COLUMNS);
-		if (j < ROWS - 1) res.add(slot + COLUMNS);
+		if (i > 0) {
+			res.add(slot - 1);
+		}
+		if (i < (COLUMNS - 1)) {
+			res.add(slot + 1);
+		}
+		if (j > 0) {
+			res.add(slot - COLUMNS);
+		}
+		if (j < (ROWS - 1)) {
+			res.add(slot + COLUMNS);
+		}
 		return res;
 	}
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound tag) {
-		hives_inventory.deserializeNBT(tag.getCompoundTag("hives"));
-		readModSyncDataNBT(tag);
+		this.hives_inventory.deserializeNBT(tag.getCompoundTag("hives"));
+		this.readModSyncDataNBT(tag);
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
-		tag.setTag("hives", hives_inventory.serializeNBT());
-		writeModSyncDataNBT(tag);
+		tag.setTag("hives", this.hives_inventory.serializeNBT());
+		this.writeModSyncDataNBT(tag);
 	}
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
-		tag.setInteger("hasbees", beesSlots);
+		tag.setInteger("hasbees", this.beesSlots);
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
-		beesSlots = tag.getInteger("hasbees");
+		this.beesSlots = tag.getInteger("hasbees");
 	}
 
 	@Override
@@ -144,7 +150,7 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 	}
 
 	public boolean hasBees() {
-		return beesSlots > 0;
+		return this.beesSlots > 0;
 	}
 
 	static class ApiaryInventory extends ItemStackHandler {
@@ -156,7 +162,7 @@ public class TileEntityApiary extends ModTileEntity implements ITickable {
 		@Override
 		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 			Item i = stack.getItem();
-			if (i == Items.PAPER || i == Item.getItemFromBlock(Blocks.CARPET) || i == ModItems.empty_honeycomb) {
+			if ((i == Items.PAPER) || (i == Item.getItemFromBlock(Blocks.CARPET)) || (i == ModItems.empty_honeycomb)) {
 				return super.insertItem(slot, stack, simulate);
 			}
 			return stack;

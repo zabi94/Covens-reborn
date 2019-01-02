@@ -1,7 +1,10 @@
 package com.covens.common.content.cauldron.brews;
 
+import java.util.UUID;
+
 import com.covens.common.content.cauldron.BrewMod;
 import com.covens.common.core.helper.AttributeModifierModeHelper;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
@@ -12,8 +15,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import java.util.UUID;
 
 public class PotionShellArmor extends BrewMod {
 
@@ -42,7 +43,7 @@ public class PotionShellArmor extends BrewMod {
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent evt) {
 		PotionEffect pe = evt.getEntityLiving().getActivePotionEffect(this);
-		if (pe != null && evt.getSource().getTrueSource() != null && !evt.getSource().damageType.equals("thorns")) {
+		if ((pe != null) && (evt.getSource().getTrueSource() != null) && !evt.getSource().damageType.equals("thorns")) {
 			evt.getSource().getTrueSource().attackEntityFrom(DamageSource.causeThornsDamage(evt.getEntityLiving()), (pe.getAmplifier() / 8f) * evt.getAmount());
 		}
 	}

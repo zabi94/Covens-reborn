@@ -1,7 +1,10 @@
 package com.covens.common.block.tiles;
 
+import static net.minecraft.block.BlockHorizontal.FACING;
+
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.tile.tiles.TileEntityDistillery;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -15,12 +18,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.Random;
-
-import static net.minecraft.block.BlockHorizontal.FACING;
 
 public class BlockDistillery extends BlockModTileEntity {
 
@@ -29,7 +26,7 @@ public class BlockDistillery extends BlockModTileEntity {
 
 	public BlockDistillery(String id) {
 		super(id, Material.IRON);
-		this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
 		this.setHardness(1f);
 		this.setHarvestLevel("pickaxe", 0);
 	}
@@ -42,7 +39,7 @@ public class BlockDistillery extends BlockModTileEntity {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.HORIZONTALS[meta & 3]);
+		return this.getDefaultState().withProperty(FACING, EnumFacing.HORIZONTALS[meta & 3]);
 	}
 
 	@Override
@@ -65,12 +62,6 @@ public class BlockDistillery extends BlockModTileEntity {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityDistillery();
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-
 	}
 
 	@SuppressWarnings("deprecation")

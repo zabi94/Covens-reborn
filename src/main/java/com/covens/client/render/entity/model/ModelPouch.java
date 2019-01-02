@@ -1,6 +1,7 @@
 package com.covens.client.render.entity.model;
 
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -8,8 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * Mantle - Ingoleth
- * Created using Tabula 5.1.0
+ * Mantle - Ingoleth Created using Tabula 5.1.0
  */
 public class ModelPouch extends ModelBiped {
 
@@ -51,13 +51,12 @@ public class ModelPouch extends ModelBiped {
 		this.pouch1.render(1);
 		if (entityIn.isSneaking()) {
 			this.pouch1.rotateAngleX = -0.78539816339F;
-		} else if (bipedLeftLeg.rotateAngleX < 0) {
-			this.pouch1.rotateAngleX = bipedLeftLeg.rotateAngleX;
+		} else if (this.bipedLeftLeg.rotateAngleX < 0) {
+			this.pouch1.rotateAngleX = this.bipedLeftLeg.rotateAngleX;
 		} else {
 			this.pouch1.rotateAngleX = 0;
 		}
 	}
-
 
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
@@ -68,4 +67,3 @@ public class ModelPouch extends ModelBiped {
 		modelRenderer.rotateAngleZ = z;
 	}
 }
-

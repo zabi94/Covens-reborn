@@ -2,6 +2,7 @@ package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.Covens;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -23,7 +24,7 @@ public class PotionDisrobing extends BrewMod {
 	@Override
 	public void affectEntity(Entity source, Entity indirectSource, EntityLivingBase entity, int amplifier, double mult) {
 		if (!entity.world.isRemote) {
-			int i = entity.getRNG().nextInt(4 + 16 / (amplifier + 1));
+			int i = entity.getRNG().nextInt(4 + (16 / (amplifier + 1)));
 			switch (i) {
 				case 0:
 					spawnItem(entity, entity.getItemStackFromSlot(EntityEquipmentSlot.FEET));

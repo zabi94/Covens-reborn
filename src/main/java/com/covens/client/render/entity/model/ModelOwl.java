@@ -1,6 +1,7 @@
 package com.covens.client.render.entity.model;
 
 import com.covens.common.entity.living.animals.EntityOwl;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -205,7 +206,7 @@ public class ModelOwl extends ModelBase {
 		this.owlRightClaw.addChild(this.rTalon02);
 		this.owlRightClaw.addChild(this.rTalon03);
 
-		setWanderingStance();
+		this.setWanderingStance();
 	}
 
 	@Override
@@ -229,7 +230,7 @@ public class ModelOwl extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
 		if (entityIn.onGround) {
-			setRotationAngles(owlHead, (float) (headPitch * Math.PI / 360), (float) (netHeadYaw * Math.PI / 360), 0);
+			this.setRotationAngles(this.owlHead, (float) ((headPitch * Math.PI) / 360), (float) ((netHeadYaw * Math.PI) / 360), 0);
 		}
 	}
 
@@ -239,30 +240,29 @@ public class ModelOwl extends ModelBase {
 		EntityOwl owl = (EntityOwl) entitylivingbaseIn;
 		if (owl.onGround) {
 			if (owl.isSitting()) {
-				setSittingStance();
+				this.setSittingStance();
 				float time = (owl.ticksExisted + partialTickTime) * 0.10471975512F;
-				owlBody.rotateAngleX = 0.08726646259F + 0.00484813681f * MathHelper.sin(time);
-
+				this.owlBody.rotateAngleX = 0.08726646259F + (0.00484813681f * MathHelper.sin(time));
 
 			} else {
-				setWanderingStance();
+				this.setWanderingStance();
 				float time = (owl.ticksExisted + partialTickTime) * 0.10471975512F;
-				owlBody.rotateAngleX = 0.08726646259F + 0.00484813681f * MathHelper.sin(time);
+				this.owlBody.rotateAngleX = 0.08726646259F + (0.00484813681f * MathHelper.sin(time));
 			}
 		} else {
-			setFlyingStance();
+			this.setFlyingStance();
 			float time = (owl.ticksExisted + partialTickTime) / 4.71238898F;
-			wingRight01.rotateAngleY = 0.26179938779914943f + 1.047166666666666f * MathHelper.cos(time);
-			wingLeft01.rotateAngleY = -wingRight01.rotateAngleY;
-			wingRight02.rotateAngleY = -0.52359877559F + 0.34906585039f * MathHelper.sin(time);
-			wingLeft02.rotateAngleY = -wingRight02.rotateAngleY;
-			wingRight03.rotateAngleY = wingRight01.rotateAngleY / 4;
-			wingLeft03.rotateAngleY = -wingRight03.rotateAngleY;
-			tail.rotateAngleX = -1.0471975511965976F + wingRight03.rotateAngleY / 4;
-			tailRight.rotateAngleX = -0.8726646259971648F + tail.rotateAngleX + 1.0471975511965976F;
-			tailLeft.rotateAngleX = tailRight.rotateAngleX;
-			owlRightClaw.rotateAngleX = wingRight03.rotateAngleY / 4;
-			owlLeftClaw.rotateAngleX = owlRightClaw.rotateAngleX;
+			this.wingRight01.rotateAngleY = 0.26179938779914943f + (1.047166666666666f * MathHelper.cos(time));
+			this.wingLeft01.rotateAngleY = -this.wingRight01.rotateAngleY;
+			this.wingRight02.rotateAngleY = -0.52359877559F + (0.34906585039f * MathHelper.sin(time));
+			this.wingLeft02.rotateAngleY = -this.wingRight02.rotateAngleY;
+			this.wingRight03.rotateAngleY = this.wingRight01.rotateAngleY / 4;
+			this.wingLeft03.rotateAngleY = -this.wingRight03.rotateAngleY;
+			this.tail.rotateAngleX = -1.0471975511965976F + (this.wingRight03.rotateAngleY / 4);
+			this.tailRight.rotateAngleX = -0.8726646259971648F + this.tail.rotateAngleX + 1.0471975511965976F;
+			this.tailLeft.rotateAngleX = this.tailRight.rotateAngleX;
+			this.owlRightClaw.rotateAngleX = this.wingRight03.rotateAngleY / 4;
+			this.owlLeftClaw.rotateAngleX = this.owlRightClaw.rotateAngleX;
 
 		}
 	}
@@ -271,152 +271,151 @@ public class ModelOwl extends ModelBase {
 		this.wingLeftAlt03a.setRotationPoint(0.0F, 0.0F, 1.0F);
 		this.wingRightAlt01a.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.owlRightClaw.setRotationPoint(-3.0F, 6.0F, -1.5F);
-		this.setRotationAngles(owlRightClaw, 0.8726646259971648F, 0.08726646259971647F, 0.0F);
+		this.setRotationAngles(this.owlRightClaw, 0.8726646259971648F, 0.08726646259971647F, 0.0F);
 		this.wingRight02.setRotationPoint(-6.0F, 0.0F, 1.0F);
-		this.setRotationAngles(wingRight02, 0.0F, -0.4363323129985824F, 0.0F);
+		this.setRotationAngles(this.wingRight02, 0.0F, -0.4363323129985824F, 0.0F);
 		this.wingRightAlt03b.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.owlBeak.setRotationPoint(-1.0F, 0.0F, -5.0F);
-		this.setRotationAngles(owlBeak, -0.08726646259971647F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlBeak, -0.08726646259971647F, 0.0F, 0.0F);
 		this.owlLeftEar.setRotationPoint(4.0F, -3.4000000953674316F, 0.0F);
-		this.setRotationAngles(owlLeftEar, -0.3490658503988659F, 0.0F, 0.2617993877991494F);
+		this.setRotationAngles(this.owlLeftEar, -0.3490658503988659F, 0.0F, 0.2617993877991494F);
 		this.wingRight03.setRotationPoint(-6.0F, 0.0F, 0.0F);
-		this.setRotationAngles(wingRight03, 0.0F, -0.3490658503988659F, 0.0F);
+		this.setRotationAngles(this.wingRight03, 0.0F, -0.3490658503988659F, 0.0F);
 		this.owlHead.setRotationPoint(0.0F, -12.0F, 0.0F);
-		this.setRotationAngles(owlHead, -1.48352986419518F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlHead, -1.48352986419518F, 0.0F, 0.0F);
 		this.lTalon01.setRotationPoint(0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(lTalon01, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
+		this.setRotationAngles(this.lTalon01, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
 		this.wingRightAlt01b.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.wingLeftAlt01a.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.wingLeftAlt03c.setRotationPoint(-3.0F, 0.30000001192092896F, 0.0F);
 		this.wingRightAlt02c.setRotationPoint(-3.0F, 1.2999999523162842F, 0.0F);
 		this.wingLeft02.setRotationPoint(6.0F, 0.0F, 0.0F);
-		this.setRotationAngles(wingLeft02, 0.0F, 0.4363323129985824F, 0.0F);
+		this.setRotationAngles(this.wingLeft02, 0.0F, 0.4363323129985824F, 0.0F);
 		this.owlRightEar.setRotationPoint(-4.0F, -3.4000000953674316F, 0.0F);
-		this.setRotationAngles(owlRightEar, -0.3490658503988659F, 0.0F, -0.2617993877991494F);
+		this.setRotationAngles(this.owlRightEar, -0.3490658503988659F, 0.0F, -0.2617993877991494F);
 		this.wingRight01.setRotationPoint(-6.0F, -7.0F, 0.0F);
-		this.setRotationAngles(wingRight01, -0.08726646259971647F, 0.6108652381980153F, 0.0F);
+		this.setRotationAngles(this.wingRight01, -0.08726646259971647F, 0.6108652381980153F, 0.0F);
 		this.tail.setRotationPoint(-2.0F, 2.5F, 4.0F);
-		this.setRotationAngles(tail, -1.0471975511965976F, 0.0F, 0.0F);
+		this.setRotationAngles(this.tail, -1.0471975511965976F, 0.0F, 0.0F);
 		this.wingRightAlt02a.setRotationPoint(0.0F, 0.0F, -1.0F);
 		this.wingRightAlt02b.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.rTalon03.setRotationPoint(-0.699999988079071F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(rTalon03, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.rTalon03, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
 		this.wingLeftAlt03b.setRotationPoint(3.0F, 1.7999999523162842F, -1.0F);
 		this.tailRight.setRotationPoint(-2.0F, 2.5F, 4.0F);
-		this.setRotationAngles(tailRight, -0.8726646259971648F, -0.4363323129985824F, -0.17453292519943295F);
+		this.setRotationAngles(this.tailRight, -0.8726646259971648F, -0.4363323129985824F, -0.17453292519943295F);
 		this.lTalon02.setRotationPoint(-0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(lTalon02, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
+		this.setRotationAngles(this.lTalon02, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
 		this.wingLeftAlt02c.setRotationPoint(-3.0F, 1.2999999523162842F, 0.0F);
 		this.wingLeftAlt01b.setRotationPoint(3.0F, 1.7999999523162842F, 0.0F);
 		this.wingLeft01.setRotationPoint(6.0F, -7.0F, 0.0F);
-		this.setRotationAngles(wingLeft01, -0.08726646259971647F, -0.6108652381980153F, 0.0F);
+		this.setRotationAngles(this.wingLeft01, -0.08726646259971647F, -0.6108652381980153F, 0.0F);
 		this.owlBodyFluff.setRotationPoint(0.0F, -6.400000095367432F, -3.0999999046325684F);
-		this.setRotationAngles(owlBodyFluff, -0.3665191429188092F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlBodyFluff, -0.3665191429188092F, 0.0F, 0.0F);
 		this.wingLeftAlt01c.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.wingRightAlt03c.setRotationPoint(-9.0F, 0.30000001192092896F, 0.0F);
 		this.owlBody.setRotationPoint(0.0F, 16.0F, 0.0F);
-		this.setRotationAngles(owlBody, 1.48352986419518F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlBody, 1.48352986419518F, 0.0F, 0.0F);
 		this.wingRightAlt03a.setRotationPoint(0.0F, 0.0F, -1.0F);
 		this.wingLeftAlt02b.setRotationPoint(3.0F, 1.7999999523162842F, 0.0F);
 		this.tailLeft.setRotationPoint(2.0F, 2.5F, 4.0F);
-		this.setRotationAngles(tailLeft, -0.8726646259971648F, 0.4363323129985824F, 0.17453292519943295F);
+		this.setRotationAngles(this.tailLeft, -0.8726646259971648F, 0.4363323129985824F, 0.17453292519943295F);
 		this.rTalon04.setRotationPoint(0.699999988079071F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(rTalon04, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.rTalon04, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
 		this.wingLeft03.setRotationPoint(6.0F, 0.0F, 0.0F);
-		this.setRotationAngles(wingLeft03, 0.0F, 0.3490658503988659F, 0.0F);
+		this.setRotationAngles(this.wingLeft03, 0.0F, 0.3490658503988659F, 0.0F);
 		this.wingLeftAlt02a.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.lTalon04.setRotationPoint(-0.699999988079071F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(lTalon04, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.lTalon04, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
 		this.wingRightAlt01c.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.owlLeftClaw.setRotationPoint(3.0F, 6.0F, -1.5F);
-		this.setRotationAngles(owlLeftClaw, 0.8726646259971648F, -0.08726646259971647F, 0.0F);
+		this.setRotationAngles(this.owlLeftClaw, 0.8726646259971648F, -0.08726646259971647F, 0.0F);
 		this.lTalon03.setRotationPoint(0.6000000238418579F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(lTalon03, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.lTalon03, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
 		this.rTalon01.setRotationPoint(-0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(rTalon01, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
+		this.setRotationAngles(this.rTalon01, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
 		this.rTalon02.setRotationPoint(0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(rTalon02, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
-
+		this.setRotationAngles(this.rTalon02, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
 
 	}
 
 	private void setWanderingStance() {
 		this.lTalon03.setRotationPoint(0.6000000238418579F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(lTalon03, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.lTalon03, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
 		this.wingRightAlt02a.setRotationPoint(0.0F, 0.0F, -1.0F);
 		this.wingRightAlt02b.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.owlHead.setRotationPoint(0.0F, -12.0F, 0.0F);
-		this.setRotationAngles(owlHead, -0.06981317007977318F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlHead, -0.06981317007977318F, 0.0F, 0.0F);
 		this.owlBeak.setRotationPoint(-1.0F, 0.0F, -5.0F);
-		this.setRotationAngles(owlBeak, -0.08726646259971647F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlBeak, -0.08726646259971647F, 0.0F, 0.0F);
 		this.wingLeftAlt01c.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.lTalon02.setRotationPoint(-0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(lTalon02, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
+		this.setRotationAngles(this.lTalon02, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
 		this.wingLeft03.setRotationPoint(6.0F, 0.0F, 0.0F);
-		this.setRotationAngles(wingLeft03, 0.0F, 0.0F, 0.3490658503988659F);
+		this.setRotationAngles(this.wingLeft03, 0.0F, 0.0F, 0.3490658503988659F);
 		this.wingRight03.setRotationPoint(-6.0F, 0.0F, 0.0F);
-		this.setRotationAngles(wingRight03, 0.0F, 0.0F, -0.3490658503988659F);
+		this.setRotationAngles(this.wingRight03, 0.0F, 0.0F, -0.3490658503988659F);
 		this.wingRightAlt03b.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.tail.setRotationPoint(-2.0F, 2.5F, 4.0F);
-		this.setRotationAngles(tail, -1.0471975511965976F, 0.0F, 0.0F);
+		this.setRotationAngles(this.tail, -1.0471975511965976F, 0.0F, 0.0F);
 		this.rTalon01.setRotationPoint(-0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(rTalon01, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
+		this.setRotationAngles(this.rTalon01, -0.17453292519943295F, 0.10471975511965977F, 0.0F);
 		this.owlBody.setRotationPoint(0.0F, 16.0F, 0.0F);
-		this.setRotationAngles(owlBody, 0.08726646259971647F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlBody, 0.08726646259971647F, 0.0F, 0.0F);
 		this.wingRightAlt03a.setRotationPoint(0.0F, 0.0F, -1.0F);
 		this.tailRight.setRotationPoint(-2.0F, 2.5F, 4.0F);
-		this.setRotationAngles(tailRight, -0.8726646259971648F, -0.4363323129985824F, -0.17453292519943295F);
+		this.setRotationAngles(this.tailRight, -0.8726646259971648F, -0.4363323129985824F, -0.17453292519943295F);
 		this.wingRight01.setRotationPoint(-6.0F, -7.0F, 0.0F);
-		this.setRotationAngles(wingRight01, -0.08726646259971647F, 0.6108652381980153F, -1.2217304763960306F);
+		this.setRotationAngles(this.wingRight01, -0.08726646259971647F, 0.6108652381980153F, -1.2217304763960306F);
 		this.wingLeftAlt02a.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.wingRightAlt02b.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.owlLeftClaw.setRotationPoint(3.0F, 6.0F, -1.5F);
-		this.setRotationAngles(owlLeftClaw, 0.08726646259971647F, -0.08726646259971647F, 0.0F);
+		this.setRotationAngles(this.owlLeftClaw, 0.08726646259971647F, -0.08726646259971647F, 0.0F);
 		this.lTalon04.setRotationPoint(-0.699999988079071F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(lTalon04, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.lTalon04, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
 		this.owlLeftEar.setRotationPoint(4.0F, -3.4000000953674316F, 0.0F);
-		this.setRotationAngles(owlLeftEar, -0.3490658503988659F, 0.0F, 0.2617993877991494F);
+		this.setRotationAngles(this.owlLeftEar, -0.3490658503988659F, 0.0F, 0.2617993877991494F);
 		this.wingRightAlt01b.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.wingRightAlt01a.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.owlBodyFluff.setRotationPoint(0.0F, -6.400000095367432F, -3.0999999046325684F);
-		this.setRotationAngles(owlBodyFluff, -0.3665191429188092F, 0.0F, 0.0F);
+		this.setRotationAngles(this.owlBodyFluff, -0.3665191429188092F, 0.0F, 0.0F);
 		this.wingLeftAlt01b.setRotationPoint(3.0F, 1.7999999523162842F, 0.0F);
 		this.owlRightClaw.setRotationPoint(-3.0F, 6.0F, -1.5F);
-		this.setRotationAngles(owlRightClaw, 0.08726646259971647F, 0.08726646259971647F, 0.0F);
+		this.setRotationAngles(this.owlRightClaw, 0.08726646259971647F, 0.08726646259971647F, 0.0F);
 		this.wingLeft02.setRotationPoint(6.0F, 0.0F, 0.0F);
-		this.setRotationAngles(wingLeft02, 0.0F, 0.0F, 0.4363323129985824F);
+		this.setRotationAngles(this.wingLeft02, 0.0F, 0.0F, 0.4363323129985824F);
 		this.wingLeftAlt03a.setRotationPoint(0.0F, 0.0F, 1.0F);
 		this.wingRightAlt02c.setRotationPoint(-3.0F, 1.2999999523162842F, 0.0F);
 		this.wingRightAlt01c.setRotationPoint(-3.0F, 1.7999999523162842F, 0.0F);
 		this.wingLeftAlt02c.setRotationPoint(-3.0F, 1.2999999523162842F, 0.0F);
 		this.wingRightAlt03c.setRotationPoint(-9.0F, 0.30000001192092896F, 0.0F);
 		this.wingLeft01.setRotationPoint(6.0F, -7.0F, 0.0F);
-		this.setRotationAngles(wingLeft01, -0.08726646259971647F, -0.6108652381980153F, 1.2217304763960306F);
+		this.setRotationAngles(this.wingLeft01, -0.08726646259971647F, -0.6108652381980153F, 1.2217304763960306F);
 		this.wingRight02.setRotationPoint(-6.0F, 0.0F, 1.0F);
-		this.setRotationAngles(wingRight02, 0.0F, 0.0F, -0.4363323129985824F);
+		this.setRotationAngles(this.wingRight02, 0.0F, 0.0F, -0.4363323129985824F);
 		this.lTalon01.setRotationPoint(0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(lTalon01, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
+		this.setRotationAngles(this.lTalon01, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
 		this.wingLeftAlt01a.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.rTalon04.setRotationPoint(0.699999988079071F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(rTalon04, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.rTalon04, -0.17453292519943295F, 0.06981317007977318F, 0.0F);
 		this.wingLeftAlt03b.setRotationPoint(3.0F, 1.7999999523162842F, -1.0F);
 		this.wingLeftAlt02b.setRotationPoint(3.0F, 1.7999999523162842F, 0.0F);
 		this.owlRightEar.setRotationPoint(-4.0F, -3.4000000953674316F, 0.0F);
-		this.setRotationAngles(owlRightEar, -0.3490658503988659F, 0.0F, -0.2617993877991494F);
+		this.setRotationAngles(this.owlRightEar, -0.3490658503988659F, 0.0F, -0.2617993877991494F);
 		this.tailLeft.setRotationPoint(2.0F, 2.5F, 4.0F);
-		this.setRotationAngles(tailLeft, -0.8726646259971648F, 0.4363323129985824F, 0.17453292519943295F);
+		this.setRotationAngles(this.tailLeft, -0.8726646259971648F, 0.4363323129985824F, 0.17453292519943295F);
 		this.wingLeftAlt03c.setRotationPoint(-3.0F, 0.30000001192092896F, 0.0F);
 		this.rTalon02.setRotationPoint(0.699999988079071F, 1.0F, -3.5999999046325684F);
-		this.setRotationAngles(rTalon02, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
+		this.setRotationAngles(this.rTalon02, -0.17453292519943295F, -0.10471975511965977F, 0.0F);
 		this.rTalon03.setRotationPoint(-0.699999988079071F, 1.2000000476837158F, 0.5F);
-		this.setRotationAngles(rTalon03, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
+		this.setRotationAngles(this.rTalon03, -0.17453292519943295F, -0.06981317007977318F, 0.0F);
 
 	}
 
 	private void setSittingStance() {
-		setWanderingStance();
-		this.setRotationAngles(owlLeftClaw, -0.08726646259971647F, -0.3f, 0);
-		this.setRotationAngles(owlRightClaw, -0.08726646259971647F, 0.3f, 0);
+		this.setWanderingStance();
+		this.setRotationAngles(this.owlLeftClaw, -0.08726646259971647F, -0.3f, 0);
+		this.setRotationAngles(this.owlRightClaw, -0.08726646259971647F, 0.3f, 0);
 		this.setRotationAngles(this.owlBody, 0.08726646259971647F, 0.0F, 0.0F);
 	}
 }

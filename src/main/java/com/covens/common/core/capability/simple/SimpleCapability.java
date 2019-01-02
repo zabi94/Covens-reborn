@@ -6,7 +6,24 @@
 
 package com.covens.common.core.capability.simple;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
+
+import org.apache.commons.lang3.SerializationException;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.covens.common.core.helper.Log;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -32,18 +49,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.apache.commons.lang3.SerializationException;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.*;
-
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({
+		"unchecked", "rawtypes"
+})
 public abstract class SimpleCapability {
 
 	private static final boolean sc_dbg = System.getProperty("simplecapabilitydebug") != null;
@@ -77,7 +85,7 @@ public abstract class SimpleCapability {
 	@Ignore
 	protected int id = -1;
 
-	//Call this somewhere during startup, passing your mods' network handler
+	// Call this somewhere during startup, passing your mods' network handler
 	public static void setup(SimpleNetworkWrapper netHandler) {
 		net = netHandler;
 	}
@@ -299,7 +307,7 @@ public abstract class SimpleCapability {
 					log("EntityName: " + e);
 				} catch (Exception ex) {
 				}
-				if (e != null && e.hasCapability(capability, null)) {
+				if ((e != null) && e.hasCapability(capability, null)) {
 					((SimpleCapability) e.getCapability(capability, null)).readSyncNBT(tag);
 					((SimpleCapability) e.getCapability(capability, null)).onSyncMessage(dirt);
 				} else {
@@ -327,12 +335,12 @@ public abstract class SimpleCapability {
 
 	public final NBTBase serialize(NBTTagCompound tag) {
 		try {
-			Class<?> clazz = getClass();
+			Class<?> clazz = this.getClass();
 			Field[] clFields = getClassFields(clazz);
 			for (Field f : clFields) {
 				Class<?> type = f.getType();
 				if (acceptField(f, type)) {
-					writeField(f, type, tag);
+					this.writeField(f, type, tag);
 				}
 			}
 		} catch (Exception e) {
@@ -343,12 +351,12 @@ public abstract class SimpleCapability {
 
 	public final void deserialize(NBTTagCompound tag) {
 		try {
-			Class<?> clazz = getClass();
+			Class<?> clazz = this.getClass();
 			Field[] clFields = getClassFields(clazz);
 			for (Field f : clFields) {
 				Class<?> type = f.getType();
 				if (acceptField(f, type)) {
-					readField(f, type, tag);
+					this.readField(f, type, tag);
 				}
 			}
 		} catch (Exception e) {
@@ -358,12 +366,12 @@ public abstract class SimpleCapability {
 
 	public final void readSyncNBT(NBTTagCompound tag) {
 		try {
-			Class<?> clazz = getClass();
+			Class<?> clazz = this.getClass();
 			Field[] clFields = getClassFields(clazz);
 			for (Field f : clFields) {
 				Class<?> type = f.getType();
 				if (syncField(f, type)) {
-					readField(f, type, tag);
+					this.readField(f, type, tag);
 				}
 			}
 		} catch (Exception e) {
@@ -373,12 +381,12 @@ public abstract class SimpleCapability {
 
 	public final void writeSyncNBT(NBTTagCompound tag) {
 		try {
-			Class<?> clazz = getClass();
+			Class<?> clazz = this.getClass();
 			Field[] clFields = getClassFields(clazz);
 			for (Field f : clFields) {
 				Class<?> type = f.getType();
 				if (syncField(f, type)) {
-					writeField(f, type, tag);
+					this.writeField(f, type, tag);
 				}
 			}
 		} catch (Exception e) {
@@ -390,7 +398,7 @@ public abstract class SimpleCapability {
 
 	@SideOnly(Side.CLIENT)
 	public void onSyncMessage(byte mode) {
-		//NO-OP
+		// NO-OP
 	}
 
 	public boolean shouldSyncToPlayersAround() {
@@ -491,42 +499,41 @@ public abstract class SimpleCapability {
 			this.default_instance = default_instance;
 		}
 
-
 		@SubscribeEvent
 		public void attachCapabilityToEntity(AttachCapabilitiesEvent<Entity> evt) {
-			if (default_instance.isRelevantFor(evt.getObject())) {
+			if (this.default_instance.isRelevantFor(evt.getObject())) {
 				log("Capability " + this.name + " attached");
-				evt.addCapability(name, new SimpleProvider(capability, default_instance.getNewInstance()));
+				evt.addCapability(this.name, new SimpleProvider(this.capability, this.default_instance.getNewInstance()));
 			}
 		}
 
 		@SubscribeEvent
 		public void onEntityTracking(StartTracking evt) {
-			if (default_instance.shouldSyncToPlayersAround()) {
+			if (this.default_instance.shouldSyncToPlayersAround()) {
 				Entity e = evt.getTarget();
 				log("start tracking: " + e);
-				if (!e.world.isRemote && e.hasCapability(capability, null) && evt.getEntityPlayer() instanceof EntityPlayerMP) {
+				if (!e.world.isRemote && e.hasCapability(this.capability, null) && (evt.getEntityPlayer() instanceof EntityPlayerMP)) {
 					log("start tracking - succeded");
 					NBTTagCompound tag = new NBTTagCompound();
-					e.getCapability(capability, null).writeSyncNBT(tag);
-					net.sendTo(new CapabilityMessage(default_instance.id, tag, e.getEntityId(), (byte) 0), (EntityPlayerMP) evt.getEntityPlayer());
+					e.getCapability(this.capability, null).writeSyncNBT(tag);
+					net.sendTo(new CapabilityMessage(this.default_instance.id, tag, e.getEntityId(), (byte) 0), (EntityPlayerMP) evt.getEntityPlayer());
 				}
 			}
 		}
 
 		@SubscribeEvent
 		public void onEntityUpdate(LivingUpdateEvent evt) {
-			if (!evt.getEntityLiving().world.isRemote && evt.getEntityLiving().hasCapability(capability, null)) {
-				C instance = evt.getEntityLiving().getCapability(capability, null);
+			if (!evt.getEntityLiving().world.isRemote && evt.getEntityLiving().hasCapability(this.capability, null)) {
+				C instance = evt.getEntityLiving().getCapability(this.capability, null);
 				if (instance.dirty != 0) {
-					log("Cleaning instance of " + capability.getName() + " for " + evt.getEntityLiving());
+					log("Cleaning instance of " + this.capability.getName() + " for " + evt.getEntityLiving());
 					NBTTagCompound tag = new NBTTagCompound();
-					evt.getEntityLiving().getCapability(capability, null).writeSyncNBT(tag);
+					evt.getEntityLiving().getCapability(this.capability, null).writeSyncNBT(tag);
 					CapabilityMessage msg = new CapabilityMessage(this.default_instance.id, tag, evt.getEntityLiving().getEntityId(), instance.dirty);
-					if (default_instance.shouldSyncToOwnerPlayer() && evt.getEntityLiving() instanceof EntityPlayerMP) {
+					if (this.default_instance.shouldSyncToOwnerPlayer() && (evt.getEntityLiving() instanceof EntityPlayerMP)) {
 						net.sendTo(msg, (EntityPlayerMP) evt.getEntityLiving());
 					}
-					if (default_instance.shouldSyncToPlayersAround()) {
+					if (this.default_instance.shouldSyncToPlayersAround()) {
 						net.sendToAllTracking(msg, evt.getEntityLiving());
 					}
 					instance.dirty = 0;
@@ -536,12 +543,12 @@ public abstract class SimpleCapability {
 
 		@SubscribeEvent
 		public void onWorldJoin(EntityJoinWorldEvent evt) {
-			if (default_instance.shouldSyncToOwnerPlayer()) {
-				if (evt.getEntity() instanceof EntityPlayerMP && default_instance.isRelevantFor(evt.getEntity())) {
+			if (this.default_instance.shouldSyncToOwnerPlayer()) {
+				if ((evt.getEntity() instanceof EntityPlayerMP) && this.default_instance.isRelevantFor(evt.getEntity())) {
 					log("onWorldJoin - player");
 					EntityPlayerMP entity = (EntityPlayerMP) evt.getEntity();
 					NBTTagCompound tag = new NBTTagCompound();
-					evt.getEntity().getCapability(capability, null).writeSyncNBT(tag);
+					evt.getEntity().getCapability(this.capability, null).writeSyncNBT(tag);
 					net.sendTo(new CapabilityMessage(this.default_instance.id, tag, entity.getEntityId(), (byte) 0), entity);
 				}
 			}

@@ -2,8 +2,19 @@ package com.covens.common.core.net;
 
 import com.covens.client.fx.ParticleF;
 import com.covens.common.core.capability.simple.CapabilityMessage;
-import com.covens.common.core.net.messages.*;
+import com.covens.common.core.net.messages.EnergySync;
+import com.covens.common.core.net.messages.EntityInternalBloodChanged;
+import com.covens.common.core.net.messages.InfusionChangedMessage;
+import com.covens.common.core.net.messages.ParticleMessage;
+import com.covens.common.core.net.messages.PlaceHeldItemMessage;
+import com.covens.common.core.net.messages.PlayerTransformationChangedMessage;
+import com.covens.common.core.net.messages.PlayerUsedAbilityMessage;
+import com.covens.common.core.net.messages.SmokeSpawn;
+import com.covens.common.core.net.messages.TarotMessage;
+import com.covens.common.core.net.messages.WitchFireTP;
+import com.covens.common.core.net.messages.WitchfireFlame;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -13,9 +24,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * This class was created by Arekkuusu on 08/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 08/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class NetworkHandler {
 
@@ -29,8 +39,9 @@ public final class NetworkHandler {
 	public static void init() {
 		HANDLER.registerMessage(ParticleMessage.ParticleMessageHandler.class, ParticleMessage.class, next(), Side.CLIENT);
 		HANDLER.registerMessage(TarotMessage.TarotMessageHandler.class, TarotMessage.class, next(), Side.CLIENT);
-		//TODO <rustylocks79> remove
-		//HANDLER.registerMessage(PlayerMimicDataChanged.PlayerMimicDataHandler.class, PlayerMimicDataChanged.class, next(), Side.CLIENT);
+		// TODO <rustylocks79> remove
+		// HANDLER.registerMessage(PlayerMimicDataChanged.PlayerMimicDataHandler.class,
+		// PlayerMimicDataChanged.class, next(), Side.CLIENT);
 		registerSimpleMessage(PlayerTransformationChangedMessage.class, next(), Side.CLIENT);
 		registerSimpleMessage(EntityInternalBloodChanged.class, next(), Side.CLIENT);
 		registerSimpleMessage(WitchfireFlame.class, next(), Side.CLIENT);

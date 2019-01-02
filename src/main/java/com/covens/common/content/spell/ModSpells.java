@@ -7,7 +7,18 @@
 package com.covens.common.content.spell;
 
 import com.covens.api.spell.ISpell.EnumSpellType;
-import com.covens.common.content.spell.spells.*;
+import com.covens.common.content.spell.spells.SpellActivation;
+import com.covens.common.content.spell.spells.SpellBlink;
+import com.covens.common.content.spell.spells.SpellCallThunderstorm;
+import com.covens.common.content.spell.spells.SpellDestabilization;
+import com.covens.common.content.spell.spells.SpellDisarming;
+import com.covens.common.content.spell.spells.SpellInfuseLife;
+import com.covens.common.content.spell.spells.SpellLesserBlinking;
+import com.covens.common.content.spell.spells.SpellMagnet;
+import com.covens.common.content.spell.spells.SpellPoke;
+import com.covens.common.content.spell.spells.SpellSelfHeal;
+import com.covens.common.content.spell.spells.SpellSlowness;
+import com.covens.common.content.spell.spells.SpellWater;
 import com.covens.common.lib.LibMod;
 
 public class ModSpells {
@@ -31,9 +42,7 @@ public class ModSpells {
 	}
 
 	private static void registerAll() {
-		Spell.SPELL_REGISTRY.registerAll(
-				magnet, poke, water, activation, slowness, lesser_blink, blink, explosion, disarming, infuse_life, self_heal, call_storm
-		);
+		Spell.SPELL_REGISTRY.registerAll(magnet, poke, water, activation, slowness, lesser_blink, blink, explosion, disarming, infuse_life, self_heal, call_storm);
 	}
 
 }

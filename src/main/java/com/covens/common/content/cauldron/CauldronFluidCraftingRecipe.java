@@ -1,11 +1,11 @@
 package com.covens.common.content.cauldron;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.List;
 
 public class CauldronFluidCraftingRecipe extends CauldronCraftingRecipe {
 
@@ -23,7 +23,7 @@ public class CauldronFluidCraftingRecipe extends CauldronCraftingRecipe {
 
 	@Override
 	public boolean matches(List<ItemStack> stacks, FluidStack fluidstack) {
-		return super.matches(stacks, fluidstack) && fluidstack.amount == this.getRequiredFluidAmount();
+		return super.matches(stacks, fluidstack) && (fluidstack.amount == this.getRequiredFluidAmount());
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class CauldronFluidCraftingRecipe extends CauldronCraftingRecipe {
 
 	@Override
 	public FluidStack getFluidResult() {
-		return result.copy();
+		return this.result.copy();
 	}
 
 	@Override

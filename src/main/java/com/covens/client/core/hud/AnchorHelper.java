@@ -38,12 +38,12 @@ public abstract class AnchorHelper {
 
 		@Override
 		public double getData(double x, int scaledSize, int componentSize) {
-			return x - (scaledSize - componentSize) / 2;
+			return x - ((scaledSize - componentSize) / 2);
 		}
 
 		@Override
 		public double getPixel(double x, int scaledSize, int componentSize) {
-			return (scaledSize - componentSize) / 2 + x;
+			return ((scaledSize - componentSize) / 2) + x;
 		}
 
 	}
@@ -53,17 +53,17 @@ public abstract class AnchorHelper {
 		private AnchorHelper used;
 
 		public RelativeVersion(AnchorHelper helper) {
-			used = helper;
+			this.used = helper;
 		}
 
 		@Override
 		public double getData(double x, int scaledSize, int componentSize) {
-			return used.getData(x, scaledSize, componentSize) / scaledSize;
+			return this.used.getData(x, scaledSize, componentSize) / scaledSize;
 		}
 
 		@Override
 		public double getPixel(double x, int scaledSize, int componentSize) {
-			return used.getPixel(x * scaledSize, scaledSize, componentSize);
+			return this.used.getPixel(x * scaledSize, scaledSize, componentSize);
 		}
 
 	}

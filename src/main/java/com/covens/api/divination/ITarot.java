@@ -26,10 +26,9 @@ public interface ITarot extends IForgeRegistryEntry<ITarot> {
 	public boolean hasNumber(EntityPlayer player);
 
 	/**
-	 * An upside down card may be used to display other data, for instance
-	 * an reversed card for the familiar shows that the familiar exists
-	 * but has been dismissed. If the familiar does not exist this card
-	 * shouldn't be shown at all
+	 * An upside down card may be used to display other data, for instance an
+	 * reversed card for the familiar shows that the familiar exists but has been
+	 * dismissed. If the familiar does not exist this card shouldn't be shown at all
 	 *
 	 * @param player the player whose cards are getting read
 	 * @return true if this card should be shown upside down

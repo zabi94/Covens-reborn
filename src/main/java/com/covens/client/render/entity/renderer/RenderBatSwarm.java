@@ -1,8 +1,11 @@
 package com.covens.client.render.entity.renderer;
 
+import java.util.Random;
+
 import com.covens.client.fx.ParticleF;
 import com.covens.common.Covens;
 import com.covens.common.entity.EntityBatSwarm;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,8 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import java.util.Random;
 
 public class RenderBatSwarm extends Render<EntityBatSwarm> {
 
@@ -31,9 +32,9 @@ public class RenderBatSwarm extends Render<EntityBatSwarm> {
 	@Override
 	public void doRender(EntityBatSwarm entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		for (int i = 0; i < 4; i++) {
-			double ipx = entity.prevPosX + (entity.posX - entity.prevPosX) * partialTicks;
-			double ipy = entity.prevPosY + (entity.posY - entity.prevPosY) * partialTicks;
-			double ipz = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * partialTicks;
+			double ipx = entity.prevPosX + ((entity.posX - entity.prevPosX) * partialTicks);
+			double ipy = entity.prevPosY + ((entity.posY - entity.prevPosY) * partialTicks);
+			double ipz = entity.prevPosZ + ((entity.posZ - entity.prevPosZ) * partialTicks);
 			ipx += rng.nextGaussian() * 0.3;
 			ipy += rng.nextGaussian() * 0.3;
 			ipz += rng.nextGaussian() * 0.3;
@@ -47,7 +48,7 @@ public class RenderBatSwarm extends Render<EntityBatSwarm> {
 
 	@Override
 	public void doRenderShadowAndFire(Entity entityIn, double x, double y, double z, float yaw, float partialTicks) {
-		//NO-OP
+		// NO-OP
 	}
 
 	public static class PlayerHider {

@@ -26,33 +26,32 @@ public class ItemListComponent implements ICustomComponent {
 	@VariableHolder
 	public String list_type;
 
-	transient List<Ingredient> ingredients;
+	private transient List<Ingredient> ingredients;
 
 	@Override
 	public void build(int componentX, int componentY, int pageNum) {
 		this.x = componentX;
 		this.y = componentY;
-		ingredients = Patchouli.getInputsFromRegistry(registry, name, list_type);
+		this.ingredients = Patchouli.getInputsFromRegistry(this.registry, this.name, this.list_type);
 	}
 
 	@Override
 	public void render(IComponentRenderContext context, float pticks, int mouseX, int mouseY) {
-		if (ingredients.size() > 0) {
-			int remaining = ingredients.size();
+		if (this.ingredients.size() > 0) {
+			int remaining = this.ingredients.size();
 			int row = 0;
-			int border = slots <= ingredients.size() ? 0 : (slots - ingredients.size())*17/2;
+			int border = this.slots <= this.ingredients.size() ? 0 : ((this.slots - this.ingredients.size()) * 17) / 2;
 			GlStateManager.pushMatrix();
 			while (remaining > 0) {
-				for (int i = 0; i < Math.min(slots, remaining); i++) {
-					context.renderIngredient(border + x + 17*i, y + 17*row, mouseX, mouseY, ingredients.get(row * slots + i));
+				for (int i = 0; i < Math.min(this.slots, remaining); i++) {
+					context.renderIngredient(border + this.x + (17 * i), this.y + (17 * row), mouseX, mouseY, this.ingredients.get((row * this.slots) + i));
 				}
 				row++;
-				remaining -= slots;
+				remaining -= this.slots;
 			}
 			GlStateManager.popMatrix();
 		}
-		
-	}
 
+	}
 
 }

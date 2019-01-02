@@ -1,5 +1,7 @@
 package com.covens.common.tile.tiles;
 
+import java.util.UUID;
+
 import com.covens.api.state.StateProperties;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.client.core.event.custom.MimicEvent;
@@ -10,6 +12,7 @@ import com.covens.common.core.capability.mimic.IMimicData;
 import com.covens.common.core.helper.NBTHelper;
 import com.covens.common.item.ModItems;
 import com.covens.common.tile.ModTileEntity;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,8 +23,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-
-import java.util.UUID;
 
 public class TileEntityMagicMirror extends ModTileEntity implements ITickable {
 	private static final int REFRESH_TIME = 10;
@@ -38,15 +39,15 @@ public class TileEntityMagicMirror extends ModTileEntity implements ITickable {
 
 	private void activate(boolean active, double distanceSq) {
 		if (!active) {
-			shadeType = 0;
-		} else if (distanceSq <= SHADE_DISTANCE_1 * SHADE_DISTANCE_1) {
-			shadeType = 3;
-		} else if (distanceSq <= SHADE_DISTANCE_2 * SHADE_DISTANCE_2) {
-			shadeType = 2;
+			this.shadeType = 0;
+		} else if (distanceSq <= (SHADE_DISTANCE_1 * SHADE_DISTANCE_1)) {
+			this.shadeType = 3;
+		} else if (distanceSq <= (SHADE_DISTANCE_2 * SHADE_DISTANCE_2)) {
+			this.shadeType = 2;
 		} else {
-			shadeType = 1;
+			this.shadeType = 1;
 		}
-		this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).withProperty(StateProperties.MIRROR_VARIANTS, shadeType), 3);
+		this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).withProperty(StateProperties.MIRROR_VARIANTS, this.shadeType), 3);
 		this.syncToClient();
 		this.markDirty();
 	}
@@ -56,7 +57,8 @@ public class TileEntityMagicMirror extends ModTileEntity implements ITickable {
 		if (playerIn.isSneaking()) {
 			return false;
 		}
-		//The "!worldIn.isRemote" is intentional. This code should only run on the client.
+		// The "!worldIn.isRemote" is intentional. This code should only run on the
+		// client.
 		if (!worldIn.isRemote) {
 			return true;
 		}
@@ -81,50 +83,50 @@ public class TileEntityMagicMirror extends ModTileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if (world.isRemote) {
+		if (this.world.isRemote) {
 			return;
 		}
 
-		if (refreshTimer >= REFRESH_TIME) {
-			EntityPlayer closestPlayer = this.world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), SHADE_DISTANCE_3, false);
+		if (this.refreshTimer >= REFRESH_TIME) {
+			EntityPlayer closestPlayer = this.world.getClosestPlayer(this.pos.getX(), this.pos.getY(), this.pos.getZ(), SHADE_DISTANCE_3, false);
 			if (closestPlayer == null) {
-				activate(false, -1.0f);
+				this.activate(false, -1.0f);
 			} else if (closestPlayer.hasCapability(CapabilityTransformation.CAPABILITY, null)) {
 				final CapabilityTransformation capability = closestPlayer.getCapability(CapabilityTransformation.CAPABILITY, null);
 				if (capability.getType() != DefaultTransformations.VAMPIRE) {
-					activate(true, closestPlayer.getDistanceSq(this.pos));
+					this.activate(true, closestPlayer.getDistanceSq(this.pos));
 				} else {
-					activate(false, -1.0f);
+					this.activate(false, -1.0f);
 				}
 			} else {
-				activate(true, closestPlayer.getDistanceSq(this.pos));
+				this.activate(true, closestPlayer.getDistanceSq(this.pos));
 			}
-			refreshTimer = 0;
+			this.refreshTimer = 0;
 		}
-		refreshTimer++;
+		this.refreshTimer++;
 	}
 
 	public int getShadeType() {
-		return shadeType;
+		return this.shadeType;
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
-		tag.setInteger("shadeType", shadeType);
+		tag.setInteger("shadeType", this.shadeType);
 	}
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound tag) {
-		shadeType = tag.getInteger("shadeType");
+		this.shadeType = tag.getInteger("shadeType");
 	}
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
-		tag.setInteger("shadeType", shadeType);
+		tag.setInteger("shadeType", this.shadeType);
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
-		shadeType = tag.getInteger("shadeType");
+		this.shadeType = tag.getInteger("shadeType");
 	}
 }

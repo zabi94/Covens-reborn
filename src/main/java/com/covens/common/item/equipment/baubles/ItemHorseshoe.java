@@ -40,27 +40,28 @@ public class ItemHorseshoe extends ItemMod implements IBauble {
 	public ItemHorseshoe() {
 		super(LibItemName.HORSESHOE);
 		this.setMaxStackSize(1);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	private static boolean isSpirit(Entity e) {
-		return e instanceof EntityLivingBase && MobHelper.isSpirit((EntityLivingBase) e);
+		return (e instanceof EntityLivingBase) && MobHelper.isSpirit((EntityLivingBase) e);
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
 			IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-			for (int i = 0; i < baubles.getSlots(); i++)
+			for (int i = 0; i < baubles.getSlots(); i++) {
 				if (baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, player.getHeldItem(hand), player)) {
 					baubles.setStackInSlot(i, player.getHeldItem(hand).copy());
 					if (!player.capabilities.isCreativeMode) {
 						player.setHeldItem(hand, ItemStack.EMPTY);
 					}
-					onEquipped(player.getHeldItem(hand), player);
+					this.onEquipped(player.getHeldItem(hand), player);
 					break;
 				}
+			}
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
@@ -72,7 +73,7 @@ public class ItemHorseshoe extends ItemMod implements IBauble {
 
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 40 == 0) {
+		if ((itemstack.getItemDamage() == 0) && ((player.ticksExisted % 40) == 0)) {
 			player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 120, 0, true, true));
 		}
 	}
@@ -83,7 +84,7 @@ public class ItemHorseshoe extends ItemMod implements IBauble {
 	}
 
 	public String getNameInefficiently(ItemStack stack) {
-		return getTranslationKey().substring(5);
+		return this.getTranslationKey().substring(5);
 	}
 
 	@SubscribeEvent
@@ -96,6 +97,6 @@ public class ItemHorseshoe extends ItemMod implements IBauble {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip." + getNameInefficiently(stack) + "_description.name"));
+		tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 }

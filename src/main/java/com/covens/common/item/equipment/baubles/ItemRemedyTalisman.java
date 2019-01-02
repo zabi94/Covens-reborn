@@ -1,12 +1,17 @@
 package com.covens.common.item.equipment.baubles;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.common.item.ItemMod;
+import com.covens.common.lib.LibItemName;
+
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
-import com.covens.api.mp.IMagicPowerContainer;
-import com.covens.common.item.ItemMod;
-import com.covens.common.lib.LibItemName;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,9 +26,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 /**
  * Created by Joseph on 1/1/2018.
@@ -40,15 +42,16 @@ public class ItemRemedyTalisman extends ItemMod implements IBauble {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
 			IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-			for (int i = 0; i < baubles.getSlots(); i++)
+			for (int i = 0; i < baubles.getSlots(); i++) {
 				if (baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, player.getHeldItem(hand), player)) {
 					baubles.setStackInSlot(i, player.getHeldItem(hand).copy());
 					if (!player.capabilities.isCreativeMode) {
 						player.setHeldItem(hand, ItemStack.EMPTY);
 					}
-					onEquipped(player.getHeldItem(hand), player);
+					this.onEquipped(player.getHeldItem(hand), player);
 					break;
 				}
+			}
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
@@ -61,10 +64,11 @@ public class ItemRemedyTalisman extends ItemMod implements IBauble {
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		// Check the condition that is easier to fail first, so it's more performant
-		if (player instanceof EntityPlayer && player.ticksExisted % 40 == 0) {
+		if ((player instanceof EntityPlayer) && ((player.ticksExisted % 40) == 0)) {
 			EntityPlayer p = (EntityPlayer) player;
-			boolean flag = p.getActivePotionEffect(MobEffects.POISON) != null || p.getActivePotionEffect(MobEffects.NAUSEA) != null || p.getActivePotionEffect(MobEffects.WITHER) != null || p.getActivePotionEffect(MobEffects.BLINDNESS) != null || p.getActivePotionEffect(MobEffects.WEAKNESS) != null;
-			// by putting "flag" first (in the AND operation) we don't drain MP if there was nothing to cure
+			boolean flag = (p.getActivePotionEffect(MobEffects.POISON) != null) || (p.getActivePotionEffect(MobEffects.NAUSEA) != null) || (p.getActivePotionEffect(MobEffects.WITHER) != null) || (p.getActivePotionEffect(MobEffects.BLINDNESS) != null) || (p.getActivePotionEffect(MobEffects.WEAKNESS) != null);
+			// by putting "flag" first (in the AND operation) we don't drain MP if there was
+			// nothing to cure
 			// due to java lazy evaluation
 			if (flag && player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
 				p.removePotionEffect(MobEffects.NAUSEA);
@@ -88,12 +92,12 @@ public class ItemRemedyTalisman extends ItemMod implements IBauble {
 	}
 
 	public String getNameInefficiently(ItemStack stack) {
-		return getTranslationKey().substring(5);
+		return this.getTranslationKey().substring(5);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip." + getNameInefficiently(stack) + "_description.name"));
+		tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 }

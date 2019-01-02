@@ -2,6 +2,7 @@ package com.covens.common.content.infusion;
 
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.InfusionChangedMessage;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

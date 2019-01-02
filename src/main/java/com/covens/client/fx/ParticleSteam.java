@@ -1,6 +1,7 @@
 package com.covens.client.fx;
 
 import com.covens.client.ResourceLocations;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -9,9 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by Arekkuusu on 04/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 04/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 
 @SideOnly(Side.CLIENT)
@@ -21,16 +21,16 @@ class ParticleSteam extends Particle {
 		super(world, x, y, z, xSpeed, ySpeed, zSpeed);
 		this.motionY *= 0.20000000298023224D;
 
-		if (xSpeed == 0.0D && zSpeed == 0.0D) {
+		if ((xSpeed == 0.0D) && (zSpeed == 0.0D)) {
 			this.motionX *= 0.10000000149011612D;
 			this.motionZ *= 0.10000000149011612D;
 		}
 
-		this.particleScale *= 0.5F + rand.nextFloat();
-		this.particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D));
+		this.particleScale *= 0.5F + this.rand.nextFloat();
+		this.particleMaxAge = (int) (8.0D / ((Math.random() * 0.8D) + 0.2D));
 
 		final TextureAtlasSprite atlasSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(ResourceLocations.STEAM.toString());
-		setParticleTexture(atlasSprite);
+		this.setParticleTexture(atlasSprite);
 	}
 
 	@Override

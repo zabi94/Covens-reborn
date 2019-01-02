@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.core.helper.MobHelper;
+
 import net.minecraft.entity.EntityLivingBase;
 
 public class PotionHolyWater extends GenericBrewDamageVS {
@@ -16,7 +17,7 @@ public class PotionHolyWater extends GenericBrewDamageVS {
 
 	@Override
 	protected float getDamage(int amplifier) {
-		return 2 + amplifier * 1.5f;
+		return 2 + (amplifier * 1.5f);
 	}
 
 }

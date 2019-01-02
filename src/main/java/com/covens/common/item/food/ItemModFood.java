@@ -5,6 +5,7 @@ import com.covens.api.mp.IMagicPowerExpander;
 import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -14,9 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by Arekkuusu on 28/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 28/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class ItemModFood extends ItemFood implements IModelRegister {
 
@@ -24,17 +24,17 @@ public class ItemModFood extends ItemFood implements IModelRegister {
 
 	public ItemModFood(String id, int amount, float saturation, boolean isWolfFood) {
 		super(amount, saturation, isWolfFood);
-		setRegistryName(id);
-		setTranslationKey(id);
-		setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
+		this.setRegistryName(id);
+		this.setTranslationKey(id);
+		this.setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
 	}
 
 	public ItemModFood setMPExpansionValue(int amount) {
-		expander = new IMagicPowerExpander() {
+		this.expander = new IMagicPowerExpander() {
 
 			@Override
 			public ResourceLocation getID() {
-				return getRegistryName();
+				return ItemModFood.this.getRegistryName();
 			}
 
 			@Override
@@ -48,8 +48,8 @@ public class ItemModFood extends ItemFood implements IModelRegister {
 	@Override
 	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
 		super.onFoodEaten(stack, worldIn, player);
-		if (expander != null) {
-			CovensAPI.getAPI().expandPlayerMP(expander, player);
+		if (this.expander != null) {
+			CovensAPI.getAPI().expandPlayerMP(this.expander, player);
 		}
 	}
 

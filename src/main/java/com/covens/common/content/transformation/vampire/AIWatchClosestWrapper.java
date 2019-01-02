@@ -17,45 +17,45 @@ public class AIWatchClosestWrapper extends EntityAIBase {
 	private EntityAIWatchClosest wrapped;
 
 	public AIWatchClosestWrapper(EntityAIWatchClosest action) {
-		wrapped = action;
+		this.wrapped = action;
 		this.setMutexBits(action.getMutexBits());
 	}
 
 	@Override
 	public boolean shouldExecute() {
 		try {
-			return wrapped.shouldExecute() && canLookAt((EntityLiving) entitySubject.get(wrapped), (Entity) entityClosest.get(wrapped));
+			return this.wrapped.shouldExecute() && this.canLookAt((EntityLiving) entitySubject.get(this.wrapped), (Entity) entityClosest.get(this.wrapped));
 		} catch (Exception e) {
 			throw new IllegalStateException("Reflection failed", e);
 		}
 	}
 
 	private boolean canLookAt(EntityLiving subject, Entity target) {
-		return !(target.isSneaking() && (Math.abs(target.getRotationYawHead() - subject.rotationYawHead) < 70 || target.world.getLightFor(EnumSkyBlock.BLOCK, target.getPosition()) < 3));
+		return !(target.isSneaking() && ((Math.abs(target.getRotationYawHead() - subject.rotationYawHead) < 70) || (target.world.getLightFor(EnumSkyBlock.BLOCK, target.getPosition()) < 3)));
 	}
 
 	@Override
 	public boolean shouldContinueExecuting() {
-		return wrapped.shouldContinueExecuting();
+		return this.wrapped.shouldContinueExecuting();
 	}
 
 	@Override
 	public boolean isInterruptible() {
-		return wrapped.isInterruptible();
+		return this.wrapped.isInterruptible();
 	}
 
 	@Override
 	public void resetTask() {
-		wrapped.resetTask();
+		this.wrapped.resetTask();
 	}
 
 	@Override
 	public void updateTask() {
-		wrapped.updateTask();
+		this.wrapped.updateTask();
 	}
 
 	@Override
 	public void startExecuting() {
-		wrapped.startExecuting();
+		this.wrapped.startExecuting();
 	}
 }

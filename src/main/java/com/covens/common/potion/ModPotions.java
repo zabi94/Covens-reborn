@@ -1,9 +1,54 @@
 package com.covens.common.potion;
 
-import com.covens.common.content.cauldron.brews.*;
+import com.covens.common.content.cauldron.brews.PotionAbsence;
+import com.covens.common.content.cauldron.brews.PotionArrowDeflection;
+import com.covens.common.content.cauldron.brews.PotionBaneArthropods;
+import com.covens.common.content.cauldron.brews.PotionCorruption;
+import com.covens.common.content.cauldron.brews.PotionCursedLeaping;
+import com.covens.common.content.cauldron.brews.PotionDeathsEbb;
+import com.covens.common.content.cauldron.brews.PotionDemonsbane;
+import com.covens.common.content.cauldron.brews.PotionDisrobing;
+import com.covens.common.content.cauldron.brews.PotionEnderInhibition;
+import com.covens.common.content.cauldron.brews.PotionExtinguishFire;
+import com.covens.common.content.cauldron.brews.PotionFertilize;
+import com.covens.common.content.cauldron.brews.PotionFireWorld;
+import com.covens.common.content.cauldron.brews.PotionFrostbite;
+import com.covens.common.content.cauldron.brews.PotionGrace;
+import com.covens.common.content.cauldron.brews.PotionGrowFlowers;
+import com.covens.common.content.cauldron.brews.PotionHarvest;
+import com.covens.common.content.cauldron.brews.PotionHolyWater;
+import com.covens.common.content.cauldron.brews.PotionIceWorld;
+import com.covens.common.content.cauldron.brews.PotionInfestation;
+import com.covens.common.content.cauldron.brews.PotionLove;
+import com.covens.common.content.cauldron.brews.PotionMending;
+import com.covens.common.content.cauldron.brews.PotionMowing;
+import com.covens.common.content.cauldron.brews.PotionOutcastsShame;
+import com.covens.common.content.cauldron.brews.PotionOzymandias;
+import com.covens.common.content.cauldron.brews.PotionPathOfTheDeep;
+import com.covens.common.content.cauldron.brews.PotionPlant;
+import com.covens.common.content.cauldron.brews.PotionPowerBoost;
+import com.covens.common.content.cauldron.brews.PotionPowerDampening;
+import com.covens.common.content.cauldron.brews.PotionPowerDrain;
+import com.covens.common.content.cauldron.brews.PotionPowerRegen;
+import com.covens.common.content.cauldron.brews.PotionProjectileResistance;
+import com.covens.common.content.cauldron.brews.PotionPruneLeaves;
+import com.covens.common.content.cauldron.brews.PotionPulverize;
+import com.covens.common.content.cauldron.brews.PotionPurification;
+import com.covens.common.content.cauldron.brews.PotionRevealing;
+import com.covens.common.content.cauldron.brews.PotionRotting;
+import com.covens.common.content.cauldron.brews.PotionSaltedEarth;
+import com.covens.common.content.cauldron.brews.PotionSetehsWastes;
+import com.covens.common.content.cauldron.brews.PotionShellArmor;
+import com.covens.common.content.cauldron.brews.PotionSinking;
+import com.covens.common.content.cauldron.brews.PotionSnowTrail;
+import com.covens.common.content.cauldron.brews.PotionSpiderNightmare;
+import com.covens.common.content.cauldron.brews.PotionTillLand;
+import com.covens.common.content.cauldron.brews.PotionVolatility;
+import com.covens.common.content.cauldron.brews.PotionWolfsbane;
 import com.covens.common.potion.potions.PotionBloodDrained;
 import com.covens.common.potion.potions.PotionMesmerize;
 import com.covens.common.potion.potions.PotionSunWard;
+
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -86,7 +131,6 @@ public class ModPotions {
 				salted_earth, shell_armor, till_land, sinking, snow_trail, spider_nightmare, //
 				volatility, pulverize, mowing, sun_ward, love, revealing, //
 				deaths_ebb, power_boon, mesmerized, power_drain, power_boost, //
-				power_dampening
-		);
+				power_dampening);
 	}
 }

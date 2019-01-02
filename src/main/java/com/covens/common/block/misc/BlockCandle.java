@@ -1,9 +1,12 @@
 package com.covens.common.block.misc;
 
+import java.util.Random;
+
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.Covens;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -31,12 +34,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
-import java.util.Random;
-
 /**
- * This class was created by Arekkuusu on 11/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 11/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public abstract class BlockCandle extends BlockMod implements IInfusionStabiliserExt {
@@ -45,18 +45,18 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 
 	public BlockCandle(String id, boolean lit) {
 		super(id, Material.CLOTH);
-		setSoundType(SoundType.CLOTH);
-		this.setDefaultState(blockState.getBaseState().withProperty(Covens.COLOR, EnumDyeColor.WHITE));
-		isLit = lit;
-		if (isLit) {
-			setCreativeTab(null); // No need for them to appear twice
+		this.setSoundType(SoundType.CLOTH);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(Covens.COLOR, EnumDyeColor.WHITE));
+		this.isLit = lit;
+		if (this.isLit) {
+			this.setCreativeTab(null); // No need for them to appear twice
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerModel() {
-		if (!isLit) {
+		if (!this.isLit) {
 			for (int i = 0; i < 16; i++) {
 				ModelHandler.registerModel(this, i);
 			}
@@ -72,7 +72,7 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(Covens.COLOR, EnumDyeColor.byMetadata(meta));
+		return this.getDefaultState().withProperty(Covens.COLOR, EnumDyeColor.byMetadata(meta));
 	}
 
 	@Override
@@ -94,33 +94,29 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		return getMetaFromState(state);
+		return this.getMetaFromState(state);
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return worldIn.getBlockState(
-				pos.down()).isSideSolid(
-				worldIn,
-				pos.down(),
-				EnumFacing.UP
-		);
+		return worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP);
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (state.getBlock() == ModBlocks.candle_medium_lit)
+		if (state.getBlock() == ModBlocks.candle_medium_lit) {
 			world.setBlockState(pos, ModBlocks.candle_medium.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
-		else if (state.getBlock() == ModBlocks.candle_small_lit)
+		} else if (state.getBlock() == ModBlocks.candle_small_lit) {
 			world.setBlockState(pos, ModBlocks.candle_small.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
-		else {
+		} else {
 			ItemStack heldItem = playerIn.getHeldItem(hand);
-			if (!heldItem.isEmpty() && heldItem.getItem() == Items.FLINT_AND_STEEL) {
+			if (!heldItem.isEmpty() && (heldItem.getItem() == Items.FLINT_AND_STEEL)) {
 				heldItem.damageItem(1, playerIn);
-				if (state.getBlock() == ModBlocks.candle_medium)
+				if (state.getBlock() == ModBlocks.candle_medium) {
 					world.setBlockState(pos, ModBlocks.candle_medium_lit.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
-				else if (state.getBlock() == ModBlocks.candle_small)
+				} else if (state.getBlock() == ModBlocks.candle_small) {
 					world.setBlockState(pos, ModBlocks.candle_small_lit.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
+				}
 			}
 		}
 		return true;
@@ -133,21 +129,21 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return isLit ? 9 + getType() * 5 : 0;
+		return this.isLit ? 9 + (this.getType() * 5) : 0;
 	}
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return getDefaultState().withProperty(Covens.COLOR, EnumDyeColor.byMetadata(meta));
+		return this.getDefaultState().withProperty(Covens.COLOR, EnumDyeColor.byMetadata(meta));
 	}
 
 	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (isLit) {
-			Vec3d offset = getOffset(state, world, pos);
-			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5 + offset.x, pos.getY() + 0.7 + getType() * 0.25, pos.getZ() + 0.5 + offset.z, 0, 0, 0);
+		if (this.isLit) {
+			Vec3d offset = this.getOffset(state, world, pos);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5 + offset.x, pos.getY() + 0.7 + (this.getType() * 0.25), pos.getZ() + 0.5 + offset.z, 0, 0, 0);
 		}
 	}
 
@@ -181,15 +177,15 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		if (isLit)
+		if (this.isLit) {
 			return new ItemStack(state.getBlock() == ModBlocks.candle_medium_lit ? ModBlocks.candle_medium : ModBlocks.candle_small, 1, state.getBlock().getMetaFromState(state));
+		}
 		return super.getPickBlock(state, target, world, pos, player);
 	}
 
 	public boolean isLit() {
-		return isLit;
+		return this.isLit;
 	}
-
 
 	@Override
 	@Optional.Method(modid = "thaumcraft")

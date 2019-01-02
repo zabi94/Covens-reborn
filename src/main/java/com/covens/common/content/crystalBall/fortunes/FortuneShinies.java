@@ -1,8 +1,13 @@
 package com.covens.common.content.crystalBall.fortunes;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
 import com.covens.common.core.statics.ModLootTables;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,9 +21,6 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 /**
  * Created by Joseph on 2/12/2018.
@@ -58,11 +60,11 @@ public class FortuneShinies extends Fortune {
 		if (cap.getFortune() == this) {
 			if (cap.isActive()) {
 				Block block = evt.getState().getBlock();
-				if (block == Blocks.STONE || block == Blocks.SANDSTONE || block == Blocks.RED_SANDSTONE || block == Blocks.END_STONE || block == Blocks.NETHERRACK || block == Blocks.COBBLESTONE || block == Blocks.MOSSY_COBBLESTONE) {
+				if ((block == Blocks.STONE) || (block == Blocks.SANDSTONE) || (block == Blocks.RED_SANDSTONE) || (block == Blocks.END_STONE) || (block == Blocks.NETHERRACK) || (block == Blocks.COBBLESTONE) || (block == Blocks.MOSSY_COBBLESTONE)) {
 					LootTable lt = evt.getWorld().getLootTableManager().getLootTableFromLocation(ModLootTables.JEWELS);
 					LootContext lc = (new LootContext.Builder((WorldServer) evt.getWorld()).withLuck(evt.getPlayer().getLuck()).withPlayer(evt.getPlayer())).build();
 					List<ItemStack> spawn = lt.generateLootForPools(evt.getPlayer().getRNG(), lc);
-					spawn.forEach(s -> spawn(s, evt.getWorld(), evt.getPos()));
+					spawn.forEach(s -> this.spawn(s, evt.getWorld(), evt.getPos()));
 					cap.setRemovable();
 				}
 			}

@@ -1,7 +1,11 @@
 package com.covens.common.content.tarot;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import com.covens.api.divination.ITarot;
 import com.covens.common.lib.LibMod;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,16 +14,13 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
 public class TarotHandler {
 
 	public static final IForgeRegistry<ITarot> REGISTRY = new RegistryBuilder<ITarot>().setName(new ResourceLocation(LibMod.MOD_ID, "tarots")).setType(ITarot.class).setIDRange(0, 200).create();
 	private static final int MAX_CARDS_PER_READING = 5;
 
 	private TarotHandler() {
-		//NO-OP
+		// NO-OP
 	}
 
 	public static void registerTarot(ITarot tarot) {
@@ -30,7 +31,8 @@ public class TarotHandler {
 
 		ArrayList<TarotInfo> res = new ArrayList<TarotInfo>(5);
 
-		// Can't instantiate since the collected List<> might not support remove operations,
+		// Can't instantiate since the collected List<> might not support remove
+		// operations,
 		// depending on the jre, so this needs to be addAll for safety
 		res.addAll(REGISTRY.getValuesCollection().parallelStream() //
 				.filter(it -> it.isApplicableToPlayer(player)) //
@@ -54,8 +56,9 @@ public class TarotHandler {
 		private TarotInfo(ITarot tarot, boolean reversed, int number) {
 			this.tarot = tarot;
 			this.reversed = reversed;
-			if (number >= 0)
+			if (number >= 0) {
 				this.number = number;
+			}
 		}
 
 		TarotInfo(ITarot tarot, EntityPlayer player) {
@@ -77,32 +80,32 @@ public class TarotHandler {
 		}
 
 		public boolean isReversed() {
-			return reversed;
+			return this.reversed;
 		}
 
 		public boolean hasNumber() {
-			return number >= 0;
+			return this.number >= 0;
 		}
 
 		public int getNumber() {
-			return number;
+			return this.number;
 		}
 
 		public ResourceLocation getTexture() {
-			return tarot.getTexture();
+			return this.tarot.getTexture();
 		}
 
 		public String getTranslationKey() {
-			return tarot.getTranslationKey();
+			return this.tarot.getTranslationKey();
 		}
 
 		public String getRegistryName() {
-			return tarot.getRegistryName().toString();
+			return this.tarot.getRegistryName().toString();
 		}
 
 		@Override
 		public String toString() {
-			return I18n.format(getTranslationKey()) + ", " + number + (reversed ? ", reversed" : "");
+			return I18n.format(this.getTranslationKey()) + ", " + this.number + (this.reversed ? ", reversed" : "");
 		}
 	}
 

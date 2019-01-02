@@ -1,6 +1,7 @@
 package com.covens.common.potion;
 
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -21,7 +22,7 @@ public class PotionMod extends Potion {
 
 	@Override
 	public boolean isInstant() {
-		return instant;
+		return this.instant;
 	}
 
 	@Override

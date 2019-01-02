@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -26,7 +27,7 @@ public class PotionHarvest extends BrewMod {
 			EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
 			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
 				ItemStack stack = player.inventory.getStackInSlot(i);
-				if (stack.getItem() instanceof ItemFood && player.getRNG().nextInt(7) <= amplifier) {
+				if ((stack.getItem() instanceof ItemFood) && (player.getRNG().nextInt(7) <= amplifier)) {
 					player.entityDropItem(stack.splitStack(1), 0.5f);
 				}
 			}
@@ -42,12 +43,12 @@ public class PotionHarvest extends BrewMod {
 		BlockPos posF = pos.add(-box, -1, -box);
 
 		Iterable<BlockPos> spots = BlockPos.getAllInBox(posI, posF);
-		int chance = 10 + amplifier * 2;
+		int chance = 10 + (amplifier * 2);
 		int fortune = MathHelper.clamp(amplifier, 0, 5);
 		for (BlockPos spot : spots) {
 			IBlockState state = world.getBlockState(spot);
-			boolean place = amplifier > 1 || world.rand.nextBoolean();
-			if (place && state.getBlock() instanceof BlockCrops) {
+			boolean place = (amplifier > 1) || world.rand.nextBoolean();
+			if (place && (state.getBlock() instanceof BlockCrops)) {
 				BlockCrops crop = (BlockCrops) state.getBlock();
 				if (crop.isMaxAge(state)) {
 					crop.dropBlockAsItemWithChance(world, spot, state, chance, fortune);

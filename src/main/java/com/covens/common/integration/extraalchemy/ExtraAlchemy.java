@@ -8,8 +8,8 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 public class ExtraAlchemy {
-	
-	@ObjectHolder(value="extraalchemy:effect.magnetism")
+
+	@ObjectHolder(value = "extraalchemy:effect.magnetism")
 	public static final Potion magnetism = null;
 
 	public static void init() {
@@ -17,5 +17,5 @@ public class ExtraAlchemy {
 			CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(magnetism), magnetism, LibIngredients.ingotIron);
 		}
 	}
-	
+
 }

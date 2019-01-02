@@ -10,6 +10,7 @@ import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
@@ -26,9 +27,9 @@ public class BlockModLog extends BlockLog implements IModelRegister {
 
 	public BlockModLog(String id) {
 		super();
-		setTranslationKey(id);
-		setRegistryName(LibMod.MOD_ID, id);
-		setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
+		this.setTranslationKey(id);
+		this.setRegistryName(LibMod.MOD_ID, id);
+		this.setCreativeTab(ModCreativeTabs.PLANTS_CREATIVE_TAB);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, EnumAxis.Y));
 	}
 
@@ -40,7 +41,7 @@ public class BlockModLog extends BlockLog implements IModelRegister {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		EnumAxis axis = EnumAxis.values()[meta];
-		return getDefaultState().withProperty(LOG_AXIS, axis);
+		return this.getDefaultState().withProperty(LOG_AXIS, axis);
 	}
 
 	@Override
@@ -50,7 +51,9 @@ public class BlockModLog extends BlockLog implements IModelRegister {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty<?>[]{LOG_AXIS});
+		return new BlockStateContainer(this, new IProperty<?>[] {
+				LOG_AXIS
+		});
 	}
 
 	@Override

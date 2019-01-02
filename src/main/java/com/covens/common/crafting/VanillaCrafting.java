@@ -4,15 +4,15 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.ModMaterials;
 import com.covens.common.item.magic.ItemFumes;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class VanillaCrafting {
 

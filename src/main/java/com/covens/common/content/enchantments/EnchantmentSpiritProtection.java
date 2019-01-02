@@ -1,6 +1,7 @@
 package com.covens.common.content.enchantments;
 
 import com.covens.api.CovensAPI;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,15 +18,15 @@ public class EnchantmentSpiritProtection extends BaublesEnchantment {
 	@SubscribeEvent
 	public void onDamageReceived(LivingHurtEvent evt) {
 		if (evt.getEntityLiving() instanceof EntityPlayer) {
-			if (evt.getSource().getTrueSource() instanceof EntityLivingBase && isSpirit((EntityLivingBase) evt.getSource().getTrueSource())) {
+			if ((evt.getSource().getTrueSource() instanceof EntityLivingBase) && this.isSpirit((EntityLivingBase) evt.getSource().getTrueSource())) {
 				int level = this.getTotalLevelOnPlayer((EntityPlayer) evt.getEntityLiving());
-				evt.setAmount(evt.getAmount() * (1f - 0.05f * level));
+				evt.setAmount(evt.getAmount() * (1f - (0.05f * level)));
 			}
 		}
 	}
 
 	private boolean isSpirit(EntityLivingBase trueSource) {
-		//TODO move this to api and generalize with other creatures
+		// TODO move this to api and generalize with other creatures
 		return trueSource.getCreatureAttribute() == CovensAPI.getAPI().SPIRIT;
 	}
 }

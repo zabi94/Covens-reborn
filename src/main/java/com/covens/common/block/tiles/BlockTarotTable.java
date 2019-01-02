@@ -1,8 +1,11 @@
 package com.covens.common.block.tiles;
 
+import static net.minecraft.block.BlockHorizontal.FACING;
+
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.tile.tiles.TileEntityTarotsTable;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -16,29 +19,26 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-
 /**
- * This class was created by Joseph on 3/4/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Joseph on 3/4/2017. It's distributed as part of
+ * Covens under the MIT license.
  */
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public class BlockTarotTable extends BlockModTileEntity implements IInfusionStabiliserExt {
 
 	public BlockTarotTable() {
 		super(LibBlockName.TAROT_TABLE, Material.ROCK);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		setSoundType(SoundType.STONE);
-		setResistance(3F);
-		setHardness(3F);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setSoundType(SoundType.STONE);
+		this.setResistance(3F);
+		this.setHardness(3F);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		final EnumFacing facing = EnumFacing.byHorizontalIndex(meta);
-		return getDefaultState().withProperty(FACING, facing);
+		return this.getDefaultState().withProperty(FACING, facing);
 	}
 
 	@Override

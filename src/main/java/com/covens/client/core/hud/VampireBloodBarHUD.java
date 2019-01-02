@@ -1,10 +1,13 @@
 package com.covens.client.core.hud;
 
+import org.lwjgl.opengl.GL11;
+
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.content.transformation.vampire.CapabilityVampire;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -19,7 +22,6 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class VampireBloodBarHUD extends HudComponent {
@@ -46,7 +48,7 @@ public class VampireBloodBarHUD extends HudComponent {
 
 	@SubscribeEvent
 	public void renderOverlay(RenderGameOverlayEvent.Pre event) {
-		if ((event.getType() == RenderGameOverlayEvent.ElementType.FOOD || event.getType() == RenderGameOverlayEvent.ElementType.AIR) && Minecraft.getMinecraft().player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) {
+		if (((event.getType() == RenderGameOverlayEvent.ElementType.FOOD) || (event.getType() == RenderGameOverlayEvent.ElementType.AIR)) && (Minecraft.getMinecraft().player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE)) {
 			event.setCanceled(true);
 		}
 	}
@@ -65,13 +67,13 @@ public class VampireBloodBarHUD extends HudComponent {
 	@Override
 	public double getX() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.VAMPIRE_METER_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.VAMPIRE_METER_HUD.x, getWidth(), sr.getScaledWidth());
+		return ModConfig.CLIENT.VAMPIRE_METER_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.VAMPIRE_METER_HUD.x, this.getWidth(), sr.getScaledWidth());
 	}
 
 	@Override
 	public double getY() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.VAMPIRE_METER_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.VAMPIRE_METER_HUD.y, getHeight(), sr.getScaledHeight());
+		return ModConfig.CLIENT.VAMPIRE_METER_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.VAMPIRE_METER_HUD.y, this.getHeight(), sr.getScaledHeight());
 	}
 
 	@Override
@@ -79,8 +81,8 @@ public class VampireBloodBarHUD extends HudComponent {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 		ModConfig.CLIENT.VAMPIRE_METER_HUD.v_anchor = vertical;
 		ModConfig.CLIENT.VAMPIRE_METER_HUD.h_anchor = horizontal;
-		ModConfig.CLIENT.VAMPIRE_METER_HUD.x = horizontal.pixelToData(x, getWidth(), sr.getScaledWidth());
-		ModConfig.CLIENT.VAMPIRE_METER_HUD.y = vertical.pixelToData(y, getHeight(), sr.getScaledHeight());
+		ModConfig.CLIENT.VAMPIRE_METER_HUD.x = horizontal.pixelToData(x, this.getWidth(), sr.getScaledWidth());
+		ModConfig.CLIENT.VAMPIRE_METER_HUD.y = vertical.pixelToData(y, this.getHeight(), sr.getScaledHeight());
 		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
 	}
 
@@ -88,8 +90,8 @@ public class VampireBloodBarHUD extends HudComponent {
 	public void resetConfig() {
 		ModConfig.CLIENT.VAMPIRE_METER_HUD.v_anchor = EnumHudAnchor.END_ABSOLUTE;
 		ModConfig.CLIENT.VAMPIRE_METER_HUD.h_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-		ModConfig.CLIENT.VAMPIRE_METER_HUD.x = 9 + getWidth() / 2;
-		ModConfig.CLIENT.VAMPIRE_METER_HUD.y = 39 - getHeight();
+		ModConfig.CLIENT.VAMPIRE_METER_HUD.x = 9 + (this.getWidth() / 2);
+		ModConfig.CLIENT.VAMPIRE_METER_HUD.y = 39 - this.getHeight();
 		ModConfig.CLIENT.VAMPIRE_METER_HUD.deactivate = false;
 		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
 	}
@@ -115,7 +117,7 @@ public class VampireBloodBarHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -141,16 +143,16 @@ public class VampireBloodBarHUD extends HudComponent {
 			Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
 			GlStateManager.enableBlend();
 
-			renderTextureAt(getX() + 1, getY(), (int) ((getWidth() - 2) * blood), getHeight(), 0, 0.5, blood, 1); //Draw the content
-			renderTextureAt(getX(), getY(), 1, getHeight(), 4d / getWidth(), 0, 5d / getWidth(), 0.5); //Draw the first vertical line
-			renderTextureAt(getX() + getWidth() - 2, getY(), 2, getHeight(), 3d / getWidth(), 0, 5d / getWidth(), 0.5); //Draw the last 2 vertical lines
-			int pixelsPerSlot = (int) ((getWidth() - 2d) / (level + 1d));
-			for (int i = 0; i < level; i++) { //Draw each slot
-				renderTextureAt(1 + getX() + i * pixelsPerSlot, getY(), 1, getHeight(), 3d / getWidth(), 0, 4d / getWidth(), 0.5);
-				renderTextureAt(2 + getX() + i * pixelsPerSlot, getY(), pixelsPerSlot - 1, getHeight(), 0, 0, 1d / getWidth(), 0.5);
+			renderTextureAt(this.getX() + 1, this.getY(), (int) ((this.getWidth() - 2) * blood), this.getHeight(), 0, 0.5, blood, 1); // Draw the content
+			renderTextureAt(this.getX(), this.getY(), 1, this.getHeight(), 4d / this.getWidth(), 0, 5d / this.getWidth(), 0.5); // Draw the first vertical line
+			renderTextureAt((this.getX() + this.getWidth()) - 2, this.getY(), 2, this.getHeight(), 3d / this.getWidth(), 0, 5d / this.getWidth(), 0.5); // Draw the last 2 vertical lines
+			int pixelsPerSlot = (int) ((this.getWidth() - 2d) / (level + 1d));
+			for (int i = 0; i < level; i++) { // Draw each slot
+				renderTextureAt(1 + this.getX() + (i * pixelsPerSlot), this.getY(), 1, this.getHeight(), 3d / this.getWidth(), 0, 4d / this.getWidth(), 0.5);
+				renderTextureAt(2 + this.getX() + (i * pixelsPerSlot), this.getY(), pixelsPerSlot - 1, this.getHeight(), 0, 0, 1d / this.getWidth(), 0.5);
 			}
-			renderTextureAt(1 + getX() + level * pixelsPerSlot, getY(), 1, getHeight(), 3d / getWidth(), 0, 4d / getWidth(), 0.5);
-			renderTextureAt(2 + getX() + level * pixelsPerSlot, getY(), getWidth() - (pixelsPerSlot * level) - 4, getHeight(), 0, 0, 1d / getWidth(), 0.5);
+			renderTextureAt(1 + this.getX() + (level * pixelsPerSlot), this.getY(), 1, this.getHeight(), 3d / this.getWidth(), 0, 4d / this.getWidth(), 0.5);
+			renderTextureAt(2 + this.getX() + (level * pixelsPerSlot), this.getY(), this.getWidth() - (pixelsPerSlot * level) - 4, this.getHeight(), 0, 0, 1d / this.getWidth(), 0.5);
 			GlStateManager.disableBlend();
 			GlStateManager.popMatrix();
 		}

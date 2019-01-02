@@ -1,18 +1,17 @@
 package com.covens.common.core.helper;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import java.util.Optional;
-import java.util.UUID;
-
 /**
- * This class was created by Arekkuusu on 02/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 02/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class NBTHelper {
 
@@ -87,7 +86,9 @@ public final class NBTHelper {
 
 	public static <T extends Entity> Optional<T> getEntityByUUID(Class<T> clazz, UUID uuid, World world) {
 		for (Entity entity : world.loadedEntityList) {
-			if (clazz.isInstance(entity) && entity.getUniqueID().equals(uuid)) return Optional.of(clazz.cast(entity));
+			if (clazz.isInstance(entity) && entity.getUniqueID().equals(uuid)) {
+				return Optional.of(clazz.cast(entity));
+			}
 		}
 
 		return Optional.empty();
@@ -95,17 +96,17 @@ public final class NBTHelper {
 
 	public static boolean hasTag(ItemStack stack, String tag, int type) {
 		NBTTagCompound tagCompound = stack.getTagCompound();
-		return tagCompound != null && tagCompound.hasKey(tag, type);
+		return (tagCompound != null) && tagCompound.hasKey(tag, type);
 	}
 
 	public static boolean hasTag(ItemStack stack, String tag) {
 		NBTTagCompound tagCompound = stack.getTagCompound();
-		return tagCompound != null && tagCompound.hasKey(tag);
+		return (tagCompound != null) && tagCompound.hasKey(tag);
 	}
 
 	public static void removeTag(ItemStack stack, String tag) {
 		NBTTagCompound tagCompound = stack.getTagCompound();
-		if (tagCompound != null && tagCompound.hasKey(tag)) {
+		if ((tagCompound != null) && tagCompound.hasKey(tag)) {
 			tagCompound.removeTag(tag);
 		}
 	}

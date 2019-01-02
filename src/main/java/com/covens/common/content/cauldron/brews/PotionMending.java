@@ -36,13 +36,13 @@ public class PotionMending extends BrewMod {
 
 	public PotionMending() {
 		super("mending", false, 0x4CBB17, true, 0);
-		stateMap.put(Blocks.MYCELIUM, Blocks.GRASS.getDefaultState());
-		stateMap.put(Blocks.DIRT, Blocks.GRASS.getDefaultState());
-		stateMap.put(Blocks.RED_MUSHROOM, Blocks.RED_FLOWER.getDefaultState());
-		stateMap.put(Blocks.BROWN_MUSHROOM, Blocks.TALLGRASS.getDefaultState());
-		stateMap.put(Blocks.SAND, Blocks.DIRT.getDefaultState());
+		this.stateMap.put(Blocks.MYCELIUM, Blocks.GRASS.getDefaultState());
+		this.stateMap.put(Blocks.DIRT, Blocks.GRASS.getDefaultState());
+		this.stateMap.put(Blocks.RED_MUSHROOM, Blocks.RED_FLOWER.getDefaultState());
+		this.stateMap.put(Blocks.BROWN_MUSHROOM, Blocks.TALLGRASS.getDefaultState());
+		this.stateMap.put(Blocks.SAND, Blocks.DIRT.getDefaultState());
 		try {
-			startConverting = LibReflection.method("startConverting", "func_191991_a", EntityZombieVillager.class, Void.class, UUID.class, int.class); 
+			this.startConverting = LibReflection.method("startConverting", "func_191991_a", EntityZombieVillager.class, Void.class, UUID.class, int.class);
 		} catch (Exception e) {
 			throw new LoaderException("[Covens] Failed to find startConverting method in class EntityZombieVillager for PotionMending");
 		}
@@ -69,7 +69,7 @@ public class PotionMending extends BrewMod {
 				starterUUID = EntityPlayer.getUUID(((EntityPlayer) indirectSource).getGameProfile());
 			}
 			try {
-				startConverting.invoke(entity, starterUUID, 200);
+				this.startConverting.invoke(entity, starterUUID, 200);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				throw new LoaderException("Failed to reflect method", e);
 			}
@@ -83,7 +83,7 @@ public class PotionMending extends BrewMod {
 
 	@Override
 	public void applyInWorld(World world, BlockPos pos, EnumFacing side, IBrewModifierList modifiers, EntityLivingBase thrower) {
-		int box = 1 + 3 * modifiers.getLevel(DefaultModifiers.RADIUS).orElse(0);
+		int box = 1 + (3 * modifiers.getLevel(DefaultModifiers.RADIUS).orElse(0));
 		int ampl = modifiers.getLevel(DefaultModifiers.POWER).orElse(0);
 		BlockPos posI = pos.add(box, box / 3, box);
 		BlockPos posF = pos.add(-box, -box / 3, -box);
@@ -91,10 +91,10 @@ public class PotionMending extends BrewMod {
 		for (BlockPos spot : spots) {
 			Block block = world.getBlockState(spot).getBlock();
 			boolean place = world.rand.nextInt(6) <= ampl;
-			if (place && stateMap.containsKey(block)) {
-				world.setBlockState(spot, stateMap.get(block), 3);
+			if (place && this.stateMap.containsKey(block)) {
+				world.setBlockState(spot, this.stateMap.get(block), 3);
 			}
-			if (place && block == Blocks.TALLGRASS && world.getBlockState(spot).getValue(BlockTallGrass.TYPE) == BlockTallGrass.EnumType.DEAD_BUSH) {
+			if (place && (block == Blocks.TALLGRASS) && (world.getBlockState(spot).getValue(BlockTallGrass.TYPE) == BlockTallGrass.EnumType.DEAD_BUSH)) {
 				world.setBlockState(spot, Blocks.YELLOW_FLOWER.getDefaultState(), 3);
 			}
 		}

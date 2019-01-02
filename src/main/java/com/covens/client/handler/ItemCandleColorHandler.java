@@ -4,9 +4,8 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 
 /**
- * This class was created by Arekkuusu on 11/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 11/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class ItemCandleColorHandler implements IItemColor {
 

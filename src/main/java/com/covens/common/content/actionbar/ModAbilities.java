@@ -3,6 +3,7 @@ package com.covens.common.content.actionbar;
 import com.covens.common.content.transformation.vampire.CapabilityVampire;
 import com.covens.common.content.transformation.werewolf.CapabilityWerewolfStatus;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -44,11 +45,11 @@ public class ModAbilities {
 	};
 
 	private ModAbilities() {
-		//NO-OP
+		// NO-OP
 	}
 
 	public static void dummyMethodToLoadClass() {
-		//I only use this method to force the JVM to load this class
+		// I only use this method to force the JVM to load this class
 	}
 
 	public static abstract class NightVisionAction extends HotbarAction {
@@ -61,7 +62,7 @@ public class ModAbilities {
 		@SideOnly(Side.CLIENT)
 		public int getIconIndexY() {
 			int yIndex = super.getIconIndexY();
-			if (hasNightVision(Minecraft.getMinecraft().player)) {
+			if (this.hasNightVision(Minecraft.getMinecraft().player)) {
 				return yIndex;
 			}
 			return yIndex + 1;

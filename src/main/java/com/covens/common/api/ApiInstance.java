@@ -1,5 +1,7 @@
 package com.covens.common.api;
 
+import java.util.function.Supplier;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
@@ -55,8 +57,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-import java.util.function.Supplier;
-
 @SuppressWarnings("deprecation")
 public class ApiInstance extends CovensAPI {
 
@@ -108,12 +108,17 @@ public class ApiInstance extends CovensAPI {
 
 	/**
 	 * @param player The player whose blood reserve is being modified
-	 * @param amount The amount of blood to add (negative values will decrease the total)
-	 * @return <i>When adding</i> blood this will return true if the value changed and false otherwise: this is <b>true</b> if there was
-	 * even a little bit of space in the pool, but the blood added was greater than the amount that could be inserted,
-	 * and <b>false</b> if the pool was maxed.<br>
-	 * <i>When removing</i> blood this will return true if ALL the blood requested was drained.
-	 * If the amount drained is greater than the amount available this will return false, and no blood will be drained from the pool
+	 * @param amount The amount of blood to add (negative values will decrease the
+	 *               total)
+	 * @return <i>When adding</i> blood this will return true if the value changed
+	 *         and false otherwise: this is <b>true</b> if there was even a little
+	 *         bit of space in the pool, but the blood added was greater than the
+	 *         amount that could be inserted, and <b>false</b> if the pool was
+	 *         maxed.<br>
+	 *         <i>When removing</i> blood this will return true if ALL the blood
+	 *         requested was drained. If the amount drained is greater than the
+	 *         amount available this will return false, and no blood will be drained
+	 *         from the pool
 	 * @throws UnsupportedOperationException if the player is not a vampire
 	 */
 	@Override
@@ -129,7 +134,7 @@ public class ApiInstance extends CovensAPI {
 		ITransformation oldTransformation = data.getType();
 		data.setType(type);
 		data.setLevel(level);
-		if (oldTransformation != type && oldTransformation == DefaultTransformations.VAMPIRE) {
+		if ((oldTransformation != type) && (oldTransformation == DefaultTransformations.VAMPIRE)) {
 			player.getCapability(CapabilityVampire.CAPABILITY, null).setNightVision(false);
 		}
 		if (type == DefaultTransformations.VAMPIRE) {
@@ -202,7 +207,7 @@ public class ApiInstance extends CovensAPI {
 
 	@Override
 	public void removeMPExpansion(IMagicPowerExpander expander, EntityPlayer player) {
-		removeMPExpansion(expander.getID(), player);
+		this.removeMPExpansion(expander.getID(), player);
 	}
 
 	@Override
@@ -215,9 +220,9 @@ public class ApiInstance extends CovensAPI {
 	public void drainBloodFromEntity(EntityPlayer player, EntityLivingBase entity) {
 		IBloodReserve br = entity.getCapability(CapabilityBloodReserve.CAPABILITY, null);
 		CapabilityTransformation data = player.getCapability(CapabilityTransformation.CAPABILITY, null);
-		if (br.getBlood() > 0 && br.getMaxBlood() > 0) {
+		if ((br.getBlood() > 0) && (br.getMaxBlood() > 0)) {
 			int transferred = (int) Math.min(br.getBlood(), br.getBlood() * 0.05 * data.getLevel());
-			if (transferred > 0 && (CovensAPI.getAPI().addVampireBlood(player, transferred) || player.isSneaking())) {
+			if ((transferred > 0) && (CovensAPI.getAPI().addVampireBlood(player, transferred) || player.isSneaking())) {
 				br.setBlood(br.getBlood() - transferred);
 				NetworkHandler.HANDLER.sendToAllAround(new EntityInternalBloodChanged(entity), new TargetPoint(entity.dimension, entity.posX, entity.posY, entity.posZ, 32));
 			}
@@ -227,15 +232,15 @@ public class ApiInstance extends CovensAPI {
 	@Override
 	public void bindFamiliar(EntityPlayer player, Entity familiar) {
 		if (!familiar.hasCapability(CapabilityFamiliarCreature.CAPABILITY, null)) {
-			throw new IllegalArgumentException(familiar.getClass().getCanonicalName()+" is not a valid familiar");
+			throw new IllegalArgumentException(familiar.getClass().getCanonicalName() + " is not a valid familiar");
 		}
-		
+
 	}
 
 	@Override
 	public void unbindFamiliar(Entity familiar) {
 		if (!familiar.hasCapability(CapabilityFamiliarCreature.CAPABILITY, null)) {
-			throw new IllegalArgumentException(familiar.getClass().getCanonicalName()+" is not a valid familiar");
+			throw new IllegalArgumentException(familiar.getClass().getCanonicalName() + " is not a valid familiar");
 		}
 		CapabilityFamiliarCreature cap = familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
 		CreatureSyncHelper.executeOnPlayerAvailable(cap.owner, new RemoveFamiliarFromPlayer(cap.owner));

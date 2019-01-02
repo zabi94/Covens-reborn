@@ -1,18 +1,19 @@
 package com.covens.common.potion.potions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.covens.api.transformation.IBloodReserve;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
 import com.covens.common.core.helper.PlayerHelper;
 import com.covens.common.potion.PotionMod;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PotionBloodDrained extends PotionMod {
 
@@ -40,7 +41,7 @@ public class PotionBloodDrained extends PotionMod {
 			IBloodReserve reserve = entity.getCapability(CapabilityBloodReserve.CAPABILITY, null);
 			if (reserve.getPercentFilled() < TRESHOLD) {
 				if (entity instanceof EntityLiving) {
-					handleNPCEffect((EntityLiving) entity, reserve);
+					this.handleNPCEffect((EntityLiving) entity, reserve);
 				}
 				entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, amplifier, true, false));
 				entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, amplifier, true, false));

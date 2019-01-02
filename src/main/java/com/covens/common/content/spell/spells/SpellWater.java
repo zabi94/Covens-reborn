@@ -7,6 +7,7 @@
 package com.covens.common.content.spell.spells;
 
 import com.covens.common.content.spell.Spell;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -24,7 +25,9 @@ public class SpellWater extends Spell {
 	public void performEffect(RayTraceResult rtrace, EntityLivingBase caster, World world) {
 		if (rtrace.typeOfHit == Type.BLOCK) {
 			BlockPos pos = rtrace.getBlockPos().offset(rtrace.sideHit);
-			if (world.isAirBlock(pos)) world.setBlockState(pos, Blocks.WATER.getDefaultState(), 3);
+			if (world.isAirBlock(pos)) {
+				world.setBlockState(pos, Blocks.WATER.getDefaultState(), 3);
+			}
 		}
 	}
 

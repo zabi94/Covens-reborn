@@ -1,9 +1,14 @@
 package com.covens.common.item.tool;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,31 +24,28 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-
 /**
- * This class was created by BerciTheBeast on 27.3.2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by BerciTheBeast on 27.3.2017. It's distributed as
+ * part of Covens under the MIT license.
  */
 public class ItemBoline extends ItemShears implements IModelRegister {
 
 	@Nonnull
 	public ItemBoline() {
 		super();
-		setMaxDamage(600);
+		this.setMaxDamage(600);
 		this.setMaxStackSize(1);
-		setRegistryName(LibItemName.BOLINE);
-		setTranslationKey(LibItemName.BOLINE);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setRegistryName(LibItemName.BOLINE);
+		this.setTranslationKey(LibItemName.BOLINE);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, @Nonnull EntityLivingBase attacker) {
 		if (!target.world.isRemote) {
-			if (attacker instanceof EntityPlayer)
+			if (attacker instanceof EntityPlayer) {
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), 5);
+			}
 			stack.damageItem(1, attacker);
 		}
 		return true;

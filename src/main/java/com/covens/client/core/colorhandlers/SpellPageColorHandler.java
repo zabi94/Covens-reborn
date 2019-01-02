@@ -11,8 +11,9 @@ public final class SpellPageColorHandler implements IItemColor {
 	public int colorMultiplier(ItemStack stack, int tintIndex) {
 		if (tintIndex == 0) {
 			ISpell s = ItemSpellPage.getSpellFromItemStack(stack);
-			if (s != null)
+			if (s != null) {
 				return s.getColor();
+			}
 		}
 		return -1;
 	}

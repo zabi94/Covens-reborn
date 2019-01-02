@@ -22,8 +22,8 @@ public class PotionArrowDeflection extends BrewMod {
 	public PotionArrowDeflection() {
 		super("arrow_deflection", false, 0xFFFACD, false, 2400);
 		try {
-			fieldInGround = LibReflection.field("inGround", "field_70254_i", EntityArrow.class);
-			methodGetArrowStack = LibReflection.method("getArrowStack", "func_184550_j", EntityArrow.class, ItemStack.class);
+			this.fieldInGround = LibReflection.field("inGround", "field_70254_i", EntityArrow.class);
+			this.methodGetArrowStack = LibReflection.method("getArrowStack", "func_184550_j", EntityArrow.class, ItemStack.class);
 		} catch (Exception e) {
 			throw new LoaderException("Covens cannot find some essential forge data, please report this to the Covens Github page", e);
 		}
@@ -37,11 +37,11 @@ public class PotionArrowDeflection extends BrewMod {
 
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
-		entity.world.getEntitiesWithinAABB(EntityArrow.class, entity.getEntityBoundingBox().grow(amplifier, amplifier, amplifier)).parallelStream().filter(a -> a.shootingEntity != entity).filter(a -> !isInGround(a)).forEach(a -> {
-			if (!entity.world.isRemote && a.pickupStatus == PickupStatus.ALLOWED) {
+		entity.world.getEntitiesWithinAABB(EntityArrow.class, entity.getEntityBoundingBox().grow(amplifier, amplifier, amplifier)).parallelStream().filter(a -> a.shootingEntity != entity).filter(a -> !this.isInGround(a)).forEach(a -> {
+			if (!entity.world.isRemote && (a.pickupStatus == PickupStatus.ALLOWED)) {
 				ItemStack arrow;
 				try {
-					arrow = (ItemStack) methodGetArrowStack.invoke(a);
+					arrow = (ItemStack) this.methodGetArrowStack.invoke(a);
 					EntityItem ei = new EntityItem(entity.world, a.posX, a.posY, a.posZ, arrow);
 					entity.world.spawnEntity(ei);
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -55,7 +55,7 @@ public class PotionArrowDeflection extends BrewMod {
 
 	private boolean isInGround(EntityArrow a) {
 		try {
-			return (boolean) fieldInGround.get(a);
+			return (boolean) this.fieldInGround.get(a);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 			return false;

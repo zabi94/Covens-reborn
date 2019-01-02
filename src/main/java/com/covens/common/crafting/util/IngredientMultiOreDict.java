@@ -1,10 +1,10 @@
 package com.covens.common.crafting.util;
 
+import java.util.ArrayList;
+
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.ArrayList;
 
 public class IngredientMultiOreDict extends CompoundIngredient {
 

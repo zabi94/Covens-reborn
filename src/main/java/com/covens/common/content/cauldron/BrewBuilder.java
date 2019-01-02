@@ -1,14 +1,15 @@
 package com.covens.common.content.cauldron;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewData.BrewEntry;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.List;
-import java.util.Optional;
 
 public class BrewBuilder {
 
@@ -16,7 +17,7 @@ public class BrewBuilder {
 
 	public BrewBuilder(List<ItemStack> list) {
 		this.list = list;
-		if (list.size() > 0 && list.get(0).getItem() == Items.NETHER_WART) {
+		if ((list.size() > 0) && (list.get(0).getItem() == Items.NETHER_WART)) {
 			list.remove(0);
 		}
 	}
@@ -25,8 +26,7 @@ public class BrewBuilder {
 		BrewData data = new BrewData();
 		IBrewEffect currentEffect = null;
 		IBrewModifierList modList = null;
-		for (ItemStack stack : list) {
-
+		for (ItemStack stack : this.list) {
 			if (currentEffect != null) { // Check if the next item is a valid modifier for the current potion
 				Optional<IBrewModifierList> newList = CauldronRegistry.getModifierListFromStack(stack, modList, currentEffect);
 				if (newList == null) {// Null means potion failed, not present means pass
@@ -37,23 +37,19 @@ public class BrewBuilder {
 					continue;
 				}
 			}
-
 			Optional<IBrewEffect> newBrew = CauldronRegistry.getBrewFromStack(stack);
-			if (newBrew.isPresent()) {
-
-				if (currentEffect != null) {
-					data.addEntry(new BrewEntry(CauldronRegistry.getPotionFromBrew(currentEffect), new BrewModifierListImpl(modList)));
-					ResourceLocation newPot = CauldronRegistry.getPotionFromBrew(newBrew.get()).getRegistryName();
-					if (data.getEffects().stream().filter(be -> be.getPotion() != null).map(be -> be.getPotion().getRegistryName()).anyMatch(p -> p.equals(newPot))) {
-						return Optional.empty();
-					}
-				}
-
-				currentEffect = newBrew.get();
-				modList = new BrewModifierListImpl();
-				continue;
+			if (!newBrew.isPresent()) {
+				return Optional.empty();
 			}
-			return Optional.empty();
+			if (currentEffect != null) {
+				data.addEntry(new BrewEntry(CauldronRegistry.getPotionFromBrew(currentEffect), new BrewModifierListImpl(modList)));
+				ResourceLocation newPot = CauldronRegistry.getPotionFromBrew(newBrew.get()).getRegistryName();
+				if (data.getEffects().stream().filter(be -> be.getPotion() != null).map(be -> be.getPotion().getRegistryName()).anyMatch(p -> p.equals(newPot))) {
+					return Optional.empty();
+				}
+			}
+			currentEffect = newBrew.get();
+			modList = new BrewModifierListImpl();
 		}
 		if (currentEffect != null) {
 			data.addEntry(new BrewEntry(CauldronRegistry.getPotionFromBrew(currentEffect), new BrewModifierListImpl(modList)));

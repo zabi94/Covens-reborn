@@ -2,6 +2,7 @@ package com.covens.common.content.incantation;
 
 import com.covens.api.incantation.IIncantation;
 import com.covens.common.block.ModBlocks;
+
 import net.minecraft.entity.player.EntityPlayer;
 
 public class IncantationWitchFire implements IIncantation {

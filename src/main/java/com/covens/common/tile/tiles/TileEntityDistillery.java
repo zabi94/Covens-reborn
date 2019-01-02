@@ -40,10 +40,10 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	private String currentRecipe = "";
 	private int startingProgress = -1;
 	private ItemStackHandler fuelInventory = new ItemStackHandler(1) {
-		
+
 		@Override
 		protected void onContentsChanged(int slot) {
-			markDirty();
+			TileEntityDistillery.this.markDirty();
 		}
 
 		@Override
@@ -54,96 +54,95 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 			return super.insertItem(slot, stack, simulate);
 		}
 	};
-	
+
 	private ItemStackHandler inventoryOutput = new ItemStackHandler(6) {
 		@Override
 		protected void onContentsChanged(int slot) {
-			contentsChanged();
+			TileEntityDistillery.this.contentsChanged();
 		}
 	};
 	private ItemStackHandler inventoryInput = new ItemStackHandler(6) {
 		@Override
 		protected void onContentsChanged(int slot) {
-			contentsChanged();
+			TileEntityDistillery.this.contentsChanged();
 		}
 	};
-	
+
 	private JointInventoryWrapper ioSideWrapper = new JointInventoryWrapper();
 	private JointInventoryWrapper ioGuiWrapper = new JointInventoryWrapper();
 	private JointInventoryWrapper ioBackWrapper = new JointInventoryWrapper();
 
 	public TileEntityDistillery() {
 		for (int i = 0; i < 6; i++) {
-			ioSideWrapper.bind(() -> inventoryInput, i, Mode.INSERT);
-			ioSideWrapper.bind(() -> inventoryOutput, i, Mode.EXTRACT);
-			ioGuiWrapper.bind(() -> inventoryInput, i, Mode.BOTH);
-			ioGuiWrapper.bind(() -> inventoryOutput, i, Mode.EXTRACT);
+			this.ioSideWrapper.bind(() -> this.inventoryInput, i, Mode.INSERT);
+			this.ioSideWrapper.bind(() -> this.inventoryOutput, i, Mode.EXTRACT);
+			this.ioGuiWrapper.bind(() -> this.inventoryInput, i, Mode.BOTH);
+			this.ioGuiWrapper.bind(() -> this.inventoryOutput, i, Mode.EXTRACT);
 		}
-		ioGuiWrapper.bind(() -> fuelInventory, 0, Mode.BOTH);
-		ioBackWrapper.bind(() -> fuelInventory, 0, Mode.INSERT);
+		this.ioGuiWrapper.bind(() -> this.fuelInventory, 0, Mode.BOTH);
+		this.ioBackWrapper.bind(() -> this.fuelInventory, 0, Mode.INSERT);
 	}
 
 	@Override
 	public void update() {
-		if (heat > 0) {
-			heat--;
-			markDirty();
+		if (this.heat > 0) {
+			this.heat--;
+			this.markDirty();
 		}
-		if (currentRecipe.length() > 0) {
-			if (heat == 0) {
-				burnFuel();
+		if (this.currentRecipe.length() > 0) {
+			if (this.heat == 0) {
+				this.burnFuel();
 			}
-			if (heat > 0) {
-				if (progress > 0) {
-					if (mp.drainAltarFirst(world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getPos(), this.world.provider.getDimension(), 2)) {
-						progress--;
-						markDirty();
+			if (this.heat > 0) {
+				if (this.progress > 0) {
+					if (this.mp.drainAltarFirst(this.world.getClosestPlayer(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 5, false), this.getPos(), this.world.provider.getDimension(), 2)) {
+						this.progress--;
+						this.markDirty();
 					}
 				} else {
-					DistilleryRecipe recipe = ModDistilleryRecipes.REGISTRY.getValue(new ResourceLocation(currentRecipe));
+					DistilleryRecipe recipe = ModDistilleryRecipes.REGISTRY.getValue(new ResourceLocation(this.currentRecipe));
 					if (recipe == null) {
-						currentRecipe = "";
-						progress = 0;
-						startingProgress = -1;
+						this.currentRecipe = "";
+						this.progress = 0;
+						this.startingProgress = -1;
 					} else {
-						for (int i = 0; i < inventoryInput.getSlots(); i++) {
-							if (!inventoryInput.getStackInSlot(i).isEmpty()) {
-								inventoryInput.extractItem(i, 1, false);
+						for (int i = 0; i < this.inventoryInput.getSlots(); i++) {
+							if (!this.inventoryInput.getStackInSlot(i).isEmpty()) {
+								this.inventoryInput.extractItem(i, 1, false);
 							}
 						}
 
 						for (ItemStack is : recipe.getOutputs()) {
 							ItemStack remaining = is.copy();
-							for (int i = 0; i < inventoryOutput.getSlots() && !remaining.isEmpty(); i++) {
-								remaining = inventoryOutput.insertItem(i, remaining, false);
+							for (int i = 0; (i < this.inventoryOutput.getSlots()) && !remaining.isEmpty(); i++) {
+								remaining = this.inventoryOutput.insertItem(i, remaining, false);
 							}
 						}
-						progress = startingProgress;
-						checkRecipe();
+						this.progress = this.startingProgress;
+						this.checkRecipe();
 					}
 				}
-				markDirty();
+				this.markDirty();
 			}
 		}
 	}
 
 	private void burnFuel() {
-		if (!fuelInventory.extractItem(0, 1, false).isEmpty()) {
-			heat = BURN_TIME;
+		if (!this.fuelInventory.extractItem(0, 1, false).isEmpty()) {
+			this.heat = BURN_TIME;
 		}
 	}
-	
+
 	@Override
 	public void onBlockBroken(World worldIn, BlockPos pos, IBlockState state) {
-		dropInventory(fuelInventory);
-		dropInventory(inventoryInput);
-		dropInventory(inventoryOutput);
+		this.dropInventory(this.fuelInventory);
+		this.dropInventory(this.inventoryInput);
+		this.dropInventory(this.inventoryOutput);
 	}
 
-
 	protected void contentsChanged() {
-		if (!world.isRemote) {
-			checkRecipe();
+		if (!this.world.isRemote) {
+			this.checkRecipe();
 			this.markDirty();
 		}
 	}
@@ -155,17 +154,15 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	}
 
 	private void checkRecipe() {
-		DistilleryRecipe recipe = ModDistilleryRecipes.REGISTRY.getValuesCollection().parallelStream()
-				.filter(dr -> dr.matches(asList(inventoryInput)))
-				.findFirst().orElse(null);
+		DistilleryRecipe recipe = ModDistilleryRecipes.REGISTRY.getValuesCollection().parallelStream().filter(dr -> dr.matches(this.asList(this.inventoryInput))).findFirst().orElse(null);
 		if (recipe == null) {
-			currentRecipe = "";
-			progress = 0;
-			startingProgress = -1;
-		} else if (!currentRecipe.equals(recipe.getRegistryName().toString()) && canOutputFit(recipe)) {
-			currentRecipe = recipe.getRegistryName().toString();
-			progress = recipe.getTime();
-			startingProgress = recipe.getTime();
+			this.currentRecipe = "";
+			this.progress = 0;
+			this.startingProgress = -1;
+		} else if (!this.currentRecipe.equals(recipe.getRegistryName().toString()) && this.canOutputFit(recipe)) {
+			this.currentRecipe = recipe.getRegistryName().toString();
+			this.progress = recipe.getTime();
+			this.startingProgress = recipe.getTime();
 		}
 	}
 
@@ -179,12 +176,12 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 
 	private boolean canOutputFit(DistilleryRecipe recipe) {
 		ItemStackHandler simulated = new ItemStackHandler(6);
-		for (int i = 0; i < inventoryOutput.getSlots(); i++) {
-			simulated.setStackInSlot(i, inventoryOutput.getStackInSlot(i).copy());
+		for (int i = 0; i < this.inventoryOutput.getSlots(); i++) {
+			simulated.setStackInSlot(i, this.inventoryOutput.getStackInSlot(i).copy());
 		}
 		for (ItemStack is : recipe.getOutputs()) {
 			ItemStack remaining = is.copy();
-			for (int i = 0; i < simulated.getSlots() && !remaining.isEmpty(); i++) {
+			for (int i = 0; (i < simulated.getSlots()) && !remaining.isEmpty(); i++) {
 				remaining = simulated.insertItem(i, remaining, false);
 			}
 			if (!remaining.isEmpty()) {
@@ -195,11 +192,11 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	}
 
 	public ItemStackHandler getInputInventory() {
-		return inventoryInput;
+		return this.inventoryInput;
 	}
 
 	public ItemStackHandler getOutputInventory() {
-		return inventoryOutput;
+		return this.inventoryOutput;
 	}
 
 	@Override
@@ -216,63 +213,63 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			if (facing == world.getBlockState(pos).getValue(BlockHorizontal.FACING)) {
-				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(ioBackWrapper);
+			if (facing == this.world.getBlockState(this.pos).getValue(BlockHorizontal.FACING)) {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.ioBackWrapper);
 			}
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(ioSideWrapper);
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.ioSideWrapper);
 		}
 		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(mp);
+			return IMagicPowerConsumer.CAPABILITY.cast(this.mp);
 		}
 		return super.getCapability(capability, facing);
 	}
 
 	public IItemHandler getGuiHandler() {
-		return ioGuiWrapper;
+		return this.ioGuiWrapper;
 	}
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound tag) {
-		inventoryInput.deserializeNBT(tag.getCompoundTag("inv_in"));
-		inventoryOutput.deserializeNBT(tag.getCompoundTag("inv_out"));
-		fuelInventory.deserializeNBT(tag.getCompoundTag("fuel"));
-		mp.readFromNbt(tag.getCompoundTag("mp"));
-		progress = tag.getInteger("progress");
-		currentRecipe = tag.getString("recipe");
-		startingProgress = tag.getInteger("recipeTime");
+		this.inventoryInput.deserializeNBT(tag.getCompoundTag("inv_in"));
+		this.inventoryOutput.deserializeNBT(tag.getCompoundTag("inv_out"));
+		this.fuelInventory.deserializeNBT(tag.getCompoundTag("fuel"));
+		this.mp.readFromNbt(tag.getCompoundTag("mp"));
+		this.progress = tag.getInteger("progress");
+		this.currentRecipe = tag.getString("recipe");
+		this.startingProgress = tag.getInteger("recipeTime");
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
-		tag.setTag("inv_in", inventoryInput.serializeNBT());
-		tag.setTag("inv_out", inventoryOutput.serializeNBT());
-		tag.setTag("fuel", fuelInventory.serializeNBT());
-		tag.setTag("mp", mp.writeToNbt());
-		tag.setInteger("progress", progress);
-		tag.setString("recipe", currentRecipe);
-		tag.setInteger("recipeTime", startingProgress);
+		tag.setTag("inv_in", this.inventoryInput.serializeNBT());
+		tag.setTag("inv_out", this.inventoryOutput.serializeNBT());
+		tag.setTag("fuel", this.fuelInventory.serializeNBT());
+		tag.setTag("mp", this.mp.writeToNbt());
+		tag.setInteger("progress", this.progress);
+		tag.setString("recipe", this.currentRecipe);
+		tag.setInteger("recipeTime", this.startingProgress);
 	}
 
 	public int getProgress() {
-		return progress;
+		return this.progress;
 	}
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	public int getStartingTime() {
-		return startingProgress;
+		return this.startingProgress;
 	}
 
 	public int getHeat() {
-		return heat;
+		return this.heat;
 	}
 
 }

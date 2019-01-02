@@ -21,7 +21,7 @@ public class CauldronMixedCraftingRecipe extends CauldronFluidCraftingRecipe {
 
 	@Override
 	public ItemStack getItemResult() {
-		return itemResult.copy();
+		return this.itemResult.copy();
 	}
 
 }

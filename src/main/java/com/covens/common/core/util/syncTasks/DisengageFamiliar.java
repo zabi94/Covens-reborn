@@ -12,32 +12,32 @@ import net.minecraft.nbt.NBTTagCompound;
 public class DisengageFamiliar extends SyncTask<EntityLiving> {
 
 	private UUID eID;
-	
+
 	public DisengageFamiliar() {
 	}
-	
+
 	public DisengageFamiliar(UUID familiarID) {
-		eID = familiarID;
+		this.eID = familiarID;
 	}
-	
+
 	@Override
 	public void run() {
-		EntityLiving p = CreatureSyncHelper.getEntityAcrossDimensions(eID);
+		EntityLiving p = CreatureSyncHelper.getEntityAcrossDimensions(this.eID);
 		if (p == null) {
-			throw new RuntimeException("Entity was not found after sync task was triggered");
+			throw new IllegalStateException("Entity was not found after sync task was triggered");
 		}
 		p.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).setOwner(null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) {
-		eID = new UUID(nbt.getLong("msb"), nbt.getLong("lsb"));
+		this.eID = new UUID(nbt.getLong("msb"), nbt.getLong("lsb"));
 	}
 
 	@Override
 	protected void writeToNBT(NBTTagCompound tag) {
-		tag.setLong("msb", eID.getMostSignificantBits());
-		tag.setLong("lsb", eID.getLeastSignificantBits());
+		tag.setLong("msb", this.eID.getMostSignificantBits());
+		tag.setLong("lsb", this.eID.getLeastSignificantBits());
 	}
 
 }

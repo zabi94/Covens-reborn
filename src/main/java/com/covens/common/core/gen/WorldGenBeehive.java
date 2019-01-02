@@ -1,7 +1,10 @@
 package com.covens.common.core.gen;
 
+import java.util.Random;
+
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModConfig;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
@@ -15,16 +18,15 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import java.util.Random;
-
 public class WorldGenBeehive implements IWorldGenerator {
 
 	private static void generateBeehives(World world, Random random, int chunkX, int chunkZ) {
 		final MutableBlockPos variableBlockPos = new BlockPos.MutableBlockPos();
-		if (random.nextFloat() < ModConfig.WORLD_GEN.beehive.beehive_gen_chance / 33.0f) {
+		if (random.nextFloat() < (ModConfig.WORLD_GEN.beehive.beehive_gen_chance / 33.0f)) {
 			int x = chunkX + random.nextInt(16);
 			int z = chunkZ + random.nextInt(16);
-			int y = world.getHeight(x, z) - 1; // if there is a tree, world height will be just above the top leaves of the tree.
+			int y = world.getHeight(x, z) - 1; // if there is a tree, world height will be just above the top leaves of the
+												// tree.
 			variableBlockPos.setPos(x, y, z);
 			if (!isBlockLeaves(world, variableBlockPos)) {
 				return;
@@ -48,7 +50,7 @@ public class WorldGenBeehive implements IWorldGenerator {
 		final IBlockState blockState = world.getBlockState(pos);
 		final Block block = blockState.getBlock();
 		if (block.isLeaves(blockState, world, pos)) {
-			pos.setY(pos.getY()-1);
+			pos.setY(pos.getY() - 1);
 			return getHeightOfFirstAirBlockBelowLeaves(world, pos);
 		}
 		if (world.isAirBlock(pos)) {
@@ -63,7 +65,7 @@ public class WorldGenBeehive implements IWorldGenerator {
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.END) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER)) {
 			return;
 		}
-		generateBeehives(world, random, chunkX * 16 + 8, chunkZ * 16 + 8);
+		generateBeehives(world, random, (chunkX * 16) + 8, (chunkZ * 16) + 8);
 	}
 
 }

@@ -27,36 +27,36 @@ public abstract class EntityMultiSkin extends EntityTameable {
 
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
-		this.setEntitySkinIndex(rand.nextInt(getSkinTypes()));
+		this.setEntitySkinIndex(this.rand.nextInt(this.getSkinTypes()));
 		return super.onInitialSpawn(difficulty, livingdata);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getSkinIndex() {
-		return dataManager.get(SKIN);
+		return this.dataManager.get(SKIN);
 	}
 
 	public void setEntitySkinIndex(int type) {
-		if (type >= getSkinTypes()) {
+		if (type >= this.getSkinTypes()) {
 			throw new IllegalArgumentException(String.format("Skin of index %d doesn't exist for %s", type, this.getClass().getName()));
 		}
-		dataManager.set(SKIN, type);
-		dataManager.setDirty(SKIN);
+		this.dataManager.set(SKIN, type);
+		this.dataManager.setDirty(SKIN);
 	}
 
 	public abstract int getSkinTypes();
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
-		compound.setInteger("skin", dataManager.get(SKIN));
+		compound.setInteger("skin", this.dataManager.get(SKIN));
 	}
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
-		dataManager.set(SKIN, compound.getInteger("skin"));
-		dataManager.setDirty(SKIN);
+		this.dataManager.set(SKIN, compound.getInteger("skin"));
+		this.dataManager.setDirty(SKIN);
 	}
 
 }

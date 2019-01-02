@@ -1,8 +1,11 @@
 package com.covens.common.block.natural;
 
+import java.util.Random;
+
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -13,39 +16,36 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
- * This class was created by Joseph on 3/4/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Joseph on 3/4/2017. It's distributed as part of
+ * Covens under the MIT license.
  */
 public class BlockInfestedFarmland extends BlockMod implements IGrowable {
 
 	public BlockInfestedFarmland() {
 		super(LibBlockName.INFESTED_FARMLAND, Material.VINE);
-		setResistance(1F);
-		setHardness(1F);
+		this.setResistance(1F);
+		this.setHardness(1F);
 	}
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isRemote) {
-			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
+			if ((worldIn.getLightFromNeighbors(pos.up()) < 4) && (worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)) {
 				worldIn.setBlockState(pos, Blocks.FARMLAND.getDefaultState());
 			} else {
 				if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
 					for (int i = 0; i < 4; ++i) {
 						BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
-						if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos)) {
+						if ((blockpos.getY() >= 0) && (blockpos.getY() < 256) && !worldIn.isBlockLoaded(blockpos)) {
 							return;
 						}
 
 						IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
 						IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-						if (iblockstate1.getBlock() == Blocks.FARMLAND && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+						if ((iblockstate1.getBlock() == Blocks.FARMLAND) && (worldIn.getLightFromNeighbors(blockpos.up()) >= 4) && (iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)) {
 							worldIn.setBlockState(blockpos, ModBlocks.infested_farmland.getDefaultState());
 						}
 					}
@@ -63,7 +63,7 @@ public class BlockInfestedFarmland extends BlockMod implements IGrowable {
 			int j = 0;
 
 			while (true) {
-				if (j >= i / 16) {
+				if (j >= (i / 16)) {
 					if (worldIn.isAirBlock(blockpos1)) {
 						if (rand.nextInt(8) == 0) {
 							worldIn.getBiome(blockpos1).plantFlower(worldIn, rand, blockpos1);
@@ -79,9 +79,9 @@ public class BlockInfestedFarmland extends BlockMod implements IGrowable {
 					break;
 				}
 
-				blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
+				blockpos1 = blockpos1.add(rand.nextInt(3) - 1, ((rand.nextInt(3) - 1) * rand.nextInt(3)) / 2, rand.nextInt(3) - 1);
 
-				if (worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.infested_farmland || worldIn.getBlockState(blockpos1).isNormalCube()) {
+				if ((worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.infested_farmland) || worldIn.getBlockState(blockpos1).isNormalCube()) {
 					break;
 				}
 

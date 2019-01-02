@@ -4,6 +4,7 @@ import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.BlockBush;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

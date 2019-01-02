@@ -1,5 +1,9 @@
 package com.covens.common.block.natural.plants;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.ModBlocks;
@@ -7,6 +11,7 @@ import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.SoundType;
@@ -25,9 +30,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.Random;
-
 // FIXME placement (try and place it under a dangling piece while not connected laterally to any block)
 public class BlockMoss extends BlockVine implements IModelRegister {
 
@@ -38,7 +40,7 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 		this.setRegistryName(LibMod.MOD_ID, name);
 		this.setTranslationKey(LibBlockName.SPANISH_MOSS);
 		this.setSoundType(SoundType.PLANT);
-		this.setTickRandomly(!terminalPiece);
+		this.setTickRandomly(!this.terminalPiece);
 		if (terminal) {
 			this.setCreativeTab(null);
 		} else {
@@ -55,7 +57,7 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if (!worldIn.isRemote && !terminalPiece && worldIn.isAirBlock(pos.down())) {
+		if (!worldIn.isRemote && !this.terminalPiece && worldIn.isAirBlock(pos.down())) {
 			IBlockState newState = (rand.nextInt(3) == 0 ? ModBlocks.spanish_moss_end : ModBlocks.spanish_moss).getDefaultState();
 			newState = newState.withProperty(UP, state.getValue(UP));
 			newState = newState.withProperty(NORTH, state.getValue(NORTH));
@@ -68,7 +70,7 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 
 	@Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-		if (!worldIn.isRemote && stack.getItem() == ModItems.boline && !terminalPiece) {
+		if (!worldIn.isRemote && (stack.getItem() == ModItems.boline) && !this.terminalPiece) {
 			player.addStat(StatList.getBlockStats(this));
 			spawnAsEntity(worldIn, pos, new ItemStack(ModBlocks.spanish_moss, 1, 0));
 		}
@@ -84,7 +86,7 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 			IBlockState upper = worldIn.getBlockState(pos.up());
 			for (EnumFacing f : EnumFacing.HORIZONTALS) {
 				PropertyBool visualSide = getPropertyFor(f);
-				if (canAttachTo(worldIn, pos.offset(f), f.getOpposite()) || (upper.getBlock() == ModBlocks.spanish_moss && upper.getValue(visualSide) && state.getValue(visualSide))) {
+				if (this.canAttachTo(worldIn, pos.offset(f), f.getOpposite()) || ((upper.getBlock() == ModBlocks.spanish_moss) && upper.getValue(visualSide) && state.getValue(visualSide))) {
 					foundValidAttachment = true;
 					if (!newState.getValue(visualSide)) {
 						newState = newState.withProperty(visualSide, true);
@@ -97,7 +99,7 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 					}
 				}
 			}
-			if (canAttachTo(worldIn, pos.up(), EnumFacing.DOWN)) {
+			if (this.canAttachTo(worldIn, pos.up(), EnumFacing.DOWN)) {
 				foundValidAttachment = true;
 			} else {
 				if (newState.getValue(UP)) {
@@ -116,9 +118,9 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 	@Override
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
 
-		if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
+		if ((side == EnumFacing.UP) || (side == EnumFacing.DOWN)) {
 			for (EnumFacing f : EnumFacing.HORIZONTALS) {
-				if (canAttachTo(worldIn, pos.offset(f), f.getOpposite())) {
+				if (this.canAttachTo(worldIn, pos.offset(f), f.getOpposite())) {
 					return true;
 				}
 			}
@@ -151,7 +153,7 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 		}
 		for (EnumFacing f : EnumFacing.HORIZONTALS) {
 			PropertyBool side = getPropertyFor(f);
-			if (canAttachTo(worldIn, pos.offset(f), f.getOpposite()) || (worldIn.getBlockState(pos.up()).getBlock() == ModBlocks.spanish_moss && worldIn.getBlockState(pos.up()).getValue(side))) {
+			if (this.canAttachTo(worldIn, pos.offset(f), f.getOpposite()) || ((worldIn.getBlockState(pos.up()).getBlock() == ModBlocks.spanish_moss) && worldIn.getBlockState(pos.up()).getValue(side))) {
 				state = state.withProperty(side, true);
 			}
 		}

@@ -7,6 +7,7 @@
 package com.covens.common.content.spell.spells;
 
 import com.covens.common.content.spell.Spell;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;

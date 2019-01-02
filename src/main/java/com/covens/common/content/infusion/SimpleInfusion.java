@@ -2,6 +2,7 @@ package com.covens.common.content.infusion;
 
 import com.covens.api.infusion.IInfusion;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.util.ResourceLocation;
 
 public class SimpleInfusion implements IInfusion {
@@ -10,20 +11,20 @@ public class SimpleInfusion implements IInfusion {
 	private int dimension;
 
 	public SimpleInfusion(String name, int dim) {
-		dimension = dim;
-		setRegistryName(new ResourceLocation(LibMod.MOD_ID, "infusion_" + name));
-		texture = new ResourceLocation(LibMod.MOD_ID, "textures/gui/energy_" + name + ".png");
+		this.dimension = dim;
+		this.setRegistryName(new ResourceLocation(LibMod.MOD_ID, "infusion_" + name));
+		this.texture = new ResourceLocation(LibMod.MOD_ID, "textures/gui/energy_" + name + ".png");
 	}
 
 	@Override
 	public IInfusion setRegistryName(ResourceLocation name) {
-		rl = name;
+		this.rl = name;
 		return this;
 	}
 
 	@Override
 	public ResourceLocation getRegistryName() {
-		return rl;
+		return this.rl;
 	}
 
 	@Override
@@ -33,12 +34,12 @@ public class SimpleInfusion implements IInfusion {
 
 	@Override
 	public int getDimensionAffinity() {
-		return dimension;
+		return this.dimension;
 	}
 
 	@Override
 	public ResourceLocation getTexture() {
-		return texture;
+		return this.texture;
 	}
 
 }

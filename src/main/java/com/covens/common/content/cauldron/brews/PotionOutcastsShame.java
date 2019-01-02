@@ -20,7 +20,7 @@ public class PotionOutcastsShame extends GenericBrewDamageVS {
 
 	@Override
 	protected float getDamage(int amplifier) {
-		return 2 + amplifier * 1.5f;
+		return 2 + (amplifier * 1.5f);
 	}
 
 }

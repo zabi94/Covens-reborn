@@ -1,10 +1,15 @@
 package com.covens.common.block.tiles;
 
+import static net.minecraft.block.BlockHorizontal.FACING;
+
+import java.util.Random;
+
 import com.covens.client.fx.ParticleF;
 import com.covens.common.Covens;
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.tile.tiles.TileEntityApiary;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,14 +25,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Random;
-
-import static net.minecraft.block.BlockHorizontal.FACING;
-
 /**
- * This class was created by Joseph on 3/4/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Joseph on 3/4/2017. It's distributed as part of
+ * Covens under the MIT license.
  */
 public class BlockApiary extends BlockModTileEntity {
 
@@ -35,17 +35,17 @@ public class BlockApiary extends BlockModTileEntity {
 
 	public BlockApiary() {
 		super(LibBlockName.APIARY, Material.WOOD);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		setSoundType(SoundType.WOOD);
-		setResistance(2F);
-		setHardness(2F);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setSoundType(SoundType.WOOD);
+		this.setResistance(2F);
+		this.setHardness(2F);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		final EnumFacing facing = EnumFacing.byHorizontalIndex(meta);
-		return getDefaultState().withProperty(FACING, facing);
+		return this.getDefaultState().withProperty(FACING, facing);
 	}
 
 	@Override

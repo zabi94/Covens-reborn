@@ -4,6 +4,7 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -17,9 +18,8 @@ public class ModOvenSmeltingRecipes {
 		final ItemStack ash = new ItemStack(ModItems.wood_ash);
 		final ItemStack cloudy_oil = new ItemStack(ModItems.fume, 1, ItemFumes.Type.cloudy_oil.ordinal());
 
-		//TODO: modify the fumeChances
-		OvenSmeltingRecipe.REGISTRY.registerAll(
-				new OvenSmeltingRecipe(rl("sapling_0"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.oak_spirit.ordinal()), 0.85f), //
+		// TODO: modify the fumeChances
+		OvenSmeltingRecipe.REGISTRY.registerAll(new OvenSmeltingRecipe(rl("sapling_0"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.oak_spirit.ordinal()), 0.85f), //
 				new OvenSmeltingRecipe(rl("sapling_1"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.spruce_heart.ordinal()), 0.85f), //
 				new OvenSmeltingRecipe(rl("sapling_2"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 2)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.birch_soul.ordinal()), 0.85f), //
 				new OvenSmeltingRecipe(rl("sapling_3"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 3)), ash, cloudy_oil, 0.85f), //

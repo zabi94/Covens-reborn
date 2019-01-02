@@ -1,5 +1,10 @@
 package com.covens.common.block.misc;
 
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
+import javax.annotation.Nullable;
 
 import com.covens.api.CovensAPI;
 import com.covens.common.block.BlockMod;
@@ -10,6 +15,7 @@ import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,7 +32,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -38,32 +48,30 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 /**
- * This class was created by BerciTheBeast on 27.3.2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by BerciTheBeast on 27.3.2017. It's distributed as
+ * part of Covens under the MIT license.
  */
-@SuppressWarnings({"WeakerAccess", "deprecation"})
+@SuppressWarnings({
+		"WeakerAccess", "deprecation"
+})
 public class BlockSaltBarrier extends BlockMod {
 
 	public static final PropertyEnum<BlockSaltBarrier.EnumAttachPosition> NORTH = PropertyEnum.create("north", BlockSaltBarrier.EnumAttachPosition.class);
 	public static final PropertyEnum<BlockSaltBarrier.EnumAttachPosition> EAST = PropertyEnum.create("east", BlockSaltBarrier.EnumAttachPosition.class);
 	public static final PropertyEnum<BlockSaltBarrier.EnumAttachPosition> SOUTH = PropertyEnum.create("south", BlockSaltBarrier.EnumAttachPosition.class);
 	public static final PropertyEnum<BlockSaltBarrier.EnumAttachPosition> WEST = PropertyEnum.create("west", BlockSaltBarrier.EnumAttachPosition.class);
-	private static final AxisAlignedBB[] SALT_BARRIER_AABB = new AxisAlignedBB[]{new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D)};
+	private static final AxisAlignedBB[] SALT_BARRIER_AABB = new AxisAlignedBB[] {
+			new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.8125D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.8125D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.1875D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.1875D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 0.8125D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D)
+	};
 	private static final AxisAlignedBB wall = new AxisAlignedBB(0, -5, 0, 1, 5, 1);
 	private final Set<BlockPos> blocksNeedingUpdate = Sets.newHashSet();
 
 	public BlockSaltBarrier() {
 		super(LibBlockName.SALT_BARRIER, Material.CIRCUITS);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, BlockSaltBarrier.EnumAttachPosition.NONE).withProperty(EAST, BlockSaltBarrier.EnumAttachPosition.NONE).withProperty(SOUTH, BlockSaltBarrier.EnumAttachPosition.NONE).withProperty(WEST, BlockSaltBarrier.EnumAttachPosition.NONE));
-		setSoundType(SoundType.CLOTH);
-		setCreativeTab(null);
+		this.setSoundType(SoundType.CLOTH);
+		this.setCreativeTab(null);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -83,19 +91,19 @@ public class BlockSaltBarrier extends BlockMod {
 		final boolean flag2 = state.getValue(SOUTH) != BlockSaltBarrier.EnumAttachPosition.NONE;
 		final boolean flag3 = state.getValue(WEST) != BlockSaltBarrier.EnumAttachPosition.NONE;
 
-		if (flag || flag2 && !flag1 && !flag3) {
+		if (flag || (flag2 && !flag1 && !flag3)) {
 			i |= 1 << EnumFacing.NORTH.getHorizontalIndex();
 		}
 
-		if (flag1 || flag3 && !flag && !flag2) {
+		if (flag1 || (flag3 && !flag && !flag2)) {
 			i |= 1 << EnumFacing.EAST.getHorizontalIndex();
 		}
 
-		if (flag2 || flag && !flag1 && !flag3) {
+		if (flag2 || (flag && !flag1 && !flag3)) {
 			i |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
 		}
 
-		if (flag3 || flag1 && !flag && !flag2) {
+		if (flag3 || (flag1 && !flag && !flag2)) {
 			i |= 1 << EnumFacing.WEST.getHorizontalIndex();
 		}
 
@@ -129,7 +137,7 @@ public class BlockSaltBarrier extends BlockMod {
 			final IBlockState iblockstate1 = worldIn.getBlockState(pos.up());
 
 			if (!iblockstate1.isNormalCube()) {
-				final boolean flag = worldIn.getBlockState(blockpos).isSideSolid(worldIn, blockpos, EnumFacing.UP) || worldIn.getBlockState(blockpos).getBlock() == Blocks.GLOWSTONE;
+				final boolean flag = worldIn.getBlockState(blockpos).isSideSolid(worldIn, blockpos, EnumFacing.UP) || (worldIn.getBlockState(blockpos).getBlock() == Blocks.GLOWSTONE);
 
 				if (flag && canConnectUpwardsTo(worldIn, blockpos.up())) {
 					if (iblockstate.isBlockNormalCube()) {
@@ -281,11 +289,11 @@ public class BlockSaltBarrier extends BlockMod {
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
 		if (entityIn instanceof EntityLivingBase) {
 			EnumCreatureAttribute attr = ((EntityLivingBase) entityIn).getCreatureAttribute();
-			if (attr == EnumCreatureAttribute.UNDEAD || attr == CovensAPI.getAPI().DEMON || attr == CovensAPI.getAPI().SPIRIT) {
+			if ((attr == EnumCreatureAttribute.UNDEAD) || (attr == CovensAPI.getAPI().DEMON) || (attr == CovensAPI.getAPI().SPIRIT)) {
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
 			}
 		}
-		if (entityIn instanceof EntityBlaze || entityIn instanceof EntityGhast || entityIn instanceof EntityVex || entityIn instanceof EntityBatSwarm) {
+		if ((entityIn instanceof EntityBlaze) || (entityIn instanceof EntityGhast) || (entityIn instanceof EntityVex) || (entityIn instanceof EntityBatSwarm)) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
 		}
 		if ((entityIn instanceof EntityPlayer) && !((EntityPlayer) entityIn).isCreative() && !entityIn.getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt()) {
@@ -306,7 +314,7 @@ public class BlockSaltBarrier extends BlockMod {
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos, EnumFacing.UP) || worldIn.getBlockState(pos.down()).getBlock() == Blocks.GLOWSTONE;
+		return worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos, EnumFacing.UP) || (worldIn.getBlockState(pos.down()).getBlock() == Blocks.GLOWSTONE);
 	}
 
 	@Override
@@ -321,15 +329,13 @@ public class BlockSaltBarrier extends BlockMod {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onBlockBreaking(BlockEvent.BreakEvent event) {
-		if (!event.getPlayer().getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt() && (event.getState().getBlock() == this || event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == this)) {
+		if (!event.getPlayer().getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt() && ((event.getState().getBlock() == this) || (event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == this))) {
 			event.setCanceled(true);
 		}
 	}
 
 	private enum EnumAttachPosition implements IStringSerializable {
-		UP("up"),
-		SIDE("side"),
-		NONE("none");
+		UP("up"), SIDE("side"), NONE("none");
 
 		private final String name;
 

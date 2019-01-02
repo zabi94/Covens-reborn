@@ -26,8 +26,8 @@ public class BlockPurifyingEarth extends BlockMod {
 
 	public BlockPurifyingEarth() {
 		super(LibBlockName.PURIFYING_EARTH, Material.GROUND);
-		setResistance(1F);
-		setHardness(1F);
+		this.setResistance(1F);
+		this.setHardness(1F);
 		this.setSoundType(SoundType.GROUND);
 	}
 
@@ -37,11 +37,10 @@ public class BlockPurifyingEarth extends BlockMod {
 		return FULL_BLOCK_AABB;
 	}
 
-
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		EnumCreatureAttribute attr = ((EntityLivingBase) entityIn).getCreatureAttribute();
-		if (attr == EnumCreatureAttribute.UNDEAD || attr == CovensAPI.getAPI().DEMON || attr == CovensAPI.getAPI().SPIRIT || isTransformedPlayer(entityIn)) {
+		if ((attr == EnumCreatureAttribute.UNDEAD) || (attr == CovensAPI.getAPI().DEMON) || (attr == CovensAPI.getAPI().SPIRIT) || this.isTransformedPlayer(entityIn)) {
 			if (!entityIn.isBurning()) {
 				entityIn.setFire(1500);
 			}

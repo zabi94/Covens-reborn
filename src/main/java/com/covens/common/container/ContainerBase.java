@@ -12,12 +12,12 @@ public class ContainerBase extends Container {
 	protected void addPlayerSlots(InventoryPlayer playerInventory, int x, int y) {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, x + j * 18, y + i * 18));
+				this.addSlotToContainer(new Slot(playerInventory, j + (i * 9) + 9, x + (j * 18), y + (i * 18)));
 			}
 		}
 
 		for (int i = 0; i < 9; ++i) {
-			addSlotToContainer(new Slot(playerInventory, i, x + i * 18, y + 58));
+			this.addSlotToContainer(new Slot(playerInventory, i, x + (i * 18), y + 58));
 		}
 	}
 
@@ -26,12 +26,12 @@ public class ContainerBase extends Container {
 		int y = 84;
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, x + j * 18, y + i * 18));
+				this.addSlotToContainer(new Slot(playerInventory, j + (i * 9) + 9, x + (j * 18), y + (i * 18)));
 			}
 		}
 
 		for (int i = 0; i < 9; ++i) {
-			addSlotToContainer(new Slot(playerInventory, i, x + i * 18, y + 58));
+			this.addSlotToContainer(new Slot(playerInventory, i, x + (i * 18), y + 58));
 		}
 	}
 
@@ -47,9 +47,9 @@ public class ContainerBase extends Container {
 
 	/*
 	 * An array with all the ids for integers to sync in gui (fuel, progress...)
-	 * Intended use is to have an int array as a nonstatic field in the container class
-	 * ContainerBase::updateField should only update that array.
-	 * A gui object should then read the array instead of a dedicated field to update the GUI
+	 * Intended use is to have an int array as a nonstatic field in the container
+	 * class ContainerBase::updateField should only update that array. A gui object
+	 * should then read the array instead of a dedicated field to update the GUI
 	 */
 	protected int[] getFieldsToSync() {
 		return new int[0];
@@ -58,16 +58,17 @@ public class ContainerBase extends Container {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		this.listeners.forEach(l -> sendChangesToListener(l));
+		this.listeners.forEach(l -> this.sendChangesToListener(l));
 	}
 
 	private void sendChangesToListener(IContainerListener l) {
-		for (int i = 0; i < getFieldsToSync().length; i++) {
-			l.sendWindowProperty(this, i, getUpdatedFieldData(i));
+		for (int i = 0; i < this.getFieldsToSync().length; i++) {
+			l.sendWindowProperty(this, i, this.getUpdatedFieldData(i));
 		}
 	}
 
-	// Usually called on servers, given an ID, this should return the corresponding value
+	// Usually called on servers, given an ID, this should return the corresponding
+	// value
 	public int getUpdatedFieldData(int id) {
 		return 0;
 	}
@@ -75,13 +76,13 @@ public class ContainerBase extends Container {
 	@Override
 	public void addListener(IContainerListener listener) {
 		super.addListener(listener);
-		sendChangesToListener(listener);
+		this.sendChangesToListener(listener);
 	}
 
 	@Override
 	public void updateProgressBar(int id, int data) {
 		super.updateProgressBar(id, data);
-		updateField(id, data);
+		this.updateField(id, data);
 	}
 
 	// Called on clients, do whatever you need to do with the sync data

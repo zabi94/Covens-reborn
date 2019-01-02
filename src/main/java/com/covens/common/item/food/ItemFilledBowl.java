@@ -1,8 +1,12 @@
 package com.covens.common.item.food;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,22 +19,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.List;
-
 public class ItemFilledBowl extends ItemModFood {
 
 	public ItemFilledBowl() {
 		super(LibItemName.FILLED_BOWL, 0, 0f, true);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
-		setMaxStackSize(16);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setMaxStackSize(16);
 	}
 
 	@Override
 	public void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
 		super.onFoodEaten(stack, worldIn, player);
 		if (stack.getTagCompound() == null) {
-			stack.setTagCompound(new NBTTagCompound()); //not really supposed to happen ingame since you only get the stews with NBT values assigned but it prevents crashing
+			stack.setTagCompound(new NBTTagCompound()); // not really supposed to happen ingame since you only get the stews with NBT
+														// values assigned but it prevents crashing
 		}
 		final FoodStats foodStats = player.getFoodStats();
 		foodStats.setFoodLevel(foodStats.getFoodLevel() + stack.getTagCompound().getInteger("hunger"));

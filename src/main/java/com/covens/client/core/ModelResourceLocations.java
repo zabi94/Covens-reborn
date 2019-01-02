@@ -2,6 +2,7 @@ package com.covens.client.core;
 
 import com.covens.common.lib.LibItemName;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;

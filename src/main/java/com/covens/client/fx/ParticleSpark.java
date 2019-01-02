@@ -10,9 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by Arekkuusu on 14/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 14/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 @SideOnly(Side.CLIENT)
 class ParticleSpark extends Particle {
@@ -24,16 +23,16 @@ class ParticleSpark extends Particle {
 		this.motionX *= 0.10000000149011612D;
 		this.motionY *= 0.10000000149011612D;
 		this.motionZ *= 0.10000000149011612D;
-		this.motionX += (rand.nextBoolean() ? 0.1D : -0.1D) + rand.nextFloat() * (rand.nextBoolean() ? 0.1D : -0.1D);
-		this.motionY += rand.nextFloat() * 0.2D;
-		this.motionZ += (rand.nextBoolean() ? 0.1D : -0.1D) + rand.nextFloat() * (rand.nextBoolean() ? 0.1D : -0.1D);
-		float r = world.rand.nextFloat() / 2f + 0.5F;
-		float g = world.rand.nextFloat() / 2f + 0.5F;
-		float b = world.rand.nextFloat() / 2f + 0.5F;
-		setRBGColorF(r, g, b);
+		this.motionX += (this.rand.nextBoolean() ? 0.1D : -0.1D) + (this.rand.nextFloat() * (this.rand.nextBoolean() ? 0.1D : -0.1D));
+		this.motionY += this.rand.nextFloat() * 0.2D;
+		this.motionZ += (this.rand.nextBoolean() ? 0.1D : -0.1D) + (this.rand.nextFloat() * (this.rand.nextBoolean() ? 0.1D : -0.1D));
+		float r = (world.rand.nextFloat() / 2f) + 0.5F;
+		float g = (world.rand.nextFloat() / 2f) + 0.5F;
+		float b = (world.rand.nextFloat() / 2f) + 0.5F;
+		this.setRBGColorF(r, g, b);
 		this.particleScale *= 0.25F;
 		this.oSize = this.particleScale;
-		this.particleMaxAge = (int) (6.0D / (Math.random() * 0.8D + 0.05D));
+		this.particleMaxAge = (int) (6.0D / ((Math.random() * 0.8D) + 0.05D));
 		this.setParticleTextureIndex(65);
 	}
 
@@ -62,11 +61,11 @@ class ParticleSpark extends Particle {
 
 	@Override
 	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-		float scale = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
+		float scale = ((this.particleAge + partialTicks) / this.particleMaxAge) * 32.0F;
 		scale = MathHelper.clamp(scale, 0.0F, 1.0F);
 		this.particleScale = this.oSize * scale;
 		super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
-		GlStateManager.color(getRedColorF(), getGreenColorF(), getBlueColorF(), 1.0F);
+		GlStateManager.color(this.getRedColorF(), this.getGreenColorF(), this.getBlueColorF(), 1.0F);
 	}
 
 	@SideOnly(Side.CLIENT)

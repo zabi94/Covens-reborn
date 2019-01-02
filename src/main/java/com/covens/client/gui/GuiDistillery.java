@@ -3,6 +3,7 @@ package com.covens.client.gui;
 import com.covens.client.ResourceLocations;
 import com.covens.common.container.ContainerDistillery;
 import com.covens.common.tile.tiles.TileEntityDistillery;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -12,7 +13,7 @@ public class GuiDistillery extends GuiContainer {
 
 	public GuiDistillery(ContainerDistillery container) {
 		super(container);
-		containerDistillery = container;
+		this.containerDistillery = container;
 	}
 
 	@Override
@@ -29,15 +30,15 @@ public class GuiDistillery extends GuiContainer {
 		final int i = (this.width - this.xSize) / 2;
 		final int j = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-		if (containerDistillery.totalTime >= 0) {
+		if (this.containerDistillery.totalTime >= 0) {
 			int l = this.getCookProgress(24);
 			this.drawTexturedModalRect(i + 76, j + 16, 176, 0, l + 1, 17);
 		}
-		int burnProgress = 14 - (int) Math.ceil((14 * (containerDistillery.burnTime / (double) TileEntityDistillery.BURN_TIME)));
+		int burnProgress = 14 - (int) Math.ceil((14 * (this.containerDistillery.burnTime / (double) TileEntityDistillery.BURN_TIME)));
 		this.drawTexturedModalRect(i + 81, j + 36 + burnProgress, 242, 0 + burnProgress, 14, 14 - burnProgress);
 	}
 
 	public int getCookProgress(int pixels) {
-		return containerDistillery.progress * pixels / containerDistillery.totalTime;
+		return (this.containerDistillery.progress * pixels) / this.containerDistillery.totalTime;
 	}
 }

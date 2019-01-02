@@ -1,11 +1,12 @@
 package com.covens.common.content.cauldron.behaviours;
 
+import java.util.Random;
+
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
-
-import java.util.Random;
 
 public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
@@ -14,14 +15,14 @@ public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
 	@Override
 	public void setCauldron(TileEntityCauldron tile) {
-		cauldron = tile;
+		this.cauldron = tile;
 	}
 
 	@Override
 	public void handleParticles(boolean isActiveBehaviour) {
 		if (isActiveBehaviour) {
-			Random r = cauldron.getWorld().rand;
-			cauldron.getWorld().spawnParticle(EnumParticleTypes.SMOKE_NORMAL, cauldron.getPos().getX() + 0.4 + 0.2 * r.nextDouble(), cauldron.getPos().getY() + 0.5, cauldron.getPos().getZ() + 0.4 + 0.2 * r.nextDouble(), 0, 0, 0);
+			Random r = this.cauldron.getWorld().rand;
+			this.cauldron.getWorld().spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.cauldron.getPos().getX() + 0.4 + (0.2 * r.nextDouble()), this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.4 + (0.2 * r.nextDouble()), 0, 0, 0);
 		}
 	}
 
@@ -32,12 +33,12 @@ public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
 	@Override
 	public void statusChanged(boolean isActiveBehaviour) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void update(boolean isActiveBehaviour) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -47,22 +48,22 @@ public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public class CauldronBehaviourFailing implements ICauldronBehaviour {
 
 	@Override
 	public void onDeactivation() {
-		//NO-OP
+		// NO-OP
 	}
 
 }

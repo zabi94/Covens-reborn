@@ -1,11 +1,14 @@
 package com.covens.common.entity;
 
+import java.util.List;
+
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.ApplicationType;
 import com.covens.common.item.ModItems;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.google.common.base.Predicate;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -20,11 +23,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 public class EntityBrew extends EntityThrowable {
 
-	public static final Predicate<EntityLivingBase> WATER_SENSITIVE = (e -> (e instanceof EntityEnderman || e instanceof EntityBlaze));
+	public static final Predicate<EntityLivingBase> WATER_SENSITIVE = (e -> ((e instanceof EntityEnderman) || (e instanceof EntityBlaze)));
 	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack>createKey(EntityBrew.class, DataSerializers.ITEM_STACK);
 	private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityBrew.class, DataSerializers.VARINT);
 
@@ -67,7 +68,7 @@ public class EntityBrew extends EntityThrowable {
 	}
 
 	public int getColor() {
-		return dataManager.get(COLOR);
+		return this.dataManager.get(COLOR);
 	}
 
 	@Override
@@ -75,32 +76,32 @@ public class EntityBrew extends EntityThrowable {
 		if (!this.world.isRemote) {
 			ItemStack itemstack = this.getBrew();
 			BrewData data = BrewData.fromStack(itemstack);
-			data.applyInWorld(world, result.hitVec.x, result.hitVec.y, result.hitVec.z, result.sideHit, this.getThrower());
+			data.applyInWorld(this.world, result.hitVec.x, result.hitVec.y, result.hitVec.z, result.sideHit, this.getThrower());
 			if (this.isLingering()) {
-				EntityLingeringBrew entBrew = new EntityLingeringBrew(world, result.hitVec.x, result.hitVec.y, result.hitVec.z);
+				EntityLingeringBrew entBrew = new EntityLingeringBrew(this.world, result.hitVec.x, result.hitVec.y, result.hitVec.z);
 				entBrew.setBrew(itemstack);
 				data.setupLingeringCloud(entBrew);
-				entBrew.setOwner(getThrower());
+				entBrew.setOwner(this.getThrower());
 				entBrew.setRadiusOnUse(0);
-				world.spawnEntity(entBrew);
+				this.world.spawnEntity(entBrew);
 			} else {
-				applySplash(data);
+				this.applySplash(data);
 			}
 
 			int i = data.getEffects().stream().filter(be -> be.getPotion() != null).map(be -> be.getPotion()).anyMatch(p -> p.isInstant()) ? 2007 : 2002;
-			this.world.playEvent(i, new BlockPos(this), getColor());
+			this.world.playEvent(i, new BlockPos(this), this.getColor());
 			this.setDead();
 		}
 	}
 
 	private void applySplash(BrewData data) {
 		int size = (int) data.getEffects().stream().mapToDouble(be -> be.getModifierList().getLevel(DefaultModifiers.RADIUS).orElse(0)).average().orElse(0);
-		AxisAlignedBB axisalignedbb = this.getEntityBoundingBox().grow(size + 4.0D, size / 2 + 2.0D, size + 4.0D);
+		AxisAlignedBB axisalignedbb = this.getEntityBoundingBox().grow(size + 4.0D, (size / 2) + 2.0D, size + 4.0D);
 		List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 		for (EntityLivingBase entitylivingbase : list) {
 			if (entitylivingbase.canBeHitWithPotion()) {
-				if (this.getDistanceSq(entitylivingbase) < 16.0D + size) {
-					data.applyToEntity(entitylivingbase, this, getThrower(), ApplicationType.GENERAL);
+				if (this.getDistanceSq(entitylivingbase) < (16.0D + size)) {
+					data.applyToEntity(entitylivingbase, this, this.getThrower(), ApplicationType.GENERAL);
 				}
 			}
 		}

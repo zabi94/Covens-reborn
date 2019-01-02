@@ -3,6 +3,7 @@ package com.covens.common.block.natural;
 import com.covens.common.block.BlockMod;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -10,17 +11,16 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 
 /**
- * This class was created by Joseph on 3/4/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Joseph on 3/4/2017. It's distributed as part of
+ * Covens under the MIT license.
  */
 public class BlockSilverOre extends BlockMod {
 
 	public BlockSilverOre() {
 		super(LibBlockName.SILVER_ORE, Material.ROCK);
-		setResistance(3F);
-		setHardness(3F);
-		setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB);
+		this.setResistance(3F);
+		this.setHardness(3F);
+		this.setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB);
 	}
 
 	@Override

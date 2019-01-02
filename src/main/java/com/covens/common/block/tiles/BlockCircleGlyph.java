@@ -43,23 +43,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 
-
 	protected static final AxisAlignedBB FLAT_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0025D, 1.0D);
 
 	public BlockCircleGlyph(String id) {
 		super(id, Material.GRASS);
-		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(BlockHorizontal.FACING, EnumFacing.SOUTH)
-				.withProperty(StateProperties.GLYPH_TYPE, EnumGlyphType.NORMAL)
-				.withProperty(StateProperties.LETTER, 0)
-				);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(BlockHorizontal.FACING, EnumFacing.SOUTH).withProperty(StateProperties.GLYPH_TYPE, EnumGlyphType.NORMAL).withProperty(StateProperties.LETTER, 0));
 		this.setHardness(5);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		if (getStateFromMeta(meta).getValue(StateProperties.GLYPH_TYPE).equals(EnumGlyphType.GOLDEN))
+		if (this.getStateFromMeta(meta).getValue(StateProperties.GLYPH_TYPE).equals(EnumGlyphType.GOLDEN)) {
 			return new TileEntityGlyph();
+		}
 		return null;
 	}
 
@@ -81,8 +77,9 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		//Dont change the actual bounding box to the offset, as that's only a visual thing.
-		//This is used on the server
+		// Dont change the actual bounding box to the offset, as that's only a visual
+		// thing.
+		// This is used on the server
 		return FLAT_AABB;
 	}
 
@@ -136,7 +133,7 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 
 	@Override
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
-		return super.canPlaceBlockOnSide(worldIn, pos, side) && side == EnumFacing.UP;
+		return super.canPlaceBlockOnSide(worldIn, pos, side) && (side == EnumFacing.UP);
 	}
 
 	@Override
@@ -163,28 +160,26 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 		return BlockFaceShape.UNDEFINED;
 	}
 
-
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		int color = meta & 3;
 		int dir = (meta >> 2) & 3;
-		return this.getDefaultState()
-				.withProperty(StateProperties.GLYPH_TYPE, EnumGlyphType.values()[color])
-				.withProperty(BlockHorizontal.FACING, EnumFacing.HORIZONTALS[dir]);
+		return this.getDefaultState().withProperty(StateProperties.GLYPH_TYPE, EnumGlyphType.values()[color]).withProperty(BlockHorizontal.FACING, EnumFacing.HORIZONTALS[dir]);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int color = state.getValue(StateProperties.GLYPH_TYPE).ordinal();
 		int dir = state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
-		return (dir << 2) | color; //Bitwise that's DDCC, where DD is either 00=south, 01=... and CC is 00=normal, 01=golden...
+		return (dir << 2) | color; // Bitwise that's DDCC, where DD is either 00=south, 01=... and CC is 00=normal,
+									// 01=golden...
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		int letter = Math.abs(pos.getX() + pos.getZ() * 2) % 6;
+		int letter = Math.abs(pos.getX() + (pos.getZ() * 2)) % 6;
 		return state.withProperty(StateProperties.LETTER, letter);
 	}
 
@@ -205,47 +200,45 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 		double d0 = pos.getX() + 0.5D;
 		double d1 = pos.getY() + 0.05D;
 		double d2 = pos.getZ() + 0.5D;
-		EnumParticleTypes part = getParticleFor(stateIn);
+		EnumParticleTypes part = this.getParticleFor(stateIn);
 		if (part != null) {
 			double spreadX = rand.nextGaussian() / 3;
 			double spreadZ = rand.nextGaussian() / 3;
 			worldIn.spawnParticle(part, d0 + spreadX, d1, d2 + spreadZ, 0.0D, 0.0D, 0.0D, new int[0]);
 		}
 		TileEntityGlyph te = (TileEntityGlyph) worldIn.getTileEntity(pos);
-		if (te != null && te.hasRunningRitual()) {
+		if ((te != null) && te.hasRunningRitual()) {
 			double spreadX = rand.nextGaussian() * 0.4;
 			double spreadZ = rand.nextGaussian() * 0.4;
-			Minecraft.getMinecraft().effectRenderer.addEffect(
-					new ParticleEndRod(worldIn, d0 + spreadX, d1, d2 + spreadZ, 0, 0.02 + 0.1 * rand.nextDouble(), 0)
-					);
+			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleEndRod(worldIn, d0 + spreadX, d1, d2 + spreadZ, 0, 0.02 + (0.1 * rand.nextDouble()), 0));
 			if (ModConfig.CLIENT.allGlyphParticles) {
-				EnumParticleTypes p = getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.small.get(0)[0], 0, TileEntityGlyph.small.get(0)[1])));
-				if (p!=null) {
-					for (int[] coo:TileEntityGlyph.small) {
+				EnumParticleTypes p = this.getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.small.get(0)[0], 0, TileEntityGlyph.small.get(0)[1])));
+				if (p != null) {
+					for (int[] coo : TileEntityGlyph.small) {
 						if (rand.nextInt(5) == 0) {
 							spreadX = rand.nextGaussian() * 0.4;
 							spreadZ = rand.nextGaussian() * 0.4;
-							worldIn.spawnParticle(p, pos.getX()+coo[0], pos.getY(), pos.getZ()+coo[1], 0, 0.05 + 0.1 * rand.nextDouble(), 0);
+							worldIn.spawnParticle(p, pos.getX() + coo[0], pos.getY(), pos.getZ() + coo[1], 0, 0.05 + (0.1 * rand.nextDouble()), 0);
 						}
 					}
 				}
-				p = getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.medium.get(0)[0], 0, TileEntityGlyph.medium.get(0)[1])));
-				if (p!=null) {
-					for (int[] coo:TileEntityGlyph.medium) {
+				p = this.getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.medium.get(0)[0], 0, TileEntityGlyph.medium.get(0)[1])));
+				if (p != null) {
+					for (int[] coo : TileEntityGlyph.medium) {
 						if (rand.nextInt(5) == 0) {
 							spreadX = rand.nextGaussian() * 0.4;
 							spreadZ = rand.nextGaussian() * 0.4;
-							worldIn.spawnParticle(p, pos.getX()+coo[0], pos.getY(), pos.getZ()+coo[1], 0, 0.05 + 0.1 * rand.nextDouble(), 0);
+							worldIn.spawnParticle(p, pos.getX() + coo[0], pos.getY(), pos.getZ() + coo[1], 0, 0.05 + (0.1 * rand.nextDouble()), 0);
 						}
 					}
 				}
-				p = getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.big.get(0)[0], 0, TileEntityGlyph.big.get(0)[1])));
-				if (p!=null) {
-					for (int[] coo:TileEntityGlyph.big) {
+				p = this.getParticleFor(worldIn.getBlockState(pos.add(TileEntityGlyph.big.get(0)[0], 0, TileEntityGlyph.big.get(0)[1])));
+				if (p != null) {
+					for (int[] coo : TileEntityGlyph.big) {
 						if (rand.nextInt(5) == 0) {
 							spreadX = rand.nextGaussian() * 0.4;
 							spreadZ = rand.nextGaussian() * 0.4;
-							worldIn.spawnParticle(p, pos.getX()+coo[0], pos.getY(), pos.getZ()+coo[1], 0, 0.05 + 0.1 * rand.nextDouble(), 0);
+							worldIn.spawnParticle(p, pos.getX() + coo[0], pos.getY(), pos.getZ() + coo[1], 0, 0.05 + (0.1 * rand.nextDouble()), 0);
 						}
 					}
 				}
@@ -253,15 +246,17 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 		}
 	}
 
-
 	@SideOnly(Side.CLIENT)
 	private EnumParticleTypes getParticleFor(IBlockState blockState) {
 		if (blockState.getBlock() == this) {
 			EnumGlyphType type = blockState.getValue(StateProperties.GLYPH_TYPE);
 			switch (type) {
-			case ENDER: return EnumParticleTypes.PORTAL;
-			case NETHER: return EnumParticleTypes.FLAME;
-			default: break;
+				case ENDER:
+					return EnumParticleTypes.PORTAL;
+				case NETHER:
+					return EnumParticleTypes.FLAME;
+				default:
+					break;
 			}
 		}
 		return null;
@@ -270,7 +265,9 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (!this.canPlaceBlockAt(worldIn, pos)) worldIn.destroyBlock(pos, false);
+		if (!this.canPlaceBlockAt(worldIn, pos)) {
+			worldIn.destroyBlock(pos, false);
+		}
 	}
 
 	@Override
@@ -291,6 +288,5 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 	public EnumOffsetType getOffsetType() {
 		return EnumOffsetType.XZ;
 	}
-
 
 }

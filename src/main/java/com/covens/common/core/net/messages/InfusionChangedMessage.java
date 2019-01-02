@@ -3,6 +3,7 @@ package com.covens.common.core.net.messages;
 import com.covens.api.CovensAPI;
 import com.covens.common.content.infusion.ModInfusions;
 import com.covens.common.core.net.SimpleMessage;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +17,7 @@ public class InfusionChangedMessage extends SimpleMessage<InfusionChangedMessage
 	public ResourceLocation infusion;
 
 	public InfusionChangedMessage(EntityPlayer p) {
-		infusion = CovensAPI.getAPI().getPlayerInfusion(p).getRegistryName();
+		this.infusion = CovensAPI.getAPI().getPlayerInfusion(p).getRegistryName();
 	}
 
 	public InfusionChangedMessage() {
@@ -26,7 +27,7 @@ public class InfusionChangedMessage extends SimpleMessage<InfusionChangedMessage
 	@SideOnly(Side.CLIENT)
 	public IMessage handleMessage(MessageContext context) {
 		Minecraft.getMinecraft().addScheduledTask(() -> {
-			CovensAPI.getAPI().setPlayerInfusion(Minecraft.getMinecraft().player, ModInfusions.REGISTRY.getValue(infusion));
+			CovensAPI.getAPI().setPlayerInfusion(Minecraft.getMinecraft().player, ModInfusions.REGISTRY.getValue(this.infusion));
 		});
 		return null;
 	}

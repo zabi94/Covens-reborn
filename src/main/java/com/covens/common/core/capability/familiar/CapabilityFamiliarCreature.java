@@ -16,49 +16,50 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class CapabilityFamiliarCreature extends SimpleCapability {
-	
+
 	@CapabilityInject(CapabilityFamiliarCreature.class)
 	public static final Capability<CapabilityFamiliarCreature> CAPABILITY = null;
 	public static final CapabilityFamiliarCreature DEFAULT_INSTANCE = new CapabilityFamiliarCreature();
-	
+
 	public UUID owner = new UUID(0, 0);
 	public String ownerName = "";
-	@DontSync public float bindingChance = 0.01f * rng.nextInt(10);
+	@DontSync
+	public float bindingChance = 0.01f * rng.nextInt(10);
 
 	public boolean hasOwner() {
-		return owner.getLeastSignificantBits() != 0 || owner.getMostSignificantBits() != 0;
+		return (this.owner.getLeastSignificantBits() != 0) || (this.owner.getMostSignificantBits() != 0);
 	}
-	
+
 	public void setOwner(EntityPlayer player) {
 		if (player == null) {
-			owner = new UUID(0, 0);
-			ownerName = "";
+			this.owner = new UUID(0, 0);
+			this.ownerName = "";
 		} else {
-			owner = EntityPlayer.getUUID(player.getGameProfile());
-			ownerName = player.getName();
+			this.owner = EntityPlayer.getUUID(player.getGameProfile());
+			this.ownerName = player.getName();
 		}
-		markDirty((byte) 1);
+		this.markDirty((byte) 1);
 	}
-	
+
 	@Nullable
 	public EntityPlayer getOwner() {
-		if (hasOwner()) {
-			return PlayerHelper.getPlayerAcrossDimensions(owner);
+		if (this.hasOwner()) {
+			return PlayerHelper.getPlayerAcrossDimensions(this.owner);
 		}
 		return null;
 	}
-	
+
 	@Nullable
 	public String getOwnerName() {
-		if (hasOwner()) {
-			return ownerName;
+		if (this.hasOwner()) {
+			return this.ownerName;
 		}
 		return null;
 	}
-	
+
 	@Override
 	public boolean isRelevantFor(Entity object) {
-		return (object instanceof EntityCreature || object instanceof IFamiliarEligible) && !(object instanceof IFamiliarUneligible);
+		return ((object instanceof EntityCreature) || (object instanceof IFamiliarEligible)) && !(object instanceof IFamiliarUneligible);
 	}
 
 	@Override

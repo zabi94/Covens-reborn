@@ -2,6 +2,7 @@ package com.covens.common.content.transformation.vampire;
 
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.capability.simple.SimpleCapability;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
@@ -28,41 +29,42 @@ public class CapabilityVampire extends SimpleCapability {
 
 	public void setNightVision(boolean b) {
 		boolean changed = false;
-		if (nightVision != b) {
+		if (this.nightVision != b) {
 			changed = true;
 		}
-		nightVision = b;
+		this.nightVision = b;
 		if (changed) {
-			markDirty((byte) 1);
+			this.markDirty((byte) 1);
 		}
 	}
 
 	public boolean addVampireBlood(int amount, EntityPlayer p) {
-		if (getBlood() >= getMaxBlood(p) && amount > 0)
+		if ((this.getBlood() >= this.getMaxBlood(p)) && (amount > 0)) {
 			return false;
-		if (amount + getBlood() < 0)
+		}
+		if ((amount + this.getBlood()) < 0) {
 			return false;
-		blood += amount;
-		markDirty((byte) 2);
+		}
+		this.blood += amount;
+		this.markDirty((byte) 2);
 		return true;
 	}
 
-
 	public int getBlood() {
-		return blood;
+		return this.blood;
 	}
 
 	public int getMaxBlood(EntityPlayer p) {
-		int max = 50 + 155 * p.getCapability(CapabilityTransformation.CAPABILITY, null).getLevel();
-		if (getBlood() > max) {
-			setBlood(max);
+		int max = 50 + (155 * p.getCapability(CapabilityTransformation.CAPABILITY, null).getLevel());
+		if (this.getBlood() > max) {
+			this.setBlood(max);
 		}
 		return max; // lvl 0: 50, lvl 5: 825, lvl 10: 1600
 	}
 
 	public void setBlood(int blood) {
 		this.blood = blood;
-		markDirty((byte) 2);
+		this.markDirty((byte) 2);
 	}
 
 }

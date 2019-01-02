@@ -2,6 +2,7 @@ package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.Covens;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;

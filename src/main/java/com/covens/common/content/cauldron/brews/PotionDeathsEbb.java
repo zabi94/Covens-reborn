@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityZombie;
@@ -25,7 +26,7 @@ public class PotionDeathsEbb extends BrewMod {
 				EntityZombie zombie = new EntityZombie(world);
 				zombie.setPosition(pos.getX(), pos.getY(), pos.getZ());
 				world.spawnEntity(zombie);
-				setZombieAI(zombie);
+				this.setZombieAI(zombie);
 			}
 		}
 	}
@@ -33,7 +34,7 @@ public class PotionDeathsEbb extends BrewMod {
 	@Override
 	public void affectEntity(Entity source, Entity indirectSource, EntityLivingBase elb, int amplifier, double health) {
 		if (elb instanceof EntityZombie) {
-			setZombieAI(elb);
+			this.setZombieAI(elb);
 		} else {
 			if (!elb.world.isRemote) {
 				int zombies = 1 + amplifier;
@@ -41,13 +42,13 @@ public class PotionDeathsEbb extends BrewMod {
 					EntityZombie zombie = new EntityZombie(elb.world);
 					zombie.setPosition(elb.posX, elb.posY, elb.posZ);
 					elb.world.spawnEntity(zombie);
-					setZombieAI(zombie);
+					this.setZombieAI(zombie);
 				}
 			}
 		}
 	}
 
 	private void setZombieAI(EntityLivingBase elb) {
-		elb.getName();//Placeholder code for codacy
+		elb.getName();// Placeholder code for codacy
 	}
 }

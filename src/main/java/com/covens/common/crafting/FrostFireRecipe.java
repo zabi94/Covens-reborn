@@ -1,7 +1,12 @@
 package com.covens.common.crafting;
 
+import java.util.Optional;
+import java.util.Random;
+import java.util.function.Supplier;
+
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,10 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
-
-import java.util.Optional;
-import java.util.Random;
-import java.util.function.Supplier;
 
 public class FrostFireRecipe extends IForgeRegistryEntry.Impl<FrostFireRecipe> {
 
@@ -42,6 +43,6 @@ public class FrostFireRecipe extends IForgeRegistryEntry.Impl<FrostFireRecipe> {
 	}
 
 	public ItemStack getOutput() {
-		return output.get();
+		return this.output.get();
 	}
 }

@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -17,8 +18,8 @@ public class PotionProjectileResistance extends BrewMod {
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event) {
 		PotionEffect pe = event.getEntityLiving().getActivePotionEffect(this);
-		if (pe != null && event.getSource().isProjectile() && event.getAmount() >= 2) {
-			float newAmount = event.getAmount() - 0.5f * (pe.getAmplifier() + 1);
+		if ((pe != null) && event.getSource().isProjectile() && (event.getAmount() >= 2)) {
+			float newAmount = event.getAmount() - (0.5f * (pe.getAmplifier() + 1));
 			if (newAmount < 2) {
 				newAmount = 2;
 			}

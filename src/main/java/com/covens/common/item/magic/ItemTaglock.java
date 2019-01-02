@@ -33,9 +33,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by Arekkuusu on 5/15/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 5/15/2017. It's distributed as part of
+ * Covens under the MIT license.
  */
 public class ItemTaglock extends ItemMod {
 
@@ -43,12 +42,12 @@ public class ItemTaglock extends ItemMod {
 		super(LibItemName.TAGLOCK);
 	}
 
-	//Todo: Make appearance change based on whether it has a taglock or not in it.
+	// Todo: Make appearance change based on whether it has a taglock or not in it.
 
 	public static Optional<EntityLivingBase> getVictim(ItemStack stack, World world) {
 		UUID uuid = NBTHelper.getUniqueID(stack, Covens.TAGLOCK_ENTITY);
 		for (Entity entity : world.loadedEntityList) {
-			if (entity instanceof EntityLivingBase && entity.getUniqueID().equals(uuid)) {
+			if ((entity instanceof EntityLivingBase) && entity.getUniqueID().equals(uuid)) {
 				return Optional.of((EntityLivingBase) entity);
 			}
 		}
@@ -71,7 +70,7 @@ public class ItemTaglock extends ItemMod {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
 			RayTraceResult result = RayTraceHelper.rayTraceResult(player, RayTraceHelper.fromLookVec(player, 2), true, true);
-			if (result != null && result.typeOfHit == ENTITY && result.entityHit instanceof EntityLivingBase) {
+			if ((result != null) && (result.typeOfHit == ENTITY) && (result.entityHit instanceof EntityLivingBase)) {
 				setVictim(player.getHeldItem(hand), (EntityLivingBase) result.entityHit);
 			}
 		}
@@ -93,7 +92,7 @@ public class ItemTaglock extends ItemMod {
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock().isBed(state, world, pos, player)) {
-			Optional<EntityPlayer> victim = getPlayerFromBed(world, pos);
+			Optional<EntityPlayer> victim = this.getPlayerFromBed(world, pos);
 			if (victim.isPresent()) {
 				setVictim(player.getHeldItem(hand), victim.get());
 				return EnumActionResult.SUCCESS;
@@ -104,9 +103,6 @@ public class ItemTaglock extends ItemMod {
 	}
 
 	private Optional<EntityPlayer> getPlayerFromBed(World world, BlockPos bed) {
-		return world.playerEntities.stream()
-				.filter(player -> player.bedLocation != null)
-				.filter(player -> player.getBedLocation().equals(bed))
-				.findAny();
+		return world.playerEntities.stream().filter(player -> player.bedLocation != null).filter(player -> player.getBedLocation().equals(bed)).findAny();
 	}
 }

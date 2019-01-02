@@ -4,6 +4,7 @@ import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
 import com.covens.common.item.equipment.baubles.ItemGirdleOfTheWooded;
+
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -23,7 +24,7 @@ public class PotionFertilize extends BrewMod {
 	@Override
 	public void affectEntity(Entity source, Entity indirectSource, EntityLivingBase entity, int amplifier, double health) {
 		if (entity instanceof EntityPlayer) {
-			for (int i = 0; i < 1 + amplifier; i++) {
+			for (int i = 0; i < (1 + amplifier); i++) {
 				if (entity.getRNG().nextBoolean()) {
 					ItemGirdleOfTheWooded.buildBark((EntityPlayer) entity);
 				}
@@ -44,7 +45,7 @@ public class PotionFertilize extends BrewMod {
 				if (state.getBlock() instanceof IGrowable) {
 					IGrowable crop = (IGrowable) state.getBlock();
 					int steps = world.rand.nextInt(amplifier + 1);
-					for (int i = 0; i < steps + 1; i++) {
+					for (int i = 0; i < (steps + 1); i++) {
 						if (crop.canGrow(world, spot, state, false)) {
 							crop.grow(world, world.rand, spot, state);
 						}

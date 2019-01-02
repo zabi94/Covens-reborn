@@ -33,7 +33,7 @@ public class RitualInfusion extends RitualImpl {
 		}
 		IMagicPowerContainer pc = player.getCapability(IMagicPowerContainer.CAPABILITY, null);
 		pc.drain(pc.getAmount());
-		player.getCapability(InfusionCapability.CAPABILITY, null).setType(type);
+		player.getCapability(InfusionCapability.CAPABILITY, null).setType(this.type);
 		if (player instanceof EntityPlayerMP) {
 			NetworkHandler.HANDLER.sendTo(new InfusionChangedMessage(player), (EntityPlayerMP) player);
 		}

@@ -69,14 +69,13 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 @ObjectHolder(LibMod.MOD_ID)
 public final class ModBlocks {
 
-	//Todo: Add new gemstone blocks, and meta the existing ones.
+	// Todo: Add new gemstone blocks, and meta the existing ones.
 
 	public static final BlockCrop crop_aconitum = null;
 	public static final BlockCrop crop_asphodel = null;
@@ -97,7 +96,7 @@ public final class ModBlocks {
 	public static final BlockCrop crop_chrysanthemum = null;
 	public static final BlockCrop crop_sagebrush = null;
 	public static final BlockCrop crop_infested_wheat = null;
-	//--------------------------------Blocks--------------------------------//
+	// --------------------------------Blocks--------------------------------//
 	public static final Block silver_block = null;
 	public static final Block silver_ore = null;
 	public static final Block gem_block = null;
@@ -166,96 +165,21 @@ public final class ModBlocks {
 			registry.register((Block) fluidBlock);
 		}
 
-		registry.registerAll(
-				new BlockCrop(LibBlockName.CROP_ACONITUM),
-				new BlockCrop(LibBlockName.CROP_ASPHODEL),
-				new BlockCrop(LibBlockName.CROP_GINGER),
-				new BlockCrop(LibBlockName.CROP_WHITE_SAGE),
-				new BlockCrop(LibBlockName.CROP_MANDRAKE),
-				new BlockCrop(LibBlockName.CROP_LAVENDER),
-				new BlockCrop(LibBlockName.CROP_TULSI),
-				new BlockCrop(LibBlockName.CROP_GARLIC),
-				new BlockCrop(LibBlockName.CROP_HELLEBORE),
-				new BlockCrop(LibBlockName.CROP_CHRYSANTHEMUM),
-				new BlockCrop(LibBlockName.CROP_SAGEBRUSH),
-				new BlockCrop(LibBlockName.CROP_INFESTED_WHEAT),
-				new CropWormwood(),
-				new CropSilphium(),
-				new CropKenaf(),
-				new CropThistle(),
-				new CropKelp(),
-				new CropBelladonna(),
-				new CropMint(),
-				new BlockMoonbell(),
-				new BlockInfestedFarmland(),
-				new BlockMoss(true),
-				new BlockMoss(false)
-		);
-		//Ore
+		registry.registerAll(new BlockCrop(LibBlockName.CROP_ACONITUM), new BlockCrop(LibBlockName.CROP_ASPHODEL), new BlockCrop(LibBlockName.CROP_GINGER), new BlockCrop(LibBlockName.CROP_WHITE_SAGE), new BlockCrop(LibBlockName.CROP_MANDRAKE), new BlockCrop(LibBlockName.CROP_LAVENDER), new BlockCrop(LibBlockName.CROP_TULSI), new BlockCrop(LibBlockName.CROP_GARLIC), new BlockCrop(LibBlockName.CROP_HELLEBORE), new BlockCrop(LibBlockName.CROP_CHRYSANTHEMUM), new BlockCrop(LibBlockName.CROP_SAGEBRUSH), new BlockCrop(LibBlockName.CROP_INFESTED_WHEAT), new CropWormwood(), new CropSilphium(), new CropKenaf(), new CropThistle(), new CropKelp(), new CropBelladonna(), new CropMint(), new BlockMoonbell(), new BlockInfestedFarmland(), new BlockMoss(true), new BlockMoss(false));
+		// Ore
 		registry.register(new BlockSilverOre());
 		registry.register(new BlockSaltOre());
 		registry.register(new BlockGemOre());
 		registry.register(new BlockWitchFire());
-		
-		//Tool Blocks
-		registry.registerAll(
-				new BlockCauldron(),
-				new BlockMagicMirror(),
-				new BlockOven(),
-				new BlockBrazier(),
-				new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM, false),
-				new BlockCandleSmall(LibBlockName.CANDLE_SMALL, false),
-				new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM_LIT, true),
-				new BlockCandleSmall(LibBlockName.CANDLE_SMALL_LIT, true),
-				new BlockSaltBarrier(),
-				new BlockApiary(),
-				new BlockTorchwood(),
-				new BlockEmberGrass(),
-				new BlockBeehive(LibBlockName.BEEHIVE),
-				new BlockWitchAltar(LibBlockName.WITCH_ALTAR, Material.ROCK),
-				new BlockThreadSpinner(LibBlockName.THREAD_SPINNER),
-				new BlockCircleGlyph(LibBlockName.GLYPHS),
-				new BlockCrystalBall(LibBlockName.CRYSTAL_BALL),
-				new BlockGoblet(LibBlockName.GOBLET),
-				new BlockGemBowl(LibBlockName.GEM_BOWL),
-				new BlockTarotTable(),
-				new BlockLantern(true),
-				new BlockLantern(false),
-				new BlockDistillery(LibBlockName.DISTILLERY),
-				new BlockWitchesLight(),
-				new BlockPurifyingEarth(),
-				new BlockPlacedItem()
-		);
 
-		//Decorative Blocks
-		registry.registerAll(
-				new BlockMod(LibBlockName.SILVER_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F),
-				new BlockFakeIce(),
-				new BlockSilverChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
-				new BlockColdIronChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
-				new BlockNetherSteelChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F),
-				new BlockMod(LibBlockName.COLD_IRON_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F),
-				new BlockMod(LibBlockName.NETHERSTEEL, Material.IRON, SoundType.METAL).setHardness(5.0F),
-				new BlockGem(),
-				new BlockGraveyardDirt()
-		);
+		// Tool Blocks
+		registry.registerAll(new BlockCauldron(), new BlockMagicMirror(), new BlockOven(), new BlockBrazier(), new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM, false), new BlockCandleSmall(LibBlockName.CANDLE_SMALL, false), new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM_LIT, true), new BlockCandleSmall(LibBlockName.CANDLE_SMALL_LIT, true), new BlockSaltBarrier(), new BlockApiary(), new BlockTorchwood(), new BlockEmberGrass(), new BlockBeehive(LibBlockName.BEEHIVE), new BlockWitchAltar(LibBlockName.WITCH_ALTAR, Material.ROCK), new BlockThreadSpinner(LibBlockName.THREAD_SPINNER), new BlockCircleGlyph(LibBlockName.GLYPHS), new BlockCrystalBall(LibBlockName.CRYSTAL_BALL), new BlockGoblet(LibBlockName.GOBLET), new BlockGemBowl(LibBlockName.GEM_BOWL), new BlockTarotTable(), new BlockLantern(true), new BlockLantern(false), new BlockDistillery(LibBlockName.DISTILLERY), new BlockWitchesLight(), new BlockPurifyingEarth(), new BlockPlacedItem());
 
-		//Trees
-		registry.registerAll(
-				new BlockModLog(LibBlockName.LOG_ELDER),
-				new BlockModLog(LibBlockName.LOG_JUNIPER),
-				new BlockModLog(LibBlockName.LOG_YEW),
-				new BlockModLog(LibBlockName.LOG_CYPRESS),
-				new BlockModLeaves(LibBlockName.LEAVES_ELDER),
-				new BlockModLeaves(LibBlockName.LEAVES_JUNIPER),
-				new BlockModLeaves(LibBlockName.LEAVES_YEW),
-				new BlockModLeaves(LibBlockName.LEAVES_CYPRESS),
-				new BlockPlanks(LibBlockName.PLANKS_ELDER),
-				new BlockPlanks(LibBlockName.PLANKS_JUNIPER),
-				new BlockPlanks(LibBlockName.PLANKS_YEW),
-				new BlockPlanks(LibBlockName.PLANKS_CYPRESS),
-				new BlockModSapling(LibBlockName.SAPLING)
-		);
+		// Decorative Blocks
+		registry.registerAll(new BlockMod(LibBlockName.SILVER_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockFakeIce(), new BlockSilverChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockColdIronChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockNetherSteelChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockMod(LibBlockName.COLD_IRON_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockMod(LibBlockName.NETHERSTEEL, Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockGem(), new BlockGraveyardDirt());
+
+		// Trees
+		registry.registerAll(new BlockModLog(LibBlockName.LOG_ELDER), new BlockModLog(LibBlockName.LOG_JUNIPER), new BlockModLog(LibBlockName.LOG_YEW), new BlockModLog(LibBlockName.LOG_CYPRESS), new BlockModLeaves(LibBlockName.LEAVES_ELDER), new BlockModLeaves(LibBlockName.LEAVES_JUNIPER), new BlockModLeaves(LibBlockName.LEAVES_YEW), new BlockModLeaves(LibBlockName.LEAVES_CYPRESS), new BlockPlanks(LibBlockName.PLANKS_ELDER), new BlockPlanks(LibBlockName.PLANKS_JUNIPER), new BlockPlanks(LibBlockName.PLANKS_YEW), new BlockPlanks(LibBlockName.PLANKS_CYPRESS), new BlockModSapling(LibBlockName.SAPLING));
 	}
 
 	public static void init() {
@@ -264,7 +188,7 @@ public final class ModBlocks {
 	}
 
 	private static void initOreDictionary() {
-		//Crystals, Minerals, and Metals
+		// Crystals, Minerals, and Metals
 		OreDictionary.registerOre("blockSilver", new ItemStack(ModBlocks.silver_block));
 		OreDictionary.registerOre("blockColdIron", new ItemStack(ModBlocks.cold_iron_block, 1, 0));
 		OreDictionary.registerOre("blockNethersteel", new ItemStack(ModBlocks.nethersteel, 1, 0));
@@ -286,7 +210,7 @@ public final class ModBlocks {
 		OreDictionary.registerOre("blockMalachite", new ItemStack(ModBlocks.gem_block, 1, Gem.MALACHITE.ordinal()));
 		OreDictionary.registerOre("blockAmethyst", new ItemStack(ModBlocks.gem_block, 1, Gem.AMETHYST.ordinal()));
 		OreDictionary.registerOre("blockAlexandrite", new ItemStack(ModBlocks.gem_block, 1, Gem.ALEXANDRITE.ordinal()));
-		
+
 		OreDictionary.registerOre("oreGarnet", new ItemStack(ModBlocks.gem_ore, 1, Gem.GARNET.ordinal()));
 		OreDictionary.registerOre("oreNuummite", new ItemStack(ModBlocks.gem_ore, 1, Gem.NUUMMITE.ordinal()));
 		OreDictionary.registerOre("oreAmethyst", new ItemStack(ModBlocks.gem_ore, 1, Gem.AMETHYST.ordinal()));
@@ -296,17 +220,17 @@ public final class ModBlocks {
 		OreDictionary.registerOre("oreMalachite", new ItemStack(ModBlocks.gem_ore, 1, Gem.MALACHITE.ordinal()));
 		OreDictionary.registerOre("oreTigersEye", new ItemStack(ModBlocks.gem_ore, 1, Gem.TIGERS_EYE.ordinal()));
 		OreDictionary.registerOre("oreJasper", new ItemStack(ModBlocks.gem_ore, 1, Gem.JASPER.ordinal()));
-		
+
 		OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.silver_ore));
 		OreDictionary.registerOre("blockNethersteel", new ItemStack(ModBlocks.nethersteel));
 		OreDictionary.registerOre("oreSalt", new ItemStack(ModBlocks.salt_ore));
-		//Candles
+		// Candles
 		for (int i = 0; i < 16; i++) {
 			OreDictionary.registerOre("blockCandle", new ItemStack(ModBlocks.candle_small, 1, i));
 			OreDictionary.registerOre("blockCandle", new ItemStack(ModBlocks.candle_medium, 1, i));
 		}
 
-		//Wool oredicts, used for coloring brews
+		// Wool oredicts, used for coloring brews
 		OreDictionary.registerOre("blockWoolWHITE", new ItemStack(Blocks.WOOL, 1, 0));
 		OreDictionary.registerOre("blockWoolORANGE", new ItemStack(Blocks.WOOL, 1, 1));
 		OreDictionary.registerOre("blockWoolMAGENTA", new ItemStack(Blocks.WOOL, 1, 2));
@@ -324,7 +248,7 @@ public final class ModBlocks {
 		OreDictionary.registerOre("blockWoolRED", new ItemStack(Blocks.WOOL, 1, 14));
 		OreDictionary.registerOre("blockWoolBLACK", new ItemStack(Blocks.WOOL, 1, 15));
 
-		//Imported oredicts
+		// Imported oredicts
 		OreDictionary.registerOre("logWood", ModBlocks.log_elder);
 		OreDictionary.registerOre("logWood", ModBlocks.log_juniper);
 		OreDictionary.registerOre("logWood", ModBlocks.log_yew);

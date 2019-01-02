@@ -4,9 +4,8 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.world.World;
 
 /**
- * This class was created by Arekkuusu on 02/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 02/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 interface IParticleF {
 

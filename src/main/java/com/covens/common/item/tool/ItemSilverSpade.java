@@ -1,10 +1,16 @@
 package com.covens.common.item.tool;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModMaterials;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,30 +24,25 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-
 /**
- * This class was created by BerciTheBeast on 27.3.2017.
- * It's distributed as part of Covens under
- * the MIT license.
- * Parts of the code were created by Vazkii, for Botania.
+ * This class was created by BerciTheBeast on 27.3.2017. It's distributed as
+ * part of Covens under the MIT license. Parts of the code were created by
+ * Vazkii, for Botania.
  */
 public class ItemSilverSpade extends ItemSpade implements IModelRegister {
 
 	public ItemSilverSpade() {
 		super(ModMaterials.TOOL_SILVER);
 		this.setMaxStackSize(1);
-		setRegistryName(LibItemName.SILVER_SPADE);
-		setTranslationKey(LibItemName.SILVER_SPADE);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setRegistryName(LibItemName.SILVER_SPADE);
+		this.setTranslationKey(LibItemName.SILVER_SPADE);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, @Nonnull EntityLivingBase attacker) {
 		if (!target.world.isRemote) {
-			if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD && attacker instanceof EntityPlayer) {
+			if ((target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) && (attacker instanceof EntityPlayer)) {
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), 12);
 				stack.damageItem(25, attacker);
 			} else {
@@ -53,13 +54,13 @@ public class ItemSilverSpade extends ItemSpade implements IModelRegister {
 	}
 
 	public String getNameInefficiently(ItemStack stack) {
-		return getTranslationKey().substring(5);
+		return this.getTranslationKey().substring(5);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.GRAY + I18n.format("witch.tooltip." + getNameInefficiently(stack) + "_description.name"));
+		tooltip.add(TextFormatting.GRAY + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 
 	@SideOnly(Side.CLIENT)

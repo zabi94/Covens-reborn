@@ -1,7 +1,10 @@
 package com.covens.common.block.tiles;
 
+import static net.minecraft.block.BlockHorizontal.FACING;
+
 import com.covens.common.block.BlockMod;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,8 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-
 /**
  * Created by Joseph on 9/16/2018.
  */
@@ -29,15 +30,15 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 public class BlockBrazier extends BlockMod implements IInfusionStabiliserExt {
 
 	private static final PropertyBool HANGING = PropertyBool.create("hanging");
-	private static final AxisAlignedBB BBOX_STANDING = new AxisAlignedBB(0.15625, 0, 0.15625, 0.84375, 1 + 1d / 32d, 0.84375);
+	private static final AxisAlignedBB BBOX_STANDING = new AxisAlignedBB(0.15625, 0, 0.15625, 0.84375, 1 + (1d / 32d), 0.84375);
 	private static final AxisAlignedBB BBOX_HANGING = new AxisAlignedBB(0.15625, -1d / 32d, 0.15625, 0.84375, 1, 0.84375);
 
 	public BlockBrazier() {
 		super(LibBlockName.BRAZIER, Material.IRON);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(HANGING, false));
-		setSoundType(SoundType.METAL);
-		setResistance(3F);
-		setHardness(3F);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(HANGING, false));
+		this.setSoundType(SoundType.METAL);
+		this.setResistance(3F);
+		this.setHardness(3F);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -51,7 +52,7 @@ public class BlockBrazier extends BlockMod implements IInfusionStabiliserExt {
 	public IBlockState getStateFromMeta(int meta) {
 		final EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 0b11);
 		final boolean hanging = ((meta >> 2) & 1) == 1;
-		return getDefaultState().withProperty(FACING, facing).withProperty(HANGING, hanging);
+		return this.getDefaultState().withProperty(FACING, facing).withProperty(HANGING, hanging);
 	}
 
 	@Override
@@ -80,18 +81,17 @@ public class BlockBrazier extends BlockMod implements IInfusionStabiliserExt {
 
 	@Override
 	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
-		return super.canPlaceBlockOnSide(world, pos, side) && ((side == EnumFacing.DOWN && canHangFromAbove(world, pos)) || (side != EnumFacing.DOWN && canSitBelow(world, pos)));
+		return super.canPlaceBlockOnSide(world, pos, side) && (((side == EnumFacing.DOWN) && this.canHangFromAbove(world, pos)) || ((side != EnumFacing.DOWN) && this.canSitBelow(world, pos)));
 	}
 
 	private boolean canHangFromAbove(World world, BlockPos pos) {
 		BlockFaceShape fs = world.getBlockState(pos.up()).getBlockFaceShape(world, pos.up(), EnumFacing.DOWN);
-		return fs != BlockFaceShape.BOWL && fs != BlockFaceShape.UNDEFINED;
+		return (fs != BlockFaceShape.BOWL) && (fs != BlockFaceShape.UNDEFINED);
 	}
 
 	private boolean canSitBelow(World world, BlockPos pos) {
 		return world.getBlockState(pos.down()).getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
 	}
-
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -99,14 +99,14 @@ public class BlockBrazier extends BlockMod implements IInfusionStabiliserExt {
 		super.neighborChanged(state, world, pos, blockIn, fromPos);
 		if (!world.isRemote) {
 			boolean hang = state.getValue(HANGING);
-			if (hang && !canHangFromAbove(world, pos)) {
-				if (canSitBelow(world, pos)) {
+			if (hang && !this.canHangFromAbove(world, pos)) {
+				if (this.canSitBelow(world, pos)) {
 					world.setBlockState(pos, state.withProperty(HANGING, false), 3);
 				} else {
 					world.destroyBlock(pos, true);
 				}
-			} else if (!hang && !canSitBelow(world, pos)) {
-				if (canHangFromAbove(world, pos)) {
+			} else if (!hang && !this.canSitBelow(world, pos)) {
+				if (this.canHangFromAbove(world, pos)) {
 					world.setBlockState(pos, state.withProperty(HANGING, true), 3);
 				} else {
 					world.destroyBlock(pos, true);

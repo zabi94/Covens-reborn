@@ -1,6 +1,7 @@
 package com.covens.common.potion.potions;
 
 import com.covens.common.potion.PotionMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 

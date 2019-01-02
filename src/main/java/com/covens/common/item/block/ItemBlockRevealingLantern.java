@@ -6,10 +6,13 @@
 
 package com.covens.common.item.block;
 
+import java.util.List;
+
 import com.covens.api.mp.IMagicPowerContainer;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.block.misc.BlockWitchFire.EnumFireType;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -27,8 +30,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
 public class ItemBlockRevealingLantern extends ItemBlock {
 
 	private boolean lit;
@@ -41,7 +42,7 @@ public class ItemBlockRevealingLantern extends ItemBlock {
 
 	@Override
 	public String getTranslationKey(ItemStack stack) {
-		if (stack.getMetadata() < 16 && stack.getMetadata() >= 0) {
+		if ((stack.getMetadata() < 16) && (stack.getMetadata() >= 0)) {
 			return super.getTranslationKey(stack) + "." + EnumDyeColor.values()[stack.getMetadata()].name().toLowerCase();
 		}
 		return super.getTranslationKey(stack);
@@ -50,7 +51,7 @@ public class ItemBlockRevealingLantern extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		if (!lit) {
+		if (!this.lit) {
 			tooltip.add(TextFormatting.GRAY + TextFormatting.ITALIC.toString() + I18n.format("tile.lantern.desc"));
 		}
 	}
@@ -67,12 +68,12 @@ public class ItemBlockRevealingLantern extends ItemBlock {
 
 	@Override
 	public boolean hasEffect(ItemStack stack) {
-		return lit;
+		return this.lit;
 	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!lit && worldIn.getBlockState(pos).getBlock() == ModBlocks.witchfire && worldIn.getBlockState(pos).getValue(BlockWitchFire.TYPE) == EnumFireType.SIGHTFIRE && player.getHeldItem(hand).getItem().equals(Item.getItemFromBlock(ModBlocks.lantern))) {
+		if (!this.lit && (worldIn.getBlockState(pos).getBlock() == ModBlocks.witchfire) && (worldIn.getBlockState(pos).getValue(BlockWitchFire.TYPE) == EnumFireType.SIGHTFIRE) && player.getHeldItem(hand).getItem().equals(Item.getItemFromBlock(ModBlocks.lantern))) {
 			player.setHeldItem(hand, new ItemStack(ModBlocks.revealing_lantern, 1, player.getHeldItem(hand).getMetadata()));
 			worldIn.setBlockToAir(pos);
 			return EnumActionResult.SUCCESS;
@@ -86,7 +87,7 @@ public class ItemBlockRevealingLantern extends ItemBlock {
 			return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 		}
 
-		if (lit && world.getBlockState(pos.offset(side)).getBlock().isReplaceable(world, pos.offset(side)) && player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
+		if (this.lit && world.getBlockState(pos.offset(side)).getBlock().isReplaceable(world, pos.offset(side)) && player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
 			world.setBlockState(pos.offset(side), ModBlocks.witches_light.getDefaultState(), 3);
 			return EnumActionResult.SUCCESS;
 		}

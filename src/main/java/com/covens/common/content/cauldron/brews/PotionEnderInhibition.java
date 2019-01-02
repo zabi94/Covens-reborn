@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,7 +25,7 @@ public class PotionEnderInhibition extends BrewMod {
 	@Override
 	public void performEffect(EntityLivingBase e, int amplifier) {
 		int redo = 5 - amplifier;
-		if ((redo <= 1 || e.world.rand.nextInt(redo) == 0) && e.getDistanceSq(e.lastTickPosX, e.lastTickPosY, e.lastTickPosZ) > 1) {
+		if (((redo <= 1) || (e.world.rand.nextInt(redo) == 0)) && (e.getDistanceSq(e.lastTickPosX, e.lastTickPosY, e.lastTickPosZ) > 1)) {
 			e.posX = e.lastTickPosX;
 			e.posY = e.lastTickPosY;
 			e.posZ = e.lastTickPosZ;
@@ -37,7 +38,7 @@ public class PotionEnderInhibition extends BrewMod {
 		PotionEffect pe = event.getEntityLiving().getActivePotionEffect(this);
 		if (pe != null) {
 			int redo = 5 - pe.getAmplifier();
-			if (redo <= 1 || event.getEntityLiving().world.rand.nextInt(redo) == 0) {
+			if ((redo <= 1) || (event.getEntityLiving().world.rand.nextInt(redo) == 0)) {
 				event.setCanceled(true);
 			}
 		}
@@ -49,7 +50,7 @@ public class PotionEnderInhibition extends BrewMod {
 			PotionEffect pe = ((EntityLivingBase) event.getEntity()).getActivePotionEffect(this);
 			if (pe != null) {
 				int redo = 5 - pe.getAmplifier();
-				if (redo <= 1 || event.getEntity().world.rand.nextInt(redo) == 0) {
+				if ((redo <= 1) || (event.getEntity().world.rand.nextInt(redo) == 0)) {
 					event.setCanceled(true);
 				}
 			}

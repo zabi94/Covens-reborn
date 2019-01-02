@@ -1,5 +1,7 @@
 package com.covens.common.content.transformation.werewolf;
 
+import java.util.UUID;
+
 import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.event.HotbarActionTriggeredEvent;
 import com.covens.api.event.TransformationModifiedEvent;
@@ -7,6 +9,7 @@ import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.helper.AttributeModifierModeHelper;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -17,8 +20,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-
-import java.util.UUID;
 
 @Mod.EventBusSubscriber
 public class WerewolfAbilityHandler {
@@ -57,9 +58,9 @@ public class WerewolfAbilityHandler {
 
 	@SubscribeEvent
 	public static void abilityHandler(PlayerTickEvent evt) {
-		if (evt.phase == Phase.START && !evt.player.world.isRemote && evt.player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF) {
+		if ((evt.phase == Phase.START) && !evt.player.world.isRemote && (evt.player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF)) {
 			PotionEffect nv = evt.player.getActivePotionEffect(MobEffects.NIGHT_VISION);
-			if ((nv == null || nv.getDuration() <= 220) && evt.player.getCapability(CapabilityWerewolfStatus.CAPABILITY, null).nightVision) {
+			if (((nv == null) || (nv.getDuration() <= 220)) && evt.player.getCapability(CapabilityWerewolfStatus.CAPABILITY, null).nightVision) {
 				evt.player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0, true, false));
 			}
 		}

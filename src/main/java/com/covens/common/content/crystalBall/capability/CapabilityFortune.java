@@ -1,11 +1,12 @@
 package com.covens.common.content.crystalBall.capability;
 
+import javax.annotation.Nullable;
+
 import com.covens.api.divination.IFortune;
+
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
-import javax.annotation.Nullable;
 
 public interface CapabilityFortune {
 

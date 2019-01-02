@@ -9,6 +9,7 @@ package com.covens.common.content.spell.spells;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.spell.Spell;
 import com.covens.common.content.transformation.CapabilityTransformation;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +35,7 @@ public class SpellCallThunderstorm extends Spell {
 	public boolean canBeUsed(World world, BlockPos pos, EntityLivingBase caster) {
 		if (caster instanceof EntityPlayer) {
 			CapabilityTransformation data = ((EntityPlayer) caster).getCapability(CapabilityTransformation.CAPABILITY, null);
-			return data.getType() == DefaultTransformations.VAMPIRE && data.getLevel() >= 9;
+			return (data.getType() == DefaultTransformations.VAMPIRE) && (data.getLevel() >= 9);
 		}
 		return false;
 	}

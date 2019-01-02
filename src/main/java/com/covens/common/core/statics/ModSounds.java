@@ -1,5 +1,7 @@
 package com.covens.common.core.statics;
 
+import static com.covens.common.lib.LibMod.MOD_ID;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -7,12 +9,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import static com.covens.common.lib.LibMod.MOD_ID;
-
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 //Note: Current code is ripped from Choonster's TestMod3, and modified for usage here.
 
@@ -55,15 +54,7 @@ public final class ModSounds {
 	public static class RegistrationHandler {
 		@SubscribeEvent
 		public static void registerSoundEvents(final RegistryEvent.Register<SoundEvent> event) {
-			event.getRegistry().registerAll(
-					BUZZ,
-					BOIL,
-					BUBBLE,
-					OVEN_OPEN,
-					CHALK_SCRIBBLE,
-					BROOM_SWEEP,
-					OWL_HOOT
-			);
+			event.getRegistry().registerAll(BUZZ, BOIL, BUBBLE, OVEN_OPEN, CHALK_SCRIBBLE, BROOM_SWEEP, OWL_HOOT);
 		}
 	}
 }

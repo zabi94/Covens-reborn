@@ -1,8 +1,13 @@
 package com.covens.common.content.crystalBall.fortunes;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
 import com.covens.common.core.statics.ModLootTables;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,9 +21,6 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 /**
  * Created by Joseph on 2/12/2018.
@@ -55,13 +57,13 @@ public class FortuneTreasure extends Fortune {
 	@SubscribeEvent
 	public void onDig(BreakEvent evt) {
 		CapabilityFortune cap = evt.getPlayer().getCapability(CapabilityFortune.CAPABILITY, null);
-		if (cap.getFortune() == this && cap.isActive()) {
+		if ((cap.getFortune() == this) && cap.isActive()) {
 			Block block = evt.getState().getBlock();
-			if (block == Blocks.DIRT || block == Blocks.GRASS || block == Blocks.SAND || block == Blocks.MYCELIUM || block == Blocks.GRAVEL || block == Blocks.SOUL_SAND) {
+			if ((block == Blocks.DIRT) || (block == Blocks.GRASS) || (block == Blocks.SAND) || (block == Blocks.MYCELIUM) || (block == Blocks.GRAVEL) || (block == Blocks.SOUL_SAND)) {
 				LootTable lt = evt.getWorld().getLootTableManager().getLootTableFromLocation(ModLootTables.METALS);
 				LootContext lc = (new LootContext.Builder((WorldServer) evt.getWorld()).withLuck(evt.getPlayer().getLuck()).withPlayer(evt.getPlayer())).build();
 				List<ItemStack> spawn = lt.generateLootForPools(evt.getPlayer().getRNG(), lc);
-				spawn.forEach(s -> spawn(s, evt.getWorld(), evt.getPos()));
+				spawn.forEach(s -> this.spawn(s, evt.getWorld(), evt.getPos()));
 				cap.setRemovable();
 			}
 		}

@@ -1,5 +1,7 @@
 package com.covens.common.item.magic.brew;
 
+import java.util.List;
+
 import com.covens.client.core.IModelRegister;
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.BrewEntry;
@@ -8,6 +10,7 @@ import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.entity.EntityBrewArrow;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -23,21 +26,19 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
 public class ItemBrewArrow extends ItemArrow implements IModelRegister {
 
 	public ItemBrewArrow() {
 		super();
-		setRegistryName(LibItemName.BREW_ARROW);
-		setTranslationKey(LibItemName.BREW_ARROW);
-		setCreativeTab(ModCreativeTabs.BREW_CREATIVE_TAB);
+		this.setRegistryName(LibItemName.BREW_ARROW);
+		this.setTranslationKey(LibItemName.BREW_ARROW);
+		this.setCreativeTab(ModCreativeTabs.BREW_CREATIVE_TAB);
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
-			CauldronRegistry.BREW_POTION_MAP.values().forEach(p -> addPotionType(items, p));
+			CauldronRegistry.BREW_POTION_MAP.values().forEach(p -> this.addPotionType(items, p));
 		}
 	}
 
@@ -57,13 +58,11 @@ public class ItemBrewArrow extends ItemArrow implements IModelRegister {
 		items.add(stack);
 	}
 
-
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		ItemBrew.addTooltip(stack, worldIn, tooltip, flagIn);
 	}
-
 
 	@Override
 	@SideOnly(Side.CLIENT)

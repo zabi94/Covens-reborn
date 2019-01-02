@@ -7,6 +7,7 @@
 package com.covens.common.content.spell.spells;
 
 import com.covens.common.content.spell.Spell;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +25,7 @@ public class SpellMagnet extends Spell {
 
 	@Override
 	public void performEffect(RayTraceResult rtrace, EntityLivingBase caster, World world) {
-		if (rtrace.typeOfHit == Type.BLOCK && caster != null) {
+		if ((rtrace.typeOfHit == Type.BLOCK) && (caster != null)) {
 			world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(new BlockPos(rtrace.hitVec), new BlockPos(rtrace.hitVec.add(1, 1, 1))).grow(2)).forEach(ei -> {
 				ei.setNoPickupDelay();
 				if (caster instanceof EntityPlayer) {

@@ -1,13 +1,14 @@
 package com.covens.common.core.helper;
 
 /**
- * This class was created by Arekkuusu on 22/05/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 22/05/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class RomanNumberHelper {
 
-	private static final String[] romans = {"", "I", "II", "III", "IV", "V", "V+"};
+	private static final String[] romans = {
+			"", "I", "II", "III", "IV", "V", "V+"
+	};
 
 	public static String getRoman(int i) {
 		if (i < 0) {

@@ -1,5 +1,12 @@
 package com.covens.common.core.gen;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.function.Function;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -11,15 +18,13 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import java.util.*;
-import java.util.function.Function;
-
 /**
- * This class was created by BerciTheBeast on 4.3.2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by BerciTheBeast on 4.3.2017. It's distributed as part
+ * of Covens under the MIT license.
  */
-@SuppressWarnings({"WeakerAccess"})
+@SuppressWarnings({
+		"WeakerAccess"
+})
 public class WorldGenOre extends WorldGenMinable implements IWorldGenerator {
 
 	private final List<BiomeDictionary.Type> biomes = new ArrayList<>();
@@ -40,8 +45,9 @@ public class WorldGenOre extends WorldGenMinable implements IWorldGenerator {
 		this.minHeight = minHeight;
 		this.genChance = generationChance;
 		this.predicate = BlockMatcher.forBlock(surrounding);
-		if (biomes != null)
+		if (biomes != null) {
 			Collections.addAll(this.biomes, biomes);
+		}
 	}
 
 	@Override
@@ -50,8 +56,8 @@ public class WorldGenOre extends WorldGenMinable implements IWorldGenerator {
 			Set<BiomeDictionary.Type> set = BiomeDictionary.getTypes(world.getBiome(new BlockPos(chunkX, 0, chunkZ)));
 
 			for (BiomeDictionary.Type type : set) {
-				if (biomes.isEmpty() || biomes.contains(type)) {
-					generateOre(world, random, chunkX, chunkZ);
+				if (this.biomes.isEmpty() || this.biomes.contains(type)) {
+					this.generateOre(world, random, chunkX, chunkZ);
 					break;
 				}
 			}
@@ -59,15 +65,15 @@ public class WorldGenOre extends WorldGenMinable implements IWorldGenerator {
 	}
 
 	private void generateOre(World world, Random random, int chunkX, int chunkZ) {
-		final int heightRange = maxHeight - minHeight;
-		final int randFactor = (maxOreVeinSize - minOreVeinSize) > 0 ? random.nextInt(maxOreVeinSize - minOreVeinSize) : 0;
-		final int veinSize = minOreVeinSize + randFactor;
-		final WorldGenMinable generator = new WorldGenMinable(oreToGen, veinSize, predicate);
+		final int heightRange = this.maxHeight - this.minHeight;
+		final int randFactor = (this.maxOreVeinSize - this.minOreVeinSize) > 0 ? random.nextInt(this.maxOreVeinSize - this.minOreVeinSize) : 0;
+		final int veinSize = this.minOreVeinSize + randFactor;
+		final WorldGenMinable generator = new WorldGenMinable(this.oreToGen, veinSize, this.predicate);
 
-		for (int i = 0; i < genChance; ++i) {
-			final int xRandom = chunkX * 16 + random.nextInt(16);
-			final int yRandom = random.nextInt(heightRange) + minHeight;
-			final int zRandom = chunkZ * 16 + random.nextInt(16);
+		for (int i = 0; i < this.genChance; ++i) {
+			final int xRandom = (chunkX * 16) + random.nextInt(16);
+			final int yRandom = random.nextInt(heightRange) + this.minHeight;
+			final int zRandom = (chunkZ * 16) + random.nextInt(16);
 			generator.generate(world, random, new BlockPos(xRandom, yRandom, zRandom));
 		}
 	}
@@ -117,7 +123,7 @@ public class WorldGenOre extends WorldGenMinable implements IWorldGenerator {
 		}
 
 		public WorldGenOre build(Function<Block, IBlockState> function) {
-			return new WorldGenOre(function, ore, minOreVeinSize, maxOreVeinSize, minHeight, maxHeight, genChance, container, biomes);
+			return new WorldGenOre(function, this.ore, this.minOreVeinSize, this.maxOreVeinSize, this.minHeight, this.maxHeight, this.genChance, this.container, this.biomes);
 		}
 	}
 }

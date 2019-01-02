@@ -17,9 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 /**
- * This class was created by Arekkuusu on 08/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 08/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public abstract class ModTileEntity extends TileEntity {
 
@@ -55,9 +54,9 @@ public abstract class ModTileEntity extends TileEntity {
 	}
 
 	public void syncToClient() {
-		if (world != null) {
-			IBlockState state = world.getBlockState(pos);
-			world.notifyBlockUpdate(pos, state, state, 3);
+		if (this.world != null) {
+			IBlockState state = this.world.getBlockState(this.pos);
+			this.world.notifyBlockUpdate(this.pos, state, state, 3);
 		}
 	}
 
@@ -69,7 +68,7 @@ public abstract class ModTileEntity extends TileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		readAllModDataNBT(tag);
+		this.readAllModDataNBT(tag);
 	}
 
 	/**
@@ -81,7 +80,7 @@ public abstract class ModTileEntity extends TileEntity {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		final NBTTagCompound ret = super.writeToNBT(tag);
-		writeAllModDataNBT(ret);
+		this.writeAllModDataNBT(ret);
 		return ret;
 	}
 
@@ -92,7 +91,7 @@ public abstract class ModTileEntity extends TileEntity {
 	 */
 	@Override
 	public final SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(pos, 0, getUpdateTag());
+		return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
 	}
 
 	/**
@@ -103,7 +102,7 @@ public abstract class ModTileEntity extends TileEntity {
 	@Override
 	public NBTTagCompound getUpdateTag() {
 		NBTTagCompound tag = super.getUpdateTag();
-		writeModSyncDataNBT(tag);
+		this.writeModSyncDataNBT(tag);
 		return tag;
 	}
 
@@ -115,7 +114,7 @@ public abstract class ModTileEntity extends TileEntity {
 	 */
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-		handleUpdateTag(packet.getNbtCompound());
+		this.handleUpdateTag(packet.getNbtCompound());
 	}
 
 	/**
@@ -125,7 +124,7 @@ public abstract class ModTileEntity extends TileEntity {
 	 */
 	@Override
 	public void handleUpdateTag(NBTTagCompound tag) {
-		readModSyncDataNBT(tag);
+		this.readModSyncDataNBT(tag);
 	}
 
 	/**

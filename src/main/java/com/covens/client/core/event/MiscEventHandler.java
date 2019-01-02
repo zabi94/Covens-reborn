@@ -19,25 +19,25 @@ public class MiscEventHandler {
 	private Minecraft mc;
 
 	public MiscEventHandler(Minecraft minecraft) {
-		mc = minecraft;
+		this.mc = minecraft;
 	}
 
 	@SubscribeEvent
 	public void onKeyPress(KeyInputEvent evt) {
-		if (Keybinds.placeItem.isPressed() && isPointingToUpperFace() && canReplaceAbove() && isTopSolid()) {
-				NetworkHandler.HANDLER.sendToServer(new PlaceHeldItemMessage(mc.objectMouseOver.getBlockPos().up()));
+		if (Keybinds.placeItem.isPressed() && this.isPointingToUpperFace() && this.canReplaceAbove() && this.isTopSolid()) {
+			NetworkHandler.HANDLER.sendToServer(new PlaceHeldItemMessage(this.mc.objectMouseOver.getBlockPos().up()));
 		}
 	}
-	
+
 	private boolean isPointingToUpperFace() {
-		return mc.objectMouseOver.typeOfHit == Type.BLOCK && mc.objectMouseOver.sideHit == EnumFacing.UP;
+		return (this.mc.objectMouseOver.typeOfHit == Type.BLOCK) && (this.mc.objectMouseOver.sideHit == EnumFacing.UP);
 	}
-	
+
 	private boolean canReplaceAbove() {
-		return mc.world.getBlockState(mc.objectMouseOver.getBlockPos().up()).getBlock().isReplaceable(mc.world, mc.objectMouseOver.getBlockPos().up());
+		return this.mc.world.getBlockState(this.mc.objectMouseOver.getBlockPos().up()).getBlock().isReplaceable(this.mc.world, this.mc.objectMouseOver.getBlockPos().up());
 	}
-	
+
 	private boolean isTopSolid() {
-		return mc.world.getBlockState(mc.objectMouseOver.getBlockPos()).getBlockFaceShape(mc.player.world, mc.objectMouseOver.getBlockPos(), EnumFacing.UP) == BlockFaceShape.SOLID;
+		return this.mc.world.getBlockState(this.mc.objectMouseOver.getBlockPos()).getBlockFaceShape(this.mc.player.world, this.mc.objectMouseOver.getBlockPos(), EnumFacing.UP) == BlockFaceShape.SOLID;
 	}
 }

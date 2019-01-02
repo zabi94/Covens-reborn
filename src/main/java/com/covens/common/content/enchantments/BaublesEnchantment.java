@@ -1,9 +1,13 @@
 package com.covens.common.content.enchantments;
 
-import baubles.api.BaublesApi;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.covens.common.item.equipment.baubles.ItemTalisman;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
+
+import baubles.api.BaublesApi;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -13,9 +17,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BaublesEnchantment extends Enchantment {
 
@@ -30,7 +31,7 @@ public class BaublesEnchantment extends Enchantment {
 
 	@Override
 	public int getMaxLevel() {
-		return maxLevel;
+		return this.maxLevel;
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class BaublesEnchantment extends Enchantment {
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack) {
-		return canApply(stack);
+		return this.canApply(stack);
 	}
 
 	@Override
@@ -60,27 +61,23 @@ public class BaublesEnchantment extends Enchantment {
 	}
 
 	public int getMaxLevelOnPlayer(EntityPlayer p) {
-		return this.getEntityEquipment(p).parallelStream()
-				.mapToInt(is -> EnchantmentHelper.getEnchantmentLevel(this, is))
-				.max().orElse(0);
+		return this.getEntityEquipment(p).parallelStream().mapToInt(is -> EnchantmentHelper.getEnchantmentLevel(this, is)).max().orElse(0);
 	}
 
 	public int getTotalLevelOnPlayer(EntityPlayer p) {
-		return this.getEntityEquipment(p).parallelStream()
-				.mapToInt(is -> EnchantmentHelper.getEnchantmentLevel(this, is))
-				.sum();
+		return this.getEntityEquipment(p).parallelStream().mapToInt(is -> EnchantmentHelper.getEnchantmentLevel(this, is)).sum();
 	}
 
 	public void onWornTick(EntityPlayer player) {
-		//Override this
+		// Override this
 	}
 
 	public void onUnequipped(EntityPlayer player) {
-		//Override this
+		// Override this
 	}
 
 	public void onEquipped(EntityPlayer player) {
-		//Override this
+		// Override this
 	}
 
 }

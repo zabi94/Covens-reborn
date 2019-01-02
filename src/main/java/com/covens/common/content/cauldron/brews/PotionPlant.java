@@ -1,8 +1,11 @@
 package com.covens.common.content.cauldron.brews;
 
+import java.util.List;
+
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,8 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-
-import java.util.List;
 
 public class PotionPlant extends BrewMod {
 
@@ -43,9 +44,9 @@ public class PotionPlant extends BrewMod {
 			pos = pos.offset(side);
 		}
 		AxisAlignedBB space = new AxisAlignedBB(pos).grow(2 + MathHelper.clamp(amplifier, 0, 5));
-		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, space, input -> input != null && isSeed(input.getItem()));
+		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, space, input -> (input != null) && this.isSeed(input.getItem()));
 		if (!items.isEmpty()) {
-			plantAll(items, world, pos, amplifier);
+			this.plantAll(items, world, pos, amplifier);
 		}
 	}
 

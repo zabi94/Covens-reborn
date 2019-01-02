@@ -1,18 +1,17 @@
 package com.covens.client.render.entity.model;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.input.Keyboard;
 
 /**
- * werewolf5 - cybercat5555
- * Created using Tabula 5.1.0
+ * werewolf5 - cybercat5555 Created using Tabula 5.1.0
  */
 public class ModelGhost extends ModelBase {
-
 
 	public ModelRenderer body;
 	public ModelRenderer lArm;
@@ -34,7 +33,7 @@ public class ModelGhost extends ModelBase {
 		this.body = new ModelRenderer(this, 16, 16);
 		this.body.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.body.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0.0F);
-		this.setRotateAngle(body, 0.6108652381980153F, 0.0F, 0.0F);
+		this.setRotateAngle(this.body, 0.6108652381980153F, 0.0F, 0.0F);
 		this.rLeg = new ModelRenderer(this, 0, 16);
 		this.rLeg.setRotationPoint(-1.9F, 12.0F, 0.1F);
 		this.rLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0.0F);
@@ -53,7 +52,6 @@ public class ModelGhost extends ModelBase {
 		 * Childing
 		 */
 
-
 		this.body.addChild(this.lArm);
 		this.body.addChild(this.rLeg);
 		this.body.addChild(this.head);
@@ -69,53 +67,56 @@ public class ModelGhost extends ModelBase {
 		float time = (p.ticksExisted + ptick) * 0.10471975512F;
 		this.body.render(1);
 
-		if (entity.isSneaking() && transition == 0) {
-			float anglechange = 2.4712389F - body.rotateAngleX;
-			body.rotateAngleX = body.rotateAngleX + anglechange * (timer + 1) / 40;
-			head.rotateAngleX = -(body.rotateAngleX - 0.43633231299F);
+		if (entity.isSneaking() && (this.transition == 0)) {
+			float anglechange = 2.4712389F - this.body.rotateAngleX;
+			this.body.rotateAngleX = this.body.rotateAngleX + ((anglechange * (this.timer + 1)) / 40);
+			this.head.rotateAngleX = -(this.body.rotateAngleX - 0.43633231299F);
 
-			timer++;
-			if (timer >= 40) {
-				transition = 1;
+			this.timer++;
+			if (this.timer >= 40) {
+				this.transition = 1;
 			}
-			//Sets the sneak position
-		} else if (entity.isSneaking() && transition == 1) {
-			body.rotateAngleZ = 0F;
-			body.rotationPointY = 2F + 1.5F * MathHelper.sin(time);
-			body.rotateAngleX = 0.43633231299F + 6F * limbSwingAmount + 0.03490658503F;
-			lLeg.rotateAngleZ = -0.03490658503F + 0.03490658503F * MathHelper.sin(time);
-			rLeg.rotateAngleZ = -lLeg.rotateAngleZ;
-			lArm.rotateAngleZ = lLeg.rotateAngleZ;
-			rArm.rotateAngleZ = -lLeg.rotateAngleZ;
-			head.rotateAngleX = -(body.rotateAngleX - 0.43633231299F);
-			timer = 1;
-			//After the sneak position is taken, if shift remains pressed, it does the actual shift animation
+			// Sets the sneak position
+		} else if (entity.isSneaking() && (this.transition == 1)) {
+			this.body.rotateAngleZ = 0F;
+			this.body.rotationPointY = 2F + (1.5F * MathHelper.sin(time));
+			this.body.rotateAngleX = 0.43633231299F + (6F * limbSwingAmount) + 0.03490658503F;
+			this.lLeg.rotateAngleZ = -0.03490658503F + (0.03490658503F * MathHelper.sin(time));
+			this.rLeg.rotateAngleZ = -this.lLeg.rotateAngleZ;
+			this.lArm.rotateAngleZ = this.lLeg.rotateAngleZ;
+			this.rArm.rotateAngleZ = -this.lLeg.rotateAngleZ;
+			this.head.rotateAngleX = -(this.body.rotateAngleX - 0.43633231299F);
+			this.timer = 1;
+			// After the sneak position is taken, if shift remains pressed, it does the
+			// actual shift animation
 		} else {
-			body.rotationPointY = -2F + 1.5F * MathHelper.sin(time);
-			body.rotateAngleX = 0.43633231299F + 3F * limbSwingAmount + 0.03490658503F;
-			lLeg.rotateAngleZ = -0.03490658503F + 0.03490658503F * MathHelper.sin(time);
-			rLeg.rotateAngleZ = -lLeg.rotateAngleZ;
-			lArm.rotateAngleZ = lLeg.rotateAngleZ;
-			rArm.rotateAngleZ = -lLeg.rotateAngleZ;
-			head.rotateAngleX = -(body.rotateAngleX - 0.43633231299F);
-			transition = 0;
-			//Idle animation. Notice that this is the first chunk of code that runs, so the idle animation will be present throughout the rest of the animation...
-
+			this.body.rotationPointY = -2F + (1.5F * MathHelper.sin(time));
+			this.body.rotateAngleX = 0.43633231299F + (3F * limbSwingAmount) + 0.03490658503F;
+			this.lLeg.rotateAngleZ = -0.03490658503F + (0.03490658503F * MathHelper.sin(time));
+			this.rLeg.rotateAngleZ = -this.lLeg.rotateAngleZ;
+			this.lArm.rotateAngleZ = this.lLeg.rotateAngleZ;
+			this.rArm.rotateAngleZ = -this.lLeg.rotateAngleZ;
+			this.head.rotateAngleX = -(this.body.rotateAngleX - 0.43633231299F);
+			this.transition = 0;
+			// Idle animation. Notice that this is the first chunk of code that runs, so the
+			// idle animation will be present throughout the rest of the animation...
 
 		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || timer2 != 0) {
-			//the or timer2 check makes it so the animation is run fully even if you just press the key once, and keeps the animation going until the timer reaches 40;
-			body.rotateAngleZ = 6.28318531F * (timer2 + 1) / 40;
-			timer2++;
-			if (timer2 == 40) {
-				timer2 = 0;
-				//resets the timer, thus turning the second condition to false. If the first condition remains fulfilled, the animation should start from the beginning.
-				//Also, a sine could in theory be used so long as it remains in phase with the timer.
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || (this.timer2 != 0)) {
+			// the or timer2 check makes it so the animation is run fully even if you just
+			// press the key once, and keeps the animation going until the timer reaches 40;
+			this.body.rotateAngleZ = (6.28318531F * (this.timer2 + 1)) / 40;
+			this.timer2++;
+			if (this.timer2 == 40) {
+				this.timer2 = 0;
+				// resets the timer, thus turning the second condition to false. If the first
+				// condition remains fulfilled, the animation should start from the beginning.
+				// Also, a sine could in theory be used so long as it remains in phase with the
+				// timer.
 			}
 
 		}
 	}
-
 
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts

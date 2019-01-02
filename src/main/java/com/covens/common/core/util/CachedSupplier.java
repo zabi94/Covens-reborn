@@ -13,14 +13,14 @@ public class CachedSupplier<T> implements Supplier<T> {
 
 	@Override
 	public T get() {
-		if (cachedObject == null) {
-			cachedObject = supplier.get();
+		if (this.cachedObject == null) {
+			this.cachedObject = this.supplier.get();
 		}
-		return cachedObject;
+		return this.cachedObject;
 	}
 
 	public void invalidateCache() {
-		cachedObject = null;
+		this.cachedObject = null;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.covens.common.core.capability.energy.player;
 
 import com.covens.api.mp.IMagicPowerContainer;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -18,19 +19,19 @@ public class PlayerMPContainerProvider implements ICapabilitySerializable<NBTBas
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == IMagicPowerContainer.CAPABILITY) {
-			return IMagicPowerContainer.CAPABILITY.cast(container);
+			return IMagicPowerContainer.CAPABILITY.cast(this.container);
 		}
 		return null;
 	}
 
 	@Override
 	public NBTBase serializeNBT() {
-		return IMagicPowerContainer.CAPABILITY.getStorage().writeNBT(IMagicPowerContainer.CAPABILITY, container, null);
+		return IMagicPowerContainer.CAPABILITY.getStorage().writeNBT(IMagicPowerContainer.CAPABILITY, this.container, null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt) {
-		IMagicPowerContainer.CAPABILITY.getStorage().readNBT(IMagicPowerContainer.CAPABILITY, container, null, nbt);
+		IMagicPowerContainer.CAPABILITY.getStorage().readNBT(IMagicPowerContainer.CAPABILITY, this.container, null, nbt);
 	}
 
 }

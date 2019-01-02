@@ -5,6 +5,7 @@ import com.covens.api.mp.IMagicPowerExpander;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -20,9 +21,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
- * This class was created by Joseph on 3/4/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Joseph on 3/4/2017. It's distributed as part of
+ * Covens under the MIT license.
  */
 
 //Todo: Make this expand ME only once, and make sure it's ME extension is working
@@ -30,7 +30,7 @@ public class ItemMagicSalve extends ItemMod implements IMagicPowerExpander {
 
 	public ItemMagicSalve() {
 		super(LibItemName.MAGIC_SALVE);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override

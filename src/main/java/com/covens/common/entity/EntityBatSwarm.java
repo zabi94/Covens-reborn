@@ -5,6 +5,7 @@ import com.covens.api.transformation.DefaultTransformations;
 import com.covens.client.fx.ParticleF;
 import com.covens.common.Covens;
 import com.covens.common.content.transformation.CapabilityTransformation;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,12 +31,12 @@ public class EntityBatSwarm extends Entity {
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class EntityBatSwarm extends Entity {
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
 		if (this.rand.nextInt(7) == 0) {
-			this.world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_BAT_LOOP, SoundCategory.PLAYERS, 0.8f, 0.8f + 0.4f * rand.nextFloat());
+			this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_BAT_LOOP, SoundCategory.PLAYERS, 0.8f, 0.8f + (0.4f * this.rand.nextFloat()));
 		}
 		if (this.getPassengers().size() == 0) {
 			this.setDead();
@@ -55,7 +56,7 @@ public class EntityBatSwarm extends Entity {
 			EntityPlayer rider = (EntityPlayer) this.getPassengers().get(0);
 			if (rider.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) {
 				if (this.rand.nextInt(7) == 0) {
-					this.world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_BAT_LOOP, SoundCategory.PLAYERS, 0.8f, 0.8f + 0.4f * rand.nextFloat());
+					this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_BAT_LOOP, SoundCategory.PLAYERS, 0.8f, 0.8f + (0.4f * this.rand.nextFloat()));
 				}
 				if (rider.isCreative() || CovensAPI.getAPI().addVampireBlood(rider, -1)) {
 					this.move(MoverType.SELF, this.getLookVec().x, this.getLookVec().y, this.getLookVec().z);
@@ -64,7 +65,7 @@ public class EntityBatSwarm extends Entity {
 					this.setDead();
 					return;
 				}
-				if (this.collided || this.ticksExisted > 60) {
+				if (this.collided || (this.ticksExisted > 60)) {
 					rider.dismountRidingEntity();
 					this.setDead();
 					return;
@@ -78,13 +79,13 @@ public class EntityBatSwarm extends Entity {
 
 	@Override
 	public void setDead() {
-		if (world.isRemote) {
+		if (this.world.isRemote) {
 			for (int i = 0; i < 30; i++) {
-				Covens.proxy.spawnParticle(ParticleF.BAT, this.posX + rand.nextGaussian(), posY + rand.nextGaussian(), posZ + rand.nextGaussian(), 0, 0, 0, 1);
+				Covens.proxy.spawnParticle(ParticleF.BAT, this.posX + this.rand.nextGaussian(), this.posY + this.rand.nextGaussian(), this.posZ + this.rand.nextGaussian(), 0, 0, 0, 1);
 			}
 		}
-		this.world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_BAT_AMBIENT, SoundCategory.PLAYERS, 1f, 0.8f + 0.4f * rand.nextFloat());
-		this.world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_BAT_TAKEOFF, SoundCategory.PLAYERS, 1f, 0.8f + 0.4f * rand.nextFloat());
+		this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_BAT_AMBIENT, SoundCategory.PLAYERS, 1f, 0.8f + (0.4f * this.rand.nextFloat()));
+		this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_BAT_TAKEOFF, SoundCategory.PLAYERS, 1f, 0.8f + (0.4f * this.rand.nextFloat()));
 		super.setDead();
 	}
 

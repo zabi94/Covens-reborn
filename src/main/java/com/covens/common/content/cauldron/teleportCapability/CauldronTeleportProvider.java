@@ -16,19 +16,20 @@ public class CauldronTeleportProvider implements ICapabilitySerializable<NBTBase
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == CapabilityCauldronTeleport.CAPABILITY)
-			return CapabilityCauldronTeleport.CAPABILITY.<T>cast(default_capability);
+		if (capability == CapabilityCauldronTeleport.CAPABILITY) {
+			return CapabilityCauldronTeleport.CAPABILITY.<T>cast(this.default_capability);
+		}
 		return null;
 	}
 
 	@Override
 	public NBTBase serializeNBT() {
-		return CapabilityCauldronTeleport.CAPABILITY.getStorage().writeNBT(CapabilityCauldronTeleport.CAPABILITY, default_capability, null);
+		return CapabilityCauldronTeleport.CAPABILITY.getStorage().writeNBT(CapabilityCauldronTeleport.CAPABILITY, this.default_capability, null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt) {
-		CapabilityCauldronTeleport.CAPABILITY.getStorage().readNBT(CapabilityCauldronTeleport.CAPABILITY, default_capability, null, nbt);
+		CapabilityCauldronTeleport.CAPABILITY.getStorage().readNBT(CapabilityCauldronTeleport.CAPABILITY, this.default_capability, null, nbt);
 	}
 
 }

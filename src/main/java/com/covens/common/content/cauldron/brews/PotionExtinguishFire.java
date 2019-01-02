@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +23,7 @@ public class PotionExtinguishFire extends BrewMod {
 
 	private static boolean canExtinguish(World world, int amplifier) {
 		int dimId = world.provider.getDimension();
-		return dimId != DimensionType.NETHER.getId() || amplifier > 2;
+		return (dimId != DimensionType.NETHER.getId()) || (amplifier > 2);
 	}
 
 	@Override
@@ -50,10 +51,8 @@ public class PotionExtinguishFire extends BrewMod {
 				if (world.getBlockState(in).getBlock() == Blocks.FIRE) {
 					world.setBlockToAir(in);
 				} else {
-					if (amplifier > 0) {
-						if (world.getBlockState(in).getMaterial() == Material.FIRE) {
-							world.setBlockToAir(in);
-						}
+					if ((amplifier > 0) && (world.getBlockState(in).getMaterial() == Material.FIRE)) {
+						world.setBlockToAir(in);
 					}
 				}
 			});

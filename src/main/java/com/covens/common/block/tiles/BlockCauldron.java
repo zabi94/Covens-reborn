@@ -1,10 +1,18 @@
 package com.covens.common.block.tiles;
 
+import static net.minecraft.block.BlockHorizontal.FACING;
+
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.Covens;
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,16 +30,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-
-import static net.minecraft.block.BlockHorizontal.FACING;
-
 /**
- * This class was created by Joseph on 3/4/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Joseph on 3/4/2017. It's distributed as part of
+ * Covens under the MIT license.
  */
 public class BlockCauldron extends BlockModTileEntity {
 
@@ -44,10 +45,10 @@ public class BlockCauldron extends BlockModTileEntity {
 
 	public BlockCauldron() {
 		super(LibBlockName.CAULDRON, Material.IRON);
-		this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(Covens.HALF, BlockStairs.EnumHalf.BOTTOM));
-		setSoundType(SoundType.METAL);
-		setResistance(5F);
-		setHardness(5F);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(Covens.HALF, BlockStairs.EnumHalf.BOTTOM));
+		this.setSoundType(SoundType.METAL);
+		this.setResistance(5F);
+		this.setHardness(5F);
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class BlockCauldron extends BlockModTileEntity {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		IBlockState iblockstate = getDefaultState().withProperty(Covens.HALF, (meta & 4) > 0 ? BlockStairs.EnumHalf.TOP : BlockStairs.EnumHalf.BOTTOM);
+		IBlockState iblockstate = this.getDefaultState().withProperty(Covens.HALF, (meta & 4) > 0 ? BlockStairs.EnumHalf.TOP : BlockStairs.EnumHalf.BOTTOM);
 		iblockstate = iblockstate.withProperty(FACING, EnumFacing.byIndex(5 - (meta & 3)));
 		return iblockstate;
 	}
@@ -72,7 +73,7 @@ public class BlockCauldron extends BlockModTileEntity {
 			i |= 4;
 		}
 
-		i = i | 5 - state.getValue(FACING).getIndex();
+		i = i | (5 - state.getValue(FACING).getIndex());
 		return i;
 	}
 
@@ -118,9 +119,7 @@ public class BlockCauldron extends BlockModTileEntity {
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		IBlockState iblockstate = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
 		iblockstate = iblockstate.withProperty(FACING, placer.getHorizontalFacing());
-		return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || hitY <= 0.5F) ?
-				iblockstate.withProperty(Covens.HALF, BlockStairs.EnumHalf.BOTTOM) :
-				iblockstate.withProperty(Covens.HALF, BlockStairs.EnumHalf.TOP);
+		return (facing != EnumFacing.DOWN) && ((facing == EnumFacing.UP) || (hitY <= 0.5F)) ? iblockstate.withProperty(Covens.HALF, BlockStairs.EnumHalf.BOTTOM) : iblockstate.withProperty(Covens.HALF, BlockStairs.EnumHalf.TOP);
 	}
 
 	@Override

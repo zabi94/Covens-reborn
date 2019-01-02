@@ -6,10 +6,16 @@
 
 package com.covens.common.entity;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.covens.api.spell.ISpell;
 import com.covens.api.spell.ISpell.EnumSpellType;
 import com.covens.common.Covens;
 import com.covens.common.content.spell.Spell;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -21,10 +27,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class EntitySpellCarrier extends EntityThrowable {
 
@@ -49,7 +51,7 @@ public class EntitySpellCarrier extends EntityThrowable {
 	}
 
 	public void setSpell(ISpell spell) {
-		setSpell(spell.getRegistryName().toString());
+		this.setSpell(spell.getRegistryName().toString());
 	}
 
 	private void setSpell(String spell) {
@@ -63,15 +65,18 @@ public class EntitySpellCarrier extends EntityThrowable {
 	}
 
 	public void setCaster(EntityLivingBase player) {
-		if (player != null) setCaster(player.getUniqueID().toString());
-		else setCaster("");
+		if (player != null) {
+			this.setCaster(player.getUniqueID().toString());
+		} else {
+			this.setCaster("");
+		}
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
-		compound.setString("spell", getSpellName());
-		compound.setString("caster", getCasterUUID());
+		compound.setString("spell", this.getSpellName());
+		compound.setString("caster", this.getCasterUUID());
 	}
 
 	@Override
@@ -87,7 +92,7 @@ public class EntitySpellCarrier extends EntityThrowable {
 
 	@Nullable
 	public ISpell getSpell() {
-		return Spell.SPELL_REGISTRY.getValue(new ResourceLocation(getSpellName()));
+		return Spell.SPELL_REGISTRY.getValue(new ResourceLocation(this.getSpellName()));
 	}
 
 	private String getCasterUUID() {
@@ -97,36 +102,48 @@ public class EntitySpellCarrier extends EntityThrowable {
 	@Override
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
-		if (ticksExisted > 40) {
+		if (this.ticksExisted > 40) {
 			this.setDead();
 		}
 	}
 
 	@Nullable
 	public EntityLivingBase getCaster() {
-		String uuid = getCasterUUID();
-		if (uuid == null || uuid.equals("")) return null;
+		String uuid = this.getCasterUUID();
+		if ((uuid == null) || uuid.equals("")) {
+			return null;
+		}
 		EntityLivingBase player = this.world.getPlayerEntityByUUID(UUID.fromString(uuid));
-		if (player != null) return player;
-		ArrayList<Entity> ent = new ArrayList<Entity>(world.getLoadedEntityList());
-		for (Entity e : ent)
-			if (e instanceof EntityLivingBase && uuid.equals(e.getUniqueID().toString())) return (EntityLivingBase) e;
+		if (player != null) {
+			return player;
+		}
+		ArrayList<Entity> ent = new ArrayList<Entity>(this.world.getLoadedEntityList());
+		for (Entity e : ent) {
+			if ((e instanceof EntityLivingBase) && uuid.equals(e.getUniqueID().toString())) {
+				return (EntityLivingBase) e;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	protected void onImpact(RayTraceResult result) {
-		if (!world.isRemote) {
-			ISpell spell = getSpell();
-			EntityLivingBase caster = getCaster();
+		if (!this.world.isRemote) {
+			ISpell spell = this.getSpell();
+			EntityLivingBase caster = this.getCaster();
 			if (spell != null) {
-				if (result.typeOfHit != Type.ENTITY || result.entityHit != caster)
-					spell.performEffect(result, caster, world);
-				if (result.typeOfHit == Type.BLOCK && (spell.getType() == EnumSpellType.PROJECTILE_BLOCK || spell.getType() == EnumSpellType.PROJECTILE_ALL))
+				if ((result.typeOfHit != Type.ENTITY) || (result.entityHit != caster)) {
+					spell.performEffect(result, caster, this.world);
+				}
+				if ((result.typeOfHit == Type.BLOCK) && ((spell.getType() == EnumSpellType.PROJECTILE_BLOCK) || (spell.getType() == EnumSpellType.PROJECTILE_ALL))) {
 					this.setDead();
-				if (result.typeOfHit == Type.ENTITY && (spell.getType() == EnumSpellType.PROJECTILE_ENTITY || spell.getType() == EnumSpellType.PROJECTILE_ALL) && result.entityHit != caster)
+				}
+				if ((result.typeOfHit == Type.ENTITY) && ((spell.getType() == EnumSpellType.PROJECTILE_ENTITY) || (spell.getType() == EnumSpellType.PROJECTILE_ALL)) && (result.entityHit != caster)) {
 					this.setDead();
-			} else Covens.logger.warn("Spell is null for " + this + " with spell reg name of " + getSpellName());
+				}
+			} else {
+				Covens.logger.warn("Spell is null for " + this + " with spell reg name of " + this.getSpellName());
+			}
 		}
 	}
 

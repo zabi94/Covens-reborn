@@ -19,16 +19,20 @@ public interface IBrewModifier extends IForgeRegistryEntry<IBrewModifier> {
 	public String getTooltipString(int lvl);
 
 	/**
-	 * Given the ingredient thrown in the cauldron, decide what level this modifier should be set at
+	 * Given the ingredient thrown in the cauldron, decide what level this modifier
+	 * should be set at
 	 *
 	 * @param brew             The brew being modified
 	 * @param stack            The stack that should be used as a modifier
 	 * @param currentModifiers The current list of modifiers applied to this brew.
-	 *                         The effect might already be present if the ingredient is thrown in twice,
-	 *                         so you should check it before in case this uses multiple levels
-	 * @return the ModifierResult representing what should happen. if ResultType is SUCCESS, the modifier gets
-	 * set to the level value of the Result, if the result type is FAIL the potion will fail, if the result type
-	 * is PASS nothing will be modified, and the next brew modifier will be called.
+	 *                         The effect might already be present if the ingredient
+	 *                         is thrown in twice, so you should check it before in
+	 *                         case this uses multiple levels
+	 * @return the ModifierResult representing what should happen. if ResultType is
+	 *         SUCCESS, the modifier gets set to the level value of the Result, if
+	 *         the result type is FAIL the potion will fail, if the result type is
+	 *         PASS nothing will be modified, and the next brew modifier will be
+	 *         called.
 	 */
 	public ModifierResult acceptIngredient(IBrewEffect brew, ItemStack stack, IBrewModifierList currentModifiers);
 

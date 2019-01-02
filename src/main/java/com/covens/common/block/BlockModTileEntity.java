@@ -26,7 +26,6 @@ public abstract class BlockModTileEntity extends BlockMod implements ITileEntity
 		return false;
 	}
 
-
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		if (worldIn.getTileEntity(pos) != null) {

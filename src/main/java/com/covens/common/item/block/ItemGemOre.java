@@ -14,17 +14,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 /**
- * This class was created by <Arekkuusu> on 27/06/2017.
- * It's distributed as part of Solar Epiphany under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 27/06/2017. It's distributed as part
+ * of Solar Epiphany under the MIT license.
  */
 public class ItemGemOre extends ItemBlock implements IModelRegister {
 
 	public ItemGemOre(Block block) {
 		super(block);
-		setRegistryName(block.getRegistryName());
-		setHasSubtypes(true);
-		setMaxDamage(0);
+		this.setRegistryName(block.getRegistryName());
+		this.setHasSubtypes(true);
+		this.setMaxDamage(0);
 		this.setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB);
 	}
 
@@ -46,7 +45,6 @@ public class ItemGemOre extends ItemBlock implements IModelRegister {
 			}
 		}
 	}
-
 
 	@Override
 	public void registerModel() {

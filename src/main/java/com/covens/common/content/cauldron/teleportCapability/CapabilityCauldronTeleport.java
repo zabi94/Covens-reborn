@@ -1,16 +1,18 @@
 package com.covens.common.content.cauldron.teleportCapability;
 
+import java.util.HashMap;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.block.ModBlocks;
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
-import javax.annotation.Nullable;
-import java.util.HashMap;
 
 public interface CapabilityCauldronTeleport {
 
@@ -47,7 +49,7 @@ public interface CapabilityCauldronTeleport {
 			cauldronName = cauldronName.replace(" ", "").trim();
 
 			BlockPos pos = get(cauldronName, world);
-			if (pos != null && !pos.equals(position)) {
+			if ((pos != null) && !pos.equals(position)) {
 				return false;
 			}
 			map.put(cauldronName, position);

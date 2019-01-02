@@ -1,6 +1,7 @@
 package com.covens.common.content.enchantments;
 
 import com.covens.api.mp.IMagicPowerContainer;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,10 +17,10 @@ public class EnchantmentPotentWard extends BaublesEnchantment {
 
 	@SubscribeEvent
 	public void onDamage(LivingHurtEvent evt) {
-		if (evt.getSource().isMagicDamage() && evt.getEntityLiving() instanceof EntityPlayer) {
+		if (evt.getSource().isMagicDamage() && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			EntityPlayer p = (EntityPlayer) evt.getEntityLiving();
 			IMagicPowerContainer mpc = p.getCapability(IMagicPowerContainer.CAPABILITY, null);
-			if (mpc.getAmount() * 2 > mpc.getMaxAmount()) {
+			if ((mpc.getAmount() * 2) > mpc.getMaxAmount()) {
 				int maxLevel = this.getMaxLevelOnPlayer(p);
 				if (mpc.drain(150)) {
 					evt.setAmount(Math.max(evt.getAmount() - maxLevel, 0f));
@@ -27,7 +28,6 @@ public class EnchantmentPotentWard extends BaublesEnchantment {
 			}
 		}
 	}
-
 
 	@Override
 	protected boolean canApplyTogether(Enchantment ench) {

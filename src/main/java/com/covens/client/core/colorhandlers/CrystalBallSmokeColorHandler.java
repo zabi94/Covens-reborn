@@ -11,7 +11,7 @@ public final class CrystalBallSmokeColorHandler implements IBlockColor {
 	@Override
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
 		if (tintIndex == 1) {
-			return Color.HSBtoRGB((pos.getX() + pos.getY() + pos.getZ()) % 50 / 50f, 0.4f, 1f);
+			return Color.HSBtoRGB(((pos.getX() + pos.getY() + pos.getZ()) % 50) / 50f, 0.4f, 1f);
 		}
 		return -1;
 	}

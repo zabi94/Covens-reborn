@@ -1,9 +1,22 @@
 package com.covens.common.core.net;
 
-import com.covens.client.gui.*;
-import com.covens.common.container.*;
+import com.covens.client.gui.GuiApiary;
+import com.covens.client.gui.GuiDistillery;
+import com.covens.client.gui.GuiOven;
+import com.covens.client.gui.GuiTarots;
+import com.covens.client.gui.GuiThreadSpinner;
+import com.covens.common.container.ContainerApiary;
+import com.covens.common.container.ContainerDistillery;
+import com.covens.common.container.ContainerFake;
+import com.covens.common.container.ContainerOven;
+import com.covens.common.container.ContainerThreadSpinner;
 import com.covens.common.lib.LibGui;
-import com.covens.common.tile.tiles.*;
+import com.covens.common.tile.tiles.TileEntityApiary;
+import com.covens.common.tile.tiles.TileEntityDistillery;
+import com.covens.common.tile.tiles.TileEntityOven;
+import com.covens.common.tile.tiles.TileEntityTarotsTable;
+import com.covens.common.tile.tiles.TileEntityThreadSpinner;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -13,9 +26,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by Arekkuusu on 16/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 16/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class GuiHandler implements IGuiHandler {
 
@@ -46,13 +58,13 @@ public class GuiHandler implements IGuiHandler {
 			case APIARY:
 				return tile instanceof TileEntityApiary ? new GuiApiary(player.inventory, (TileEntityApiary) tile) : null;
 			case OVEN:
-				return tile instanceof TileEntityOven ? new GuiOven((ContainerOven) getServerGuiElement(ID, player, world, x, y, z), player.inventory) : null;
+				return tile instanceof TileEntityOven ? new GuiOven((ContainerOven) this.getServerGuiElement(ID, player, world, x, y, z), player.inventory) : null;
 			case THREAD_SPINNER:
 				return tile instanceof TileEntityThreadSpinner ? new GuiThreadSpinner(player.inventory, (TileEntityThreadSpinner) tile) : null;
 			case TAROT:
 				return tile instanceof TileEntityTarotsTable ? new GuiTarots() : null;
 			case DISTILLERY:
-				return tile instanceof TileEntityDistillery ? new GuiDistillery((ContainerDistillery) getServerGuiElement(ID, player, world, x, y, z)) : null;
+				return tile instanceof TileEntityDistillery ? new GuiDistillery((ContainerDistillery) this.getServerGuiElement(ID, player, world, x, y, z)) : null;
 			default:
 				return null;
 		}

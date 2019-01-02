@@ -18,15 +18,17 @@ public class DistilleryWrapper implements IRecipeWrapper {
 	List<ItemStack> output;
 
 	public DistilleryWrapper(DistilleryRecipe recipe) {
-		input = recipe.getInputs();
-		output = recipe.getOutputs();
+		this.input = recipe.getInputs();
+		this.output = recipe.getOutputs();
 	}
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		ArrayList<List<ItemStack>> list = new ArrayList<List<ItemStack>>();
-		for (Ingredient i : input) list.add(Arrays.asList(i.getMatchingStacks()));
+		for (Ingredient i : this.input) {
+			list.add(Arrays.asList(i.getMatchingStacks()));
+		}
 		ingredients.setInputLists(VanillaTypes.ITEM, list);
-		ingredients.setOutputs(VanillaTypes.ITEM, output);
+		ingredients.setOutputs(VanillaTypes.ITEM, this.output);
 	}
 }

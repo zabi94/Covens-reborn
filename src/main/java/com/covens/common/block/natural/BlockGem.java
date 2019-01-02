@@ -1,8 +1,13 @@
 package com.covens.common.block.natural;
 
+import static com.covens.common.core.statics.ModCreativeTabs.BLOCKS_CREATIVE_TAB;
+
+import javax.annotation.Nonnull;
+
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockMod;
 import com.covens.common.lib.LibBlockName;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -16,25 +21,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
-import javax.annotation.Nonnull;
-
-import static com.covens.common.core.statics.ModCreativeTabs.BLOCKS_CREATIVE_TAB;
-
-
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public class BlockGem extends BlockMod implements IInfusionStabiliserExt {
 	public static final PropertyEnum<BlockGem.Gem> GEM = PropertyEnum.create("gem", BlockGem.Gem.class);
 
 	public BlockGem() {
 		super(LibBlockName.GEM_BLOCK, Material.ROCK);
-		setHardness(5.0F);
-		setCreativeTab(BLOCKS_CREATIVE_TAB);
+		this.setHardness(5.0F);
+		this.setCreativeTab(BLOCKS_CREATIVE_TAB);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(GEM, BlockGem.Gem.values()[meta]);
+		return this.getDefaultState().withProperty(GEM, BlockGem.Gem.values()[meta]);
 	}
 
 	@Override
@@ -81,19 +81,11 @@ public class BlockGem extends BlockMod implements IInfusionStabiliserExt {
 	}
 
 	public enum Gem implements IStringSerializable {
-		GARNET,
-		NUUMMITE,
-		TIGERS_EYE,
-		TOURMALINE,
-		BLOODSTONE,
-		JASPER,
-		MALACHITE,
-		AMETHYST,
-		ALEXANDRITE;
+		GARNET, NUUMMITE, TIGERS_EYE, TOURMALINE, BLOODSTONE, JASPER, MALACHITE, AMETHYST, ALEXANDRITE;
 
 		@Override
 		public String getName() {
-			return name().toLowerCase();
+			return this.name().toLowerCase();
 		}
 	}
 }

@@ -23,11 +23,11 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public final class ModEntities {
-	
+
 	private static int id = 0;
 
 	private ModEntities() {
-		//NO-OP
+		// NO-OP
 	}
 
 	public static void init() {
@@ -47,24 +47,13 @@ public final class ModEntities {
 		registerEntity("toad", EntityToad.class, 64, 1, true, 0xA9BA9D, 0xC3B091);
 		registerEntity("lizard", EntityLizard.class, 64, 1, true, 0x568203, 0x0070BB);
 
-		List<Biome> validOwl = BiomeDictionary.getBiomes(Type.FOREST).stream()
-				.filter(b -> BiomeDictionary.hasType(b, Type.DENSE))
-				.peek(b -> Log.d("Valid owl biome found: " + b.getRegistryName()))
-				.collect(Collectors.toList());
-		List<Biome> validSnake = Biome.REGISTRY.getKeys().stream()
-				.map(rl -> Biome.REGISTRY.getObject(rl))
-				.filter(b -> BiomeDictionary.hasType(b, Type.PLAINS) || BiomeDictionary.hasType(b, Type.HILLS))
-				.peek(b -> Log.d("Valid snake biome found: " + b.getRegistryName()))
-				.collect(Collectors.toList());
+		List<Biome> validOwl = BiomeDictionary.getBiomes(Type.FOREST).stream().filter(b -> BiomeDictionary.hasType(b, Type.DENSE)).peek(b -> Log.d("Valid owl biome found: " + b.getRegistryName())).collect(Collectors.toList());
+		List<Biome> validSnake = Biome.REGISTRY.getKeys().stream().map(rl -> Biome.REGISTRY.getObject(rl)).filter(b -> BiomeDictionary.hasType(b, Type.PLAINS) || BiomeDictionary.hasType(b, Type.HILLS)).peek(b -> Log.d("Valid snake biome found: " + b.getRegistryName())).collect(Collectors.toList());
 
 		Set<Biome> validToad = BiomeDictionary.getBiomes(Type.SWAMP);
 		validToad.forEach(b -> Log.d("Valid toad biome found: " + b.getRegistryName()));
 
-		List<Biome> validRaven = Biome.REGISTRY.getKeys().stream()
-				.map(rl -> Biome.REGISTRY.getObject(rl))
-				.filter(b -> BiomeDictionary.hasType(b, Type.PLAINS) || BiomeDictionary.hasType(b, Type.WASTELAND))
-				.peek(b -> Log.d("Valid raven biome found: " + b.getRegistryName()))
-				.collect(Collectors.toList());
+		List<Biome> validRaven = Biome.REGISTRY.getKeys().stream().map(rl -> Biome.REGISTRY.getObject(rl)).filter(b -> BiomeDictionary.hasType(b, Type.PLAINS) || BiomeDictionary.hasType(b, Type.WASTELAND)).peek(b -> Log.d("Valid raven biome found: " + b.getRegistryName())).collect(Collectors.toList());
 
 		Set<Biome> validLizard = BiomeDictionary.getBiomes(Type.FOREST);
 		validLizard.forEach(b -> Log.d("Valid lizard biome found: " + b.getRegistryName()));
@@ -85,24 +74,22 @@ public final class ModEntities {
 	private static ResourceLocation getResource(String name) {
 		return new ResourceLocation(LibMod.MOD_ID, name);
 	}
-	
+
 	private static void registerEntity(String name, Class<? extends Entity> clazz, int track_range, int update_frewuency, boolean sends_updates, int eggColor, int secundaryEggColor) {
 		checkContructor(clazz);
 		EntityRegistry.registerModEntity(getResource(name), clazz, name, id++, Covens.instance, track_range, update_frewuency, sends_updates, eggColor, secundaryEggColor);
 	}
-	
+
 	private static void registerEntity(String name, Class<? extends Entity> clazz, int track_range, int update_frewuency, boolean sends_updates) {
 		checkContructor(clazz);
 		EntityRegistry.registerModEntity(getResource(name), clazz, name, id++, Covens.instance, track_range, update_frewuency, sends_updates);
 	}
-	
+
 	private static void checkContructor(Class<? extends Entity> clazz) {
 		try {
 			clazz.getConstructor(World.class);
 		} catch (NoSuchMethodException e) {
-			throw new NoSuchMethodError("You need a contructor that takes a world object for the entity "+clazz.getCanonicalName());
-		} catch (SecurityException e) {
-			throw new RuntimeException("Exception during entity registration", e);
+			throw new NoSuchMethodError("You need a contructor that takes a world object for the entity " + clazz.getCanonicalName());
 		}
 	}
 }

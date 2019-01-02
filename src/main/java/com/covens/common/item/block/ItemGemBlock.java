@@ -17,9 +17,9 @@ import net.minecraft.util.NonNullList;
 public class ItemGemBlock extends ItemBlock implements IModelRegister {
 	public ItemGemBlock(Block block) {
 		super(block);
-		setRegistryName(block.getRegistryName());
-		setHasSubtypes(true);
-		setMaxDamage(0);
+		this.setRegistryName(block.getRegistryName());
+		this.setHasSubtypes(true);
+		this.setMaxDamage(0);
 		this.setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB);
 	}
 
@@ -41,7 +41,6 @@ public class ItemGemBlock extends ItemBlock implements IModelRegister {
 			}
 		}
 	}
-
 
 	@Override
 	public void registerModel() {

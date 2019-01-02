@@ -1,5 +1,11 @@
 package com.covens.common.block.tiles;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
+import javax.annotation.Nullable;
+
 import com.covens.api.mp.IMagicPowerContainer;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
@@ -8,6 +14,7 @@ import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModItems;
 import com.covens.common.tile.tiles.TileEntityPlacedItem;
 import com.covens.common.tile.tiles.TileEntityWitchAltar;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -32,11 +39,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vazkii.patchouli.common.multiblock.Multiblock;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-
 public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 
 	public static final PropertyAltar ALTAR_TYPE = new PropertyAltar("altar_multiblock", AltarMultiblockType.class, Arrays.asList(AltarMultiblockType.values()));
@@ -55,12 +57,14 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 
 	@SuppressWarnings("deprecation")
 	public static void notifyAround(BlockPos pos, World world) {
-		for (int dx = -1; dx <= 1; dx++)
+		for (int dx = -1; dx <= 1; dx++) {
 			for (int dy = -1; dy <= 1; dy++) {
 				BlockPos bp = pos.add(dx, 0, dy);
-				if (world.getBlockState(bp).getBlock().equals(ModBlocks.witch_altar))
+				if (world.getBlockState(bp).getBlock().equals(ModBlocks.witch_altar)) {
 					world.notifyBlockUpdate(bp, world.getBlockState(bp), world.getBlockState(bp).getBlock().getActualState(world.getBlockState(bp), world, bp), 11);
+				}
 			}
+		}
 	}
 
 	@Nullable
@@ -101,14 +105,15 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return !hasFormedBlocksAround(worldIn, pos.north(), pos.south(), pos.east(), pos.west(), pos.west().north(), pos.west().south(), pos.east().north(), pos.east().south());
+		return !this.hasFormedBlocksAround(worldIn, pos.north(), pos.south(), pos.east(), pos.west(), pos.west().north(), pos.west().south(), pos.east().north(), pos.east().south());
 	}
 
 	private boolean hasFormedBlocksAround(World world, BlockPos... pos) {
 		for (BlockPos p : pos) {
 			IBlockState bs = world.getBlockState(p);
-			if (bs.getBlock().equals(ModBlocks.witch_altar) && !bs.getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED))
+			if (bs.getBlock().equals(ModBlocks.witch_altar) && !bs.getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -144,7 +149,7 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		if (worldIn instanceof Multiblock) {
-			return state.withProperty(COLOR, (int) (System.currentTimeMillis()/1000)%16);
+			return state.withProperty(COLOR, (int) (System.currentTimeMillis() / 1000) % 16);
 		}
 		if (state.getValue(ALTAR_TYPE) != AltarMultiblockType.UNFORMED) {
 			TileEntityWitchAltar tea = (TileEntityWitchAltar) worldIn.getTileEntity(getAltarTileFromMultiblock(worldIn, pos));
@@ -162,18 +167,22 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 		int sy = Math.min(firstCorner.getZ(), secondCorner.getZ());
 		int ey = Math.max(firstCorner.getZ(), secondCorner.getZ());
 
-		for (int i = sx - 1; i <= ex + 1; i++) {
-			for (int j = sy - 1; j <= ey + 1; j++) { // -1 +1 to check the border too, it needs to be a non-witch_altar block, doesn't matter meta
+		for (int i = sx - 1; i <= (ex + 1); i++) {
+			for (int j = sy - 1; j <= (ey + 1); j++) { // -1 +1 to check the border too, it needs to be a non-witch_altar block,
+														// doesn't matter meta
 				BlockPos checked = new BlockPos(i, y, j);
-				if (!isMBBase(worldIn, checked) && i >= sx && i <= ex && j >= sy && j <= ey)
+				if (!isMBBase(worldIn, checked) && (i >= sx) && (i <= ex) && (j >= sy) && (j <= ey)) {
 					return false; // If something in the witch_altar area is not an unformed witch_altar, abort
+				}
 				blocks.add(checked);
-				if (worldIn.getBlockState(checked).getBlock().equals(ModBlocks.witch_altar) && (i < sx || i > ex || j < sy || j > ey))
-					return false; // At least one other witch_altar block is touching the multiblock you're trying to form
+				if (worldIn.getBlockState(checked).getBlock().equals(ModBlocks.witch_altar) && ((i < sx) || (i > ex) || (j < sy) || (j > ey))) {
+					return false; // At least one other witch_altar block is touching the multiblock you're trying
+									// to form
+				}
 			}
 		}
 
-		if (ex - sx < ey - sy) {
+		if ((ex - sx) < (ey - sy)) {
 			worldIn.setBlockState(new BlockPos(sx, y, sy + 1), ModBlocks.witch_altar.getDefaultState().withProperty(BlockWitchAltar.ALTAR_TYPE, BlockWitchAltar.AltarMultiblockType.TILE));
 			worldIn.setBlockState(new BlockPos(ex, y, sy + 1), ModBlocks.witch_altar.getDefaultState().withProperty(BlockWitchAltar.ALTAR_TYPE, BlockWitchAltar.AltarMultiblockType.SIDE));
 		} else {
@@ -195,39 +204,49 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (pos.getY() == fromPos.getY() && world.isAirBlock(fromPos) && !checkRecursive(world, pos, 0, new ArrayList<BlockPos>(6)) && blockIn.equals(ModBlocks.witch_altar)) {
-			dismantleRecursive(world, pos);
-		} else if (fromPos.getY() == pos.getY() + 1 && state.getValue(ALTAR_TYPE) != AltarMultiblockType.UNFORMED) {
-			//This should never cause NPEs. If it does, investigate why getAltarTileFromMultiblock returned null from a formed piece of altar
+		if ((pos.getY() == fromPos.getY()) && world.isAirBlock(fromPos) && !this.checkRecursive(world, pos, 0, new ArrayList<BlockPos>(6)) && blockIn.equals(ModBlocks.witch_altar)) {
+			this.dismantleRecursive(world, pos);
+		} else if ((fromPos.getY() == (pos.getY() + 1)) && (state.getValue(ALTAR_TYPE) != AltarMultiblockType.UNFORMED)) {
+			// This should never cause NPEs. If it does, investigate why
+			// getAltarTileFromMultiblock returned null from a formed piece of altar
 			((TileEntityWitchAltar) world.getTileEntity(getAltarTileFromMultiblock(world, pos))).scheduleUpgradeCheck();
 		}
 	}
 
 	private void dismantleRecursive(World world, BlockPos pos) {
-		world.setBlockState(pos, getDefaultState());
+		world.setBlockState(pos, this.getDefaultState());
 
-		if (world.getBlockState(pos.north()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.north()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED))
-			dismantleRecursive(world, pos.north());
-		if (world.getBlockState(pos.south()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.south()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED))
-			dismantleRecursive(world, pos.south());
-		if (world.getBlockState(pos.west()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.west()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED))
-			dismantleRecursive(world, pos.west());
-		if (world.getBlockState(pos.east()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.east()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED))
-			dismantleRecursive(world, pos.east());
+		if (world.getBlockState(pos.north()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.north()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
+			this.dismantleRecursive(world, pos.north());
+		}
+		if (world.getBlockState(pos.south()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.south()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
+			this.dismantleRecursive(world, pos.south());
+		}
+		if (world.getBlockState(pos.west()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.west()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
+			this.dismantleRecursive(world, pos.west());
+		}
+		if (world.getBlockState(pos.east()).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos.east()).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
+			this.dismantleRecursive(world, pos.east());
+		}
 	}
 
 	private boolean checkRecursive(IBlockAccess world, BlockPos pos, int i, ArrayList<BlockPos> arrayList) {
-		if (i == 5 && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED))
+		if ((i == 5) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar) && !world.getBlockState(pos).getValue(ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
 			return true;
+		}
 		arrayList.add(pos);
-		if (!arrayList.contains(pos.north()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar))
-			return checkRecursive(world, pos.north(), i + 1, arrayList);
-		if (!arrayList.contains(pos.south()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar))
-			return checkRecursive(world, pos.south(), i + 1, arrayList);
-		if (!arrayList.contains(pos.west()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar))
-			return checkRecursive(world, pos.west(), i + 1, arrayList);
-		if (!arrayList.contains(pos.east()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar))
-			return checkRecursive(world, pos.east(), i + 1, arrayList);
+		if (!arrayList.contains(pos.north()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar)) {
+			return this.checkRecursive(world, pos.north(), i + 1, arrayList);
+		}
+		if (!arrayList.contains(pos.south()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar)) {
+			return this.checkRecursive(world, pos.south(), i + 1, arrayList);
+		}
+		if (!arrayList.contains(pos.west()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar)) {
+			return this.checkRecursive(world, pos.west(), i + 1, arrayList);
+		}
+		if (!arrayList.contains(pos.east()) && world.getBlockState(pos).getBlock().equals(ModBlocks.witch_altar)) {
+			return this.checkRecursive(world, pos.east(), i + 1, arrayList);
+		}
 		return false;
 	}
 
@@ -240,10 +259,10 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		if (!worldIn.isRemote && playerIn.getHeldItem(hand).getItem() == Item.getItemFromBlock(Blocks.CARPET) && state.getValue(ALTAR_TYPE) == AltarMultiblockType.UNFORMED && !playerIn.isSneaking()) {
-			if (tryFormAltar(worldIn, pos)) {
+		if (!worldIn.isRemote && (playerIn.getHeldItem(hand).getItem() == Item.getItemFromBlock(Blocks.CARPET)) && (state.getValue(ALTAR_TYPE) == AltarMultiblockType.UNFORMED) && !playerIn.isSneaking()) {
+			if (this.tryFormAltar(worldIn, pos)) {
 				int newColor = playerIn.getHeldItem(hand).getMetadata();
-				setColor(worldIn, pos, newColor);
+				this.setColor(worldIn, pos, newColor);
 				if (!playerIn.isCreative()) {
 					playerIn.getHeldItem(hand).shrink(1);
 				}
@@ -251,7 +270,7 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 			}
 		}
 
-		if (!worldIn.isRemote && (playerIn.getHeldItem(hand).getItem() == ModItems.athame || playerIn.getHeldItem(hand).getItem() == ModItems.boline || playerIn.getHeldItem(hand).getItem() == ModItems.silver_sword || playerIn.getHeldItem(hand).getItem() == ModItems.cold_iron_sword || playerIn.getHeldItem(hand).getItem() == ModItems.pentacle) && facing == EnumFacing.UP) {
+		if (!worldIn.isRemote && ((playerIn.getHeldItem(hand).getItem() == ModItems.athame) || (playerIn.getHeldItem(hand).getItem() == ModItems.boline) || (playerIn.getHeldItem(hand).getItem() == ModItems.silver_sword) || (playerIn.getHeldItem(hand).getItem() == ModItems.cold_iron_sword) || (playerIn.getHeldItem(hand).getItem() == ModItems.pentacle)) && (facing == EnumFacing.UP)) {
 			worldIn.setBlockState(pos.up(), ModBlocks.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(playerIn.rotationYaw)), 3);
 			((TileEntityPlacedItem) worldIn.getTileEntity(pos.up())).setItem(playerIn.getHeldItem(hand).splitStack(1));
 			return true;
@@ -264,14 +283,14 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 					int oldColor = ((TileEntityWitchAltar) worldIn.getTileEntity(getAltarTileFromMultiblock(worldIn, pos))).getColor().ordinal();
 					if (newColor != oldColor) {
 						Log.i(newColor + " " + oldColor);
-						setColor(worldIn, pos, newColor);
+						this.setColor(worldIn, pos, newColor);
 						if (!playerIn.isCreative()) {
 							playerIn.getHeldItem(hand).shrink(1);
 						}
 					}
 					return true;
 				}
-			} else if (!worldIn.isRemote && playerIn.getHeldItem(hand).isEmpty() && worldIn.getBlockState(pos).getValue(ALTAR_TYPE) != AltarMultiblockType.UNFORMED) {
+			} else if (!worldIn.isRemote && playerIn.getHeldItem(hand).isEmpty() && (worldIn.getBlockState(pos).getValue(ALTAR_TYPE) != AltarMultiblockType.UNFORMED)) {
 				BlockPos tilePos = getAltarTileFromMultiblock(worldIn, pos);
 				if (tilePos != null) {
 					TileEntityWitchAltar tea = (TileEntityWitchAltar) worldIn.getTileEntity(tilePos);
@@ -286,28 +305,28 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 	}
 
 	private boolean tryFormAltar(World worldIn, BlockPos pos) {
-		
-		if (checkAndForm(worldIn, pos, pos.north().north().east(), pos.north().north().west(), pos.north().east().east(), pos.north().west().west(), pos.south().south().east(), pos.south().south().west(), pos.south().east().east(), pos.south().west().west())) {
+
+		if (this.checkAndForm(worldIn, pos, pos.north().north().east(), pos.north().north().west(), pos.north().east().east(), pos.north().west().west(), pos.south().south().east(), pos.south().south().west(), pos.south().east().east(), pos.south().west().west())) {
 			return true;
 		}
-		if (tryFormMultiblockFromCorner(worldIn, pos.east(), pos.south().west())) {
+		if (this.tryFormMultiblockFromCorner(worldIn, pos.east(), pos.south().west())) {
 			return true;
 		}
-		if (tryFormMultiblockFromCorner(worldIn, pos.east(), pos.north().west())) {
+		if (this.tryFormMultiblockFromCorner(worldIn, pos.east(), pos.north().west())) {
 			return true;
 		}
-		if (tryFormMultiblockFromCorner(worldIn, pos.north(), pos.south().west())) {
+		if (this.tryFormMultiblockFromCorner(worldIn, pos.north(), pos.south().west())) {
 			return true;
 		}
-		if (tryFormMultiblockFromCorner(worldIn, pos.north(), pos.south().east())) {
+		if (this.tryFormMultiblockFromCorner(worldIn, pos.north(), pos.south().east())) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	private boolean checkAndForm(World world, BlockPos currentPos, BlockPos... posCheckArray) {
-		for (BlockPos posCheck:posCheckArray) {
-			if (isMBBase(world, posCheck) && tryFormMultiblockFromCorner(world, currentPos, posCheck)) {
+		for (BlockPos posCheck : posCheckArray) {
+			if (isMBBase(world, posCheck) && this.tryFormMultiblockFromCorner(world, currentPos, posCheck)) {
 				return true;
 			}
 		}
@@ -338,7 +357,7 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 		}
 	}
 
-	//###########################################################################################################
+	// ###########################################################################################################
 
 	public static enum AltarMultiblockType implements IStringSerializable {
 		UNFORMED, CORNER, TILE, SIDE;

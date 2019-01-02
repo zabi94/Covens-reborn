@@ -11,7 +11,7 @@ public class CauldronItemCraftingRecipe extends CauldronCraftingRecipe {
 
 	public CauldronItemCraftingRecipe(Fluid fluid, int fluidAmount, ItemStack output, Ingredient[] ingredient) {
 		super(fluid, fluidAmount, ingredient);
-		result = output.copy();
+		this.result = output.copy();
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class CauldronItemCraftingRecipe extends CauldronCraftingRecipe {
 
 	@Override
 	public ItemStack getItemResult() {
-		return result.copy();
+		return this.result.copy();
 	}
 
 	@Override

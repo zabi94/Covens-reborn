@@ -1,12 +1,13 @@
 package com.covens.common.content.crystalBall.fortunes;
 
+import javax.annotation.Nonnull;
+
 import com.covens.common.content.crystalBall.Fortune;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.MinecraftForge;
-
-import javax.annotation.Nonnull;
 
 /**
  * Created by Joseph on 1/16/2018.

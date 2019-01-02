@@ -7,10 +7,20 @@ import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
 import com.covens.common.potion.ModPotions;
 import com.covens.common.potion.potions.PotionBloodDrained;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPolarBear;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityDonkey;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityLlama;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityParrot;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
@@ -27,7 +37,7 @@ public class BloodEvents {
 	@SubscribeEvent
 	public static void onJoin(EntityJoinWorldEvent evt) {
 		Entity e = evt.getEntity();
-		if (!e.world.isRemote && e instanceof EntityLivingBase) {
+		if (!e.world.isRemote && (e instanceof EntityLivingBase)) {
 			IBloodReserve br = e.getCapability(CapabilityBloodReserve.CAPABILITY, null);
 			if (br.getMaxBlood() == 0) {
 				int maxBlood = 100;
@@ -35,15 +45,15 @@ public class BloodEvents {
 					maxBlood = 480;
 				} else if (e instanceof EntityVillager) {
 					maxBlood = 240;
-				} else if (e instanceof EntityCow || e instanceof EntityHorse || e instanceof EntityPolarBear) {
+				} else if ((e instanceof EntityCow) || (e instanceof EntityHorse) || (e instanceof EntityPolarBear)) {
 					maxBlood = 150;
-				} else if (e instanceof EntityDonkey || e instanceof EntityLlama) {
+				} else if ((e instanceof EntityDonkey) || (e instanceof EntityLlama)) {
 					maxBlood = 130;
 				} else if (e instanceof EntitySheep) {
 					maxBlood = 110;
-				} else if (e instanceof EntityWolf || e instanceof EntityOcelot) {
+				} else if ((e instanceof EntityWolf) || (e instanceof EntityOcelot)) {
 					maxBlood = 80;
-				} else if (e instanceof EntityChicken || e instanceof EntityParrot) {
+				} else if ((e instanceof EntityChicken) || (e instanceof EntityParrot)) {
 					maxBlood = 50;
 				} else {
 					maxBlood = -1;
@@ -73,7 +83,7 @@ public class BloodEvents {
 			EntityLivingBase ent = evt.getEntityLiving();
 			boolean ignore = false;
 			IBloodReserve br = ent.getCapability(CapabilityBloodReserve.CAPABILITY, null);
-			if (br.getMaxBlood() > br.getBlood() && ent.ticksExisted % 80 == 0) {
+			if ((br.getMaxBlood() > br.getBlood()) && ((ent.ticksExisted % 80) == 0)) {
 				int baseIncrease = 20 / (int) ent.world.getEntitiesWithinAABB(EntityLivingBase.class, ent.getEntityBoundingBox().grow(10)).parallelStream().count();
 				if (ent instanceof EntityPlayer) {
 					CapabilityTransformation data = ent.getCapability(CapabilityTransformation.CAPABILITY, null);
@@ -89,7 +99,7 @@ public class BloodEvents {
 				}
 
 				float stored = br.getPercentFilled();
-				if (!ignore && stored < PotionBloodDrained.TRESHOLD) {
+				if (!ignore && (stored < PotionBloodDrained.TRESHOLD)) {
 					ent.addPotionEffect(new PotionEffect(ModPotions.bloodDrained, 200, 0));
 				}
 

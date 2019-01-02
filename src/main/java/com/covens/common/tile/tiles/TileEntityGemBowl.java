@@ -138,13 +138,13 @@ public class TileEntityGemBowl extends ModTileEntity {
 		}
 		ItemStack held = playerIn.getHeldItem(hand);
 		if (held.isEmpty() && this.hasGem()) {
-			playerIn.setHeldItem(hand, gemHandler.extractItem(0, 1, false));
+			playerIn.setHeldItem(hand, this.gemHandler.extractItem(0, 1, false));
 			this.markDirty();
 			this.syncToClient();
 		} else if (!held.isEmpty() && !this.hasGem()) {
 			for (int oreID : OreDictionary.getOreIDs(held)) {
 				if (gainMap.keySet().contains(OreDictionary.getOreName(oreID))) {
-					gemHandler.insertItem(0, held.splitStack(1), false);
+					this.gemHandler.insertItem(0, held.splitStack(1), false);
 					this.markDirty();
 					this.syncToClient();
 					break;
@@ -156,35 +156,35 @@ public class TileEntityGemBowl extends ModTileEntity {
 
 	@Override
 	public void onBlockBroken(World worldIn, BlockPos pos, IBlockState state) {
-		dropInventory(gemHandler);
+		this.dropInventory(this.gemHandler);
 	}
 
 	public boolean hasGem() {
-		return !gemHandler.getStackInSlot(0).isEmpty();
+		return !this.gemHandler.getStackInSlot(0).isEmpty();
 	}
 
 	public ItemStack getGem() {
-		return gemHandler.getStackInSlot(0).copy();
+		return this.gemHandler.getStackInSlot(0).copy();
 	}
-	
+
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+		return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
 	}
-	
+
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(gemHandler);
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.gemHandler);
 		}
 		return super.getCapability(capability, facing);
 	}
 
 	public int getGemValue() {
-		if (!hasGem()) {
+		if (!this.hasGem()) {
 			return 0;
 		}
-		for (int oreID : OreDictionary.getOreIDs(getGem())) {
+		for (int oreID : OreDictionary.getOreIDs(this.getGem())) {
 			String oreName = OreDictionary.getOreName(oreID);
 			if (gainMap.containsKey(oreName)) {
 				return gainMap.get(oreName);
@@ -195,25 +195,25 @@ public class TileEntityGemBowl extends ModTileEntity {
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound cmp) {
-		gemHandler.deserializeNBT(cmp.getCompoundTag(GEM_TAG_NAME));
+		this.gemHandler.deserializeNBT(cmp.getCompoundTag(GEM_TAG_NAME));
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound cmp) {
-		cmp.setTag(GEM_TAG_NAME, gemHandler.serializeNBT());
+		cmp.setTag(GEM_TAG_NAME, this.gemHandler.serializeNBT());
 	}
 
 	@Override
 	protected void writeModSyncDataNBT(NBTTagCompound tag) {
-		writeAllModDataNBT(tag);
+		this.writeAllModDataNBT(tag);
 	}
 
 	@Override
 	protected void readModSyncDataNBT(NBTTagCompound tag) {
-		readAllModDataNBT(tag);
+		this.readAllModDataNBT(tag);
 	}
 
 	public EnumFacing getDirection() {
-		return world.getBlockState(pos).getValue(BlockHorizontal.FACING);
+		return this.world.getBlockState(this.pos).getValue(BlockHorizontal.FACING);
 	}
 }

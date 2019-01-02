@@ -4,6 +4,7 @@ import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.Covens;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
@@ -47,11 +48,11 @@ public class PotionFrostbite extends BrewMod {
 
 		Iterable<BlockPos> spots = BlockPos.getAllInBox(posI, posF);
 		for (BlockPos spot : spots) {
-			if (spot.distanceSq(pos) < 2 + box * box / 2) {
+			if (spot.distanceSq(pos) < (2 + ((box * box) / 2))) {
 				IBlockState state = world.getBlockState(spot);
-				if (world.rand.nextInt(4) <= modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2) {
+				if (world.rand.nextInt(4) <= (modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2)) {
 					Block block = state.getBlock();
-					if (block == Blocks.WATER && world.isAirBlock(spot.up())) {
+					if ((block == Blocks.WATER) && world.isAirBlock(spot.up())) {
 						world.setBlockState(spot, Blocks.ICE.getDefaultState(), 3);
 					} else if (block == Blocks.SNOW_LAYER) {
 						int level = state.getValue(BlockSnow.LAYERS);
@@ -66,7 +67,7 @@ public class PotionFrostbite extends BrewMod {
 						world.setBlockState(spot, Blocks.ICE.getDefaultState(), 3);
 					} else if (block == Blocks.LAVA) {
 						world.setBlockState(spot, Blocks.OBSIDIAN.getDefaultState(), 3);
-					} else if (block == Blocks.AIR && world.getBlockState(spot.down()).getBlock() == Blocks.GRASS) {
+					} else if ((block == Blocks.AIR) && (world.getBlockState(spot.down()).getBlock() == Blocks.GRASS)) {
 						world.setBlockState(spot, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 3);
 					}
 				}

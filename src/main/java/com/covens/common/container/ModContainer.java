@@ -20,12 +20,12 @@ public abstract class ModContainer<T extends TileEntity> extends Container {
 	protected void addPlayerSlots(InventoryPlayer playerInventory, int x, int y) {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, x + j * 18, y + i * 18));
+				this.addSlotToContainer(new Slot(playerInventory, j + (i * 9) + 9, x + (j * 18), y + (i * 18)));
 			}
 		}
 
 		for (int i = 0; i < 9; ++i) {
-			addSlotToContainer(new Slot(playerInventory, i, x + i * 18, y + 58));
+			this.addSlotToContainer(new Slot(playerInventory, i, x + (i * 18), y + 58));
 		}
 	}
 
@@ -44,7 +44,7 @@ public abstract class ModContainer<T extends TileEntity> extends Container {
 	}
 
 	public T getTileEntity() {
-		return tileEntity;
+		return this.tileEntity;
 	}
 
 	/*
@@ -57,12 +57,12 @@ public abstract class ModContainer<T extends TileEntity> extends Container {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		this.listeners.forEach(l -> sendChangesToListener(l));
+		this.listeners.forEach(l -> this.sendChangesToListener(l));
 	}
 
 	private void sendChangesToListener(IContainerListener l) {
-		for (int i = 0; i < getFieldsToSync(); i++) {
-			l.sendWindowProperty(this, i, getFieldFromTile(i));
+		for (int i = 0; i < this.getFieldsToSync(); i++) {
+			l.sendWindowProperty(this, i, this.getFieldFromTile(i));
 		}
 	}
 
@@ -74,18 +74,18 @@ public abstract class ModContainer<T extends TileEntity> extends Container {
 	@Override
 	public void addListener(IContainerListener listener) {
 		super.addListener(listener);
-		sendChangesToListener(listener);
+		this.sendChangesToListener(listener);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
 		super.updateProgressBar(id, data);
-		onFieldUpdated(id, data);
+		this.onFieldUpdated(id, data);
 	}
 
 	@SideOnly(Side.CLIENT)
 	protected void onFieldUpdated(int id, int data) {
-		//Extend this
+		// Extend this
 	}
 }

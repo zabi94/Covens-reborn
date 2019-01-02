@@ -1,18 +1,17 @@
 package com.covens.common.content.incantation;
 
-import com.covens.api.incantation.IIncantation;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import com.covens.api.incantation.IIncantation;
+
 /**
- * This class was created by Arekkuusu on 19/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 19/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class ModIncantations {
 
-	//Todo: Convert all of these into spells.
+	// Todo: Convert all of these into spells.
 
 	private static final Map<String, IIncantation> commands = new HashMap<>();
 

@@ -1,6 +1,7 @@
 package com.covens.common.core.capability.energy;
 
 import com.covens.api.mp.IMagicPowerUsingItem;
+
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class MagicPowerUsingItem {

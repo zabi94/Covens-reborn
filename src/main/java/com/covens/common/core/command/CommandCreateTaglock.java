@@ -1,20 +1,26 @@
 package com.covens.common.core.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.Covens;
 import com.covens.common.core.helper.NBTHelper;
 import com.covens.common.item.ModItems;
-import net.minecraft.command.*;
+
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 public class CommandCreateTaglock extends CommandBase {
 
@@ -42,7 +48,7 @@ public class CommandCreateTaglock extends CommandBase {
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-		if (args.length != 1 && args.length != 2) {
+		if ((args.length != 1) && (args.length != 2)) {
 			throw new WrongUsageException("commands.create_taglock.usage");
 		} else if (sender instanceof EntityPlayer) {
 			ItemStack stack = new ItemStack(ModItems.taglock);
@@ -77,8 +83,7 @@ public class CommandCreateTaglock extends CommandBase {
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
 		if (args.length == 1) {
 			ArrayList<String> possibilities = new ArrayList<>();
-			server.getPlayerList().getPlayers().stream().filter(player -> player.getName().startsWith(args[0]))
-					.forEach(player -> possibilities.add(player.getName()));
+			server.getPlayerList().getPlayers().stream().filter(player -> player.getName().startsWith(args[0])).forEach(player -> possibilities.add(player.getName()));
 			if (!possibilities.isEmpty()) {
 				return possibilities;
 			}

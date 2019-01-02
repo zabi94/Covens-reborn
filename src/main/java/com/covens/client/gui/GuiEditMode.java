@@ -1,11 +1,12 @@
 package com.covens.client.gui;
 
+import java.io.IOException;
+
 import com.covens.client.core.hud.HudController;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-
-import java.io.IOException;
 
 public class GuiEditMode extends GuiScreen {
 

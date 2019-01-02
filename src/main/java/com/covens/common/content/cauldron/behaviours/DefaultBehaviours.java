@@ -7,30 +7,30 @@ public class DefaultBehaviours {
 	public ICauldronBehaviour IDLE, FAILING, BREWING, STEW, CRAFTING, CLEANING, LAVA;
 
 	public void init(TileEntityCauldron tile) {
-		IDLE = new CauldronBehaviourIdle();
-		LAVA = new CauldronBehaviourLava();
-		STEW = new CauldronBehaviourStew();
-		FAILING = new CauldronBehaviourFailing();
-		CLEANING = new CauldronBehaviourClean();
-		BREWING = new CauldronBehaviourBrewing();
-		CRAFTING = new CauldronBehaviourCrafting();
+		this.IDLE = new CauldronBehaviourIdle();
+		this.LAVA = new CauldronBehaviourLava();
+		this.STEW = new CauldronBehaviourStew();
+		this.FAILING = new CauldronBehaviourFailing();
+		this.CLEANING = new CauldronBehaviourClean();
+		this.BREWING = new CauldronBehaviourBrewing();
+		this.CRAFTING = new CauldronBehaviourCrafting();
 
-		IDLE.setCauldron(tile);
-		LAVA.setCauldron(tile);
-		STEW.setCauldron(tile);
-		FAILING.setCauldron(tile);
-		CLEANING.setCauldron(tile);
-		BREWING.setCauldron(tile);
-		CRAFTING.setCauldron(tile);
+		this.IDLE.setCauldron(tile);
+		this.LAVA.setCauldron(tile);
+		this.STEW.setCauldron(tile);
+		this.FAILING.setCauldron(tile);
+		this.CLEANING.setCauldron(tile);
+		this.BREWING.setCauldron(tile);
+		this.CRAFTING.setCauldron(tile);
 
-		tile.addBehaviour(IDLE);
-		tile.addBehaviour(LAVA);
-		tile.addBehaviour(STEW);
-		tile.addBehaviour(FAILING);
-		tile.addBehaviour(CLEANING);
-		tile.addBehaviour(BREWING);
-		tile.addBehaviour(CRAFTING);
+		tile.addBehaviour(this.IDLE);
+		tile.addBehaviour(this.LAVA);
+		tile.addBehaviour(this.STEW);
+		tile.addBehaviour(this.FAILING);
+		tile.addBehaviour(this.CLEANING);
+		tile.addBehaviour(this.BREWING);
+		tile.addBehaviour(this.CRAFTING);
 
-		tile.setBehaviour(IDLE);
+		tile.setBehaviour(this.IDLE);
 	}
 }

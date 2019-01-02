@@ -1,18 +1,15 @@
 package com.covens.common.core.capability.mimic;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
-import javax.annotation.Nullable;
-
 public class MimicDataStorage implements Capability.IStorage<IMimicData> {
 
-	private static final String
-			MIMICKING = "mimicking",
-			MIMICKING_ID = "mimickingID",
-			MIMICKING_NAME = "mimickingName";
+	private static final String MIMICKING = "mimicking", MIMICKING_ID = "mimickingID", MIMICKING_NAME = "mimickingName";
 
 	@Nullable
 	@Override

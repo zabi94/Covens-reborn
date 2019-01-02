@@ -1,6 +1,7 @@
 package com.covens.common.item.magic;
 
 import com.covens.common.item.ItemMod;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -19,16 +20,18 @@ public class ItemFumes extends ItemMod {
 
 	@Override
 	public String getTranslationKey(ItemStack stack) {
-		if (stack.getMetadata() >= Type.values().length)
+		if (stack.getMetadata() >= Type.values().length) {
 			return super.getTranslationKey(stack);
+		}
 		return super.getTranslationKey(stack) + "." + Type.values()[stack.getMetadata()].name();
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> tab) {
 		if (this.isInCreativeTab(itemIn)) {
-			for (Type t : Type.values())
+			for (Type t : Type.values()) {
 				tab.add(new ItemStack(this, 1, t.ordinal()));
+			}
 		}
 	}
 
@@ -72,7 +75,7 @@ public class ItemFumes extends ItemMod {
 		petrichor_odour, // connected with earth
 		zephyr_of_the_depths, // connected with water
 
-		reek_of_death, vital_essence, droplet_of_wisdom, bottled_magic //Trees from our mod. In order: Cypress, Yew, Elder, Juniper
+		reek_of_death, vital_essence, droplet_of_wisdom, bottled_magic // Trees from our mod. In order: Cypress, Yew, Elder, Juniper
 	}
 
 }

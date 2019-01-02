@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.behaviours;
 
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,12 +18,12 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 
 	@Override
 	public void setCauldron(TileEntityCauldron tile) {
-		cauldron = tile;
+		this.cauldron = tile;
 	}
 
 	@Override
 	public void handleParticles(boolean active) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 
 	@Override
 	public void update(boolean active) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -42,22 +43,22 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -67,13 +68,13 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 
 	@Override
 	public void statusChanged(boolean active) {
-		if (active && cauldron.getInputs().size() > 0) {
-			ItemStack stack = cauldron.getInputs().get(cauldron.getInputs().size() - 1);
-			if (stack.getItem() == Items.GUNPOWDER || stack.getItem() == Items.FIRE_CHARGE) {
-				cauldron.getWorld().createExplosion(null, cauldron.getPos().getX() + 0.5, cauldron.getPos().getY() + 0.5, cauldron.getPos().getZ() + 0.5, 1, true);
+		if (active && (this.cauldron.getInputs().size() > 0)) {
+			ItemStack stack = this.cauldron.getInputs().get(this.cauldron.getInputs().size() - 1);
+			if ((stack.getItem() == Items.GUNPOWDER) || (stack.getItem() == Items.FIRE_CHARGE)) {
+				this.cauldron.getWorld().createExplosion(null, this.cauldron.getPos().getX() + 0.5, this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.5, 1, true);
 			} else if (stack.getItem() == Item.getItemFromBlock(Blocks.TNT)) {
-				cauldron.getWorld().createExplosion(null, cauldron.getPos().getX() + 0.5, cauldron.getPos().getY() + 0.5, cauldron.getPos().getZ() + 0.5, 3, true);
-			} else if (stack.getItem() == Items.FIREWORKS || stack.getItem() == Items.FIREWORK_CHARGE) {
+				this.cauldron.getWorld().createExplosion(null, this.cauldron.getPos().getX() + 0.5, this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.5, 3, true);
+			} else if ((stack.getItem() == Items.FIREWORKS) || (stack.getItem() == Items.FIREWORK_CHARGE)) {
 				boolean isCharge = false;
 				if (stack.getItem() == Items.FIREWORK_CHARGE) {
 					isCharge = true;
@@ -90,20 +91,20 @@ public class CauldronBehaviourLava implements ICauldronBehaviour {
 					stack.setTagCompound(fireworksBaseTag);
 
 				}
-				EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(cauldron.getWorld(), cauldron.getPos().getX() + 0.5, cauldron.getPos().getY() + 0.5, cauldron.getPos().getZ() + 0.5, stack);
+				EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(this.cauldron.getWorld(), this.cauldron.getPos().getX() + 0.5, this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.5, stack);
 				if (isCharge) {
 					NBTTagCompound hackTag = new NBTTagCompound();
 					entityfireworkrocket.writeEntityToNBT(hackTag);
 					hackTag.setInteger("LifeTime", 0);
 					entityfireworkrocket.readEntityFromNBT(hackTag);
 				}
-				cauldron.getWorld().spawnEntity(entityfireworkrocket);
+				this.cauldron.getWorld().spawnEntity(entityfireworkrocket);
 			}
 		}
 	}
 
 	@Override
 	public void onDeactivation() {
-		//NO-OP
+		// NO-OP
 	}
 }

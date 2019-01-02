@@ -1,11 +1,12 @@
 package com.covens.common.tile.util;
 
+import javax.annotation.Nullable;
+
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-
-import javax.annotation.Nullable;
 
 public class CauldronFluidTank extends FluidTank {
 
@@ -19,7 +20,7 @@ public class CauldronFluidTank extends FluidTank {
 	@Override
 	public int fillInternal(FluidStack resource, boolean doFill) {
 		int filled = super.fillInternal(resource, doFill);
-		if (doFill && filled > 0) {
+		if (doFill && (filled > 0)) {
 			// world.updateComparatorOutputLevel(pos, world.getBlockState(pos).getBlock());
 		}
 		return filled;
@@ -29,7 +30,7 @@ public class CauldronFluidTank extends FluidTank {
 	@Override
 	public FluidStack drainInternal(int maxDrain, boolean doDrain) {
 		FluidStack drained = super.drainInternal(maxDrain, doDrain);
-		if (doDrain && drained != null && drained.amount > 0) {
+		if (doDrain && (drained != null) && (drained.amount > 0)) {
 			// world.updateComparatorOutputLevel(pos, world.getBlockState(pos).getBlock());
 		}
 		return drained;
@@ -37,33 +38,33 @@ public class CauldronFluidTank extends FluidTank {
 
 	@Override
 	protected void onContentsChanged() {
-		tileCauldron.onLiquidChange();
+		this.tileCauldron.onLiquidChange();
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Cauldron: %s, %d/%d", fluid != null && fluid.getFluid() != null ? fluid.getFluid().getName() : "Empty", getFluidAmount(), getCapacity());
+		return String.format("Cauldron: %s, %d/%d", (this.fluid != null) && (this.fluid.getFluid() != null) ? this.fluid.getFluid().getName() : "Empty", this.getFluidAmount(), this.getCapacity());
 	}
 
 	public boolean hasFluid() {
-		FluidStack fluid = getFluid();
-		return fluid != null && fluid.amount > 0 && fluid.getFluid() != null;
+		FluidStack fluid = this.getFluid();
+		return (fluid != null) && (fluid.amount > 0) && (fluid.getFluid() != null);
 	}
 
 	public boolean hasFluid(Fluid other) {
-		return fluid != null && fluid.getFluid() == other;
+		return (this.fluid != null) && (this.fluid.getFluid() == other);
 	}
 
 	@Nullable
 	public Fluid getInnerFluid() {
-		return fluid != null ? fluid.getFluid() : null;
+		return this.fluid != null ? this.fluid.getFluid() : null;
 	}
 
 	public boolean isEmpty() {
-		return getFluid() == null || getFluid().amount <= 0;
+		return (this.getFluid() == null) || (this.getFluid().amount <= 0);
 	}
 
 	public boolean isFull() {
-		return getFluid() != null && getFluid().amount == getCapacity();
+		return (this.getFluid() != null) && (this.getFluid().amount == this.getCapacity());
 	}
 }

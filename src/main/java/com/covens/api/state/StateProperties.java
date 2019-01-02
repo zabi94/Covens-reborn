@@ -7,7 +7,6 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 
-
 public class StateProperties {
 
 	public static final PropertyEnum<EnumWoodType> WOOD_TYPE = PropertyEnum.create("wood", EnumWoodType.class);
@@ -19,6 +18,6 @@ public class StateProperties {
 	public static final PropertyInteger MIRROR_VARIANTS = PropertyInteger.create("mirror", 0, 3);
 
 	public static final PropertyBool LOWER_HALF = PropertyBool.create("half");
-	
+
 	public static final PropertyBool FERTILE = PropertyBool.create("fertile");
 }

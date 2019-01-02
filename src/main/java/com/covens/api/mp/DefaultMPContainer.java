@@ -13,24 +13,24 @@ public class DefaultMPContainer implements IMagicPowerContainer {
 	private int maxAmount;
 
 	public DefaultMPContainer(int max) {
-		maxAmount = max;
-		amount = max;
+		this.maxAmount = max;
+		this.amount = max;
 	}
 
 	@Override
 	public int getAmount() {
-		return amount;
+		return this.amount;
 	}
 
 	@Override
 	public int getMaxAmount() {
-		return maxAmount;
+		return this.maxAmount;
 	}
 
 	@Override
 	public boolean fill(int in) {
-		if (getAmount() < getMaxAmount()) {
-			setAmount(Math.min(getAmount() + in, getMaxAmount()));
+		if (this.getAmount() < this.getMaxAmount()) {
+			this.setAmount(Math.min(this.getAmount() + in, this.getMaxAmount()));
 			return true;
 		}
 		return false;
@@ -38,8 +38,8 @@ public class DefaultMPContainer implements IMagicPowerContainer {
 
 	@Override
 	public boolean drain(int out) {
-		if (getAmount() >= out) {
-			setAmount(getAmount() - out);
+		if (this.getAmount() >= out) {
+			this.setAmount(this.getAmount() - out);
 			return true;
 		}
 		return false;
@@ -47,13 +47,13 @@ public class DefaultMPContainer implements IMagicPowerContainer {
 
 	@Override
 	public void setAmount(int newAmount) {
-		if (newAmount > getMaxAmount()) {
-			throw new MPManipulationException(String.format("The amount set (%d) is greater than the maximum amount (%d)", newAmount, getMaxAmount()));
+		if (newAmount > this.getMaxAmount()) {
+			throw new MPManipulationException(String.format("The amount set (%d) is greater than the maximum amount (%d)", newAmount, this.getMaxAmount()));
 		}
 		if (newAmount < 0) {
 			throw new MPManipulationException("The amount must be 0 or greater");
 		}
-		amount = newAmount;
+		this.amount = newAmount;
 	}
 
 	@Override
@@ -61,22 +61,22 @@ public class DefaultMPContainer implements IMagicPowerContainer {
 		if (newMaxAmount < 0) {
 			throw new MPManipulationException("The amount must be 0 or greater");
 		}
-		maxAmount = newMaxAmount;
-		if (getAmount() > maxAmount) {
-			setAmount(maxAmount);
+		this.maxAmount = newMaxAmount;
+		if (this.getAmount() > this.maxAmount) {
+			this.setAmount(this.maxAmount);
 		}
 	}
 
 	public NBTTagCompound saveNBTTag() {
 		NBTTagCompound tag = new NBTTagCompound();
-		tag.setInteger("current", getAmount());
-		tag.setInteger("max", getMaxAmount());
+		tag.setInteger("current", this.getAmount());
+		tag.setInteger("max", this.getMaxAmount());
 		return tag;
 	}
 
 	public void loadFromNBT(NBTTagCompound tag) {
-		setMaxAmount(tag.getInteger("max"));
-		setAmount(tag.getInteger("current"));
+		this.setMaxAmount(tag.getInteger("max"));
+		this.setAmount(tag.getInteger("current"));
 	}
 
 }

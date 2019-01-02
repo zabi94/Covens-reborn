@@ -8,11 +8,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 /**
- * adder - cybercat5555
- * Created using Tabula 5.1.0
+ * adder - cybercat5555 Created using Tabula 5.1.0
  */
 public class ModelSnake extends ModelBase {
-	//	private static final int COIL_ANIMATION_LENGTH = 160;
+	// private static final int COIL_ANIMATION_LENGTH = 160;
 	public ModelRenderer neck01a;
 	public ModelRenderer neck01b;
 	public ModelRenderer neck02;
@@ -47,11 +46,11 @@ public class ModelSnake extends ModelBase {
 		this.upperJawR.mirror = true;
 		this.upperJawR.setRotationPoint(-1.9F, -0.9F, -3.0F);
 		this.upperJawR.addBox(-0.5F, -1.0F, -4.07F, 2, 2, 5, 0.0F);
-		this.setRotateAngle(upperJawR, 0.0F, -0.19198621771937624F, 0.0F);
+		this.setRotateAngle(this.upperJawR, 0.0F, -0.19198621771937624F, 0.0F);
 		this.upperJawL = new ModelRenderer(this, 17, 0);
 		this.upperJawL.setRotationPoint(0.9F, -0.9F, -3.0F);
 		this.upperJawL.addBox(-0.5F, -1.0F, -3.7F, 2, 2, 5, 0.0F);
-		this.setRotateAngle(upperJawL, 0.0F, 0.19198621771937624F, 0.0F);
+		this.setRotateAngle(this.upperJawL, 0.0F, 0.19198621771937624F, 0.0F);
 		this.tail03 = new ModelRenderer(this, 23, 45);
 		this.tail03.setRotationPoint(0.0F, 0.0F, 5.9F);
 		this.tail03.addBox(-1.5F, -1.1F, -1.0F, 3, 2, 7, 0.0F);
@@ -97,7 +96,7 @@ public class ModelSnake extends ModelBase {
 		this.upperJawM = new ModelRenderer(this, 0, 0);
 		this.upperJawM.setRotationPoint(0.0F, -1.3F, -2.8F);
 		this.upperJawM.addBox(-1.5F, -1.1F, -4.4F, 3, 2, 5, 0.0F);
-		this.setRotateAngle(upperJawM, 0.08726646259971647F, 0.0F, 0.0F);
+		this.setRotateAngle(this.upperJawM, 0.08726646259971647F, 0.0F, 0.0F);
 		this.tail01 = new ModelRenderer(this, 27, 22);
 		this.tail01.setRotationPoint(0.0F, 0.0F, 6.7F);
 		this.tail01.addBox(-0.7F, -1.5F, 0.6F, 3, 3, 7, 0.0F);
@@ -151,7 +150,7 @@ public class ModelSnake extends ModelBase {
 			this.tail02.rotateAngleY = angle * MathHelper.sin(limbSwing + 4);
 			this.tail03.rotateAngleY = angle * MathHelper.sin(limbSwing + 2);
 			this.tail04.rotateAngleY = angle * MathHelper.sin(limbSwing + 3);
-			this.tail05.rotateAngleY = angle / 4F * MathHelper.sin(limbSwing + 2);
+			this.tail05.rotateAngleY = (angle / 4F) * MathHelper.sin(limbSwing + 2);
 			this.head.rotateAngleY = this.neck02.rotateAngleY;
 			this.head.rotateAngleZ = 0.174532925F * MathHelper.cos(limbSwing - 5);
 			this.head.rotateAngleX = 0;

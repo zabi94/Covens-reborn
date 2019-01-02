@@ -1,15 +1,15 @@
 package com.covens.common.block.natural.crop;
 
 import com.covens.client.core.IModelRegister;
+
 import net.minecraft.block.BlockCrops;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by Arekkuusu on 28/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 28/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class BlockCrop extends BlockCrops implements IModelRegister {
 
@@ -19,28 +19,28 @@ public class BlockCrop extends BlockCrops implements IModelRegister {
 
 	public BlockCrop(String id) {
 		super();
-		setTranslationKey(id);
-		setRegistryName(id);
-		setCreativeTab(null);
+		this.setTranslationKey(id);
+		this.setRegistryName(id);
+		this.setCreativeTab(null);
 		this.maxAge = 7;
 	}
 
 	public BlockCrop(String id, int maxAge) {
 		super();
-		setTranslationKey(id);
-		setRegistryName(id);
-		setCreativeTab(null);
+		this.setTranslationKey(id);
+		this.setRegistryName(id);
+		this.setCreativeTab(null);
 		this.maxAge = maxAge;
 	}
 
 	@Override
 	public int getMaxAge() {
-		return maxAge;
+		return this.maxAge;
 	}
 
 	@Override
 	public Item getSeed() {
-		return seed;
+		return this.seed;
 	}
 
 	public void setSeed(Item seed) {
@@ -49,7 +49,7 @@ public class BlockCrop extends BlockCrops implements IModelRegister {
 
 	@Override
 	public Item getCrop() {
-		return crop;
+		return this.crop;
 	}
 
 	public void setCrop(Item crop) {

@@ -1,9 +1,9 @@
 package com.covens.client.core.event.custom;
 
+import java.util.UUID;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-
-import java.util.UUID;
 
 public class MimicEvent extends PlayerEvent {
 	private UUID victimID;
@@ -18,14 +18,14 @@ public class MimicEvent extends PlayerEvent {
 	}
 
 	public UUID getVictimID() {
-		return victimID;
+		return this.victimID;
 	}
 
 	public String getVictimName() {
-		return victimName;
+		return this.victimName;
 	}
 
 	public boolean isReverting() {
-		return reverting;
+		return this.reverting;
 	}
 }

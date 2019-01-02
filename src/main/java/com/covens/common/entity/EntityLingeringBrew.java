@@ -1,8 +1,17 @@
 package com.covens.common.entity;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.ApplicationType;
 import com.google.common.collect.Maps;
+
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,13 +24,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-
-import javax.annotation.Nullable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 public class EntityLingeringBrew extends Entity {
 	private static final DataParameter<Float> RADIUS = EntityDataManager.<Float>createKey(EntityLingeringBrew.class, DataSerializers.FLOAT);
@@ -104,12 +106,12 @@ public class EntityLingeringBrew extends Entity {
 		float radius = this.getRadius();
 
 		if (this.world.isRemote) {
-			handleParticles(radius);
+			this.handleParticles(radius);
 		} else {
-			radius = updateLifetime(radius);
-			BrewData data = BrewData.fromStack(dataManager.get(BREW));
-			if (this.ticksExisted % 5 == 0) {
-				radius = applyToEntities(data, radius);
+			radius = this.updateLifetime(radius);
+			BrewData data = BrewData.fromStack(this.dataManager.get(BREW));
+			if ((this.ticksExisted % 5) == 0) {
+				radius = this.applyToEntities(data, radius);
 			}
 			this.setRadius(radius);
 		}
@@ -126,7 +128,7 @@ public class EntityLingeringBrew extends Entity {
 		}
 		List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox());
 		for (EntityLivingBase entitylivingbase : list) {
-			r = applyTo(entitylivingbase, r, data);
+			r = this.applyTo(entitylivingbase, r, data);
 		}
 		return r;
 	}
@@ -136,11 +138,11 @@ public class EntityLingeringBrew extends Entity {
 		if (!this.reapplicationDelayMap.containsKey(entitylivingbase) && entitylivingbase.canBeHitWithPotion()) {
 			double dx = entitylivingbase.posX - this.posX;
 			double dz = entitylivingbase.posZ - this.posZ;
-			double distanceSquared = dx * dx + dz * dz;
-			if (distanceSquared <= r * r) {
+			double distanceSquared = (dx * dx) + (dz * dz);
+			if (distanceSquared <= (r * r)) {
 				this.reapplicationDelayMap.put(entitylivingbase, Integer.valueOf(this.ticksExisted + this.reapplicationDelay));
 				data.applyToEntity(entitylivingbase, this, this.getOwner(), ApplicationType.LINGERING);
-				r = decreaseRadiusAndLifespan(r);
+				r = this.decreaseRadiusAndLifespan(r);
 			}
 		}
 		return r;
@@ -149,14 +151,14 @@ public class EntityLingeringBrew extends Entity {
 	private float decreaseRadiusAndLifespan(float radius) {
 		float r = radius;
 		if (this.radiusOnUse != 0.0F) {
-			r += this.radiusOnUse; //decrease radius on reapplication
+			r += this.radiusOnUse; // decrease radius on reapplication
 			if (r < 0.5F) {
 				this.setDead();
 				return 0;
 			}
 		}
 		if (this.durationOnUse != 0) {
-			this.duration += this.durationOnUse; //Decrease lifespan on reapplication
+			this.duration += this.durationOnUse; // Decrease lifespan on reapplication
 			if (this.duration <= 0) {
 				this.setDead();
 				return 0;
@@ -167,7 +169,7 @@ public class EntityLingeringBrew extends Entity {
 
 	private float updateLifetime(float radius) {
 		float r = radius;
-		if (this.ticksExisted >= this.waitTime + this.duration) {
+		if (this.ticksExisted >= (this.waitTime + this.duration)) {
 			this.setDead();
 			return r;
 		}
@@ -195,8 +197,8 @@ public class EntityLingeringBrew extends Entity {
 			float f8 = MathHelper.cos(f6) * f7;
 			float f9 = MathHelper.sin(f6) * f7;
 			int l1 = this.getColor();
-			int i2 = l1 >> 16 & 255;
-			int j2 = l1 >> 8 & 255;
+			int i2 = (l1 >> 16) & 255;
+			int j2 = (l1 >> 8) & 255;
 			int j1 = l1 & 255;
 			this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + f8, this.posY, this.posZ + f9, i2 / 255.0F, j2 / 255.0F, j1 / 255.0F);
 		}
@@ -225,7 +227,7 @@ public class EntityLingeringBrew extends Entity {
 
 	@Nullable
 	public EntityLivingBase getOwner() {
-		if (this.owner == null && this.ownerUniqueId != null && this.world instanceof WorldServer) {
+		if ((this.owner == null) && (this.ownerUniqueId != null) && (this.world instanceof WorldServer)) {
 			Entity entity = ((WorldServer) this.world).getEntityFromUuid(this.ownerUniqueId);
 			if (entity instanceof EntityLivingBase) {
 				this.owner = (EntityLivingBase) entity;
@@ -245,7 +247,7 @@ public class EntityLingeringBrew extends Entity {
 		this.radiusPerTick = compound.getFloat("RadiusPerTick");
 		this.setRadius(compound.getFloat("Radius"));
 		this.ownerUniqueId = compound.getUniqueId("OwnerUUID");
-		setBrew(new ItemStack(compound.getCompoundTag("brew")));
+		this.setBrew(new ItemStack(compound.getCompoundTag("brew")));
 	}
 
 	@Override
@@ -258,7 +260,7 @@ public class EntityLingeringBrew extends Entity {
 		compound.setFloat("RadiusOnUse", this.radiusOnUse);
 		compound.setFloat("RadiusPerTick", this.radiusPerTick);
 		compound.setFloat("Radius", this.getRadius());
-		compound.setTag("brew", dataManager.get(BREW).writeToNBT(new NBTTagCompound()));
+		compound.setTag("brew", this.dataManager.get(BREW).writeToNBT(new NBTTagCompound()));
 		if (this.ownerUniqueId != null) {
 			compound.setUniqueId("OwnerUUID", this.ownerUniqueId);
 		}

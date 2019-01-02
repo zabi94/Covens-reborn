@@ -1,14 +1,25 @@
 package com.covens.common.tile;
 
 import com.covens.common.lib.LibMod;
-import com.covens.common.tile.tiles.*;
+import com.covens.common.tile.tiles.TileEntityApiary;
+import com.covens.common.tile.tiles.TileEntityCauldron;
+import com.covens.common.tile.tiles.TileEntityCrystalBall;
+import com.covens.common.tile.tiles.TileEntityDistillery;
+import com.covens.common.tile.tiles.TileEntityGemBowl;
+import com.covens.common.tile.tiles.TileEntityGlyph;
+import com.covens.common.tile.tiles.TileEntityMagicMirror;
+import com.covens.common.tile.tiles.TileEntityOven;
+import com.covens.common.tile.tiles.TileEntityPlacedItem;
+import com.covens.common.tile.tiles.TileEntityTarotsTable;
+import com.covens.common.tile.tiles.TileEntityThreadSpinner;
+import com.covens.common.tile.tiles.TileEntityWitchAltar;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
- * This class was created by Arekkuusu on 09/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 09/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class ModTiles {
 

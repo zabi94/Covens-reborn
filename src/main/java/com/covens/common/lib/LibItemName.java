@@ -1,13 +1,12 @@
 package com.covens.common.lib;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public final class LibItemName {
 
-	//Crops
+	// Crops
 	public static final String HELLEBORE = "hellebore";
 	public static final String SEED_HELLEBORE = "seed_hellebore";
 	public static final String ACONITUM = "aconitum";
@@ -49,7 +48,7 @@ public final class LibItemName {
 	public static final String JUNIPER_BERRIES = "juniper_berries";
 	public static final String YEW_ARIL = "yew_aril";
 
-	//Tools
+	// Tools
 	public static final String SILVER_PICKAXE = "silver_pickaxe";
 	public static final String SILVER_AXE = "silver_axe";
 	public static final String SILVER_SPADE = "silver_spade";
@@ -61,7 +60,7 @@ public final class LibItemName {
 	public static final String COLD_IRON_SPADE = "cold_iron_spade";
 	public static final String COLD_IRON_PICKAXE = "cold_iron_pickaxe";
 
-	//Equipment
+	// Equipment
 	public static final String SILVER_HELMET = "silver_helmet";
 	public static final String SILVER_CHESTPLATE = "silver_chestplate";
 	public static final String SILVER_LEGGINGS = "silver_leggings";
@@ -78,7 +77,7 @@ public final class LibItemName {
 	public static final String HELLISH_BAUBLE = "hellish_bauble";
 	public static final String WRATHFUL_EYE = "wrathful_eye";
 
-	//Misc
+	// Misc
 	public static final String BREW_PHIAL_DRINK = "brew_phial_drink";
 	public static final String BREW_PHIAL_SPLASH = "brew_phial_splash";
 	public static final String BREW_PHIAL_LINGER = "brew_phial_linger";
@@ -130,7 +129,7 @@ public final class LibItemName {
 	public static final String EYE_OF_NEWT = "eye_of_newt";
 	public static final String LIZARD_LEG = "lizard_leg";
 
-	//Materials
+	// Materials
 	public static final String SILVER = "silver";
 	public static final String BEWITCHED_LEATHER = "bewitched_leather";
 	public static final String VAMPIRE = "vampire";
@@ -164,7 +163,6 @@ public final class LibItemName {
 	public static final String SANGUINE_FABRIC = "sanguine_fabric";
 	public static final String QUARTZ_POWDER = "quartz_powder";
 	public static final String LAPIS_POWDER = "lapis_powder";
-
 
 	private LibItemName() {
 	}

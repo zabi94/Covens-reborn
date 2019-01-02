@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.brews;
 
 import com.covens.common.core.helper.MobHelper;
+
 import net.minecraft.entity.EntityLivingBase;
 
 public class PotionDemonsbane extends GenericBrewDamageVS {

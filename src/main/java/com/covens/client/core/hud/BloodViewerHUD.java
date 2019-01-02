@@ -5,6 +5,7 @@ import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -31,12 +32,12 @@ public class BloodViewerHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void render(ScaledResolution sr, float partialTicks, boolean renderDummy) {
-		if (renderDummy || (ExtraBarButtonsHUD.INSTANCE.actionScroller[0] == ModAbilities.DRAIN_BLOOD && ExtraBarButtonsHUD.INSTANCE.isInExtraBar() && Minecraft.getMinecraft().pointedEntity instanceof EntityLivingBase)) {
+		if (renderDummy || ((ExtraBarButtonsHUD.INSTANCE.actionScroller[0] == ModAbilities.DRAIN_BLOOD) && ExtraBarButtonsHUD.INSTANCE.isInExtraBar() && (Minecraft.getMinecraft().pointedEntity instanceof EntityLivingBase))) {
 			float filled = (System.currentTimeMillis() % 3000) / 3000f;
 			int maxBlood = 1;
 			if (!renderDummy) {
@@ -49,7 +50,7 @@ public class BloodViewerHUD extends HudComponent {
 				GlStateManager.color(filled, filled, filled);
 				GlStateManager.enableAlpha();
 				Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-				renderTextureAt(getX(), getY(), w, h);
+				renderTextureAt(this.getX(), this.getY(), this.w, this.h);
 				GlStateManager.popMatrix();
 			}
 		}
@@ -69,13 +70,13 @@ public class BloodViewerHUD extends HudComponent {
 	@Override
 	public double getX() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.BLOOD_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.BLOOD_HUD.x, getWidth(), sr.getScaledWidth());
+		return ModConfig.CLIENT.BLOOD_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.BLOOD_HUD.x, this.getWidth(), sr.getScaledWidth());
 	}
 
 	@Override
 	public double getY() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.BLOOD_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.BLOOD_HUD.y, getHeight(), sr.getScaledHeight());
+		return ModConfig.CLIENT.BLOOD_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.BLOOD_HUD.y, this.getHeight(), sr.getScaledHeight());
 	}
 
 	@Override
@@ -83,8 +84,8 @@ public class BloodViewerHUD extends HudComponent {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 		ModConfig.CLIENT.BLOOD_HUD.v_anchor = vertical;
 		ModConfig.CLIENT.BLOOD_HUD.h_anchor = horizontal;
-		ModConfig.CLIENT.BLOOD_HUD.x = horizontal.pixelToData(x, getWidth(), sr.getScaledWidth());
-		ModConfig.CLIENT.BLOOD_HUD.y = vertical.pixelToData(y, getHeight(), sr.getScaledHeight());
+		ModConfig.CLIENT.BLOOD_HUD.x = horizontal.pixelToData(x, this.getWidth(), sr.getScaledWidth());
+		ModConfig.CLIENT.BLOOD_HUD.y = vertical.pixelToData(y, this.getHeight(), sr.getScaledHeight());
 		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
 	}
 
@@ -97,7 +98,6 @@ public class BloodViewerHUD extends HudComponent {
 		ModConfig.CLIENT.BLOOD_HUD.deactivate = false;
 		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
 	}
-
 
 	@Override
 	public EnumHudAnchor getAnchorHorizontal() {

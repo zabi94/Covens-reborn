@@ -3,6 +3,7 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
+
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,15 +50,15 @@ public class PotionSnowTrail extends BrewMod {
 
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		return (duration % Math.max(1, 10 - 2 * amplifier)) == 0;
+		return (duration % Math.max(1, 10 - (2 * amplifier))) == 0;
 	}
 
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
 		for (int l = 0; l < 4; ++l) {
-			int i = MathHelper.floor(entity.posX + (l % 2 * 2 - 1) * 0.25F);
+			int i = MathHelper.floor(entity.posX + ((((l % 2) * 2) - 1) * 0.25F));
 			int j = MathHelper.floor(entity.posY);
-			int k = MathHelper.floor(entity.posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+			int k = MathHelper.floor(entity.posZ + (((((l / 2) % 2) * 2) - 1) * 0.25F));
 			BlockPos blockpos = new BlockPos(i, j, k);
 			World world = entity.world;
 			if (world.isAirBlock(blockpos) && Blocks.SNOW_LAYER.canPlaceBlockAt(world, blockpos)) {

@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.teleportCapability;
 
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;

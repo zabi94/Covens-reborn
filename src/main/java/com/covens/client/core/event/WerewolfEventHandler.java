@@ -1,10 +1,13 @@
 package com.covens.client.core.event;
 
+import org.lwjgl.opengl.GL11;
+
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.client.render.entity.model.ModelWerewolf;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.content.transformation.werewolf.CapabilityWerewolfStatus;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +16,6 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class WerewolfEventHandler {

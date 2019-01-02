@@ -2,6 +2,7 @@ package com.covens.common.content.crystalBall.fortunes;
 
 import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
@@ -34,12 +35,11 @@ public class FortuneDropItem extends Fortune {
 	public void onItemUsed(RightClickItem evt) {
 		if (evt.getEntityPlayer() != null) { // Needs to check for mainhand due to how the event works
 			CapabilityFortune cap = evt.getEntityPlayer().getCapability(CapabilityFortune.CAPABILITY, null);
-			if (cap.getFortune() == this && cap.isActive() && evt.getEntityPlayer().dropItem(true) != null) {
+			if ((cap.getFortune() == this) && cap.isActive() && (evt.getEntityPlayer().dropItem(true) != null)) {
 				cap.setRemovable();
 			}
 		}
 	}
-
 
 	@Override
 	public boolean isNegative() {

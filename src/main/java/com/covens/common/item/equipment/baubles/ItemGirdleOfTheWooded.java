@@ -1,14 +1,21 @@
 package com.covens.common.item.equipment.baubles;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import org.lwjgl.opengl.GL11;
+
+import com.covens.client.render.entity.model.ModelGirdleOfTheWooded;
+import com.covens.client.render.entity.model.ModelGirdleOfTheWoodedArmor;
+import com.covens.common.core.capability.simple.BarkCapability;
+import com.covens.common.item.ItemMod;
+
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
 import baubles.api.render.IRenderBauble;
-import com.covens.client.render.entity.model.ModelGirdleOfTheWooded;
-import com.covens.client.render.entity.model.ModelGirdleOfTheWoodedArmor;
-import com.covens.common.core.capability.simple.BarkCapability;
-import com.covens.common.item.ItemMod;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
@@ -34,10 +41,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBauble {
 
@@ -98,7 +101,7 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 				return;
 			}
 			EntityPlayer player = (EntityPlayer) entity;
-			if (isValidSpot(player) && entity.getRNG().nextDouble() < 0.0008d) { // ~once a minute
+			if (this.isValidSpot(player) && (entity.getRNG().nextDouble() < 0.0008d)) { // ~once a minute
 				if (buildBark(player)) {
 					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 10, false, false));
 					player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_CHORUS_FLOWER_GROW, SoundCategory.PLAYERS, 1f, 1f);
@@ -122,15 +125,16 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
 			IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-			for (int i = 0; i < baubles.getSlots(); i++)
+			for (int i = 0; i < baubles.getSlots(); i++) {
 				if (baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, player.getHeldItem(hand), player)) {
 					baubles.setStackInSlot(i, player.getHeldItem(hand).copy());
 					if (!player.capabilities.isCreativeMode) {
 						player.setHeldItem(hand, ItemStack.EMPTY);
 					}
-					onEquipped(player.getHeldItem(hand), player);
+					this.onEquipped(player.getHeldItem(hand), player);
 					break;
 				}
+			}
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
@@ -156,11 +160,11 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 
 	@SubscribeEvent
 	public void onPlayerDamaged(LivingHurtEvent evt) {
-		if (!evt.getEntityLiving().world.isRemote && evt.getAmount() > 2 && evt.getSource().getTrueSource() != null && evt.getEntityLiving() instanceof EntityPlayer) {
+		if (!evt.getEntityLiving().world.isRemote && (evt.getAmount() > 2) && (evt.getSource().getTrueSource() != null) && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			EntityPlayer player = (EntityPlayer) evt.getEntityLiving();
 			fixBark(player);
 			if (player.getCapability(BarkCapability.CAPABILITY, null).pieces > 0) {
-				destroyBark(player);
+				this.destroyBark(player);
 				evt.setCanceled(true);
 			}
 		}
@@ -169,7 +173,7 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.DARK_GREEN + I18n.format("witch.tooltip." + getUnlocalizedNameInefficiently(stack).substring(5) + "_description.name"));
+		tooltip.add(TextFormatting.DARK_GREEN + I18n.format("witch.tooltip." + this.getUnlocalizedNameInefficiently(stack).substring(5) + "_description.name"));
 	}
 
 	@Override
@@ -203,7 +207,7 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 
 	@SubscribeEvent
 	public void onEquipmentChanged(LivingEquipmentChangeEvent evt) {
-		if (!evt.getEntityLiving().world.isRemote && evt.getEntityLiving() instanceof EntityPlayer) {
+		if (!evt.getEntityLiving().world.isRemote && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			int base = evt.getEntityLiving().getCapability(BarkCapability.CAPABILITY, null).pieces;
 			int possible = Math.min((ForgeHooks.getTotalArmorValue((EntityPlayer) evt.getEntityLiving()) / 2), 5);
 			int actual = Math.min(possible, base);

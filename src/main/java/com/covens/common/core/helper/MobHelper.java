@@ -30,22 +30,22 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class MobHelper {
 
-	public static final Set<String> VILLAGERS = Sets.newHashSet(); //Hmm hmmm mmph
-	public static final Set<String> SPIRITS = Sets.newHashSet(); //Spirits and discarnate undead
-	public static final Set<String> CANIDS = Sets.newHashSet(); //The entire canid family of carnivorans
-	public static final Set<String> DEMONS = Sets.newHashSet(); //Infernal beings
-	public static final Set<String> UNDEAD_BODY = Sets.newHashSet(); //Corporeal undead, such as zombies and mummies
-	public static final Set<String> HUMANS = Sets.newHashSet(); //People
+	public static final Set<String> VILLAGERS = Sets.newHashSet(); // Hmm hmmm mmph
+	public static final Set<String> SPIRITS = Sets.newHashSet(); // Spirits and discarnate undead
+	public static final Set<String> CANIDS = Sets.newHashSet(); // The entire canid family of carnivorans
+	public static final Set<String> DEMONS = Sets.newHashSet(); // Infernal beings
+	public static final Set<String> UNDEAD_BODY = Sets.newHashSet(); // Corporeal undead, such as zombies and mummies
+	public static final Set<String> HUMANS = Sets.newHashSet(); // People
 
 	public static void init() {
 
 		/*
-		* Don't overload them for the sake of adding stuff
-		* Eg: endermen are not in any of these lists
-		* Less is more in this case
-		*/
+		 * Don't overload them for the sake of adding stuff Eg: endermen are not in any
+		 * of these lists Less is more in this case
+		 */
 
-		//This class is to be used in extending certain brews/weapons/mechanics only. Things like mobs eating each other go in their own class.
+		// This class is to be used in extending certain brews/weapons/mechanics only.
+		// Things like mobs eating each other go in their own class.
 
 		SPIRITS.add(EntityGhast.class.getName());
 		SPIRITS.add(EntityVex.class.getName());
@@ -56,7 +56,7 @@ public class MobHelper {
 		SPIRITS.add("familiarfauna.entities.EntityPixie");
 		SPIRITS.add("com.github.alexthe666.iceandfire.entity.EntityPixie");
 		SPIRITS.add("teamroots.roots.entity.EntityFairy");
-		
+
 		DEMONS.add(EntityBlaze.class.getName());
 
 		CANIDS.add(EntityWolf.class.getName());
@@ -66,7 +66,7 @@ public class MobHelper {
 		CANIDS.add("its_meow.betteranimalsplus.common.entity.EntityCoyote");
 		CANIDS.add("elucent.mysticalworld.entity.EntityFox");
 
-		//Villagers are already included in the list
+		// Villagers are already included in the list
 		HUMANS.add(EntityWitch.class.getName());
 		HUMANS.add(EntityIllusionIllager.class.getName());
 		HUMANS.add(EntityEvoker.class.getName());
@@ -97,7 +97,7 @@ public class MobHelper {
 	}
 
 	public static boolean isHumanoid(EntityLivingBase entity) {
-		if (isVillager(entity) || entity instanceof EntityPlayer) {
+		if (isVillager(entity) || (entity instanceof EntityPlayer)) {
 			return true;
 		}
 		return HUMANS.contains(entity.getClass().getName());
@@ -110,7 +110,7 @@ public class MobHelper {
 		return DEMONS.contains(entity.getClass().getName());
 	}
 
-	//For usage in cold iron
+	// For usage in cold iron
 	public static boolean isSpirit(EntityLivingBase entity) {
 		if (entity.getCreatureAttribute() == CovensAPI.getAPI().SPIRIT) {
 			return true;
@@ -118,23 +118,22 @@ public class MobHelper {
 		return SPIRITS.contains(entity.getClass().getName());
 	}
 
-	//For usage in silver
+	// For usage in silver
 	public static boolean isCorporealUndead(EntityLivingBase entity) {
 		if (entity.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
 			return true;
 		}
-		if (entity instanceof EntityPlayer && entity.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) {
+		if ((entity instanceof EntityPlayer) && (entity.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE)) {
 			return true;
 		}
 		return UNDEAD_BODY.contains(entity.getClass().getName());
 	}
 
-	//For usage in aconite
+	// For usage in aconite
 	public static boolean isCanid(EntityLivingBase entity) {
-		if (entity instanceof EntityPlayer && entity.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF) {
+		if ((entity instanceof EntityPlayer) && (entity.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF)) {
 			return true;
 		}
 		return CANIDS.contains(entity.getClass().getName());
 	}
 }
-

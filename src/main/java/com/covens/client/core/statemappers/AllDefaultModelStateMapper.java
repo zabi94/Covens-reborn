@@ -15,29 +15,29 @@ import net.minecraft.client.renderer.block.statemap.IStateMapper;
 
 public class AllDefaultModelStateMapper implements IStateMapper {
 
-		private final Map<IBlockState, ModelResourceLocation> map = Maps.newHashMap();
-		
-		public AllDefaultModelStateMapper(Block block) {
-			ModelResourceLocation mrl = new ModelResourceLocation(block.getRegistryName(), "normal");
-			variateKeyAndAdd(mrl, 0, Lists.newArrayList(block.getDefaultState().getPropertyKeys()), block.getDefaultState());
-		}
-		
-		private void variateKeyAndAdd(ModelResourceLocation mrl, int i, List<IProperty<?>> properties, IBlockState iBlockState) {
-			if (i >= properties.size()) {
-				map.put(iBlockState, mrl);
-			} else {
-				IBlockState current = iBlockState;
-				Iterator<?> it = properties.get(i).getAllowedValues().iterator();
-				while (it.hasNext()) {
-					it.next();
-					current = current.cycleProperty(properties.get(i));
-					variateKeyAndAdd(mrl, i + 1, properties, current);
-				}
+	private final Map<IBlockState, ModelResourceLocation> map = Maps.newHashMap();
+
+	public AllDefaultModelStateMapper(Block block) {
+		ModelResourceLocation mrl = new ModelResourceLocation(block.getRegistryName(), "normal");
+		this.variateKeyAndAdd(mrl, 0, Lists.newArrayList(block.getDefaultState().getPropertyKeys()), block.getDefaultState());
+	}
+
+	private void variateKeyAndAdd(ModelResourceLocation mrl, int i, List<IProperty<?>> properties, IBlockState iBlockState) {
+		if (i >= properties.size()) {
+			this.map.put(iBlockState, mrl);
+		} else {
+			IBlockState current = iBlockState;
+			Iterator<?> it = properties.get(i).getAllowedValues().iterator();
+			while (it.hasNext()) {
+				it.next();
+				current = current.cycleProperty(properties.get(i));
+				this.variateKeyAndAdd(mrl, i + 1, properties, current);
 			}
 		}
+	}
 
-		@Override
-		public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block blockIn) {
-			return map;
-		}
+	@Override
+	public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block blockIn) {
+		return this.map;
+	}
 }

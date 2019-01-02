@@ -40,7 +40,7 @@ public class CreatureSyncHelper {
 
 	public static boolean executeOnPlayerAvailable(UUID playerUUID, SyncTask<EntityPlayer> action) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			throw new RuntimeException("Don't invoke CreatureSyncHelper from client");
+			throw new IllegalStateException("Don't invoke CreatureSyncHelper from client");
 		}
 		EntityPlayer p = PlayerHelper.getPlayerAcrossDimensions(playerUUID);
 		if (p != null) {
@@ -61,10 +61,10 @@ public class CreatureSyncHelper {
 			return false;
 		}
 	}
-	
+
 	public static boolean executeOnEntityLivingAvailable(UUID uniqueID, SyncTask<EntityLiving> action) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			throw new RuntimeException("Don't invoke CreatureSyncHelper from client");
+			throw new IllegalStateException("Don't invoke CreatureSyncHelper from client");
 		}
 		EntityLiving ent = getEntityAcrossDimensions(uniqueID);
 		if (ent != null) {
@@ -88,13 +88,13 @@ public class CreatureSyncHelper {
 
 	@Nullable
 	public static EntityLiving getEntityAcrossDimensions(UUID uniqueID) {
-		for (WorldServer ws:DimensionManager.getWorlds()) {
+		for (WorldServer ws : DimensionManager.getWorlds()) {
 			Entity e = ws.getEntityFromUuid(uniqueID);
 			if (e != null) {
 				if (e instanceof EntityLiving) {
 					return (EntityLiving) e;
 				} else {
-					throw new IllegalStateException("Entity with UUID "+uniqueID+" is not an EntityLiving");
+					throw new IllegalStateException("Entity with UUID " + uniqueID + " is not an EntityLiving");
 				}
 			}
 		}
@@ -132,10 +132,10 @@ public class CreatureSyncHelper {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onWorldLoad(WorldEvent.Load evt) {
-		if (evt.getWorld().isRemote || evt.getWorld().provider.getDimension() != 0) {
+		if (evt.getWorld().isRemote || (evt.getWorld().provider.getDimension() != 0)) {
 			return;
 		}
 		Log.i("Loading SyncTask data");
@@ -147,26 +147,26 @@ public class CreatureSyncHelper {
 			data.markDirty();
 		}
 	}
-	
+
 	public static abstract class SyncTask<T extends EntityLivingBase> implements Runnable, INBTSerializable<NBTTagCompound> {
-		
+
 		@Override
 		public NBTTagCompound serializeNBT() {
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setString("covens:type", this.getClass().getCanonicalName());
-			writeToNBT(tag);
+			this.writeToNBT(tag);
 			return tag;
 		}
 
 		protected abstract void writeToNBT(NBTTagCompound tag);
 	}
-	
+
 	public static class TaskData extends WorldSavedData {
-		
+
 		public TaskData() {
 			super(DATA_TAG);
 		}
-		
+
 		@Override
 		public void readFromNBT(NBTTagCompound tag) {
 			synchronized (playerLock) {
@@ -231,7 +231,7 @@ public class CreatureSyncHelper {
 			tag.setTag("players", players);
 			tag.setTag("entities", entities);
 			synchronized (playerLock) {
-				for (UUID id:playerList.keySet()) {
+				for (UUID id : playerList.keySet()) {
 					NBTTagCompound playerContainer = new NBTTagCompound();
 					playerContainer.setLong("msb", id.getMostSignificantBits());
 					playerContainer.setLong("lsb", id.getLeastSignificantBits());
@@ -242,7 +242,7 @@ public class CreatureSyncHelper {
 				}
 			}
 			synchronized (entityLock) {
-				for (UUID id:entityList.keySet()) {
+				for (UUID id : entityList.keySet()) {
 					NBTTagCompound entityContainer = new NBTTagCompound();
 					entityContainer.setLong("msb", id.getMostSignificantBits());
 					entityContainer.setLong("lsb", id.getLeastSignificantBits());
@@ -252,7 +252,7 @@ public class CreatureSyncHelper {
 					players.appendTag(entityContainer);
 				}
 			}
-			Log.i("Writing to NBT:\n"+tag);
+			Log.i("Writing to NBT:\n" + tag);
 			return tag;
 		}
 	}

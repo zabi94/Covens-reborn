@@ -12,6 +12,7 @@ import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,18 +20,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This class was created by <Arekkuusu> on 26/02/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class BlockMod extends Block implements IModelRegister {
 
 	public BlockMod(String id, Material material) {
 		super(material);
-		setTranslationKey(id);
-		setDefaultState(blockState.getBaseState());
-		setRegistryName(LibMod.MOD_ID, id);
-		setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB);
+		this.setTranslationKey(id);
+		this.setDefaultState(this.blockState.getBaseState());
+		this.setRegistryName(LibMod.MOD_ID, id);
+		this.setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB);
 	}
 
 	public BlockMod(String id, Material material, SoundType sound) {

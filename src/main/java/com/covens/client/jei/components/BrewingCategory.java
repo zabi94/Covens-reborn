@@ -3,6 +3,7 @@ package com.covens.client.jei.components;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.brew.ItemBrewArrow;
 import com.covens.common.lib.LibMod;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -23,7 +24,7 @@ public class BrewingCategory implements IRecipeCategory<BrewingWrapper> {
 	private static ResourceLocation rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_brewing.png");
 
 	public BrewingCategory(IGuiHelper igh) {
-		bg = igh.drawableBuilder(rl, 0, 0, 91, 40).setTextureSize(91, 40).build();
+		this.bg = igh.drawableBuilder(rl, 0, 0, 91, 40).setTextureSize(91, 40).build();
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class BrewingCategory implements IRecipeCategory<BrewingWrapper> {
 
 	@Override
 	public IDrawable getBackground() {
-		return bg;
+		return this.bg;
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class BrewingCategory implements IRecipeCategory<BrewingWrapper> {
 
 		is.init(2, true, 18, 19);
 
-		if (l.getFocus() != null && l.getFocus().getValue() instanceof ItemStack && l.getFocus().getMode() == Mode.OUTPUT) {
+		if ((l.getFocus() != null) && (l.getFocus().getValue() instanceof ItemStack) && (l.getFocus().getMode() == Mode.OUTPUT)) {
 			if (((ItemStack) l.getFocus().getValue()).getItem() instanceof ItemBrewArrow) {
 				is.set(2, new ItemStack(Items.ARROW));
 			} else if (((ItemStack) l.getFocus().getValue()).getItem() == ModItems.brew_phial_drink) {

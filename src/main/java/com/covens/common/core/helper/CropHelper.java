@@ -1,23 +1,25 @@
 package com.covens.common.core.helper;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.covens.common.block.natural.crop.BlockCrop;
 import com.covens.common.core.statics.ModCrops;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.natural.crop.ItemCropFood;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 /**
- * This class was created by Arekkuusu on 14/04/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 14/04/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
-@SuppressWarnings({"WeakerAccess"})
+@SuppressWarnings({
+		"WeakerAccess"
+})
 public final class CropHelper {
 
 	private static final Map<ModCrops, Item> seeds = new LinkedHashMap<>();
@@ -30,8 +32,8 @@ public final class CropHelper {
 	/**
 	 * Register a Crop to the {@link CropHelper}.
 	 * <p>
-	 * The Item Seed needs to be different, for ex the Kelp seed,
-	 * that needs to be placed on water so it uses a different placement recipeDropLogic.
+	 * The Item Seed needs to be different, for ex the Kelp seed, that needs to be
+	 * placed on water so it uses a different placement recipeDropLogic.
 	 * </p>
 	 *
 	 * @param crop     The Crop enum
@@ -41,7 +43,7 @@ public final class CropHelper {
 	public static <T extends BlockCrop> void registerCrop(ModCrops crop, T placed, Item cropItem, Item seedItem) {
 		placed.setCrop(cropItem);
 		placed.setSeed(seedItem);
-		if (cropItem instanceof ItemCropFood && crop.getMPExpansionOnEaten() > 0) {
+		if ((cropItem instanceof ItemCropFood) && (crop.getMPExpansionOnEaten() > 0)) {
 			((ItemCropFood) cropItem).setMPExpansionValue(crop.getMPExpansionOnEaten());
 		}
 		CropHelper.getSeeds().put(crop, seedItem);

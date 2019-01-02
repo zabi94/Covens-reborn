@@ -28,13 +28,13 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 				nonEmpty++;
 			}
 		}
-		if (nonEmpty != inputs.size()) {
+		if (nonEmpty != this.inputs.size()) {
 			return false;
 		}
-		boolean[] found = new boolean[inputs.size()];
+		boolean[] found = new boolean[this.inputs.size()];
 		ArrayList<ItemStack> comp = new ArrayList<>(list);
-		for (int i = 0; i < inputs.size(); i++) {
-			Ingredient current = inputs.get(i);
+		for (int i = 0; i < this.inputs.size(); i++) {
+			Ingredient current = this.inputs.get(i);
 			for (int j = 0; j < comp.size(); j++) {
 				ItemStack is = comp.get(j);
 				if (current.apply(is)) {
@@ -53,11 +53,11 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 	}
 
 	public int getTime() {
-		return time;
+		return this.time;
 	}
 
 	public NonNullList<ItemStack> getOutputs() {
-		return outputs;
+		return this.outputs;
 	}
 
 	public static class Factory {
@@ -65,7 +65,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		private DistilleryRecipe recipe = new DistilleryRecipe();
 
 		private Factory(ResourceLocation registryName) {
-			recipe.setRegistryName(registryName);
+			this.recipe.setRegistryName(registryName);
 		}
 
 		public static Factory start(ResourceLocation registryName) {
@@ -80,7 +80,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 			if (time <= 0) {
 				throw new IllegalArgumentException("Time must be a positive integer");
 			}
-			recipe.time = time;
+			this.recipe.time = time;
 			return this;
 		}
 
@@ -88,7 +88,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 			if (stacks.length > 6) {
 				throw new IllegalArgumentException("Too many outputs, you can only use 6 at most");
 			}
-			recipe.outputs = NonNullList.from(ItemStack.EMPTY, stacks);
+			this.recipe.outputs = NonNullList.from(ItemStack.EMPTY, stacks);
 			return this;
 		}
 
@@ -101,32 +101,32 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 					throw new IllegalArgumentException("No valid stack found");
 				}
 			}
-			recipe.inputs = NonNullList.from(Ingredient.EMPTY, stacks);
+			this.recipe.inputs = NonNullList.from(Ingredient.EMPTY, stacks);
 			return this;
 		}
 
 		public Factory setNoOutput() {
-			recipe.outputs = NonNullList.create();
+			this.recipe.outputs = NonNullList.create();
 			return this;
 		}
 
 		public DistilleryRecipe build() {
-			if (recipe.time <= 0) {
+			if (this.recipe.time <= 0) {
 				throw new IllegalStateException("Time was not set properly");
 			}
-			if (recipe.inputs == null) {
+			if (this.recipe.inputs == null) {
 				throw new IllegalStateException("Inputs were not set");
 			}
-			if (recipe.outputs == null) {
+			if (this.recipe.outputs == null) {
 				throw new IllegalStateException("Outputs were not set");
 			}
-			return recipe;
+			return this.recipe;
 		}
 
 	}
 
 	public List<Ingredient> getInputs() {
-		return inputs;
+		return this.inputs;
 	}
 
 }

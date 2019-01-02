@@ -1,6 +1,7 @@
 package com.covens.common.content.transformation.werewolf;
 
 import com.covens.common.core.capability.simple.SimpleCapability;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
@@ -18,26 +19,26 @@ public class CapabilityWerewolfStatus extends SimpleCapability {
 
 	public void setNightVision(boolean b) {
 		boolean changed = false;
-		if (nightVision != b) {
+		if (this.nightVision != b) {
 			changed = true;
 		}
-		nightVision = b;
+		this.nightVision = b;
 		if (changed) {
-			markDirty((byte) 1);
+			this.markDirty((byte) 1);
 		}
 	}
 
 	public void changeForm(boolean backwards) {
 		if (backwards) {
-			if (currentWWForm == 0) {
-				currentWWForm = 2;
+			if (this.currentWWForm == 0) {
+				this.currentWWForm = 2;
 			} else {
-				currentWWForm = (currentWWForm - 1);
+				this.currentWWForm = (this.currentWWForm - 1);
 			}
 		} else {
-			currentWWForm = (currentWWForm + 1) % 3;
+			this.currentWWForm = (this.currentWWForm + 1) % 3;
 		}
-		markDirty((byte) 2);
+		this.markDirty((byte) 2);
 	}
 
 	@Override

@@ -81,7 +81,7 @@ public class BlockCrystalBall extends BlockModTileEntity {
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Item.getItemFromBlock(this);
 	}
-	
+
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
 		return 1;

@@ -1,6 +1,7 @@
 package com.covens.common.content.ritual.rituals;
 
 import com.covens.common.content.ritual.RitualImpl;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

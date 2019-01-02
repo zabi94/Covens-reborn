@@ -1,6 +1,7 @@
 package com.covens.client.core;
 
 import com.covens.client.core.hud.HudController;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -16,7 +17,7 @@ public class ClientCommandGuiConfig extends CommandBase implements IClientComman
 
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return getName();
+		return this.getName();
 	}
 
 	@Override

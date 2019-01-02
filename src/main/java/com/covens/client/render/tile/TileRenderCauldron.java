@@ -1,7 +1,12 @@
 package com.covens.client.render.tile;
 
+import java.util.Optional;
+
+import org.lwjgl.opengl.GL11;
+
 import com.covens.client.ResourceLocations;
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -14,14 +19,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import org.lwjgl.opengl.GL11;
-
-import java.util.Optional;
 
 /**
- * This class was created by Arekkuusu on 09/03/2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by Arekkuusu on 09/03/2017. It's distributed as part
+ * of Covens under the MIT license.
  */
 public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCauldron> {
 
@@ -29,7 +30,7 @@ public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCaul
 	@Override
 	public void render(TileEntityCauldron te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		Optional<FluidStack> optional = te.getFluid();
-		if (optional.isPresent() && optional.get().amount > 0) {
+		if (optional.isPresent() && (optional.get().amount > 0)) {
 			FluidStack fluidStack = optional.get();
 			Fluid fluid = fluidStack.getFluid();
 			ResourceLocation location = fluid.getStill();
@@ -40,8 +41,8 @@ public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCaul
 			GlStateManager.translate(x, y + 0.1 + level, z);
 			if (fluid == FluidRegistry.WATER) {
 				int color = te.getColorRGB();
-				float r = (color >>> 16 & 0xFF) / 256.0F;
-				float g = (color >>> 8 & 0xFF) / 256.0F;
+				float r = ((color >>> 16) & 0xFF) / 256.0F;
+				float g = ((color >>> 8) & 0xFF) / 256.0F;
 				float b = (color & 0xFF) / 256.0F;
 				GlStateManager.color(r, g, b, 0.8f);
 				location = ResourceLocations.GRAY_WATER;
@@ -60,7 +61,7 @@ public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCaul
 			GlStateManager.scale(s, s, s);
 
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
-			renderWater(location);
+			this.renderWater(location);
 
 			GlStateManager.enableAlpha();
 			GlStateManager.disableBlend();
@@ -69,8 +70,8 @@ public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCaul
 			GlStateManager.popMatrix();
 		}
 
-		if (te.getName() != null && Minecraft.getMinecraft().objectMouseOver != null && te.getPos().equals(Minecraft.getMinecraft().objectMouseOver.getBlockPos())) {
-			drawNameplate(te, te.getName(), x, y, z, 5);
+		if ((te.getName() != null) && (Minecraft.getMinecraft().objectMouseOver != null) && te.getPos().equals(Minecraft.getMinecraft().objectMouseOver.getBlockPos())) {
+			this.drawNameplate(te, te.getName(), x, y, z, 5);
 		}
 	}
 

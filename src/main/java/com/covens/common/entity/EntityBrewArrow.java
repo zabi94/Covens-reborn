@@ -2,6 +2,7 @@ package com.covens.common.entity;
 
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.ApplicationType;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -42,10 +43,10 @@ public class EntityBrewArrow extends EntityArrow {
 	}
 
 	public void setArrowStack(ItemStack arrow) {
-		dataManager.set(COLOR, BrewData.fromStack(arrow).getColor());
-		dataManager.set(ARROW, arrow);
-		dataManager.setDirty(COLOR);
-		dataManager.setDirty(ARROW);
+		this.dataManager.set(COLOR, BrewData.fromStack(arrow).getColor());
+		this.dataManager.set(ARROW, arrow);
+		this.dataManager.setDirty(COLOR);
+		this.dataManager.setDirty(ARROW);
 	}
 
 	public int getColor() {
@@ -58,7 +59,7 @@ public class EntityBrewArrow extends EntityArrow {
 
 		if (this.world.isRemote) {
 			if (this.inGround) {
-				if (this.timeInGround % 5 == 0) {
+				if ((this.timeInGround % 5) == 0) {
 					this.spawnPotionParticles(1);
 				}
 			} else {
@@ -69,32 +70,32 @@ public class EntityBrewArrow extends EntityArrow {
 
 	private void spawnPotionParticles(int particleCount) {
 		int i = this.getColor();
-		if (i != -1 && particleCount > 0) {
-			double d0 = (i >> 16 & 255) / 255.0D;
-			double d1 = (i >> 8 & 255) / 255.0D;
-			double d2 = (i >> 0 & 255) / 255.0D;
+		if ((i != -1) && (particleCount > 0)) {
+			double d0 = ((i >> 16) & 255) / 255.0D;
+			double d1 = ((i >> 8) & 255) / 255.0D;
+			double d2 = ((i >> 0) & 255) / 255.0D;
 
 			for (int j = 0; j < particleCount; ++j) {
-				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * this.width, this.posY + this.rand.nextDouble() * this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, d0, d1, d2);
+				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + ((this.rand.nextDouble() - 0.5D) * this.width), this.posY + (this.rand.nextDouble() * this.height), this.posZ + ((this.rand.nextDouble() - 0.5D) * this.width), d0, d1, d2);
 			}
 		}
 	}
 
 	@Override
 	protected void arrowHit(EntityLivingBase living) {
-		BrewData.fromStack(dataManager.get(ARROW)).applyToEntity(living, this, this.shootingEntity, ApplicationType.ARROW);
+		BrewData.fromStack(this.dataManager.get(ARROW)).applyToEntity(living, this, this.shootingEntity, ApplicationType.ARROW);
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
-		compound.setTag("arrow", dataManager.get(ARROW).writeToNBT(new NBTTagCompound()));
+		compound.setTag("arrow", this.dataManager.get(ARROW).writeToNBT(new NBTTagCompound()));
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
-		setArrowStack(new ItemStack(compound.getCompoundTag("arrow")));
+		this.setArrowStack(new ItemStack(compound.getCompoundTag("arrow")));
 	}
 
 }

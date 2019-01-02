@@ -1,7 +1,13 @@
 package com.covens.client.gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.lwjgl.opengl.GL11;
+
 import com.covens.common.content.tarot.TarotHandler.TarotInfo;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -10,10 +16,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import org.lwjgl.opengl.GL11;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class GuiTarots extends GuiScreen {
 
@@ -21,32 +23,29 @@ public class GuiTarots extends GuiScreen {
 	protected static final ResourceLocation card_frame = new ResourceLocation(LibMod.MOD_ID, "textures/gui/tarot_frame.png");
 	protected static final ResourceLocation card_frame_number = new ResourceLocation(LibMod.MOD_ID, "textures/gui/tarot_frame_number.png");
 
-	private ArrayList<TarotButton> buttons = new ArrayList<TarotButton>(0); // buttonList acts funky, I add a button but when drawScreen gets called the list is empty
+	private ArrayList<TarotButton> buttons = new ArrayList<TarotButton>(0); // buttonList acts funky, I add a button but when drawScreen gets called the
+																			// list is empty
 	private ArrayList<TarotInfo> data = new ArrayList<TarotInfo>(0);
 	private int pressed = -1;
 	private boolean dataReceived = false;
 
-	public GuiTarots() {
-		//NO-OP
-	}
-
 	public void loadData(ArrayList<TarotInfo> fromNetwork) {
 		this.data = fromNetwork;
-		this.buttons = new ArrayList<TarotButton>(data.size());
+		this.buttons = new ArrayList<TarotButton>(this.data.size());
 		this.setGuiSize(252, 192);
-		int t = data.size();
+		int t = this.data.size();
 		for (int i = 0; i < t; i++) {
-			int qx = ((252 - (22 * t)) / (t + 1)) * (i + 1) + (i * 22);
+			int qx = (((252 - (22 * t)) / (t + 1)) * (i + 1)) + (i * 22);
 			TarotButton tb = new TarotButton(i, qx, 160);
 			this.buttons.add(tb);
 			if (i == 0) {
 				tb.setPressed(true);
-				pressed = 0;
+				this.pressed = 0;
 			}
 		}
-		dataReceived = true;
-		ScaledResolution sr = new ScaledResolution(mc);
-		this.onResize(mc, sr.getScaledWidth(), sr.getScaledHeight());
+		this.dataReceived = true;
+		ScaledResolution sr = new ScaledResolution(this.mc);
+		this.onResize(this.mc, sr.getScaledWidth(), sr.getScaledHeight());
 	}
 
 	@Override
@@ -58,14 +57,14 @@ public class GuiTarots extends GuiScreen {
 	public void drawDefaultBackground() {
 		Minecraft.getMinecraft().renderEngine.bindTexture(background);
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		drawTexturedModalRect((sr.getScaledWidth() - 252) / 2, (sr.getScaledHeight() - 192) / 2, 0, 0, 252, 192);
+		this.drawTexturedModalRect((sr.getScaledWidth() - 252) / 2, (sr.getScaledHeight() - 192) / 2, 0, 0, 252, 192);
 	}
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		drawDefaultBackground();
-		if (dataReceived) {
-			drawCard();
+		this.drawDefaultBackground();
+		if (this.dataReceived) {
+			this.drawCard();
 			GL11.glColor4f(1f, 1f, 1f, 1f);
 			for (int i = 0; i < this.buttons.size(); ++i) {
 				this.buttons.get(i).drawButton(this.mc, mouseX, mouseY, partialTicks);
@@ -73,55 +72,55 @@ public class GuiTarots extends GuiScreen {
 
 			for (int i = 0; i < this.buttons.size(); ++i) {
 				if (this.buttons.get(i).isMouseOver()) {
-					drawHoveringText(TextFormatting.LIGHT_PURPLE + I18n.format(data.get(i).getTranslationKey()), mouseX, mouseY);
+					this.drawHoveringText(TextFormatting.LIGHT_PURPLE + I18n.format(this.data.get(i).getTranslationKey()), mouseX, mouseY);
 				}
 			}
 		} else {
 			String reading = I18n.format("tarots.reading");
-			ScaledResolution sr = new ScaledResolution(mc);
-			int x = ((sr.getScaledWidth() - mc.fontRenderer.getStringWidth(reading)) / 2);
-			int y = ((sr.getScaledHeight() - mc.fontRenderer.FONT_HEIGHT) / 2);
-			mc.fontRenderer.drawString(reading, x, y, 0xFCD71C, false);
+			ScaledResolution sr = new ScaledResolution(this.mc);
+			int x = ((sr.getScaledWidth() - this.mc.fontRenderer.getStringWidth(reading)) / 2);
+			int y = ((sr.getScaledHeight() - this.mc.fontRenderer.FONT_HEIGHT) / 2);
+			this.mc.fontRenderer.drawString(reading, x, y, 0xFCD71C, false);
 		}
 
 	}
 
 	private void drawCard() {
-		if (pressed < 0)
+		if (this.pressed < 0) {
 			return; // no card selected
+		}
 		double scale = 0.5d;
-		TarotInfo t = data.get(pressed);
-		ScaledResolution sr = new ScaledResolution(mc);
+		TarotInfo t = this.data.get(this.pressed);
+		ScaledResolution sr = new ScaledResolution(this.mc);
 		int left = ((sr.getScaledWidth() - 252) / 2);
 		int top = ((sr.getScaledHeight() - 192) / 2);
-		int cardX = (int) (left + ((252 - 192 * scale) / 2));
-		int cardY = (int) (top + 15 + ((146 - 256 * scale) / 2));
+		int cardX = (int) (left + ((252 - (192 * scale)) / 2));
+		int cardY = (int) (top + 15 + ((146 - (256 * scale)) / 2));
 		GL11.glPushMatrix();
 		if (t.isReversed()) {
-			GlStateManager.translate(cardX + (192 * scale / 2), cardY + (256 * scale / 2), 0); // Center on the card center
+			GlStateManager.translate(cardX + ((192 * scale) / 2), cardY + ((256 * scale) / 2), 0); // Center on the card center
 			GlStateManager.rotate(180, 0, 0, 1);// Rotate everything
-			GlStateManager.translate(-cardX - (192 * scale / 2), -cardY - (256 * scale / 2), 0); // Go back
+			GlStateManager.translate(-cardX - ((192 * scale) / 2), -cardY - ((256 * scale) / 2), 0); // Go back
 		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(t.getTexture());
 		drawModalRectWithCustomSizedTexture(cardX, cardY, 0f, 0f, (int) (192 * scale), (int) (256 * scale), (int) (192 * scale), (int) (256 * scale));
 		Minecraft.getMinecraft().renderEngine.bindTexture(t.hasNumber() ? card_frame_number : card_frame);
-		drawModalRectWithCustomSizedTexture((int) (left + ((252 - 192 * scale) / 2)), (int) (top + 15 + ((146 - 256 * scale) / 2)), 0f, 0f, (int) (192 * scale), (int) (256 * scale), (int) (192 * scale), (int) (256 * scale));
+		drawModalRectWithCustomSizedTexture((int) (left + ((252 - (192 * scale)) / 2)), (int) (top + 15 + ((146 - (256 * scale)) / 2)), 0f, 0f, (int) (192 * scale), (int) (256 * scale), (int) (192 * scale), (int) (256 * scale));
 
 		if (t.hasNumber()) {
 			String num = "" + t.getNumber();
-			mc.fontRenderer.drawString(num, left + ((252 - mc.fontRenderer.getStringWidth(num)) / 2), top + 139, 0xFCD71C, true);
+			this.mc.fontRenderer.drawString(num, left + ((252 - this.mc.fontRenderer.getStringWidth(num)) / 2), top + 139, 0xFCD71C, true);
 		}
 		GL11.glPopMatrix();
 		String name = I18n.format(t.getTranslationKey());
-		mc.fontRenderer.drawString(name, left + ((252 - mc.fontRenderer.getStringWidth(name)) / 2), top + 14, 0xFCD71C, true);
-
+		this.mc.fontRenderer.drawString(name, left + ((252 - this.mc.fontRenderer.getStringWidth(name)) / 2), top + 14, 0xFCD71C, true);
 
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
-		buttons.forEach(b -> b.setPressed(b == button));
-		pressed = button.id;
+		this.buttons.forEach(b -> b.setPressed(b == button));
+		this.pressed = button.id;
 	}
 
 	@Override
@@ -155,14 +154,20 @@ public class GuiTarots extends GuiScreen {
 			int top = ((sr.getScaledHeight() - 192) / 2);
 			int mxn = mouseX - left;
 			int myn = mouseY - top;
-			this.hovered = mxn >= this.x && myn >= this.y && mxn < this.x + this.width && myn < this.y + this.height;
+			this.hovered = this.isHovered(mxn, myn);
 			mc.renderEngine.bindTexture(background);
-			drawTexturedModalRect(left + this.x, top + this.y - (this.isMouseOver() ? 2 : 0), (pressed || this.isMouseOver()) ? 0 : 22, 192, 22, 26);
-			drawTexturedModalRect(left + this.x, top + this.y - (this.isMouseOver() ? 2 : 0), pressed ? 0 : 22, 218, 22, 26);
+			int posX = left + this.x;
+			int posY = (top + this.y) - (this.isMouseOver() ? 2 : 0);
+			this.drawTexturedModalRect(posX, posY, (this.pressed || this.isMouseOver()) ? 0 : 22, 192, 22, 26);
+			this.drawTexturedModalRect(posX, posY, this.pressed ? 0 : 22, 218, 22, 26);
+		}
+
+		private boolean isHovered(int mxn, int myn) {
+			return (mxn >= this.x) && (myn >= this.y) && (mxn < (this.x + this.width)) && (myn < (this.y + this.height));
 		}
 
 		public void setPressed(boolean p) {
-			pressed = p;
+			this.pressed = p;
 		}
 
 		@Override
@@ -172,7 +177,7 @@ public class GuiTarots extends GuiScreen {
 			int top = ((sr.getScaledHeight() - 192) / 2);
 			int mxn = mouseX - left;
 			int myn = mouseY - top;
-			return mxn >= this.x && myn >= this.y && mxn < this.x + this.width && myn < this.y + this.height;
+			return (mxn >= this.x) && (myn >= this.y) && (mxn < (this.x + this.width)) && (myn < (this.y + this.height));
 		}
 	}
 }

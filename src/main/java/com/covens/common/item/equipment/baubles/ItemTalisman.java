@@ -1,12 +1,17 @@
 package com.covens.common.item.equipment.baubles;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import com.covens.common.content.enchantments.BaublesEnchantment;
+import com.covens.common.core.statics.ModCreativeTabs;
+import com.covens.common.item.ItemMod;
+
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
-import com.covens.common.content.enchantments.BaublesEnchantment;
-import com.covens.common.core.statics.ModCreativeTabs;
-import com.covens.common.item.ItemMod;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
@@ -22,9 +27,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class ItemTalisman extends ItemMod implements IBauble {
 
@@ -56,22 +58,23 @@ public class ItemTalisman extends ItemMod implements IBauble {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
 			IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-			for (int i = 0; i < baubles.getSlots(); i++)
+			for (int i = 0; i < baubles.getSlots(); i++) {
 				if (baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, player.getHeldItem(hand), player)) {
 					baubles.setStackInSlot(i, player.getHeldItem(hand).copy());
 					if (!player.capabilities.isCreativeMode) {
 						player.setHeldItem(hand, ItemStack.EMPTY);
 					}
-					onEquipped(player.getHeldItem(hand), player);
+					this.onEquipped(player.getHeldItem(hand), player);
 					break;
 				}
+			}
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
 
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return enchantability;
+		return this.enchantability;
 	}
 
 	@Override
@@ -86,7 +89,7 @@ public class ItemTalisman extends ItemMod implements IBauble {
 
 	@Override
 	public BaubleType getBaubleType(ItemStack itemstack) {
-		return type;
+		return this.type;
 	}
 
 	@Override
@@ -96,26 +99,17 @@ public class ItemTalisman extends ItemMod implements IBauble {
 
 	@Override
 	public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
-		EnchantmentHelper.getEnchantments(itemstack).keySet().parallelStream()
-				.filter(e -> e instanceof BaublesEnchantment)
-				.map(e -> (BaublesEnchantment) e)
-				.forEach(e -> e.onUnequipped((EntityPlayer) player));
+		EnchantmentHelper.getEnchantments(itemstack).keySet().parallelStream().filter(e -> e instanceof BaublesEnchantment).map(e -> (BaublesEnchantment) e).forEach(e -> e.onUnequipped((EntityPlayer) player));
 	}
 
 	@Override
 	public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
-		EnchantmentHelper.getEnchantments(itemstack).keySet().parallelStream()
-				.filter(e -> e instanceof BaublesEnchantment)
-				.map(e -> (BaublesEnchantment) e)
-				.forEach(e -> e.onEquipped((EntityPlayer) player));
+		EnchantmentHelper.getEnchantments(itemstack).keySet().parallelStream().filter(e -> e instanceof BaublesEnchantment).map(e -> (BaublesEnchantment) e).forEach(e -> e.onEquipped((EntityPlayer) player));
 	}
 
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-		EnchantmentHelper.getEnchantments(itemstack).keySet().parallelStream()
-				.filter(e -> e instanceof BaublesEnchantment)
-				.map(e -> (BaublesEnchantment) e)
-				.forEach(e -> e.onWornTick((EntityPlayer) player));
+		EnchantmentHelper.getEnchantments(itemstack).keySet().parallelStream().filter(e -> e instanceof BaublesEnchantment).map(e -> (BaublesEnchantment) e).forEach(e -> e.onWornTick((EntityPlayer) player));
 	}
 
 }

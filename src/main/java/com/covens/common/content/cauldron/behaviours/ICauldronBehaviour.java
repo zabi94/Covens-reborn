@@ -1,6 +1,7 @@
 package com.covens.common.content.cauldron.behaviours;
 
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,8 @@ public interface ICauldronBehaviour {
 	public void handleParticles(boolean isActiveBehaviour);
 
 	/**
-	 * If <i>any</i> decorator returns true, the cauldron won't accept any more items
+	 * If <i>any</i> decorator returns true, the cauldron won't accept any more
+	 * items
 	 */
 	default boolean shouldInputsBeBlocked() {
 		return false;

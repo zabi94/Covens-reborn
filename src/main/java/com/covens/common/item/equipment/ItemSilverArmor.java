@@ -1,10 +1,15 @@
 package com.covens.common.item.equipment;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.client.core.IModelRegister;
 import com.covens.client.handler.ModelHandler;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.statics.ModCreativeTabs;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -24,33 +29,29 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.List;
-
 /**
- * This class was created by BerciTheBeast on 11.4.2017.
- * It's distributed as part of Covens under
- * the MIT license.
+ * This class was created by BerciTheBeast on 11.4.2017. It's distributed as
+ * part of Covens under the MIT license.
  */
 public class ItemSilverArmor extends ItemArmor implements IModelRegister {
 
 	public ItemSilverArmor(String id, ArmorMaterial materialIn, int renderIndex, EntityEquipmentSlot equipmentSlotIn) {
 		super(materialIn, renderIndex, equipmentSlotIn);
 		this.setMaxStackSize(1);
-		setRegistryName(id);
-		setTranslationKey(id);
-		setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
+		this.setRegistryName(id);
+		this.setTranslationKey(id);
+		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	public String getNameInefficiently(ItemStack stack) {
-		return getTranslationKey().substring(5);
+		return this.getTranslationKey().substring(5);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.GRAY + I18n.format("witch.tooltip." + getNameInefficiently(stack) + "_description.name"));
+		tooltip.add(TextFormatting.GRAY + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 
 	@SubscribeEvent
@@ -62,7 +63,7 @@ public class ItemSilverArmor extends ItemArmor implements IModelRegister {
 			if (((EntityLivingBase) attacker).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
 				event.setAmount(event.getAmount() * 0.9F);
 			}
-			if (attacker instanceof EntityPlayer && attacker.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF) {
+			if ((attacker instanceof EntityPlayer) && (attacker.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF)) {
 				event.setAmount(event.getAmount() * 0.9F);
 				EntityPlayer a = (EntityPlayer) attacker;
 				a.attackEntityFrom(DamageSource.causeThornsDamage(event.getEntityLiving()), MathHelper.clamp(event.getAmount() / 2, 1f, 4f));

@@ -1,5 +1,7 @@
 package com.covens.common.content.cauldron;
 
+import java.util.Arrays;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewEffect;
@@ -9,6 +11,7 @@ import com.covens.common.core.helper.ColorHelper;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.covens.common.tile.tiles.TileEntityCauldron;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -17,8 +20,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.oredict.DyeUtils;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.Arrays;
 
 public class ModBrewModifiers {
 
@@ -126,12 +127,12 @@ public class ModBrewModifiers {
 
 			@Override
 			public ResourceLocation getRegistryName() {
-				return name;
+				return this.name;
 			}
 
 			@Override
 			public Ingredient getJEIStackRepresentative() {
-				return ingredient;
+				return this.ingredient;
 			}
 
 			@Override

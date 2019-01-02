@@ -3,7 +3,12 @@ package com.covens.common.content.cauldron.brews;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockHugeMushroom;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
@@ -25,16 +30,16 @@ public class PotionInfestation extends BrewMod {
 
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		return duration % 40 == 0;
+		return (duration % 40) == 0;
 	}
 
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
 		if (entity instanceof EntityCow) {
-			convertCow(entity);
+			this.convertCow(entity);
 		} else {
-			entity.attackEntityFrom(DamageSource.MAGIC, 1 + entity.getRNG().nextFloat() * amplifier);
-			if (entity.getRNG().nextBoolean() && amplifier > 1) {
+			entity.attackEntityFrom(DamageSource.MAGIC, 1 + (entity.getRNG().nextFloat() * amplifier));
+			if (entity.getRNG().nextBoolean() && (amplifier > 1)) {
 				entity.world.getEntitiesWithinAABB(EntityLivingBase.class, entity.getEntityBoundingBox().grow(2 * amplifier)).forEach(e -> {
 					if (e.getActivePotionEffect(this) == null) {
 						e.addPotionEffect(new PotionEffect(this, this.getDefaultDuration(), amplifier - 1));
@@ -65,21 +70,21 @@ public class PotionInfestation extends BrewMod {
 
 		Iterable<MutableBlockPos> spots = BlockPos.getAllInBoxMutable(posI, posF);
 		for (BlockPos spot : spots) {
-			if (spot.distanceSq(pos) < 2 + box * box / 2) {
+			if (spot.distanceSq(pos) < (2 + ((box * box) / 2))) {
 				IBlockState state = world.getBlockState(spot);
-				if (world.rand.nextInt(4) <= modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2) {
-					convertBlock(state, world, spot);
+				if (world.rand.nextInt(4) <= (modifiers.getLevel(DefaultModifiers.POWER).orElse(0) / 2)) {
+					this.convertBlock(state, world, spot);
 				}
 			}
 		}
 	}
-	
+
 	private void convertBlock(IBlockState state, World world, BlockPos spot) {
-		Block mushroom = (state.getBlock().getRegistryName().toString().length() + state.getBlock().getMetaFromState(state)) % 2 == 0 ? Blocks.RED_MUSHROOM_BLOCK : Blocks.BROWN_MUSHROOM_BLOCK;
+		Block mushroom = ((state.getBlock().getRegistryName().toString().length() + state.getBlock().getMetaFromState(state)) % 2) == 0 ? Blocks.RED_MUSHROOM_BLOCK : Blocks.BROWN_MUSHROOM_BLOCK;
 		Block mushroomSmall = world.rand.nextBoolean() ? Blocks.RED_MUSHROOM : Blocks.BROWN_MUSHROOM;
-		if (state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_PATH) {
+		if ((state.getBlock() == Blocks.GRASS) || (state.getBlock() == Blocks.DIRT) || (state.getBlock() == Blocks.GRASS_PATH)) {
 			world.setBlockState(spot, Blocks.MYCELIUM.getDefaultState(), 3);
-			if (world.isAirBlock(spot.up()) && world.rand.nextInt(10) == 0) {
+			if (world.isAirBlock(spot.up()) && (world.rand.nextInt(10) == 0)) {
 				world.setBlockState(spot.up(), mushroomSmall.getDefaultState(), 3);
 			}
 		} else if (state.getBlock() == Blocks.COBBLESTONE) {

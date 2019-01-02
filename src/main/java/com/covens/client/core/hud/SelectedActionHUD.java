@@ -4,6 +4,7 @@ import com.covens.api.hotbar.IHotbarAction;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.lib.LibMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -30,13 +31,13 @@ public class SelectedActionHUD extends HudComponent {
 	@Override
 	public double getX() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.CURRENTACTION_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.CURRENTACTION_HUD.x, getWidth(), sr.getScaledWidth());
+		return ModConfig.CLIENT.CURRENTACTION_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.CURRENTACTION_HUD.x, this.getWidth(), sr.getScaledWidth());
 	}
 
 	@Override
 	public double getY() {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.CURRENTACTION_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.CURRENTACTION_HUD.y, getHeight(), sr.getScaledHeight());
+		return ModConfig.CLIENT.CURRENTACTION_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.CURRENTACTION_HUD.y, this.getHeight(), sr.getScaledHeight());
 	}
 
 	@Override
@@ -44,8 +45,8 @@ public class SelectedActionHUD extends HudComponent {
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 		ModConfig.CLIENT.CURRENTACTION_HUD.v_anchor = vertical;
 		ModConfig.CLIENT.CURRENTACTION_HUD.h_anchor = horizontal;
-		ModConfig.CLIENT.CURRENTACTION_HUD.x = horizontal.pixelToData(x, getWidth(), sr.getScaledWidth());
-		ModConfig.CLIENT.CURRENTACTION_HUD.y = vertical.pixelToData(y, getHeight(), sr.getScaledHeight());
+		ModConfig.CLIENT.CURRENTACTION_HUD.x = horizontal.pixelToData(x, this.getWidth(), sr.getScaledWidth());
+		ModConfig.CLIENT.CURRENTACTION_HUD.y = vertical.pixelToData(y, this.getHeight(), sr.getScaledHeight());
 		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
 	}
 
@@ -85,7 +86,7 @@ public class SelectedActionHUD extends HudComponent {
 
 	@Override
 	public void onClick(int mouseX, int mouseY) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
@@ -94,7 +95,7 @@ public class SelectedActionHUD extends HudComponent {
 			IHotbarAction sel = renderDummy ? ModAbilities.NIGHT_VISION_VAMPIRE : ExtraBarButtonsHUD.INSTANCE.actionScroller[0];
 			if (sel != null) {
 				GlStateManager.pushMatrix();
-				sel.render(getX(), getY(), getWidth(), getHeight(), 0.4f);
+				sel.render(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 0.4f);
 				GlStateManager.popMatrix();
 			}
 		}

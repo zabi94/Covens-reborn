@@ -1,6 +1,7 @@
 package com.covens.common.block.misc;
 
 import com.covens.common.block.BlockMod;
+
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -23,7 +24,7 @@ public class BlockGoblet extends BlockMod {
 
 	public BlockGoblet(String id) {
 		super(id, new Material(MapColor.IRON));
-		this.setDefaultState(blockState.getBaseState().withProperty(FULL, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FULL, false));
 		this.setLightOpacity(0);
 		this.setHardness(0.3f);
 		this.setHarvestLevel("pickaxe", 0);
@@ -44,7 +45,9 @@ public class BlockGoblet extends BlockMod {
 	@SuppressWarnings("deprecation")
 	@Override
 	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		if (blockState.getValue(FULL)) return 8;
+		if (blockState.getValue(FULL)) {
+			return 8;
+		}
 		return 0;
 	}
 
@@ -89,7 +92,7 @@ public class BlockGoblet extends BlockMod {
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		return getMetaFromState(state);
+		return this.getMetaFromState(state);
 	}
 
 	@Override

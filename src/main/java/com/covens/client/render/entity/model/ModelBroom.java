@@ -7,15 +7,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 /**
- * ModelBroom - zabi94
- * Created using Tabula 6.0.0
+ * ModelBroom - zabi94 Created using Tabula 6.0.0
  */
 public class ModelBroom extends ModelBase {
+
 	public ModelRenderer handle;
 	public ModelRenderer twigs_bound;
 	public ModelRenderer twigs;
-	private float time1;
-	private float time2;
 
 	public ModelBroom() {
 		this.textureWidth = 64;
@@ -30,8 +28,8 @@ public class ModelBroom extends ModelBase {
 		this.twigs.setRotationPoint(18F, -2.0F, -2.0F);
 		this.twigs.addBox(0.0F, 0.0F, 0.0F, 6, 5, 5, 0.5F);
 
-		this.handle.addChild(twigs_bound);
-		this.handle.addChild(twigs);
+		this.handle.addChild(this.twigs_bound);
+		this.handle.addChild(this.twigs);
 	}
 
 	@Override
@@ -45,17 +43,17 @@ public class ModelBroom extends ModelBase {
 		this.handle.render(f5);
 		GlStateManager.popMatrix();
 
-		time1 = MathHelper.sin(entity.ticksExisted * 0.10471975512F);
-		time2 = MathHelper.cos(entity.ticksExisted * 0.10471975512F);
+		float time1 = MathHelper.sin(entity.ticksExisted * 0.10471975512F);
+		float time2 = MathHelper.cos(entity.ticksExisted * 0.10471975512F);
 
 		if (entity.getPassengers().isEmpty()) {
-			handle.setRotationPoint(-13.0F + 0.2F * time1, 16F + 0.3F * time1, 0.2F * time2);
-			handle.rotateAngleX = (time1 * 0.05235987755F - limbSwingAmount * time1 * 0.17453292516F);
-			handle.rotateAngleY = time2 * 0.05235987755F - limbSwingAmount * time1 * 0.17453292516F;
+			this.handle.setRotationPoint(-13.0F + (0.2F * time1), 16F + (0.3F * time1), 0.2F * time2);
+			this.handle.rotateAngleX = ((time1 * 0.05235987755F) - (limbSwingAmount * time1 * 0.17453292516F));
+			this.handle.rotateAngleY = (time2 * 0.05235987755F) - (limbSwingAmount * time1 * 0.17453292516F);
 		} else {
-			handle.setRotationPoint(-13.0F + 0.02F * time1, 16F + 0.03F * time1, 0.02F * time2);
-			handle.rotateAngleX = time1 * 0.01745329251F;
-			handle.rotateAngleY = time2 * 0.01745329251F;
+			this.handle.setRotationPoint(-13.0F + (0.02F * time1), 16F + (0.03F * time1), 0.02F * time2);
+			this.handle.rotateAngleX = time1 * 0.01745329251F;
+			this.handle.rotateAngleY = time2 * 0.01745329251F;
 		}
 	}
 

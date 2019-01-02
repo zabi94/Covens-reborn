@@ -1,5 +1,9 @@
 package com.covens.common.tile.tiles;
 
+import java.util.UUID;
+
+import javax.annotation.Nonnull;
+
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.Covens;
 import com.covens.common.core.helper.PlayerHelper;
@@ -8,6 +12,7 @@ import com.covens.common.core.net.messages.TarotMessage;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibGui;
 import com.covens.common.tile.ModTileEntity;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,9 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-
-import javax.annotation.Nonnull;
-import java.util.UUID;
 
 public class TileEntityTarotsTable extends ModTileEntity {
 
@@ -35,8 +37,8 @@ public class TileEntityTarotsTable extends ModTileEntity {
 
 	public void read(@Nonnull ItemStack tarotDeck, @Nonnull EntityPlayer reader) {
 		if (!reader.world.isRemote) {
-			if (checkDeck(tarotDeck) && altarTracker.drainAltarFirst(reader, pos, world.provider.getDimension(), READ_COST)) {
-				reader.openGui(Covens.instance, LibGui.TAROT.ordinal(), reader.world, pos.getX(), pos.getY(), pos.getZ());
+			if (this.checkDeck(tarotDeck) && this.altarTracker.drainAltarFirst(reader, this.pos, this.world.provider.getDimension(), READ_COST)) {
+				reader.openGui(Covens.instance, LibGui.TAROT.ordinal(), reader.world, this.pos.getX(), this.pos.getY(), this.pos.getZ());
 				EntityPlayerMP readee = (EntityPlayerMP) PlayerHelper.getPlayerAcrossDimensions(UUID.fromString(tarotDeck.getTagCompound().getString("read_id")));
 				if (readee != null) {
 					NetworkHandler.HANDLER.sendTo(new TarotMessage(readee), (EntityPlayerMP) reader);
@@ -52,28 +54,28 @@ public class TileEntityTarotsTable extends ModTileEntity {
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(altarTracker);
+			return IMagicPowerConsumer.CAPABILITY.cast(this.altarTracker);
 		}
 		return super.getCapability(capability, facing);
 	}
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return capability == IMagicPowerConsumer.CAPABILITY || super.hasCapability(capability, facing);
+		return (capability == IMagicPowerConsumer.CAPABILITY) || super.hasCapability(capability, facing);
 	}
 
 	private boolean checkDeck(ItemStack tarotDeck) {
-		return (tarotDeck.getItem() == ModItems.tarots && tarotDeck.hasTagCompound() && tarotDeck.getTagCompound().hasKey("read_id") && tarotDeck.getTagCompound().hasKey("read_name"));
+		return ((tarotDeck.getItem() == ModItems.tarots) && tarotDeck.hasTagCompound() && tarotDeck.getTagCompound().hasKey("read_id") && tarotDeck.getTagCompound().hasKey("read_name"));
 	}
 
 	@Override
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
-		tag.setTag("altar", altarTracker.writeToNbt());
+		tag.setTag("altar", this.altarTracker.writeToNbt());
 	}
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound tag) {
-		altarTracker.readFromNbt(tag.getCompoundTag("altar"));
+		this.altarTracker.readFromNbt(tag.getCompoundTag("altar"));
 	}
 
 	@Override
