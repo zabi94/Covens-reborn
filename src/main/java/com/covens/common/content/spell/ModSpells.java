@@ -8,6 +8,7 @@ package com.covens.common.content.spell;
 
 import com.covens.api.spell.ISpell.EnumSpellType;
 import com.covens.common.content.spell.spells.SpellActivation;
+import com.covens.common.content.spell.spells.SpellBindMob;
 import com.covens.common.content.spell.spells.SpellBlink;
 import com.covens.common.content.spell.spells.SpellCallThunderstorm;
 import com.covens.common.content.spell.spells.SpellDestabilization;
@@ -23,7 +24,8 @@ import com.covens.common.lib.LibMod;
 
 public class ModSpells {
 
-	public static Spell magnet, poke, water, activation, slowness, lesser_blink, blink, explosion, disarming, infuse_life, self_heal, call_storm;
+	public static Spell magnet, poke, water, activation, slowness, lesser_blink, blink, explosion, 
+	disarming, infuse_life, self_heal, call_storm, tame;
 
 	public static void init() {
 		magnet = new SpellMagnet(1, 0xa5cec9, EnumSpellType.PROJECTILE_BLOCK, "magnet", LibMod.MOD_ID);
@@ -38,11 +40,16 @@ public class ModSpells {
 		infuse_life = new SpellInfuseLife(5, 0xf6546a, EnumSpellType.PROJECTILE_ALL, "infuse_life", LibMod.MOD_ID);
 		self_heal = new SpellSelfHeal(4, 0xd20057, EnumSpellType.INSTANT, "self_heal", LibMod.MOD_ID);
 		call_storm = new SpellCallThunderstorm(15, 0x000033, EnumSpellType.INSTANT, "call_storm", LibMod.MOD_ID);
+		tame = new SpellBindMob(5, 0xFF0000, EnumSpellType.PROJECTILE_ENTITY, "tame", LibMod.MOD_ID);
 		registerAll();
 	}
 
 	private static void registerAll() {
-		Spell.SPELL_REGISTRY.registerAll(magnet, poke, water, activation, slowness, lesser_blink, blink, explosion, disarming, infuse_life, self_heal, call_storm);
+		Spell.SPELL_REGISTRY.registerAll(
+				magnet, poke, water, activation, slowness, 
+				lesser_blink, blink, explosion, disarming, 
+				infuse_life, self_heal, call_storm, tame
+				);
 	}
 
 }

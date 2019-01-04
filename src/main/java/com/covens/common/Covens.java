@@ -30,6 +30,7 @@ import com.covens.common.core.capability.energy.MagicPowerContainer;
 import com.covens.common.core.capability.energy.MagicPowerUsingItem;
 import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExpansion;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
+import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.capability.mimic.CapabilityMimicData;
 import com.covens.common.core.capability.simple.BarkCapability;
 import com.covens.common.core.capability.simple.SimpleCapability;
@@ -119,6 +120,7 @@ public class Covens {
 		SimpleCapability.preInit(CapabilityTransformation.class);
 		SimpleCapability.preInit(CapabilityVampire.class);
 		SimpleCapability.preInit(CapabilityFamiliarCreature.class);
+		SimpleCapability.preInit(CapabilityFamiliarOwner.class);
 		NetworkHandler.init();
 		ModInfusions.init();
 		ModTransformations.init();
@@ -139,6 +141,7 @@ public class Covens {
 		SimpleCapability.init(CapabilityTransformation.class, LibMod.MOD_ID, CapabilityTransformation.CAPABILITY, CapabilityTransformation.DEFAULT_INSTANCE);
 		SimpleCapability.init(CapabilityVampire.class, LibMod.MOD_ID, CapabilityVampire.CAPABILITY, CapabilityVampire.DEFAULT_INSTANCE);
 		SimpleCapability.init(CapabilityFamiliarCreature.class, LibMod.MOD_ID, CapabilityFamiliarCreature.CAPABILITY, CapabilityFamiliarCreature.DEFAULT_INSTANCE);
+		SimpleCapability.init(CapabilityFamiliarOwner.class, LibMod.MOD_ID, CapabilityFamiliarOwner.CAPABILITY, CapabilityFamiliarOwner.DEFAULT_INSTANCE);
 		ModItems.init();
 		ModBlocks.init();
 		ModTarots.init();

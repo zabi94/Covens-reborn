@@ -1,5 +1,6 @@
 package com.covens.api;
 
+import java.util.UUID;
 import java.util.function.Supplier;
 
 import com.covens.api.cauldron.IBrewEffect;
@@ -116,7 +117,11 @@ public abstract class CovensAPI {
 
 	public abstract void drainBloodFromEntity(EntityPlayer player, EntityLivingBase entity);
 
-	public abstract void bindFamiliar(EntityPlayer player, Entity familiar);
+	public abstract boolean isValidFamiliar(Entity entity);
+	
+	public abstract boolean bindFamiliar(Entity familiar, EntityPlayer player);
 
-	public abstract void unbindFamiliar(Entity entity);
+	public abstract void unbindFamiliar(Entity familiar);
+	
+	public abstract void unbindFamiliar(UUID entity, UUID player);
 }

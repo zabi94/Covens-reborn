@@ -286,6 +286,9 @@ public abstract class SimpleCapability {
 		if (f.isAnnotationPresent(Ignore.class) || Modifier.isFinal(mods) || Modifier.isStatic(mods) || Modifier.isTransient(mods)) {
 			return false;
 		}
+		if (f.isAnnotationPresent(CustomSerializer.class)) {
+			return true;
+		}
 		return handlers.containsKey(type);
 	}
 
@@ -323,14 +326,22 @@ public abstract class SimpleCapability {
 		}
 	}
 
-	private final void writeField(Field f, Class clazz, NBTTagCompound buf) throws IllegalArgumentException, IllegalAccessException {
-		Pair<Reader, Writer> handler = getHandler(clazz);
-		handler.getRight().write(f.get(this), buf, f.getName());
+	private final void writeField(Field f, Class clazz, NBTTagCompound buf) throws IllegalArgumentException, IllegalAccessException, InstantiationException {
+		if (f.getAnnotation(CustomSerializer.class) != null) {
+			f.getAnnotation(CustomSerializer.class).writer().newInstance().write(f.get(this), buf, f.getName());
+		} else {
+			Pair<Reader, Writer> handler = getHandler(clazz);
+			handler.getRight().write(f.get(this), buf, f.getName());
+		}
 	}
 
-	private final void readField(Field f, Class clazz, NBTTagCompound buf) throws IllegalArgumentException, IllegalAccessException {
-		Pair<Reader, Writer> handler = getHandler(clazz);
-		f.set(this, handler.getLeft().read(buf, f.getName()));
+	private final void readField(Field f, Class clazz, NBTTagCompound buf) throws IllegalArgumentException, IllegalAccessException, InstantiationException {
+		if (f.getAnnotation(CustomSerializer.class) != null) {
+			f.set(this, f.getAnnotation(CustomSerializer.class).reader().newInstance().read(buf, f.getName()));
+		} else {
+			Pair<Reader, Writer> handler = getHandler(clazz);
+			f.set(this, handler.getLeft().read(buf, f.getName()));
+		}
 	}
 
 	public final NBTBase serialize(NBTTagCompound tag) {
@@ -437,6 +448,13 @@ public abstract class SimpleCapability {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
 	public static @interface Ignore {
+	}
+	
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target(ElementType.FIELD)
+	public static @interface CustomSerializer {
+		Class<? extends Reader> reader();
+		Class<? extends Writer> writer();
 	}
 
 	public static class SimpleProvider<T extends SimpleCapability> implements ICapabilitySerializable<NBTBase> {

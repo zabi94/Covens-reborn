@@ -1,5 +1,6 @@
 package com.covens.common.api;
 
+import java.util.UUID;
 import java.util.function.Supplier;
 
 import com.covens.api.CovensAPI;
@@ -34,11 +35,13 @@ import com.covens.common.content.transformation.vampire.blood.CapabilityBloodRes
 import com.covens.common.core.capability.energy.player.PlayerMPContainer;
 import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExpansion;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
+import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
+import com.covens.common.core.helper.Log;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
-import com.covens.common.core.util.CreatureSyncHelper;
-import com.covens.common.core.util.syncTasks.DisengageFamiliar;
-import com.covens.common.core.util.syncTasks.RemoveFamiliarFromPlayer;
+import com.covens.common.core.util.EntitySyncHelper;
+import com.covens.common.core.util.syncTasks.UnbindFamiliarFromPlayer;
+import com.covens.common.core.util.syncTasks.UnbindPlayerFromFamiliar;
 import com.covens.common.crafting.FrostFireRecipe;
 import com.covens.common.crafting.OvenSmeltingRecipe;
 import com.covens.common.crafting.SpinningThreadRecipe;
@@ -52,6 +55,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -230,21 +234,54 @@ public class ApiInstance extends CovensAPI {
 	}
 
 	@Override
-	public void bindFamiliar(EntityPlayer player, Entity familiar) {
-		if (!familiar.hasCapability(CapabilityFamiliarCreature.CAPABILITY, null)) {
-			throw new IllegalArgumentException(familiar.getClass().getCanonicalName() + " is not a valid familiar");
+	public boolean bindFamiliar(Entity familiar, EntityPlayer player) {
+		if (isValidFamiliar(familiar)) {
+			if (familiar == null || player == null) {
+				throw new IllegalArgumentException("You can't bind a familiar if the entity or the player are null");
+			}
+			
+			if (!isValidFamiliar(familiar)) {
+				throw new IllegalArgumentException(familiar.getClass().getCanonicalName()+" is not a valid familiar type");
+			}
+			
+			CapabilityFamiliarCreature famCap = familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
+			
+			if (!famCap.hasOwner()) {
+				familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).setOwner(player);
+				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).addFamiliar(familiar.getPersistentID());
+				CovensAPI.getAPI().removeMPExpansion(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
+				CovensAPI.getAPI().expandPlayerMP(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
+				Log.i("Familiar "+familiar+" added to owner: "+player);
+				player.sendStatusMessage(new TextComponentString("You now have "+player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount+" familiars"), true);
+				return true;
+			} else {
+				if (famCap.owner.equals(player.getUniqueID())) {
+					player.sendStatusMessage(new TextComponentString("It's already a familiar of yours"), true);
+				} else {
+					player.sendStatusMessage(new TextComponentString("This creature has an owner already"), true);
+				}
+				return false;
+			}
 		}
-
+		return false;
 	}
 
 	@Override
+	public void unbindFamiliar(UUID familiar, UUID player) {
+		EntitySyncHelper.executeOnEntityLivingAvailable(familiar, new UnbindFamiliarFromPlayer(familiar));
+		EntitySyncHelper.executeOnPlayerAvailable(player, new UnbindPlayerFromFamiliar(player, familiar));
+	}
+	
+	@Override
 	public void unbindFamiliar(Entity familiar) {
-		if (!familiar.hasCapability(CapabilityFamiliarCreature.CAPABILITY, null)) {
-			throw new IllegalArgumentException(familiar.getClass().getCanonicalName() + " is not a valid familiar");
+		if (isValidFamiliar(familiar)) {
+			unbindFamiliar(familiar.getPersistentID(), familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner);
 		}
-		CapabilityFamiliarCreature cap = familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
-		CreatureSyncHelper.executeOnPlayerAvailable(cap.owner, new RemoveFamiliarFromPlayer(cap.owner));
-		CreatureSyncHelper.executeOnEntityLivingAvailable(familiar.getPersistentID(), new DisengageFamiliar(familiar.getPersistentID()));
+	}
+	
+	@Override
+	public boolean isValidFamiliar(Entity entity) {
+		return CapabilityFamiliarCreature.DEFAULT_INSTANCE.isRelevantFor(entity);
 	}
 
 }
