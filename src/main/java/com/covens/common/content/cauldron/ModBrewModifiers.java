@@ -35,6 +35,7 @@ public class ModBrewModifiers {
 		api.registerBrewModifier(DefaultModifiers.SUPPRESS_ENTITY_EFFECT);
 		api.registerBrewModifier(DefaultModifiers.SUPPRESS_IN_WORLD_EFFECT);
 		api.registerBrewModifier(DefaultModifiers.COLOR);
+		api.registerBrewModifier(DefaultModifiers.SUPPRESS_PARTICLES);
 	}
 
 	private static void initApiModifiers() {
@@ -96,7 +97,7 @@ public class ModBrewModifiers {
 			}
 		};
 
-		DefaultModifiers.SUPPRESS_PARTICLES = new SimpleModifier("suppress_particles", Ingredient.fromItem(Items.DIAMOND)) {
+		DefaultModifiers.SUPPRESS_PARTICLES = new SimpleModifier("suppress_particles", Ingredient.fromItem(Items.BEETROOT)) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
