@@ -55,7 +55,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemAthame extends ItemSword implements IModelRegister {
 
 	public ItemAthame() {
-		super(ModMaterials.TOOL_RITUAL);
+		super(ModMaterials.TOOL_ATHAME);
 		this.setMaxDamage(600);
 		this.setMaxStackSize(1);
 		this.setRegistryName(LibItemName.ATHAME);

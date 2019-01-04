@@ -38,12 +38,12 @@ public final class VanillaCrafting {
 		GameRegistry.addSmelting(new ItemStack((ModBlocks.gem_ore), 1, 9), new ItemStack(ModItems.gem, 4, 9), 0.35F);
 		GameRegistry.addSmelting(new ItemStack((ModItems.golden_thread), 1, 0), new ItemStack(Items.GOLD_NUGGET, 1, 0), 1.0F);
 
-		ModMaterials.TOOL_RITUAL.setRepairItem(new ItemStack(ModItems.silver_ingot));
+		ModMaterials.TOOL_ATHAME.setRepairItem(new ItemStack(ModItems.silver_ingot));
 		ModMaterials.ARMOR_SILVER.setRepairItem(new ItemStack(ModItems.silver_ingot));
 		ModMaterials.TOOL_SILVER.setRepairItem(new ItemStack(ModItems.silver_ingot));
 		ModMaterials.TOOL_COLD_IRON.setRepairItem(new ItemStack(ModItems.cold_iron_ingot));
 		ModMaterials.ARMOR_COLD_IRON.setRepairItem(new ItemStack(ModItems.cold_iron_ingot));
-		ModMaterials.ARMOR_BEWITCHED_LEATHER.setRepairItem(new ItemStack(ModItems.witches_stitching));
+		ModMaterials.ARMOR_WITCH_LEATHER.setRepairItem(new ItemStack(ModItems.witches_stitching));
 		ModMaterials.ARMOR_VAMPIRE.setRepairItem(new ItemStack(ModItems.sanguine_fabric));
 	}
 }
