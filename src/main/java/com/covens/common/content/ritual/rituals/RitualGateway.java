@@ -34,11 +34,15 @@ public class RitualGateway extends RitualImpl {
 	public boolean isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
 
 		for (ItemStack stack : recipe) {
-			if (stack.getItem().equals(ModItems.location_stone) && ItemLocationStone.isBound(stack)) {
-				return ItemLocationStone.getLocation(stack).get().getDim() == world.provider.getDimension();
+			if (stack.getItem().equals(ModItems.location_stone)) {
+				if (ItemLocationStone.isBound(stack)) {
+					return ItemLocationStone.getLocation(stack).get().getDim() == world.provider.getDimension();
+				} else {
+					return false;
+				}
 			}
 		}
-		return super.isValid(player, world, mainGlyphPos, recipe, effectivePosition, covenSize);
+		return false;
 	}
 
 	@Override
@@ -53,7 +57,7 @@ public class RitualGateway extends RitualImpl {
 			return;
 		}
 		for (ItemStack stack : AdapterIRitual.getItemsUsedForInput(data)) {
-			if (stack.getItem().equals(ModItems.location_stone)) {
+			if (stack.getItem().equals(ModItems.location_stone) && ItemLocationStone.isBound(stack)) {
 				DimensionalPosition pdest = ItemLocationStone.getLocation(stack).get();
 				BlockPos dest = pdest.getPosition();
 				int distance = (int) pdest.getDistanceSqFrom(new DimensionalPosition(effectivePosition, world.provider.getDimension()));
