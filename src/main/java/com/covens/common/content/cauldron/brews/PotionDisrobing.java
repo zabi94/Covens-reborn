@@ -1,6 +1,5 @@
 package com.covens.common.content.cauldron.brews;
 
-import com.covens.common.Covens;
 import com.covens.common.content.cauldron.BrewMod;
 
 import net.minecraft.entity.Entity;
@@ -43,7 +42,7 @@ public class PotionDisrobing extends BrewMod {
 					entity.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
 					break;
 				default:
-					Covens.logger.warn("Possible bug in Covens: report this to the authors [PotionDisrobing.java]");
+					//Miss, don't disrobe
 					break;
 			}
 		}
