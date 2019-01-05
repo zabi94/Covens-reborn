@@ -19,6 +19,7 @@ covens.drain_blood=Drain Blood
 covens.bat_swarm=Bat Swarm
 covens.howl=Howl
 covens.wolf_shift=Transform
+covens.command_familiar=Command Familiar (Not working yet)
 
 //Gui
 container.apiary=Apiary

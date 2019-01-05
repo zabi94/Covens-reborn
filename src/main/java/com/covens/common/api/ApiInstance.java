@@ -36,7 +36,6 @@ import com.covens.common.core.capability.energy.player.PlayerMPContainer;
 import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExpansion;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
-import com.covens.common.core.helper.Log;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
 import com.covens.common.core.util.EntitySyncHelper;
@@ -251,7 +250,7 @@ public class ApiInstance extends CovensAPI {
 				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).addFamiliar(familiar.getPersistentID());
 				CovensAPI.getAPI().removeMPExpansion(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
 				CovensAPI.getAPI().expandPlayerMP(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
-				Log.i("Familiar "+familiar+" added to owner: "+player);
+				HotbarAction.refreshActions(player, player.world);
 				player.sendStatusMessage(new TextComponentString("You now have "+player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount+" familiars"), true);
 				return true;
 			} else {
