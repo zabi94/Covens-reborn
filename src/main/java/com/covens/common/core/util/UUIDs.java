@@ -34,4 +34,8 @@ public class UUIDs {
 	public static void toExistingNBT(UUID uuid, NBTTagCompound tag) {
 		tag.setUniqueId("uuid", uuid == null ? NULL_UUID : uuid);
 	}
+
+	public static boolean isNull(UUID uniqueID) {
+		return uniqueID == null || NULL_UUID.equals(uniqueID);
+	}
 }

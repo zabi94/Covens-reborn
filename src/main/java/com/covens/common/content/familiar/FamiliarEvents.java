@@ -9,6 +9,7 @@ import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.familiar.ai.AIFollowTarget;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
+import com.covens.common.core.helper.Log;
 import com.covens.common.core.helper.RayTraceHelper;
 import com.covens.common.core.util.EntitySyncHelper;
 import com.covens.common.core.util.UUIDs;
@@ -18,7 +19,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,7 +34,7 @@ public class FamiliarEvents {
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void familiarDeath(LivingDeathEvent evt) {
-		if (!CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
+		if (evt.getEntity().world.isRemote || !CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
 			return;
 		}
 		if (evt.getEntity().getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
@@ -51,7 +54,7 @@ public class FamiliarEvents {
 	}
 	
 	@SubscribeEvent
-	public static void attachFamiliarAI(EntityConstructing evt) {
+	public static void attachFamiliarAI(EntityJoinWorldEvent evt) {
 		//Don't use the capabilities at this point, they are still not attached
 		if (evt.getEntity() instanceof EntityLiving && CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
 			EntityLiving entity = (EntityLiving) evt.getEntity();
@@ -74,16 +77,23 @@ public class FamiliarEvents {
 				handleClickOnFamiliar(evt.player, (EntityLiving) e);
 			} else {
 				RayTraceResult result = RayTraceHelper.rayTraceResult(evt.player, RayTraceHelper.fromLookVec(evt.player, 32), true, true);
+				if (result == null) {
+					result = new RayTraceResult(Type.MISS, new Vec3d(0, 0, 0), null, null);
+				}
 				switch (result.typeOfHit) {
 					case BLOCK:
+						Log.i("Issue: goto, "+result.hitVec);
 						FamiliarController.sendSelectedFamiliarTo(evt.player, result.hitVec);
 						break;
 					case ENTITY:
 						if (result.entityHit instanceof EntityLivingBase) {
+							Log.i("Following "+result.entityHit);
 							FamiliarController.orderSelectedFamiliarFollow(evt.player, (EntityLivingBase) result.entityHit);
+						} else {
 						}
 						break;
 					case MISS:
+						Log.i("Familiar selector");
 						FamiliarController.openFamiliarSelector(evt.player);
 						break;
 				}
@@ -93,14 +103,17 @@ public class FamiliarEvents {
 
 	private static void handleClickOnFamiliar(EntityPlayer player, EntityLiving e) {
 		if (player.isSneaking()) {
+			Log.i("Issued: wait");
 			FamiliarController.toggleFamiliarWait(e);
 		} else {
 			UUID sel = player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
-			if (sel.equals(UUIDs.of(e))) {
+			if (UUIDs.of(e).equals(sel)) {
+				Log.i("Sending home");
 				FamiliarController.sendSelectedFamiliarHome(player);
 				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar = UUIDs.NULL_UUID;
 			} else {
 				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar = UUIDs.of(e);
+				Log.i("Selecting "+UUIDs.of(e));
 			}
 		}
 	}

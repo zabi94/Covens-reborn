@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class UnbindFamiliarFromPlayer extends SyncTask<EntityLiving> {
+public class UnbindFamiliarFromPlayer extends SyncTask<EntityLivingBase> {
 
 	private UUID eID;
 	

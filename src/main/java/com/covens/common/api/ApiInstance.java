@@ -267,7 +267,7 @@ public class ApiInstance extends CovensAPI {
 
 	@Override
 	public void unbindFamiliar(UUID familiar, UUID player) {
-		EntitySyncHelper.executeOnEntityLivingAvailable(familiar, new UnbindFamiliarFromPlayer(familiar));
+		EntitySyncHelper.executeOnEntityAvailable(familiar, new UnbindFamiliarFromPlayer(familiar));
 		EntitySyncHelper.executeOnPlayerAvailable(player, new UnbindPlayerFromFamiliar(player, familiar));
 	}
 	

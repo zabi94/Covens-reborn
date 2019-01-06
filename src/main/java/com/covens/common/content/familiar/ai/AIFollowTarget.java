@@ -1,6 +1,5 @@
 package com.covens.common.content.familiar.ai;
 
-import com.covens.common.core.util.EntitySyncHelper;
 import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.block.state.BlockFaceShape;
@@ -13,69 +12,73 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class AIFollowTarget extends FamiliarAIBase {
-	
+
 	private EntityLivingBase target;
 	private int timeToRecalcPath = 0;
 	private PathNavigate petPathfinder;
 
 	public AIFollowTarget(EntityLiving familiarIn) {
 		super(familiarIn);
-		petPathfinder = familiar.getNavigator();
-		setMutexBits(3);
+		this.petPathfinder = this.familiar.getNavigator();
+		this.setMutexBits(3);
 	}
-	
+
 	@Override
 	public void startExecuting() {
-		timeToRecalcPath = 0;
-		target = EntitySyncHelper.getEntityAcrossDimensions(getCap().target);
-		familiar.getNavigator().setPath(familiar.getNavigator().getPathToEntityLiving(target), 1f);
+		this.timeToRecalcPath = 0;
+		try {
+			this.target = this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().target)).get(0);
+			this.familiar.getNavigator().setPath(this.familiar.getNavigator().getPathToEntityLiving(this.target), 3f);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			this.target = null;
+		}
 	}
-	
+
 	@Override
 	public void resetTask() {
-		target = null;
+		this.target = null;
 	}
-	
-	@Override
-	public void updateTask() {
-		familiar.getLookHelper().setLookPositionWithEntity(target, 10.0F, (float) familiar.getVerticalFaceSpeed());
-		if (--this.timeToRecalcPath <= 0) {
-            this.timeToRecalcPath = 10;
-            if (!this.petPathfinder.tryMoveToEntityLiving(target, 1f)) {
-                if (!familiar.getLeashed() && !familiar.isRiding()) {
-                    if (familiar.getDistanceSq(target) >= 144.0D) {
-                        int i = MathHelper.floor(target.posX) - 2;
-                        int j = MathHelper.floor(target.posZ) - 2;
-                        int k = MathHelper.floor(target.getEntityBoundingBox().minY);
-                        for (int l = 0; l <= 4; ++l) {
-                            for (int i1 = 0; i1 <= 4; ++i1) {
-                                if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.isTeleportFriendlyBlock(i, j, k, l, i1)) {
-                                    familiar.setLocationAndAngles((double)((float)(i + l) + 0.5F), (double)k, (double)((float)(j + i1) + 0.5F), familiar.rotationYaw, familiar.rotationPitch);
-                                    this.petPathfinder.clearPath();
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-	}
-	
+
 	@Override
 	public boolean shouldExecute() {
-		return !getCap().target.equals(UUIDs.NULL_UUID);
+		return !this.getCap().target.equals(UUIDs.NULL_UUID) && !this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().target)).isEmpty();
 	}
-	
+
+	@Override
+	public void updateTask() {
+		this.familiar.getLookHelper().setLookPositionWithEntity(this.target, 10.0F, this.familiar.getVerticalFaceSpeed());
+		if (--this.timeToRecalcPath <= 0) {
+			this.timeToRecalcPath = 10;
+			if (!this.petPathfinder.tryMoveToEntityLiving(this.target, 3f)) {
+				if (!this.familiar.getLeashed() && !this.familiar.isRiding()) {
+					if (this.familiar.getDistanceSq(this.target) >= 144.0D) {
+						int i = MathHelper.floor(this.target.posX) - 2;
+						int j = MathHelper.floor(this.target.posZ) - 2;
+						int k = MathHelper.floor(this.target.getEntityBoundingBox().minY);
+						for (int l = 0; l <= 4; ++l) {
+							for (int i1 = 0; i1 <= 4; ++i1) {
+								if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.isTeleportFriendlyBlock(i, j, k, l, i1)) {
+									this.familiar.setLocationAndAngles(i + l + 0.5F, k, j + i1 + 0.5F, this.familiar.rotationYaw, this.familiar.rotationPitch);
+									this.petPathfinder.clearPath();
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@Override
 	public boolean shouldContinueExecuting() {
-		return shouldExecute() && target != null && !target.isDead && target.getEntityWorld().provider.getDimension() == familiar.getEntityWorld().provider.getDimension();
+		return !this.getCap().target.equals(UUIDs.NULL_UUID) && (this.target != null) && !this.target.isDead && (this.target.getEntityWorld().provider.getDimension() == this.familiar.getEntityWorld().provider.getDimension());
 	}
-	
+
 	protected boolean isTeleportFriendlyBlock(int x, int z, int y, int xOffset, int zOffset) {
-        BlockPos blockpos = new BlockPos(x + xOffset, y - 1, z + zOffset);
-        IBlockState iblockstate = familiar.world.getBlockState(blockpos);
-        return iblockstate.getBlockFaceShape(familiar.world, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID && iblockstate.canEntitySpawn(familiar) && familiar.world.isAirBlock(blockpos.up()) && familiar.world.isAirBlock(blockpos.up(2));
-    }
+		BlockPos blockpos = new BlockPos(x + xOffset, y - 1, z + zOffset);
+		IBlockState iblockstate = this.familiar.world.getBlockState(blockpos);
+		return (iblockstate.getBlockFaceShape(this.familiar.world, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID) && iblockstate.canEntitySpawn(this.familiar) && this.familiar.world.isAirBlock(blockpos.up()) && this.familiar.world.isAirBlock(blockpos.up(2));
+	}
 
 }

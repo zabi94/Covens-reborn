@@ -10,13 +10,11 @@ import com.covens.common.core.helper.Log;
 import com.covens.common.core.helper.PlayerHelper;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.DimensionManager;
@@ -33,7 +31,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class EntitySyncHelper {
 
 	private static HashMap<UUID, ArrayList<SyncTask<EntityPlayer>>> playerList = new HashMap<>();
-	private static HashMap<UUID, ArrayList<SyncTask<EntityLiving>>> entityList = new HashMap<>();
+	private static HashMap<UUID, ArrayList<SyncTask<EntityLivingBase>>> entityList = new HashMap<>();
 	private static final String DATA_TAG = "covens:tasks";
 	private static final Object playerLock = new Object();
 	private static final Object entityLock = new Object();
@@ -42,8 +40,12 @@ public class EntitySyncHelper {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 			throw new IllegalStateException("Don't invoke CreatureSyncHelper from client");
 		}
+		if (UUIDs.isNull(playerUUID)) {
+			throw new IllegalStateException("You can only queue valid player UUIDs");
+		}
 		EntityPlayer p = PlayerHelper.getPlayerAcrossDimensions(playerUUID);
 		if (p != null) {
+			action.entityFound(p);
 			DimensionManager.getWorld(0).getMinecraftServer().addScheduledTask(action);
 			return true;
 		} else {
@@ -62,21 +64,25 @@ public class EntitySyncHelper {
 		}
 	}
 
-	public static boolean executeOnEntityLivingAvailable(UUID uniqueID, SyncTask<EntityLiving> action) {
+	public static boolean executeOnEntityAvailable(UUID uniqueID, SyncTask<EntityLivingBase> action) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 			throw new IllegalStateException("Don't invoke CreatureSyncHelper from client");
 		}
-		EntityLiving ent = getEntityAcrossDimensions(uniqueID);
+		if (UUIDs.isNull(uniqueID)) {
+			throw new IllegalStateException("You can only queue valid UUIDs");
+		}
+		EntityLivingBase ent = (EntityLivingBase) getEntityAcrossDimensions(uniqueID);
 		if (ent != null) {
+			action.entityFound(ent);
 			DimensionManager.getWorld(0).getMinecraftServer().addScheduledTask(action);
 			return true;
 		} else {
 			synchronized (entityLock) {
-				ArrayList<SyncTask<EntityLiving>> list;
+				ArrayList<SyncTask<EntityLivingBase>> list;
 				if (entityList.containsKey(uniqueID)) {
 					list = entityList.get(uniqueID);
 				} else {
-					list = new ArrayList<SyncTask<EntityLiving>>();
+					list = new ArrayList<SyncTask<EntityLivingBase>>();
 					entityList.put(uniqueID, list);
 				}
 				list.add(action);
@@ -90,7 +96,7 @@ public class EntitySyncHelper {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 			throw new IllegalStateException("Don't invoke CreatureSyncHelper from client");
 		}
-		EntityLiving ent = getEntityAcrossDimensions(uniqueID);
+		EntityLivingBase ent = (EntityLivingBase) getEntityAcrossDimensions(uniqueID);
 		if (ent == null) {
 			synchronized (entityLock) {
 				if (entityList.containsKey(uniqueID)) {
@@ -102,14 +108,14 @@ public class EntitySyncHelper {
 	}
 
 	@Nullable
-	public static EntityLiving getEntityAcrossDimensions(UUID uniqueID) {
+	public static EntityLivingBase getEntityAcrossDimensions(UUID uniqueID) {
 		for (WorldServer ws : DimensionManager.getWorlds()) {
 			Entity e = ws.getEntityFromUuid(uniqueID);
 			if (e != null) {
-				if (e instanceof EntityLiving) {
-					return (EntityLiving) e;
+				if (e instanceof EntityLivingBase) {
+					return (EntityLivingBase) e;
 				} else {
-					throw new IllegalStateException("Entity with UUID " + uniqueID + " is not an EntityLiving");
+					throw new IllegalStateException("Entity with UUID " + uniqueID + " is not an EntityLivingBase");
 				}
 			}
 		}
@@ -123,28 +129,30 @@ public class EntitySyncHelper {
 		}
 		if (evt.getEntity() instanceof EntityPlayerMP) {
 			UUID id = EntityPlayer.getUUID(((EntityPlayerMP) evt.getEntity()).getGameProfile());
+			ArrayList<SyncTask<EntityPlayer>> bufferList = new ArrayList<>();
 			synchronized (playerLock) {
 				if (playerList.containsKey(id)) {
 					ArrayList<SyncTask<EntityPlayer>> list = playerList.get(id);
-					MinecraftServer server = DimensionManager.getWorld(0).getMinecraftServer();
-					list.stream().forEach(task -> server.addScheduledTask(task.entityFound((EntityLivingBase) evt.getEntity())));
+					bufferList.addAll(list);
 					list.clear();
 					playerList.remove(id);
 					DimensionManager.getWorld(0).getMapStorage().getOrLoadData(TaskData.class, DATA_TAG).markDirty();
 				}
 			}
-		} else if (evt.getEntity() instanceof EntityLiving) {
+			bufferList.stream().forEach(task -> DimensionManager.getWorld(0).getMinecraftServer().addScheduledTask(task.entityFound((EntityLivingBase) evt.getEntity())));
+		} else if (evt.getEntity() instanceof EntityLivingBase) {
 			UUID id = evt.getEntity().getPersistentID();
+			ArrayList<SyncTask<EntityLivingBase>> bufferList = new ArrayList<>();
 			synchronized (entityLock) {
 				if (entityList.containsKey(id)) {
-					ArrayList<SyncTask<EntityLiving>> list = entityList.get(id);
-					MinecraftServer server = DimensionManager.getWorld(0).getMinecraftServer();
-					list.stream().forEach(task -> server.addScheduledTask(task.entityFound((EntityLivingBase) evt.getEntity())));
+					ArrayList<SyncTask<EntityLivingBase>> list = entityList.get(id);
+					bufferList.addAll(list);
 					list.clear();
 					entityList.remove(id);
 					DimensionManager.getWorld(0).getMapStorage().getOrLoadData(TaskData.class, DATA_TAG).markDirty();
 				}
 			}
+			bufferList.stream().forEach(task -> DimensionManager.getWorld(0).getMinecraftServer().addScheduledTask(task.entityFound((EntityLivingBase) evt.getEntity())));
 		}
 	}
 
@@ -206,17 +214,17 @@ public class EntitySyncHelper {
 		}
 
 		@SuppressWarnings("unchecked")
-		private static void unpackEntities(HashMap<UUID, ArrayList<SyncTask<EntityLiving>>> entityListIn, NBTTagList tagList) {
+		private static void unpackEntities(HashMap<UUID, ArrayList<SyncTask<EntityLivingBase>>> entityListIn, NBTTagList tagList) {
 			tagList.forEach(entTag -> {
 				NBTTagCompound tag = (NBTTagCompound) entTag;
 				UUID id = UUIDs.fromNBT(tag);
 				NBTTagList tasks = tag.getTagList("tasks", NBT.TAG_COMPOUND);
-				ArrayList<SyncTask<EntityLiving>> nlist = new ArrayList<>();
+				ArrayList<SyncTask<EntityLivingBase>> nlist = new ArrayList<>();
 				tasks.forEach(base -> {
 					NBTTagCompound nbt = (NBTTagCompound) base;
 					String className = nbt.getString("covens:type");
 					try {
-						SyncTask<EntityLiving> task = (SyncTask<EntityLiving>) Class.forName(className).newInstance();
+						SyncTask<EntityLivingBase> task = (SyncTask<EntityLivingBase>) Class.forName(className).newInstance();
 						task.deserializeNBT(nbt);
 						nlist.add(task);
 					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
