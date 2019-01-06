@@ -3,6 +3,7 @@ package com.covens.common.core.capability.mimic;
 import java.util.UUID;
 
 import com.covens.common.Covens;
+import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
@@ -20,7 +21,7 @@ public class CapabilityMimicData implements IMimicData {
 
 	public CapabilityMimicData() {
 		this.mimicking = false;
-		this.mimickedPlayerID = new UUID(0, 0);
+		this.mimickedPlayerID = UUIDs.NULL_UUID;
 		this.mimickedPlayerName = "";
 	}
 

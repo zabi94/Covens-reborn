@@ -2,8 +2,8 @@ package com.covens.common.block.misc;
 
 import java.util.Random;
 
+import com.covens.api.state.StateProperties;
 import com.covens.client.handler.ModelHandler;
-import com.covens.common.Covens;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
 
@@ -46,7 +46,7 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 	public BlockCandle(String id, boolean lit) {
 		super(id, Material.CLOTH);
 		this.setSoundType(SoundType.CLOTH);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(Covens.COLOR, EnumDyeColor.WHITE));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(StateProperties.COLOR, EnumDyeColor.WHITE));
 		this.isLit = lit;
 		if (this.isLit) {
 			this.setCreativeTab(null); // No need for them to appear twice
@@ -66,18 +66,18 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 	@Override
 	@SuppressWarnings("deprecation")
 	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		return MapColor.getBlockColor(state.getValue(Covens.COLOR));
+		return MapColor.getBlockColor(state.getValue(StateProperties.COLOR));
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(Covens.COLOR, EnumDyeColor.byMetadata(meta));
+		return this.getDefaultState().withProperty(StateProperties.COLOR, EnumDyeColor.byMetadata(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(Covens.COLOR).getMetadata();
+		return state.getValue(StateProperties.COLOR).getMetadata();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -105,17 +105,17 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (state.getBlock() == ModBlocks.candle_medium_lit) {
-			world.setBlockState(pos, ModBlocks.candle_medium.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
+			world.setBlockState(pos, ModBlocks.candle_medium.getDefaultState().withProperty(StateProperties.COLOR, state.getValue(StateProperties.COLOR)), 3);
 		} else if (state.getBlock() == ModBlocks.candle_small_lit) {
-			world.setBlockState(pos, ModBlocks.candle_small.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
+			world.setBlockState(pos, ModBlocks.candle_small.getDefaultState().withProperty(StateProperties.COLOR, state.getValue(StateProperties.COLOR)), 3);
 		} else {
 			ItemStack heldItem = playerIn.getHeldItem(hand);
 			if (!heldItem.isEmpty() && (heldItem.getItem() == Items.FLINT_AND_STEEL)) {
 				heldItem.damageItem(1, playerIn);
 				if (state.getBlock() == ModBlocks.candle_medium) {
-					world.setBlockState(pos, ModBlocks.candle_medium_lit.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
+					world.setBlockState(pos, ModBlocks.candle_medium_lit.getDefaultState().withProperty(StateProperties.COLOR, state.getValue(StateProperties.COLOR)), 3);
 				} else if (state.getBlock() == ModBlocks.candle_small) {
-					world.setBlockState(pos, ModBlocks.candle_small_lit.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
+					world.setBlockState(pos, ModBlocks.candle_small_lit.getDefaultState().withProperty(StateProperties.COLOR, state.getValue(StateProperties.COLOR)), 3);
 				}
 			}
 		}
@@ -124,7 +124,7 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 
 	@Override
 	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, Covens.COLOR);
+		return new BlockStateContainer(this, StateProperties.COLOR);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return this.getDefaultState().withProperty(Covens.COLOR, EnumDyeColor.byMetadata(meta));
+		return this.getDefaultState().withProperty(StateProperties.COLOR, EnumDyeColor.byMetadata(meta));
 	}
 
 	@SuppressWarnings("deprecation")

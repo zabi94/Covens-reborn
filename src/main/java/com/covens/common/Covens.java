@@ -60,9 +60,6 @@ import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -82,12 +79,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 public class Covens {
 
 	public static final Logger logger = LogManager.getLogger(MOD_NAME);
-	// Constants
-	public static final String TAGLOCK_ENTITY = "tag_entity";
-	public static final String TAGLOCK_ENTITY_NAME = "tag_entity_name";
-	// States
-	public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
-	public static final PropertyEnum<BlockStairs.EnumHalf> HALF = PropertyEnum.create("half", BlockStairs.EnumHalf.class);
+	
 	@SidedProxy(serverSide = LibMod.PROXY_COMMON, clientSide = LibMod.PROXY_CLIENT)
 	public static ISidedProxy proxy;
 	@Instance(LibMod.MOD_ID)

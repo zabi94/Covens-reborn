@@ -1,7 +1,7 @@
 package com.covens.common.content.incantation;
 
 import com.covens.api.incantation.IIncantation;
-import com.covens.common.Covens;
+import com.covens.api.state.StateProperties;
 import com.covens.common.block.ModBlocks;
 
 import net.minecraft.block.state.IBlockState;
@@ -24,11 +24,11 @@ public class IncantationCandlelight implements IIncantation {
 			IBlockState state = world.getBlockState(pos);
 			boolean flag = false;
 			if (state.getBlock() == ModBlocks.candle_medium) {
-				world.setBlockState(pos, ModBlocks.candle_medium_lit.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
+				world.setBlockState(pos, ModBlocks.candle_medium_lit.getDefaultState().withProperty(StateProperties.COLOR, state.getValue(StateProperties.COLOR)), 3);
 				flag = true;
 			}
 			if (state.getBlock() == ModBlocks.candle_small) {
-				world.setBlockState(pos, ModBlocks.candle_small_lit.getDefaultState().withProperty(Covens.COLOR, state.getValue(Covens.COLOR)), 3);
+				world.setBlockState(pos, ModBlocks.candle_small_lit.getDefaultState().withProperty(StateProperties.COLOR, state.getValue(StateProperties.COLOR)), 3);
 				flag = true;
 			}
 			if (flag) {

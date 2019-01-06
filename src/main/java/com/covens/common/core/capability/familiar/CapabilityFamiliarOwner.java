@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.covens.api.mp.IMagicPowerExpander;
 import com.covens.common.core.capability.simple.SimpleCapability;
+import com.covens.common.core.util.UUIDs;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
 
@@ -29,6 +30,8 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 	@DontSync 
 	@CustomSerializer(reader = SerializerArrayUUID.class, writer = SerializerArrayUUID.class) 
 	public ArrayList<UUID> familiars = new ArrayList<UUID>();
+	
+	public UUID selectedFamiliar = UUIDs.NULL_UUID;
 
 	public void addFamiliar(UUID familiar) {
 		if (!familiars.contains(familiar)) {
@@ -66,27 +69,23 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 		return this.familiarCount * 100;
 	}
 	
+	public void selectFamiliar(Entity e) {
+		selectedFamiliar = UUIDs.of(e);
+	}
+	
 	public static class SerializerArrayUUID implements SimpleCapability.Reader<ArrayList<UUID>>, SimpleCapability.Writer<ArrayList<UUID>> {
 
 		@Override
 		public void write(ArrayList<UUID> list, NBTTagCompound buf, String field) {
 			NBTTagList tlist = new NBTTagList();
-			list.forEach(uuid -> {
-				NBTTagCompound t = new NBTTagCompound();
-				t.setLong("msb", uuid.getMostSignificantBits());
-				t.setLong("lsb", uuid.getLeastSignificantBits());
-				tlist.appendTag(t);
-			});
+			list.forEach(uuid -> tlist.appendTag(UUIDs.toNBT(uuid)));
 			buf.setTag("list", tlist);
 		}
 
 		@Override
 		public ArrayList<UUID> read(NBTTagCompound buf, String name) {
 			ArrayList<UUID> list = Lists.newArrayList();
-			buf.getTagList("list", NBT.TAG_COMPOUND).forEach(nbt -> {
-				NBTTagCompound tag = (NBTTagCompound) nbt;
-				list.add(new UUID(tag.getLong("msb"), tag.getLong("lsb")));
-			});
+			buf.getTagList("list", NBT.TAG_COMPOUND).forEach(nbt -> list.add(UUIDs.fromNBT((NBTTagCompound) nbt)));
 			return list;
 		}
 		

@@ -2,7 +2,7 @@ package com.covens.client.core.colorhandlers;
 
 import javax.annotation.Nullable;
 
-import com.covens.common.Covens;
+import com.covens.api.state.StateProperties;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -63,7 +63,7 @@ public class ColorPropertyHandler implements IBlockColor, IItemColor {
 
 	@Override
 	public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
-		return getColor(state.getValue(Covens.COLOR).getMetadata());
+		return getColor(state.getValue(StateProperties.COLOR).getMetadata());
 	}
 
 	@Override

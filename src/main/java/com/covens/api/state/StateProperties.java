@@ -6,6 +6,7 @@ import com.covens.api.state.enums.EnumWoodType;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.item.EnumDyeColor;
 
 public class StateProperties {
 
@@ -17,7 +18,11 @@ public class StateProperties {
 
 	public static final PropertyInteger MIRROR_VARIANTS = PropertyInteger.create("mirror", 0, 3);
 
-	public static final PropertyBool LOWER_HALF = PropertyBool.create("half");
+	public static final PropertyBool HALF = PropertyBool.create("half");
+	
+	public static final PropertyBool HANDLE_DOWN = PropertyBool.create("handle_down");
 
 	public static final PropertyBool FERTILE = PropertyBool.create("fertile");
+
+	public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 }

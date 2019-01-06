@@ -23,6 +23,7 @@ import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.covens.common.core.helper.Log;
+import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -131,15 +132,12 @@ public abstract class SimpleCapability {
 		if (!tag.hasKey(name)) {
 			return null;
 		}
-		return new UUID(tag.getCompoundTag(name).getLong("msb"), tag.getCompoundTag(name).getLong("lsb"));
+		return UUIDs.fromNBT(tag.getCompoundTag(name));
 	}
 
 	private static void writeUUID(UUID bt, NBTTagCompound tag, String name) {
 		if (bt != null) {
-			NBTTagCompound tag_uuid = new NBTTagCompound();
-			tag_uuid.setLong("msb", bt.getMostSignificantBits());
-			tag_uuid.setLong("lsb", bt.getLeastSignificantBits());
-			tag.setTag(name, tag_uuid);
+			tag.setTag(name, UUIDs.toNBT(bt));
 		}
 	}
 

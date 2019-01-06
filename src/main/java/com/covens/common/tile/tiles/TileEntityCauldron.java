@@ -7,7 +7,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import com.covens.api.mp.IMagicPowerConsumer;
-import com.covens.common.Covens;
+import com.covens.api.state.StateProperties;
 import com.covens.common.content.cauldron.behaviours.DefaultBehaviours;
 import com.covens.common.content.cauldron.behaviours.ICauldronBehaviour;
 import com.covens.common.content.cauldron.teleportCapability.CapabilityCauldronTeleport;
@@ -74,7 +74,7 @@ public class TileEntityCauldron extends ModTileEntity implements ITickable {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (playerIn.isSneaking() && playerIn.getHeldItem(hand).isEmpty()) {
-			worldIn.setBlockState(pos, state.cycleProperty(Covens.HALF), 3);
+			worldIn.setBlockState(pos, state.cycleProperty(StateProperties.HANDLE_DOWN), 3);
 		}
 		ItemStack heldItem = playerIn.getHeldItem(hand);
 		if (!playerIn.world.isRemote && (this.ingredients.size() == 0) && heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {

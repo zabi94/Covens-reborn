@@ -1,8 +1,7 @@
 package com.covens.common.content.transformation.vampire.blood;
 
-import java.util.UUID;
-
 import com.covens.api.transformation.IBloodReserve;
+import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,8 +17,7 @@ public class BloodReserveStorage implements IStorage<IBloodReserve> {
 		data.setInteger("max", instance.getMaxBlood());
 		data.setInteger("val", instance.getBlood());
 		if (instance.getDrinkerUUID() != null) {
-			data.setLong("uuidmsb", instance.getDrinkerUUID().getMostSignificantBits());
-			data.setLong("uuidlsb", instance.getDrinkerUUID().getLeastSignificantBits());
+			UUIDs.toExistingNBT(instance.getDrinkerUUID(), data);
 		}
 		return data;
 	}
@@ -30,7 +28,7 @@ public class BloodReserveStorage implements IStorage<IBloodReserve> {
 		instance.setMaxBlood(data.getInteger("max"));
 		instance.setBlood(data.getInteger("val"));
 		if (data.hasKey("uuidmsb")) {
-			instance.setDrinker(new UUID(data.getLong("uuidmsb"), data.getLong("uuidlsb")));
+			instance.setDrinker(UUIDs.fromNBT(data));
 		}
 	}
 

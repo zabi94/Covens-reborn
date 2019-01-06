@@ -5,6 +5,7 @@ import java.util.UUID;
 import com.covens.api.CovensAPI;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.util.EntitySyncHelper.SyncTask;
+import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,13 +35,12 @@ public class UnbindPlayerFromFamiliar extends SyncTask<EntityPlayer> {
 
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) {
-		this.pID = new UUID(nbt.getLong("msb"), nbt.getLong("lsb"));
+		this.pID = UUIDs.fromNBT(nbt);
 	}
 
 	@Override
 	protected void writeToNBT(NBTTagCompound tag) {
-		tag.setLong("msb", this.pID.getMostSignificantBits());
-		tag.setLong("lsb", this.pID.getLeastSignificantBits());
+		UUIDs.toExistingNBT(pID, tag);
 	}
 	
 	@Override

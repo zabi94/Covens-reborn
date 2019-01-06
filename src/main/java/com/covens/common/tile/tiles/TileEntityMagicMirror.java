@@ -5,12 +5,12 @@ import java.util.UUID;
 import com.covens.api.state.StateProperties;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.client.core.event.custom.MimicEvent;
-import com.covens.common.Covens;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.capability.mimic.CapabilityMimicData;
 import com.covens.common.core.capability.mimic.IMimicData;
 import com.covens.common.core.helper.NBTHelper;
 import com.covens.common.item.ModItems;
+import com.covens.common.item.magic.ItemTaglock;
 import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.state.IBlockState;
@@ -65,8 +65,8 @@ public class TileEntityMagicMirror extends ModTileEntity implements ITickable {
 
 		ItemStack held = playerIn.getHeldItem(hand);
 		if (ItemStack.areItemsEqual(held, new ItemStack(ModItems.taglock))) {
-			UUID victimID = NBTHelper.getUniqueID(held, Covens.TAGLOCK_ENTITY);
-			String victimName = NBTHelper.getString(held, Covens.TAGLOCK_ENTITY_NAME);
+			UUID victimID = NBTHelper.getUniqueID(held, ItemTaglock.TAGLOCK_ENTITY);
+			String victimName = NBTHelper.getString(held, ItemTaglock.TAGLOCK_ENTITY_NAME);
 			final IMimicData capability = playerIn.getCapability(CapabilityMimicData.CAPABILITY, null);
 			capability.setMimickedPlayerID(victimID);
 			capability.setMimickedPlayerName(victimName);

@@ -209,7 +209,7 @@ public class EntitySyncHelper {
 		private static void unpackEntities(HashMap<UUID, ArrayList<SyncTask<EntityLiving>>> entityListIn, NBTTagList tagList) {
 			tagList.forEach(entTag -> {
 				NBTTagCompound tag = (NBTTagCompound) entTag;
-				UUID id = new UUID(tag.getLong("msb"), tag.getLong("lsb"));
+				UUID id = UUIDs.fromNBT(tag);
 				NBTTagList tasks = tag.getTagList("tasks", NBT.TAG_COMPOUND);
 				ArrayList<SyncTask<EntityLiving>> nlist = new ArrayList<>();
 				tasks.forEach(base -> {
@@ -231,7 +231,7 @@ public class EntitySyncHelper {
 		private static void unpackPlayers(HashMap<UUID, ArrayList<SyncTask<EntityPlayer>>> playerListIn, NBTTagList tagList) {
 			tagList.forEach(entTag -> {
 				NBTTagCompound tag = (NBTTagCompound) entTag;
-				UUID id = new UUID(tag.getLong("msb"), tag.getLong("lsb"));
+				UUID id = UUIDs.fromNBT(tag);
 				NBTTagList tasks = tag.getTagList("tasks", NBT.TAG_COMPOUND);
 				ArrayList<SyncTask<EntityPlayer>> nlist = new ArrayList<>();
 				tasks.forEach(base -> {
@@ -258,9 +258,7 @@ public class EntitySyncHelper {
 			tag.setTag("entities", entities);
 			synchronized (playerLock) {
 				for (UUID id : playerList.keySet()) {
-					NBTTagCompound playerContainer = new NBTTagCompound();
-					playerContainer.setLong("msb", id.getMostSignificantBits());
-					playerContainer.setLong("lsb", id.getLeastSignificantBits());
+					NBTTagCompound playerContainer = UUIDs.toNBT(id);
 					NBTTagList tasks = new NBTTagList();
 					playerList.get(id).forEach(st -> tasks.appendTag(st.serializeNBT()));
 					playerContainer.setTag("tasks", tasks);
@@ -269,16 +267,13 @@ public class EntitySyncHelper {
 			}
 			synchronized (entityLock) {
 				for (UUID id : entityList.keySet()) {
-					NBTTagCompound entityContainer = new NBTTagCompound();
-					entityContainer.setLong("msb", id.getMostSignificantBits());
-					entityContainer.setLong("lsb", id.getLeastSignificantBits());
+					NBTTagCompound entityContainer = UUIDs.toNBT(id);
 					NBTTagList tasks = new NBTTagList();
 					entityList.get(id).forEach(st -> tasks.appendTag(st.serializeNBT()));
 					entityContainer.setTag("tasks", tasks);
 					players.appendTag(entityContainer);
 				}
 			}
-			Log.i("Writing to NBT:\n" + tag);
 			return tag;
 		}
 	}

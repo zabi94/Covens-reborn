@@ -7,13 +7,12 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.covens.api.state.StateProperties;
 import com.covens.client.handler.ModelHandler;
-import com.covens.common.Covens;
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 
-import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -45,7 +44,7 @@ public class BlockCauldron extends BlockModTileEntity {
 
 	public BlockCauldron() {
 		super(LibBlockName.CAULDRON, Material.IRON);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(Covens.HALF, BlockStairs.EnumHalf.BOTTOM));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(StateProperties.HANDLE_DOWN, true));
 		this.setSoundType(SoundType.METAL);
 		this.setResistance(5F);
 		this.setHardness(5F);
@@ -60,7 +59,7 @@ public class BlockCauldron extends BlockModTileEntity {
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		IBlockState iblockstate = this.getDefaultState().withProperty(Covens.HALF, (meta & 4) > 0 ? BlockStairs.EnumHalf.TOP : BlockStairs.EnumHalf.BOTTOM);
+		IBlockState iblockstate = this.getDefaultState().withProperty(StateProperties.HANDLE_DOWN, (meta & 4) > 0 ? false : true);
 		iblockstate = iblockstate.withProperty(FACING, EnumFacing.byIndex(5 - (meta & 3)));
 		return iblockstate;
 	}
@@ -69,7 +68,7 @@ public class BlockCauldron extends BlockModTileEntity {
 	public int getMetaFromState(IBlockState state) {
 		int i = 0;
 
-		if (state.getValue(Covens.HALF) == BlockStairs.EnumHalf.TOP) {
+		if (state.getValue(StateProperties.HANDLE_DOWN) == false) {
 			i |= 4;
 		}
 
@@ -112,14 +111,14 @@ public class BlockCauldron extends BlockModTileEntity {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, Covens.HALF);
+		return new BlockStateContainer(this, FACING, StateProperties.HANDLE_DOWN);
 	}
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		IBlockState iblockstate = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
 		iblockstate = iblockstate.withProperty(FACING, placer.getHorizontalFacing());
-		return (facing != EnumFacing.DOWN) && ((facing == EnumFacing.UP) || (hitY <= 0.5F)) ? iblockstate.withProperty(Covens.HALF, BlockStairs.EnumHalf.BOTTOM) : iblockstate.withProperty(Covens.HALF, BlockStairs.EnumHalf.TOP);
+		return (facing != EnumFacing.DOWN) && ((facing == EnumFacing.UP) || (hitY <= 0.5F)) ? iblockstate.withProperty(StateProperties.HANDLE_DOWN, true) : iblockstate.withProperty(StateProperties.HANDLE_DOWN, false);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import com.covens.api.familiar.IFamiliarEligible;
 import com.covens.api.familiar.IFamiliarUneligible;
 import com.covens.common.core.capability.simple.SimpleCapability;
 import com.covens.common.core.helper.PlayerHelper;
+import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -21,21 +22,22 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 	public static final Capability<CapabilityFamiliarCreature> CAPABILITY = null;
 	public static final CapabilityFamiliarCreature DEFAULT_INSTANCE = new CapabilityFamiliarCreature();
 
-	public UUID owner = new UUID(0, 0);
+	public UUID owner = UUIDs.NULL_UUID;
 	public String ownerName = "";
 	@DontSync
 	public float bindingChance = 0.01f * rng.nextInt(10);
+	@DontSync
+	public UUID target = UUIDs.NULL_UUID;
 
 	public boolean hasOwner() {
-		return (this.owner.getLeastSignificantBits() != 0) || (this.owner.getMostSignificantBits() != 0);
+		return !owner.equals(UUIDs.NULL_UUID);
 	}
 
 	public void setOwner(EntityPlayer player) {
+		this.owner = UUIDs.of(player);
 		if (player == null) {
-			this.owner = new UUID(0, 0);
 			this.ownerName = "";
 		} else {
-			this.owner = EntityPlayer.getUUID(player.getGameProfile());
 			this.ownerName = player.getName();
 		}
 		this.markDirty((byte) 1);

@@ -7,9 +7,9 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import com.covens.common.Covens;
 import com.covens.common.core.helper.NBTHelper;
 import com.covens.common.item.ModItems;
+import com.covens.common.item.magic.ItemTaglock;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -52,14 +52,14 @@ public class CommandCreateTaglock extends CommandBase {
 			throw new WrongUsageException("commands.create_taglock.usage");
 		} else if (sender instanceof EntityPlayer) {
 			ItemStack stack = new ItemStack(ModItems.taglock);
-			NBTHelper.setString(stack, Covens.TAGLOCK_ENTITY_NAME, args[0]);
+			NBTHelper.setString(stack, ItemTaglock.TAGLOCK_ENTITY_NAME, args[0]);
 			if (args.length == 2) {
-				NBTHelper.setUniqueID(stack, Covens.TAGLOCK_ENTITY, UUID.fromString(args[1]));
+				NBTHelper.setUniqueID(stack, ItemTaglock.TAGLOCK_ENTITY, UUID.fromString(args[1]));
 			} else {
 				boolean found = false;
 				for (EntityPlayerMP player : server.getPlayerList().getPlayers()) {
 					if (player.getName().equals(args[0])) {
-						NBTHelper.setUniqueID(stack, Covens.TAGLOCK_ENTITY, player.getUniqueID());
+						NBTHelper.setUniqueID(stack, ItemTaglock.TAGLOCK_ENTITY, player.getUniqueID());
 						found = true;
 						break;
 					}

@@ -2,7 +2,7 @@ package com.covens.common.block.misc;
 
 import java.util.Random;
 
-import com.covens.common.Covens;
+import com.covens.api.state.StateProperties;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.lib.LibBlockName;
@@ -37,7 +37,7 @@ public class BlockLantern extends BlockMod {
 		super(lit ? LibBlockName.REVEALING_LANTERN : LibBlockName.LANTERN, Material.IRON);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setLightOpacity(0);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(Covens.COLOR, EnumDyeColor.WHITE));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(StateProperties.COLOR, EnumDyeColor.WHITE));
 		this.lit = lit;
 		this.setHardness(1.5f);
 	}
@@ -80,12 +80,12 @@ public class BlockLantern extends BlockMod {
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		return (state.getValue(Covens.COLOR)).ordinal();
+		return (state.getValue(StateProperties.COLOR)).ordinal();
 	}
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this, 1, state.getValue(Covens.COLOR).ordinal());
+		return new ItemStack(this, 1, state.getValue(StateProperties.COLOR).ordinal());
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class BlockLantern extends BlockMod {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, Covens.COLOR);
+		return new BlockStateContainer(this, StateProperties.COLOR);
 	}
 
 	@Override
@@ -119,13 +119,13 @@ public class BlockLantern extends BlockMod {
 	@Override
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(Covens.COLOR, EnumDyeColor.values()[meta]);
+		return this.getDefaultState().withProperty(StateProperties.COLOR, EnumDyeColor.values()[meta]);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(Covens.COLOR).ordinal();
+		return state.getValue(StateProperties.COLOR).ordinal();
 	}
 
 	@Override
