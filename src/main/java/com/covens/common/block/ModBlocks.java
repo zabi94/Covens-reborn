@@ -32,7 +32,6 @@ import com.covens.common.block.natural.crop.CropMint;
 import com.covens.common.block.natural.crop.CropSilphium;
 import com.covens.common.block.natural.crop.CropThistle;
 import com.covens.common.block.natural.crop.CropWormwood;
-import com.covens.common.block.natural.fluid.Fluids;
 import com.covens.common.block.natural.plants.BlockEmberGrass;
 import com.covens.common.block.natural.plants.BlockMoonbell;
 import com.covens.common.block.natural.plants.BlockMoss;
@@ -63,7 +62,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -157,14 +155,9 @@ public final class ModBlocks {
 	public static final Block nethersteel_chisel = null;
 
 	private ModBlocks() {
-
 	}
 
 	public static void register(final IForgeRegistry<Block> registry) {
-		for (final IFluidBlock fluidBlock : Fluids.MOD_FLUID_BLOCKS) {
-			registry.register((Block) fluidBlock);
-		}
-
 		registry.registerAll(new BlockCrop(LibBlockName.CROP_ACONITUM), new BlockCrop(LibBlockName.CROP_ASPHODEL), new BlockCrop(LibBlockName.CROP_GINGER), new BlockCrop(LibBlockName.CROP_WHITE_SAGE), new BlockCrop(LibBlockName.CROP_MANDRAKE), new BlockCrop(LibBlockName.CROP_LAVENDER), new BlockCrop(LibBlockName.CROP_TULSI), new BlockCrop(LibBlockName.CROP_GARLIC), new BlockCrop(LibBlockName.CROP_HELLEBORE), new BlockCrop(LibBlockName.CROP_CHRYSANTHEMUM), new BlockCrop(LibBlockName.CROP_SAGEBRUSH), new BlockCrop(LibBlockName.CROP_INFESTED_WHEAT), new CropWormwood(), new CropSilphium(), new CropKenaf(), new CropThistle(), new CropKelp(), new CropBelladonna(), new CropMint(), new BlockMoonbell(), new BlockInfestedFarmland(), new BlockMoss(true), new BlockMoss(false));
 		// Ore
 		registry.register(new BlockSilverOre());

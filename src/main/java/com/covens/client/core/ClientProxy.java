@@ -50,6 +50,7 @@ import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.content.tarot.TarotHandler.TarotInfo;
 import com.covens.common.core.net.GuiHandler;
 import com.covens.common.core.proxy.ISidedProxy;
+import com.covens.common.core.statics.ModFluids;
 import com.covens.common.entity.EntityAoE;
 import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.entity.EntityBrew;
@@ -118,19 +119,21 @@ public class ClientProxy implements ISidedProxy {
 		event.getMap().registerSprite(ResourceLocations.FLAME);
 		event.getMap().registerSprite(ResourceLocations.GRAY_WATER);
 		event.getMap().registerSprite(ResourceLocations.BAT);
+		event.getMap().registerSprite(ModFluids.HONEY.getFlowing());
+		event.getMap().registerSprite(ModFluids.HONEY.getStill());
+		event.getMap().registerSprite(ModFluids.MUNDANE_OIL.getFlowing());
+		event.getMap().registerSprite(ModFluids.MUNDANE_OIL.getStill());
 	}
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		this.registerRenders();
-
 		HudController.registerNewComponent(new BloodViewerHUD());
 		HudController.registerNewComponent(new EnergyHUD());
 		HudController.registerNewComponent(new MoonHUD());
 		HudController.registerNewComponent(new SelectedActionHUD());
 		HudController.registerNewComponent(ExtraBarButtonsHUD.INSTANCE);
 		HudController.registerNewComponent(new VampireBloodBarHUD());
-
 		MinecraftForge.EVENT_BUS.register(new GirdleOfTheWoodedHUD());
 		MinecraftForge.EVENT_BUS.register(new WerewolfEventHandler());
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());

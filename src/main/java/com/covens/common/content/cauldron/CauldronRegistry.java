@@ -44,7 +44,7 @@ import com.covens.api.cauldron.IBrewModifier.ModifierResult;
 import com.covens.api.cauldron.IBrewModifier.ResultType;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.block.ModBlocks;
-import com.covens.common.block.natural.fluid.Fluids;
+import com.covens.common.core.statics.ModFluids;
 import com.covens.common.crafting.util.IngredientMultiOreDict;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemFumes;
@@ -235,20 +235,20 @@ public class CauldronRegistry {
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.catechu, 3, 0), acaciaLog);
 		// Arcane recipes
 
-		registerCauldronItemCrafting(Fluids.BW_HONEY, Fluid.BUCKET_VOLUME, new ItemStack(ModBlocks.goblet, 1, 1), redstone, redstone, redstone, fumeCloudyOil, emptyGoblet, ghastTear);
-		registerCauldronItemCrafting(Fluids.MUNDANE_OIL, new ItemStack(ModItems.ritual_chalk, 2, 3), normalRitualChalk, normalRitualChalk, blazePowder, blazePowder, blazePowder, blazePowder, fumeFieryBreeze, fumeFieryBreeze);
+		registerCauldronItemCrafting(ModFluids.HONEY, Fluid.BUCKET_VOLUME, new ItemStack(ModBlocks.goblet, 1, 1), redstone, redstone, redstone, fumeCloudyOil, emptyGoblet, ghastTear);
+		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModItems.ritual_chalk, 2, 3), normalRitualChalk, normalRitualChalk, blazePowder, blazePowder, blazePowder, blazePowder, fumeFieryBreeze, fumeFieryBreeze);
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk, 2, 2), normalRitualChalk, normalRitualChalk, dimensionalSand, dimensionalSand, dimensionalSand, dimensionalSand, fumeHeavenlyWind, fumeHeavenlyWind);
-		registerCauldronItemCrafting(Fluids.BW_HONEY, new ItemStack(ModItems.ritual_chalk, 2, 1), normalRitualChalk, normalRitualChalk, goldNugget, goldNugget, goldNugget, goldNugget, fumeCleansingAura, fumeCleansingAura);
+		registerCauldronItemCrafting(ModFluids.HONEY, new ItemStack(ModItems.ritual_chalk, 2, 1), normalRitualChalk, normalRitualChalk, goldNugget, goldNugget, goldNugget, goldNugget, fumeCleansingAura, fumeCleansingAura);
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.graveyard_dirt, 8, 0), graveyardDust, graveyardDust, wormwood, wormwood, dirt, dirt, dirt, dirt);
-		registerCauldronItemCrafting(Fluids.MUNDANE_OIL, new ItemStack(ModBlocks.ember_grass, 2, 0), blazePowder, blazePowder, wormwood, wormwood);
-		registerCauldronItemCrafting(Fluids.MUNDANE_OIL, new ItemStack(ModBlocks.torchwood, 2, 0), glowstoneDust, glowstoneDust, anyLog, anyLeaf);
+		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.ember_grass, 2, 0), blazePowder, blazePowder, wormwood, wormwood);
+		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.torchwood, 2, 0), glowstoneDust, glowstoneDust, anyLog, anyLeaf);
 		// Banner pattern removal
 		for (int i = 0; i < 16; i++) {
 			registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(Items.BANNER, 1, i), Ingredient.fromStacks(new ItemStack(Items.BANNER, 1, i)));
 		}
 
-		registerCauldronMixedCrafting(FluidRegistry.WATER, new FluidStack(Fluids.BW_HONEY, Fluid.BUCKET_VOLUME), new ItemStack(ModItems.empty_honeycomb), honeycomb);
-		registerCauldronFluidCrafting(FluidRegistry.WATER, new FluidStack(Fluids.MUNDANE_OIL, Fluid.BUCKET_VOLUME), potato, Ingredient.fromStacks(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0)));
+		registerCauldronMixedCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.HONEY, Fluid.BUCKET_VOLUME), new ItemStack(ModItems.empty_honeycomb), honeycomb);
+		registerCauldronFluidCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.MUNDANE_OIL, Fluid.BUCKET_VOLUME), potato, Ingredient.fromStacks(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0)));
 
 		registerVanillaBrewEffect(MobEffects.ABSORPTION, Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 0)), 600);
 		registerVanillaBrewEffect(MobEffects.FIRE_RESISTANCE, Ingredient.fromItem(Items.MAGMA_CREAM));

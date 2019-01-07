@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public final class ResourceLocations {
 
 	// Misc
-	public static final ResourceLocation GRAY_WATER = getLocation("blocks/fluid/gray_scale_fluid");
+	public static final ResourceLocation GRAY_WATER = getLocation("fluids/gray_scale_fluid");
 
 	// GUI
 	public static final ResourceLocation POTION_TEXTURES = getLocation("textures/gui/potions.png");

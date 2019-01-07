@@ -5,7 +5,6 @@ import com.covens.common.block.chisel.BlockColdIronChiseled;
 import com.covens.common.block.chisel.BlockNetherSteelChiseled;
 import com.covens.common.block.chisel.BlockSilverChiseled;
 import com.covens.common.block.natural.BlockGem.Gem;
-import com.covens.common.block.natural.fluid.Fluids;
 import com.covens.common.core.helper.CropHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.block.ItemBlockColor;
@@ -70,7 +69,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.LoaderException;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
@@ -253,11 +251,7 @@ public final class ModItems {
 	public static void register(final IForgeRegistry<Item> registry) {
 		CropHelper.getFoods().forEach((crop, item) -> registry.register(item));
 		CropHelper.getSeeds().forEach((crop, item) -> registry.register(item));
-		for (final IFluidBlock fluidBlock : Fluids.MOD_FLUID_BLOCKS) {
-			registry.register(itemBlock((Block) fluidBlock));
-		}
 		registry.register(new ItemGem());
-		// registry.register(new ItemFume());
 		registry.register(new ItemFumes(LibItemName.FUME));
 		registry.register(new ItemGemPowder(LibItemName.GEM_POWDER));
 		registry.register(new ItemMod(LibItemName.COLD_IRON_INGOT));
