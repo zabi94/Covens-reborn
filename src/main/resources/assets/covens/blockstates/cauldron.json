@@ -1,34 +1,28 @@
 {
+  "forge_marker": 1,
+  "parent": "block/block",
   "variants": {
-    "facing=north,half=bottom": {
-      "model": "covens:cauldron"
+    "facing": {
+      "north": {
+        "y": 0
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "east": {
+        "y": 90
+      }
     },
-    "facing=south,half=bottom": {
-      "model": "covens:cauldron",
-      "y": 180
-    },
-    "facing=east,half=bottom": {
-      "model": "covens:cauldron",
-      "y": 90
-    },
-    "facing=west,half=bottom": {
-      "model": "covens:cauldron",
-      "y": 270
-    },
-    "facing=north,half=top": {
-      "model": "covens:cauldron_hanging"
-    },
-    "facing=south,half=top": {
-      "model": "covens:cauldron_hanging",
-      "y": 180
-    },
-    "facing=east,half=top": {
-      "model": "covens:cauldron_hanging",
-      "y": 90
-    },
-    "facing=west,half=top": {
-      "model": "covens:cauldron_hanging",
-      "y": 270
+    "handle_down": {
+   	  "true": {
+   	    "model": "covens:cauldron"
+   	  },
+   	  "false": {
+   	    "model": "covens:cauldron_hanging"
+   	  }
     }
   }
 }
