@@ -1,10 +1,10 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/covens-reborn",
   "1.12.2": {
-    "0.0.18": "Familiar follow command, remove liquids"
+    "0.0.19": "hotfix"
   },
   "promos": {
-    "1.12.2-latest": "0.0.18",
-    "1.12.2-recommended": "0.0.18"
+    "1.12.2-latest": "0.0.19",
+    "1.12.2-recommended": "0.0.19"
   }
 }
