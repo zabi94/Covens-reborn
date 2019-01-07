@@ -28,7 +28,7 @@ public class AIFollowTarget extends FamiliarAIBase {
 		this.timeToRecalcPath = 0;
 		try {
 			this.target = this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().target)).get(0);
-			this.familiar.getNavigator().setPath(this.familiar.getNavigator().getPathToEntityLiving(this.target), 3f);
+			this.familiar.getNavigator().setPath(this.familiar.getNavigator().getPathToEntityLiving(this.target), 1.2f);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			this.target = null;
 		}
@@ -49,7 +49,13 @@ public class AIFollowTarget extends FamiliarAIBase {
 		this.familiar.getLookHelper().setLookPositionWithEntity(this.target, 10.0F, this.familiar.getVerticalFaceSpeed());
 		if (--this.timeToRecalcPath <= 0) {
 			this.timeToRecalcPath = 10;
-			if (!this.petPathfinder.tryMoveToEntityLiving(this.target, 3f)) {
+			if (!UUIDs.of(target).equals(getCap().target)) {
+				this.target = this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().target)).get(0);
+				if (target == null) {
+					return;
+				}
+			}
+			if (!this.familiar.getLeashed() && !this.familiar.isRiding() && this.familiar.getDistanceSq(this.target) >= 16.0D && !this.petPathfinder.tryMoveToEntityLiving(this.target, 1f)) {
 				if (!this.familiar.getLeashed() && !this.familiar.isRiding()) {
 					if (this.familiar.getDistanceSq(this.target) >= 144.0D) {
 						int i = MathHelper.floor(this.target.posX) - 2;

@@ -960,3 +960,8 @@ covens.book.rites.name=Book of Shadows
 covens.book.rites.landing=A grimoire, handed from witch to witch for centuries.
 covens.book.brews.name=Almanac of boiling
 covens.book.brews.landing=Bubble, bubble! Fire burn and caldron bubble.
+
+//Familiars
+familiar.command.follow=%s is now following %s
+familiar.command.sit.enable=%s is now sitting
+familiar.command.sit.disable=%s is now following
