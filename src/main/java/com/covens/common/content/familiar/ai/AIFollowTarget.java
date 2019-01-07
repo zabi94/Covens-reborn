@@ -1,5 +1,6 @@
 package com.covens.common.content.familiar.ai;
 
+import com.covens.api.CovensAPI;
 import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.block.state.BlockFaceShape;
@@ -19,6 +20,9 @@ public class AIFollowTarget extends FamiliarAIBase {
 
 	public AIFollowTarget(EntityLiving familiarIn) {
 		super(familiarIn);
+		if (!CovensAPI.getAPI().isValidFamiliar(familiarIn)) {
+			throw new IllegalArgumentException("I can't add familiar AI to non familiar entities");
+		}
 		this.petPathfinder = this.familiar.getNavigator();
 		this.setMutexBits(3);
 	}
@@ -41,7 +45,7 @@ public class AIFollowTarget extends FamiliarAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return !this.getCap().target.equals(UUIDs.NULL_UUID) && !this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().target)).isEmpty();
+		return !this.getCap().getTargetUUID().equals(UUIDs.NULL_UUID) && !this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().getTargetUUID())).isEmpty();
 	}
 
 	@Override
@@ -49,7 +53,7 @@ public class AIFollowTarget extends FamiliarAIBase {
 		this.familiar.getLookHelper().setLookPositionWithEntity(this.target, 10.0F, this.familiar.getVerticalFaceSpeed());
 		if (--this.timeToRecalcPath <= 0) {
 			this.timeToRecalcPath = 10;
-			if (!UUIDs.of(target).equals(getCap().target)) {
+			if (!UUIDs.of(target).equals(getCap().getTargetUUID())) {
 				this.target = this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().target)).get(0);
 				if (target == null) {
 					return;

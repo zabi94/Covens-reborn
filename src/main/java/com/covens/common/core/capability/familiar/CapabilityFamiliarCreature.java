@@ -2,6 +2,7 @@ package com.covens.common.core.capability.familiar;
 
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.covens.api.familiar.IFamiliarEligible;
@@ -11,7 +12,8 @@ import com.covens.common.core.helper.PlayerHelper;
 import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -61,7 +63,15 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 
 	@Override
 	public boolean isRelevantFor(Entity object) {
-		return ((object instanceof EntityCreature) || (object instanceof IFamiliarEligible)) && !(object instanceof IFamiliarUneligible);
+		return ((object instanceof EntityAnimal) || (object instanceof IFamiliarEligible)) && !(object instanceof IFamiliarUneligible) && !(object instanceof IMob);
+	}
+	
+	@Nonnull
+	public UUID getTargetUUID() {
+		if (target == null) {
+			target = UUIDs.NULL_UUID;
+		}
+		return target;
 	}
 
 	@Override
