@@ -76,7 +76,7 @@ public class FamiliarEvents {
 			if (e != null && CovensAPI.getAPI().isValidFamiliar(e) && e.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner.equals(evt.player.getUniqueID())) {
 				handleClickOnFamiliar(evt.player, (EntityLiving) e);
 			} else {
-				RayTraceResult result = RayTraceHelper.rayTraceResult(evt.player, RayTraceHelper.fromLookVec(evt.player, 32), true, true);
+				RayTraceResult result = RayTraceHelper.rayTracePlayerSight(evt.player, 32, true);
 				if (result == null) {
 					result = new RayTraceResult(Type.MISS, new Vec3d(0, 0, 0), null, null);
 				}
