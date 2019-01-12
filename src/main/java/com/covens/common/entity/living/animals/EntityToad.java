@@ -76,7 +76,7 @@ public class EntityToad extends EntityMultiSkin {
 				
 			}
 			
-	    	 if (jumpingAnim.getTimer()>= jumpingAnim.getDuration()) {	 //If the animation is finished, reset the counters and remove the AItasks;
+	    	 if (jumpingAnim.getTimer()>= jumpingAnim.getDuration()) {
 		    	 jumpingAnim.setTimer(0);
 				jumping = false;
 		     }
@@ -84,7 +84,6 @@ public class EntityToad extends EntityMultiSkin {
 			if((MathHelper.abs((float) this.motionX) >0.05 || MathHelper.abs((float) this.motionZ) > 0.05) && this.onGround) {
 
 	    			this.motionY += 0.6;
-	    			System.out.println("Up I go!");
 			}
     	
 	}

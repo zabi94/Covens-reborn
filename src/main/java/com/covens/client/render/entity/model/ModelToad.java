@@ -173,49 +173,7 @@ public class ModelToad extends ModelBase {
 			this.lLeg03.rotateAngleY = 1.0471975512F;
 			this.rLeg03.rotateAngleY = -1.0471975512F;
 		} //Check later whether it works...
-		
-		/*if ((limbSwingAmount > 0.1) || (this.timer != 0)) {// This needs to be made so that the variable is stored on the actual entity or
-															// whatever
-			this.timer++;
-			if (this.timer < 25) {
-				this.stomach.offsetY = this.stomach.offsetY + ((-1.5F - this.stomach.offsetY) * (this.timer / 100));
-				this.stomach.rotateAngleX = this.stomach.rotateAngleX + ((0 - this.stomach.rotateAngleX) * (this.timer / 100));
-				this.lLeg01.rotateAngleX = this.lLeg01.rotateAngleX + ((1.3962634016F - this.lLeg01.rotateAngleX) * (this.timer / 100));
-				this.lLeg02.rotateAngleX = this.lLeg02.rotateAngleX + ((-1.3962634016F - this.lLeg02.rotateAngleX) * (this.timer / 100));
-				this.lLeg03.rotateAngleX = this.lLeg03.rotateAngleX + ((2.35619449019F - this.lLeg03.rotateAngleX) * (this.timer / 100));
-				this.rLeg01.rotateAngleX = this.lLeg01.rotateAngleX;
-				this.rLeg02.rotateAngleX = this.lLeg02.rotateAngleX;
-				this.rLeg03.rotateAngleX = this.lLeg03.rotateAngleX;
-				this.lArm01.rotateAngleX = this.lArm01.rotateAngleX + ((-2.35619449019F - this.lArm01.rotateAngleX) * (this.timer / 100));
-				this.lArm02.rotateAngleX = this.lArm02.rotateAngleX + ((1.3962634016F - this.lArm02.rotateAngleX) * (this.timer / 100));
-				this.rArm01.rotateAngleX = this.lArm01.rotateAngleX;
-				this.rArm02.rotateAngleX = this.lArm02.rotateAngleX;
-
-				// System.out.println("25: " + this.stomach.rotateAngleX);
-
-			} else if (this.timer < 50) {
-				this.stomach.offsetY = this.stomach.offsetY + ((0F - this.stomach.offsetY) * ((this.timer - 25) / 100));
-				this.stomach.rotateAngleX = this.stomach.rotateAngleX + ((0.36651914291F - this.stomach.rotateAngleX) * ((this.timer - 24) / 100));
-				this.lLeg01.rotateAngleX = this.lLeg01.rotateAngleX + ((-0.51225413546F - this.lLeg01.rotateAngleX) * ((this.timer - 24) / 100));
-				this.lLeg02.rotateAngleX = this.lLeg02.rotateAngleX + ((0.45378560551F - this.lLeg02.rotateAngleX) * ((this.timer - 24) / 100));
-				this.lLeg03.rotateAngleX = this.lLeg03.rotateAngleX + ((0.41887902047F - this.lLeg03.rotateAngleX) * ((this.timer - 24) / 100));
-				this.rLeg01.rotateAngleX = this.lLeg01.rotateAngleX;
-				this.rLeg02.rotateAngleX = this.lLeg02.rotateAngleX;
-				this.rLeg03.rotateAngleX = this.lLeg03.rotateAngleX;
-				this.lArm01.rotateAngleX = this.lArm01.rotateAngleX + ((-0.8159414253F - this.lArm01.rotateAngleX) * ((this.timer - 24) / 100));
-				this.lArm02.rotateAngleX = this.lArm02.rotateAngleX + ((0.45378560551F - this.lArm02.rotateAngleX) * ((this.timer - 24) / 100));
-				this.rArm01.rotateAngleX = this.lArm01.rotateAngleX;
-				this.rArm02.rotateAngleX = this.lArm02.rotateAngleX;
-
-				// System.out.println("50: " + this.stomach.rotateAngleX + " timer: " + timer);
-
-			} else if (this.timer < 75) {
-				this.stomach.rotateAngleX = this.stomach.rotateAngleX + ((-0.36651914291F - this.stomach.rotateAngleX) * ((this.timer - 49) / 100));
-				// System.out.println("70" + this.stomach.rotateAngleX);
-			}
-
-		}*/
-		resetAngles();
+;
 		if(toad.isJumping()) {
 			if(jumpProgress < 0.3333334) {
 				this.stomach.rotateAngleX = -0.36651914291F + 0.36651914291F*jumpProgress*3;
