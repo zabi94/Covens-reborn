@@ -958,6 +958,6 @@ covens.book.brews.landing=Bubble, bubble! Fire burn and caldron bubble.
 //Familiars
 familiar.command.follow=%s is now following %s
 familiar.command.sit.enable=%s is now sitting
-familiar.command.sit.disable=%s is now following
+familiar.command.sit.disable=%s is now following you
 familiar.command.follow.forbidden=%s doesn't belong to our world
 familiar.dead=%s was dismissed
