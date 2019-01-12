@@ -56,7 +56,6 @@ public class BlockCauldron extends BlockModTileEntity {
 		ModelHandler.registerModel(this, 0);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		IBlockState iblockstate = this.getDefaultState().withProperty(StateProperties.HANDLE_DOWN, (meta & 4) > 0 ? false : true);
@@ -76,7 +75,6 @@ public class BlockCauldron extends BlockModTileEntity {
 		return i;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
@@ -87,7 +85,6 @@ public class BlockCauldron extends BlockModTileEntity {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return BOUNDING_BOX;
@@ -103,7 +100,6 @@ public class BlockCauldron extends BlockModTileEntity {
 		addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;

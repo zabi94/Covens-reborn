@@ -31,7 +31,6 @@ public class BlockGem extends BlockMod implements IInfusionStabiliserExt {
 		this.setCreativeTab(BLOCKS_CREATIVE_TAB);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(GEM, BlockGem.Gem.values()[meta]);

@@ -40,7 +40,6 @@ public class PotionFireWorld extends BrewMod {
 
 	private final Map<Block, IBlockState> stateMap = new HashMap<>();
 
-	@SuppressWarnings("deprecation")
 	public PotionFireWorld() {
 		super("fireworld", true, 0xED2939, true, 0);
 		this.stateMap.put(Blocks.GRASS_PATH, Blocks.RED_NETHER_BRICK.getDefaultState());

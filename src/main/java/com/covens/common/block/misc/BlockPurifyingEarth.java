@@ -32,7 +32,6 @@ public class BlockPurifyingEarth extends BlockMod {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return FULL_BLOCK_AABB;
 	}

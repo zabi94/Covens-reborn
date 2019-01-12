@@ -22,7 +22,6 @@ public class BlockCandleMedium extends BlockCandle {
 		super(id, lit);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return MEDIUM_BOX.offset(state.getOffset(source, pos));
