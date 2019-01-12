@@ -9,7 +9,7 @@ import com.covens.common.tile.tiles.TileEntityCauldron;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -37,7 +37,6 @@ public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCaul
 			double level = fluidStack.amount / (Fluid.BUCKET_VOLUME * 2D);
 
 			GlStateManager.pushMatrix();
-			GlStateManager.disableLighting();
 			GlStateManager.translate(x, y + 0.1 + level, z);
 			if (fluid == FluidRegistry.WATER) {
 				int color = te.getColorRGB();
@@ -53,20 +52,15 @@ public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCaul
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GlStateManager.disableAlpha();
-
+			RenderHelper.disableStandardItemLighting();
 			final float w = 0.125F;
 			GlStateManager.translate(w, 0, w);
 			GlStateManager.rotate(90F, 1F, 0F, 0F);
 			final float s = 0.0460425F;
 			GlStateManager.scale(s, s, s);
-
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
 			this.renderWater(location);
-
 			GlStateManager.enableAlpha();
 			GlStateManager.disableBlend();
-
-			GlStateManager.enableLighting();
 			GlStateManager.popMatrix();
 		}
 
