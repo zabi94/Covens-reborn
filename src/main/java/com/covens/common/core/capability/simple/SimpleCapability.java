@@ -420,7 +420,7 @@ public abstract class SimpleCapability {
 
 	public abstract SimpleCapability getNewInstance();
 
-	public void markDirty(byte mode) {
+	public final void markDirty(byte mode) {
 		this.dirty = mode;
 	}
 

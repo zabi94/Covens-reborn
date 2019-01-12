@@ -5,6 +5,7 @@ import java.util.UUID;
 import com.covens.api.CovensAPI;
 import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.event.HotbarActionTriggeredEvent;
+import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.familiar.ai.AIFollowTarget;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
@@ -13,11 +14,13 @@ import com.covens.common.core.helper.Log;
 import com.covens.common.core.helper.RayTraceHelper;
 import com.covens.common.core.util.EntitySyncHelper;
 import com.covens.common.core.util.UUIDs;
+import com.covens.common.core.util.syncTasks.FamiliarDeath;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
@@ -28,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 @Mod.EventBusSubscriber
 public class FamiliarEvents {
@@ -37,7 +41,9 @@ public class FamiliarEvents {
 		if (evt.getEntity().world.isRemote || !CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
 			return;
 		}
-		if (evt.getEntity().getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
+		CapabilityFamiliarCreature cap = evt.getEntity().getCapability(CapabilityFamiliarCreature.CAPABILITY, null); 
+		if (cap.hasOwner()) {
+			EntitySyncHelper.executeOnPlayerAvailable(cap.owner, new FamiliarDeath(evt.getEntity().getPersistentID(), evt.getEntity().getName()));
 			CovensAPI.getAPI().unbindFamiliar(evt.getEntity());
 		}
 		EntitySyncHelper.cleanMessagesForEntity(evt.getEntity().getPersistentID());
@@ -98,6 +104,14 @@ public class FamiliarEvents {
 						break;
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerLogin(PlayerLoggedInEvent evt) {
+		if (evt.player instanceof EntityPlayerMP) {
+			evt.player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).markDirty((byte) 2);
+			HotbarAction.refreshActions(evt.player, evt.player.world);
 		}
 	}
 

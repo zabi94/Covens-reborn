@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.core.capability.simple.SimpleCapability;
 import com.covens.common.core.util.UUIDs;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +19,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicPowerExpander {
 
@@ -71,6 +75,14 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 	
 	public void selectFamiliar(Entity e) {
 		selectedFamiliar = UUIDs.of(e);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onSyncMessage(byte mode) {
+		if (mode == 2) {
+			HotbarAction.refreshActions(Minecraft.getMinecraft().player, Minecraft.getMinecraft().world);
+		}
 	}
 	
 	public static class SerializerArrayUUID implements SimpleCapability.Reader<ArrayList<UUID>>, SimpleCapability.Writer<ArrayList<UUID>> {

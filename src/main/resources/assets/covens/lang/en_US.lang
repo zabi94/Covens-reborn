@@ -921,12 +921,6 @@ moon.tooltip.0=You feel weird today
 moon.tooltip.1=Your heart is beating faster, your thoughts are slipping out of control
 moon.tooltip.2=No matter how hard you try, you cannot switch back
 
-//Thaumcraft aspects
-tc.aspect.diabolus=Demon, Unholy, Profane
-tc.aspect.stellae=Stars, Constellation, Asterism
-tc.aspect.luna=The Moon
-tc.aspect.sol=The Sun
-
 //Mobs
 entity.owl.name=Owl
 entity.snake.name=Snake
@@ -965,3 +959,5 @@ covens.book.brews.landing=Bubble, bubble! Fire burn and caldron bubble.
 familiar.command.follow=%s is now following %s
 familiar.command.sit.enable=%s is now sitting
 familiar.command.sit.disable=%s is now following
+familiar.command.follow.forbidden=%s doesn't belong to our world
+familiar.dead=%s was dismissed

@@ -2,10 +2,9 @@ package com.covens.common.core.util.syncTasks;
 
 import java.util.UUID;
 
-import com.covens.common.core.helper.Log;
 import com.covens.common.core.util.EntitySyncHelper;
-import com.covens.common.core.util.UUIDs;
 import com.covens.common.core.util.EntitySyncHelper.SyncTask;
+import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,9 +20,8 @@ public class EntityBeFollowedByFamiliar extends SyncTask<EntityLivingBase> {
 	}
 	
 	@Override
-	public void run() {
+	public void execute(EntityLivingBase entity) {
 		EntitySyncHelper.executeOnEntityAvailable(familiar, new FamiliarFollowEntity(familiar, target));
-		Log.i("Target online");
 	}
 
 	@Override
@@ -37,12 +35,4 @@ public class EntityBeFollowedByFamiliar extends SyncTask<EntityLivingBase> {
 		tag.setTag("familiar", UUIDs.toNBT(familiar));
 		tag.setTag("target", UUIDs.toNBT(target));
 	}
-
-	@Override
-	protected void onEntityConnected(EntityLivingBase entity) {
-		//NO-OP
-	}
-
-	
-
 }

@@ -6,7 +6,6 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.util.EntitySyncHelper.SyncTask;
 import com.covens.common.core.util.UUIDs;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -14,8 +13,6 @@ public class UnbindFamiliarFromPlayer extends SyncTask<EntityLivingBase> {
 
 	private UUID eID;
 	
-	private EntityLiving p = null;
-
 	public UnbindFamiliarFromPlayer() {
 	}
 
@@ -24,7 +21,7 @@ public class UnbindFamiliarFromPlayer extends SyncTask<EntityLivingBase> {
 	}
 
 	@Override
-	public void run() {//TODO add checks
+	public void execute(EntityLivingBase p) {//TODO add checks
 		p.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).setOwner(null);
 	}
 
@@ -37,10 +34,4 @@ public class UnbindFamiliarFromPlayer extends SyncTask<EntityLivingBase> {
 	protected void writeToNBT(NBTTagCompound tag) {
 		UUIDs.toExistingNBT(this.eID, tag);
 	}
-
-	@Override
-	protected void onEntityConnected(EntityLivingBase entity) {
-		p = (EntityLiving) entity;
-	}
-
 }

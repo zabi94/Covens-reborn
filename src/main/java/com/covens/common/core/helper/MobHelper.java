@@ -5,6 +5,7 @@ import java.util.Set;
 import com.covens.api.CovensAPI;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.transformation.CapabilityTransformation;
+import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.google.common.collect.Sets;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -113,6 +114,9 @@ public class MobHelper {
 	// For usage in cold iron
 	public static boolean isSpirit(EntityLivingBase entity) {
 		if (entity.getCreatureAttribute() == CovensAPI.getAPI().SPIRIT) {
+			return true;
+		}
+		if  (CovensAPI.getAPI().isValidFamiliar(entity) && entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
 			return true;
 		}
 		return SPIRITS.contains(entity.getClass().getName());

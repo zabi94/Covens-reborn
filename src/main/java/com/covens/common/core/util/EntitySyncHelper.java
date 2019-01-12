@@ -172,6 +172,8 @@ public class EntitySyncHelper {
 	}
 
 	public static abstract class SyncTask<T extends EntityLivingBase> implements Runnable, INBTSerializable<NBTTagCompound> {
+		
+		private T instance = null;
 
 		@Override
 		public NBTTagCompound serializeNBT() {
@@ -181,12 +183,27 @@ public class EntitySyncHelper {
 			return tag;
 		}
 		
+		@Override
+		public void run() {
+			execute(instance);
+			cleanUp();
+		}
+		
+		protected abstract void execute(T instance);
+		
 		protected SyncTask<T> entityFound(EntityLivingBase entity) {
 			onEntityConnected(entity);
 			return this;
 		}
 
-		protected abstract void onEntityConnected(EntityLivingBase entity);
+		@SuppressWarnings("unchecked")
+		private final void onEntityConnected(EntityLivingBase entity) {
+			instance = (T) entity;
+		}
+		
+		public final void cleanUp() {
+			instance = null;
+		}
 
 		protected abstract void writeToNBT(NBTTagCompound tag);
 	}

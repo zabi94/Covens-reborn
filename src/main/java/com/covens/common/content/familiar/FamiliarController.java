@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
+import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.util.EntitySyncHelper;
 import com.covens.common.core.util.UUIDs;
 import com.covens.common.core.util.syncTasks.FamiliarFollowEntity;
@@ -36,6 +37,12 @@ public class FamiliarController {
 		if (UUIDs.isNull(selectedFamiliar)) {
 			throw new IllegalArgumentException("Cannot order to unselected familiar");
 		}
+		
+		if (MobHelper.isSpirit(toFollow)) {
+			player.sendStatusMessage(new TextComponentTranslation("familiar.command.follow.forbidden", toFollow.getName()), true);
+			return;
+		}
+		
 		EntitySyncHelper.executeOnEntityAvailable(selectedFamiliar, new FamiliarFollowEntity(selectedFamiliar, UUIDs.of(toFollow)));
 		player.sendStatusMessage(new TextComponentTranslation("familiar.command.follow", getSelectedFamiliarName(selectedFamiliar, player), toFollow.getName()), true);
 	}
