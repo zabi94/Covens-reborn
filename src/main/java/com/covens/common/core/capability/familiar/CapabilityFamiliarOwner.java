@@ -36,6 +36,7 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 	public ArrayList<UUID> familiars = new ArrayList<UUID>();
 	
 	public UUID selectedFamiliar = UUIDs.NULL_UUID;
+	@DontSync
 	public String selectedFamiliarName = "";
 
 	public void addFamiliar(UUID familiar) {
@@ -50,6 +51,9 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 		if (familiars.contains(familiar)) {
 			familiars.remove(familiar);
 			familiarCount--;
+			if (selectedFamiliar.equals(familiar)) {
+				selectFamiliar(null);
+			}
 			markDirty((byte) 1); 
 		}
 	}
