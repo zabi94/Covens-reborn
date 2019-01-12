@@ -173,7 +173,8 @@ public class ModelToad extends ModelBase {
 			this.lLeg03.rotateAngleY = 1.0471975512F;
 			this.rLeg03.rotateAngleY = -1.0471975512F;
 		} //Check later whether it works...
-;
+		
+		resetAngles();
 		if(toad.isJumping()) {
 			if(jumpProgress < 0.3333334) {
 				this.stomach.rotateAngleX = -0.36651914291F + 0.36651914291F*jumpProgress*3;
