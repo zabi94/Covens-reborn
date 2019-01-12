@@ -93,7 +93,6 @@ public class FamiliarEvents {
 						break;
 					case ENTITY:
 						if (result.entityHit instanceof EntityLivingBase) {
-							Log.i("Following "+result.entityHit);
 							FamiliarController.orderSelectedFamiliarFollow(evt.player, (EntityLivingBase) result.entityHit);
 						} else {
 						}
