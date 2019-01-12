@@ -1,10 +1,10 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/covens-reborn",
   "1.12.2": {
-    "0.0.19": "hotfix"
+    "0.0.20": "More familiar work and polishing"
   },
   "promos": {
-    "1.12.2-latest": "0.0.19",
-    "1.12.2-recommended": "0.0.19"
+    "1.12.2-latest": "0.0.20",
+    "1.12.2-recommended": "0.0.20"
   }
 }
