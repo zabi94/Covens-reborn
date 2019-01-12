@@ -1,5 +1,6 @@
 package com.covens.common.content.familiar;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
@@ -24,7 +25,7 @@ public class FamiliarController {
 			isFollowing = ((EntityTameable) familiar).isSitting();
 			((EntityTameable) familiar).setSitting(!isFollowing);
 		} else {
-			
+			//TODO add sit logic
 		}
 		EntityPlayer p = familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).getOwner();
 		if (p != null) {
@@ -48,7 +49,11 @@ public class FamiliarController {
 	}
 
 	private static String getSelectedFamiliarName(UUID selectedFamiliar, EntityPlayer player) {
-		return "familiar.name";
+		List<EntityLiving> el = player.world.getEntities(EntityLiving.class, e -> e.getPersistentID().equals(selectedFamiliar));
+		if (el.isEmpty()) {
+			return player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliarName;
+		}
+		return el.get(0).getName();
 	}
 
 	public static void sendSelectedFamiliarHome(EntityPlayer e) {

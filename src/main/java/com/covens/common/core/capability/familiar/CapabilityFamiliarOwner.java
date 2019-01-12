@@ -36,6 +36,7 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 	public ArrayList<UUID> familiars = new ArrayList<UUID>();
 	
 	public UUID selectedFamiliar = UUIDs.NULL_UUID;
+	public String selectedFamiliarName = "";
 
 	public void addFamiliar(UUID familiar) {
 		if (!familiars.contains(familiar)) {
@@ -75,6 +76,7 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 	
 	public void selectFamiliar(Entity e) {
 		selectedFamiliar = UUIDs.of(e);
+		selectedFamiliarName = e==null?"":e.getName();
 	}
 	
 	@Override
