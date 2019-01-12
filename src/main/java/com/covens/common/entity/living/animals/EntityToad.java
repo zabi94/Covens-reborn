@@ -6,7 +6,7 @@ import com.covens.common.entity.living.EntityMultiSkin;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Sets;
-
+import com.covens.client.render.entity.model.AnimationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.entity.Entity;
@@ -51,10 +51,12 @@ public class EntityToad extends EntityMultiSkin {
 	// "Wednesday", "Trevor", "Odin", "Woden"};
 	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModItems.silver_scales, ModItems.envenomed_fang);
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntityToad.class, DataSerializers.VARINT);
-
+	private AnimationHelper jumpingAnim = new AnimationHelper(30);
+	private boolean jumping = false;
+	
 	public EntityToad(World worldIn) {
 		super(worldIn);
-		this.setSize(1F, 0.3F);
+		this.setSize(0.5F, 0.5F);
 	}
 
 	@Override
@@ -62,6 +64,29 @@ public class EntityToad extends EntityMultiSkin {
 		super.entityInit();
 		this.dataManager.register(TINT, 0xFFFFFF);
 		this.aiSit = new EntityAISit(this);
+	}
+	
+	public void onUpdate(){
+		super.onUpdate();
+		jumpingAnim.updateTimer();
+		if(this.world.isRemote) {
+			if((MathHelper.abs((float) this.motionX) >0.05 || MathHelper.abs((float) this.motionZ) > 0.05) || isJumping()) {
+				jumpingAnim.increaseTimer();
+				jumping = true;
+				
+			}
+			
+	    	 if (jumpingAnim.getTimer()>= jumpingAnim.getDuration()) {	 //If the animation is finished, reset the counters and remove the AItasks;
+		    	 jumpingAnim.setTimer(0);
+				jumping = false;
+		     }
+		}
+			if((MathHelper.abs((float) this.motionX) >0.05 || MathHelper.abs((float) this.motionZ) > 0.05) && this.onGround) {
+
+	    			this.motionY += 0.6;
+	    			System.out.println("Up I go!");
+			}
+    	
 	}
 
 	@Override
@@ -198,4 +223,15 @@ public class EntityToad extends EntityMultiSkin {
 	public int getSkinTypes() {
 		return 4;
 	}
+	
+	public boolean isJumping() {
+    	return jumping;
+    }
+	
+	public float getJumpProgress(float partialRenderTicks) {
+		return jumpingAnim.getAnimationFraction(partialRenderTicks);
+	}
+
+	
+	
 }

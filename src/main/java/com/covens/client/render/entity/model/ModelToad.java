@@ -131,6 +131,22 @@ public class ModelToad extends ModelBase {
 		this.head01.addChild(this.head02);
 		this.rLeg02.addChild(this.rLeg03);
 	}
+	
+	public void resetAngles() {
+		this.stomach.rotateAngleX = -0.36651914291F;
+		this.lLeg01.rotateAngleX = -0.51225413546F;
+		this.lLeg02.rotateAngleX = 0.45378560551F;
+		this.lLeg03.rotateAngleX = 0.41887902047863906F;
+		this.rLeg01.rotateAngleX = this.lLeg01.rotateAngleX;
+		this.rLeg02.rotateAngleX = this.lLeg02.rotateAngleX;
+		this.rLeg03.rotateAngleX = this.lLeg03.rotateAngleX;
+		this.lArm01.rotateAngleX = -0.8159414253F;
+		this.lArm02.rotateAngleX = 0.45378560551F;
+		this.rArm01.rotateAngleX = this.lArm01.rotateAngleX;
+		this.rArm02.rotateAngleX = this.lArm02.rotateAngleX;
+		this.lLeg03.rotateAngleY = -0.6000000238418579F;
+		this.rLeg03.rotateAngleY = 0.6000000238418579F;
+	}
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
@@ -145,22 +161,20 @@ public class ModelToad extends ModelBase {
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
-		super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
-		float time = entitylivingbaseIn.ticksExisted * 0.2F;
+	 public void setLivingAnimations(EntityLivingBase entity, float yaw, float pitch, float partialRenderTicks) {
+		float time = entity.ticksExisted * 0.2F;
+		EntityToad toad = (EntityToad) entity;
+    	float jumpProgress = toad.getJumpProgress(partialRenderTicks);
 		this.jaw.rotationPointY = (float) (0.5F + (0.02 * MathHelper.sin(time)));
 
-		EntityToad toad = (EntityToad) entitylivingbaseIn;
+		
 
 		if (toad.isSitting()) {
 			this.lLeg03.rotateAngleY = 1.0471975512F;
 			this.rLeg03.rotateAngleY = -1.0471975512F;
-		} else {
-			this.lLeg03.rotateAngleY = -0.6000000238418579F;
-			this.rLeg03.rotateAngleY = 0.6000000238418579F;
-		}
-
-		if ((limbSwingAmount > 0.1) || (this.timer != 0)) {// This needs to be made so that the variable is stored on the actual entity or
+		} //Check later whether it works...
+		
+		/*if ((limbSwingAmount > 0.1) || (this.timer != 0)) {// This needs to be made so that the variable is stored on the actual entity or
 															// whatever
 			this.timer++;
 			if (this.timer < 25) {
@@ -198,25 +212,40 @@ public class ModelToad extends ModelBase {
 			} else if (this.timer < 75) {
 				this.stomach.rotateAngleX = this.stomach.rotateAngleX + ((-0.36651914291F - this.stomach.rotateAngleX) * ((this.timer - 49) / 100));
 				// System.out.println("70" + this.stomach.rotateAngleX);
-			} else {
-				this.timer = 0;
-				this.stomach.offsetY = 0;
-				this.stomach.rotateAngleX = -0.36651914291F;
-				this.lLeg01.rotateAngleX = -0.51225413546F;
-				this.lLeg02.rotateAngleX = 0.45378560551F;
+			}
+
+		}*/
+		resetAngles();
+		if(toad.isJumping()) {
+			if(jumpProgress < 0.3333334) {
+				this.stomach.rotateAngleX = -0.36651914291F + 0.36651914291F*jumpProgress*3;
+				this.lLeg01.rotateAngleX = -0.51225413546F + 1.90851753706F*jumpProgress*3;
+				this.lLeg02.rotateAngleX = 0.45378560551F -1.85004901F*jumpProgress*3;
+				this.lLeg03.rotateAngleX = 0.41887902047863906F + 1.93731546971F*jumpProgress*3;
 				this.rLeg01.rotateAngleX = this.lLeg01.rotateAngleX;
 				this.rLeg02.rotateAngleX = this.lLeg02.rotateAngleX;
 				this.rLeg03.rotateAngleX = this.lLeg03.rotateAngleX;
-				this.lArm01.rotateAngleX = -0.8159414253F;
-				this.lArm02.rotateAngleX = 0.45378560551F;
+				this.lArm01.rotateAngleX = -0.8159414253F - 1.54025306F*jumpProgress*3;
+				this.lArm02.rotateAngleX = 0.45378560551F + 0.94247779609F*jumpProgress*3;
 				this.rArm01.rotateAngleX = this.lArm01.rotateAngleX;
 				this.rArm02.rotateAngleX = this.lArm02.rotateAngleX;
-
+				
+			}else if(jumpProgress < 0.6666667) {
+				this.stomach.rotateAngleX = 0 + 0.36651914291F*(jumpProgress-0.3333334F)*3;
+				this.lLeg01.rotateAngleX = 1.3962634016F - 1.90851753706F*(jumpProgress-0.3333334F)*3;
+				this.lLeg02.rotateAngleX = -1.3962634016F + 1.85004901F*(jumpProgress-0.3333334F)*3;
+				this.lLeg03.rotateAngleX = 2.35619449019F - 1.93731546971F*(jumpProgress-0.3333334F)*3;
+				this.rLeg01.rotateAngleX = this.lLeg01.rotateAngleX;
+				this.rLeg02.rotateAngleX = this.lLeg02.rotateAngleX;
+				this.rLeg03.rotateAngleX = this.lLeg03.rotateAngleX;
+				this.lArm01.rotateAngleX = -2.35619449019F + 2.2122048269F*(jumpProgress-0.3333334F)*3;
+				this.lArm02.rotateAngleX = 1.3962634016F - 0.94247779609F*(jumpProgress-0.3333334F)*3;
+				this.rArm01.rotateAngleX = this.lArm01.rotateAngleX;
+				this.rArm02.rotateAngleX = this.lArm02.rotateAngleX;	
+			}else {
+				this.stomach.rotateAngleX = 0.36651914291F - 0.733038286F*(jumpProgress-0.6666667F)*3;
 			}
-
-		} else {
-			this.timer = 0;
-			this.stomach.offsetY = 0;
+			
 		}
 
 	}
