@@ -13,47 +13,47 @@
     "variant": {
       "sun": {
         "textures": {
-          "all": "covens:blocks/silver_block_sun"
+          "all": "covens:blocks/silver/silver_block_sun"
         }
       },
       "cup": {
         "textures": {
-          "all": "covens:blocks/silver_block_cup"
+          "all": "covens:blocks/silver/silver_block_cup"
         }
       },
       "moon": {
         "textures": {
-          "all": "covens:blocks/silver_block_moon"
+          "all": "covens:blocks/silver/silver_block_moon"
         }
       },
       "pentacle": {
         "textures": {
-          "all": "covens:blocks/silver_block_pentacle"
+          "all": "covens:blocks/silver/silver_block_pentacle"
         }
       },
       "pentagram": {
         "textures": {
-          "all": "covens:blocks/silver_block_pentagram"
+          "all": "covens:blocks/silver/silver_block_pentagram"
         }
       },
       "sword": {
         "textures": {
-          "all": "covens:blocks/silver_block_sword"
+          "all": "covens:blocks/silver/silver_block_sword"
         }
       },
       "symbol": {
         "textures": {
-          "all": "covens:blocks/silver_block_symbol"
+          "all": "covens:blocks/silver/silver_block_symbol"
         }
       },
       "wand": {
         "textures": {
-          "all": "covens:blocks/silver_block_wand"
+          "all": "covens:blocks/silver/silver_block_wand"
         }
       },
       "bevel": {
         "textures": {
-          "all": "covens:blocks/silver_block_bevel"
+          "all": "covens:blocks/silver/silver_block_bevel"
         }
       }
     }

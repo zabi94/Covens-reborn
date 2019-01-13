@@ -1,12 +1,12 @@
 {
   "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
   "textures": {
-    "0": "covens:blocks/thread_spinner_base",
-    "1": "covens:blocks/thread_spinner_side",
-    "2": "covens:blocks/thread_spinner_shuttle",
-    "3": "covens:blocks/thread_spinner_back",
-    "4": "covens:blocks/thread_spinner_threads",
-    "particle": "covens:blocks/thread_spinner_shuttle"
+    "0": "covens:blocks/thread_spinner/thread_spinner_base",
+    "1": "covens:blocks/thread_spinner/thread_spinner_side",
+    "2": "covens:blocks/thread_spinner/thread_spinner_shuttle",
+    "3": "covens:blocks/thread_spinner/thread_spinner_back",
+    "4": "covens:blocks/thread_spinner/thread_spinner_threads",
+    "particle": "covens:blocks/thread_spinner/thread_spinner_shuttle"
   },
   "elements": [
     {

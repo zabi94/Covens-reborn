@@ -1,8 +1,8 @@
 {
   "parent": "block/cube_bottom_top",
   "textures": {
-    "side": "covens:blocks/altar_unformed_side",
-    "bottom": "covens:blocks/altar_bottom",
-    "top": "covens:blocks/altar_unformed_top"
+    "side": "covens:blocks/altar/altar_unformed_side",
+    "bottom": "covens:blocks/altar/altar_bottom",
+    "top": "covens:blocks/altar/altar_unformed_top"
   }
 }

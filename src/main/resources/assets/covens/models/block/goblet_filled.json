@@ -1,9 +1,9 @@
 {
   "__comment": "Created by KienanBlue, using Cubik Studio.",
   "textures": {
-    "particle": "blocks/cauldron_side",
-    "outside": "blocks/cauldron_side",
-    "inside": "blocks/cauldron_inner",
+    "particle": "covens:blocks/cauldron/cauldron_side",
+    "outside": "covens:blocks/cauldron/cauldron_side",
+    "inside": "covens:blocks/cauldron/cauldron_inner",
     "liquid": "covens:blocks/goblet_content"
   },
   "elements": [

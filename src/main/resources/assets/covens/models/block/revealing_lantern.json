@@ -3,10 +3,10 @@
   "parent": "block/block",
   "textures": {
     "0": "covens:blocks/candle_texture",
-    "1": "blocks/cauldron_inner",
-    "2": "blocks/cauldron_side",
+    "1": "covens:blocks/cauldron/cauldron_inner",
+    "2": "covens:blocks/cauldron/cauldron_side",
     "3": "blocks/glass",
-    "particle": "blocks/cauldron_inner"
+    "particle": "covens:blocks/cauldron/cauldron_side"
   },
   "elements": [
     {

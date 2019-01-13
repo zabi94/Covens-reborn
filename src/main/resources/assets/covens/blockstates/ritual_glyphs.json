@@ -22,32 +22,32 @@
     "letter": {
       "0": {
         "textures": {
-          "btexture": "covens:blocks/glyph0"
+          "btexture": "covens:blocks/glyph/glyph0"
         }
       },
       "1": {
         "textures": {
-          "btexture": "covens:blocks/glyph1"
+          "btexture": "covens:blocks/glyph/glyph1"
         }
       },
       "2": {
         "textures": {
-          "btexture": "covens:blocks/glyph2"
+          "btexture": "covens:blocks/glyph/glyph2"
         }
       },
       "3": {
         "textures": {
-          "btexture": "covens:blocks/glyph3"
+          "btexture": "covens:blocks/glyph/glyph3"
         }
       },
       "4": {
         "textures": {
-          "btexture": "covens:blocks/glyph4"
+          "btexture": "covens:blocks/glyph/glyph4"
         }
       },
       "5": {
         "textures": {
-          "btexture": "covens:blocks/glyph5"
+          "btexture": "covens:blocks/glyph/glyph5"
         }
       }
     },

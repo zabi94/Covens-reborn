@@ -13,47 +13,47 @@
     "variant": {
       "sun": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_sun"
+          "all": "covens:blocks/cold_iron/cold_iron_block_sun"
         }
       },
       "cup": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_cup"
+          "all": "covens:blocks/cold_iron/cold_iron_block_cup"
         }
       },
       "moon": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_moon"
+          "all": "covens:blocks/cold_iron/cold_iron_block_moon"
         }
       },
       "pentacle": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_pentacle"
+          "all": "covens:blocks/cold_iron/cold_iron_block_pentacle"
         }
       },
       "pentagram": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_pentagram"
+          "all": "covens:blocks/cold_iron/cold_iron_block_pentagram"
         }
       },
       "sword": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_sword"
+          "all": "covens:blocks/cold_iron/cold_iron_block_sword"
         }
       },
       "symbol": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_symbol"
+          "all": "covens:blocks/cold_iron/cold_iron_block_symbol"
         }
       },
       "wand": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_wand"
+          "all": "covens:blocks/cold_iron/cold_iron_block_wand"
         }
       },
       "bevel": {
         "textures": {
-          "all": "covens:blocks/cold_iron_block_bevel"
+          "all": "covens:blocks/cold_iron/cold_iron_block_bevel"
         }
       }
     }

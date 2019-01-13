@@ -1,11 +1,11 @@
 {
   "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
   "textures": {
-    "base": "covens:blocks/crystal_ball_base_large_plate",
-    "glass_large": "covens:blocks/crystal_ball_core",
-    "glass_small": "covens:blocks/crystal_ball_core_bump_plate",
-    "smoke": "covens:blocks/crystal_ball_smoke",
-    "particle": "covens:blocks/crystal_ball_base_large_plate"
+    "base": "covens:blocks/crystal_ball/crystal_ball_base_large_plate",
+    "glass_large": "covens:blocks/crystal_ball/crystal_ball_core",
+    "glass_small": "covens:blocks/crystal_ball/crystal_ball_core_bump_plate",
+    "smoke": "covens:blocks/crystal_ball/crystal_ball_smoke",
+    "particle": "covens:blocks/crystal_ball/crystal_ball_base_large_plate"
   },
   "elements": [
     {

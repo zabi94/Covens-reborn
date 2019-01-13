@@ -1,12 +1,12 @@
 ﻿{
-  "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+  "credit": "Made by Ingoleth",
   "parent": "block/block",
   "textures": {
-    "0": "blocks/stonebrick",
-    "1": "blocks/wool_colored_red",
-    "2": "blocks/planks_oak",
-    "3": "blocks/log_oak",
-    "particle": "blocks/stonebrick"
+    "0": "covens:blocks/divination_table/stonebrick",
+    "1": "covens:blocks/divination_table/wool_colored_red",
+    "2": "covens:blocks/divination_table/planks_oak",
+    "3": "covens:blocks/divination_table/log_oak",
+    "particle": "covens:blocks/divination_table/stonebrick"
   },
   "elements": [
     {
