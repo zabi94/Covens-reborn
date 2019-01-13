@@ -15,6 +15,10 @@ public class FamiliarFollowEntity extends SyncTask<EntityLivingBase> {
 	private UUID familiar;
 	private UUID target;
 	
+	public FamiliarFollowEntity() {
+		// Required
+	}
+	
 	public FamiliarFollowEntity(UUID fam, UUID tgt) {
 		this.familiar = fam;
 		this.target = tgt;
