@@ -27,7 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Created by Joseph on 11/4/2017.
  */
-@SuppressWarnings("deprecation")
 public class BlockTorchwood extends BlockMod implements IGrowable, IPlantable {
 
 	public BlockTorchwood() {

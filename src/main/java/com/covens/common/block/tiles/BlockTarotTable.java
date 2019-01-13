@@ -16,15 +16,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
-import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
 /**
  * This class was created by Joseph on 3/4/2017. It's distributed as part of
  * Covens under the MIT license.
  */
-@Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
-public class BlockTarotTable extends BlockModTileEntity implements IInfusionStabiliserExt {
+public class BlockTarotTable extends BlockModTileEntity {
 
 	public BlockTarotTable() {
 		super(LibBlockName.TAROT_TABLE, Material.ROCK);
@@ -34,7 +31,6 @@ public class BlockTarotTable extends BlockModTileEntity implements IInfusionStab
 		this.setHardness(3F);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		final EnumFacing facing = EnumFacing.byHorizontalIndex(meta);
@@ -47,13 +43,11 @@ public class BlockTarotTable extends BlockModTileEntity implements IInfusionStab
 		return facing.getHorizontalIndex();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
@@ -73,17 +67,5 @@ public class BlockTarotTable extends BlockModTileEntity implements IInfusionStab
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityTarotsTable();
-	}
-
-	@Override
-	@Optional.Method(modid = "thaumcraft")
-	public boolean canStabaliseInfusion(World world, BlockPos pos) {
-		return true;
-	}
-
-	@Override
-	@Optional.Method(modid = "thaumcraft")
-	public float getStabilizationAmount(World world, BlockPos pos) {
-		return 0;
 	}
 }

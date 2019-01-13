@@ -34,7 +34,6 @@ public class BlockOven extends BlockModTileEntity {
 		this.setHardness(3F);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		final EnumFacing facing = EnumFacing.byHorizontalIndex(meta);
@@ -47,13 +46,11 @@ public class BlockOven extends BlockModTileEntity {
 		return facing.getHorizontalIndex();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;

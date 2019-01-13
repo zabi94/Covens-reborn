@@ -60,19 +60,16 @@ public class BlockThreadSpinner extends BlockModTileEntity {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullBlock(IBlockState state) {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isBlockNormalCube(IBlockState state) {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
@@ -83,7 +80,6 @@ public class BlockThreadSpinner extends BlockModTileEntity {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
@@ -94,7 +90,6 @@ public class BlockThreadSpinner extends BlockModTileEntity {
 		return state.getValue(FACING).getHorizontalIndex();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.HORIZONTALS[meta]);

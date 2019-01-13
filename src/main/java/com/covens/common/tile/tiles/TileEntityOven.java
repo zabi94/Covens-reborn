@@ -29,7 +29,6 @@ import net.minecraftforge.items.ItemStackHandler;
 /**
  * Created by Joseph on 7/17/2017.
  */
-@SuppressWarnings("NullableProblems")
 public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNameable {
 	// Change to speed up smelting, lower = faster
 	public static final int TOTAL_WORK = 100;
@@ -216,7 +215,6 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 		return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {

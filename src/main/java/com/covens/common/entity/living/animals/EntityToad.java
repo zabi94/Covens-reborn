@@ -2,11 +2,11 @@ package com.covens.common.entity.living.animals;
 
 import java.util.Set;
 
+import com.covens.client.render.entity.model.AnimationHelper;
 import com.covens.common.entity.living.EntityMultiSkin;
-import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Sets;
-import com.covens.client.render.entity.model.AnimationHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.entity.Entity;
@@ -38,22 +38,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-/**
- * Created by Joseph on 10/2/2018.
- */
-
 public class EntityToad extends EntityMultiSkin {
 
 	private static final ResourceLocation loot = new ResourceLocation(LibMod.MOD_ID, "entities/toad");
-	// private static final String[] names = {"Iron Henry", "Jimmy", "Kermit",
-	// "Frog-n-stein", "Prince Charming", "Heqet", "Hapi", "Aphrodite",
-	// "Physignathus", "Jiraiya", "Dat Boi", "Llamhigyn Y Dwr", "Michigan",
-	// "Wednesday", "Trevor", "Odin", "Woden"};
-	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModItems.silver_scales, ModItems.envenomed_fang);
+	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE);
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntityToad.class, DataSerializers.VARINT);
-	private AnimationHelper jumpingAnim = new AnimationHelper(30);
-	private boolean jumping = false;
-	
+	private AnimationHelper jumpingAnim = new AnimationHelper(15);
+
 	public EntityToad(World worldIn) {
 		super(worldIn);
 		this.setSize(0.5F, 0.5F);
@@ -65,27 +56,26 @@ public class EntityToad extends EntityMultiSkin {
 		this.dataManager.register(TINT, 0xFFFFFF);
 		this.aiSit = new EntityAISit(this);
 	}
-	
-	public void onUpdate(){
-		super.onUpdate();
-		jumpingAnim.updateTimer();
-		if(this.world.isRemote) {
-			if((MathHelper.abs((float) this.motionX) >0.05 || MathHelper.abs((float) this.motionZ) > 0.05) || isJumping()) {
-				jumpingAnim.increaseTimer();
-				jumping = true;
-				
-			}
-			
-	    	 if (jumpingAnim.getTimer()>= jumpingAnim.getDuration()) {
-		    	 jumpingAnim.setTimer(0);
-				jumping = false;
-		     }
-		}
-			if((MathHelper.abs((float) this.motionX) >0.05 || MathHelper.abs((float) this.motionZ) > 0.05) && this.onGround) {
 
-	    			this.motionY += 0.6;
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		this.jumpingAnim.updateTimer();
+		boolean isMoving = ((this.motionX * this.motionX) > 0.025) || ((this.motionZ * this.motionZ) > 0.025);
+		if (this.world.isRemote) {
+			if (isMoving || this.isJumping()) {
+				this.jumpingAnim.increaseTimer();
 			}
-    	
+			if (this.jumpingAnim.getTimer() >= this.jumpingAnim.getDuration()) {
+				this.jumpingAnim.setTimer(0);
+				this.setJumping(false);
+			}
+		}
+		if (isMoving && this.onGround) {
+			this.jump();
+			this.setJumping(true);
+		}
+
 	}
 
 	@Override
@@ -173,44 +163,33 @@ public class EntityToad extends EntityMultiSkin {
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		{
-			ItemStack itemstack = player.getHeldItem(hand);
+		ItemStack itemstack = player.getHeldItem(hand);
+		if (!this.isTamed() && TAME_ITEMS.contains(itemstack.getItem())) {
+			if (!player.capabilities.isCreativeMode) {
+				itemstack.shrink(1);
+			}
+			if (!this.isSilent()) {
+				this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
+			}
 
-			if (!this.isTamed() && TAME_ITEMS.contains(itemstack.getItem())) {
-				if (!player.capabilities.isCreativeMode) {
-					itemstack.shrink(1);
+			if (!this.world.isRemote) {
+				if ((this.rand.nextInt(10) == 0) && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+					this.setTamedBy(player);
+					this.playTameEffect(true);
+					this.world.setEntityState(this, (byte) 7);
+				} else {
+					this.playTameEffect(false);
+					this.world.setEntityState(this, (byte) 6);
 				}
-
-				if (!this.isSilent()) {
-					this.world.playSound((EntityPlayer) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
-				}
-
-				if (!this.world.isRemote) {
-					if ((this.rand.nextInt(10) == 0) && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
-						this.setTamedBy(player);
-						this.playTameEffect(true);
-						this.world.setEntityState(this, (byte) 7);
-					} else {
-						this.playTameEffect(false);
-						this.world.setEntityState(this, (byte) 6);
-					}
-				}
-				return true;
 			}
 			return true;
 		}
-	}
-
-	@Override
-	protected void collideWithEntity(Entity entityIn) {
-		if (!entityIn.equals(this.getOwner())) {
-			super.collideWithEntity(entityIn);
-		}
+		return true;
 	}
 
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return stack.getItem() == ModItems.envenomed_fang;
+		return TAME_ITEMS.contains(stack.getItem());
 	}
 
 	@Override
@@ -222,15 +201,13 @@ public class EntityToad extends EntityMultiSkin {
 	public int getSkinTypes() {
 		return 4;
 	}
-	
+
 	public boolean isJumping() {
-    	return jumping;
-    }
-	
-	public float getJumpProgress(float partialRenderTicks) {
-		return jumpingAnim.getAnimationFraction(partialRenderTicks);
+		return this.isJumping;
 	}
 
-	
-	
+	public float getJumpProgress(float partialRenderTicks) {
+		return this.jumpingAnim.getAnimationFraction(partialRenderTicks);
+	}
+
 }

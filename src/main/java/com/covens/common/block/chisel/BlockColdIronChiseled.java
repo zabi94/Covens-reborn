@@ -26,7 +26,6 @@ public class BlockColdIronChiseled extends BlockMod {
 		return state.getValue(VARIANT).ordinal();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(VARIANT, BlockColdIronVariant.values()[meta]);

@@ -40,7 +40,6 @@ public class BlockGemOre extends BlockMod {
 		this.setCreativeTab(BLOCKS_CREATIVE_TAB);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(GEM, Gem.values()[meta]);

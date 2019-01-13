@@ -46,7 +46,6 @@ public class CommandIncantation implements ICommand {
 		return alias;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (args.length < 1) {

@@ -33,7 +33,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Created by Joseph on 11/7/2017.
  */
-@SuppressWarnings("deprecation")
 public class BlockEmberGrass extends BlockMod implements IGrowable, IPlantable {
 
 	public BlockEmberGrass() {

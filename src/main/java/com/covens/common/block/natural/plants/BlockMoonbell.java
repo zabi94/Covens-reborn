@@ -47,7 +47,6 @@ public class BlockMoonbell extends BlockModFlower {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(PLACED, meta == 0);

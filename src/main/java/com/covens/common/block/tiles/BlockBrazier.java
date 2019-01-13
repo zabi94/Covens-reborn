@@ -41,13 +41,11 @@ public class BlockBrazier extends BlockMod implements IInfusionStabiliserExt {
 		this.setHardness(3F);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return state.getValue(HANGING) ? BBOX_HANGING : BBOX_STANDING;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		final EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 0b11);
@@ -62,13 +60,11 @@ public class BlockBrazier extends BlockMod implements IInfusionStabiliserExt {
 		return facing.getHorizontalIndex() | (bit << 2);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
@@ -122,7 +118,6 @@ public class BlockBrazier extends BlockMod implements IInfusionStabiliserExt {
 		return this.getDefaultState().withProperty(FACING, enumfacing.getOpposite()).withProperty(HANGING, hang);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;

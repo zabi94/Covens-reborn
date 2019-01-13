@@ -60,7 +60,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-@SuppressWarnings("deprecation")
 public class ApiInstance extends CovensAPI {
 
 	private ApiInstance() {

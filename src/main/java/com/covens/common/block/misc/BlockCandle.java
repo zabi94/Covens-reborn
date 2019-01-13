@@ -64,12 +64,10 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return MapColor.getBlockColor(state.getValue(StateProperties.COLOR));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(StateProperties.COLOR, EnumDyeColor.byMetadata(meta));
@@ -80,13 +78,11 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 		return state.getValue(StateProperties.COLOR).getMetadata();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
@@ -147,7 +143,6 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!this.canPlaceBlockAt(worldIn, pos)) {
@@ -155,7 +150,6 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public EnumPushReaction getPushReaction(IBlockState state) {
 		return EnumPushReaction.DESTROY;

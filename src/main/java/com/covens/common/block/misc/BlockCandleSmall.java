@@ -23,7 +23,6 @@ public class BlockCandleSmall extends BlockCandle {
 		super(id, lit);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return SMALL_BOX.offset(state.getOffset(source, pos));

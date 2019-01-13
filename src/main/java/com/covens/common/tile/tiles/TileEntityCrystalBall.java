@@ -46,9 +46,6 @@ public class TileEntityCrystalBall extends ModTileEntity {
 		return false;
 	}
 
-	@SuppressWarnings({
-			"deprecation", "null"
-	})
 	private boolean readFortune(@Nonnull EntityPlayer endPlayer, @Nullable EntityPlayer externalReader) {
 		EntityPlayer messageRecpt = endPlayer;
 		if (endPlayer.getDistanceSq(this.getPos()) > 25) {
