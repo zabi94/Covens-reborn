@@ -48,6 +48,9 @@ public class TileEntityCrystalBall extends ModTileEntity {
 
 	private boolean readFortune(@Nonnull EntityPlayer endPlayer, @Nullable EntityPlayer externalReader) {
 		EntityPlayer messageRecpt = endPlayer;
+		if (endPlayer == null) {
+			throw new IllegalArgumentException("Cannot read a null player fortune");
+		}
 		if (endPlayer.getDistanceSq(this.getPos()) > 25) {
 			messageRecpt.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.too_far"), true);
 			return false;
@@ -76,7 +79,7 @@ public class TileEntityCrystalBall extends ModTileEntity {
 		}
 		endPlayer.getCapability(CapabilityFortune.CAPABILITY, null).setFortune(fortune);
 		endPlayer.sendStatusMessage(new TextComponentTranslation(fortune.getTranslationKey()), true);
-		if (!externalReader.equals(endPlayer)) {
+		if (!endPlayer.equals(externalReader)) {
 			externalReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.read.other", I18n.format(fortune.getTranslationKey()), endPlayer.getDisplayNameString()), true);
 		}
 		return true;
