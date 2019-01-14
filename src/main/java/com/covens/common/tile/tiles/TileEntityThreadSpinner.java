@@ -48,15 +48,15 @@ public class TileEntityThreadSpinner extends ModTileEntity implements ITickable,
 		if (playerIn.isSneaking()) {
 			return false;
 		}
-		if (worldIn.isRemote) {
-			return true;
-		}
+		
 
 		ItemStack heldItem = playerIn.getHeldItem(hand);
 		if (!heldItem.isEmpty() && (heldItem.getItem() == Items.NAME_TAG)) {
-			this.customName = heldItem.getDisplayName();
-			this.markDirty();
-			this.syncToClient();
+			if (!worldIn.isRemote) {
+				this.customName = heldItem.getDisplayName();
+				this.markDirty();
+				this.syncToClient();
+			}
 		} else {
 			playerIn.openGui(Covens.instance, LibGui.THREAD_SPINNER.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
