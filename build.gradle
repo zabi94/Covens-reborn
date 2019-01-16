@@ -66,10 +66,10 @@ processResources {
 }
 
 repositories {
-    flatDir {
+    flatDir { //Minerva
         dirs 'libs'
     }
-    maven {
+    maven { //Hwyla
         name = "Mobius Repo"
         url = "http://tehnut.info/maven"
     }
@@ -77,18 +77,14 @@ repositories {
         name = "JEI"
         url = "http://dvs1.progwml6.com/files/maven"
     }
-    maven {
+    maven { //?? tc/baubles?
         url = "https://minecraft.curseforge.com/api/maven/"
     }
-    maven {
-        name = "ModMaven"
-        url = "modmaven.k-4u.nl"
-    }
-    maven {
-        name = "ModMaven"
-        url = "modmaven.k-4u.nl"
-    }
-    maven { 
+//    maven { //??
+//        name = "ModMaven"
+//        url = "modmaven.k-4u.nl"
+//    }
+    maven { //Patchouli
       	url = 'https://maven.blamejared.com' 
     }
 }
@@ -100,12 +96,6 @@ dependencies {
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     compile "thaumcraft:Thaumcraft:1.12.2:${thaumcraft_version}"
     compile "vazkii.patchouli:Patchouli:${patchouli_version}"
-}
-
-tasks.withType(JavaCompile) {
-    options.compilerArgs += ["-Xlint:all", "-Xlint:deprecation", "-Xlint:rawtypes", "-Xlint:unchecked"]
-    options.deprecation = true
-    options.encoding = "UTF-8"
 }
 
 runClient {
