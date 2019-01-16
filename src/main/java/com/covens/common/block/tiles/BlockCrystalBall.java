@@ -6,6 +6,7 @@ import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.tile.tiles.TileEntityCrystalBall;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -80,5 +81,10 @@ public class BlockCrystalBall extends BlockModTileEntity {
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
 		return 1;
+	}
+	
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
 	}
 }

@@ -8,6 +8,7 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.lib.LibBlockName;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -119,6 +120,11 @@ public class BlockLantern extends BlockMod {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(StateProperties.COLOR).ordinal();
+	}
+	
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
