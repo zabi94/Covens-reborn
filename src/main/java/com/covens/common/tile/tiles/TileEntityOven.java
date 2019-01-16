@@ -78,18 +78,18 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 		if (playerIn.isSneaking()) {
 			return false;
 		}
-		if (this.world.isRemote) {
-			return true;
-		}
+		
 
 		ItemStack heldItem = playerIn.getHeldItem(hand);
 		if (!heldItem.isEmpty() && (heldItem.getItem() == Items.NAME_TAG)) {
-			this.customName = heldItem.getDisplayName();
-			if (!playerIn.isCreative()) {
-				heldItem.shrink(1);
+			if (!this.world.isRemote) {
+				this.customName = heldItem.getDisplayName();
+				if (!playerIn.isCreative()) {
+					heldItem.shrink(1);
+				}
+				this.markDirty();
+				this.syncToClient();
 			}
-			this.markDirty();
-			this.syncToClient();
 		} else {
 			playerIn.openGui(Covens.instance, LibGui.OVEN.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
