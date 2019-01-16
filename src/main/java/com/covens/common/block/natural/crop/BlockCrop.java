@@ -1,11 +1,10 @@
 package com.covens.common.block.natural.crop;
 
-import com.covens.client.core.IModelRegister;
-
 import net.minecraft.block.BlockCrops;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 
 /**
  * This class was created by Arekkuusu on 28/02/2017. It's distributed as part

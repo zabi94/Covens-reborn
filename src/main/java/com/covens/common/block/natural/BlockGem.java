@@ -4,7 +4,6 @@ import static com.covens.common.core.statics.ModCreativeTabs.BLOCKS_CREATIVE_TAB
 
 import javax.annotation.Nonnull;
 
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockMod;
 import com.covens.common.lib.LibBlockName;
 
@@ -20,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public class BlockGem extends BlockMod implements IInfusionStabiliserExt {

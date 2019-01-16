@@ -15,6 +15,7 @@ import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.hud.HudComponent;
 
 @SideOnly(Side.CLIENT)
 public class BloodViewerHUD extends HudComponent {

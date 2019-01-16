@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.covens.client.core.IModelRegister;
 import com.covens.client.fx.ParticleF;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.Covens;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModCreativeTabs;
@@ -44,6 +42,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by Joseph on 3/4/2017. It's distributed as part of

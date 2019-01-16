@@ -1,8 +1,5 @@
 package com.covens.common.container;
 
-import com.covens.common.container.slots.ModSlot;
-import com.covens.common.container.slots.SlotFiltered;
-import com.covens.common.container.slots.SlotOutput;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.tile.tiles.TileEntityOven;
@@ -15,6 +12,10 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import zabi.minecraft.minerva.common.network.container.ModContainer;
+import zabi.minecraft.minerva.common.network.container.slot.ModSlot;
+import zabi.minecraft.minerva.common.network.container.slot.SlotFiltered;
+import zabi.minecraft.minerva.common.network.container.slot.SlotOutput;
 
 /**
  * Created by Joseph on 7/17/2017.

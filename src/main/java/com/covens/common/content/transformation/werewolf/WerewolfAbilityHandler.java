@@ -8,7 +8,6 @@ import com.covens.api.event.TransformationModifiedEvent;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
-import com.covens.common.core.helper.AttributeModifierModeHelper;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -20,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
 
 @Mod.EventBusSubscriber
 public class WerewolfAbilityHandler {

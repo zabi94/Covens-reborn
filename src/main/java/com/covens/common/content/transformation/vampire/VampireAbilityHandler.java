@@ -10,7 +10,6 @@ import com.covens.api.event.TransformationModifiedEvent;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
-import com.covens.common.core.helper.AttributeModifierModeHelper;
 import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.potion.ModPotions;
 import com.covens.common.world.biome.ModBiomes;
@@ -46,6 +45,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreIngredient;
+import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
 
 @Mod.EventBusSubscriber
 public class VampireAbilityHandler {

@@ -4,11 +4,11 @@ import java.util.UUID;
 
 import com.covens.api.CovensAPI;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
-import com.covens.common.core.util.EntitySyncHelper.SyncTask;
-import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
 
 public class UnbindPlayerFromFamiliar extends SyncTask<EntityPlayer> {
 

@@ -15,7 +15,6 @@ import com.covens.common.block.misc.BlockLantern;
 import com.covens.common.block.tiles.BlockWitchAltar;
 import com.covens.common.block.tiles.BlockWitchAltar.AltarMultiblockType;
 import com.covens.common.item.ModItems;
-import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -36,6 +35,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 @Mod.EventBusSubscriber
 public class TileEntityWitchAltar extends ModTileEntity implements ITickable {

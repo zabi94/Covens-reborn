@@ -1,7 +1,6 @@
 package com.covens.common.content.familiar.ai;
 
 import com.covens.api.CovensAPI;
-import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +10,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import zabi.minecraft.minerva.common.data.UUIDs;
 
 public class AIFollowTarget extends FamiliarAIBase {
 

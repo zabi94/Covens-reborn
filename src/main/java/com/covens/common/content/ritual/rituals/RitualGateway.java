@@ -6,7 +6,6 @@ import java.util.Random;
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.content.ritual.AdapterIRitual;
 import com.covens.common.content.ritual.RitualImpl;
-import com.covens.common.core.util.DimensionalPosition;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemLocationStone;
 
@@ -23,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 public class RitualGateway extends RitualImpl {
 

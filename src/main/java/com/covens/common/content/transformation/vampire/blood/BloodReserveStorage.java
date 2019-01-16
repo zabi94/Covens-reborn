@@ -1,13 +1,13 @@
 package com.covens.common.content.transformation.vampire.blood;
 
 import com.covens.api.transformation.IBloodReserve;
-import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import zabi.minecraft.minerva.common.data.UUIDs;
 
 public class BloodReserveStorage implements IStorage<IBloodReserve> {
 

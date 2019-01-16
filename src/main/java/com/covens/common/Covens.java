@@ -33,7 +33,6 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.capability.mimic.CapabilityMimicData;
 import com.covens.common.core.capability.simple.BarkCapability;
-import com.covens.common.core.capability.simple.SimpleCapability;
 import com.covens.common.core.command.CommandCreateTaglock;
 import com.covens.common.core.command.CommandForceFortune;
 import com.covens.common.core.command.CommandFortuneActivator;
@@ -74,6 +73,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import zabi.minecraft.minerva.common.capability.SimpleCapability;
 
 @Mod(modid = LibMod.MOD_ID, name = MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.13]", certificateFingerprint = LibMod.FINGERPRINT)
 public class Covens {
@@ -96,7 +96,6 @@ public class Covens {
 		MinecraftForge.EVENT_BUS.register(new LootTableEventHandler());
 		ApiInstance.initAPI();
 		MobHelper.init();
-		SimpleCapability.setup(NetworkHandler.HANDLER);
 		CapabilityFortune.init();
 		InfusionCapability.init();
 		MagicPowerUsingItem.init();

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.covens.client.core.ModelResourceLocations;
 import com.covens.common.Covens;
-import com.covens.common.core.util.DimensionalPosition;
 import com.covens.common.item.ItemMod;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibItemName;
@@ -24,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 public class ItemLocationStone extends ItemMod {
 

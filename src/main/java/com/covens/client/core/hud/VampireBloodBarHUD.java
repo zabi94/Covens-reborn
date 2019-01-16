@@ -22,6 +22,7 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.hud.HudComponent;
 
 @SideOnly(Side.CLIENT)
 public class VampireBloodBarHUD extends HudComponent {

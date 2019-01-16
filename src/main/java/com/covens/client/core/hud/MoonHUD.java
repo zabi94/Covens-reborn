@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
+import zabi.minecraft.minerva.client.hud.HudComponent;
 
 public class MoonHUD extends HudComponent {
 

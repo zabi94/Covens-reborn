@@ -1,6 +1,5 @@
 package com.covens.common.block.chisel;
 
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockMod;
 import com.covens.common.lib.LibBlockName;
 
@@ -13,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 public class BlockColdIronChiseled extends BlockMod {
 	public static final PropertyEnum<BlockColdIronVariant> VARIANT = PropertyEnum.create("variant", BlockColdIronVariant.class);

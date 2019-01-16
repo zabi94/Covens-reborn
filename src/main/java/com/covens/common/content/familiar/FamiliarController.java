@@ -6,8 +6,6 @@ import java.util.UUID;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.helper.MobHelper;
-import com.covens.common.core.util.EntitySyncHelper;
-import com.covens.common.core.util.UUIDs;
 import com.covens.common.core.util.syncTasks.FamiliarFollowEntity;
 
 import net.minecraft.entity.EntityLiving;
@@ -16,6 +14,8 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
+import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
 
 public class FamiliarController {
 	

@@ -1,7 +1,6 @@
 package com.covens.common.core.net.messages;
 
 import com.covens.common.block.ModBlocks;
-import com.covens.common.core.net.SimpleMessage;
 import com.covens.common.tile.tiles.TileEntityPlacedItem;
 
 import net.minecraft.block.BlockHorizontal;
@@ -13,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class PlaceHeldItemMessage extends SimpleMessage<PlaceHeldItemMessage> {
 

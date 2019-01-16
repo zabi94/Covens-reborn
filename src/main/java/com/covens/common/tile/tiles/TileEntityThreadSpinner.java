@@ -6,7 +6,6 @@ import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.Covens;
 import com.covens.common.crafting.SpinningThreadRecipe;
 import com.covens.common.lib.LibGui;
-import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 @SuppressWarnings("NullableProblems")
 public class TileEntityThreadSpinner extends ModTileEntity implements ITickable, IWorldNameable {

@@ -13,13 +13,10 @@ import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.ritual.AdapterIRitual;
-import com.covens.common.core.helper.BlockStreamHelper;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.SmokeSpawn;
-import com.covens.common.core.util.DimensionalPosition;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemLocationStone;
-import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -43,6 +40,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants.NBT;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
+import zabi.minecraft.minerva.common.utils.BlockStreamHelper;
+import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 public class TileEntityGlyph extends ModTileEntity implements ITickable {
 

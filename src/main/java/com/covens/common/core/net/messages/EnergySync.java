@@ -1,11 +1,11 @@
 package com.covens.common.core.net.messages;
 
 import com.covens.api.mp.IMagicPowerContainer;
-import com.covens.common.core.net.SimpleMessage;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class EnergySync extends SimpleMessage<EnergySync> {
 

@@ -4,12 +4,12 @@ import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.event.HotbarActionTriggeredEvent;
 import com.covens.api.hotbar.IHotbarAction;
 import com.covens.common.content.actionbar.HotbarAction;
-import com.covens.common.core.net.SimpleMessage;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class PlayerUsedAbilityMessage extends SimpleMessage<PlayerUsedAbilityMessage> {
 

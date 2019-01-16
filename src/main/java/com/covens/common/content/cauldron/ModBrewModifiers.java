@@ -7,7 +7,6 @@ import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.cauldron.IBrewModifierList;
-import com.covens.common.core.helper.ColorHelper;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.covens.common.tile.tiles.TileEntityCauldron;
@@ -20,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.oredict.DyeUtils;
 import net.minecraftforge.oredict.OreIngredient;
+import zabi.minecraft.minerva.common.utils.ColorHelper;
 
 public class ModBrewModifiers {
 

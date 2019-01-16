@@ -2,7 +2,6 @@ package com.covens.common.item.magic.brew;
 
 import java.util.List;
 
-import com.covens.client.core.IModelRegister;
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.BrewEntry;
 import com.covens.common.content.cauldron.BrewModifierListImpl;
@@ -25,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 
 public class ItemBrewArrow extends ItemArrow implements IModelRegister {
 

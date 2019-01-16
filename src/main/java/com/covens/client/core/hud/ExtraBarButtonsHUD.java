@@ -36,6 +36,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.hud.HudComponent;
 
 @SideOnly(Side.CLIENT)
 public class ExtraBarButtonsHUD extends HudComponent {

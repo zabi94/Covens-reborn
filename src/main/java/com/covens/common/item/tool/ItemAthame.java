@@ -5,8 +5,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModItems;
@@ -46,6 +44,8 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by BerciTheBeast on 27.3.2017. It's distributed as

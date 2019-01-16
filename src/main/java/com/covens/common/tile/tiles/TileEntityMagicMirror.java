@@ -11,7 +11,6 @@ import com.covens.common.core.capability.mimic.IMimicData;
 import com.covens.common.core.helper.NBTHelper;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemTaglock;
-import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +22,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 public class TileEntityMagicMirror extends ModTileEntity implements ITickable {
 	private static final int REFRESH_TIME = 10;

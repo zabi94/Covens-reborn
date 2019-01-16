@@ -45,7 +45,6 @@ import com.covens.api.cauldron.IBrewModifier.ResultType;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModFluids;
-import com.covens.common.crafting.util.IngredientMultiOreDict;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.lib.LibMod;
@@ -67,6 +66,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
+import zabi.minecraft.minerva.common.crafting.IngredientMultiOreDict;
 
 public class CauldronRegistry {
 

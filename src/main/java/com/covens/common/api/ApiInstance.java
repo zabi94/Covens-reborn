@@ -38,7 +38,6 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
-import com.covens.common.core.util.EntitySyncHelper;
 import com.covens.common.core.util.syncTasks.UnbindFamiliarFromPlayer;
 import com.covens.common.core.util.syncTasks.UnbindPlayerFromFamiliar;
 import com.covens.common.crafting.FrostFireRecipe;
@@ -59,6 +58,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
 
 public class ApiInstance extends CovensAPI {
 

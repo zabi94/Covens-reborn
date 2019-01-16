@@ -8,7 +8,6 @@
  */
 package com.covens.common.core.statics;
 
-import com.covens.client.core.hud.HudComponent.EnumHudAnchor;
 import com.covens.common.lib.LibMod;
 
 import net.minecraftforge.common.config.Config;
@@ -18,6 +17,7 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import zabi.minecraft.minerva.client.hud.HudComponent.EnumHudAnchor;
 
 /**
  * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part

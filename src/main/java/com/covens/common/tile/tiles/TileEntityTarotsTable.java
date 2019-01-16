@@ -6,12 +6,10 @@ import javax.annotation.Nonnull;
 
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.Covens;
-import com.covens.common.core.helper.PlayerHelper;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.TarotMessage;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibGui;
-import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
+import zabi.minecraft.minerva.common.utils.entity.PlayerHelper;
 
 public class TileEntityTarotsTable extends ModTileEntity {
 

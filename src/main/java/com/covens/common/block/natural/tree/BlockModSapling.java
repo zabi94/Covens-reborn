@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Random;
 
-import com.covens.client.core.IModelRegister;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibMod;
@@ -42,6 +41,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 
 public class BlockModSapling extends BlockBush implements IGrowable, IModelRegister {
 

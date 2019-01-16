@@ -2,7 +2,6 @@ package com.covens.common.item.magic;
 
 import javax.annotation.Nonnull;
 
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
@@ -11,6 +10,7 @@ import com.covens.common.lib.LibItemName;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by <Arekkuusu> on 28/06/2017. It's distributed as part

@@ -7,9 +7,6 @@ import javax.annotation.Nullable;
 
 import com.covens.api.familiar.IFamiliarEligible;
 import com.covens.api.familiar.IFamiliarUneligible;
-import com.covens.common.core.capability.simple.SimpleCapability;
-import com.covens.common.core.helper.PlayerHelper;
-import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
@@ -17,6 +14,10 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import zabi.minecraft.minerva.common.capability.SimpleCapability;
+import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.utils.annotation.DontSync;
+import zabi.minecraft.minerva.common.utils.entity.PlayerHelper;
 
 public class CapabilityFamiliarCreature extends SimpleCapability {
 

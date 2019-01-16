@@ -1,8 +1,5 @@
 package com.covens.common.container;
 
-import com.covens.common.container.slots.ModSlot;
-import com.covens.common.container.slots.SlotFiltered;
-import com.covens.common.container.slots.SlotOutput;
 import com.covens.common.tile.tiles.TileEntityDistillery;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +7,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
+import zabi.minecraft.minerva.common.network.container.ModContainer;
+import zabi.minecraft.minerva.common.network.container.slot.ModSlot;
+import zabi.minecraft.minerva.common.network.container.slot.SlotFiltered;
+import zabi.minecraft.minerva.common.network.container.slot.SlotOutput;
 
 public class ContainerDistillery extends ModContainer<TileEntityDistillery> {
 

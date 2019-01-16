@@ -11,7 +11,6 @@ import com.covens.common.block.BlockMod;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.WitchFireTP;
-import com.covens.common.core.util.CachedSupplier;
 import com.covens.common.crafting.FrostFireRecipe;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
@@ -49,6 +48,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.common.utils.CachedSupplier;
 
 public class BlockWitchFire extends BlockMod {
 

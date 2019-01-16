@@ -13,7 +13,6 @@ import com.covens.api.cauldron.IBrewData;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.Covens;
-import com.covens.common.core.helper.ColorHelper;
 import com.covens.common.entity.EntityLingeringBrew;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.google.common.collect.ImmutableList;
@@ -32,6 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import zabi.minecraft.minerva.common.utils.ColorHelper;
 
 public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 

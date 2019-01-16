@@ -4,13 +4,13 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.content.cauldron.teleportCapability.CapabilityCauldronTeleport;
 import com.covens.common.core.net.NetworkHandler;
-import com.covens.common.core.net.SimpleMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class WitchFireTP extends SimpleMessage<WitchFireTP> {
 

@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibItemName;
 
@@ -23,6 +21,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by BerciTheBeast on 27.3.2017. It's distributed as

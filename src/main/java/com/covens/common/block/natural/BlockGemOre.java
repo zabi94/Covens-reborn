@@ -6,7 +6,6 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.item.ModItems;
@@ -25,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by <Arekkuusu> on 27/06/2017. It's distributed as part

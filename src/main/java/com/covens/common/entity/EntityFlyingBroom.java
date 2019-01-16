@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 
 import com.covens.api.mp.IMagicPowerContainer;
 import com.covens.common.Covens;
-import com.covens.common.core.util.DimensionalPosition;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibReflection;
 
@@ -34,6 +33,7 @@ import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 @Mod.EventBusSubscriber
 public class EntityFlyingBroom extends Entity {

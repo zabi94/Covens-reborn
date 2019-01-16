@@ -8,13 +8,13 @@
  */
 package com.covens.common.item;
 
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part

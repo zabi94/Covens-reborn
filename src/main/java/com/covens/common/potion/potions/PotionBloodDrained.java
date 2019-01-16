@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.covens.api.transformation.IBloodReserve;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
-import com.covens.common.core.helper.PlayerHelper;
 import com.covens.common.potion.PotionMod;
 
 import net.minecraft.entity.EntityLiving;
@@ -14,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import zabi.minecraft.minerva.common.utils.entity.PlayerHelper;
 
 public class PotionBloodDrained extends PotionMod {
 

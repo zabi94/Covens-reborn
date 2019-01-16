@@ -2,8 +2,6 @@ package com.covens.common.tile.tiles;
 
 import java.util.HashMap;
 
-import com.covens.common.tile.ModTileEntity;
-
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +15,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.oredict.OreDictionary;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 public class TileEntityGemBowl extends ModTileEntity {
 

@@ -1,7 +1,6 @@
 package com.covens.common.core.net;
 
 import com.covens.client.fx.ParticleF;
-import com.covens.common.core.capability.simple.CapabilityMessage;
 import com.covens.common.core.net.messages.EnergySync;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
 import com.covens.common.core.net.messages.InfusionChangedMessage;
@@ -22,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 /**
  * This class was created by Arekkuusu on 08/03/2017. It's distributed as part
@@ -48,7 +48,6 @@ public final class NetworkHandler {
 		registerSimpleMessage(EnergySync.class, next(), Side.CLIENT);
 		registerSimpleMessage(InfusionChangedMessage.class, next(), Side.CLIENT);
 		registerSimpleMessage(SmokeSpawn.class, next(), Side.CLIENT);
-		registerSimpleMessage(CapabilityMessage.class, next(), Side.CLIENT);
 
 		registerSimpleMessage(PlayerUsedAbilityMessage.class, next(), Side.SERVER);
 		registerSimpleMessage(WitchFireTP.class, next(), Side.SERVER);

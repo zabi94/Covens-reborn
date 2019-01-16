@@ -1,6 +1,5 @@
 package com.covens.common.item.block;
 
-import com.covens.client.core.IModelRegister;
 import com.covens.common.block.ModBlocks;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -8,6 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 
 public class ItemGoblet extends ItemBlock implements IModelRegister {
 

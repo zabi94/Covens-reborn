@@ -5,7 +5,6 @@ import java.util.UUID;
 import com.covens.api.transformation.IBloodReserve;
 import com.covens.common.Covens;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
-import com.covens.common.core.net.SimpleMessage;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,6 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class EntityInternalBloodChanged extends SimpleMessage<EntityInternalBloodChanged> {
 

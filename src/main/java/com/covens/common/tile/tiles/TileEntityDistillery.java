@@ -8,9 +8,6 @@ import com.covens.common.Covens;
 import com.covens.common.crafting.DistilleryRecipe;
 import com.covens.common.crafting.ModDistilleryRecipes;
 import com.covens.common.lib.LibGui;
-import com.covens.common.tile.ModTileEntity;
-import com.covens.common.tile.util.JointInventoryWrapper;
-import com.covens.common.tile.util.JointInventoryWrapper.Mode;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.BlockHorizontal;
@@ -29,6 +26,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import zabi.minecraft.minerva.common.tileentity.JointInventoryWrapper;
+import zabi.minecraft.minerva.common.tileentity.JointInventoryWrapper.Mode;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 public class TileEntityDistillery extends ModTileEntity implements ITickable {
 

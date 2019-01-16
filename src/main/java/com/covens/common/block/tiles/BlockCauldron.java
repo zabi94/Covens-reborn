@@ -8,7 +8,6 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.covens.api.state.StateProperties;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.tile.tiles.TileEntityCauldron;
@@ -28,6 +27,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by Joseph on 3/4/2017. It's distributed as part of

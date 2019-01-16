@@ -5,8 +5,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModMaterials;
@@ -23,6 +21,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * Created by Joseph on 6/14/2018.

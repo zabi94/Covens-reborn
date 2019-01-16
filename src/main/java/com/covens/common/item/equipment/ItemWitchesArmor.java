@@ -1,7 +1,5 @@
 package com.covens.common.item.equipment;
 
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.client.render.entity.model.ModelWitchesArmor;
 import com.covens.common.core.statics.ModCreativeTabs;
 
@@ -12,6 +10,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 public class ItemWitchesArmor extends ItemArmor implements IModelRegister {
 

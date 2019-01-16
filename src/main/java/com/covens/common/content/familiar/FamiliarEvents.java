@@ -11,9 +11,6 @@ import com.covens.common.content.familiar.ai.AIFollowTarget;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.helper.Log;
-import com.covens.common.core.helper.RayTraceHelper;
-import com.covens.common.core.util.EntitySyncHelper;
-import com.covens.common.core.util.UUIDs;
 import com.covens.common.core.util.syncTasks.FamiliarDeath;
 
 import net.minecraft.entity.Entity;
@@ -32,6 +29,9 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
 
 @Mod.EventBusSubscriber
 public class FamiliarEvents {

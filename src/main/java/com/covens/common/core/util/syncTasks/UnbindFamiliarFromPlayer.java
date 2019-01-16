@@ -3,11 +3,11 @@ package com.covens.common.core.util.syncTasks;
 import java.util.UUID;
 
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
-import com.covens.common.core.util.EntitySyncHelper.SyncTask;
-import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
 
 public class UnbindFamiliarFromPlayer extends SyncTask<EntityLivingBase> {
 

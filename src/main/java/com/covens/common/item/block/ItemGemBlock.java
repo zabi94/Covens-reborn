@@ -2,8 +2,6 @@ package com.covens.common.item.block;
 
 import javax.annotation.Nonnull;
 
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.natural.BlockGem;
 import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.core.statics.ModCreativeTabs;
@@ -13,6 +11,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 public class ItemGemBlock extends ItemBlock implements IModelRegister {
 	public ItemGemBlock(Block block) {

@@ -3,7 +3,6 @@ package com.covens.common.block.misc;
 import java.util.Random;
 
 import com.covens.api.state.StateProperties;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
 
@@ -33,6 +32,7 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by Arekkuusu on 11/03/2017. It's distributed as part

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.covens.common.Covens;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibGui;
-import com.covens.common.tile.ModTileEntity;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 public class TileEntityApiary extends ModTileEntity implements ITickable {
 

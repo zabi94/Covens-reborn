@@ -2,7 +2,6 @@ package com.covens.common.block.natural.fluid;
 
 import java.util.Random;
 
-import com.covens.client.core.IModelRegister;
 import com.covens.common.lib.LibMod;
 
 import net.minecraft.block.material.Material;
@@ -23,6 +22,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 
 /**
  * This class was created by Arekkuusu on 03/05/2017. It's distributed as part

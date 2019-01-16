@@ -10,7 +10,6 @@ import com.covens.api.divination.IFortune;
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
-import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -22,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 public class TileEntityCrystalBall extends ModTileEntity {
 

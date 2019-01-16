@@ -4,8 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModItems;
@@ -29,6 +27,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 // FIXME placement (try and place it under a dangling piece while not connected laterally to any block)
 public class BlockMoss extends BlockVine implements IModelRegister {

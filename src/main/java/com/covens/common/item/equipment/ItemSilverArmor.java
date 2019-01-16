@@ -5,8 +5,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.covens.api.transformation.DefaultTransformations;
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.statics.ModCreativeTabs;
 
@@ -28,6 +26,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by BerciTheBeast on 11.4.2017. It's distributed as

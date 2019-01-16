@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import com.covens.common.core.capability.mimic.CapabilityMimicData;
 import com.covens.common.core.capability.mimic.IMimicData;
-import com.covens.common.core.net.SimpleMessage;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -13,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class PlayerMimicDataChanged implements IMessage {
 	public UUID id;

@@ -1,12 +1,12 @@
 package com.covens.common.content.transformation.vampire;
 
 import com.covens.common.content.transformation.CapabilityTransformation;
-import com.covens.common.core.capability.simple.SimpleCapability;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import zabi.minecraft.minerva.common.capability.SimpleCapability;
 
 public class CapabilityVampire extends SimpleCapability {
 

@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 import com.covens.common.Covens;
 import com.covens.common.crafting.OvenSmeltingRecipe;
 import com.covens.common.lib.LibGui;
-import com.covens.common.tile.ModTileEntity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 /**
  * Created by Joseph on 7/17/2017.

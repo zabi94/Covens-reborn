@@ -11,8 +11,8 @@
   "credits": "To Sunconure, Ingoleth, and the whole lot of awesome people who contributed in old-Covens, Bewitchment and Witchworks! Credit to Monospace for Nethersteel Textures. Credit to Dobroide and NewAgeSoup for some of the sounds.",
   "logoFile": "",
   "screenshots": [],
-  "requiredMods": [ "baubles", "forge", "patchouli", "openeye"],
-  "dependencies": [ "baubles", "forge", "patchouli", "openeye"],
+  "requiredMods": [ "baubles", "forge", "patchouli", "minerva"],
+  "dependencies": [ "baubles", "forge", "patchouli", "minerva"],
   "useDependencyInformation": false
 }
 ]

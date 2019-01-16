@@ -3,7 +3,6 @@ package com.covens.common.core.net.messages;
 import com.covens.api.CovensAPI;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.content.transformation.ModTransformations;
-import com.covens.common.core.net.SimpleMessage;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class PlayerTransformationChangedMessage extends SimpleMessage<PlayerTransformationChangedMessage> {
 

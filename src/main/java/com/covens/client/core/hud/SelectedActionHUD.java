@@ -10,6 +10,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
+import zabi.minecraft.minerva.client.hud.HudComponent;
 
 public class SelectedActionHUD extends HudComponent {
 

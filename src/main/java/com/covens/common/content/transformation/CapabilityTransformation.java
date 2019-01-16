@@ -3,7 +3,6 @@ package com.covens.common.content.transformation;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.api.transformation.ITransformation;
 import com.covens.common.content.actionbar.HotbarAction;
-import com.covens.common.core.capability.simple.SimpleCapability;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -13,6 +12,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.common.capability.SimpleCapability;
 
 public class CapabilityTransformation extends SimpleCapability {
 

@@ -2,12 +2,11 @@ package com.covens.common.core.net.messages;
 
 import java.util.Random;
 
-import com.covens.common.core.net.SimpleMessage;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class SmokeSpawn extends SimpleMessage<SmokeSpawn> {
 	public double x, y, z;

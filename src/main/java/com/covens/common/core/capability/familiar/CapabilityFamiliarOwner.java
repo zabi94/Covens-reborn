@@ -5,8 +5,6 @@ import java.util.UUID;
 
 import com.covens.api.mp.IMagicPowerExpander;
 import com.covens.common.content.actionbar.HotbarAction;
-import com.covens.common.core.capability.simple.SimpleCapability;
-import com.covens.common.core.util.UUIDs;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
 
@@ -21,6 +19,9 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.common.capability.SimpleCapability;
+import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.utils.annotation.DontSync;
 
 public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicPowerExpander {
 

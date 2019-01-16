@@ -3,12 +3,12 @@ package com.covens.common.core.capability.mimic;
 import java.util.UUID;
 
 import com.covens.common.Covens;
-import com.covens.common.core.util.UUIDs;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import zabi.minecraft.minerva.common.data.UUIDs;
 
 public class CapabilityMimicData implements IMimicData {
 

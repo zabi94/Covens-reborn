@@ -11,9 +11,7 @@ import com.covens.api.state.StateProperties;
 import com.covens.common.content.cauldron.behaviours.DefaultBehaviours;
 import com.covens.common.content.cauldron.behaviours.ICauldronBehaviour;
 import com.covens.common.content.cauldron.teleportCapability.CapabilityCauldronTeleport;
-import com.covens.common.core.helper.ColorHelper;
 import com.covens.common.core.helper.Log;
-import com.covens.common.tile.ModTileEntity;
 import com.covens.common.tile.util.CauldronFluidTank;
 
 import net.minecraft.block.state.IBlockState;
@@ -37,6 +35,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
+import zabi.minecraft.minerva.common.utils.ColorHelper;
 
 public class TileEntityCauldron extends ModTileEntity implements ITickable {
 

@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 import com.covens.common.core.helper.NBTHelper;
-import com.covens.common.core.helper.RayTraceHelper;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
 
@@ -29,6 +28,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
 
 /**
  * This class was created by Arekkuusu on 5/15/2017. It's distributed as part of

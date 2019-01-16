@@ -2,8 +2,6 @@ package com.covens.common.item.food;
 
 import com.covens.api.CovensAPI;
 import com.covens.api.mp.IMagicPowerExpander;
-import com.covens.client.core.IModelRegister;
-import com.covens.client.handler.ModelHandler;
 import com.covens.common.core.statics.ModCreativeTabs;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
+import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 /**
  * This class was created by Arekkuusu on 28/02/2017. It's distributed as part

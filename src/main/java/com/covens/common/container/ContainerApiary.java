@@ -1,6 +1,5 @@
 package com.covens.common.container;
 
-import com.covens.common.container.slots.SlotFiltered;
 import com.covens.common.tile.tiles.TileEntityApiary;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +7,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import zabi.minecraft.minerva.common.network.container.ModContainer;
+import zabi.minecraft.minerva.common.network.container.slot.SlotFiltered;
 
 /**
  * This class was created by Zabi94. It's distributed as part of Covens under
