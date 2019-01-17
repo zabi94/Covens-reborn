@@ -7,11 +7,13 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.util.syncTasks.FamiliarFollowEntity;
+import com.covens.common.core.util.syncTasks.FamiliarOrderGoto;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import zabi.minecraft.minerva.common.data.UUIDs;
@@ -61,7 +63,9 @@ public class FamiliarController {
 	}
 
 	public static void sendSelectedFamiliarTo(EntityPlayer e, Vec3d hitVec) {
-		
+		UUID familiar = e.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
+		EntitySyncHelper.executeOnEntityAvailable(familiar, new FamiliarOrderGoto(new BlockPos(hitVec)));
+		e.sendMessage(new TextComponentTranslation("familiar.command.goto", getSelectedFamiliarName(familiar, e)));
 	}
 
 	public static void openFamiliarSelector(EntityPlayer player) {

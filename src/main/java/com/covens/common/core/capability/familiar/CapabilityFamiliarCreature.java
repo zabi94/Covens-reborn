@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
@@ -31,6 +32,8 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 	public float bindingChance = 0.01f * rng.nextInt(10);
 	@DontSync
 	public UUID target = UUIDs.NULL_UUID;
+	@DontSync
+	public BlockPos destination = null;
 
 	public boolean hasOwner() {
 		return !owner.equals(UUIDs.NULL_UUID);
