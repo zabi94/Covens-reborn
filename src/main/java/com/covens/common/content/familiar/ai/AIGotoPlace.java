@@ -1,6 +1,7 @@
 package com.covens.common.content.familiar.ai;
 
 import com.covens.api.CovensAPI;
+import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.util.syncTasks.NotificationPlayer;
 
 import net.minecraft.block.state.BlockFaceShape;
@@ -32,6 +33,7 @@ public class AIGotoPlace extends FamiliarAIBase {
 		this.timeToRecalcPath = 0;
 		failed = false;
 		try {
+			CapabilityFamiliarCreature.setSitting(familiar, false);
 			this.familiar.getNavigator().setPath(this.familiar.getNavigator().getPathToPos(getCap().destination), 1.2f);
 		} catch (ArrayIndexOutOfBoundsException e) {
 		}

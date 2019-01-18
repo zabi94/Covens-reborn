@@ -9,6 +9,7 @@ import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.familiar.ai.AIFollowTarget;
 import com.covens.common.content.familiar.ai.AIGotoPlace;
+import com.covens.common.content.familiar.ai.AIFamiliarSit;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.helper.Log;
@@ -73,6 +74,7 @@ public class FamiliarEvents {
 			EntityLiving entity = (EntityLiving) evt.getEntity();
 			entity.tasks.addTask(2, new AIFollowTarget(entity));
 			entity.tasks.addTask(3, new AIGotoPlace(entity));
+			entity.tasks.addTask(4, new AIFamiliarSit(entity));
 			IAttributeInstance follow = entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE);
 			if (follow != null) {
 				follow.removeModifier(FOLLOW_RANGE_UUID);

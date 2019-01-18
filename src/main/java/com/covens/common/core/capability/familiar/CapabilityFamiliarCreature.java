@@ -9,8 +9,10 @@ import com.covens.api.familiar.IFamiliarEligible;
 import com.covens.api.familiar.IFamiliarUneligible;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
@@ -28,12 +30,10 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 
 	public UUID owner = UUIDs.NULL_UUID;
 	public String ownerName = "";
-	@DontSync
-	public float bindingChance = 0.01f * rng.nextInt(10);
-	@DontSync
-	public UUID target = UUIDs.NULL_UUID;
-	@DontSync
-	public BlockPos destination = null;
+	@Deprecated public boolean sitting = false;
+	@DontSync public float bindingChance = 0.01f * rng.nextInt(10);
+	@DontSync public UUID target = UUIDs.NULL_UUID;
+	@DontSync public BlockPos destination = null;
 
 	public boolean hasOwner() {
 		return !owner.equals(UUIDs.NULL_UUID);
@@ -76,6 +76,22 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 			target = UUIDs.NULL_UUID;
 		}
 		return target;
+	}
+	
+	public static boolean isSitting(EntityLiving e) {
+		if (e instanceof EntityTameable) {
+			return ((EntityTameable) e).isSitting();
+		}
+		return e.getCapability(CAPABILITY, null).sitting;
+	}
+	
+	public static void setSitting(EntityLiving e, boolean sitting) {
+		if (e instanceof EntityTameable) {
+			((EntityTameable) e).setSitting(sitting);
+		} else {
+			e.getCapability(CAPABILITY, null).sitting = sitting;
+			e.getCapability(CAPABILITY, null).markDirty((byte) 5);
+		}
 	}
 
 	@Override

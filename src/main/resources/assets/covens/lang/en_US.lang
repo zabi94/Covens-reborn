@@ -961,3 +961,5 @@ familiar.command.sit.enable=%s is now sitting
 familiar.command.sit.disable=%s is now following you
 familiar.command.follow.forbidden=%s doesn't belong to our world
 familiar.dead=%s was dismissed
+familiar.command.goto=%s is on the move
+familiar.command.goto.failed=%s lost the way

@@ -11,7 +11,6 @@ import com.covens.common.core.util.syncTasks.FamiliarOrderGoto;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -22,16 +21,11 @@ import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
 public class FamiliarController {
 	
 	public static void toggleFamiliarWait(EntityLiving familiar) {
-		boolean isFollowing = false;
-		if (familiar instanceof EntityTameable) {
-			isFollowing = ((EntityTameable) familiar).isSitting();
-			((EntityTameable) familiar).setSitting(!isFollowing);
-		} else {
-			//TODO add sit logic
-		}
+		boolean isFollowing = !CapabilityFamiliarCreature.isSitting(familiar);
+		CapabilityFamiliarCreature.setSitting(familiar, isFollowing);
 		EntityPlayer p = familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).getOwner();
 		if (p != null) {
-			p.sendMessage(new TextComponentTranslation("familiar.command.sit."+(isFollowing?"enable":"disable"), familiar.getName()));
+			p.sendMessage(new TextComponentTranslation("familiar.command.sit."+(isFollowing?"disable":"enable"), familiar.getName()));
 		}
 	}
 	

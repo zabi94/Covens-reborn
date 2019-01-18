@@ -1,6 +1,7 @@
 package com.covens.common.content.familiar.ai;
 
 import com.covens.api.CovensAPI;
+import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -31,6 +32,7 @@ public class AIFollowTarget extends FamiliarAIBase {
 	public void startExecuting() {
 		this.timeToRecalcPath = 0;
 		try {
+			CapabilityFamiliarCreature.setSitting(familiar, false);
 			this.target = this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().target)).get(0);
 			this.familiar.getNavigator().setPath(this.familiar.getNavigator().getPathToEntityLiving(this.target), 1.2f);
 		} catch (ArrayIndexOutOfBoundsException e) {
