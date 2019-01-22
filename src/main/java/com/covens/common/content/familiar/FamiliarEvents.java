@@ -7,12 +7,11 @@ import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.event.HotbarActionTriggeredEvent;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.actionbar.ModAbilities;
+import com.covens.common.content.familiar.ai.AIFamiliarSit;
 import com.covens.common.content.familiar.ai.AIFollowTarget;
 import com.covens.common.content.familiar.ai.AIGotoPlace;
-import com.covens.common.content.familiar.ai.AIFamiliarSit;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
-import com.covens.common.core.helper.Log;
 import com.covens.common.core.util.syncTasks.FamiliarDeath;
 
 import net.minecraft.entity.Entity;
@@ -103,7 +102,6 @@ public class FamiliarEvents {
 				}
 				switch (result.typeOfHit) {
 					case BLOCK:
-						Log.i("Issue: goto, "+result.hitVec);
 						FamiliarController.sendSelectedFamiliarTo(evt.player, result.hitVec);
 						break;
 					case ENTITY:
@@ -113,7 +111,6 @@ public class FamiliarEvents {
 						}
 						break;
 					case MISS:
-						Log.i("Familiar selector");
 						FamiliarController.openFamiliarSelector(evt.player);
 						break;
 				}
@@ -131,17 +128,14 @@ public class FamiliarEvents {
 
 	private static void handleClickOnFamiliar(EntityPlayer player, EntityLiving e) {
 		if (player.isSneaking()) {
-			Log.i("Issued: wait");
 			FamiliarController.toggleFamiliarWait(e);
 		} else {
 			UUID sel = player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
 			if (UUIDs.of(e).equals(sel)) {
-				Log.i("Sending home");
 				FamiliarController.sendSelectedFamiliarHome(player);
 				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar = UUIDs.NULL_UUID;
 			} else {
 				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar = UUIDs.of(e);
-				Log.i("Selecting "+UUIDs.of(e));
 			}
 		}
 	}

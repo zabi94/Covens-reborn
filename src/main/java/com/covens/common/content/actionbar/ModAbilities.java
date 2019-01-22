@@ -1,13 +1,10 @@
 package com.covens.common.content.actionbar;
 
-import com.covens.api.CovensAPI;
 import com.covens.common.content.transformation.vampire.CapabilityVampire;
 import com.covens.common.content.transformation.werewolf.CapabilityWerewolfStatus;
-import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.lib.LibMod;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,18 +17,7 @@ public class ModAbilities {
 	public static final HotbarAction HOWL = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "howl"), 1, 1);
 	public static final HotbarAction MESMERIZE = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "mesmerize"), 2, 1);
 	public static final HotbarAction HYPNOTIZE = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "hypnotize"), 2, 2);
-	public static final HotbarAction COMMAND_FAMILIAR = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "command_familiar"), 0, 2) {
-		@Override
-		@SideOnly(Side.CLIENT)
-		public int getIconIndexY() {
-			int yIndex = super.getIconIndexY();
-			Entity e = Minecraft.getMinecraft().pointedEntity;
-			if (e != null && CovensAPI.getAPI().isValidFamiliar(e) && e.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner.equals(Minecraft.getMinecraft().player.getUniqueID())) {
-				return yIndex;
-			}
-			return yIndex + 1;
-		}
-	};
+	public static final HotbarAction COMMAND_FAMILIAR = new CommandFamilarAction(new ResourceLocation(LibMod.MOD_ID, "command_familiar"), 0, 2);
 	public static final HotbarAction WOLF_SHIFT = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "wolf_shift"), 3, 0) {
 		@Override
 		@SideOnly(Side.CLIENT)
