@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import zabi.minecraft.minerva.common.data.UUIDs;
@@ -30,7 +31,10 @@ public class FamiliarFollowEntity extends SyncTask<EntityLivingBase> {
 		if (tgtEnt == null) {
 			EntitySyncHelper.executeOnEntityAvailable(target, new EntityBeFollowedByFamiliar(familiar, target));
 		} else {
-			famEnt.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).target = target;
+			CapabilityFamiliarCreature cap = famEnt.getCapability(CapabilityFamiliarCreature.CAPABILITY, null); 
+			CapabilityFamiliarCreature.setSitting((EntityLiving) famEnt, false);
+			cap.target = target;
+			cap.destination = null;
 		}
 	}
 	

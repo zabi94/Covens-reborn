@@ -2,9 +2,11 @@ package com.covens.common.core.util.syncTasks;
 
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
+import zabi.minecraft.minerva.common.data.UUIDs;
 import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
 
 public class FamiliarOrderGoto extends SyncTask<EntityLivingBase> {
@@ -26,7 +28,9 @@ public class FamiliarOrderGoto extends SyncTask<EntityLivingBase> {
 
 	@Override
 	protected void execute(EntityLivingBase familiar) {
+		CapabilityFamiliarCreature.setSitting((EntityLiving) familiar, false);
 		familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).destination = dest;
+		familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).target = UUIDs.NULL_UUID;
 	}
 
 	@Override
