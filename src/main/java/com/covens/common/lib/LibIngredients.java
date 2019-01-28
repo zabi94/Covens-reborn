@@ -106,4 +106,9 @@ public class LibIngredients {
 	public static Ingredient witches_stitching = Ingredient.fromItem(ModItems.witches_stitching);
 	public static Ingredient honeycomb = Ingredient.fromItem(ModItems.honeycomb);
 	public static Ingredient ingotIron = Ingredient.fromItem(Items.IRON_INGOT);
+	public static Ingredient saplingElder = Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 0));
+	public static Ingredient saplingJuniper = Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 1));
+	public static Ingredient saplingYew = Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 2));
+	public static Ingredient saplingCypress = Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 3));
+	public static Ingredient woolOfBat = Ingredient.fromItem(ModItems.wool_of_bat);
 }

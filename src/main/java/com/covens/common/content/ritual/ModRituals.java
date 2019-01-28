@@ -2,14 +2,10 @@ package com.covens.common.content.ritual;
 
 import static com.covens.api.ritual.EnumGlyphType.ANY;
 import static com.covens.api.ritual.EnumGlyphType.ENDER;
-import static com.covens.api.ritual.EnumGlyphType.GOLDEN;
 import static com.covens.api.ritual.EnumGlyphType.NETHER;
 import static com.covens.api.ritual.EnumGlyphType.NORMAL;
 
-import java.util.Arrays;
-
 import com.covens.api.infusion.DefaultInfusions;
-import com.covens.api.ritual.EnumGlyphType;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.ritual.rituals.RitualBiomeShift;
 import com.covens.common.content.ritual.rituals.RitualConjurationBlaze;
@@ -29,114 +25,333 @@ import com.covens.common.content.ritual.rituals.RitualPerception;
 import com.covens.common.content.ritual.rituals.RitualSandsTime;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibIngredients;
-import com.covens.common.lib.LibMod;
 import com.covens.common.tile.tiles.TileEntityGlyph;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 
 public class ModRituals {
 
-	private static final NonNullList<ItemStack> none = NonNullList.<ItemStack>create();
-
-	public static RitualImpl night, fast_day, glowing, spawn_witch, spawn_wither, draw_circle_small, draw_circle_medium, draw_circle_large, infusion_overworld, infusion_nether, infusion_end, infusion_dream, flames, sanctuary, spawn_vex, deck, table, crystal_ball, elder_broom, juniper_broom, yew_broom, cypress_broom, gateway, nether_portal, spawn_blaze, spawn_ghast, spawn_magma_cube, shift_biome, vampire_lair;
-
 	public static void init() {
+		
+		RitualFactory.create("high_moon")
+			.addInput(LibIngredients.goldIngot)
+			.addInput(LibIngredients.netherBrickItem)
+			.withStartingPower(800)
+			.withRunningTime(100)
+			.withSmallCircle(NORMAL)
+			.disallowRemote()
+			.buildAndRegister(new RitualHighMoon());
 
-		night = new RitualHighMoon(rl("high_moon"), // Reg name
-				of( // Recipe
-						LibIngredients.goldIngot, LibIngredients.netherBrickItem),
-				none, // Output
-				100, // Initial cast time
-				circles(NORMAL, null, null), 800, // Initial cost
-				0 // Cost per tick
-		);
+		RitualFactory.create("time_sands")
+			.addInput(LibIngredients.sand)
+			.addInput(LibIngredients.diamondOre)
+			.withStartingPower(1000)
+			.withRunningTime(5)
+			.withAllCircles(NORMAL)
+			.neverEnding()
+			.disallowRemote()
+			.buildAndRegister(new RitualSandsTime());
+		
+		RitualFactory.create("perception")
+			.addInput(LibIngredients.glowstoneBlock)
+			.addInput(LibIngredients.goldenCarrot)
+			.withAllCircles(NORMAL)
+			.withStartingPower(700)
+			.withTickCost(3)
+			.neverEnding()
+			.buildAndRegister(new RitualPerception());
+		
+		RitualFactory.create("conjure_witch")
+			.addInput(LibIngredients.athame)
+			.addInput(LibIngredients.apple, 2)
+			.addInput(LibIngredients.pentacle)
+			.addInput(LibIngredients.poisonousPotato)
+			.addOutput(new ItemStack(ModItems.athame))
+			.withRunningTime(200)
+			.withStartingPower(3000)
+			.withTickCost(3)
+			.withAllCircles(NETHER)
+			.withMediumCircle(ENDER)
+			.buildAndRegister(new RitualConjurationWitch());
+		
+		RitualFactory.create("conjure_magma_cube")
+			.addInput(LibIngredients.athame)
+			.addInput(LibIngredients.blazePowder, 2)
+			.addInput(LibIngredients.slime, 2)
+			.addOutput(new ItemStack(ModItems.athame))
+			.withRunningTime(120)
+			.withSmallCircle(NETHER)
+			.withMediumCircle(NETHER)
+			.withStartingPower(1200)
+			.withTickCost(2)
+			.buildAndRegister(new RitualConjurationMagmaCube());
 
-		fast_day = new RitualSandsTime(rl("time_sands"), of(LibIngredients.sand, LibIngredients.diamondOre), none, -1, circles(NORMAL, NORMAL, NORMAL), 1000, 5);
-
-		glowing = new RitualPerception(rl("perception"), of(LibIngredients.glowstoneBlock, LibIngredients.goldenCarrot), none, -1, circles(NORMAL, NORMAL, NORMAL), 700, 3);
-
-		spawn_witch = new RitualConjurationWitch(rl("conjure_witch"), of(LibIngredients.athame, LibIngredients.apple, LibIngredients.pentacle, LibIngredients.poisonousPotato), ofs(new ItemStack(ModItems.athame)), 200, circles(NETHER, ENDER, NETHER), 3000, 3);
-
-		spawn_magma_cube = new RitualConjurationMagmaCube(rl("conjure_magma_cube"), of(LibIngredients.athame, LibIngredients.blazePowder, LibIngredients.slime), ofs(new ItemStack(ModItems.athame)), 120, circles(NETHER, NETHER, null), 1200, 2);
-
-		spawn_vex = new RitualConjurationVex(rl("conjure_vex"), of(LibIngredients.apple, LibIngredients.wormwood, LibIngredients.athame), ofs(new ItemStack(ModItems.athame)), 100, circles(NORMAL, ENDER, null), 1000, 2);
-
-		spawn_blaze = new RitualConjurationBlaze(rl("conjure_blaze"), of(LibIngredients.anyLog, LibIngredients.netherBrickItem, LibIngredients.athame), ofs(new ItemStack(ModItems.athame)), 120, circles(NETHER, NETHER, null), 1200, 2);
-
-		spawn_ghast = new RitualConjurationGhast(rl("conjure_ghast"), of(LibIngredients.soulSand, LibIngredients.soulSand, LibIngredients.soulSand, LibIngredients.fire_charge, LibIngredients.fumeReekOfDeath, LibIngredients.glowstoneDust, LibIngredients.athame), ofs(new ItemStack(ModItems.athame)), 250, circles(NETHER, NETHER, NETHER), 3400, 2);
-
-		spawn_wither = new RitualConjurationWither(rl("conjure_wither"), of(LibIngredients.athame, LibIngredients.witherSkull, LibIngredients.soulSand
-
-		), ofs(new ItemStack(ModItems.athame)), 400, circles(NETHER, NETHER, NETHER), 5000, 4);
-		draw_circle_small = new RitualDrawing(rl("draw_circle_small"), of(LibIngredients.woodAsh), none, 40, circles(ANY, null, null), 100, 0, TileEntityGlyph.small);
-		draw_circle_medium = new RitualDrawing(rl("draw_circle_medium"), of(LibIngredients.woodAsh, LibIngredients.clayBall // balanced
-		), none, 40, circles(ANY, null, null), 100, 0, TileEntityGlyph.medium);
-		draw_circle_large = new RitualDrawing(rl("draw_circle_large"), of(LibIngredients.woodAsh, LibIngredients.woodAsh, LibIngredients.clayBall, LibIngredients.clayBall // VERY balanced
-		), none, 40, circles(ANY, ANY, null), 100, 0, TileEntityGlyph.big);
-		gateway = new RitualGateway(rl("gateway"), of(LibIngredients.locationStoneBound), ofs(), -1, circles(ENDER, NORMAL, ENDER), 4000, 8);
-		nether_portal = new RitualNetherPortal(rl("nether_portal"), of(LibIngredients.obsidian, LibIngredients.obsidian, LibIngredients.obsidian, LibIngredients.obsidian, LibIngredients.fire_charge), ofs(), 200, circles(NETHER, null, null), 4000, 1);
-
-		shift_biome = new RitualBiomeShift(rl("shift_biome"), of(LibIngredients.anyGlass, LibIngredients.boline), ofs(new ItemStack(ModItems.boline)), 400, circles(NORMAL, NORMAL, NORMAL), 2000, 8);
-
-		infusion_overworld = new RitualInfusion(of(LibIngredients.fumePetrichorOdour), none, 60, circles(NORMAL, NORMAL, NORMAL), 6000, 1, DefaultInfusions.OVERWORLD);
-		infusion_nether = new RitualInfusion(of(LibIngredients.fumeFieryBreeze), none, 60, circles(NETHER, NETHER, NETHER), 6000, 1, DefaultInfusions.NETHER);
-		infusion_end = new RitualInfusion(of(LibIngredients.fumeHeavenlyWind), none, 60, circles(ENDER, ENDER, ENDER), 6000, 1, DefaultInfusions.END);
-		infusion_dream = new RitualInfusion(of(LibIngredients.fumeZephyrOfDepths), none, 60, circles(NORMAL, NETHER, ENDER), 6000, 1, DefaultInfusions.DREAM);
-		flames = new RitualFlames(rl("flames"), of(LibIngredients.blazeRod, LibIngredients.coal), none, 3600, circles(NETHER, null, null), 300, 4);
-		sanctuary = new RitualImpl(rl("sanctuary"), of(LibIngredients.whiteSage, LibIngredients.sagebrush, LibIngredients.salt, LibIngredients.dirt, LibIngredients.dirt, LibIngredients.dirt), ofs(new ItemStack(ModBlocks.purifying_earth, 3)), 130, circles(NORMAL, NORMAL, null), 500, 4);
-		deck = new RitualImpl(rl("deck"), of(LibIngredients.anyDye, LibIngredients.anyDye, LibIngredients.paper, LibIngredients.fumeBirchSoul, LibIngredients.wax), ofs(new ItemStack(ModItems.tarots)), 50, circles(NORMAL, null, null), 350, 1);
-		table = new RitualImpl(rl("table"), of(LibIngredients.anyString, LibIngredients.anyDye, LibIngredients.craftingTable, Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, 20)), LibIngredients.fumeDropletOfWisdom, LibIngredients.fumeDropletOfWisdom), ofs(new ItemStack(ModBlocks.tarot_table)), 50, circles(NORMAL, NORMAL, null), 350, 1);
-		crystal_ball = new RitualImpl(rl("crystal_ball"), of(LibIngredients.quartz, LibIngredients.anyGlass, LibIngredients.anyGlass, LibIngredients.anyGlass, LibIngredients.anyGlass, LibIngredients.fumeBottledMagic), ofs(new ItemStack(ModBlocks.crystal_ball)), 50, circles(NORMAL, ENDER, null), 750, 3);
-		elder_broom = new RitualImpl(rl("elder_broom"), of(LibIngredients.logElder, LibIngredients.broomMundane, Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 0)), LibIngredients.magicSalve, LibIngredients.elytra), ofs(new ItemStack(ModItems.broom, 1, 1)), 130, circles(NORMAL, NORMAL, ENDER), 1000, 4);
-		juniper_broom = new RitualImpl(rl("juniper_broom"), of(LibIngredients.logJuniper, LibIngredients.broomMundane, Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 1)), LibIngredients.magicSalve, LibIngredients.elytra), ofs(new ItemStack(ModItems.broom, 1, 2)), 130, circles(NORMAL, NORMAL, ENDER), 1000, 4);
-		yew_broom = new RitualImpl(rl("yew_broom"), of(LibIngredients.logYew, LibIngredients.broomMundane, Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 2)), LibIngredients.magicSalve, LibIngredients.elytra), ofs(new ItemStack(ModItems.broom, 1, 3)), 130, circles(NORMAL, NORMAL, ENDER), 1000, 4);
-		cypress_broom = new RitualImpl(rl("cypress_broom"), of(LibIngredients.logCypress, LibIngredients.broomMundane, Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 3)), LibIngredients.magicSalve, LibIngredients.elytra), ofs(new ItemStack(ModItems.broom, 1, 4)), 130, circles(NORMAL, NORMAL, ENDER), 1000, 4);
-		vampire_lair = new RitualCreateVampireLair(rl("vampire_lair"), of(LibIngredients.bloodyRags, LibIngredients.bloodyRags, LibIngredients.anySapling, LibIngredients.blazePowder, LibIngredients.boline), ofs(), 200, circles(NORMAL, NETHER, NETHER), 5000, 5);
-		registerAll();
-	}
-
-	public static void registerAll() {
-		Arrays.asList(night, fast_day, glowing, spawn_witch, spawn_wither, draw_circle_large, draw_circle_medium, draw_circle_small, infusion_overworld, infusion_nether, infusion_end, infusion_dream, flames, sanctuary, spawn_vex, deck, table, crystal_ball, elder_broom, juniper_broom, yew_broom, cypress_broom, gateway, nether_portal, spawn_blaze, spawn_ghast, spawn_magma_cube, shift_biome, vampire_lair
-
-		).stream().map(r -> new AdapterIRitual(r)).forEach(r -> AdapterIRitual.REGISTRY.register(r));
-
-	}
-
-	public static NonNullList<Ingredient> of(Ingredient... list) {
-		return NonNullList.<Ingredient>from(Ingredient.EMPTY, list);
-	}
-
-	public static NonNullList<ItemStack> ofs(ItemStack... list) {
-		if ((list == null) || (list.length == 0)) {
-			return none;
-		}
-		return NonNullList.<ItemStack>from(ItemStack.EMPTY, list);
-	}
-
-	public static ResourceLocation rl(String s) {
-		return new ResourceLocation(LibMod.MOD_ID, s);
-	}
-
-	public static int circles(EnumGlyphType small, EnumGlyphType medium, EnumGlyphType big) {
-		if (small == null) {
-			throw new IllegalArgumentException("Cannot have the smaller circle missing");
-		}
-		if ((medium == null) && (big != null)) {
-			throw new IllegalArgumentException("Cannot have null middle circle when a big circle is present");
-		}
-		if ((small == GOLDEN) || (medium == GOLDEN) || (big == GOLDEN)) {
-			throw new IllegalArgumentException("No golden circles allowed");
-		}
-		int circleNum = 0;
-		if (medium != null) {
-			circleNum++;
-		}
-		if (big != null) {
-			circleNum++;
-		}
-		return circleNum | (small.meta() << 2) | (medium == null ? 0 : medium.meta() << 4) | (big == null ? 0 : big.meta() << 6);
+		RitualFactory.create("conjure_vex")
+			.addInput(LibIngredients.athame)
+			.addInput(LibIngredients.oakAppleGall)
+			.addInput(LibIngredients.wormwood, 2)
+			.addOutput(new ItemStack(ModItems.athame))
+			.withRunningTime(120)
+			.withStartingPower(1000)
+			.withTickCost(2)
+			.withSmallCircle(NORMAL)
+			.withMediumCircle(ENDER)
+			.buildAndRegister(new RitualConjurationVex());
+		
+		
+		RitualFactory.create("conjure_blaze")
+			.addInput(LibIngredients.athame)
+			.addInput(LibIngredients.anyLog, 2)
+			.addInput(LibIngredients.netherBrickItem, 2)
+			.addOutput(new ItemStack(ModItems.athame))
+			.withRunningTime(120)
+			.withStartingPower(1200)
+			.withTickCost(2)
+			.withSmallCircle(NETHER)
+			.withMediumCircle(NETHER)
+			.disallowRemote()
+			.buildAndRegister(new RitualConjurationBlaze());
+		
+		RitualFactory.create("conjure_ghast")
+			.addInput(LibIngredients.athame)
+			.addInput(LibIngredients.soulSand, 3)
+			.addInput(LibIngredients.fire_charge)
+			.addInput(LibIngredients.fumeReekOfDeath)
+			.addInput(LibIngredients.glowstoneDust)
+			.addOutput(new ItemStack(ModItems.athame))
+			.withRunningTime(250)
+			.withStartingPower(3400)
+			.withTickCost(3)
+			.withAllCircles(NETHER)
+			.disallowRemote()
+			.buildAndRegister(new RitualConjurationGhast());
+		
+		RitualFactory.create("conjure_wither")
+			.addInput(LibIngredients.athame)
+			.addInput(LibIngredients.soulSand, 4)
+			.addInput(LibIngredients.witherSkull)
+			.addInput(LibIngredients.fumeReekOfDeath)
+			.addOutput(new ItemStack(ModItems.athame))
+			.withRunningTime(400)
+			.withStartingPower(5000)
+			.withTickCost(4)
+			.withAllCircles(NETHER)
+			.buildAndRegister(new RitualConjurationWither());
+		
+		RitualFactory.create("draw_circle_small")
+			.addInput(LibIngredients.woodAsh)
+			.withSmallCircle(ANY)
+			.withRunningTime(40)
+			.withStartingPower(100)
+			.buildAndRegister(new RitualDrawing(TileEntityGlyph.small));
+		
+		RitualFactory.create("draw_circle_medium")
+			.addInput(LibIngredients.woodAsh)
+			.addInput(LibIngredients.clayBall) // balanced
+			.withSmallCircle(ANY)
+			.withRunningTime(40)
+			.withStartingPower(100)
+			.buildAndRegister(new RitualDrawing(TileEntityGlyph.medium));
+		
+		RitualFactory.create("draw_circle_large")
+			.addInput(LibIngredients.woodAsh, 2)
+			.addInput(LibIngredients.clayBall, 2) // balanced
+			.withSmallCircle(ANY)
+			.withMediumCircle(ANY)
+			.withRunningTime(40)
+			.withStartingPower(100)
+			.buildAndRegister(new RitualDrawing(TileEntityGlyph.big));
+		
+		RitualFactory.create("gateway")
+			.addInput(LibIngredients.locationStoneBound)
+			.neverEnding()
+			.withAllCircles(ENDER)
+			.withMediumCircle(NORMAL)
+			.withStartingPower(4000)
+			.withTickCost(8)
+			.buildAndRegister(new RitualGateway());
+		
+		RitualFactory.create("nether_portal")
+			.addInput(LibIngredients.obsidian, 4)
+			.addInput(LibIngredients.fire_charge)
+			.withRunningTime(50)
+			.withSmallCircle(NETHER)
+			.withStartingPower(4000)
+			.disallowRemote()
+			.buildAndRegister(new RitualNetherPortal());
+		
+		RitualFactory.create("shift_biome")
+			.addInput(LibIngredients.anyGlass, 4)
+			.addInput(LibIngredients.boline)
+			.addOutput(new ItemStack(ModItems.boline))
+			.withRunningTime(400)
+			.withAllCircles(NORMAL)
+			.withStartingPower(2000)
+			.withTickCost(8)
+			.buildAndRegister(new RitualBiomeShift());
+		
+		new RitualFactory(DefaultInfusions.OVERWORLD.getRegistryName())
+			.addInput(LibIngredients.fumePetrichorOdour)
+			.withAllCircles(NORMAL)
+			.withRunningTime(60)
+			.withStartingPower(6000)
+			.withTickCost(1)
+			.disallowRemote()
+			.buildAndRegister(new RitualInfusion(DefaultInfusions.OVERWORLD));
+		
+		new RitualFactory(DefaultInfusions.NETHER.getRegistryName())
+			.addInput(LibIngredients.fumeFieryBreeze)
+			.withAllCircles(NETHER)
+			.withRunningTime(60)
+			.withStartingPower(6000)
+			.withTickCost(1)
+			.disallowRemote()
+			.buildAndRegister(new RitualInfusion(DefaultInfusions.NETHER));
+		
+		new RitualFactory(DefaultInfusions.END.getRegistryName())
+			.addInput(LibIngredients.fumeHeavenlyWind)
+			.withAllCircles(ENDER)
+			.withRunningTime(60)
+			.withStartingPower(6000)
+			.withTickCost(1)
+			.disallowRemote()
+			.buildAndRegister(new RitualInfusion(DefaultInfusions.END));
+		
+		new RitualFactory(DefaultInfusions.DREAM.getRegistryName())
+			.addInput(LibIngredients.fumeZephyrOfDepths)
+			.withAllCircles(ANY)
+			.withRunningTime(60)
+			.withStartingPower(6000)
+			.withTickCost(1)
+			.disallowRemote()
+			.buildAndRegister(new RitualInfusion(DefaultInfusions.DREAM));
+		
+		
+		RitualFactory.create("flames")
+			.addInput(LibIngredients.blazeRod)
+			.addInput(LibIngredients.coal, 3)
+			.withSmallCircle(NETHER)
+			.withRunningTime(3600)
+			.withStartingPower(300)
+			.withTickCost(4)
+			.buildAndRegister(new RitualFlames());
+		
+		RitualFactory.create("sanctuary")
+			.addInput(LibIngredients.whiteSage)
+			.addInput(LibIngredients.sagebrush)
+			.addInput(LibIngredients.salt)
+			.addInput(LibIngredients.dirt, 3)
+			.addOutput(new ItemStack(ModBlocks.purifying_earth, 3))
+			.withSmallCircle(NORMAL)
+			.withMediumCircle(NORMAL)
+			.withRunningTime(130)
+			.withStartingPower(500)
+			.withTickCost(4)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("deck")
+			.addInput(LibIngredients.anyDye, 2)
+			.addInput(LibIngredients.paper, 12)
+			.addInput(LibIngredients.fumeBirchSoul)
+			.addInput(LibIngredients.wax)
+			.addOutput(new ItemStack(ModItems.tarots))
+			.withSmallCircle(NORMAL)
+			.withRunningTime(130)
+			.withStartingPower(350)
+			.withTickCost(1)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("table")
+			.addInput(LibIngredients.anyDye, 2)
+			.addInput(LibIngredients.anyString, 12)
+			.addInput(LibIngredients.craftingTable)
+			.addInput(LibIngredients.fumeDropletOfWisdom)
+			.addInput(LibIngredients.fumeBottledMagic)
+			.addOutput(new ItemStack(ModBlocks.tarot_table))
+			.withSmallCircle(NORMAL)
+			.withMediumCircle(NORMAL)
+			.withRunningTime(130)
+			.withStartingPower(350)
+			.withTickCost(1)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("crystal_ball")
+			.addInput(LibIngredients.quartz, 2)
+			.addInput(LibIngredients.anyGlass, 4)
+			.addInput(LibIngredients.fumeBottledMagic)
+			.addOutput(new ItemStack(ModBlocks.crystal_ball))
+			.withSmallCircle(NORMAL)
+			.withMediumCircle(ENDER)
+			.withRunningTime(750)
+			.withStartingPower(350)
+			.withTickCost(3)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("elder_broom")
+			.addInput(LibIngredients.logElder, 3)
+			.addInput(LibIngredients.broomMundane)
+			.addInput(LibIngredients.saplingElder, 4)
+			.addInput(LibIngredients.magicSalve)
+			.addInput(LibIngredients.elytra)
+			.addOutput(new ItemStack(ModItems.broom, 1, 1))
+			.withAllCircles(NORMAL)
+			.withBigCircle(ENDER)
+			.withRunningTime(2000)
+			.withStartingPower(1000)
+			.withTickCost(3)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("juniper_broom")
+			.addInput(LibIngredients.logJuniper, 3)
+			.addInput(LibIngredients.broomMundane)
+			.addInput(LibIngredients.saplingJuniper, 4)
+			.addInput(LibIngredients.magicSalve)
+			.addInput(LibIngredients.elytra)
+			.addOutput(new ItemStack(ModItems.broom, 1, 2))
+			.withAllCircles(NORMAL)
+			.withBigCircle(ENDER)
+			.withRunningTime(2000)
+			.withStartingPower(1000)
+			.withTickCost(3)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("yew_broom")
+			.addInput(LibIngredients.logYew, 3)
+			.addInput(LibIngredients.broomMundane)
+			.addInput(LibIngredients.saplingYew, 4)
+			.addInput(LibIngredients.magicSalve)
+			.addInput(LibIngredients.elytra)
+			.addOutput(new ItemStack(ModItems.broom, 1, 3))
+			.withAllCircles(NORMAL)
+			.withBigCircle(ENDER)
+			.withRunningTime(2000)
+			.withStartingPower(1000)
+			.withTickCost(3)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("cypress_broom")
+			.addInput(LibIngredients.logCypress, 3)
+			.addInput(LibIngredients.broomMundane)
+			.addInput(LibIngredients.saplingCypress, 4)
+			.addInput(LibIngredients.magicSalve)
+			.addInput(LibIngredients.elytra)
+			.addOutput(new ItemStack(ModItems.broom, 1, 4))
+			.withAllCircles(NORMAL)
+			.withBigCircle(ENDER)
+			.withRunningTime(2000)
+			.withStartingPower(1000)
+			.withTickCost(3)
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("vampire_lair")
+			.addInput(LibIngredients.bloodyRags, 8)
+			.addInput(LibIngredients.anySapling)
+			.addInput(LibIngredients.woolOfBat)
+			.withAllCircles(NORMAL)
+			.withRunningTime(2000)
+			.withStartingPower(1000)
+			.withTickCost(3)
+			.buildAndRegister(new RitualCreateVampireLair());
+		
 	}
 }

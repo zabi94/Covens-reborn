@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.ritual.IRitual;
 import com.covens.common.content.ritual.AdapterIRitual;
-import com.covens.common.content.ritual.RitualImpl;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemLocationStone;
 
@@ -13,26 +13,18 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
-public class RitualGateway extends RitualImpl {
-
-	public RitualGateway(ResourceLocation registryName, NonNullList<Ingredient> input, NonNullList<ItemStack> output, int timeInTicks, int circles, int altarStartingPower, int powerPerTick) {
-		super(registryName, input, output, timeInTicks, circles, altarStartingPower, powerPerTick);
-	}
+public class RitualGateway implements IRitual {
 
 	@Override
 	public boolean isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
-
 		for (ItemStack stack : recipe) {
 			if (stack.getItem().equals(ModItems.location_stone)) {
 				if (ItemLocationStone.isBound(stack)) {

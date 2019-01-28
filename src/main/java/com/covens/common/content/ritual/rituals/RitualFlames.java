@@ -3,7 +3,7 @@ package com.covens.common.content.ritual.rituals;
 import java.util.List;
 import java.util.Random;
 
-import com.covens.common.content.ritual.RitualImpl;
+import com.covens.api.ritual.IRitual;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -12,23 +12,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RitualFlames extends RitualImpl {
+public class RitualFlames implements IRitual {
 
 	private static final Random rng = new Random();
-
-	public RitualFlames(ResourceLocation registryName, NonNullList<Ingredient> input, NonNullList<ItemStack> output, int timeInTicks, int circles, int altarStartingPower, int powerPerTick) {
-		super(registryName, input, output, timeInTicks, circles, altarStartingPower, powerPerTick);
-	}
 
 	@Override
 	public void onUpdate(EntityPlayer player, TileEntity tile, World world, BlockPos pos, NBTTagCompound data, int ticks, BlockPos effectivePosition, int covenSize) {

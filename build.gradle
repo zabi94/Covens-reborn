@@ -67,7 +67,7 @@ processResources {
 
 repositories {
     flatDir { //Minerva
-        dirs 'libs'
+        dirs 'libsIn'
     }
     maven { //Hwyla
         name = "Mobius Repo"

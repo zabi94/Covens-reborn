@@ -1,32 +1,29 @@
 package com.covens.common.content.ritual.rituals;
 
 import java.util.Optional;
+import java.util.Random;
 
+import javax.annotation.Nonnull;
+
+import com.covens.api.ritual.IRitual;
 import com.covens.common.content.ritual.AdapterIRitual;
-import com.covens.common.content.ritual.RitualImpl;
 import com.covens.common.item.ModItems;
 import com.covens.common.world.BiomeChangingUtils.BiomeChangerWalker;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-public class RitualBiomeShift extends RitualImpl {
-
-	public RitualBiomeShift(ResourceLocation registryName, NonNullList<Ingredient> input, NonNullList<ItemStack> output, int timeInTicks, int circles, int altarStartingPower, int powerPerTick) {
-		super(registryName, input, output, timeInTicks, circles, altarStartingPower, powerPerTick);
-	}
+public class RitualBiomeShift implements IRitual {
 
 	@Override
 	public void onFinish(EntityPlayer player, TileEntity tile, World world, BlockPos circlePos, NBTTagCompound data, BlockPos effectivePos, int covenSize) {
@@ -56,13 +53,21 @@ public class RitualBiomeShift extends RitualImpl {
 	}
 
 	@Override
-	public NonNullList<ItemStack> getOutput(NonNullList<ItemStack> input, NBTTagCompound data) {
-		NonNullList<ItemStack> oldOutput = super.getOutput(input, data);
-		Optional<ItemStack> oldBoline = input.parallelStream().filter(is -> is.getItem() == ModItems.boline).findFirst();
-		if (oldBoline.isPresent()) {
-			oldOutput.parallelStream().filter(is -> is.getItem() == ModItems.boline).findFirst().ifPresent(is -> is.setItemDamage(is.getItemDamage() + 50));
+	@Nonnull
+	public ItemStack modifyOutput(ItemStack originalOutput, NonNullList<ItemStack> input, NBTTagCompound tag) {
+		if (originalOutput.getItem() == ModItems.boline) {
+			Optional<ItemStack> oldBoline = input.parallelStream().filter(is -> is.getItem() == ModItems.boline).findFirst();
+			if (oldBoline.isPresent()) {
+				ItemStack res = oldBoline.get().copy();
+				if (res.attemptDamageItem(50, new Random(), null)) {
+					return ItemStack.EMPTY;
+				}
+				return res;
+			} else {
+				return ItemStack.EMPTY;
+			}
 		}
-		return oldOutput;
+		return originalOutput;
 	}
 
 }

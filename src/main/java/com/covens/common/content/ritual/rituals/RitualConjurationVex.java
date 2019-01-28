@@ -1,8 +1,11 @@
 package com.covens.common.content.ritual.rituals;
 
 import java.util.Optional;
+import java.util.Random;
 
-import com.covens.common.content.ritual.RitualImpl;
+import javax.annotation.Nonnull;
+
+import com.covens.api.ritual.IRitual;
 import com.covens.common.item.ModItems;
 
 import net.minecraft.advancements.CriteriaTriggers;
@@ -10,19 +13,13 @@ import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RitualConjurationVex extends RitualImpl {
-
-	public RitualConjurationVex(ResourceLocation registryName, NonNullList<Ingredient> input, NonNullList<ItemStack> output, int timeInTicks, int circles, int altarStartingPower, int powerPerTick) {
-		super(registryName, input, output, timeInTicks, circles, altarStartingPower, powerPerTick);
-	}
+public class RitualConjurationVex implements IRitual {
 
 	@Override
 	public void onFinish(EntityPlayer player, TileEntity tile, World world, BlockPos pos, NBTTagCompound data, BlockPos effectivePosition, int covenSize) {
@@ -38,13 +35,21 @@ public class RitualConjurationVex extends RitualImpl {
 	}
 
 	@Override
-	public NonNullList<ItemStack> getOutput(NonNullList<ItemStack> input, NBTTagCompound data) {
-		NonNullList<ItemStack> oldOutput = super.getOutput(input, data);
-		Optional<ItemStack> oldAthame = input.parallelStream().filter(is -> is.getItem() == ModItems.athame).findFirst();
-		if (oldAthame.isPresent()) {
-			oldOutput.parallelStream().filter(is -> is.getItem() == ModItems.athame).findFirst().ifPresent(is -> is.setItemDamage(is.getItemDamage() + 35));
+	@Nonnull
+	public ItemStack modifyOutput(ItemStack originalOutput, NonNullList<ItemStack> input, NBTTagCompound tag) {
+		if (originalOutput.getItem() == ModItems.athame) {
+			Optional<ItemStack> oldBoline = input.parallelStream().filter(is -> is.getItem() == ModItems.athame).findFirst();
+			if (oldBoline.isPresent()) {
+				ItemStack res = oldBoline.get().copy();
+				if (res.attemptDamageItem(50, new Random(), null)) {
+					return ItemStack.EMPTY;
+				}
+				return res;
+			} else {
+				return ItemStack.EMPTY;
+			}
 		}
-		return oldOutput;
+		return originalOutput;
 	}
 
 }

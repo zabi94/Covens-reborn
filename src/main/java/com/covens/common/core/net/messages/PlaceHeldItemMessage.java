@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import zabi.minecraft.minerva.common.mod.Log;
 import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class PlaceHeldItemMessage extends SimpleMessage<PlaceHeldItemMessage> {
@@ -27,6 +28,10 @@ public class PlaceHeldItemMessage extends SimpleMessage<PlaceHeldItemMessage> {
 
 	@Override
 	public IMessage handleMessage(MessageContext context) {
+		if (this.clicked == null) {
+			Log.e("Target position is null!");
+			return null;
+		}
 		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
 			EntityPlayer p = context.getServerHandler().player;
 			if (this.canReplace(p.world) && this.isFaceBelowSolid(p.world)) {

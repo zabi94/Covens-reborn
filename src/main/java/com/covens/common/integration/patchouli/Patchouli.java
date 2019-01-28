@@ -12,6 +12,7 @@ import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -44,7 +45,7 @@ public class Patchouli {
 			if ("covens:rituals".equals(registry)) {
 				AdapterIRitual ritual = AdapterIRitual.REGISTRY.getValue(new ResourceLocation(name));
 				if ("input".equals(type)) {
-					return ritual.getInput();
+					return ritual.getJeiInput().parallelStream().map(l -> Ingredient.fromStacks(listToArray(l))).collect(Collectors.toList());
 				} else if ("output".equals(type)) {
 					return ritual.getOutputRaw().parallelStream().map(is -> Ingredient.fromStacks(is)).collect(Collectors.toList());
 				}
@@ -53,5 +54,9 @@ public class Patchouli {
 			return Lists.newArrayList();
 		}
 		return Lists.newArrayList();
+	}
+	
+	private static ItemStack[] listToArray(List<ItemStack> list) {
+		return list.toArray(new ItemStack[list.size()]);
 	}
 }

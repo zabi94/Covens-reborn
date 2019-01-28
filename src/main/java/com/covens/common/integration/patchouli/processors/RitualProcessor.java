@@ -61,7 +61,7 @@ public class RitualProcessor implements IComponentProcessor {
 	private String getInput(String substring) {
 		try {
 			int index = Integer.parseInt(substring) - 1;
-			return PatchouliAPI.instance.serializeItemStack(this.ritual.getInput().get(index).getMatchingStacks()[0]);
+			return PatchouliAPI.instance.serializeItemStack(this.ritual.getInput().get(index).getCachedStacks().get(0));
 		} catch (Exception e) {
 			return "minecraft:air";
 		}

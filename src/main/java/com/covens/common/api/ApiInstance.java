@@ -27,7 +27,7 @@ import com.covens.common.content.incantation.ModIncantations;
 import com.covens.common.content.infusion.ModInfusions;
 import com.covens.common.content.infusion.capability.InfusionCapability;
 import com.covens.common.content.ritual.AdapterIRitual;
-import com.covens.common.content.ritual.ModRituals;
+import com.covens.common.content.ritual.RitualFactory;
 import com.covens.common.content.spell.Spell;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.content.transformation.vampire.CapabilityVampire;
@@ -162,7 +162,7 @@ public class ApiInstance extends CovensAPI {
 
 	@Override
 	public int getCirclesIntegerForRitual(EnumGlyphType small, EnumGlyphType medium, EnumGlyphType large) {
-		return ModRituals.circles(small, medium, large);
+		return RitualFactory.circles(small, medium, large);
 	}
 
 	@Override
