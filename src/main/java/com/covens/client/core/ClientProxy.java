@@ -19,6 +19,7 @@ import com.covens.client.core.event.WerewolfEventHandler;
 import com.covens.client.core.hud.BloodViewerHUD;
 import com.covens.client.core.hud.EnergyHUD;
 import com.covens.client.core.hud.ExtraBarButtonsHUD;
+import com.covens.client.core.hud.FamiliarHUD;
 import com.covens.client.core.hud.MoonHUD;
 import com.covens.client.core.hud.SelectedActionHUD;
 import com.covens.client.core.hud.VampireBloodBarHUD;
@@ -131,6 +132,7 @@ public class ClientProxy implements ISidedProxy {
 		HudController.registerNewComponent(new SelectedActionHUD());
 		HudController.registerNewComponent(ExtraBarButtonsHUD.INSTANCE);
 		HudController.registerNewComponent(new VampireBloodBarHUD());
+		HudController.registerNewComponent(new FamiliarHUD());
 		MinecraftForge.EVENT_BUS.register(new GirdleOfTheWoodedHUD());
 		MinecraftForge.EVENT_BUS.register(new WerewolfEventHandler());
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());

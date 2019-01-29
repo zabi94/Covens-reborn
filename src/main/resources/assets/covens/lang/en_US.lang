@@ -11,6 +11,7 @@ covens.config.blood_hud=Blood Viewer HUD
 covens.config.moon_hud=Moon Warning HUD
 covens.config.current_action_hud=Selected Ability HUD
 covens.config.client=Client Settings
+covens.config.familiar_hud=Familar HUD
 
 //Actions
 covens.night_vision_vampire=Night Vision
@@ -921,6 +922,8 @@ moon.tooltip.0=You feel weird today
 moon.tooltip.1=Your heart is beating faster, your thoughts are slipping out of control
 moon.tooltip.2=No matter how hard you try, you cannot switch back
 
+covens.hud.open_familiar_gui=Familiars
+
 //Mobs
 entity.owl.name=Owl
 entity.snake.name=Snake
@@ -944,10 +947,6 @@ enchantment.covens.potent_ward.desc=An enchantment for baubles that will reduce 
 enchantment.covens.protection_spirit.desc=An armor enchantment that protects the wearer from spirits.
 enchantment.covens.hex_protection.desc=An armor enchantment that protects the wearer from hexes.
 enchantment.covens.protection_demon.desc=An armor enchantment that protects the wearer from demons.
-
-gui.cvguicfg.pick=§a§l[Click]§r to pick, click again to place
-gui.cvguicfg.orig=§b§l[Alt+Click]§r to reset to the original position
-gui.cvguicfg.hide=§b§l[Shift+Click]§r to hide/show
 
 //Books
 covens.book.rites.name=Book of Shadows

@@ -133,9 +133,9 @@ public class FamiliarEvents {
 			UUID sel = player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
 			if (UUIDs.of(e).equals(sel)) {
 				FamiliarController.sendSelectedFamiliarHome(player);
-				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar = UUIDs.NULL_UUID;
+				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(null);
 			} else {
-				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar = UUIDs.of(e);
+				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(e);
 			}
 		}
 	}

@@ -204,6 +204,10 @@ public final class ModConfig {
 		@Comment("Customize the vampire blood meter HUD positions in the screen")
 		@Config.LangKey("covens.config.vampire_blood_meter")
 		public VampireBloodHUD VAMPIRE_METER_HUD = new VampireBloodHUD();
+		
+		@Comment("Customize the familiar HUD positions in the screen")
+		@Config.LangKey("covens.config.familiar_hud")
+		public FamiliarHUD FAMILIAR_HUD = new FamiliarHUD();
 
 		@Comment("The amount of visual imprecision to give to chalk runes. Use 0 to have them perfectly aligned to the block")
 		@Config.RangeDouble(min = 0d, max = 1d)
@@ -305,6 +309,20 @@ public final class ModConfig {
 			public EnumHudAnchor v_anchor = EnumHudAnchor.START_RELATIVE;
 			@Comment("Defines how big the icon is")
 			public double scale = 1;
+		}
+		
+		public static class FamiliarHUD {
+			@Comment("Should the familiar hud be completely removed?")
+			public boolean deactivate = false;
+
+			@Comment("Horizontal position of the HUD in the screen")
+			public double x = 10;
+			@Comment("Vertical position of the HUD in the screen")
+			public double y = 10;
+			@Comment("Defines how to calculate the x offset")
+			public EnumHudAnchor h_anchor = EnumHudAnchor.END_ABSOLUTE;
+			@Comment("Defines how to calculate the x offset")
+			public EnumHudAnchor v_anchor = EnumHudAnchor.END_ABSOLUTE;
 		}
 	}
 }

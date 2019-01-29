@@ -58,11 +58,13 @@ public class FamiliarController {
 
 	public static void sendSelectedFamiliarTo(EntityPlayer e, Vec3d hitVec) {
 		UUID familiar = e.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
-		EntitySyncHelper.executeOnEntityAvailable(familiar, new FamiliarOrderGoto(new BlockPos(hitVec)));
-		e.sendMessage(new TextComponentTranslation("familiar.command.goto", getSelectedFamiliarName(familiar, e)));
+		if (!familiar.equals(UUIDs.NULL_UUID)) {
+			EntitySyncHelper.executeOnEntityAvailable(familiar, new FamiliarOrderGoto(new BlockPos(hitVec)));
+			e.sendStatusMessage(new TextComponentTranslation("familiar.command.goto", getSelectedFamiliarName(familiar, e)), true);
+		}
 	}
 
 	public static void openFamiliarSelector(EntityPlayer player) {
-		
+		player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(null);
 	}
 }

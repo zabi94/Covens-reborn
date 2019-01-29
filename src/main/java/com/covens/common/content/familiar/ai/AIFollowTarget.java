@@ -61,7 +61,7 @@ public class AIFollowTarget extends FamiliarAIBase {
 					return;
 				}
 			}
-			if (!this.familiar.getLeashed() && !this.familiar.isRiding() && this.familiar.getDistanceSq(this.target) >= 16.0D && !this.petPathfinder.tryMoveToEntityLiving(this.target, 1f)) {
+			if (!this.familiar.getLeashed() && !this.familiar.isRiding() && this.familiar.getDistanceSq(this.target) >= 16.0D && !this.petPathfinder.tryMoveToEntityLiving(this.target, 1.3f)) {
 				if (!this.familiar.getLeashed() && !this.familiar.isRiding()) {
 					if (this.familiar.getDistanceSq(this.target) >= 144.0D) {
 						int i = MathHelper.floor(this.target.posX) - 2;
