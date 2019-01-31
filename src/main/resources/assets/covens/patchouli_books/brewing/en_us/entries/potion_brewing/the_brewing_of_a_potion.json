@@ -1,0 +1,31 @@
+{
+  "name": "The brewing of a potion",
+  "icon": "covens:brew_phial_drink",
+  "category": "potion_brewing",
+  "pages": [
+    {
+      "type": "text",
+      "text": "In ages long past, the brewing of potions was considered a difficult task, as the brews not only needed regular ingredients to manifest an effect, but also special ones that would allow you to create the brew itself. Therefore, the brewing of said potions was costly and limited to the amount of capacity ingredients you were able to muster."
+    },
+    {
+      "type": "text",
+      "text": "Fortunately, the synergies of magic have allowed the requirement of said ingredients to be lifted, thus simplifying the brewing process. $(br2)Should a witch wish to brew a potion, it should firstly have a boiling cauldron, as well as an altar in the nearby vicinity. Once it has both of them, the process starts with the usage of a wart from the depths of the burning hells, which should be thrown into the boiling water."
+    },
+    {
+      "type": "text",
+      "text": "An ingredient should then follow. $(br2)From here, the witch can choose to augment the effect caused by the ingredient, or to add further ingredients. $(br2)In order to do the first, a witch can add redstone to increase the potion duration, glowstone to increase the power level, sagebrush to increase the radius of effect (which would only work on"
+    },
+    {
+      "type": "text",
+      "text": "splash and lingering brews), hellebore to increase the lingering cloud duration. $(br2)Additionally, a brick could be used to prevent the entity effects whilst nether bricks could be used to prevent in world events. $(br2)Finally, dyes can be thrown to change the colour of the brew whilst beetroot can be used to suppress the potion particles. $(br2)In order to add more effects,"
+    },
+    {
+      "type": "text",
+      "text": "one can just add new ingredients. $(br2)Do note that both brew effect modifications and multiple effects can coexist, but only if the ingredients are added in the correct order (that is, the augments you wish to add to the prior ingredient would go first, followed by the next ingredient, and so on and so forth). $(br2)Finally, in order to collect the brew, a witch would use"
+    },
+    {
+      "type": "text",
+      "text": "one of the different vessels used to store them. To do so, however, the cauldron must first sip the necessary magical energy to stabilize the brew ($(italic)so check that you have a nearby altar!$())."
+    }
+  ]
+}

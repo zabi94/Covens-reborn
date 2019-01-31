@@ -1,4 +1,4 @@
-ï»¿//CreativeTab
+//CreativeTab
 itemGroup.covens_plants=covens - Plants
 itemGroup.covens_items=covens - Items
 itemGroup.covens_blocks=covens - Blocks
@@ -952,8 +952,7 @@ enchantment.covens.protection_demon.desc=An armor enchantment that protects the 
 covens.book.rites.name=Book of Shadows
 covens.book.rites.landing=A grimoire, handed from witch to witch for centuries.
 covens.book.brews.name=Almanac of Boiling
-covens.book.brews.landing=Bubble, bubble! Fire burn and caldron bubble.
-
+covens.book.brews.landing=To the common folk, the art of witchcraft is commonly associated with a broom. However, that couldn’t be further from the truth, as every witch knows that the most useful tool at its disposal is the cauldron. This piece of metal might seem an ordinary piece of homeware, but in the hands of a skilled witch it holds a lot of power indeed. 
 //Familiars
 familiar.command.follow=%s is now following %s
 familiar.command.sit.enable=%s is now sitting
