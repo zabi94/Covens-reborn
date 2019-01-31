@@ -47,7 +47,7 @@ public class AIFollowTarget extends FamiliarAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return !this.getCap().getTargetUUID().equals(UUIDs.NULL_UUID) && !this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().getTargetUUID())).isEmpty();
+		return this.getCap().hasOwner() && !this.getCap().getTargetUUID().equals(UUIDs.NULL_UUID) && !this.familiar.world.getEntities(EntityLivingBase.class, e -> !e.isDead && UUIDs.of(e).equals(this.getCap().getTargetUUID())).isEmpty();
 	}
 
 	@Override

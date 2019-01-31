@@ -46,7 +46,7 @@ public class AIGotoPlace extends FamiliarAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return this.getCap().destination != null;
+		return this.getCap().hasOwner() && this.getCap().destination != null;
 	}
 
 	@Override
