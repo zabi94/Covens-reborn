@@ -17,9 +17,6 @@ import com.covens.common.core.util.syncTasks.FamiliarDeath;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.RayTraceResult;
@@ -34,14 +31,11 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
 import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
 import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
 
 @Mod.EventBusSubscriber
 public class FamiliarEvents {
-	
-	public static final UUID FOLLOW_RANGE_UUID = UUID.fromString("9a5dc290-90f1-45b3-bb5c-b6f7fa464686");
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void familiarDeath(LivingDeathEvent evt) {
@@ -69,16 +63,11 @@ public class FamiliarEvents {
 	@SubscribeEvent
 	public static void attachFamiliarAI(EntityJoinWorldEvent evt) {
 		//Don't use the capabilities at this point, they are still not attached
-		if (evt.getEntity() instanceof EntityLiving && CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
+		if (!evt.getWorld().isRemote && evt.getEntity() instanceof EntityLiving && CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
 			EntityLiving entity = (EntityLiving) evt.getEntity();
 			entity.tasks.addTask(2, new AIFollowTarget(entity));
 			entity.tasks.addTask(3, new AIGotoPlace(entity));
 			entity.tasks.addTask(4, new AIFamiliarSit(entity));
-			IAttributeInstance follow = entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE);
-			if (follow != null) {
-				follow.removeModifier(FOLLOW_RANGE_UUID);
-				follow.applyModifier(new AttributeModifier(FOLLOW_RANGE_UUID, "familiar_increase", 10, AttributeModifierModeHelper.SCALE));
-			}
 		}
 	}
 	

@@ -6,13 +6,18 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.nbt.NBTTagCompound;
 import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
 import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
 import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
 
 public class FamiliarFollowEntity extends SyncTask<EntityLivingBase> {
 	
+	public static final UUID FOLLOW_RANGE_UUID = UUID.fromString("9a5dc290-90f1-45b3-bb5c-b6f7fa464686");
 	private UUID familiar;
 	private UUID target;
 	
@@ -33,6 +38,11 @@ public class FamiliarFollowEntity extends SyncTask<EntityLivingBase> {
 		} else {
 			CapabilityFamiliarCreature cap = famEnt.getCapability(CapabilityFamiliarCreature.CAPABILITY, null); 
 			CapabilityFamiliarCreature.setSitting((EntityLiving) famEnt, false);
+			IAttributeInstance follow = famEnt.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE);
+			if (follow != null) {
+				follow.removeModifier(FOLLOW_RANGE_UUID);
+				follow.applyModifier(new AttributeModifier(FOLLOW_RANGE_UUID, "familiar_increase", 10, AttributeModifierModeHelper.SCALE));
+			}
 			cap.target = target;
 			cap.destination = null;
 		}

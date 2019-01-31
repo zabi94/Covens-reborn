@@ -31,7 +31,7 @@ public abstract class CovensAPI {
 	private static CovensAPI INSTANCE;
 	public EnumCreatureAttribute DEMON, SPIRIT;
 	public BiomeDictionary.Type IMMUTABLE;
-
+	
 	public static final void setupAPI(CovensAPI api) {
 		if (INSTANCE == null) {
 			INSTANCE = api;
