@@ -42,6 +42,9 @@ public class BlockGemOre extends BlockMod {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
+		if (meta < 0 || meta >= Gem.values().length) {
+			return this.getDefaultState();
+		}
 		return this.getDefaultState().withProperty(GEM, Gem.values()[meta]);
 	}
 

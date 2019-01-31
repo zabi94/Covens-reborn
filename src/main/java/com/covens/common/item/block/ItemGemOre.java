@@ -34,6 +34,9 @@ public class ItemGemOre extends ItemBlock implements IModelRegister {
 
 	@Override
 	public String getTranslationKey(ItemStack stack) {
+		if (stack.getMetadata() < 0 || stack.getMetadata() >= Gem.values().length) {
+			return super.getTranslationKey();
+		}
 		return super.getTranslationKey() + "_" + Gem.values()[stack.getMetadata()].getName();
 	}
 
