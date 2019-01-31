@@ -66,7 +66,7 @@ public class EntityFlyingBroom extends Entity {
 			if (!source.isDead) {
 				if (broom.getType() == 3) {
 					BlockPos start = broom.getMountPos();
-					if (broom.world.provider.getDimension() == broom.getMountDim()) {
+					if (start == null || broom.world.provider.getDimension() == broom.getMountDim()) {
 						broom.setPositionAndUpdate(start.getX(), start.getY(), start.getZ());
 						source.setPositionAndUpdate(start.getX(), start.getY(), start.getZ());
 					}
