@@ -1,10 +1,10 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/covens-reborn",
   "1.12.2": {
-    "0.0.22": "Familiar tweaks + indicator, new Minerva Lib (1.0.2), huge ritual under-the-hood improvements"
+    "0.0.23": "Fix worlds lagging AF"
   },
   "promos": {
-    "1.12.2-latest": "0.0.22",
-    "1.12.2-recommended": "0.0.22"
+    "1.12.2-latest": "0.0.23",
+    "1.12.2-recommended": "0.0.23"
   }
 }
