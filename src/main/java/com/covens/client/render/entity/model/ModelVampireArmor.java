@@ -52,10 +52,10 @@ public class ModelVampireArmor extends ModelBiped {
 		this.legRight = new ModelRenderer(this, 71, 31);
 		this.legRight.mirror = true;
 		this.legRight.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.legRight.addBox(-2.0F, 0.0F, -2.0F, 4, 8, 4, 0.1F);
+		this.legRight.addBox(-2.0F, 0.0F, -2.0F, 4, 8, 4, 0.261F);
 		this.shoulderRight = new ModelRenderer(this, 28, 56);
 		this.shoulderRight.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.shoulderRight.addBox(-1.5F, -2.5F, -3F, 5, 5, 6, 0.0F);
+		this.shoulderRight.addBox(-1.5F, -2.5F, -3F, 5, 5, 6, 0.15F);
 		ModelHelper.setRotateAngle(this.shoulderRight, 0.0F, 3.141592653589793F, -0.08726646259971647F);
 		this.capeCollarBack1 = new ModelRenderer(this, 52, 60);
 		this.capeCollarBack1.setRotationPoint(-4.0F, 3.0F, 3.0F);
@@ -101,7 +101,7 @@ public class ModelVampireArmor extends ModelBiped {
 		this.setRotateAngle(this.capeBackRight1, -0.05235987755982988F, 0.0F, 0.0F);
 		this.body = new ModelRenderer(this, 39, 31);
 		this.body.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.body.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0.1F);
+		this.body.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0.251F);
 		this.capeBack2 = new ModelRenderer(this, 1, 31);
 		this.capeBack2.setRotationPoint(0.0F, 20.0F, 0.0F);
 		this.capeBack2.addBox(-4.0F, 0.0F, 0.0F, 8, 4, 1, 0.0F);
@@ -115,8 +115,8 @@ public class ModelVampireArmor extends ModelBiped {
 		this.capeCollarLeft1.addBox(-1.0F, -3.0F, 0.0F, 1, 3, 5, 0.0F);
 		this.setRotateAngle(this.capeCollarLeft1, 0.0F, 0.0F, -0.5235987755982988F);
 		this.hat = new ModelRenderer(this, 32, 0);
-		this.hat.setRotationPoint(0.0F, -6.0F, -4.0F);
-		this.hat.addBox(-4.0F, -8.0F, 0.0F, 8, 8, 8, 0.1F);
+		this.hat.setRotationPoint(0.0F, -6.5F, -4.0F);
+		this.hat.addBox(-4.0F, -8.0F, 0.0F, 8, 8, 8, 0.531F);
 		this.setRotateAngle(this.hat, -0.017453292519943295F, 0.0F, 0.0F);
 		this.capeBackRight2 = new ModelRenderer(this, 0, 61);
 		this.capeBackRight2.setRotationPoint(0.0F, 20.0F, 0.0F);
@@ -128,7 +128,7 @@ public class ModelVampireArmor extends ModelBiped {
 		this.setRotateAngle(this.capeCollarLeft2, 0.0F, 0.0F, -0.4363323129985824F);
 		this.shoulderLeft = new ModelRenderer(this, 28, 56);
 		this.shoulderLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.shoulderLeft.addBox(-1.5F, -2.5F, -3F, 5, 5, 6, 0.0F);
+		this.shoulderLeft.addBox(-1.5F, -2.5F, -3F, 5, 5, 6, 0.15F);
 		ModelHelper.setRotateAngle(this.shoulderLeft, 0.0F, 0.0F, 0.08726646259971647F);
 		this.capeCollarBack2 = new ModelRenderer(this, 52, 55);
 		this.capeCollarBack2.setRotationPoint(0.0F, -6.0F, -1.0F);
@@ -136,7 +136,7 @@ public class ModelVampireArmor extends ModelBiped {
 		this.setRotateAngle(this.capeCollarBack2, -0.4363323129985824F, 0.0F, 0.0F);
 		this.legLeft = new ModelRenderer(this, 71, 31);
 		this.legLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.legLeft.addBox(-2.0F, 0.0F, -2.0F, 4, 8, 4, 0.1F);
+		this.legLeft.addBox(-2.0F, 0.0F, -2.0F, 4, 8, 4, 0.261F);
 		this.capeBack1 = new ModelRenderer(this, 1, 8);
 		this.capeBack1.setRotationPoint(0.0F, 0.0F, 2.0F);
 		this.capeBack1.addBox(-4.0F, 0.0F, 0.0F, 8, 20, 1, 1.0F);
@@ -150,10 +150,10 @@ public class ModelVampireArmor extends ModelBiped {
 		this.armLeft = new ModelRenderer(this, 71, 13);
 		this.armLeft.mirror = true;
 		this.armLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.armLeft.addBox(-1.0F, -1.9F, -2.0F, 4, 12, 4, 0.2F);
+		this.armLeft.addBox(-1.0F, -1.9F, -2.0F, 4, 12, 4, 0.251F);
 		this.hatWing = new ModelRenderer(this, 20, 17);
-		this.hatWing.setRotationPoint(0.0F, -0.9391108155250549F, 3.9696435928344727F);
-		this.hatWing.addBox(-5.5F, 0.0F, -5.5F, 11, 1, 11, 0.0F);
+		this.hatWing.setRotationPoint(0.0F, -1.9391108155250549F, 3.9696435928344727F);
+		this.hatWing.addBox(-5.5F, 2.0F, -5.5F, 11, 1, 11, 0.5F);
 		this.setRotateAngle(this.hatWing, 0.05227491439867795F, -0.0024344683732524883F, 0.03490658503988659F);
 		this.capeLeftSide = new ModelRenderer(this, 14, 42);
 		this.capeLeftSide.mirror = true;
@@ -166,7 +166,7 @@ public class ModelVampireArmor extends ModelBiped {
 		this.setRotateAngle(this.capeCollarRight1, 0.0F, 0.0F, 0.5235987755982988F);
 		this.armRight = new ModelRenderer(this, 71, 13);
 		this.armRight.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.armRight.addBox(-3.0F, -1.9F, -2.0F, 4, 12, 4, 0.2F);
+		this.armRight.addBox(-3.0F, -1.9F, -2.0F, 4, 12, 4, 0.251F);
 
 		this.bipedHead = new ModelRenderer(this);
 		this.bipedBody = new ModelRenderer(this);
