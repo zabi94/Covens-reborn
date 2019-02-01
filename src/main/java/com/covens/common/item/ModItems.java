@@ -35,6 +35,7 @@ import com.covens.common.item.food.ItemHoney;
 import com.covens.common.item.food.ItemJuniperBerries;
 import com.covens.common.item.food.ItemMagicSalve;
 import com.covens.common.item.food.ItemYewAril;
+import com.covens.common.item.magic.ItemBell;
 import com.covens.common.item.magic.ItemBroom;
 import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.item.magic.ItemGem;
@@ -229,6 +230,7 @@ public final class ModItems {
 	public static final Item spell_page = null;
 	public static final Item ritual_chalk = null;
 	public static final Item location_stone = null;
+	public static final Item bell = null;
 
 	public static final Item snake_venom = null;
 	public static final Item adders_fork = null;
@@ -261,6 +263,7 @@ public final class ModItems {
 
 		registry.register(new ItemSpellPage(LibItemName.SPELL_PAGE));
 
+		registry.register(new ItemBell());
 		// Misc
 		registry.registerAll(new ItemHoney(), new ItemSalt(), new ItemMod(LibItemName.WAX), new ItemMod(LibItemName.HONEYCOMB), new ItemMod(LibItemName.EMPTY_HONEYCOMB), new ItemMod(LibItemName.MORTAR_AND_PESTLE), new ItemMod(LibItemName.MORTAR_AND_PESTLE_STONE), new ItemBrewDrinkable(), new ItemBrewThrowable(LibItemName.BREW_PHIAL_SPLASH), new ItemBrewThrowable(LibItemName.BREW_PHIAL_LINGER), new ItemMod(LibItemName.EMPTY_BREW_DRINK), new ItemMod(LibItemName.EMPTY_BREW_SPLASH), new ItemMod(LibItemName.EMPTY_BREW_LINGER), new ItemBrewArrow(), new ItemMod(LibItemName.GLASS_JAR), new ItemAthame(), new ItemBoline(), new ItemTaglock(), new ItemMod(LibItemName.NEEDLE_BONE), new ItemMod(LibItemName.WOOL_OF_BAT), new ItemMod(LibItemName.TONGUE_OF_DOG), new ItemMod(LibItemName.WOOD_ASH), new ItemMod(LibItemName.SPECTRAL_DUST), new ItemMod(LibItemName.SILVER_SCALES), new ItemMod(LibItemName.ENVENOMED_FANG), new ItemMod(LibItemName.DIMENSIONAL_SAND), new ItemMod(LibItemName.EQUINE_TAIL), new ItemMod(LibItemName.CATECHU), new ItemMod(LibItemName.OAK_APPLE_GALL), new ItemMod(LibItemName.IRON_GALL_INK), new ItemMod(LibItemName.GOLDEN_THREAD), new ItemMod(LibItemName.COLD_IRON_NUGGET),
 				new ItemMod(LibItemName.OWLETS_WING), new ItemMod(LibItemName.RAVENS_FEATHER), new ItemMod(LibItemName.COLD_IRON_DUST), new ItemMod(LibItemName.COLD_IRON_DUST_SMALL), new ItemMod(LibItemName.REGAL_SILK), new ItemMod(LibItemName.WITCHES_STITCHING), new ItemMod(LibItemName.DIABOLIC_VEIN), new ItemMod(LibItemName.PURE_FILAMENT), new ItemMod(LibItemName.SOUL_STRING), new ItemMod(LibItemName.GRAVEYARD_DUST), new ItemMod(LibItemName.SANGUINE_FABRIC), new ItemMod(LibItemName.PENTACLE), new ItemMod(LibItemName.ADDERS_FORK), new ItemMod(LibItemName.SNAKE_VENOM), new ItemMod(LibItemName.TOE_OF_FROG), new ItemMod(LibItemName.LIZARD_LEG), new ItemMod(LibItemName.EYE_OF_NEWT), new ItemMod(LibItemName.QUARTZ_POWDER), new ItemMod(LibItemName.LAPIS_POWDER), new ItemHeart(), new ItemGrilledWatermelon(), new ItemJuniperBerries(), new ItemYewAril(), new ItemFilledBowl(), new ItemRitualChalk(LibItemName.RITUAL_CHALK), new ItemRemedyTalisman(), new ItemMagicSalve(), new ItemLocationStone(), new ItemTarots(LibItemName.TAROTS), new ItemBroom(LibItemName.BROOM)// ,
