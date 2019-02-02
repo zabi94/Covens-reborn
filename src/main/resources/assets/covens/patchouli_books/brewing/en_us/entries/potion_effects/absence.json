@@ -1,0 +1,16 @@
+{
+  "name": "Absence",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)All effects, good or bad will be removed when an entity is under this effect (do note, however, that it's effects are instant)..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:absence"
+    }
+  ]
+}

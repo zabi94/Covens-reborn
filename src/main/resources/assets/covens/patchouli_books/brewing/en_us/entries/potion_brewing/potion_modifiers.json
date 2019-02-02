@@ -1,0 +1,65 @@
+{
+  "name": "Potion modifiers",
+  "icon": "minecraft:redstone",
+  "sortnum": "3",
+  "category": "potion_brewing",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Just like the ordinary potions brewed by those not skilled on the art, potions brewed by a witch can be altered to manipulate the characteristics of the effects contained within them. $(br2)Furthermore, the magics involved in the process allow witches to further manipulate the effects, through the use of multiple pieces of the same       reagent."
+    },
+    {
+      "type": "text",
+      "text": "Indeed, whereas a regular potion can only accept, for instance, a single piece of redstone to increase the duration of the effect, a potion brewed on a cauldron can take $(o)$(thing)up to five times the amount$(), generally speaking, thus allowing for longer potions. $(br2)As a piece of advice, however, do keep in mind that the usage of modifiers will also increase the magic needed to brew the potion..."
+    },
+    {
+      "type": "spotlight", 
+      "item": "minecraft:redstone",
+      "title": "Redstone",
+      "text": "Just as it happens with regular potions, redstone can be used to extend the effect's duration..."
+    },
+    {
+      "type": "spotlight", 
+      "item": "minecraft:glowstone_dust",
+      "title": "Glowstone dust",
+      "text": "Glowstone dust, as expected, can be used to increase the effect of the potion effect..."
+    },
+    {
+      "type": "spotlight", 
+      "item": "covens:sagebrush",
+      "title": "Sagebrush",
+      "text": "The characteristics of this particular plant increases the radius wherein the effect manifests, but only on splash and lingering potions..."
+    },
+    {
+      "type": "spotlight", 
+      "item": "covens:hellebore",
+      "title": "Hellebore",
+      "text": "This delicate flower, on the other hand, extends the duration of lingering clouds..."
+    },
+    {
+      "type": "spotlight", 
+      "item": "minecraft:brick",
+      "title": "Brick",
+      "text": "The fired clay found in this item $(o)obviously$() makes the resulting potion effect ignore entities, thus not affecting them..."
+    },
+    {
+      "type": "spotlight", 
+      "item": "minecraft:netherbrick",
+      "title": "Nether brick",
+      "text": "Antagonically, the remnant nether energies this brick holds makes it do the opposite, ignoring block effects instead..."
+    },
+    {
+      "type": "spotlight", 
+      "item": "minecraft:beetroot",
+      "title": "Particle supression",
+      "text": "Throwing a beetroot will cause the resulting potion not to apply particle effects. $(br2)$(o)Sneaky..."
+    },
+
+    {
+      "type": "spotlight", 
+      "item": "minecraft:dye",
+      "title": "Potion dyeing",
+      "text": "Lastly, throwing $(o)$(item)any sort of dye$() whilst brewing a potion will make the final potion be coloured as the combination of all thrown dyes."
+    }
+  ]
+}

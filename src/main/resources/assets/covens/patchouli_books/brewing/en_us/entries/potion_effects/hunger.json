@@ -1,0 +1,16 @@
+{
+  "name": "Hunger",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)This potion effect shall drain the affected's life force, making them hunger for food..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "minecraft:strength"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Potion containers",
+  "icon": "covens:empty_brew_drink",
+"sortnum": "2",
+  "category": "potion_brewing",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Magic imbued as they are, witches brew can not be stored in regular vessels. Indeed, a specifically crafted container needs to be used. $(br2)Furthermore, in contrast with other kind of potions, the container is of the upmost importance in a witches brew, as it will determine how the potion will be used..."
+    },
+    {
+      "type": "crafting", 
+      "recipe": "covens:bottle_brew_drink",
+      "title": "Brew phial",
+      "text": "Perhaps the most common of potion containers, these simple phials are used to directly drinking the potion."
+    },
+    {
+      "type": "crafting", 
+      "recipe": "covens:bottle_brew_splash",
+      "title": "Splash phial",
+      "text": "On the other hand, these phials make the potion scatter after the potion phial is thrown. However, whilst this makes the potion effect be applied to more entities at once, it also makes it shorter."
+    },
+    {
+      "type": "crafting", 
+      "recipe": "covens:bottle_brew_linger",
+      "title": "Lingering phial",
+      "text": "These ones, infused with the essences of the dragon's breath, create a lingering cloud that affects entities in an area for a limted amount of time. Just as with the splash brew, the duration of the effect is lessened."
+
+    },
+    {
+      "type": "spotlight", 
+      "item": "minecraft:arrow",
+      "title": "Arrows",
+      "text": "Finally, a potion can also be applied to the tip of an arrow, so that it gets applied to whatever entity it hits. Again, since the potion is spread in several arrows, the duration of the effect is also lessened."
+    }
+  ]
+}

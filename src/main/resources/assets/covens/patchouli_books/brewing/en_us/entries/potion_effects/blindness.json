@@ -1,0 +1,16 @@
+{
+  "name": "Blindness",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)Darkness will shroud the victim's eyes, preventing them from seeing..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "minecraft:blindness"
+    }
+  ]
+}

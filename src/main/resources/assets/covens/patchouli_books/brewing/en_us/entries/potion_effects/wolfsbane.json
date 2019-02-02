@@ -1,0 +1,16 @@
+{
+  "name": "Wolfsbane",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)The properties of the herb used to create this effect have been amplified by the potion, causing it to hurt wolves and werewolves alike..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:wolfsbane"
+    }
+  ]
+}

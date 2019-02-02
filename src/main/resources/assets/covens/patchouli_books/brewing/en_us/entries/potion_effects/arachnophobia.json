@@ -1,0 +1,16 @@
+{
+  "name": "Arachnophobia",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)This potion severely hurts anthropods; Quite useful when facing swarms of spiders..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:bane_arthropods"
+    }
+  ]
+}

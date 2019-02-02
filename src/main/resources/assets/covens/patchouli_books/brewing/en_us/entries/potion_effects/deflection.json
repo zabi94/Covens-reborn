@@ -1,0 +1,16 @@
+{
+  "name": "Deflection",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)This potion creates a mystical aura around the entity that prevents it from being hit by ordinary projectiles..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "minecraft:strength"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Planting",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)The usage of a brown mushroom makes the potion plant nearby seeds in farmland $(o)(which it's not created by this potion effect..). $(br2)$(#68492f)It might plant more than just seeds..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:plant"
+    }
+  ]
+}
