@@ -19,9 +19,18 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 
 	@Override
 	public void setup(IVariableProvider<String> json) {
-		this.p = Potion.getPotionFromResourceLocation(json.get("brew"));
+		String[] potionAlternatives = json.get("brew").split(";");
+		for (String name:potionAlternatives) {
+			Potion tp = Potion.getPotionFromResourceLocation(name);
+			Ingredient ing = CauldronRegistry.getIngredientFromBrew(CauldronRegistry.getBrewFromPotion(tp)).orElse(null);
+			if (ing != null) {
+				brew = ing;
+				this.p = tp;
+				break;
+			}
+		}
 		Objects.requireNonNull(this.p);
-		this.brew = CauldronRegistry.getIngredientFromBrew(CauldronRegistry.getBrewFromPotion(this.p)).orElseThrow(() -> new IllegalArgumentException("Can't find ingredient"));
+		Objects.requireNonNull(this.brew);
 	}
 
 	@Override
