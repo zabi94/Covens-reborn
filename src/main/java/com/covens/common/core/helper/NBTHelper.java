@@ -34,6 +34,10 @@ public final class NBTHelper {
 	public static void setInteger(ItemStack stack, String tag, int i) {
 		fixNBT(stack).setInteger(tag, i);
 	}
+	
+	public static void setLong(ItemStack stack, String tag, long i) {
+		fixNBT(stack).setLong(tag, i);
+	}
 
 	public static void setFloat(ItemStack stack, String tag, float i) {
 		fixNBT(stack).setFloat(tag, i);
@@ -69,6 +73,10 @@ public final class NBTHelper {
 
 	public static boolean getBoolean(ItemStack stack, String tag) {
 		return fixNBT(stack).getBoolean(tag);
+	}
+	
+	public static long getLong(ItemStack stack, String tag) {
+		return fixNBT(stack).getLong(tag);
 	}
 
 	public static String getString(ItemStack stack, String tag) {
