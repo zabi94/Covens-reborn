@@ -130,6 +130,9 @@ idea {
 jar {
     from sourceSets.main.output
     from sourceSets.api.output
+    manifest {
+       attributes('FMLAT': 'extraalchemy_at.cfg')
+   }
 }
 
 task apiJar(type: Jar) {
