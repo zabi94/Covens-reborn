@@ -1,8 +1,9 @@
 package com.covens.common.item.magic;
 
-import java.util.List;
+import java.util.Comparator;
 import java.util.Random;
 
+import com.covens.api.CovensAPI;
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.ModBlocks;
@@ -11,7 +12,9 @@ import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,16 +23,22 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.Tuple;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import zabi.minecraft.minerva.common.mod.Log;
+import zabi.minecraft.minerva.common.utils.BlockStreamHelper;
 
 public class ItemBell extends ItemMod {
 
 	private static final Random pitchRand = new Random();
+	private static final int[] cc = {-1, 0, 1};
 
 	public ItemBell() {
 		super(LibItemName.BELL);
@@ -44,9 +53,14 @@ public class ItemBell extends ItemMod {
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
-		return 100;
+		return 200;
 	}
 
+	@Override
+	public boolean hasEffect(ItemStack stack) {
+		return true;
+	}
+	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		if (worldIn.getTotalWorldTime() - NBTHelper.getLong(playerIn.getHeldItem(handIn), "lastFinished") > 30) {
@@ -72,25 +86,36 @@ public class ItemBell extends ItemMod {
 	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase player) {
 		stack.damageItem(1, player);
 		if (!world.isRemote && checkChalk(world, player)) {
-			Class<?> familiarClass = getEntity(world, player);
-			String result = familiarClass==null?"null":familiarClass.getName();
-			((EntityPlayer) player).sendStatusMessage(new TextComponentString(result), false);
+			Class<? extends Entity> familiarClass = getEntity(world, player);
+			Entity e = EntityRegistry.getEntry(familiarClass).newInstance(world);
+			BlockPos pos = BlockStreamHelper.ofPos(player.getPosition().add(5, 2, 5), player.getPosition().add(-5, -2, -5))
+				.filter(bp -> isTeleportFriendlyBlock(bp, world, e))
+				.sorted((bpa, bpb) -> player.getRNG().nextInt(3)-1)
+				.findFirst().orElse(null);
+			e.setPosition(pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5);
+			world.spawnEntity(e);
+			CovensAPI.getAPI().bindFamiliar(e, (EntityPlayer) player);
 		}
 		NBTHelper.setLong(stack, "lastFinished", world.getTotalWorldTime());
 		return stack;
 	}
+	
+	private static boolean isTeleportFriendlyBlock(BlockPos blockpos, World world, Entity e) {
+		IBlockState iblockstate = world.getBlockState(blockpos);
+		return (iblockstate.getBlockFaceShape(world, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID) && iblockstate.canEntitySpawn(e) && world.isAirBlock(blockpos.up()) && world.isAirBlock(blockpos.up(2));
+	}
 
-	private Class<?> getEntity(World world, EntityLivingBase player) {
-		List<SpawnListEntry> list = world.getBiome(player.getPosition()).getSpawnableList(EnumCreatureType.CREATURE);
-		if (!list.isEmpty()) {
-			return list.get(0).entityClass;
-//			list.stream().filter(p -> p.entityClass)
-		}
-		return null;
+	private Class<? extends Entity> getEntity(World world, EntityLivingBase player) {
+			return world.getBiome(player.getPosition()).getSpawnableList(EnumCreatureType.CREATURE).stream()
+					.filter(e -> CovensAPI.getAPI().isValidFamiliar(EntityRegistry.getEntry(e.entityClass).newInstance(world)))
+					.map(e -> new Tuple<SpawnListEntry, Integer>(e, (Integer) (new Random()).nextInt(100 * e.itemWeight)))
+					.peek(t -> Log.i("Entity "+t.getFirst().entityClass.getName()+" has sortnum "+t.getSecond()))
+					.sorted(Comparator.comparingInt(t -> t.getSecond()))
+					.map(t -> t.getFirst().entityClass)
+					.findFirst().orElse(null);
 	}
 
 	private boolean checkChalk(World world, EntityLivingBase player) {
-		int[] cc = {-1, 0, 1};
 		for (int a:cc) {
 			for (int b:cc) {
 				if (a!=0 && b!=0) {
