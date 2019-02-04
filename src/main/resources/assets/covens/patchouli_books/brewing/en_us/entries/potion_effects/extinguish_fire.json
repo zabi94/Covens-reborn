@@ -1,0 +1,16 @@
+{
+  "name": "Extinguish fire",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)Simple yet effective, this brew will put off any fires it comes in contact with. At least those of natural origins... $(br2)$(o)What's this water you talk about? Nonsense..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:extinguish_fire"
+    }
+  ]
+}

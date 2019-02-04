@@ -1,0 +1,16 @@
+{
+  "name": "Fertilize",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)Infused with a touch of life essence allows the potion to enhance vegetal life around it, growing plantlife wherever this potion lands."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:fertilize"
+    }
+  ]
+}

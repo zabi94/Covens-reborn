@@ -1,0 +1,16 @@
+{
+  "name": "Demon's bane",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)Whilst not particularly effective against the general beasts that roam around this world of ours, this particular brew hurts demonic entites greatly."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:demons_bane"
+    }
+  ]
+}

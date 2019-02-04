@@ -1,0 +1,16 @@
+{
+  "name": "Corruption",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)This foul brew corrupts the entity that's affected by it's effects, removing any and all the beneficial effects the entity might have had..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:corruption"
+    }
+  ]
+}

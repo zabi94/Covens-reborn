@@ -1,0 +1,16 @@
+{
+  "name": "Projectile ward",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)Being under the influence of this brew renders entities imprevious to projectile damage; At least, to a degree..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:projectile_resistance"
+    }
+  ]
+}

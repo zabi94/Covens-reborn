@@ -1,0 +1,16 @@
+{
+  "name": "Ender inhibition",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B)The effects of this potion are not noticable until the entity suffering it tries to teleport. Woe will emerge when it finds out it can no longer teleport... $(br2)$(o)Dire's delight..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:ender_inhibition"
+    }
+  ]
+}

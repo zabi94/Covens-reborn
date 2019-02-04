@@ -1,0 +1,16 @@
+{
+  "name": "Disrobing",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#835C3B) This particular potion causes the vicitm to become rather slippery. So much so that their very garments seem to squeeze to the ground $(br2)$(o)A dragon dies in the distance..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:disrobing"
+    }
+  ]
+}

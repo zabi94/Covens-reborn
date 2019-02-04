@@ -1,16 +1,16 @@
 {
-  "name": "Hunger",
+  "name": "Cursed leaps",
   "icon": "covens:brew_phial_drink",
   "sortnum": "4",
   "category": "potion_effects",
   "pages": [
     {
       "type": "text",
-      "text": "$(#835C3B)This potion effect shall drain the affected's life force, making them hunger for food..."
+      "text": "$(#835C3B)Being under the influence of this brew hinders the affected's ability to jump."
     },
     {
       "type": "covens:brew_recipe", 
-      "brew": "minecraft:hunger"
+      "brew": "covens:cursed_leaping"
     }
   ]
 }

@@ -597,8 +597,8 @@ effect.salted_earth.desc=Destroys farmland and renders it useless.
 effect.absence=Absence
 effect.absence.desc=Removes all brew effects from a player.
 
-effect.bulletproof=Bulletproof
-effect.bulletproof.desc=Negates damage from projectiles.
+effect.projectile_resistance=Projectile ward
+effect.projectile_resistance.desc=Negates damage from projectiles.
 
 effect.disrobing=Disrobing
 effect.disrobing.desc=Has a chance of knocking a piece of armor off of a target
