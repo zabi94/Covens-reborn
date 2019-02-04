@@ -1,6 +1,7 @@
 package com.covens.api.ritual;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -12,6 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IRitual {
 
@@ -137,6 +140,11 @@ public interface IRitual {
 	 */
 	default boolean isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
 		return true;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	default void onRandomDisplayTick(World world, BlockPos mainGlyphPos, BlockPos effectivePos, Random rng) {
+		//Override
 	}
 
 }

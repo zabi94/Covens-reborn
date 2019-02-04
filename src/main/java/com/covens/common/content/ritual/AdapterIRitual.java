@@ -1,6 +1,7 @@
 package com.covens.common.content.ritual;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
@@ -21,6 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -112,6 +115,11 @@ public class AdapterIRitual implements IForgeRegistryEntry<AdapterIRitual> {
 			}
 		}
 		return circles;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void spawnParticles(World world, BlockPos glyphPos, BlockPos effectivePos, Random rng) {
+		this.ritual.onRandomDisplayTick(world, glyphPos, effectivePos, rng);
 	}
 
 	public int getCircles() {

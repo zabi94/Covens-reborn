@@ -199,6 +199,7 @@ public class BlockCircleGlyph extends BlockMod implements ITileEntityProvider {
 		}
 		TileEntityGlyph te = (TileEntityGlyph) worldIn.getTileEntity(pos);
 		if ((te != null) && te.hasRunningRitual()) {
+			te.spawnParticles();
 			double spreadX = rand.nextGaussian() * 0.4;
 			double spreadZ = rand.nextGaussian() * 0.4;
 			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleEndRod(worldIn, d0 + spreadX, d1, d2 + spreadZ, 0, 0.02 + (0.1 * rand.nextDouble()), 0));

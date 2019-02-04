@@ -15,6 +15,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -74,6 +75,16 @@ public class RitualFlames implements IRitual {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public void onRandomDisplayTick(World world, BlockPos mainGlyphPos, BlockPos ep, Random rng) {
+		for (int i=0; i< 30; i++) {
+			double sx = ep.getX() + 0.5 + rng.nextGaussian()*2;
+			double sy = ep.getY() + rng.nextFloat() * 0.5;
+			double sz = ep.getZ() + 0.5 + rng.nextGaussian()*2;
+			world.spawnParticle(EnumParticleTypes.FLAME, sx, sy, sz, 0.02*rng.nextFloat(), 0.1*rng.nextFloat(), 0.02*rng.nextFloat());
+		}
 	}
 
 }
