@@ -36,7 +36,7 @@ public class CommandFamilarAction extends HotbarAction {
 				return super.getIconIndexY(); //Select familiar
 			}
 		}
-		if (selected.equals(UUIDs.NULL_UUID)) {
+		if (UUIDs.NULL_UUID.equals(selected)) {
 			return super.getIconIndexY() + 1; //Nothing
 		}
 		RayTraceResult rt = RayTraceHelper.rayTracePlayerSight(Minecraft.getMinecraft().player, 32, true);
