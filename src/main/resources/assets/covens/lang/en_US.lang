@@ -202,7 +202,7 @@ item.lizard_leg.name=Lizard's Leg
 item.eye_of_newt.name=Eye of Newt
 item.juniper_berries.name=Juniper Berries
 item.yew_aril.name=Yew Aril
-
+item.bell.name=Silver Bell
 
 //fumes
 item.fume.unfired_jar.name=Unfired Clay Jar
@@ -952,7 +952,9 @@ enchantment.covens.protection_demon.desc=An armor enchantment that protects the 
 covens.book.rites.name=Book of Shadows
 covens.book.rites.landing=A grimoire, handed from witch to witch for centuries.
 covens.book.brews.name=Almanac of Boiling
-covens.book.brews.landing=The art of witchcraft is commonly associated with a broom. However, that couldn't be further from the truth, as every witch knows that the most useful tool at its disposal is the cauldron. This metal container might seem an ordinary piece of homeware, but in the hands of a skilled witch it is an essential instrument. 
+covens.book.brews.landing=The art of witchcraft is commonly associated with a broom. However, that couldn't be further from the truth, as every witch knows that the most useful tool at its disposal is the cauldron. This metal container might seem an ordinary piece of homeware, but in the hands of a skilled witch it is an essential instrument.
+covens.brew.cost=%d magical power
+ 
 //Familiars
 familiar.command.follow=%s is now following %s
 familiar.command.sit.enable=%s is now sitting
