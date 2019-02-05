@@ -186,8 +186,8 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 				this.cooldown = 0;
 				this.ritual = null;
 				this.runningPos = null;
-				this.world.notifyBlockUpdate(this.getPos(), this.world.getBlockState(this.getPos()), this.world.getBlockState(this.getPos()), 3);
 				this.markDirty();
+				syncToClient();
 				return;
 			}
 			if (hasPowerToUpdate) {
@@ -257,8 +257,8 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 						// TODO get a better sound
 						this.world.playSound(null, this.pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.7f, 0.7f);
 						player.sendStatusMessage(new TextComponentTranslation("ritual." + rit.getRegistryName().toString().replace(':', '.') + ".name"), true);
-						this.world.notifyBlockUpdate(this.getPos(), this.world.getBlockState(this.getPos()), this.world.getBlockState(this.getPos()), 3);
 						this.markDirty();
+						this.syncToClient();
 						return;
 					}
 					player.sendStatusMessage(new TextComponentTranslation("ritual.failure.power"), true);
@@ -371,8 +371,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 			this.ritual = null;
 			this.ritualData = null;
 			this.runningPos = null;
-			IBlockState glyph = this.world.getBlockState(this.pos);
-			this.world.notifyBlockUpdate(this.pos, glyph, glyph, 3);
+			syncToClient();
 			this.markDirty();
 		}
 	}
