@@ -48,7 +48,8 @@ public class DefaultMPContainer implements IMagicPowerContainer {
 	@Override
 	public void setAmount(int newAmount) {
 		if (newAmount > this.getMaxAmount()) {
-			throw new MPManipulationException(String.format("The amount set (%d) is greater than the maximum amount (%d)", newAmount, this.getMaxAmount()));
+			this.amount = getMaxAmount();
+			return;
 		}
 		if (newAmount < 0) {
 			throw new MPManipulationException("The amount must be 0 or greater");
