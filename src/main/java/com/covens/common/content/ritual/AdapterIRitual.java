@@ -95,7 +95,6 @@ public class AdapterIRitual implements IForgeRegistryEntry<AdapterIRitual> {
 	}
 
 	public boolean isValidInput(List<ItemStack> ground, boolean circles) {
-		
 		List<InputCounter> counters = input.parallelStream().map(ni -> ni.getCounter()).collect(Collectors.toList());
 		for (ItemStack is:ground) {
 			boolean found = false;

@@ -217,7 +217,11 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 		List<EntityItem> itemsOnGround = this.getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.getPos()).grow(3, 0, 3));
 		List<BlockPos> placedOnGround = BlockStreamHelper.ofPos(this.getPos().add(3, 0, 3), this.getPos().add(-3, 0, -3)).filter(t -> (this.world.getTileEntity(t) instanceof TileEntityPlacedItem)).collect(Collectors.toList());
 		ArrayList<ItemStack> recipe = new ArrayList<>();
-		itemsOnGround.stream().map(i -> i.getItem()).forEach(is -> recipe.add(is));
+		itemsOnGround.stream().map(i -> i.getItem().copy()).forEach(is -> {
+			while (!is.isEmpty()) {
+				recipe.add(is.splitStack(1));
+			}
+		});
 		placedOnGround.stream().map(t -> (TileEntityPlacedItem) this.world.getTileEntity(t)).forEach(te -> recipe.add(te.getItem()));
 
 		for (AdapterIRitual rit : AdapterIRitual.REGISTRY) { // Check every ritual
