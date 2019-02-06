@@ -1,0 +1,16 @@
+{
+  "name": "Snow trail",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)This brew was created in case you where ever envious of the snow golem's ability to create snow under its feet$(br2)$(o)$(#68492f)Why build a snowman when you can become one?."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:snow_trail"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Outcast's shame",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)Illagers and their ilk find this potion rather damaging..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:outcasts_shame"
+    }
+  ]
+}

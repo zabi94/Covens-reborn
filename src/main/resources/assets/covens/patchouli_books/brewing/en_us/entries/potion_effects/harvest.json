@@ -1,0 +1,16 @@
+{
+  "name": "Harvest",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)This potion conveniently harvest plants wherever it lands. $(#a87850)$(br2)$(o)You reap what you sow..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:harvest"
+    }
+  ]
+}

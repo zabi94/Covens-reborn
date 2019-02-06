@@ -1,0 +1,16 @@
+{
+  "name": "Path of the deep",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Whomever drinks this brew will find itself much more nimble in water, having it's swim speed increased. $(br2)$(o)$(#68492f)Gillyweed, you say?"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:path_of_the_deep"
+    }
+  ]
+}

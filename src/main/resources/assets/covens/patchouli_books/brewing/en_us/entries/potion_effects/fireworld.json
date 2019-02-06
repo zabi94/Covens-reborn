@@ -1,0 +1,16 @@
+{
+  "name": "Fireworld",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)The magics of this potion taint the world around them, twisting the very essence of the blocks it comes in contact with, making it more... fiery...$(br2)$(o)$(#68492f)Hell on earth..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:fireworld"
+    }
+  ]
+}

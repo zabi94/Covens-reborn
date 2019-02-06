@@ -1,0 +1,16 @@
+{
+  "name": "Grace",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)An echo from the future, this particular beverage seems to stop your fall, to a degree. $(br2)$(o)$(#68492f)Falling with style..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:grace"
+    }
+  ]
+}

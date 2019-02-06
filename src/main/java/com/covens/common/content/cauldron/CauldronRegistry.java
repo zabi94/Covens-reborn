@@ -288,7 +288,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.mending, Ingredient.fromItem(Items.GOLDEN_APPLE));
 		registerCombinedBrewEffect(ModPotions.flower_growth, Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_FLOWER)));
 		registerCombinedBrewEffect(ModPotions.harvest, Ingredient.fromItem(Items.APPLE));
-		registerCombinedBrewEffect(ModPotions.holy_water, Ingredient.fromItem(ModItems.white_sage));
+		registerCombinedBrewEffect(ModPotions.smite, Ingredient.fromItem(ModItems.white_sage));
 		registerCombinedBrewEffect(ModPotions.ice_world, Ingredient.fromItem(ModItems.mint));
 		registerCombinedBrewEffect(ModPotions.outcasts_shame, fumeReekOfDeath);
 		registerCombinedBrewEffect(ModPotions.infestation, Ingredient.fromItem(Item.getItemFromBlock(Blocks.MYCELIUM)));
@@ -312,7 +312,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.power_drain, Ingredient.fromItem(ModItems.adders_fork));
 		registerCombinedBrewEffect(ModPotions.power_dampening, Ingredient.fromItem(ModItems.graveyard_dust));
 		registerCombinedBrewEffect(ModPotions.power_boost, Ingredient.fromItem(ModItems.juniper_berries));
-		registerCombinedBrewEffect(ModPotions.holy_water, Ingredient.fromItem(ModItems.garlic));
+		registerCombinedBrewEffect(ModPotions.smite, Ingredient.fromItem(ModItems.garlic));
 		registerCombinedBrewEffect(ModPotions.mowing, new CompoundIngredient(Arrays.asList(Ingredient.fromItem(Item.getItemFromBlock(Blocks.LEAVES)), Ingredient.fromItem(Item.getItemFromBlock(Blocks.LEAVES2)), new OreIngredient("leaves"))) {
 		});
 	}

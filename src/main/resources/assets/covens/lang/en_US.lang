@@ -507,8 +507,8 @@ effect.extinguish_fire.desc=Puts out any fires on you.
 effect.mars_water=Water of Mars
 effect.mars_water.desc=Inflicts nasty debuffs on the target.
 
-effect.holy_water=Holy Water
-effect.holy_water.desc=Damages undead, spirits and demons, but has no effect on the living.
+effect.smite=Smite
+effect.smite.desc=Damages undead, spirits and demons, but has no effect on the living.
 
 effect.volatility=Volatility
 effect.volatility.desc=Makes you explode upon being hit.

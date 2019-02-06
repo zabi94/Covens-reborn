@@ -1,0 +1,16 @@
+{
+  "name": "Freezing",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Cold to the touch, this potion encases the victims in pure ice... $(br2)$(o)$(#68492f)Chill out, will ya?"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:plant"
+    }
+  ]
+}

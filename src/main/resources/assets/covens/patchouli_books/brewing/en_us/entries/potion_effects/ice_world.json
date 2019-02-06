@@ -1,0 +1,16 @@
+{
+  "name": "Ice world",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)Ice and snow will cover whatever comes in contact with this brew, turning it into a chilly winterland... $(br2)$(o)$(#a87850)Let it go, let it go..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:ice_world"
+    }
+  ]
+}

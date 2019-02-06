@@ -1,0 +1,16 @@
+{
+  "name": "Flower growth",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)A gardener's delight, this potion makes all sort of flowers sprout...$(br2)$(o)$(#68492f)Flower power!"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:grow_flowers"
+    }
+  ]
+}

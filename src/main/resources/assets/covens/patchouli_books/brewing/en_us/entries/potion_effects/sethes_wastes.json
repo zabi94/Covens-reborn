@@ -1,0 +1,16 @@
+{
+  "name": "Sethe's wastes",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Upon contact with this potion, what once was made of regular sandstone will instead be made of red sandstone."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:setehs_wastes"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Infestation",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)Combined with the magics of the brew, the spores found within thrive with ease, growing mycelium in any dirt they find... $(br2)$(#a87850)$(o)You are left to wonder how it will affect the living..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:infestation"
+    }
+  ]
+}

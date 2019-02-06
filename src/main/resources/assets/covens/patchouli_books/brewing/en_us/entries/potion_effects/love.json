@@ -1,0 +1,16 @@
+{
+  "name": "Love",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)The scent of this brew seems to put animals in a particular mood wherein they seem to reproduce...$(br2)$(o)$(#68492f)Can you feel, the love tonight!"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:love"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Ozymandias",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)The sands of time seem to shimmer in this brew, as it literally turns what was once green to sand and decay. $(br2)$(o)$(#68492f)Of that colossal wreck, boundless and bare, the lone and level sands stretch far away"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:ozymandias"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Pulverize",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)What is this 'pulverizer' you speak of? No child, I rather use this potion... (basically, it turns rock to gravel and gravel to sand) $(br2)$(o)$(#68492f)In the end, everything crumbles to dust..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:pulverize"
+    }
+  ]
+}

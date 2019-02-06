@@ -1,0 +1,16 @@
+{
+  "name": "Shell armor",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Through the use of magicks of various kinds, this potion covers you on seashells, which on turn hurts whomever tries to attack you$(br2)$(o)$(#68492f)Breeze reminds you of the sea..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:shell_armor"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Smite",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)Something about this brew seems to hurt the undead, ghosts and demons, whilst leaving other creatures unharmed... Maybe it's the smell..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:smite"
+    }
+  ]
+}

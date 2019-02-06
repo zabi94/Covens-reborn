@@ -1,0 +1,16 @@
+{
+  "name": "Sinking",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Under the effect of this potion entities seem heavier in water, doomed to sink and anguish in the depths of the sea...$(br2)$(o)$(#68492f)Hey, look... A ship!"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:sinking"
+    }
+  ]
+}

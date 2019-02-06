@@ -1,0 +1,16 @@
+{
+  "name": "Salted earth",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)You could just throw the salt directly, but using this potion seems more stylish when trying to render farmland useless...$(br2)$(o)$(#68492f)Why so salty?"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:salted_earth"
+    }
+  ]
+}

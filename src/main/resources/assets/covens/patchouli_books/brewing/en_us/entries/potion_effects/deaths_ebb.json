@@ -1,0 +1,16 @@
+{
+  "name": "Death's ebb",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Who knew that a simple potion could raise zombies? $(br2)$(o)$(#68492f)Hey! that brain it's not yours to eat!"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:deaths_ebb"
+    }
+  ]
+}

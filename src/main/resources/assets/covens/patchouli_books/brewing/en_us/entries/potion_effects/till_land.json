@@ -1,0 +1,16 @@
+{
+  "name": "Till land",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)This brew is quite straight forward, making the land fertile and suitable to grow plants...$(br2)$(o)$(#68492f)You are a witch... witches don't use hoes."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:till_land"
+    }
+  ]
+}

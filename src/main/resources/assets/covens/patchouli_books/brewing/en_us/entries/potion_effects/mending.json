@@ -1,0 +1,16 @@
+{
+  "name": "Mending",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Quite the useful potion, this beverage grants may grant you the upper hand on a fight, boosting the entity affected by it. $(br2)$(#68492f)Srangely enough, it also turns dirt and mycelium into grass"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:mending"
+    }
+  ]
+}

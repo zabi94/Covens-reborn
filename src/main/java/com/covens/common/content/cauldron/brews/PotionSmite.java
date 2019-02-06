@@ -4,10 +4,10 @@ import com.covens.common.core.helper.MobHelper;
 
 import net.minecraft.entity.EntityLivingBase;
 
-public class PotionHolyWater extends GenericBrewDamageVS {
+public class PotionSmite extends GenericBrewDamageVS {
 
-	public PotionHolyWater() {
-		super("holy_water", 0x8DA399);
+	public PotionSmite() {
+		super("smite", 0x8DA399);
 	}
 
 	@Override

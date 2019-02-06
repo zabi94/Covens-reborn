@@ -1,0 +1,16 @@
+{
+  "name": "Rotting",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)We are all destined to rot... With this brew, the process is just speed up a little. $(br2)$(o)$(#68492f)All things that have form eventually decay."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:rotting"
+    }
+  ]
+}

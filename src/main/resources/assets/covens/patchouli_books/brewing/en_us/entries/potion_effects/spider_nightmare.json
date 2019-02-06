@@ -1,0 +1,16 @@
+{
+  "name": "Spider nightmare",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)The scent of this potion, or rather, its lack thereof seems to attrack spiders, that attack the victim viciously when this potion runs out...$(br2)$(o)$(#68492f)Its silvery threads are closing in around you..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:spider_nightmare"
+    }
+  ]
+}

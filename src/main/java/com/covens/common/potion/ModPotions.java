@@ -16,7 +16,7 @@ import com.covens.common.content.cauldron.brews.PotionFrostbite;
 import com.covens.common.content.cauldron.brews.PotionGrace;
 import com.covens.common.content.cauldron.brews.PotionGrowFlowers;
 import com.covens.common.content.cauldron.brews.PotionHarvest;
-import com.covens.common.content.cauldron.brews.PotionHolyWater;
+import com.covens.common.content.cauldron.brews.PotionSmite;
 import com.covens.common.content.cauldron.brews.PotionIceWorld;
 import com.covens.common.content.cauldron.brews.PotionInfestation;
 import com.covens.common.content.cauldron.brews.PotionLove;
@@ -60,7 +60,7 @@ public class ModPotions {
 	// Also brews
 	public static Potion wolfsbane, arrow_deflect, absence, plant, bane_arthropods, corruption, cursed_leaping, demons_bane;
 	public static Potion projectile_resistance, disrobing, ender_inhibition, extinguish_fires, fertilize, fireworld, grace;
-	public static Potion mending, flower_growth, harvest, holy_water, ice_world, outcasts_shame, infestation, ozymandias;
+	public static Potion mending, flower_growth, harvest, smite, ice_world, outcasts_shame, infestation, ozymandias;
 	public static Potion purification, path_of_the_deep, prune_leaves, rotting, setehs_wastes, salted_earth, shell_armor;
 	public static Potion till_land, snow_trail, spider_nightmare, volatility, pulverize, mowing, love, revealing;
 	public static Potion deaths_ebb, power_boon, power_boost, power_drain, power_dampening;
@@ -93,7 +93,7 @@ public class ModPotions {
 		mending = new PotionMending();
 		flower_growth = new PotionGrowFlowers();
 		harvest = new PotionHarvest();
-		holy_water = new PotionHolyWater();
+		smite = new PotionSmite();
 		ice_world = new PotionIceWorld();
 		outcasts_shame = new PotionOutcastsShame();
 		infestation = new PotionInfestation();
@@ -126,7 +126,7 @@ public class ModPotions {
 				bane_arthropods, corruption, cursed_leaping, demons_bane, //
 				projectile_resistance, disrobing, ender_inhibition, extinguish_fires, //
 				fertilize, freezing, fireworld, grace, mending, flower_growth, //
-				harvest, holy_water, ice_world, outcasts_shame, infestation, ozymandias, //
+				harvest, smite, ice_world, outcasts_shame, infestation, ozymandias, //
 				purification, path_of_the_deep, prune_leaves, rotting, setehs_wastes, //
 				salted_earth, shell_armor, till_land, sinking, snow_trail, spider_nightmare, //
 				volatility, pulverize, mowing, sun_ward, love, revealing, //

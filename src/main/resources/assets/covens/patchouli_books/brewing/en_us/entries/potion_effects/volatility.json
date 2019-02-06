@@ -1,0 +1,16 @@
+{
+  "name": "Volatilty",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Being hit is not advisable when under the influence of this potion, unless, of course, you want to explode... $(br2)$(o)$(#68492f)Not only creepers go boom..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:volatility"
+    }
+  ]
+}

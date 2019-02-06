@@ -1,0 +1,16 @@
+{
+  "name": "Mowing",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#68492f)Sometimes grass is annoying...Luckily, you have this brew. $(br2)$(o)$(#68492f)Horn of the what, now?."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:till_land"
+    }
+  ]
+}
