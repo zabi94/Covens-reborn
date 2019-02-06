@@ -73,7 +73,7 @@ public class ExtraBarButtonsHUD extends HudComponent {
 	private boolean isInExtraBar = false;
 
 	private ExtraBarButtonsHUD() {
-		super(70, 16);
+		super(70, 16, "covens.hud.actionbar.title", "covens.hud.actionbar.description");
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

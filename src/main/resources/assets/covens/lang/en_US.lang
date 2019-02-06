@@ -931,6 +931,22 @@ entity.raven.name=Raven
 entity.toad.name=Toad
 entity.lizard.name=Lizard
 
+// HUD Components
+covens.hud.bloodviewer.title=Entity Blood
+covens.hud.bloodviewer.description=Shows how much blood the pointed entity has
+covens.hud.energy.title=Energy
+covens.hud.energy.description=A representation of the internal MP of your player
+covens.hud.actionbar.title=Action Bar
+covens.hud.actionbar.description=Use shift, the hotkey or the immediate scroll config option to access these functions
+covens.hud.familiar.title=Chosen Familiar
+covens.hud.familiar.description=Shows the name and health of the selected familiar. Click to open the familiar GUI
+covens.hud.moon.title=Moon phase
+covens.hud.moon.description=A warning for werewolves: full moon incoming
+covens.hud.selected_action.title=Currently selected actionbar action
+covens.hud.selected_action.description=Right clicking will trigger this action
+covens.hud.vampire_blood.title=Vampire blood
+covens.hud.vampire_blood.description=How much blood is currently available to you
+
 //Enchantments
 enchantment.extra_mp=Natural Attuning
 enchantment.protection_spirit=Spirit Protection

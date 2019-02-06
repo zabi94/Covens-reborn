@@ -23,7 +23,7 @@ public class BloodViewerHUD extends HudComponent {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(LibMod.MOD_ID, "textures/gui/blood_droplet.png");
 
 	public BloodViewerHUD() {
-		super(10, 14);
+		super(10, 14, "covens.hud.bloodviewer.title", "covens.hud.bloodviewer.description");
 	}
 
 	@Override

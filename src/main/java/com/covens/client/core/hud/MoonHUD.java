@@ -24,7 +24,7 @@ public class MoonHUD extends HudComponent {
 	private static final ResourceLocation MOON = new ResourceLocation(LibMod.MOD_ID, "textures/gui/moon_warning.png");
 
 	public MoonHUD() {
-		super(24, 24);
+		super(24, 24, "covens.hud.moon.title", "covens.hud.moon.description");
 	}
 
 	@Override

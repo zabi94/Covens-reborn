@@ -17,7 +17,7 @@ public class FamiliarHUD extends HudComponent {
 	private static final ResourceLocation ICON = new ResourceLocation(LibMod.MOD_ID, "textures/gui/familiar_icon.png");
 
 	public FamiliarHUD() {
-		super(64, 32);
+		super(64, 32, "covens.hud.familiar.title", "covens.hud.familiar.description");
 	}
 
 	@Override

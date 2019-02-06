@@ -30,7 +30,7 @@ public class VampireBloodBarHUD extends HudComponent {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(LibMod.MOD_ID, "textures/gui/blood_meter.png");
 
 	public VampireBloodBarHUD() {
-		super(80, 8);
+		super(80, 8, "covens.hud.vampire_blood.title", "covens.hud.vampire_blood.description");
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

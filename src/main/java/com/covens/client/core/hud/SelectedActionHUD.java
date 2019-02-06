@@ -15,7 +15,7 @@ import zabi.minecraft.minerva.client.hud.HudComponent;
 public class SelectedActionHUD extends HudComponent {
 
 	public SelectedActionHUD() {
-		super(32, 32);
+		super(32, 32, "covens.hud.selected_action.title", "covens.hud.selected_action.description");
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public class EnergyHUD extends HudComponent {
 									// between 2 pulsation
 
 	public EnergyHUD() {
-		super(25, 102);
+		super(25, 102, "covens.hud.energy.title", "covens.hud.energy.title");
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
