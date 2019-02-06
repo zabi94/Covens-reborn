@@ -16,6 +16,7 @@ import com.covens.api.spell.ISpell;
 import com.covens.api.transformation.ITransformation;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -119,9 +120,9 @@ public abstract class CovensAPI {
 
 	public abstract boolean isValidFamiliar(Entity entity);
 	
-	public abstract boolean bindFamiliar(Entity familiar, EntityPlayer player);
+	public abstract boolean bindFamiliar(EntityLiving familiar, EntityPlayer player);
 
-	public abstract void unbindFamiliar(Entity familiar);
+	public abstract void unbindFamiliar(EntityLiving familiar);
 	
 	public abstract void unbindFamiliar(UUID entity, UUID player);
 }

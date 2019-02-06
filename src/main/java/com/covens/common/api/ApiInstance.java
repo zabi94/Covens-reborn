@@ -23,6 +23,7 @@ import com.covens.common.Covens;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.content.crystalBall.Fortune;
+import com.covens.common.content.familiar.FamiliarController;
 import com.covens.common.content.incantation.ModIncantations;
 import com.covens.common.content.infusion.ModInfusions;
 import com.covens.common.content.infusion.capability.InfusionCapability;
@@ -46,6 +47,7 @@ import com.covens.common.crafting.SpinningThreadRecipe;
 import com.covens.common.potion.ModPotions;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -232,7 +234,7 @@ public class ApiInstance extends CovensAPI {
 	}
 
 	@Override
-	public boolean bindFamiliar(Entity familiar, EntityPlayer player) {
+	public boolean bindFamiliar(EntityLiving familiar, EntityPlayer player) {
 		if (isValidFamiliar(familiar)) {
 			if (familiar == null || player == null) {
 				throw new IllegalArgumentException("You can't bind a familiar if the entity or the player are null");
@@ -250,6 +252,7 @@ public class ApiInstance extends CovensAPI {
 				CovensAPI.getAPI().removeMPExpansion(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
 				CovensAPI.getAPI().expandPlayerMP(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
 				HotbarAction.refreshActions(player, player.world);
+				FamiliarController.setupFamiliarAI(familiar);
 				player.sendStatusMessage(new TextComponentString("You now have "+player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount+" familiars"), true);
 				return true;
 			} else {
@@ -271,7 +274,7 @@ public class ApiInstance extends CovensAPI {
 	}
 	
 	@Override
-	public void unbindFamiliar(Entity familiar) {
+	public void unbindFamiliar(EntityLiving familiar) {
 		if (isValidFamiliar(familiar)) {
 			unbindFamiliar(familiar.getPersistentID(), familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner);
 		}

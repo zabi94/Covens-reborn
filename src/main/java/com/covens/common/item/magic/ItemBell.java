@@ -15,6 +15,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +33,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import zabi.minecraft.minerva.common.mod.Log;
 import zabi.minecraft.minerva.common.utils.BlockStreamHelper;
 
 public class ItemBell extends ItemMod {
@@ -86,15 +86,17 @@ public class ItemBell extends ItemMod {
 	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase player) {
 		stack.damageItem(1, player);
 		if (!world.isRemote && checkChalk(world, player)) {
-			Class<? extends Entity> familiarClass = getEntity(world, player);
+			Class<? extends EntityLiving> familiarClass = getEntity(world, player);
 			Entity e = EntityRegistry.getEntry(familiarClass).newInstance(world);
 			BlockPos pos = BlockStreamHelper.ofPos(player.getPosition().add(5, 2, 5), player.getPosition().add(-5, -2, -5))
 				.filter(bp -> isTeleportFriendlyBlock(bp, world, e))
-				.sorted((bpa, bpb) -> player.getRNG().nextInt(3)-1)
+				.map(bp -> new Tuple<>(bp, itemRand.nextInt(300)))
+				.sorted(Comparator.comparingInt(tup -> tup.getSecond()))
+				.map(t -> t.getFirst())
 				.findFirst().orElse(null);
 			e.setPosition(pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5);
 			world.spawnEntity(e);
-			CovensAPI.getAPI().bindFamiliar(e, (EntityPlayer) player);
+			CovensAPI.getAPI().bindFamiliar((EntityLiving) e, (EntityPlayer) player);
 		}
 		NBTHelper.setLong(stack, "lastFinished", world.getTotalWorldTime());
 		return stack;
@@ -105,11 +107,10 @@ public class ItemBell extends ItemMod {
 		return (iblockstate.getBlockFaceShape(world, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID) && iblockstate.canEntitySpawn(e) && world.isAirBlock(blockpos.up()) && world.isAirBlock(blockpos.up(2));
 	}
 
-	private Class<? extends Entity> getEntity(World world, EntityLivingBase player) {
+	private Class<? extends EntityLiving> getEntity(World world, EntityLivingBase player) {
 			return world.getBiome(player.getPosition()).getSpawnableList(EnumCreatureType.CREATURE).stream()
 					.filter(e -> CovensAPI.getAPI().isValidFamiliar(EntityRegistry.getEntry(e.entityClass).newInstance(world)))
 					.map(e -> new Tuple<SpawnListEntry, Integer>(e, (Integer) (new Random()).nextInt(100 * e.itemWeight)))
-					.peek(t -> Log.i("Entity "+t.getFirst().entityClass.getName()+" has sortnum "+t.getSecond()))
 					.sorted(Comparator.comparingInt(t -> t.getSecond()))
 					.map(t -> t.getFirst().entityClass)
 					.findFirst().orElse(null);
