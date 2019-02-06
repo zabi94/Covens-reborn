@@ -1,6 +1,5 @@
 package com.covens.common.item.magic;
 
-import java.util.Comparator;
 import java.util.Random;
 
 import com.covens.api.CovensAPI;
@@ -28,12 +27,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import zabi.minecraft.minerva.common.utils.BlockStreamHelper;
+import zabi.minecraft.minerva.common.utils.CollectorsUtils;
 
 public class ItemBell extends ItemMod {
 
@@ -90,10 +88,7 @@ public class ItemBell extends ItemMod {
 			Entity e = EntityRegistry.getEntry(familiarClass).newInstance(world);
 			BlockPos pos = BlockStreamHelper.ofPos(player.getPosition().add(5, 2, 5), player.getPosition().add(-5, -2, -5))
 				.filter(bp -> isTeleportFriendlyBlock(bp, world, e))
-				.map(bp -> new Tuple<>(bp, itemRand.nextInt(300)))
-				.sorted(Comparator.comparingInt(tup -> tup.getSecond()))
-				.map(t -> t.getFirst())
-				.findFirst().orElse(null);
+				.collect(CollectorsUtils.randomElement());
 			e.setPosition(pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5);
 			world.spawnEntity(e);
 			CovensAPI.getAPI().bindFamiliar((EntityLiving) e, (EntityPlayer) player);
@@ -110,10 +105,8 @@ public class ItemBell extends ItemMod {
 	private Class<? extends EntityLiving> getEntity(World world, EntityLivingBase player) {
 			return world.getBiome(player.getPosition()).getSpawnableList(EnumCreatureType.CREATURE).stream()
 					.filter(e -> CovensAPI.getAPI().isValidFamiliar(EntityRegistry.getEntry(e.entityClass).newInstance(world)))
-					.map(e -> new Tuple<SpawnListEntry, Integer>(e, (Integer) (new Random()).nextInt(100 * e.itemWeight)))
-					.sorted(Comparator.comparingInt(t -> t.getSecond()))
-					.map(t -> t.getFirst().entityClass)
-					.findFirst().orElse(null);
+					.map(e -> e.entityClass)
+					.collect(CollectorsUtils.randomElement());
 	}
 
 	private boolean checkChalk(World world, EntityLivingBase player) {
