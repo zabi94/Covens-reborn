@@ -1,0 +1,16 @@
+{
+  "name": "Power boost",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)The magicks of this brew makes you have access to more MP at once."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:power_boost"
+    }
+  ]
+}

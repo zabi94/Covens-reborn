@@ -1,0 +1,25 @@
+{
+  "name": "The cauldron",
+  "icon": "covens:cauldron",
+"sortnum": "0",
+  "category": "cauldron",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The art of witchcraft is commonly associated with a broom. However, that couldn't be further from the truth, as every witch knows that the most useful tool at its disposal is the cauldron. $(br2)This metal container might seem an ordinary piece of homeware, but in the hands of a skilled witch it is an essential instrument."
+    },
+    {
+      "type": "text", 
+      "text": "Indeed, many are the uses of a cauldron, ranging from potion making, to crafting, with a myriad other uses. $(br2)That said, before using the cauldron, a witch must firstly ensure that the cauldron itself has been properly set up. $(br2)This simple but crucial task is rather easy to do: you just need to fill the cauldron up through the use of a water bucket $(o)(although rumor has it there are other ways of"
+    },
+    {
+      "type": "text",
+      "text": "$(o)automatically filling up the cauldron$()), and heat the cauldron with a heat source, magical or otherwise... "
+    },
+    {
+      "type": "crafting", 
+      "recipe": "covens:cauldron",
+      "title": "Crafting the cauldron"
+    }
+  ]
+}

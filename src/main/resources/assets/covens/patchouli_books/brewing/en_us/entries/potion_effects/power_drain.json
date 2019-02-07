@@ -1,0 +1,16 @@
+{
+  "name": "Power drain",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)This particular potion seems to repel magic, therefore draining the ME of whatever witch is crazy enough to drink it... $(br2)$(#a87850)$(o)What, tipped arrows are a thing?"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:power_drain"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Crleaning the cauldron",
+  "icon": "covens:wood_ash",
+"sortnum": "1",
+  "category": "cauldron",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Even the wisest of witches derps from time to time, spoiling whatever was brewing in the cauldron $(o)(which makes the water turn green).$() $(br2)Luckily, whilst the contents inside are forever lost, the mess can be easily cleansed by throwing some wood ash to the cauldron. $(br2)$(o)Baldy guy is surely jealous..."
+    }
+  ]
+}

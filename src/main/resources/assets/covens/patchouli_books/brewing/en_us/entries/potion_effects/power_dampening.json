@@ -1,0 +1,16 @@
+{
+  "name": "Power dampening",
+  "icon": "covens:brew_phial_drink",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(#a87850)A wicked brew indeed, this potion partially severs a witch connection with the magics of the world, thus reducing the amount of MP they can use..."
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:power_dampening"
+    }
+  ]
+}
