@@ -1,6 +1,6 @@
 {
   "name": "Sinking",
-  "icon": "covens:brew_phial_drink",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:sinking\"}]}",
   "sortnum": "4",
   "category": "potion_effects",
   "pages": [
@@ -10,7 +10,7 @@
     },
     {
       "type": "covens:brew_recipe", 
-      "brew": "covens:sinking"
+      "brew": "extraalchemy:effect.sinking;covens:sinking"
     }
   ]
 }

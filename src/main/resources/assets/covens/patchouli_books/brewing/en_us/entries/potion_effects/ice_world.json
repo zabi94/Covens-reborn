@@ -1,6 +1,6 @@
 {
   "name": "Ice world",
-  "icon": "covens:brew_phial_drink",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:ice_world\"}]}",
   "sortnum": "4",
   "category": "potion_effects",
   "pages": [

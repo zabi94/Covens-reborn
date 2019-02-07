@@ -1,6 +1,6 @@
 {
   "name": "Spider nightmare",
-  "icon": "covens:brew_phial_drink",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:spider_nightmare\"}]}",
   "sortnum": "4",
   "category": "potion_effects",
   "pages": [

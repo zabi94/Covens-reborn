@@ -1,6 +1,6 @@
 {
   "name": "Prune leaves",
-  "icon": "covens:brew_phial_drink",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:prune_leaves\"}]}",
   "sortnum": "4",
   "category": "potion_effects",
   "pages": [

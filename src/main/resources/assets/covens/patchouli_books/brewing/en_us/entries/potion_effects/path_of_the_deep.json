@@ -1,6 +1,6 @@
 {
   "name": "Path of the deep",
-  "icon": "covens:brew_phial_drink",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:path_of_the_deep\"}]}",
   "sortnum": "4",
   "category": "potion_effects",
   "pages": [

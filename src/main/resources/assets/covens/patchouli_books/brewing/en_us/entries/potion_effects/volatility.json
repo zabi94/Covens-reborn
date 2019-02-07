@@ -1,6 +1,6 @@
 {
   "name": "Volatilty",
-  "icon": "covens:brew_phial_drink",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:volatility\"}]}",
   "sortnum": "4",
   "category": "potion_effects",
   "pages": [
