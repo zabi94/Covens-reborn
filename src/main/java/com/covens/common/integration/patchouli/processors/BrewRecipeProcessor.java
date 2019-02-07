@@ -1,5 +1,6 @@
 package com.covens.common.integration.patchouli.processors;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import com.covens.common.content.cauldron.CauldronRegistry;
@@ -11,6 +12,7 @@ import net.minecraft.util.text.TextFormatting;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.api.PatchouliAPI;
+import zabi.minecraft.minerva.common.mod.Log;
 
 public class BrewRecipeProcessor implements IComponentProcessor {
 
@@ -21,12 +23,20 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 	public void setup(IVariableProvider<String> json) {
 		String[] potionAlternatives = json.get("brew").split(";");
 		for (String name:potionAlternatives) {
-			Potion tp = Potion.getPotionFromResourceLocation(name);
-			Ingredient ing = CauldronRegistry.getIngredientFromBrew(CauldronRegistry.getBrewFromPotion(tp)).orElse(null);
-			if (ing != null) {
-				brew = ing;
-				this.p = tp;
-				break;
+			try {
+				Potion tp = Potion.getPotionFromResourceLocation(name);
+				Ingredient ing = CauldronRegistry.getIngredientFromBrew(CauldronRegistry.getBrewFromPotion(tp)).orElse(null);
+				if (ing != null && tp != null) {
+					brew = ing;
+					this.p = tp;
+					break;
+				}
+			} catch (NoSuchElementException e) {
+				//Ignore
+				continue;
+			} catch (IllegalArgumentException e) {
+				Log.e("Potion "+name+" not found");
+				continue;
 			}
 		}
 		Objects.requireNonNull(this.p);

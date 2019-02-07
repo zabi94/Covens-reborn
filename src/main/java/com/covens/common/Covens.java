@@ -146,16 +146,15 @@ public class Covens {
 		ModBrewModifiers.init();
 		ThaumcraftLoader.init();
 		Patchouli.init();
+		CauldronRegistry.postInit();
+		ExtraAlchemy.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-		ExtraAlchemy.init();
 		BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).parallelStream().filter(b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.DENSE)).forEach(b -> {
 			BlockMoonbell.addValidMoonbellBiome(b);
 		});
-
-		CauldronRegistry.postInit();
 	}
 
 	@EventHandler
