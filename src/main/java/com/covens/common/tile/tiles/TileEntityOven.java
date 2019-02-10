@@ -43,6 +43,7 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 	private int work;
 	private boolean isBurning = false;
 	private boolean isWorking = false;
+	private boolean lockFuel = false;
 	private int burnTime;
 	private int itemBurnTime;
 	private Random random;
@@ -131,9 +132,13 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 	protected void checkRecipe() {
 		if (this.hasWorkToDo()) {
 			if (!this.isBurning) {
-				this.itemBurnTime = this.consumeFuel();
-				if (this.itemBurnTime > 0) {
-					this.isBurning = true;
+				if (!lockFuel) {
+					lockFuel = true;
+					this.itemBurnTime = this.consumeFuel();
+					if (this.itemBurnTime > 0) {
+						this.isBurning = true;
+					}
+					lockFuel = false;
 				}
 			}
 			if (this.isBurning) {
