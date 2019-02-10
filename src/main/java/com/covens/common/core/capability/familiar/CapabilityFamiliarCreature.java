@@ -20,6 +20,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
 import zabi.minecraft.minerva.common.data.UUIDs;
 import zabi.minecraft.minerva.common.utils.annotation.DontSync;
+import zabi.minecraft.minerva.common.utils.annotation.Ignore;
 import zabi.minecraft.minerva.common.utils.entity.PlayerHelper;
 
 public class CapabilityFamiliarCreature extends SimpleCapability {
@@ -27,7 +28,8 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 	@CapabilityInject(CapabilityFamiliarCreature.class)
 	public static final Capability<CapabilityFamiliarCreature> CAPABILITY = null;
 	public static final CapabilityFamiliarCreature DEFAULT_INSTANCE = new CapabilityFamiliarCreature();
-
+	
+	@Ignore public boolean aiSet = false;
 	public UUID owner = UUIDs.NULL_UUID;
 	public String ownerName = "";
 	@Deprecated public boolean sitting = false;

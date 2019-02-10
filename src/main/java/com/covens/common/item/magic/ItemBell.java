@@ -17,6 +17,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
@@ -92,6 +93,9 @@ public class ItemBell extends ItemMod {
 			e.setPosition(pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5);
 			world.spawnEntity(e);
 			CovensAPI.getAPI().bindFamiliar((EntityLiving) e, (EntityPlayer) player);
+			if (e instanceof EntityTameable) {
+				((EntityTameable) e).setTamedBy((EntityPlayer) player);
+			}
 		}
 		NBTHelper.setLong(stack, "lastFinished", world.getTotalWorldTime());
 		return stack;

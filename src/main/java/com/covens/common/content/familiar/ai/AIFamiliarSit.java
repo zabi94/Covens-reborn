@@ -25,7 +25,7 @@ public class AIFamiliarSit extends FamiliarAIBase {
 			if (owner == null) {
 				return true;
 			} else {
-				return (this.familiar.getDistanceSq(owner) < 144.0D) && (owner.getRevengeTarget() != null) ? false : CapabilityFamiliarCreature.isSitting(this.familiar);
+				return (owner.getRevengeTarget() != null) ? false : CapabilityFamiliarCreature.isSitting(this.familiar);
 			}
 		}
 	}
