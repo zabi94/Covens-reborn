@@ -44,6 +44,7 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 	private boolean isBurning = false;
 	private boolean isWorking = false;
 	private boolean lockFuel = false;
+	private boolean updateScheduled = true;
 	private int burnTime;
 	private int itemBurnTime;
 	private Random random;
@@ -68,7 +69,7 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 			@Override
 			protected void onContentsChanged(int slot) {
 				if (slot != 2) {
-					TileEntityOven.this.checkRecipe();
+					updateScheduled = true;
 				}
 			}
 		};
@@ -79,7 +80,7 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 		if (playerIn.isSneaking()) {
 			return false;
 		}
-		
+
 
 		ItemStack heldItem = playerIn.getHeldItem(hand);
 		if (!heldItem.isEmpty() && (heldItem.getItem() == Items.NAME_TAG)) {
@@ -105,27 +106,33 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 
 	@Override
 	public void update() {
-		if (!this.world.isRemote && this.isBurning) {
-			this.burnTime++;
-			if (this.isWorking) {
-				this.work++;
-				if (this.work >= TOTAL_WORK) {
-					this.work = 0;
-					this.isWorking = false;
-					this.smelt();
-					this.checkRecipe();
-				}
+		if (!world.isRemote) {
+			if (updateScheduled) {
+				updateScheduled = false;
+				this.checkRecipe();
 			}
-			if (this.burnTime >= this.itemBurnTime) {
-				this.burnTime = 0;
-				this.itemBurnTime = 0;
-				this.isBurning = false;
-				this.itemBurnTime = this.consumeFuel();
-				if (this.itemBurnTime > 0) {
-					this.isBurning = true;
+			if (this.isBurning) {
+				this.burnTime++;
+				if (this.isWorking) {
+					this.work++;
+					if (this.work >= TOTAL_WORK) {
+						this.work = 0;
+						this.isWorking = false;
+						this.smelt();
+						this.checkRecipe();
+					}
 				}
+				if (this.burnTime >= this.itemBurnTime) {
+					this.burnTime = 0;
+					this.itemBurnTime = 0;
+					this.isBurning = false;
+					this.itemBurnTime = this.consumeFuel();
+					if (this.itemBurnTime > 0) {
+						this.isBurning = true;
+					}
+				}
+				this.markDirty();
 			}
-			this.markDirty();
 		}
 	}
 
@@ -148,6 +155,7 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 			}
 		} else {
 			this.isWorking = false;
+			this.work = 0;
 		}
 		this.markDirty();
 	}
