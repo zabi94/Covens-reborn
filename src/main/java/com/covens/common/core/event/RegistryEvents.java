@@ -47,10 +47,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @Mod.EventBusSubscriber(modid = LibMod.MOD_ID)
 public final class RegistryEvents {
 

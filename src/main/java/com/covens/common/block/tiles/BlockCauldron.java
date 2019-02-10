@@ -30,10 +30,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by Joseph on 3/4/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class BlockCauldron extends BlockModTileEntity {
 
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.0625, 0, 0.0625, 15 * 0.0625, 11 * 0.0625, 15 * 0.0625);

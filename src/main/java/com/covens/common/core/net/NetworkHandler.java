@@ -23,10 +23,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import zabi.minecraft.minerva.common.network.SimpleMessage;
 
-/**
- * This class was created by Arekkuusu on 08/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public final class NetworkHandler {
 
 	public static final SimpleNetworkWrapper HANDLER = new SimpleNetworkWrapper(LibMod.MOD_ID);

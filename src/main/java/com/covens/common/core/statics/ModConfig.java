@@ -19,10 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import zabi.minecraft.minerva.client.hud.HudComponent.EnumHudAnchor;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @SuppressWarnings({
 		"WeakerAccess"
 })

@@ -11,10 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 
-/**
- * This class was created by Arekkuusu on 28/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class BlockCrop extends BlockCrops implements IModelRegister {
 
 	private int maxAge;

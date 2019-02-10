@@ -29,10 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.hud.HudComponent;
 import zabi.minecraft.minerva.client.hud.HudController;
 
-/**
- * This class was created by Arekkuusu on 21/04/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @SideOnly(Side.CLIENT)
 public class EnergyHUD extends HudComponent {
 

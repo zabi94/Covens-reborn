@@ -12,10 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-/**
- * This class was created by Joseph on 02/03/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class ItemHeart extends ItemModFood implements IMagicPowerExpander {
 
 	public ItemHeart() {

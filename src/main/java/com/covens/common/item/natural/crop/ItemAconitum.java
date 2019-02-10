@@ -7,10 +7,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
-/**
- * This class was created by Arekkuusu on 02/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class ItemAconitum extends ItemCropFood {
 
 	public ItemAconitum() {

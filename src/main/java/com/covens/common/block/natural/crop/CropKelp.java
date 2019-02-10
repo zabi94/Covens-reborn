@@ -16,10 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-/**
- * This class was created by Arekkuusu on 02/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class CropKelp extends BlockCrop {
 
 	public CropKelp() {

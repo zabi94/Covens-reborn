@@ -45,10 +45,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by Joseph on 3/4/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class BlockBeehive extends BlockFalling implements IModelRegister {
 
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.18F, 0, 0.18F, 0.82F, 1, 0.82F);

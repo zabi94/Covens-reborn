@@ -10,10 +10,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-/**
- * This class was created by Arekkuusu on 04/04/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class ParticleMessage implements IMessage {
 
 	private ParticleF particleF;

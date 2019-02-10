@@ -19,10 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
-/**
- * This class was created by Arekkuusu on 02/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class ItemKelpSeed extends ItemSeed {
 
 	public ItemKelpSeed() {

@@ -49,10 +49,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * This class was created by BerciTheBeast on 27.3.2017. It's distributed as
- * part of Covens under the MIT license.
- */
+
 @SuppressWarnings({
 		"WeakerAccess", "deprecation"
 })

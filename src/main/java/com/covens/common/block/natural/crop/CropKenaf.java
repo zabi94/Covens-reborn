@@ -13,10 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-/**
- * This class was created by Arekkuusu on 17/05/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class CropKenaf extends BlockCrop {
 
 	private static final AxisAlignedBB[] KENAF_AABB = new AxisAlignedBB[] {

@@ -14,10 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by Arekkuusu on 28/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class ItemModFood extends ItemFood implements IModelRegister {
 
 	private IMagicPowerExpander expander;

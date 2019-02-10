@@ -13,10 +13,7 @@ import net.minecraft.util.NonNullList;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by <Arekkuusu> on 27/06/2017. It's distributed as part
- * of Solar Epiphany under the MIT license.
- */
+
 public class ItemGemOre extends ItemBlock implements IModelRegister {
 
 	public ItemGemOre(Block block) {

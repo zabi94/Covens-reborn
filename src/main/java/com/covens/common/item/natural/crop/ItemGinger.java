@@ -7,10 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-/**
- * This class was created by Arekkuusu on 02/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class ItemGinger extends ItemCropFood {
 
 	public ItemGinger() {

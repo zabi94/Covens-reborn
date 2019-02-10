@@ -11,10 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-/**
- * This class was created by Arekkuusu on 11/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class ColorPropertyHandler implements IBlockColor, IItemColor {
 
 	public static final ColorPropertyHandler INSTANCE = new ColorPropertyHandler();

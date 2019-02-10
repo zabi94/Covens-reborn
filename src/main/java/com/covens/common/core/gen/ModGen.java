@@ -11,10 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-/**
- * This class was created by Arekkuusu on 21/05/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public final class ModGen {
 
 	private ModGen() {

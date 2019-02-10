@@ -18,10 +18,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-/**
- * This class was created by BerciTheBeast on 4.3.2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @SuppressWarnings({
 		"WeakerAccess"
 })

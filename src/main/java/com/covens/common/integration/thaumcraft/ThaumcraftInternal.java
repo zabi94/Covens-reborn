@@ -116,7 +116,6 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModItems.eye_of_newt), new AspectList().add(Aspect.WATER, 4).add(Aspect.SENSES, 4));
 		evt.register.registerObjectTag(new ItemStack(ModItems.toe_of_frog), new AspectList().add(Aspect.WATER, 4).add(Aspect.ALCHEMY, 4));
 		evt.register.registerObjectTag(new ItemStack(ModItems.lizard_leg), new AspectList().add(Aspect.MOTION, 4).add(Aspect.EARTH, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.grilled_watermelon), new AspectList().add(Aspect.LIFE, 3).add(Aspect.DESIRE, 3));
 		evt.register.registerObjectTag(new ItemStack(ModItems.yew_aril), new AspectList().add(Aspect.PLANT, 3).add(Aspect.MIND, 3));
 		evt.register.registerObjectTag(new ItemStack(ModItems.juniper_berries), new AspectList().add(Aspect.PLANT, 3).add(Aspect.MAGIC, 3));
 		// Todo: Dynamic aspects based on brew contents

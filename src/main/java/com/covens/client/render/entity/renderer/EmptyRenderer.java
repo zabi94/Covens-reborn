@@ -7,10 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-/**
- * This class was created by Arekkuusu on 10/06/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class EmptyRenderer<T extends Entity> extends Render<T> {
 
 	public EmptyRenderer(RenderManager renderManager) {

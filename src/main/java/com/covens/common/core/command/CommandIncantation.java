@@ -18,10 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
-/**
- * This class was created by BerciTheBeast on 19.4.2017. It's distributed as
- * part of Covens under the MIT license.
- */
+
 public class CommandIncantation implements ICommand {
 
 	private static final List<String> alias = Lists.newArrayList();

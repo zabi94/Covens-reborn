@@ -10,10 +10,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-/**
- * This class was created by Joseph on 3/4/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class BlockCandleMedium extends BlockCandle {
 
 	private static final AxisAlignedBB MEDIUM_BOX = new AxisAlignedBB(0.31, 0, 0.31, 0.69, 0.75, 0.69);

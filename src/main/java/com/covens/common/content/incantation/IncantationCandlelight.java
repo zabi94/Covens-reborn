@@ -10,10 +10,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-/**
- * This class was created by Arekkuusu on 4/20/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class IncantationCandlelight implements IIncantation {
 
 	@Override

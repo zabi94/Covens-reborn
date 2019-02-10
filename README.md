@@ -12,3 +12,7 @@ If you decide to try it out, regardless of this warning, please make a backup of
 [![Curseforge](https://img.shields.io/badge/Curseforge-Project%20page%20not%20available%20yet!-A54C2D.svg?longCache=true&style=for-the-badge)](https://minecraft.curseforge.com/projects/covens-reborn)  
 [![Patreon](https://img.shields.io/badge/Patreon-Become%20a%20Patron-orange.svg?logo=Patreon&longCache=true&style=for-the-badge)](https://www.patreon.com/Zabi94)   
 [![Paypal](https://img.shields.io/badge/Paypal-Donate-blue.svg?logo=paypal&longCache=true&style=for-the-badge)](https://paypal.me/zabi94)  
+
+## License
+Everything up to commit fd60b9d6ba58b969d6f8b8d0b5ea8368a8fb7a56 is distributed under MIT License.  
+All subsequent changes to the content of this repo are All Rights Reserved, (C) 2019 Zabi94

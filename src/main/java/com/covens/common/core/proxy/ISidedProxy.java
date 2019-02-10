@@ -10,10 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public interface ISidedProxy {
 
 	void preInit(FMLPreInitializationEvent event);

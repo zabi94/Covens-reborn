@@ -12,10 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-/**
- * This class was created by Arekkuusu on 19/05/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class CropWormwood extends BlockCrop {
 
 	public CropWormwood() {

@@ -14,10 +14,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * This class was created by Joseph on 3/4/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 @SuppressWarnings("deprecation")
 public class BlockFakeIce extends BlockMod {
 

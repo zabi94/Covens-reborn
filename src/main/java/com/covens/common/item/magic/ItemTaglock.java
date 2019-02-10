@@ -30,10 +30,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
 
-/**
- * This class was created by Arekkuusu on 5/15/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class ItemTaglock extends ItemMod {
 
 	public static final String TAGLOCK_ENTITY = null;

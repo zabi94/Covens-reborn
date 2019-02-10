@@ -9,10 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-/**
- * This class was created by Joseph on 3/4/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class ItemJuniperBerries extends ItemModFood {
 
 	public ItemJuniperBerries() {

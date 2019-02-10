@@ -25,10 +25,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * This class was created by Arekkuusu on 16/04/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class GuiHandler implements IGuiHandler {
 
 	@Override

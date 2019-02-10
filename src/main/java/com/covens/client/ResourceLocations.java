@@ -4,10 +4,6 @@ import com.covens.common.lib.LibMod;
 
 import net.minecraft.util.ResourceLocation;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
 public final class ResourceLocations {
 
 	// Misc

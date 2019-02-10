@@ -17,10 +17,7 @@ import com.covens.common.tile.tiles.TileEntityWitchAltar;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-/**
- * This class was created by Arekkuusu on 09/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public final class ModTiles {
 
 	private static final ResourceLocation CAULDRON = new ResourceLocation(LibMod.MOD_ID, "cauldron");

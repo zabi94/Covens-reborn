@@ -92,10 +92,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import zabi.minecraft.minerva.client.blockmodels.AllDefaultModelStateMapper;
 import zabi.minecraft.minerva.client.hud.HudController;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy implements ISidedProxy {
 

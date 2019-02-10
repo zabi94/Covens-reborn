@@ -1,9 +1,3 @@
-/**
- * This class was created by <ZaBi94> on Dec 10th, 2017.
- * It's distributed as part of Covens under
- * the MIT license.
- */
-
 package com.covens.common.content.spell;
 
 import com.covens.api.spell.ISpell.EnumSpellType;

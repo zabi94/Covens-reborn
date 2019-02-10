@@ -1,8 +1,4 @@
-/**
- * This class was created by <ZaBi94> on Dec 11th, 2017.
- * It's distributed as part of Covens under
- * the MIT license.
- */
+
 
 package com.covens.common.item.block;
 

@@ -16,10 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-/**
- * This class was created by Joseph on 3/4/2017. It's distributed as part of
- * Covens under the MIT license.
- */
+
 public class BlockInfestedFarmland extends BlockMod implements IGrowable {
 
 	public BlockInfestedFarmland() {

@@ -29,10 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by BerciTheBeast on 11.4.2017. It's distributed as
- * part of Covens under the MIT license.
- */
+
 public class ItemSilverArmor extends ItemArmor implements IModelRegister {
 
 	public ItemSilverArmor(String id, ArmorMaterial materialIn, int renderIndex, EntityEquipmentSlot equipmentSlotIn) {

@@ -13,10 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
-/**
- * This class was created by Arekkuusu on 14/04/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @SuppressWarnings({
 		"WeakerAccess"
 })

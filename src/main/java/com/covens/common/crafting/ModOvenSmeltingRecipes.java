@@ -43,7 +43,6 @@ public class ModOvenSmeltingRecipes {
 				new OvenSmeltingRecipe(rl("chicken"), Ingredient.fromStacks(new ItemStack(Items.CHICKEN)), new ItemStack(Items.COOKED_CHICKEN), cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("fish_0"), Ingredient.fromStacks(new ItemStack(Items.FISH)), new ItemStack(Items.COOKED_FISH), cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("fish_1"), Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 1)), new ItemStack(Items.COOKED_FISH, 1, 1), cloudy_oil, 0.85f), //
-				new OvenSmeltingRecipe(rl("melon"), Ingredient.fromStacks(new ItemStack(Items.MELON)), new ItemStack(ModItems.grilled_watermelon), cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("cactus"), Ingredient.fromStacks(new ItemStack(Blocks.CACTUS)), new ItemStack(Items.DYE, 1, 2), cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("chorus_fruit"), Ingredient.fromStacks(new ItemStack(Items.CHORUS_FRUIT)), new ItemStack(Items.CHORUS_FRUIT_POPPED), new ItemStack(ModItems.dimensional_sand, 2), 0.85f), //
 				new OvenSmeltingRecipe(rl("mandrake_root"), Ingredient.fromStacks(new ItemStack(ModItems.mandrake_root)), ash, cloudy_oil, 0.85f), //

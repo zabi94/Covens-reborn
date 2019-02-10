@@ -8,10 +8,7 @@
  */
 package com.covens.common.lib;
 
-/**
- * This class was created by <Arekkuusu> on 26/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public final class LibBlockName {
 
 	public static final String CROP_ACONITUM = "crop_aconitum";

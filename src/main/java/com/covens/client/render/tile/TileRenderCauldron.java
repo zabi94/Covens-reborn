@@ -20,10 +20,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-/**
- * This class was created by Arekkuusu on 09/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCauldron> {
 
 	@SuppressWarnings("ConstantConditions")

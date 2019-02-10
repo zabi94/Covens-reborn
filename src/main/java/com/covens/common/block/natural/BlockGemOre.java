@@ -26,10 +26,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by <Arekkuusu> on 27/06/2017. It's distributed as part
- * of Solar Epiphany under the MIT license.
- */
+
 public class BlockGemOre extends BlockMod {
 
 	public static final PropertyEnum<Gem> GEM = PropertyEnum.create("gem", Gem.class);

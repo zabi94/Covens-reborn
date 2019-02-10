@@ -8,10 +8,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 
-/**
- * This class was created by Arekkuusu on 16/04/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 public class GuiApiary extends GuiContainer {
 
 	public GuiApiary(InventoryPlayer playerInventory, TileEntityApiary tileApiary) {

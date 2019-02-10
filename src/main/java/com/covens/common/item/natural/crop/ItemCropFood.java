@@ -20,10 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * This class was created by Arekkuusu on 01/03/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @SuppressWarnings("WeakerAccess")
 public class ItemCropFood extends ItemModFood {
 

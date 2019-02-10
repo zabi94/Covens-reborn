@@ -12,10 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by <Arekkuusu> on 28/06/2017. It's distributed as part
- * of Solar Epiphany under the MIT license.
- */
+
 public class ItemGem extends ItemMod {
 
 	public ItemGem() {

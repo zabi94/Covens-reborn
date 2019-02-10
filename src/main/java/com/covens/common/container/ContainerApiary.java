@@ -10,10 +10,7 @@ import net.minecraftforge.items.IItemHandler;
 import zabi.minecraft.minerva.common.network.container.ModContainer;
 import zabi.minecraft.minerva.common.network.container.slot.SlotFiltered;
 
-/**
- * This class was created by Zabi94. It's distributed as part of Covens under
- * the MIT license.
- */
+
 @SuppressWarnings("ConstantConditions")
 public class ContainerApiary extends ModContainer<TileEntityApiary> {
 

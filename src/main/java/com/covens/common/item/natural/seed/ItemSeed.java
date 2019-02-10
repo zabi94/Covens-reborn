@@ -22,10 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-/**
- * This class was created by Arekkuusu on 27/02/2017. It's distributed as part
- * of Covens under the MIT license.
- */
+
 @SuppressWarnings("WeakerAccess")
 public class ItemSeed extends ItemSeeds implements IModelRegister {
 
