@@ -87,7 +87,7 @@ public class FamiliarEvents {
 					// TODO FamiliarController.toggleFamiliarWait(e);
 					break;
 				case FOLLOW_TARGET:
-					FamiliarController.orderSelectedFamiliarFollow(evt.player, (EntityLivingBase) res.getSecond().entityHit);
+					FamiliarController.orderSelectedFamiliarFollow(evt.player, (EntityLivingBase) (e==null?res.getSecond().entityHit:e));
 					break;
 				case FREE:
 					// TODO FamiliarController.toggleFamiliarWait(e);

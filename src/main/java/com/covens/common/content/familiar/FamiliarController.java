@@ -36,12 +36,12 @@ import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
 import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
 
 public class FamiliarController {
-	
+
 	public static final Set<String> bannedTasks = Sets.newHashSet();
 	static {
 		bannedTasks.add("");
 	}
-	
+
 	public static void toggleFamiliarWait(EntityLiving familiar) {
 		boolean isFollowing = !CapabilityFamiliarCreature.isSitting(familiar);
 		CapabilityFamiliarCreature.setSitting(familiar, isFollowing);
@@ -50,18 +50,18 @@ public class FamiliarController {
 			p.sendStatusMessage(new TextComponentTranslation("familiar.command.sit."+(isFollowing?"enable":"disable"), familiar.getName()), true);
 		}
 	}
-	
+
 	public static void orderSelectedFamiliarFollow(EntityPlayer player, EntityLivingBase toFollow) {
 		UUID selectedFamiliar = player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
 		if (UUIDs.isNull(selectedFamiliar)) {
 			return;
 		}
-		
+
 		if (MobHelper.isSpirit(toFollow)) {
 			player.sendStatusMessage(new TextComponentTranslation("familiar.command.follow.forbidden", toFollow.getName()), true);
 			return;
 		}
-		
+
 		EntitySyncHelper.executeOnEntityAvailable(selectedFamiliar, new FamiliarFollowEntity(selectedFamiliar, UUIDs.of(toFollow)));
 		player.sendStatusMessage(new TextComponentTranslation("familiar.command.follow", getSelectedFamiliarName(selectedFamiliar, player), toFollow.getName()), true);
 	}
@@ -75,7 +75,7 @@ public class FamiliarController {
 	}
 
 	public static void sendSelectedFamiliarHome(EntityPlayer e) {
-		
+
 	}
 
 	public static void sendSelectedFamiliarTo(EntityPlayer e, Vec3d hitVec) {
@@ -89,7 +89,7 @@ public class FamiliarController {
 	public static void openFamiliarSelector(EntityPlayer player) {
 		player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(null);
 	}
-	
+
 	public static void setupFamiliarAI(EntityLiving entity) {
 		if (entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).aiSet) {
 			return;
@@ -103,10 +103,10 @@ public class FamiliarController {
 			entity.tasks.addTask(0, new AIFamiliarSit(entity));
 			entity.tasks.addTask(3, new AIFollowOwner(entity));
 		}
-//		entity.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(entity));
-//		entity.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(entity));
+		//		entity.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(entity));
+		//		entity.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(entity));
 	}
-	
+
 	private static void removeTasks(EntityLiving elb) {
 		Iterator<EntityAITasks.EntityAITaskEntry> iterator = elb.tasks.taskEntries.iterator();
 		while (iterator.hasNext()) {
@@ -136,7 +136,7 @@ public class FamiliarController {
 			iterator.remove();
 		}
 	}
-	
+
 	@Nonnull
 	public static Tuple<FamiliarCommand, RayTraceResult> getExecutedCommand(EntityPlayer player, Entity pointedClose) {
 		UUID selectedFamiliarUUID = player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
@@ -161,28 +161,30 @@ public class FamiliarController {
 			return new Tuple<>(FamiliarCommand.FOLLOW_TARGET, null);
 		}
 		RayTraceResult rt = RayTraceHelper.rayTracePlayerSight(player, 32, true);
-		switch (rt.typeOfHit) {
-			case ENTITY: {
-				if (player.isSneaking()) {
-					return new Tuple<>(FamiliarCommand.SELECT, rt);
-				} else {
-					return new Tuple<>(FamiliarCommand.ATTACK, rt);
+		if (rt != null) {
+			switch (rt.typeOfHit) {
+				case ENTITY: {
+					if (player.isSneaking()) {
+						return new Tuple<>(FamiliarCommand.SELECT, rt);
+					} else {
+						return new Tuple<>(FamiliarCommand.ATTACK, rt);
+					}
 				}
-			}
-			case BLOCK: {
-				if (player.isSneaking()) {
-					return new Tuple<>(FamiliarCommand.GUARD, rt);
-				} else {
-					return new Tuple<>(FamiliarCommand.GOTO, rt);
+				case BLOCK: {
+					if (player.isSneaking()) {
+						return new Tuple<>(FamiliarCommand.GUARD, rt);
+					} else {
+						return new Tuple<>(FamiliarCommand.GOTO, rt);
+					}
 				}
-			}
-			case MISS: {
-				return new Tuple<>(FamiliarCommand.DESELECT, null);
+				case MISS: {
+					return new Tuple<>(FamiliarCommand.DESELECT, null);
+				}
 			}
 		}
 		return new Tuple<>(FamiliarCommand.SELECT, null);
 	}
-	
+
 	public static enum FamiliarCommand {
 		SELECT, DESELECT, FOLLOW_TARGET, FOLLOW_ME, STAY, GUARD, GOTO, ATTACK, OPEN_GUI, FREE, NO_COMMAND, GO_HOME
 	}
