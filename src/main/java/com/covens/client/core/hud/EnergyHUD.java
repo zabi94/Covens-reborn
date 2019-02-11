@@ -29,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.hud.HudComponent;
 import zabi.minecraft.minerva.client.hud.HudController;
 
-
 @SideOnly(Side.CLIENT)
 public class EnergyHUD extends HudComponent {
 

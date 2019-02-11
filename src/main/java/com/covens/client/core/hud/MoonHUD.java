@@ -14,9 +14,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.common.config.ConfigManager;
 import zabi.minecraft.minerva.client.hud.HudComponent;
 
+@SideOnly(Side.CLIENT)
 public class MoonHUD extends HudComponent {
 
 	private static final float minWarn = 12000;

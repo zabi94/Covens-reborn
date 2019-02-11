@@ -9,9 +9,12 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.common.config.ConfigManager;
 import zabi.minecraft.minerva.client.hud.HudComponent;
 
+@SideOnly(Side.CLIENT)
 public class FamiliarHUD extends HudComponent {
 	
 	private static final ResourceLocation ICON = new ResourceLocation(LibMod.MOD_ID, "textures/gui/familiar_icon.png");
