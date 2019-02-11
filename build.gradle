@@ -13,10 +13,6 @@ buildscript {
             name = "gradle"
             url "https://plugins.gradle.org/m2/"
         }
-        maven {
-            name = "CurseForge"
-            url = "https://minecraft.curseforge.com/api/maven/"
-        }
     }
 
     dependencies {
@@ -66,9 +62,6 @@ processResources {
 }
 
 repositories {
-    flatDir { //Minerva
-        dirs 'libsIn'
-    }
     maven { //Hwyla
         name = "Mobius Repo"
         url = "http://tehnut.info/maven"
@@ -80,12 +73,12 @@ repositories {
     maven { //?? tc/baubles?
         url = "https://minecraft.curseforge.com/api/maven/"
     }
-//    maven { //??
-//        name = "ModMaven"
-//        url = "modmaven.k-4u.nl"
-//    }
     maven { //Patchouli
       	url = 'https://maven.blamejared.com' 
+    }
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
     }
 }
 
@@ -96,6 +89,7 @@ dependencies {
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     compile "thaumcraft:Thaumcraft:1.12.2:${thaumcraft_version}"
     compile "vazkii.patchouli:Patchouli:${patchouli_version}"
+    compile "minerva-library:minerva:library:${minerva_version}"
 }
 
 runClient {
