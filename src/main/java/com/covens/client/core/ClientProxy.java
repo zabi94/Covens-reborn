@@ -46,7 +46,6 @@ import com.covens.common.Covens;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.content.tarot.TarotHandler.TarotInfo;
-import com.covens.common.core.net.GuiHandler;
 import com.covens.common.core.proxy.ISidedProxy;
 import com.covens.common.core.statics.ModFluids;
 import com.covens.common.entity.EntityAoE;
@@ -87,7 +86,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import zabi.minecraft.minerva.client.blockmodels.AllDefaultModelStateMapper;
 import zabi.minecraft.minerva.client.hud.HudController;
@@ -145,7 +143,6 @@ public class ClientProxy implements ISidedProxy {
 		Keybinds.registerKeys();
 		this.addModelLayers();
 		this.registerColorHandlers();
-		NetworkRegistry.INSTANCE.registerGuiHandler(Covens.instance, new GuiHandler());
 	}
 
 	private void addModelLayers() {

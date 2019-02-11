@@ -43,6 +43,7 @@ import com.covens.common.core.gen.ModGen;
 import com.covens.common.core.helper.CropHelper;
 import com.covens.common.core.helper.Log;
 import com.covens.common.core.helper.MobHelper;
+import com.covens.common.core.net.GuiHandler;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.proxy.ISidedProxy;
 import com.covens.common.core.statics.ModLootTables;
@@ -73,6 +74,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
 
 @Mod(modid = LibMod.MOD_ID, name = MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.13]", certificateFingerprint = LibMod.FINGERPRINT)
@@ -126,6 +128,7 @@ public class Covens {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
+		NetworkRegistry.INSTANCE.registerGuiHandler(Covens.instance, new GuiHandler());
 		ModPotions.init();
 		SimpleCapability.init(BarkCapability.class, LibMod.MOD_ID, BarkCapability.CAPABILITY, BarkCapability.DEFAULT_INSTANCE);
 		SimpleCapability.init(CapabilityWerewolfStatus.class, LibMod.MOD_ID, CapabilityWerewolfStatus.CAPABILITY, CapabilityWerewolfStatus.DEFAULT_INSTANCE);
