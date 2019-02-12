@@ -61,18 +61,26 @@ public class AIFollowTarget extends FamiliarAIBase {
 					return;
 				}
 			}
-			if (!this.familiar.getLeashed() && !this.familiar.isRiding() && this.familiar.getDistanceSq(this.target) >= 16.0D && !this.petPathfinder.tryMoveToEntityLiving(this.target, 1.3f)) {
-				if (!this.familiar.getLeashed() && !this.familiar.isRiding()) {
-					if (this.familiar.getDistanceSq(this.target) >= 144.0D) {
-						int i = MathHelper.floor(this.target.posX) - 2;
-						int j = MathHelper.floor(this.target.posZ) - 2;
-						int k = MathHelper.floor(this.target.getEntityBoundingBox().minY);
-						for (int l = 0; l <= 4; ++l) {
-							for (int i1 = 0; i1 <= 4; ++i1) {
-								if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.isTeleportFriendlyBlock(i, j, k, l, i1)) {
-									this.familiar.setLocationAndAngles(i + l + 0.5F, k, j + i1 + 0.5F, this.familiar.rotationYaw, this.familiar.rotationPitch);
-									this.petPathfinder.clearPath();
-									return;
+			
+			if (this.familiar.getDistanceSq(this.target) < 16D) {
+				this.petPathfinder.clearPath();
+				return;
+			}
+			
+			if (!CapabilityFamiliarCreature.isSitting(this.familiar)) {
+				if (!this.familiar.getLeashed() && !this.familiar.isRiding() && (this.familiar.getDistanceSq(this.target) >= 144.0D || !this.petPathfinder.tryMoveToEntityLiving(this.target, 1.35f))) {
+					if (!this.familiar.getLeashed() && !this.familiar.isRiding()) {
+						if (this.familiar.getDistanceSq(this.target) >= 144.0D) {
+							int i = MathHelper.floor(this.target.posX) - 2;
+							int j = MathHelper.floor(this.target.posZ) - 2;
+							int k = MathHelper.floor(this.target.getEntityBoundingBox().minY);
+							for (int l = 0; l <= 4; ++l) {
+								for (int i1 = 0; i1 <= 4; ++i1) {
+									if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.isTeleportFriendlyBlock(i, j, k, l, i1)) {
+										this.familiar.setLocationAndAngles(i + l + 0.5F, k, j + i1 + 0.5F, this.familiar.rotationYaw, this.familiar.rotationPitch);
+										this.petPathfinder.clearPath();
+										return;
+									}
 								}
 							}
 						}

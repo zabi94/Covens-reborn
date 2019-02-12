@@ -84,7 +84,7 @@ public class FamiliarEvents {
 					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(null);
 					break;
 				case FOLLOW_ME:
-					// TODO FamiliarController.toggleFamiliarWait(e);
+					FamiliarController.followOwner(p);
 					break;
 				case FOLLOW_TARGET:
 					FamiliarController.orderSelectedFamiliarFollow(evt.player, (EntityLivingBase) (e==null?res.getSecond().entityHit:e));

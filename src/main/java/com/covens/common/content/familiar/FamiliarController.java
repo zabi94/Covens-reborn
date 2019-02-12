@@ -9,7 +9,6 @@ import javax.annotation.Nonnull;
 
 import com.covens.api.CovensAPI;
 import com.covens.common.content.familiar.ai.AIFamiliarSit;
-import com.covens.common.content.familiar.ai.AIFollowOwner;
 import com.covens.common.content.familiar.ai.AIFollowTarget;
 import com.covens.common.content.familiar.ai.AIGotoPlace;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
@@ -49,6 +48,15 @@ public class FamiliarController {
 		if (p != null) {
 			p.sendStatusMessage(new TextComponentTranslation("familiar.command.sit."+(isFollowing?"enable":"disable"), familiar.getName()), true);
 		}
+	}
+	
+	public static void followOwner(EntityPlayer player) {
+		UUID selectedFamiliar = player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
+		if (UUIDs.isNull(selectedFamiliar)) {
+			return;
+		}
+		EntitySyncHelper.executeOnEntityAvailable(selectedFamiliar, new FamiliarFollowEntity(selectedFamiliar, UUIDs.of(player)));
+		player.sendStatusMessage(new TextComponentTranslation("familiar.command.followme", getSelectedFamiliarName(selectedFamiliar, player)), true);
 	}
 
 	public static void orderSelectedFamiliarFollow(EntityPlayer player, EntityLivingBase toFollow) {
@@ -97,11 +105,10 @@ public class FamiliarController {
 		entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).aiSet = true;
 		removeTasks(entity);
 		removeTargets(entity);
-		entity.tasks.addTask(2, new AIFollowTarget(entity));
-		entity.tasks.addTask(2, new AIGotoPlace(entity));
+		entity.tasks.addTask(1, new AIFollowTarget(entity));
+		entity.tasks.addTask(1, new AIGotoPlace(entity));
 		if (!(entity instanceof EntityTameable)) {
-			entity.tasks.addTask(0, new AIFamiliarSit(entity));
-			entity.tasks.addTask(3, new AIFollowOwner(entity));
+			entity.tasks.addTask(2, new AIFamiliarSit(entity));
 		}
 		//		entity.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(entity));
 		//		entity.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(entity));
@@ -165,7 +172,7 @@ public class FamiliarController {
 			switch (rt.typeOfHit) {
 				case ENTITY: {
 					if (player.isSneaking()) {
-						return new Tuple<>(FamiliarCommand.SELECT, rt);
+						return new Tuple<>(FamiliarCommand.FOLLOW_TARGET, rt);
 					} else {
 						return new Tuple<>(FamiliarCommand.ATTACK, rt);
 					}
@@ -178,11 +185,14 @@ public class FamiliarController {
 					}
 				}
 				case MISS: {
-					return new Tuple<>(FamiliarCommand.DESELECT, null);
+					
 				}
 			}
 		}
-		return new Tuple<>(FamiliarCommand.SELECT, null);
+		if (player.rotationPitch < -85) {
+			return new Tuple<>(FamiliarCommand.FOLLOW_ME, null);
+		}
+		return new Tuple<>(FamiliarCommand.DESELECT, null);
 	}
 
 	public static enum FamiliarCommand {

@@ -973,8 +973,9 @@ covens.brew.cost=%d magical power
  
 //Familiars
 familiar.command.follow=%s is now following %s
+familiar.command.followme=%s is now following you
 familiar.command.sit.enable=%s is now sitting
-familiar.command.sit.disable=%s is now following you
+familiar.command.sit.disable=%s is free to move
 familiar.command.follow.forbidden=%s doesn't belong to our world
 familiar.dead=%s was dismissed
 familiar.command.goto=%s is on the move

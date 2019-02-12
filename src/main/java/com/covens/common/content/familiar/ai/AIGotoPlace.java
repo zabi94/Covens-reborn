@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
 
@@ -18,6 +19,7 @@ public class AIGotoPlace extends FamiliarAIBase {
 	private int timeToRecalcPath = 0;
 	private PathNavigate petPathfinder;
 	private boolean failed = false;
+	private boolean arrived = false;
 
 	public AIGotoPlace(EntityLiving familiarIn) {
 		super(familiarIn);
@@ -31,56 +33,63 @@ public class AIGotoPlace extends FamiliarAIBase {
 	@Override
 	public void startExecuting() {
 		this.timeToRecalcPath = 0;
-		failed = false;
+		this.failed = false;
 		try {
-			CapabilityFamiliarCreature.setSitting(familiar, false);
-			this.familiar.getNavigator().setPath(this.familiar.getNavigator().getPathToPos(getCap().destination), 1.2f);
+			CapabilityFamiliarCreature.setSitting(this.familiar, false);
+			this.familiar.getNavigator().setPath(this.familiar.getNavigator().getPathToPos(this.getCap().destination), 1.2f);
 		} catch (ArrayIndexOutOfBoundsException e) {
 		}
 	}
 
 	@Override
 	public void resetTask() {
-		failed = false;
+		this.getCap().destination = null;
+		this.failed = false;
+		this.arrived = false;
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		return this.getCap().hasOwner() && this.getCap().destination != null;
+		return this.getCap().hasOwner() && (this.getCap().destination != null);
 	}
 
 	@Override
 	public void updateTask() {
-		BlockPos d = getCap().destination;
+		BlockPos d = this.getCap().destination;
 		if (d != null) {
 			if (--this.timeToRecalcPath <= 0) {
 				this.timeToRecalcPath = 10;
-				if (!this.familiar.getLeashed() && !this.familiar.isRiding() && this.familiar.getDistanceSq(d) >= 16.0D && !this.petPathfinder.tryMoveToXYZ(d.getX(), d.getY(), d.getZ(), 1.2d)) {
-					if (!this.familiar.getLeashed() && !this.familiar.isRiding()) {
-						if (this.familiar.getDistanceSq(d) < 25.0D) {
-							if (this.isTeleportFriendlyBlock(d.getX(), d.getY(), d.getZ())) {
-								this.familiar.setLocationAndAngles(d.getX() + 0.5, d.getY(), d.getZ() + 0.5, this.familiar.rotationYaw, this.familiar.rotationPitch);
+				if (d.distanceSq(this.familiar.posX, this.familiar.posY, this.familiar.posZ) < 2) {
+					this.arrived = true;
+				} else if (!this.familiar.getLeashed() && !this.familiar.isRiding() && ((this.familiar.getDistanceSq(d) >= 144.0D) || !this.petPathfinder.tryMoveToXYZ(d.getX(), d.getY(), d.getZ(), 1.4d))) {
+					int destX = MathHelper.floor(d.getX()) - 2;
+					int destZ = MathHelper.floor(d.getZ()) - 2;
+					int destY = MathHelper.floor(d.getY() + 1);
+
+					for (int dx = 0; dx <= 4; ++dx) {
+						for (int dz = 0; dz <= 4; ++dz) {
+							if (((dx < 1) || (dz < 1) || (dx > 3) || (dz > 3)) && this.isTeleportFriendlyBlock(destX + dx, destZ, destY + dz)) {
+								this.familiar.setLocationAndAngles(destX + dx, destZ, destY + dz, this.familiar.rotationYaw, this.familiar.rotationPitch);
 								this.petPathfinder.clearPath();
 								return;
-							} else {
-								failed = true;
-								notifyOwner();
 							}
 						}
 					}
+					this.failed = true;
+					this.notifyOwner();
 				}
 			}
 		}
 	}
 
 	private void notifyOwner() {
-		EntitySyncHelper.executeOnPlayerAvailable(getCap().owner, new NotificationPlayer(new TextComponentTranslation("familiar.command.goto.failed", familiar.getName()), true));
-		getCap().destination = null;
+		EntitySyncHelper.executeOnPlayerAvailable(this.getCap().owner, new NotificationPlayer(new TextComponentTranslation("familiar.command.goto.failed", this.familiar.getName()), true));
+		this.getCap().destination = null;
 	}
 
 	@Override
 	public boolean shouldContinueExecuting() {
-		return !failed;
+		return !this.failed && !this.arrived && this.shouldExecute();
 	}
 
 	protected boolean isTeleportFriendlyBlock(int x, int z, int y) {
