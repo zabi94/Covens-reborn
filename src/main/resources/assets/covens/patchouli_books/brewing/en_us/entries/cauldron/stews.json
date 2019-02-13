@@ -1,0 +1,16 @@
+{
+  "name": "Stews",
+  "icon": "covens:stew",
+"sortnum": "1",
+  "category": "cauldron",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Even though the cauldron has many magical uses, the cauldron can sometimes be used to achieve more mundane goals. Indeed, the cauldron can also be used to stew. $(br2)Making a stew is rather easy, achieved by simply dropping food inside the boiling water. $(br2)However, what's hard is to make a nutritious stew. One can not"
+    },
+    {
+      "type": "text",
+      "text": "simply throw ingredients in and expect a tasy result: the key to a good stew is variety; the more there is, the better the final stew will be. $(br2)Also, keep in mind that you need to collect it with a wooden bowl, so don't add more than ten ingredients or you won't be able to collect the stew and it will spoil... $(br2)$(o)You sure you don't want another bowl, deary? You look a bit skinny..."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Voiding items",
+  "icon": "minecraft:lava_bucket",
+"sortnum": "1",
+  "category": "cauldron",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Regular folk, rudimentary as they are, tend to use lava whenever they want to dispose of useless items. $(br2)Obviously, witches do not follow such practices, but rather proceed by throwing their trash inside lava filled cauldrons. $(br2)Not only it's much more practical, it also has the"
+    },
+    {
+      "type": "text",
+      "text": "advantage of not setting the witch on fire should it trip over the cauldron... $(br2)Additionally, you can also throw filled buckets to void their content. $(br2)$(o)Just... don't throw fireworks in, ok?"
+    }
+  ]
+}

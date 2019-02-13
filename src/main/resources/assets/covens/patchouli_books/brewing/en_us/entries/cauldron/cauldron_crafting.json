@@ -32,8 +32,8 @@
     {
       "type": "spotlight", 
       "item": "covens:goblet:1",
-      "title": "Wax",
-      "text": "One can not simply fill a goblet with plain water. rather, a special concoction needs to be made by throwing a ghast tear, cloudy oil and three pieces of redstone, and last but not least, the goblet... $(br2)$(o)Don't you dare question our ancient ways!"
+      "title": "Filling the goblet",
+      "text": "One can not simply fill a goblet with plain water. Rather, a special concoction needs to be made by throwing a ghast tear, cloudy oil and three pieces of redstone, and last but not least, the goblet... $(br2)$(o)Don't you dare question our ancient ways!"
 
     }
 

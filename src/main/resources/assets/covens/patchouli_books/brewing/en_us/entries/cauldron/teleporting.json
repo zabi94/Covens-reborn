@@ -1,0 +1,21 @@
+{
+  "name": "Cauldron teleportation",
+  "icon": "minecraft:ender_pearl",
+"sortnum": "1",
+  "category": "cauldron",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Another of the many uses of the cauldron is short ranged teleportation. However, the cauldron is not used to teleport, but it's rather used as a beacon to teleport to. $(br2)Should a witch wish to teleport to a cauldron, it must first name it with an anvil, prior to it's placement. $(br2)Then, with the named cauldron"
+    },
+    {
+      "type": "text",
+      "text": "placed in world, it's a simple matter of summoning a flame of witchfire $(o)(see X)$(), converting it to end fire by throwing a pinch of dimensional sand to the flames and last, but not least, stepping inside and speaking the name of the cauldron. $(br2)Keep in mind though, that the cauldron can only attract teleportations that are within a limited range of roughly 64 blocks."
+    },
+    {
+      "type": "text",
+      "text": "$(o)Remember, keep your elbows tucked in..."
+    }
+
+  ]
+}
