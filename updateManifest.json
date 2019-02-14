@@ -1,10 +1,10 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/covens-reborn",
   "1.12.2": {
-    "0.0.23": "Fix worlds lagging AF"
+    "0.0.24": "Lots of bugfixes, better familiar AI, documentation progress"
   },
   "promos": {
-    "1.12.2-latest": "0.0.23",
-    "1.12.2-recommended": "0.0.23"
+    "1.12.2-latest": "0.0.24",
+    "1.12.2-recommended": "0.0.24"
   }
 }
