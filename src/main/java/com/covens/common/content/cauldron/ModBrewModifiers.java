@@ -17,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CompoundIngredient;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.DyeUtils;
 import net.minecraftforge.oredict.OreIngredient;
 import zabi.minecraft.minerva.common.utils.ColorHelper;
@@ -157,6 +159,7 @@ public class ModBrewModifiers {
 			}
 
 			@Override
+			@SideOnly(Side.CLIENT)
 			public String getTooltipString(int lvl) {
 				return I18n.format("modifier.covens.color", String.format("%06X", lvl));
 			}

@@ -9,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockMeta<T extends Item> extends ItemBlock {
 
@@ -28,6 +30,7 @@ public class ItemBlockMeta<T extends Item> extends ItemBlock {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		if ((this.nMode == EnumNameMode.TOOLTIP) && (stack.getMetadata() >= 0) && (stack.getMetadata() < this.itemVariants.length)) {

@@ -70,6 +70,7 @@ public class ItemBrew extends ItemMod {
 		});
 	}
 
+	@SideOnly(Side.CLIENT)
 	private static String getLengthTTip(int lengthMod, Potion potion, Item item) {
 		if (potion.isInstant()) {
 			return I18n.format("brew.instant");

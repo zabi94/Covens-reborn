@@ -12,7 +12,6 @@ import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -80,7 +79,7 @@ public class TileEntityCrystalBall extends ModTileEntity {
 		endPlayer.getCapability(CapabilityFortune.CAPABILITY, null).setFortune(fortune);
 		endPlayer.sendStatusMessage(new TextComponentTranslation(fortune.getTranslationKey()), true);
 		if (!endPlayer.equals(externalReader)) {
-			externalReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.read.other", I18n.format(fortune.getTranslationKey()), endPlayer.getDisplayNameString()), true);
+			externalReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.read.other", new TextComponentTranslation(fortune.getTranslationKey()), endPlayer.getDisplayNameString()), true);
 		}
 		return true;
 	}
