@@ -34,40 +34,41 @@ public class TileEntityCrystalBall extends ModTileEntity {
 		if (worldIn.isRemote) {
 			return true;
 		}
-		return this.fortune(playerIn);
+		return this.fortune(playerIn, null); //TODO add external reading
 	}
 
-	public boolean fortune(EntityPlayer reader) {
-		if (this.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(reader, this.getPos(), this.world.provider.getDimension(), 3000)) {
-			return this.readFortune(reader, null);
-		}
-		reader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.no_power"), true);
-		return false;
-	}
-
-	private boolean readFortune(@Nonnull EntityPlayer endPlayer, @Nullable EntityPlayer externalReader) {
-		EntityPlayer messageRecpt = endPlayer;
+	public boolean fortune(@Nonnull EntityPlayer endPlayer, @Nullable EntityPlayer externalReader) {
+		EntityPlayer actualReader = externalReader == null ? endPlayer : externalReader;
 		if (endPlayer == null) {
 			throw new IllegalArgumentException("Cannot read a null player fortune");
 		}
 		if (endPlayer.getDistanceSq(this.getPos()) > 25) {
-			messageRecpt.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.too_far"), true);
+			actualReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.too_far"), true);
 			return false;
 		}
 		IFortune fortune = endPlayer.getCapability(CapabilityFortune.CAPABILITY, null).getFortune();
-
 		if (fortune != null) {
-			messageRecpt.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.already_told", new TextComponentTranslation(fortune.getTranslationKey())), false);
+			actualReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.already_told", new TextComponentTranslation(fortune.getTranslationKey())), false);
 			return false;
 		}
 		List<IFortune> valid = Fortune.REGISTRY.getValuesCollection().parallelStream().filter(f -> f.canBeUsedFor(endPlayer)).collect(Collectors.toList());
 		if (valid.size() == 0) {
-			messageRecpt.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.no_available_fortunes"), true);
+			actualReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.no_available_fortunes"), true);
 			return false;
 		}
+		
+		if (this.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(actualReader, this.getPos(), this.world.provider.getDimension(), 3000)) {
+			return this.readFortune(endPlayer, actualReader, valid);
+		}
+		actualReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.no_power"), true);
+		return false;
+	}
+
+	private boolean readFortune(@Nonnull EntityPlayer endPlayer, @Nonnull EntityPlayer externalReader, List<IFortune> valid) {
 		int totalEntries = valid.parallelStream().mapToInt(f -> f.getDrawingWeight()).sum();
 		final int draw = endPlayer.getRNG().nextInt(totalEntries);
 		int current = 0;
+		IFortune fortune = null;
 		for (IFortune f : valid) {
 			int entries = f.getDrawingWeight();
 			if ((current <= draw) && (draw < (current + entries))) {
