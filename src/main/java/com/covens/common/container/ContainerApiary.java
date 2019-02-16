@@ -2,7 +2,6 @@ package com.covens.common.container;
 
 import com.covens.common.tile.tiles.TileEntityApiary;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -23,41 +22,6 @@ public class ContainerApiary extends ModContainer<TileEntityApiary> {
 			}
 		}
 		this.addPlayerSlots(playerInventory);
-	}
-
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-		return ItemStack.EMPTY;
-//		final Slot slot = inventorySlots.get(slotIndex);
-//		ItemStack copy = ItemStack.EMPTY;
-//
-//		if (slot != null && slot.getHasStack()) {
-//			final ItemStack original = slot.getStack();
-//			copy = original.copy();
-//
-//			if (slotIndex == 0) {
-//				if (!mergeItemStack(original, 19, 55, true)) return ItemStack.EMPTY;
-//				slot.onSlotChange(original, copy);
-//			} else if (slotIndex > 19) {
-//				if (original.getCount() == 1 && !mergeItemStack(original, 0, 1, false)) return ItemStack.EMPTY;
-//				slot.onSlotChange(original, copy);
-//			} else {
-//				if (!mergeItemStack(original, 19, 55, true)) return ItemStack.EMPTY;
-//				slot.onSlotChange(original, copy);
-//			}
-//
-//			if (original.getCount() == 0) {
-//				slot.putStack(ItemStack.EMPTY);
-//			} else {
-//				slot.onSlotChanged();
-//			}
-//
-//			if (original.getCount() == copy.getCount()) return ItemStack.EMPTY;
-//
-//			slot.onTake(player, original);
-//		}
-//
-//		return copy;
 	}
 
 	private class SlotOneItem extends SlotFiltered<TileEntityApiary> {
