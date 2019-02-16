@@ -1,5 +1,6 @@
 {
   "name": "Potion brewing",
   "description": "Double, double toil and trouble; Fire burn and caldron bubble.",
+  "sortnum": "2",
   "icon": "covens:brew_phial_drink"
 }

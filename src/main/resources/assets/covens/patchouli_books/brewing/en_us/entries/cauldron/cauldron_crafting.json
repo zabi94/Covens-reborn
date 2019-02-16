@@ -12,6 +12,7 @@
       "type": "spotlight", 
       "item": "minecraft:sticky_piston",
       "title": "Sticky piston cleansing",
+      "sortnum": "2",
       "text": "Throwing a sticky piston to the cauldron allows you to cleanse the goo from it, leaving you a lovely clean one..."
 
     },
@@ -26,14 +27,14 @@
       "type": "spotlight", 
       "item": "covens:wax",
       "title": "Wax",
-      "text": "Throwing a filled empty honeycomb to the boiling waters allows the wax to melt it, so you can gather the wax..."
+      "text": "Throwing a filled empty honeycomb to the boiling waters allows the wax to melt, so you can gather the it..."
 
     },
     {
       "type": "spotlight", 
       "item": "covens:goblet:1",
       "title": "Filling the goblet",
-      "text": "One can not simply fill a goblet with plain water. Rather, a special concoction needs to be made by throwing a ghast tear, cloudy oil and three pieces of redstone, and last but not least, the goblet... $(br2)$(o)Don't you dare question our ancient ways!"
+      "text": "One can not simply fill a goblet with plain water. Rather, a special concoction needs to be made by throwing, to a cauldron filled with honey, a ghast tear, cloudy oil and three pieces of redstone, and last but not least, the goblet... $(br2)$(o)Don't you dare question our ancient ways!"
 
     }
 
