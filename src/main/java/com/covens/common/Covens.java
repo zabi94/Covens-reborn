@@ -54,6 +54,7 @@ import com.covens.common.crafting.ModOvenSmeltingRecipes;
 import com.covens.common.crafting.ModSpinningThreadRecipes;
 import com.covens.common.entity.ModEntities;
 import com.covens.common.integration.extraalchemy.ExtraAlchemy;
+import com.covens.common.integration.optifine.Optifine;
 import com.covens.common.integration.patchouli.Patchouli;
 import com.covens.common.integration.thaumcraft.ThaumcraftLoader;
 import com.covens.common.item.ModItems;
@@ -151,6 +152,7 @@ public class Covens {
 		Patchouli.init();
 		CauldronRegistry.postInit();
 		ExtraAlchemy.init();
+		Optifine.init();
 	}
 
 	@EventHandler

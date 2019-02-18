@@ -3,6 +3,7 @@ package com.covens.common.block.misc;
 import java.util.Random;
 
 import com.covens.common.block.ModBlocks;
+import com.covens.common.integration.optifine.Optifine;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -21,6 +22,9 @@ public class BlockCandleMedium extends BlockCandle {
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		if (Optifine.isLoaded()) {
+			return MEDIUM_BOX;
+		}
 		return MEDIUM_BOX.offset(state.getOffset(source, pos));
 	}
 

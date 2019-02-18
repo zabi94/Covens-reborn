@@ -5,6 +5,7 @@ import java.util.Random;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
+import com.covens.common.integration.optifine.Optifine;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -157,6 +158,9 @@ public abstract class BlockCandle extends BlockMod implements IInfusionStabilise
 
 	@Override
 	public EnumOffsetType getOffsetType() {
+		if (Optifine.isLoaded()) {
+			return EnumOffsetType.NONE;
+		}
 		return EnumOffsetType.XZ;
 	}
 

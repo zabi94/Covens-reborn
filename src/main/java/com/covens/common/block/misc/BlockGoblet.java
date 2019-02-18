@@ -1,6 +1,7 @@
 package com.covens.common.block.misc;
 
 import com.covens.common.block.BlockMod;
+import com.covens.common.integration.optifine.Optifine;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -33,6 +34,9 @@ public class BlockGoblet extends BlockMod {
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		if (Optifine.isLoaded()) {
+			return bounding_box;
+		}
 		return bounding_box.offset(state.getOffset(source, pos));
 	}
 
@@ -101,6 +105,9 @@ public class BlockGoblet extends BlockMod {
 
 	@Override
 	public EnumOffsetType getOffsetType() {
+		if (Optifine.isLoaded()) {
+			return EnumOffsetType.NONE;
+		}
 		return EnumOffsetType.XZ;
 	}
 	
