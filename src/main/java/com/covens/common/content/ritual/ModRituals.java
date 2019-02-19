@@ -5,7 +5,6 @@ import static com.covens.api.ritual.EnumGlyphType.ENDER;
 import static com.covens.api.ritual.EnumGlyphType.NETHER;
 import static com.covens.api.ritual.EnumGlyphType.NORMAL;
 
-import com.covens.api.infusion.DefaultInfusions;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.ritual.rituals.RitualBiomeShift;
 import com.covens.common.content.ritual.rituals.RitualConjurationBlaze;
@@ -19,7 +18,6 @@ import com.covens.common.content.ritual.rituals.RitualDrawing;
 import com.covens.common.content.ritual.rituals.RitualFlames;
 import com.covens.common.content.ritual.rituals.RitualGateway;
 import com.covens.common.content.ritual.rituals.RitualHighMoon;
-import com.covens.common.content.ritual.rituals.RitualInfusion;
 import com.covens.common.content.ritual.rituals.RitualNetherPortal;
 import com.covens.common.content.ritual.rituals.RitualPerception;
 import com.covens.common.content.ritual.rituals.RitualSandsTime;
@@ -164,6 +162,8 @@ public class ModRituals {
 		
 		RitualFactory.create("gateway")
 			.addInput(LibIngredients.locationStoneBound)
+			.addInput(LibIngredients.enderPearl)
+			.addInput(LibIngredients.dimensionalSand)
 			.neverEnding()
 			.withAllCircles(ENDER)
 			.withMediumCircle(NORMAL)
@@ -190,41 +190,41 @@ public class ModRituals {
 			.withTickCost(8)
 			.buildAndRegister(new RitualBiomeShift());
 		
-		new RitualFactory(DefaultInfusions.OVERWORLD.getRegistryName())
-			.addInput(LibIngredients.fumePetrichorOdour)
-			.withAllCircles(NORMAL)
-			.withRunningTime(60)
-			.withStartingPower(6000)
-			.withTickCost(1)
-			.disallowRemote()
-			.buildAndRegister(new RitualInfusion(DefaultInfusions.OVERWORLD));
-		
-		new RitualFactory(DefaultInfusions.NETHER.getRegistryName())
-			.addInput(LibIngredients.fumeFieryBreeze)
-			.withAllCircles(NETHER)
-			.withRunningTime(60)
-			.withStartingPower(6000)
-			.withTickCost(1)
-			.disallowRemote()
-			.buildAndRegister(new RitualInfusion(DefaultInfusions.NETHER));
-		
-		new RitualFactory(DefaultInfusions.END.getRegistryName())
-			.addInput(LibIngredients.fumeHeavenlyWind)
-			.withAllCircles(ENDER)
-			.withRunningTime(60)
-			.withStartingPower(6000)
-			.withTickCost(1)
-			.disallowRemote()
-			.buildAndRegister(new RitualInfusion(DefaultInfusions.END));
-		
-		new RitualFactory(DefaultInfusions.DREAM.getRegistryName())
-			.addInput(LibIngredients.fumeZephyrOfDepths)
-			.withAllCircles(ANY)
-			.withRunningTime(60)
-			.withStartingPower(6000)
-			.withTickCost(1)
-			.disallowRemote()
-			.buildAndRegister(new RitualInfusion(DefaultInfusions.DREAM));
+//		new RitualFactory(DefaultInfusions.OVERWORLD.getRegistryName())
+//			.addInput(LibIngredients.fumePetrichorOdour)
+//			.withAllCircles(NORMAL)
+//			.withRunningTime(60)
+//			.withStartingPower(6000)
+//			.withTickCost(1)
+//			.disallowRemote()
+//			.buildAndRegister(new RitualInfusion(DefaultInfusions.OVERWORLD));
+//		
+//		new RitualFactory(DefaultInfusions.NETHER.getRegistryName())
+//			.addInput(LibIngredients.fumeFieryBreeze)
+//			.withAllCircles(NETHER)
+//			.withRunningTime(60)
+//			.withStartingPower(6000)
+//			.withTickCost(1)
+//			.disallowRemote()
+//			.buildAndRegister(new RitualInfusion(DefaultInfusions.NETHER));
+//		
+//		new RitualFactory(DefaultInfusions.END.getRegistryName())
+//			.addInput(LibIngredients.fumeHeavenlyWind)
+//			.withAllCircles(ENDER)
+//			.withRunningTime(60)
+//			.withStartingPower(6000)
+//			.withTickCost(1)
+//			.disallowRemote()
+//			.buildAndRegister(new RitualInfusion(DefaultInfusions.END));
+//		
+//		new RitualFactory(DefaultInfusions.DREAM.getRegistryName())
+//			.addInput(LibIngredients.fumeZephyrOfDepths)
+//			.withAllCircles(ANY)
+//			.withRunningTime(60)
+//			.withStartingPower(6000)
+//			.withTickCost(1)
+//			.disallowRemote()
+//			.buildAndRegister(new RitualInfusion(DefaultInfusions.DREAM));
 		
 		
 		RitualFactory.create("flames")
