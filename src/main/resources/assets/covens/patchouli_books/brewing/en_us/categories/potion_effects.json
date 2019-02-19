@@ -2,5 +2,5 @@
   "name": "Potion effects",
   "description": "A brief description of the different potion effects known to witchcraft $(o)(which excludes the vanilla flavoured ones everyone knows...).",
   "parent": "potion_brewing",
-  "icon": "covens:brew_phial_drink"
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:freezing\"}]}"
 }

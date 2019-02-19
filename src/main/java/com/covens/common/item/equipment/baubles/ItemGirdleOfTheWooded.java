@@ -10,6 +10,7 @@ import com.covens.client.render.entity.model.ModelGirdleOfTheWooded;
 import com.covens.client.render.entity.model.ModelGirdleOfTheWoodedArmor;
 import com.covens.common.core.capability.simple.BarkCapability;
 import com.covens.common.item.ItemMod;
+import com.covens.common.potion.ModPotions;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
@@ -23,7 +24,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -101,9 +101,9 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 				return;
 			}
 			EntityPlayer player = (EntityPlayer) entity;
-			if (this.isValidSpot(player) && (entity.getRNG().nextDouble() < 0.0008d)) { // ~once a minute
+			if ( (entity.getRNG().nextDouble() < 0.0004d && this.isValidSpot(player))) { // ~once every 2 minutes
 				if (buildBark(player)) {
-					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 10, false, false));
+					player.addPotionEffect(new PotionEffect(ModPotions.rooting, 80, 0, false, false));
 					player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_CHORUS_FLOWER_GROW, SoundCategory.PLAYERS, 1f, 1f);
 				}
 			}

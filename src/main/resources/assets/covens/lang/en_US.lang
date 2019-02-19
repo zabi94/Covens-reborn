@@ -642,6 +642,9 @@ effect.power_boost.desc=Temporarily increases the amount of MP you have
 effect.power_dampening=Power Dampening
 effect.power_dampening.desc=Temporarily decreases the amount of MP you have
 
+effect.rooting=Rooted
+effect.rooting.desc=Binds the entity in place
+
 //Vanilla potion descriptions
 effect.absorption.desc=Temporarily gives you extra hearts
 effect.fireResistance.desc=Protects you from fire damage, unless you're a vampire

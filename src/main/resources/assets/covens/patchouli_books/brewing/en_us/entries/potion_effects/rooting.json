@@ -1,0 +1,16 @@
+{
+  "name": "Rooting",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:rooting\"}]}",
+  "sortnum": "4",
+  "category": "potion_effects",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Creatures under this effect will grow roots if applied when they are on grass or other fertile grounds. They won't be able to move, but the soil will bring nutrition from below, satiating any hunger they may have.$(br)Note that being pushed away from the ground will rip the roots away, painfully"
+    },
+    {
+      "type": "covens:brew_recipe", 
+      "brew": "covens:rooting"
+    }
+  ]
+}

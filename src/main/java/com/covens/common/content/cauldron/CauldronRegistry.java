@@ -29,7 +29,6 @@ import static com.covens.common.lib.LibIngredients.stickyPiston;
 import static com.covens.common.lib.LibIngredients.wormwood;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +46,7 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModFluids;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemFumes;
+import com.covens.common.lib.LibIngredients;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 import com.google.common.collect.HashBiMap;
@@ -59,11 +59,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import zabi.minecraft.minerva.common.crafting.IngredientMultiOreDict;
@@ -313,8 +311,8 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.power_dampening, Ingredient.fromItem(ModItems.graveyard_dust));
 		registerCombinedBrewEffect(ModPotions.power_boost, Ingredient.fromItem(ModItems.juniper_berries));
 		registerCombinedBrewEffect(ModPotions.smite, Ingredient.fromItem(ModItems.garlic));
-		registerCombinedBrewEffect(ModPotions.mowing, new CompoundIngredient(Arrays.asList(Ingredient.fromItem(Item.getItemFromBlock(Blocks.LEAVES)), Ingredient.fromItem(Item.getItemFromBlock(Blocks.LEAVES2)), new OreIngredient("leaves"))) {
-		});
+		registerCombinedBrewEffect(ModPotions.mowing, LibIngredients.anyLeaf);
+		registerCombinedBrewEffect(ModPotions.rooting, LibIngredients.anyLog);
 	}
 
 	public static void postInit() {

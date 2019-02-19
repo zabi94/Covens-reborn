@@ -1,6 +1,6 @@
 {
   "name": "The brewing of a potion",
-  "icon": "covens:brew_phial_drink",
+  "icon": "covens:brew_phial_drink:0{brew:[{potion:\"covens:fertilize\"}]}",
   "sortnum": "1",
   "category": "potion_brewing",
   "pages": [
