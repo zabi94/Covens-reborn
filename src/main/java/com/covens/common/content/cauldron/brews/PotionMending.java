@@ -35,7 +35,7 @@ public class PotionMending extends BrewMod {
 	private Method startConverting;
 
 	public PotionMending() {
-		super("mending", false, 0x4CBB17, true, 0);
+		super("mending", false, 0x4CBB17, true, 0, 90);
 		this.stateMap.put(Blocks.MYCELIUM, Blocks.GRASS.getDefaultState());
 		this.stateMap.put(Blocks.DIRT, Blocks.GRASS.getDefaultState());
 		this.stateMap.put(Blocks.RED_MUSHROOM, Blocks.RED_FLOWER.getDefaultState());

@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class PotionGrowFlowers extends BrewMod {
 
 	public PotionGrowFlowers() {
-		super("grow_flowers", false, 0xff63ff, false, 600);
+		super("grow_flowers", false, 0xff63ff, false, 600, 10);
 		this.setIconIndex(7, 0);
 	}
 

@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class PotionPowerBoost extends BrewMod implements IMagicPowerExpander {
 
 	public PotionPowerBoost() {
-		super("power_boost", false, 0x66023C, false, 3000);
+		super("power_boost", false, 0x66023C, false, 3000, 80);
 		this.setIconIndex(1, 2);
 	}
 

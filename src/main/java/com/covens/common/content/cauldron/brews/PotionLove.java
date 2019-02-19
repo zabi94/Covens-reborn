@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class PotionLove extends BrewMod {
 	public PotionLove() {
-		super("love", false, 0xff69b4, true, 0);
+		super("love", false, 0xff69b4, true, 0, 40);
 	}
 
 	@Override

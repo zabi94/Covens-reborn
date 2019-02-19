@@ -14,7 +14,7 @@ public class ExtraAlchemy {
 
 	public static void init() {
 		if (magnetism != null) {
-			CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(magnetism), magnetism, LibIngredients.ingotIron);
+			CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(magnetism, 15), magnetism, LibIngredients.ingotIron);
 		}
 	}
 

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class PotionPruneLeaves extends BrewMod {
 
 	public PotionPruneLeaves() {
-		super("prune_leaves", false, 0x5bff6e, true, 0);
+		super("prune_leaves", false, 0x5bff6e, true, 0, 10);
 	}
 
 	@Override

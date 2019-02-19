@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 public class PotionPurification extends BrewMod {
 
 	public PotionPurification() {
-		super("purify", false, 0xFAEBD7, true, 0);
+		super("purify", false, 0xFAEBD7, true, 0, 70);
 	}
 
 	@Override

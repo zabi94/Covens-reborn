@@ -10,7 +10,7 @@ import net.minecraft.init.MobEffects;
 
 public class PotionRevealing extends BrewMod {
 	public PotionRevealing() {
-		super("revealing", false, 0x00FFFF, true, 0);
+		super("revealing", false, 0x00FFFF, true, 0, 50);
 	}
 
 	@Override

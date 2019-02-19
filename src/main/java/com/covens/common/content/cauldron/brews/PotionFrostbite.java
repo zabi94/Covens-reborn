@@ -23,7 +23,7 @@ public class PotionFrostbite extends BrewMod {
 	public static final Potion freezing = null;
 
 	public PotionFrostbite() {
-		super("freezing", true, 0xB0E0E6, true, 0);
+		super("freezing", true, 0xB0E0E6, true, 0, 50);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 public class PotionSmite extends GenericBrewDamageVS {
 
 	public PotionSmite() {
-		super("smite", 0x8DA399);
+		super("smite", 0x8DA399, 30);
 	}
 
 	@Override

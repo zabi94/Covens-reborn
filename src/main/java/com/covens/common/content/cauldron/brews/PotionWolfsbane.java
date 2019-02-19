@@ -9,7 +9,7 @@ import net.minecraft.potion.PotionEffect;
 public class PotionWolfsbane extends GenericBrewDamageVS {
 
 	public PotionWolfsbane() {
-		super("wolfsbane", 0xEFCC00);
+		super("wolfsbane", 0xEFCC00, 50);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class PotionSinking extends BrewMod {
 	public static final Potion freezing = null;
 
 	public PotionSinking() {
-		super("sinking", true, 0x333399, false, 60 * 20);
+		super("sinking", true, 0x333399, false, 60 * 20, 30);
 		this.setIconIndex(3, 1);
 	}
 

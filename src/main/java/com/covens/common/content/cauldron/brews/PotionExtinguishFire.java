@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class PotionExtinguishFire extends BrewMod {
 
 	public PotionExtinguishFire() {
-		super("extinguish_fire", false, 0x3EB489, true, 0);
+		super("extinguish_fire", false, 0x3EB489, true, 0, 5);
 	}
 
 	private static boolean canExtinguish(World world, int amplifier) {

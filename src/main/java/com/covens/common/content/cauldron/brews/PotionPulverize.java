@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class PotionPulverize extends BrewMod {
 
 	public PotionPulverize() {
-		super("pulverize", false, 0xFAEBD7, true, 0);
+		super("pulverize", false, 0xFAEBD7, true, 0, 30);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class PotionSnowTrail extends BrewMod {
 
 	public PotionSnowTrail() {
-		super("snow_trail", false, 0xccfff9, false, 3 * 60 * 20);
+		super("snow_trail", false, 0xccfff9, false, 3 * 60 * 20, 10);
 		this.setIconIndex(4, 1);
 	}
 

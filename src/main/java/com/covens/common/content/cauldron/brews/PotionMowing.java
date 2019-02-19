@@ -16,7 +16,7 @@ import net.minecraftforge.common.IPlantable;
 
 public class PotionMowing extends BrewMod {
 	public PotionMowing() {
-		super("mowing", false, 0x4d4a0d, true, 0);
+		super("mowing", false, 0x4d4a0d, true, 0, 10);
 	}
 
 	@Override

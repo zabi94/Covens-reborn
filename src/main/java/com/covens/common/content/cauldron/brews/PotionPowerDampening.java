@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class PotionPowerDampening extends BrewMod implements IMagicPowerExpander {
 
 	public PotionPowerDampening() {
-		super("power_dampening", true, 0xFADA5E, false, 3000);
+		super("power_dampening", true, 0xFADA5E, false, 3000, 80);
 		this.setIconIndex(2, 2);
 	}
 

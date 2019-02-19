@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class PotionPathOfTheDeep extends BrewMod {
 
 	public PotionPathOfTheDeep() {
-		super("path_of_the_deep", false, 0x59d2ff, false, 3 * 20 * 60);
+		super("path_of_the_deep", false, 0x59d2ff, false, 3 * 20 * 60, 15);
 		this.setIconIndex(0, 1);
 	}
 

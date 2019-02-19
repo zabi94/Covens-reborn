@@ -16,7 +16,7 @@ public class PotionVolatility extends BrewMod {
 	private static final Random rand = new Random();
 
 	public PotionVolatility() {
-		super("volatility", true, 0xFF3800, false, 20 * 45);
+		super("volatility", true, 0xFF3800, false, 20 * 45, 50);
 		this.setIconIndex(6, 1);
 	}
 

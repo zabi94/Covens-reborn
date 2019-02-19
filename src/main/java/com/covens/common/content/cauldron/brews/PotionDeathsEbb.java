@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class PotionDeathsEbb extends BrewMod {
 
 	public PotionDeathsEbb() {
-		super("deaths_ebb", true, 0x6c7c59, true, 0);
+		super("deaths_ebb", true, 0x6c7c59, true, 0, 50);
 		this.setIconIndex(5, 1);
 	}
 

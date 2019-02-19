@@ -20,7 +20,7 @@ public class PotionArrowDeflection extends BrewMod {
 	private final Method methodGetArrowStack;
 
 	public PotionArrowDeflection() {
-		super("arrow_deflection", false, 0xFFFACD, false, 2400);
+		super("arrow_deflection", false, 0xFFFACD, false, 2400, 20);
 		try {
 			this.fieldInGround = LibReflection.field("inGround", "field_70254_i", EntityArrow.class);
 			this.methodGetArrowStack = LibReflection.method("getArrowStack", "func_184550_j", EntityArrow.class, ItemStack.class);

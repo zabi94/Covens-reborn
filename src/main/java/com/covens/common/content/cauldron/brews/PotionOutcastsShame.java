@@ -7,7 +7,7 @@ import net.minecraft.entity.monster.EntityWitch;
 public class PotionOutcastsShame extends GenericBrewDamageVS {
 
 	public PotionOutcastsShame() {
-		super("outcasts_shame", 0x8A3324);
+		super("outcasts_shame", 0x8A3324, 30);
 	}
 
 	@Override

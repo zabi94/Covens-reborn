@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class PotionSpiderNightmare extends BrewMod {
 
 	public PotionSpiderNightmare() {
-		super("spider_nightmare", true, 0x353839, false, 20 * 60 * 3);
+		super("spider_nightmare", true, 0x353839, false, 20 * 60 * 3, 60);
 		this.setIconIndex(5, 1);
 	}
 

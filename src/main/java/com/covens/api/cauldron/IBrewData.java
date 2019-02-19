@@ -6,4 +6,5 @@ import com.covens.common.content.cauldron.IBrewEntry;
 
 public interface IBrewData {
 	public List<IBrewEntry> getEffects();
+	public int getCost();
 }

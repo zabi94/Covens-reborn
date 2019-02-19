@@ -23,7 +23,7 @@ public class PotionSetehsWastes extends BrewMod {
 	private final Map<Block, IBlockState> stateMap = new HashMap<>();
 
 	public PotionSetehsWastes() {
-		super("setehs_wastes", false, 0xD2691E, true, 0);
+		super("setehs_wastes", false, 0xD2691E, true, 0, 40);
 		this.stateMap.put(Blocks.SAND, Blocks.SAND.getStateFromMeta(1));
 	}
 

@@ -20,6 +20,8 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 
 	private static final String ID = "brew";
 	private int color = TileEntityCauldron.DEFAULT_COLOR;
+	private boolean finalized = false;
+	private int projectedCost = 0;
 
 	private TileEntityCauldron cauldron;
 
@@ -35,7 +37,7 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 
 	@Override
 	public boolean canAccept(ItemStack stack) {
-		return true;
+		return !finalized;
 	}
 
 	@Override
@@ -44,6 +46,8 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 			this.checkBrew();
 			if (this.cauldron.getInputs().size() == 1) {
 				this.color = 0xe050a0;
+				this.finalized = false;
+				this.projectedCost = 0;
 			}
 		}
 	}
@@ -59,8 +63,9 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 			} else if (heldItem == ModItems.empty_brew_drink) {
 				potionAmountUsed = 300;
 			}
-
-			if (this.hasEnergy(1000) && this.hasRequiredFluidAmount(potionAmountUsed)) { // TODO make energy dependent on brew
+			int cost = new BrewBuilder(this.cauldron.getInputs()).build().orElseGet(BrewData::new).getCost();
+			if ((finalized || this.hasEnergy(cost)) && this.hasRequiredFluidAmount(potionAmountUsed)) { // TODO make energy dependent on brew
+				finalized = true;
 				if (heldItem == ModItems.empty_brew_drink) {
 					TileEntityCauldron.giveItemToPlayer(player, this.getBrewStackFor(new ItemStack(ModItems.brew_phial_drink)));
 				} else if (heldItem == ModItems.empty_brew_linger) {
@@ -79,6 +84,7 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 				this.cauldron.setTankLock(true);
 				this.cauldron.clearItemInputs();
 				this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().IDLE);
+				this.finalized = false;
 			}
 			this.cauldron.markDirty();
 			this.cauldron.syncToClient();
@@ -105,22 +111,26 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 
 	@Override
 	public void saveToNBT(NBTTagCompound tag) {
-		tag.setInteger("potColor", this.color);
+		saveToSyncNBT(tag);
+		tag.setBoolean("finalized", finalized);
 	}
 
 	@Override
 	public void loadFromNBT(NBTTagCompound tag) {
-		this.color = tag.getInteger("potColor");
+		this.loadFromSyncNBT(tag);
+		this.finalized = tag.getBoolean("finalized");
 	}
 
 	@Override
 	public void saveToSyncNBT(NBTTagCompound tag) {
-		this.saveToNBT(tag);
+		tag.setInteger("potColor", this.color);
+		tag.setInteger("cost", this.projectedCost);
 	}
 
 	@Override
 	public void loadFromSyncNBT(NBTTagCompound tag) {
-		this.loadFromNBT(tag);
+		this.color = tag.getInteger("potColor");
+		this.projectedCost = tag.getInteger("cost");
 	}
 
 	@Override
@@ -131,6 +141,7 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 	@Override
 	public void onDeactivation() {
 		this.color = TileEntityCauldron.DEFAULT_COLOR;
+		this.projectedCost = 0;
 	}
 
 	private void checkBrew() {
@@ -138,8 +149,10 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 			Optional<BrewData> data = new BrewBuilder(this.cauldron.getInputs()).build();
 			if (data.isPresent()) {
 				this.color = data.get().getColor();
+				this.projectedCost = data.get().getCost();
 			} else {
 				this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
+				this.projectedCost = 0;
 			}
 			this.cauldron.markDirty();
 			this.cauldron.syncToClient();

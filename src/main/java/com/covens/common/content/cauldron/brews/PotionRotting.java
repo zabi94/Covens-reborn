@@ -9,7 +9,7 @@ import net.minecraft.util.DamageSource;
 public class PotionRotting extends BrewMod {
 
 	public PotionRotting() {
-		super("rotting", true, 0x4B5320, false, 60 * 20);
+		super("rotting", true, 0x4B5320, false, 60 * 20, 50);
 		this.setIconIndex(1, 1);
 	}
 

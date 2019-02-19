@@ -3,6 +3,7 @@ package com.covens.common.integration.patchouli.processors;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+import com.covens.api.cauldron.IBrewEffect;
 import com.covens.common.content.cauldron.CauldronRegistry;
 
 import net.minecraft.client.resources.I18n;
@@ -18,6 +19,7 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 
 	private Ingredient brew;
 	private Potion p;
+	private IBrewEffect brewEff;
 
 	@Override
 	public void setup(IVariableProvider<String> json) {
@@ -26,9 +28,11 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 			try {
 				Potion tp = Potion.getPotionFromResourceLocation(name);
 				Ingredient ing = CauldronRegistry.getIngredientFromBrew(CauldronRegistry.getBrewFromPotion(tp)).orElse(null);
-				if (ing != null && tp != null) {
-					brew = ing;
+				IBrewEffect be = CauldronRegistry.getBrewFromPotion(tp);
+				if (ing != null && tp != null && be != null) {
+					this.brew = ing;
 					this.p = tp;
+					this.brewEff = be;
 					break;
 				}
 			} catch (NoSuchElementException e) {
@@ -37,10 +41,13 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 			} catch (IllegalArgumentException e) {
 				Log.e("Potion "+name+" not found");
 				continue;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		Objects.requireNonNull(this.p);
 		Objects.requireNonNull(this.brew);
+		Objects.requireNonNull(this.brewEff);
 	}
 
 	@Override
@@ -53,7 +60,7 @@ public class BrewRecipeProcessor implements IComponentProcessor {
 				return PatchouliAPI.instance.serializeIngredient(this.brew);
 			}
 			if ("cost".equals(val)) {
-				return I18n.format("covens.brew.cost", 10);
+				return I18n.format("covens.brew.cost", brewEff.getCost());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

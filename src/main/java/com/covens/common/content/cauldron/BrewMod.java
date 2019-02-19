@@ -14,10 +14,12 @@ import net.minecraft.world.World;
 public class BrewMod extends PotionMod implements IBrewEffect {
 
 	protected int defaultDuration;
+	protected int cost;
 
-	public BrewMod(String name, boolean isBadEffectIn, int liquidColorIn, boolean isInstant, int defaultDuration) {
+	public BrewMod(String name, boolean isBadEffectIn, int liquidColorIn, boolean isInstant, int defaultDuration, int cost) {
 		super(name, isBadEffectIn, liquidColorIn, isInstant);
 		this.defaultDuration = defaultDuration;
+		this.cost = cost;
 	}
 
 	@Override
@@ -47,6 +49,11 @@ public class BrewMod extends PotionMod implements IBrewEffect {
 	@Override
 	public int getLingeringDuration() {
 		return this.defaultDuration / 5;
+	}
+
+	@Override
+	public int getCost() {
+		return cost;
 	}
 
 }

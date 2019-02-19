@@ -25,7 +25,7 @@ import net.minecraftforge.common.IPlantable;
 public class PotionInfestation extends BrewMod {
 
 	public PotionInfestation() {
-		super("infestation", true, 0xFF80DC, false, 3 * 60 * 20);
+		super("infestation", true, 0xFF80DC, false, 3 * 60 * 20, 70);
 		this.setIconIndex(0, 0);
 	}
 

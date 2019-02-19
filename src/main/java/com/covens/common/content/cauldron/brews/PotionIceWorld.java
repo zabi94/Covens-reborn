@@ -35,7 +35,7 @@ public class PotionIceWorld extends BrewMod {
 	private final Map<Block, IBlockState> stateMap = new HashMap<>();
 
 	public PotionIceWorld() {
-		super("ice_world", true, 0xB0E0E6, true, 0);
+		super("ice_world", true, 0xB0E0E6, true, 0, 40);
 		this.stateMap.put(Blocks.GRASS_PATH, Blocks.PACKED_ICE.getDefaultState());
 		this.stateMap.put(Blocks.GRAVEL, Blocks.PACKED_ICE.getDefaultState());
 		this.stateMap.put(Blocks.COBBLESTONE, Blocks.PACKED_ICE.getDefaultState());

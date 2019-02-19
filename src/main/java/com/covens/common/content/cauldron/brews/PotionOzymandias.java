@@ -22,7 +22,7 @@ import net.minecraftforge.common.IPlantable;
 
 public class PotionOzymandias extends GenericBrewDamageVS {
 	public PotionOzymandias() {
-		super("ozymandias", 0x303E0C);
+		super("ozymandias", 0x303E0C, 40);
 	}
 
 	@Override

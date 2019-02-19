@@ -47,6 +47,11 @@ public class ModBrewModifiers {
 			public boolean canApply(IBrewEffect brew) {
 				return true;
 			}
+			
+			@Override
+			public int getCostForLevel(int base, Integer level) {
+				return super.getCostForLevel(base, (int) (1.4*level));
+			}
 		};
 
 		DefaultModifiers.DURATION = new SimpleModifier("length", Ingredient.fromItem(Items.REDSTONE)) {
@@ -84,6 +89,11 @@ public class ModBrewModifiers {
 			public boolean hasMultipleLevels() {
 				return false;
 			}
+			
+			@Override
+			public int getCostForLevel(int base, Integer level) {
+				return level * 5;
+			}
 		};
 
 		DefaultModifiers.SUPPRESS_IN_WORLD_EFFECT = new SimpleModifier("suppress_in_world", Ingredient.fromItem(Items.NETHERBRICK)) {
@@ -97,6 +107,11 @@ public class ModBrewModifiers {
 			public boolean hasMultipleLevels() {
 				return false;
 			}
+			
+			@Override
+			public int getCostForLevel(int base, Integer level) {
+				return level * 5;
+			}
 		};
 
 		DefaultModifiers.SUPPRESS_PARTICLES = new SimpleModifier("suppress_particles", Ingredient.fromItem(Items.BEETROOT)) {
@@ -109,6 +124,11 @@ public class ModBrewModifiers {
 			@Override
 			public boolean hasMultipleLevels() {
 				return false;
+			}
+			
+			@Override
+			public int getCostForLevel(int base, Integer level) {
+				return level * 5;
 			}
 		};
 
@@ -162,6 +182,11 @@ public class ModBrewModifiers {
 			@SideOnly(Side.CLIENT)
 			public String getTooltipString(int lvl) {
 				return I18n.format("modifier.covens.color", String.format("%06X", lvl));
+			}
+			
+			@Override
+			public int getCostForLevel(int base, Integer level) {
+				return 0;
 			}
 		};
 	}

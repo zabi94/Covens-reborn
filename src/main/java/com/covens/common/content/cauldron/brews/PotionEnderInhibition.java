@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class PotionEnderInhibition extends BrewMod {
 
 	public PotionEnderInhibition() {
-		super("ender_inhibition", true, 0x86608E, false, 900);
+		super("ender_inhibition", true, 0x86608E, false, 900, 40);
 		MinecraftForge.EVENT_BUS.register(this);
 		this.setIconIndex(5, 0);
 	}

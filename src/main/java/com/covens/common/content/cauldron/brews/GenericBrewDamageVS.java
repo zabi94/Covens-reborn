@@ -8,8 +8,8 @@ import net.minecraft.util.DamageSource;
 
 public abstract class GenericBrewDamageVS extends BrewMod {
 
-	public GenericBrewDamageVS(String name, int liquidColorIn) {
-		super(name, true, liquidColorIn, true, 0);
+	public GenericBrewDamageVS(String name, int liquidColorIn, int cost) {
+		super(name, true, liquidColorIn, true, 0, cost);
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class PotionRooting extends BrewMod {
 	private static final UUID SPEED_ID = UUID.fromString("0d9985ba-0297-4159-83d7-7a5fd7200489");
 	
 	public PotionRooting() {
-		super("rooting", true, 0x6f4a02, false, 200);
+		super("rooting", true, 0x6f4a02, false, 200, 90);
 		this.setIconIndex(5, 2);
 		MinecraftForge.EVENT_BUS.register(this);
 	}

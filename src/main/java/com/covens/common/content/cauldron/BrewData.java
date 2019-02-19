@@ -11,6 +11,7 @@ import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewData;
 import com.covens.api.cauldron.IBrewEffect;
+import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.Covens;
 import com.covens.common.entity.EntityLingeringBrew;
@@ -196,5 +197,24 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 			}
 		}
 
+	}
+
+	@Override
+	public int getCost() {
+		int cost = 0;
+		List<IBrewEntry> list = getEffects();
+		for (IBrewEntry be:list) {
+			cost += getCostFor(be);
+		}
+		return cost * list.size();
+	}
+
+	private int getCostFor(IBrewEntry be) {
+		int base = CauldronRegistry.BREW_POTION_MAP.inverse().get(be.getPotion()).getCost();
+		int[] actualCost = {base};
+		for (IBrewModifier ibm : be.getModifierList().getModifiers()) {
+			be.getModifierList().getLevel(ibm).ifPresent(level -> actualCost[0] += ibm.getCostForLevel(base, level));
+		}
+		return actualCost[0];
 	}
 }

@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class PotionPowerDrain extends BrewMod {
 
 	public PotionPowerDrain() {
-		super("power_drain", true, 0xE8AC41, false, 400);
+		super("power_drain", true, 0xE8AC41, false, 400, 80);
 		this.setIconIndex(4, 2);
 	}
 

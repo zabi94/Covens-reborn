@@ -16,8 +16,9 @@ import net.minecraft.world.World;
 public class BrewVanilla implements IBrewEffect {
 
 	private int duration = 0;
+	private int cost = 0;
 
-	public BrewVanilla(Potion potion) {
+	public BrewVanilla(Potion potion, int cost) {
 		for (PotionType p : PotionType.REGISTRY) {
 			for (PotionEffect pe : p.getEffects()) {
 				if ((pe.getPotion() == potion) && (pe.getAmplifier() == 0)) {
@@ -26,6 +27,7 @@ public class BrewVanilla implements IBrewEffect {
 					}
 				}
 			}
+			this.cost = cost;
 		}
 
 		if (this.duration == 0) {
@@ -34,8 +36,9 @@ public class BrewVanilla implements IBrewEffect {
 		}
 	}
 
-	public BrewVanilla(int duration) {
+	public BrewVanilla(int duration, int cost) {
 		this.duration = duration;
+		this.cost = cost;
 	}
 
 	@Override
@@ -65,6 +68,11 @@ public class BrewVanilla implements IBrewEffect {
 	@Override
 	public int getLingeringDuration() {
 		return this.getDefaultDuration() / 8;
+	}
+
+	@Override
+	public int getCost() {
+		return cost;
 	}
 
 }

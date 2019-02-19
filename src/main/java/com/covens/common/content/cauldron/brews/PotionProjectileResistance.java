@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class PotionProjectileResistance extends BrewMod {
 
 	public PotionProjectileResistance() {
-		super("projectile_resistance", false, 0x2a3439, false, 3000);
+		super("projectile_resistance", false, 0x2a3439, false, 3000, 20);
 		this.setIconIndex(2, 0);
 		MinecraftForge.EVENT_BUS.register(this);
 	}

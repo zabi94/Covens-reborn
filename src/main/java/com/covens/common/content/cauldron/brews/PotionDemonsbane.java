@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 public class PotionDemonsbane extends GenericBrewDamageVS {
 
 	public PotionDemonsbane() {
-		super("demons_bane", 0xFFF5EE);
+		super("demons_bane", 0xFFF5EE, 40);
 	}
 
 	@Override

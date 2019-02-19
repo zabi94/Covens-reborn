@@ -68,4 +68,15 @@ public interface IBrewModifier extends IForgeRegistryEntry<IBrewModifier> {
 		}
 
 	}
+
+	default int getCostForLevel(int base, Integer level) {
+		return base * fact(level);
+	}
+
+	public static int fact(Integer level) {
+		if (level <= 1) {
+			return 1;
+		}
+		return level * fact(level-1);
+	}
 }

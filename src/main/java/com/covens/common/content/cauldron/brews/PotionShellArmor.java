@@ -21,7 +21,7 @@ public class PotionShellArmor extends BrewMod {
 	private static final UUID modifierUUID = UUID.fromString("54a14a6a-c4be-4113-8998-4073b97344af");
 
 	public PotionShellArmor() {
-		super("shell_armor", false, 0xCCFF00, false, 20 * 90);
+		super("shell_armor", false, 0xCCFF00, false, 20 * 90, 80);
 		MinecraftForge.EVENT_BUS.register(this);
 		this.setIconIndex(2, 1);
 	}

@@ -248,25 +248,25 @@ public class CauldronRegistry {
 		registerCauldronMixedCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.HONEY, Fluid.BUCKET_VOLUME), new ItemStack(ModItems.empty_honeycomb), honeycomb);
 		registerCauldronFluidCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.MUNDANE_OIL, Fluid.BUCKET_VOLUME), potato, Ingredient.fromStacks(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0)));
 
-		registerVanillaBrewEffect(MobEffects.ABSORPTION, Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 0)), 600);
-		registerVanillaBrewEffect(MobEffects.FIRE_RESISTANCE, Ingredient.fromItem(Items.MAGMA_CREAM));
-		registerVanillaBrewEffect(MobEffects.HUNGER, Ingredient.fromItem(Items.ROTTEN_FLESH), 600);
-		registerVanillaBrewEffect(MobEffects.INSTANT_DAMAGE, Ingredient.fromItem(Items.FERMENTED_SPIDER_EYE));
-		registerVanillaBrewEffect(MobEffects.INSTANT_HEALTH, Ingredient.fromItem(Items.SPECKLED_MELON));
-		registerVanillaBrewEffect(MobEffects.INVISIBILITY, Ingredient.fromItem(Item.getItemFromBlock(Blocks.GLASS)));
-		registerVanillaBrewEffect(MobEffects.JUMP_BOOST, Ingredient.fromItem(ModItems.equine_tail));
-		registerVanillaBrewEffect(MobEffects.NIGHT_VISION, Ingredient.fromItem(Items.GOLDEN_CARROT));
-		registerVanillaBrewEffect(MobEffects.POISON, Ingredient.fromItem(Items.SPIDER_EYE));
-		registerVanillaBrewEffect(MobEffects.REGENERATION, Ingredient.fromItem(Items.GHAST_TEAR));
-		registerVanillaBrewEffect(MobEffects.SPEED, Ingredient.fromItem(Items.SUGAR));
-		registerVanillaBrewEffect(MobEffects.SLOWNESS, Ingredient.fromItem(Item.getItemFromBlock(Blocks.SOUL_SAND)));
-		registerVanillaBrewEffect(MobEffects.WATER_BREATHING, Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 3)));
-		registerVanillaBrewEffect(MobEffects.STRENGTH, blazePowder);
-		registerVanillaBrewEffect(MobEffects.WEAKNESS, Ingredient.fromItem(Items.RABBIT_HIDE));
-		registerVanillaBrewEffect(MobEffects.BLINDNESS, Ingredient.fromItem(ModItems.belladonna), 200);
-		registerVanillaBrewEffect(MobEffects.HASTE, Ingredient.fromItem(ModItems.lavender), 1200);
-		registerVanillaBrewEffect(MobEffects.RESISTANCE, Ingredient.fromItem(ModItems.heart), 100);
-		registerVanillaBrewEffect(MobEffects.LEVITATION, Ingredient.fromItem(Items.SHULKER_SHELL), 100);
+		registerVanillaBrewEffect(MobEffects.ABSORPTION, 20, Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 0)), 600);
+		registerVanillaBrewEffect(MobEffects.FIRE_RESISTANCE, 20, Ingredient.fromItem(Items.MAGMA_CREAM));
+		registerVanillaBrewEffect(MobEffects.HUNGER, 30, Ingredient.fromItem(Items.ROTTEN_FLESH), 600);
+		registerVanillaBrewEffect(MobEffects.INSTANT_DAMAGE, 100, Ingredient.fromItem(Items.FERMENTED_SPIDER_EYE));
+		registerVanillaBrewEffect(MobEffects.INSTANT_HEALTH, 70, Ingredient.fromItem(Items.SPECKLED_MELON));
+		registerVanillaBrewEffect(MobEffects.INVISIBILITY, 30, Ingredient.fromItem(Item.getItemFromBlock(Blocks.GLASS)));
+		registerVanillaBrewEffect(MobEffects.JUMP_BOOST, 20, Ingredient.fromItem(ModItems.equine_tail));
+		registerVanillaBrewEffect(MobEffects.NIGHT_VISION, 20, Ingredient.fromItem(Items.GOLDEN_CARROT));
+		registerVanillaBrewEffect(MobEffects.POISON, 70, Ingredient.fromItem(Items.SPIDER_EYE));
+		registerVanillaBrewEffect(MobEffects.REGENERATION, 70, Ingredient.fromItem(Items.GHAST_TEAR));
+		registerVanillaBrewEffect(MobEffects.SPEED, 20, Ingredient.fromItem(Items.SUGAR));
+		registerVanillaBrewEffect(MobEffects.SLOWNESS, 40, Ingredient.fromItem(Item.getItemFromBlock(Blocks.SOUL_SAND)));
+		registerVanillaBrewEffect(MobEffects.WATER_BREATHING, 10, Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 3)));
+		registerVanillaBrewEffect(MobEffects.STRENGTH, 40, blazePowder);
+		registerVanillaBrewEffect(MobEffects.WEAKNESS, 60, Ingredient.fromItem(Items.RABBIT_HIDE));
+		registerVanillaBrewEffect(MobEffects.BLINDNESS, 50, Ingredient.fromItem(ModItems.belladonna), 200);
+		registerVanillaBrewEffect(MobEffects.HASTE, 10, Ingredient.fromItem(ModItems.lavender), 1200);
+		registerVanillaBrewEffect(MobEffects.RESISTANCE, 30, Ingredient.fromItem(ModItems.heart), 100);
+		registerVanillaBrewEffect(MobEffects.LEVITATION, 80, Ingredient.fromItem(Items.SHULKER_SHELL), 100);
 
 		registerCombinedBrewEffect(ModPotions.wolfsbane, Ingredient.fromItem(ModItems.aconitum));
 		registerCombinedBrewEffect(ModPotions.arrow_deflect, Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.everchanging_presence.ordinal())));
@@ -320,12 +320,12 @@ public class CauldronRegistry {
 		CovensAPI.getAPI().registerBrewEffect(ModPotions.sinking, ModPotions.sinking.getPotion(), Ingredient.fromItem(Items.IRON_NUGGET));
 	}
 
-	private static void registerVanillaBrewEffect(Potion potion, Ingredient ingredient) {
-		CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(potion), potion, ingredient);
+	private static void registerVanillaBrewEffect(Potion potion, int cost, Ingredient ingredient) {
+		CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(potion, cost), potion, ingredient);
 	}
 
-	private static void registerVanillaBrewEffect(Potion potion, Ingredient ingredient, int duration) {
-		CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(duration), potion, ingredient);
+	private static void registerVanillaBrewEffect(Potion potion, int cost, Ingredient ingredient, int duration) {
+		CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(duration, cost), potion, ingredient);
 	}
 
 	private static void registerCombinedBrewEffect(Potion potion, Ingredient ingredient) {

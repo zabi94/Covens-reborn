@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class PotionHarvest extends BrewMod {
 	public PotionHarvest() {
-		super("harvest", true, 0xC48F31, true, 0);
+		super("harvest", true, 0xC48F31, true, 0, 10);
 	}
 
 	@Override

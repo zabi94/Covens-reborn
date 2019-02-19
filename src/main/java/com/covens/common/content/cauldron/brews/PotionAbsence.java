@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 public class PotionAbsence extends BrewMod {
 
 	public PotionAbsence() {
-		super("absence", true, 0x808080, true, 0);
+		super("absence", true, 0x808080, true, 0, 20);
 	}
 
 	@Override

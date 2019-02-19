@@ -18,14 +18,14 @@ import net.minecraft.world.World;
 public class PotionFertilize extends BrewMod {
 
 	public PotionFertilize() {
-		super("fertilize", false, 0xede5e3, true, 0);
+		super("fertilize", false, 0xede5e3, true, 0, 10);
 	}
 
 	@Override
 	public void affectEntity(Entity source, Entity indirectSource, EntityLivingBase entity, int amplifier, double health) {
 		if (entity instanceof EntityPlayer) {
 			for (int i = 0; i < (1 + amplifier); i++) {
-				if (entity.getRNG().nextBoolean()) {
+				if (entity.getRNG().nextInt(20) == 0) {
 					ItemGirdleOfTheWooded.buildBark((EntityPlayer) entity);
 				}
 			}

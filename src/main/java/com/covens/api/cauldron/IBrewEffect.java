@@ -41,4 +41,6 @@ public interface IBrewEffect {
 	public int getArrowDuration();
 
 	public int getLingeringDuration();
+
+	public int getCost();
 }

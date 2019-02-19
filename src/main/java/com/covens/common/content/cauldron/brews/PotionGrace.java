@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class PotionGrace extends BrewMod implements IBrewEffectAoEOverTime {
 
 	public PotionGrace() {
-		super("grace", false, 0x483C32, false, 900);
+		super("grace", false, 0x483C32, false, 900, 10);
 		this.setIconIndex(6, 0);
 	}
 

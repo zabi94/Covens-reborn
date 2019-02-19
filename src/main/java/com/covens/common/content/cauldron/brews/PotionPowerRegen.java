@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class PotionPowerRegen extends BrewMod {
 
 	public PotionPowerRegen() {
-		super("power_regen", false, 0x7851A9, false, 400);
+		super("power_regen", false, 0x7851A9, false, 400, 80);
 		this.setIconIndex(3, 2);
 	}
 

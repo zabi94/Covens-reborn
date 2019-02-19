@@ -6,7 +6,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 public class PotionBaneArthropods extends GenericBrewDamageVS {
 
 	public PotionBaneArthropods() {
-		super("bane_arthropods", 0x50C878);
+		super("bane_arthropods", 0x50C878, 20);
 	}
 
 	@Override

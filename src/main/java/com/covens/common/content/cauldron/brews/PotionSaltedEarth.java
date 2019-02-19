@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class PotionSaltedEarth extends BrewMod {
 
 	public PotionSaltedEarth() {
-		super("salted_earth", true, 0x555D50, true, 0);
+		super("salted_earth", true, 0x555D50, true, 0, 20);
 	}
 
 	@Override
