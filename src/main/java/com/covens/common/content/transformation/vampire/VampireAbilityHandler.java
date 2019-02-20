@@ -11,10 +11,12 @@ import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.entity.EntityBatSwarm;
+import com.covens.common.item.ModItems;
 import com.covens.common.potion.ModPotions;
 import com.covens.common.world.biome.ModBiomes;
 import com.google.common.collect.Lists;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -22,15 +24,19 @@ import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -46,6 +52,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreIngredient;
 import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
+import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
 
 @Mod.EventBusSubscriber
 public class VampireAbilityHandler {
@@ -242,6 +249,17 @@ public class VampireAbilityHandler {
 					CovensAPI.getAPI().drainBloodFromEntity(evt.player, entity);
 				} else {
 					entity.attackEntityAsMob(evt.player);
+				}
+			} else if (data.getLevel() > 1) {
+				RayTraceResult rtr = RayTraceHelper.rayTracePlayerSight(evt.player, evt.player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue(), false);
+				if (rtr != null && rtr.typeOfHit == Type.BLOCK) {
+					IBlockState block = evt.world.getBlockState(rtr.getBlockPos());
+					if (block.getBlock() == Blocks.WOOL && CovensAPI.getAPI().addVampireBlood(evt.player, -50)) {
+						evt.world.setBlockToAir(rtr.getBlockPos());
+						ItemStack is = new ItemStack(ModItems.sanguine_fabric);
+						EntityItem ei = new EntityItem(evt.world, rtr.getBlockPos().getX() + 0.5, rtr.getBlockPos().getY() + 0.5, rtr.getBlockPos().getZ() + 0.5, is);
+						evt.world.spawnEntity(ei);
+					}
 				}
 			}
 		} else if (evt.action == ModAbilities.BAT_SWARM) {
