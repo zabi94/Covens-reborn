@@ -159,6 +159,7 @@ public final class LibItemName {
 	public static final String QUARTZ_POWDER = "quartz_powder";
 	public static final String LAPIS_POWDER = "lapis_powder";
 	public static final String BELL = "bell";
+	public static final String BLOOD_BOTTLE = "blood_bottle";
 
 	private LibItemName() {
 	}

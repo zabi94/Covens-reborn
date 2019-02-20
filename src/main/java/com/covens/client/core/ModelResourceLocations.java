@@ -14,4 +14,6 @@ public class ModelResourceLocations {
 	public static final ModelResourceLocation UNBOUND_LOCATION_STONE = new ModelResourceLocation(new ResourceLocation(LibMod.MOD_ID, LibItemName.LOCATION_STONE).toString());
 	public static final ModelResourceLocation BOUND_LOCATION_STONE = new ModelResourceLocation(new ResourceLocation(LibMod.MOD_ID, LibItemName.LOCATION_STONE) + "_bound");
 
+	public static final ModelResourceLocation BLOOD_BOTTLE = new ModelResourceLocation(new ResourceLocation(LibMod.MOD_ID, LibItemName.BLOOD_BOTTLE).toString());
+	public static final ModelResourceLocation BLOOD_BOTTLE_SPOILED = new ModelResourceLocation(new ResourceLocation(LibMod.MOD_ID, LibItemName.BLOOD_BOTTLE)+ "_spoiled");
 }

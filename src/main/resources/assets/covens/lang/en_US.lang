@@ -203,6 +203,12 @@ item.eye_of_newt.name=Eye of Newt
 item.juniper_berries.name=Juniper Berries
 item.yew_aril.name=Yew Aril
 item.bell.name=Silver Bell
+item.blood_bottle.name=Bottle of Fresh Blood
+item.blood_bottle_spoiled.name=Bottle of Spoiled Blood
+item.blood_bottle.fresh=Fresh
+item.blood_bottle.normal=Good quality
+item.blood_bottle.old=Old
+item.blood_bottle.stale=Stale
 
 //fumes
 item.fume.unfired_jar.name=Unfired Clay Jar

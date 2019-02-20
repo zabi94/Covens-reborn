@@ -12,6 +12,7 @@ import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.item.ModItems;
+import com.covens.common.item.misc.ItemBloodBottle;
 import com.covens.common.potion.ModPotions;
 import com.covens.common.world.biome.ModBiomes;
 import com.google.common.collect.Lists;
@@ -27,6 +28,7 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -247,8 +249,10 @@ public class VampireAbilityHandler {
 				EntityLivingBase entity = (EntityLivingBase) evt.focusedEntity;
 				if (canDrainBloodFrom(evt.player, entity)) {
 					CovensAPI.getAPI().drainBloodFromEntity(evt.player, entity);
-				} else {
-					entity.attackEntityAsMob(evt.player);
+					if (!evt.world.isRemote && data.getLevel() > 3 && evt.player.getHeldItemOffhand().getItem().equals(Items.GLASS_BOTTLE) && evt.player.getRNG().nextInt(10) == 0) {
+						evt.player.getHeldItemOffhand().splitStack(1);
+						evt.player.dropItem(ItemBloodBottle.getNewStack(evt.world), true);
+					}
 				}
 			} else if (data.getLevel() > 1) {
 				RayTraceResult rtr = RayTraceHelper.rayTracePlayerSight(evt.player, evt.player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue(), false);

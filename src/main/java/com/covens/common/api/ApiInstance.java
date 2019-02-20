@@ -225,8 +225,8 @@ public class ApiInstance extends CovensAPI {
 		IBloodReserve br = entity.getCapability(CapabilityBloodReserve.CAPABILITY, null);
 		CapabilityTransformation data = player.getCapability(CapabilityTransformation.CAPABILITY, null);
 		if ((br.getBlood() > 0) && (br.getMaxBlood() > 0)) {
-			int transferred = (int) Math.min(br.getBlood(), br.getBlood() * 0.05 * data.getLevel());
-			if ((transferred > 0) && (CovensAPI.getAPI().addVampireBlood(player, transferred) || player.isSneaking())) {
+			int transferred = (int) Math.min(br.getBlood(), br.getBlood() * 0.025 * data.getLevel());
+			if (transferred > 0 && CovensAPI.getAPI().addVampireBlood(player, transferred)) {
 				br.setBlood(br.getBlood() - transferred);
 				NetworkHandler.HANDLER.sendToAllAround(new EntityInternalBloodChanged(entity), new TargetPoint(entity.dimension, entity.posX, entity.posY, entity.posZ, 32));
 			}
