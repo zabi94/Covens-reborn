@@ -1,4 +1,4 @@
-package com.covens.common.block.misc;
+package com.covens.common.block.tiles;
 
 import java.util.Random;
 

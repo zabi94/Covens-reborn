@@ -24,7 +24,7 @@ public class MiscEventHandler {
 
 	@SubscribeEvent
 	public void onKeyPress(KeyInputEvent evt) {
-		if (Keybinds.placeItem.isPressed() && this.isPointingToUpperFace() && this.canReplaceAbove() && this.isTopSolid()) {
+		if (Keybinds.placeItem.isPressed() && this.isPointingToUpperFace() && this.canReplaceAbove() && this.isTopSolid() && !Minecraft.getMinecraft().player.getHeldItemMainhand().isEmpty()) {
 			NetworkHandler.HANDLER.sendToServer(new PlaceHeldItemMessage(this.mc.objectMouseOver.getBlockPos().up()));
 		}
 	}

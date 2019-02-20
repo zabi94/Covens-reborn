@@ -34,7 +34,7 @@ public class PlaceHeldItemMessage extends SimpleMessage<PlaceHeldItemMessage> {
 		}
 		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
 			EntityPlayer p = context.getServerHandler().player;
-			if (this.canReplace(p.world) && this.isFaceBelowSolid(p.world)) {
+			if (!p.getHeldItemMainhand().isEmpty() && this.canReplace(p.world) && this.isFaceBelowSolid(p.world)) {
 				p.world.setBlockState(this.clicked, ModBlocks.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(p.rotationYaw)), 3);
 				TileEntityPlacedItem te = (TileEntityPlacedItem) p.world.getTileEntity(this.clicked);
 				te.setItem(p.getHeldItemMainhand().splitStack(1));
