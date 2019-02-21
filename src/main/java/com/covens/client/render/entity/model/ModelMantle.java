@@ -61,10 +61,6 @@ public class ModelMantle extends ModelBiped {
 	public ModelPlayer playerModel;
 	private HashMap<String, Float> valuesMap = new HashMap<>();
 
-	private Object capeLeftDown2Rag1;
-
-	private Object capeRightDown2Rag2;
-
 	public ModelMantle(ModelPlayer model) {
 		this.playerModel = model;
 		this.textureWidth = 64;
