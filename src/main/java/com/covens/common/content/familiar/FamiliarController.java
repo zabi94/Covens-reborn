@@ -31,8 +31,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
-import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.RayTraceHelper;
 
 public class FamiliarController {
 

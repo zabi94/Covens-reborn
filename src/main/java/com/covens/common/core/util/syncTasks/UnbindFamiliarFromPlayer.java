@@ -7,7 +7,7 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
 
 public class UnbindFamiliarFromPlayer extends SyncTask<EntityLivingBase> {
 

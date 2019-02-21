@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
 
 public class FamiliarOrderGoto extends SyncTask<EntityLivingBase> {
 	

@@ -53,8 +53,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreIngredient;
+import zabi.minecraft.minerva.common.entity.RayTraceHelper;
 import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
-import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
 
 @Mod.EventBusSubscriber
 public class VampireAbilityHandler {

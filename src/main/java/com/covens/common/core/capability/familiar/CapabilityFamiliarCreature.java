@@ -19,9 +19,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
 import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.entity.PlayerHelper;
 import zabi.minecraft.minerva.common.utils.annotation.DontSync;
 import zabi.minecraft.minerva.common.utils.annotation.Ignore;
-import zabi.minecraft.minerva.common.utils.entity.PlayerHelper;
 
 public class CapabilityFamiliarCreature extends SimpleCapability {
 

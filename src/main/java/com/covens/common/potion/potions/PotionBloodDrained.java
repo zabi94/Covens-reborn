@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import zabi.minecraft.minerva.common.utils.entity.PlayerHelper;
+import zabi.minecraft.minerva.common.entity.PlayerHelper;
 
 public class PotionBloodDrained extends PotionMod {
 

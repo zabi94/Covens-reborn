@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
 
 public class FamiliarDeath extends SyncTask<EntityPlayer> {
 	

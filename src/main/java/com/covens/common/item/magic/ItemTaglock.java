@@ -28,7 +28,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import zabi.minecraft.minerva.common.utils.entity.RayTraceHelper;
+import zabi.minecraft.minerva.common.entity.RayTraceHelper;
 
 
 public class ItemTaglock extends ItemMod {

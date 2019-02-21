@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
 
 @Mod.EventBusSubscriber
 public class FamiliarEvents {

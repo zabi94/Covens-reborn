@@ -60,7 +60,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
 
 public class ApiInstance extends CovensAPI {
 

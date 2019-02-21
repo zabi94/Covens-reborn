@@ -11,9 +11,9 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.nbt.NBTTagCompound;
 import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
 import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
 
 public class FamiliarFollowEntity extends SyncTask<EntityLivingBase> {
 	

@@ -22,8 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import zabi.minecraft.minerva.common.entity.PlayerHelper;
 import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
-import zabi.minecraft.minerva.common.utils.entity.PlayerHelper;
 
 public class TileEntityTarotsTable extends ModTileEntity {
 

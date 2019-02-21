@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.common.content.cauldron.CauldronRegistry;
+import com.covens.common.core.helper.Log;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.crafting.Ingredient;
@@ -13,7 +14,6 @@ import net.minecraft.util.text.TextFormatting;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.api.PatchouliAPI;
-import zabi.minecraft.minerva.common.mod.Log;
 
 public class BrewRecipeProcessor implements IComponentProcessor {
 

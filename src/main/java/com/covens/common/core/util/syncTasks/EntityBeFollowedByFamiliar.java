@@ -5,8 +5,8 @@ import java.util.UUID;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
 
 public class EntityBeFollowedByFamiliar extends SyncTask<EntityLivingBase> {
 

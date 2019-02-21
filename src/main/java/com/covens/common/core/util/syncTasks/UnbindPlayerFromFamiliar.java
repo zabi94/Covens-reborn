@@ -8,7 +8,7 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.utils.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
 
 public class UnbindPlayerFromFamiliar extends SyncTask<EntityPlayer> {
 
