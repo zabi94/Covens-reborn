@@ -13,6 +13,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class CauldronBehaviourCrafting implements ICauldronBehaviour {
@@ -83,7 +85,15 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 			}
 
 			if (this.validRecipe && (this.craftTime >= MAX_CRAFT_TIME)) {
-				CauldronCraftingRecipe result = CauldronRegistry.getCraftingResult(this.cauldron.getFluid().get(), this.cauldron.getInputs()).get();
+				CauldronCraftingRecipe result = CauldronRegistry.getCraftingResult(this.cauldron.getFluid().orElse(new FluidStack(FluidRegistry.WATER, 0)), this.cauldron.getInputs()).orElse(null);
+				if (result == null) {
+					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
+					this.lowEnergy = false;
+					this.validRecipe = false;
+					this.craftTime = 0;
+					this.cauldron.markDirty();
+					return;
+				}
 				this.cauldron.setTankLock(true);
 				CauldronFluidTank tank = (CauldronFluidTank) this.cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 				tank.drain(result.getRequiredFluidAmount(), true);
@@ -107,6 +117,7 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 				this.validRecipe = false;
 				this.craftTime = 0;
 				this.cauldron.clearItemInputs();// MD & StC called here
+				this.cauldron.markDirty();
 			}
 		}
 	}
