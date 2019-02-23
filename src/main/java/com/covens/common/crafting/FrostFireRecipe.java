@@ -5,10 +5,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import com.covens.common.item.ModItems;
+import com.covens.common.lib.LibIngredients;
 import com.covens.common.lib.LibMod;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -32,10 +32,10 @@ public class FrostFireRecipe extends IForgeRegistryEntry.Impl<FrostFireRecipe> {
 	}
 
 	public static void init() {
-		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.IRON_ORE)), () -> new ItemStack(ModItems.cold_iron_nugget, 1 + rng.nextInt(4))));
-		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "packed_ice"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.ICE)), () -> packedIce));
-		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron_dust_small"), Ingredient.fromStacks(new ItemStack(ModItems.cold_iron_dust_small, 1)), () -> new ItemStack(ModItems.cold_iron_nugget, 1)));
-		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron_dust"), Ingredient.fromStacks(new ItemStack(ModItems.cold_iron_dust, 1)), () -> new ItemStack(ModItems.cold_iron_ingot, 1)));
+		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron"), LibIngredients.ironOre, () -> new ItemStack(ModItems.cold_iron_nugget, 1 + rng.nextInt(4))));
+		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "packed_ice"), LibIngredients.iceBlock, () -> packedIce));
+		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron_dust_small"), LibIngredients.coldIronDustSmall, () -> new ItemStack(ModItems.cold_iron_nugget, 1)));
+		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron_dust"), LibIngredients.coldIronDust, () -> new ItemStack(ModItems.cold_iron_ingot, 1)));
 	}
 
 	public static Optional<ItemStack> getOutput(ItemStack in) {

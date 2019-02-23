@@ -10,12 +10,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.oredict.OreIngredient;
+import zabi.minecraft.minerva.common.crafting.IngredientMultiOreDict;
 
 public class LibIngredients {
 
 	// TODO any time we call Ingredient.from*, the call should be cached here and
 	// used multiple times
 
+	public static Ingredient ironOre = Ingredient.fromItem(Item.getItemFromBlock(Blocks.IRON_ORE));
 	public static Ingredient blazePowder = Ingredient.fromItem(Items.BLAZE_POWDER);
 	public static Ingredient goldNugget = Ingredient.fromItem(Items.GOLD_NUGGET);
 	public static Ingredient slime = Ingredient.fromItem(Items.SLIME_BALL);
@@ -111,4 +113,17 @@ public class LibIngredients {
 	public static Ingredient saplingYew = Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 2));
 	public static Ingredient saplingCypress = Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 3));
 	public static Ingredient woolOfBat = Ingredient.fromItem(ModItems.wool_of_bat);
+	public static Ingredient beetroot = Ingredient.fromItem(Items.BEETROOT);
+	public static Ingredient brick_item = Ingredient.fromItem(Items.BRICK);
+	public static Ingredient hellebore = Ingredient.fromItem(ModItems.hellebore);
+	public static Ingredient snowball = Ingredient.fromItem(Items.SNOWBALL);
+	public static Ingredient iceBlock = Ingredient.fromItem(Item.getItemFromBlock(Blocks.ICE));
+	public static Ingredient coldIronDustSmall = Ingredient.fromItem(ModItems.cold_iron_dust_small);
+	public static Ingredient coldIronDust = Ingredient.fromItem(ModItems.cold_iron_dust);
+	public static Ingredient speckledMelon = Ingredient.fromItem(Items.SPECKLED_MELON);
+	public static Ingredient goldenApple = Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 0));
+	public static Ingredient egg = new IngredientMultiOreDict("egg", "foodSimpleEgg", "ingredientEgg", "listAllegg", "bakingEgg");
+	public static Ingredient sugar = Ingredient.fromItem(Items.SUGAR);
+	public static Ingredient garlic = new IngredientMultiOreDict("cropGarlic");
+	
 }

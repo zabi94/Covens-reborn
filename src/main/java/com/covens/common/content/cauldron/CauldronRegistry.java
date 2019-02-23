@@ -3,29 +3,43 @@ package com.covens.common.content.cauldron;
 import static com.covens.common.lib.LibIngredients.acaciaLog;
 import static com.covens.common.lib.LibIngredients.anyLeaf;
 import static com.covens.common.lib.LibIngredients.anyLog;
+import static com.covens.common.lib.LibIngredients.apple;
+import static com.covens.common.lib.LibIngredients.beetroot;
 import static com.covens.common.lib.LibIngredients.blazePowder;
+import static com.covens.common.lib.LibIngredients.coldIronDustSmall;
 import static com.covens.common.lib.LibIngredients.dimensionalSand;
 import static com.covens.common.lib.LibIngredients.dirt;
+import static com.covens.common.lib.LibIngredients.egg;
 import static com.covens.common.lib.LibIngredients.emptyGoblet;
 import static com.covens.common.lib.LibIngredients.empty_honeycomb;
 import static com.covens.common.lib.LibIngredients.eyes;
 import static com.covens.common.lib.LibIngredients.fumeCleansingAura;
 import static com.covens.common.lib.LibIngredients.fumeCloudyOil;
+import static com.covens.common.lib.LibIngredients.fumeEverchangingPresence;
 import static com.covens.common.lib.LibIngredients.fumeFieryBreeze;
 import static com.covens.common.lib.LibIngredients.fumeHeavenlyWind;
 import static com.covens.common.lib.LibIngredients.fumeReekOfDeath;
+import static com.covens.common.lib.LibIngredients.garlic;
 import static com.covens.common.lib.LibIngredients.ghastTear;
 import static com.covens.common.lib.LibIngredients.glowstoneDust;
 import static com.covens.common.lib.LibIngredients.goldNugget;
+import static com.covens.common.lib.LibIngredients.goldenApple;
+import static com.covens.common.lib.LibIngredients.goldenCarrot;
 import static com.covens.common.lib.LibIngredients.graveyardDust;
+import static com.covens.common.lib.LibIngredients.hellebore;
 import static com.covens.common.lib.LibIngredients.honeycomb;
 import static com.covens.common.lib.LibIngredients.normalRitualChalk;
 import static com.covens.common.lib.LibIngredients.potato;
 import static com.covens.common.lib.LibIngredients.redstone;
 import static com.covens.common.lib.LibIngredients.salt;
+import static com.covens.common.lib.LibIngredients.snowball;
+import static com.covens.common.lib.LibIngredients.soulSand;
+import static com.covens.common.lib.LibIngredients.speckledMelon;
 import static com.covens.common.lib.LibIngredients.spider_web;
 import static com.covens.common.lib.LibIngredients.sponge;
 import static com.covens.common.lib.LibIngredients.stickyPiston;
+import static com.covens.common.lib.LibIngredients.sugar;
+import static com.covens.common.lib.LibIngredients.woolOfBat;
 import static com.covens.common.lib.LibIngredients.wormwood;
 
 import java.util.ArrayList;
@@ -45,8 +59,6 @@ import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModFluids;
 import com.covens.common.item.ModItems;
-import com.covens.common.item.magic.ItemFumes;
-import com.covens.common.lib.LibIngredients;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 import com.google.common.collect.HashBiMap;
@@ -173,9 +185,9 @@ public class CauldronRegistry {
 
 	public static void init() {
 
-		registerFood(Ingredient.fromItem(Items.APPLE), 4, 2.4f);
+		registerFood(apple, 4, 2.4f);
 		registerFood(Ingredient.fromItem(Items.BAKED_POTATO), 5, 6f);
-		registerFood(Ingredient.fromItem(Items.BEETROOT), 1, 1.2f);
+		registerFood(beetroot, 1, 1.2f);
 		registerFood(Ingredient.fromItem(Items.BREAD), 5, 6f);
 		registerFood(Ingredient.fromItem(Items.CARROT), 3, 3.6f);
 		registerFood(Ingredient.fromItem(Items.FISH), 2, 0.4f);
@@ -185,11 +197,11 @@ public class CauldronRegistry {
 		registerFood(Ingredient.fromItem(Items.COOKED_PORKCHOP), 8, 12.8f);
 		registerFood(Ingredient.fromItem(Items.COOKED_BEEF), 7, 12.8f);
 		registerFood(Ingredient.fromItem(Items.COOKED_RABBIT), 5, 6f);
-		registerFood(Ingredient.fromItem(Items.SPECKLED_MELON), 3, 7.6f);
-		registerFood(Ingredient.fromItem(Items.GOLDEN_APPLE), 4, 9.6f);
-		registerFood(Ingredient.fromItem(Items.GOLDEN_CARROT), 6, 14.4f);
+		registerFood(speckledMelon, 3, 7.6f);
+		registerFood(goldenApple, 4, 9.6f);
+		registerFood(goldenCarrot, 6, 14.4f);
 		registerFood(Ingredient.fromItem(Items.MELON), 2, 1.2f);
-		registerFood(Ingredient.fromItem(Items.POTATO), 1, 0.6f);
+		registerFood(potato, 1, 0.6f);
 		registerFood(Ingredient.fromItem(Items.BEEF), 3, 1.8f);
 		registerFood(Ingredient.fromItem(Items.CHICKEN), 2, 1.2f);
 		registerFood(Ingredient.fromItem(Items.MUTTON), 2, 1.2f);
@@ -198,12 +210,12 @@ public class CauldronRegistry {
 		registerFood(Ingredient.fromItem(Items.PUMPKIN_SEEDS), 2, 1.3f);
 		registerFood(Ingredient.fromItem(Items.MELON_SEEDS), 2, 1.2f);
 		registerFood(Ingredient.fromItem(Items.BEETROOT_SEEDS), 2, 1.1f);
-		registerFood(new IngredientMultiOreDict("egg", "foodSimpleEgg", "ingredientEgg", "listAllegg", "bakingEgg"), 2, 1.2f);
-		registerFood(Ingredient.fromItem(Items.SUGAR), 1, 0.5f);
-		registerFood(new IngredientMultiOreDict("cropGarlic"), 2, 0.8f);
+		registerFood(egg, 2, 1.2f);
+		registerFood(sugar, 1, 0.5f);
+		registerFood(garlic, 2, 0.8f);
 		registerFood(Ingredient.fromItem(ModItems.silphium), 3, 1.3f);
 		registerFood(new IngredientMultiOreDict("cropSeaweed", "cropKelp"), 4, 3.3f);
-		registerFood(Ingredient.fromItem(ModItems.salt), 1, 0.5f);
+		registerFood(salt, 1, 0.5f);
 		registerFood(Ingredient.fromItem(ModItems.mint), 1, 0.7f);
 		registerFood(Ingredient.fromItem(ModItems.tulsi), 1, 0.7f);
 		registerFood(new IngredientMultiOreDict("cropGinger"), 3, 0.9f);
@@ -211,7 +223,6 @@ public class CauldronRegistry {
 		registerFood(wormwood, 1, 0.8f);
 		registerFood(Ingredient.fromItem(ModItems.white_sage), 2, 0.9f);
 		registerFood(new IngredientMultiOreDict("dropHoney", "honeyDrop", "foodHoneydrop"), 2, 1.3f);
-		registerFood(salt, 1, 0.5f);
 		registerFood(Ingredient.fromItem(ModItems.heart), 6, 6.6f);
 		registerFood(Ingredient.fromItem(ModItems.tongue_of_dog), 4, 4.4f);
 		registerFood(Ingredient.fromItem(Items.ROTTEN_FLESH), 2, 1.4f);
@@ -248,18 +259,18 @@ public class CauldronRegistry {
 		registerCauldronMixedCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.HONEY, Fluid.BUCKET_VOLUME), new ItemStack(ModItems.empty_honeycomb), honeycomb);
 		registerCauldronFluidCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.MUNDANE_OIL, Fluid.BUCKET_VOLUME), potato, Ingredient.fromStacks(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0)));
 
-		registerVanillaBrewEffect(MobEffects.ABSORPTION, 20, Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 0)), 600);
+		registerVanillaBrewEffect(MobEffects.ABSORPTION, 20, goldenApple, 600);
 		registerVanillaBrewEffect(MobEffects.FIRE_RESISTANCE, 20, Ingredient.fromItem(Items.MAGMA_CREAM));
 		registerVanillaBrewEffect(MobEffects.HUNGER, 30, Ingredient.fromItem(Items.ROTTEN_FLESH), 600);
 		registerVanillaBrewEffect(MobEffects.INSTANT_DAMAGE, 100, Ingredient.fromItem(Items.FERMENTED_SPIDER_EYE));
-		registerVanillaBrewEffect(MobEffects.INSTANT_HEALTH, 70, Ingredient.fromItem(Items.SPECKLED_MELON));
+		registerVanillaBrewEffect(MobEffects.INSTANT_HEALTH, 70, speckledMelon);
 		registerVanillaBrewEffect(MobEffects.INVISIBILITY, 30, Ingredient.fromItem(Item.getItemFromBlock(Blocks.GLASS)));
 		registerVanillaBrewEffect(MobEffects.JUMP_BOOST, 20, Ingredient.fromItem(ModItems.equine_tail));
-		registerVanillaBrewEffect(MobEffects.NIGHT_VISION, 20, Ingredient.fromItem(Items.GOLDEN_CARROT));
+		registerVanillaBrewEffect(MobEffects.NIGHT_VISION, 20, goldenCarrot);
 		registerVanillaBrewEffect(MobEffects.POISON, 70, Ingredient.fromItem(Items.SPIDER_EYE));
 		registerVanillaBrewEffect(MobEffects.REGENERATION, 70, Ingredient.fromItem(Items.GHAST_TEAR));
-		registerVanillaBrewEffect(MobEffects.SPEED, 20, Ingredient.fromItem(Items.SUGAR));
-		registerVanillaBrewEffect(MobEffects.SLOWNESS, 40, Ingredient.fromItem(Item.getItemFromBlock(Blocks.SOUL_SAND)));
+		registerVanillaBrewEffect(MobEffects.SPEED, 20, sugar);
+		registerVanillaBrewEffect(MobEffects.SLOWNESS, 40, soulSand);
 		registerVanillaBrewEffect(MobEffects.WATER_BREATHING, 10, Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 3)));
 		registerVanillaBrewEffect(MobEffects.STRENGTH, 40, blazePowder);
 		registerVanillaBrewEffect(MobEffects.WEAKNESS, 60, Ingredient.fromItem(Items.RABBIT_HIDE));
@@ -269,23 +280,23 @@ public class CauldronRegistry {
 		registerVanillaBrewEffect(MobEffects.LEVITATION, 80, Ingredient.fromItem(Items.SHULKER_SHELL), 100);
 
 		registerCombinedBrewEffect(ModPotions.wolfsbane, Ingredient.fromItem(ModItems.aconitum));
-		registerCombinedBrewEffect(ModPotions.arrow_deflect, Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.everchanging_presence.ordinal())));
-		registerCombinedBrewEffect(ModPotions.absence, Ingredient.fromItem(ModItems.cold_iron_dust_small));
+		registerCombinedBrewEffect(ModPotions.arrow_deflect, fumeEverchangingPresence);
+		registerCombinedBrewEffect(ModPotions.absence, coldIronDustSmall);
 		registerCombinedBrewEffect(ModPotions.plant, Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));
 		registerCombinedBrewEffect(ModPotions.bane_arthropods, wormwood);
 		registerCombinedBrewEffect(ModPotions.corruption, Ingredient.fromItem(Items.BONE));
 		registerCombinedBrewEffect(ModPotions.cursed_leaping, Ingredient.fromItem(Items.CHORUS_FRUIT));
-		registerCombinedBrewEffect(ModPotions.demons_bane, Ingredient.fromItem(ModItems.hellebore));
+		registerCombinedBrewEffect(ModPotions.demons_bane, hellebore);
 		registerCombinedBrewEffect(ModPotions.projectile_resistance, Ingredient.fromItem(ModItems.silver_scales));
 		registerCombinedBrewEffect(ModPotions.disrobing, Ingredient.fromItem(ModItems.wax));
 		registerCombinedBrewEffect(ModPotions.ender_inhibition, Ingredient.fromItem(ModItems.dimensional_sand));
 		registerCombinedBrewEffect(ModPotions.extinguish_fires, Ingredient.fromItem(ModItems.seed_mint));
 		registerCombinedBrewEffect(ModPotions.fertilize, Ingredient.fromItem(ModItems.thistle)); // TODO make it bonemeal, but it will collide with the color modifier
 		registerCombinedBrewEffect(ModPotions.fireworld, Ingredient.fromItem(ModItems.ginger));
-		registerCombinedBrewEffect(ModPotions.grace, Ingredient.fromItem(ModItems.wool_of_bat));
-		registerCombinedBrewEffect(ModPotions.mending, Ingredient.fromItem(Items.GOLDEN_APPLE));
+		registerCombinedBrewEffect(ModPotions.grace, woolOfBat);
+		registerCombinedBrewEffect(ModPotions.mending, goldenApple); //TODO change ingredient, absorption
 		registerCombinedBrewEffect(ModPotions.flower_growth, Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_FLOWER)));
-		registerCombinedBrewEffect(ModPotions.harvest, Ingredient.fromItem(Items.APPLE));
+		registerCombinedBrewEffect(ModPotions.harvest, apple);
 		registerCombinedBrewEffect(ModPotions.smite, Ingredient.fromItem(ModItems.white_sage));
 		registerCombinedBrewEffect(ModPotions.ice_world, Ingredient.fromItem(ModItems.mint));
 		registerCombinedBrewEffect(ModPotions.outcasts_shame, fumeReekOfDeath);
@@ -310,13 +321,13 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.power_drain, Ingredient.fromItem(ModItems.adders_fork));
 		registerCombinedBrewEffect(ModPotions.power_dampening, Ingredient.fromItem(ModItems.graveyard_dust));
 		registerCombinedBrewEffect(ModPotions.power_boost, Ingredient.fromItem(ModItems.juniper_berries));
-		registerCombinedBrewEffect(ModPotions.smite, Ingredient.fromItem(ModItems.garlic));
-		registerCombinedBrewEffect(ModPotions.mowing, LibIngredients.anyLeaf);
-		registerCombinedBrewEffect(ModPotions.rooting, LibIngredients.anyLog);
+		registerCombinedBrewEffect(ModPotions.smite, garlic);
+		registerCombinedBrewEffect(ModPotions.mowing, anyLeaf);
+		registerCombinedBrewEffect(ModPotions.rooting, anyLog);
 	}
 
 	public static void postInit() {
-		CovensAPI.getAPI().registerBrewEffect(ModPotions.freezing, ModPotions.freezing.getPotion(), Ingredient.fromItem(Items.SNOWBALL));
+		CovensAPI.getAPI().registerBrewEffect(ModPotions.freezing, ModPotions.freezing.getPotion(), snowball);
 		CovensAPI.getAPI().registerBrewEffect(ModPotions.sinking, ModPotions.sinking.getPotion(), Ingredient.fromItem(Items.IRON_NUGGET));
 	}
 

@@ -12,8 +12,8 @@ import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.WitchFireTP;
 import com.covens.common.crafting.FrostFireRecipe;
-import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
+import com.covens.common.lib.LibIngredients;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
@@ -221,9 +221,9 @@ public class BlockWitchFire extends BlockMod {
 	public static enum EnumFireType implements IStringSerializable {
 
 		NORMAL(11, 0xc032db, () -> Ingredient.EMPTY), //
-		ENDFIRE(2, 0x0B4D42, () -> Ingredient.fromItem(ModItems.dimensional_sand)), //
-		FROSTFIRE(7, 0xa4f8ff, () -> Ingredient.fromItem(Items.SNOWBALL)), //
-		SIGHTFIRE(15, 0xFFD700, () -> Ingredient.fromItem(Items.GLOWSTONE_DUST));
+		ENDFIRE(2, 0x0B4D42, () -> LibIngredients.dimensionalSand), //
+		FROSTFIRE(7, 0xa4f8ff, () -> LibIngredients.snowball), //
+		SIGHTFIRE(15, 0xFFD700, () -> LibIngredients.glowstoneDust);
 
 		private int light, color;
 		private CachedSupplier<Ingredient> ingredient;

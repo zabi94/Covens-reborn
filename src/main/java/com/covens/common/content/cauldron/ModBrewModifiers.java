@@ -1,27 +1,22 @@
 package com.covens.common.content.cauldron;
 
-import java.util.Arrays;
-
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.cauldron.IBrewModifierList;
-import com.covens.common.item.ModItems;
+import com.covens.common.lib.LibIngredients;
 import com.covens.common.lib.LibMod;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.DyeUtils;
-import net.minecraftforge.oredict.OreIngredient;
 import zabi.minecraft.minerva.common.utils.ColorHelper;
 
 public class ModBrewModifiers {
@@ -42,7 +37,7 @@ public class ModBrewModifiers {
 	}
 
 	private static void initApiModifiers() {
-		DefaultModifiers.POWER = new SimpleModifier("power", Ingredient.fromItem(Items.GLOWSTONE_DUST)) {
+		DefaultModifiers.POWER = new SimpleModifier("power", LibIngredients.glowstoneDust) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
@@ -55,7 +50,7 @@ public class ModBrewModifiers {
 			}
 		};
 
-		DefaultModifiers.DURATION = new SimpleModifier("length", Ingredient.fromItem(Items.REDSTONE)) {
+		DefaultModifiers.DURATION = new SimpleModifier("length", LibIngredients.redstone) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
@@ -63,7 +58,7 @@ public class ModBrewModifiers {
 			}
 		};
 
-		DefaultModifiers.RADIUS = new SimpleModifier("radius", Ingredient.fromItem(ModItems.sagebrush)) {
+		DefaultModifiers.RADIUS = new SimpleModifier("radius", LibIngredients.sagebrush) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
@@ -71,7 +66,7 @@ public class ModBrewModifiers {
 			}
 		};
 
-		DefaultModifiers.GAS_CLOUD_DURATION = new SimpleModifier("gas_duration", Ingredient.fromItem(ModItems.hellebore)) {
+		DefaultModifiers.GAS_CLOUD_DURATION = new SimpleModifier("gas_duration", LibIngredients.hellebore) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
@@ -79,7 +74,7 @@ public class ModBrewModifiers {
 			}
 		};
 
-		DefaultModifiers.SUPPRESS_ENTITY_EFFECT = new SimpleModifier("suppress_entity", Ingredient.fromItem(Items.BRICK)) {
+		DefaultModifiers.SUPPRESS_ENTITY_EFFECT = new SimpleModifier("suppress_entity", LibIngredients.brick_item) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
@@ -97,7 +92,7 @@ public class ModBrewModifiers {
 			}
 		};
 
-		DefaultModifiers.SUPPRESS_IN_WORLD_EFFECT = new SimpleModifier("suppress_in_world", Ingredient.fromItem(Items.NETHERBRICK)) {
+		DefaultModifiers.SUPPRESS_IN_WORLD_EFFECT = new SimpleModifier("suppress_in_world", LibIngredients.netherBrickItem) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
@@ -115,7 +110,7 @@ public class ModBrewModifiers {
 			}
 		};
 
-		DefaultModifiers.SUPPRESS_PARTICLES = new SimpleModifier("suppress_particles", Ingredient.fromItem(Items.BEETROOT)) {
+		DefaultModifiers.SUPPRESS_PARTICLES = new SimpleModifier("suppress_particles", LibIngredients.beetroot) {
 
 			@Override
 			public boolean canApply(IBrewEffect brew) {
@@ -136,8 +131,6 @@ public class ModBrewModifiers {
 		DefaultModifiers.COLOR = new IBrewModifier() {
 
 			private final ResourceLocation name = new ResourceLocation(LibMod.MOD_ID, "color");
-			private final Ingredient ingredient = new CompoundIngredient(Arrays.asList(Ingredient.fromItem(Items.DYE), new OreIngredient("dye"))) {
-			}; // TODO add the dye tag to items
 
 			@Override
 			public IBrewModifier setRegistryName(ResourceLocation name) {
@@ -156,7 +149,7 @@ public class ModBrewModifiers {
 
 			@Override
 			public Ingredient getJEIStackRepresentative() {
-				return this.ingredient;
+				return LibIngredients.anyDye;
 			}
 
 			@Override
