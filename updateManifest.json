@@ -1,10 +1,10 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/covens-reborn",
   "1.12.2": {
-    "0.0.24": "Lots of bugfixes, better familiar AI, documentation progress"
+    "0.0.25": "Textures, bugfixes, brews stack, brews cost MP, vampire blood, vampire cloth, shift click in interfaces"
   },
   "promos": {
-    "1.12.2-latest": "0.0.24",
-    "1.12.2-recommended": "0.0.24"
+    "1.12.2-latest": "0.0.25",
+    "1.12.2-recommended": "0.0.25"
   }
 }
