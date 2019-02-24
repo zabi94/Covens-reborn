@@ -13,6 +13,12 @@ import net.minecraftforge.oredict.OreIngredient;
 import zabi.minecraft.minerva.common.crafting.IngredientMultiOreDict;
 
 public class LibIngredients {
+	
+	static {
+		if (ModItems.fume == null) {
+			throw new IllegalStateException("The class LibIngredients is being loaded too early!");
+		}
+	}
 
 	// TODO any time we call Ingredient.from*, the call should be cached here and
 	// used multiple times
