@@ -122,7 +122,6 @@ public class Covens {
 		ModSpells.init();
 		ModFortunes.init();
 		ModLootTables.registerLootTables();
-		FrostFireRecipe.init();
 		proxy.preInit(event);
 	}
 
@@ -148,6 +147,7 @@ public class Covens {
 		ModOvenSmeltingRecipes.init();
 		ModRituals.init();
 		ModBrewModifiers.init();
+		FrostFireRecipe.init();
 		ThaumcraftLoader.init();
 		Patchouli.init();
 		CauldronRegistry.postInit();
