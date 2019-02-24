@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 
@@ -84,6 +85,16 @@ public class FamiliarController {
 
 	public static void sendSelectedFamiliarHome(EntityPlayer e) {
 
+	}
+	
+	public static boolean hasFamiliarsInRange(EntityPlayer p) {
+		return !getFamiliarsInRange(p).isEmpty();
+	}
+	
+	public static List<EntityLivingBase> getFamiliarsInRange(EntityPlayer p) {
+		return p.world.getEntitiesWithinAABB(EntityLivingBase.class, p.getEntityBoundingBox().grow(5, 2, 5), e -> CovensAPI.getAPI().isValidFamiliar(e)).stream()
+				.filter(e -> e.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner.equals(UUIDs.of(p)))
+				.collect(Collectors.toList());
 	}
 
 	public static void sendSelectedFamiliarTo(EntityPlayer e, Vec3d hitVec) {
