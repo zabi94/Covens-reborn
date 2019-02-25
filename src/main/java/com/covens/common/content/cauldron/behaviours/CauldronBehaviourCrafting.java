@@ -6,6 +6,7 @@ import java.util.Random;
 import com.covens.api.mp.IMagicPowerConsumer;
 import com.covens.common.content.cauldron.CauldronCraftingRecipe;
 import com.covens.common.content.cauldron.CauldronRegistry;
+import com.covens.common.core.helper.Log;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.covens.common.tile.util.CauldronFluidTank;
 
@@ -87,6 +88,11 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 			if (this.validRecipe && (this.craftTime >= MAX_CRAFT_TIME)) {
 				CauldronCraftingRecipe result = CauldronRegistry.getCraftingResult(this.cauldron.getFluid().orElse(new FluidStack(FluidRegistry.WATER, 0)), this.cauldron.getInputs()).orElse(null);
 				if (result == null) {
+					Log.w("This shouldn't happen... Please report to Covens Reborn\nCauldronBehaviourCrafting - update()\nRecipe output is null\nCauldron status:\ncurrent setting: " + this.cauldron.getCurrentBehaviour().getID() + "\nlow energy: " + this.lowEnergy + "\nvalid recipe: " + this.validRecipe + "\ncraft time: " + this.craftTime);
+					Log.w("Item inside:");
+					for (ItemStack stackInside:this.cauldron.getInputs()) {
+						Log.w(stackInside);
+					}
 					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
 					this.lowEnergy = false;
 					this.validRecipe = false;
@@ -105,7 +111,6 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 					e.motionX = 0;
 					e.motionZ = 0;
 					this.cauldron.getWorld().spawnEntity(e);
-
 				}
 
 				if (result.hasFluidOutput()) {
@@ -117,7 +122,6 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 				this.validRecipe = false;
 				this.craftTime = 0;
 				this.cauldron.clearItemInputs();// MD & StC called here
-				this.cauldron.markDirty();
 			}
 		}
 	}
