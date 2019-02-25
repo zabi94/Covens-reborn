@@ -2,6 +2,8 @@ package com.covens.common.item.magic;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.state.StateProperties;
@@ -29,6 +31,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import zabi.minecraft.minerva.common.utils.BlockStreamHelper;
@@ -59,7 +62,7 @@ public class ItemBell extends ItemMod {
 	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		if (worldIn.getTotalWorldTime() - NBTHelper.getLong(playerIn.getHeldItem(handIn), "lastFinished") > 30) {
@@ -80,37 +83,44 @@ public class ItemBell extends ItemMod {
 			}
 		}
 	}
-	
+
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase player) {
-		stack.damageItem(1, player);
-		if (!world.isRemote && checkChalk(world, player)) {
-			Class<? extends EntityLiving> familiarClass = getEntity(world, player);
-			Entity e = EntityRegistry.getEntry(familiarClass).newInstance(world);
-			BlockPos pos = BlockStreamHelper.ofPos(player.getPosition().add(5, 2, 5), player.getPosition().add(-5, -2, -5))
-				.filter(bp -> isTeleportFriendlyBlock(bp, world, e))
-				.collect(CollectorsUtils.randomElement());
-			e.setPosition(pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5);
-			world.spawnEntity(e);
-			CovensAPI.getAPI().bindFamiliar((EntityLiving) e, (EntityPlayer) player);
-			if (e instanceof EntityTameable) {
-				((EntityTameable) e).setTamedBy((EntityPlayer) player);
+		if (player instanceof EntityPlayer) {
+			stack.damageItem(1, player);
+			if (!world.isRemote && checkChalk(world, player)) {
+				Class<? extends EntityLiving> familiarClass = getEntity(world, player);
+				if (familiarClass != null) {
+					Entity e = EntityRegistry.getEntry(familiarClass).newInstance(world);
+					BlockPos pos = BlockStreamHelper.ofPos(player.getPosition().add(5, 2, 5), player.getPosition().add(-5, -2, -5))
+							.filter(bp -> isTeleportFriendlyBlock(bp, world, e))
+							.collect(CollectorsUtils.randomElement());
+					e.setPosition(pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5);
+					world.spawnEntity(e);
+					CovensAPI.getAPI().bindFamiliar((EntityLiving) e, (EntityPlayer) player);
+					if (e instanceof EntityTameable) {
+						((EntityTameable) e).setTamedBy((EntityPlayer) player);
+					}
+				} else {
+					((EntityPlayer) player).sendStatusMessage(new TextComponentTranslation("familiar.summon.fail"), true);
+				}
 			}
+			NBTHelper.setLong(stack, "lastFinished", world.getTotalWorldTime());
 		}
-		NBTHelper.setLong(stack, "lastFinished", world.getTotalWorldTime());
 		return stack;
 	}
-	
+
 	private static boolean isTeleportFriendlyBlock(BlockPos blockpos, World world, Entity e) {
 		IBlockState iblockstate = world.getBlockState(blockpos);
 		return (iblockstate.getBlockFaceShape(world, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID) && iblockstate.canEntitySpawn(e) && world.isAirBlock(blockpos.up()) && world.isAirBlock(blockpos.up(2));
 	}
 
+	@Nullable
 	private Class<? extends EntityLiving> getEntity(World world, EntityLivingBase player) {
-			return world.getBiome(player.getPosition()).getSpawnableList(EnumCreatureType.CREATURE).stream()
-					.filter(e -> CovensAPI.getAPI().isValidFamiliar(EntityRegistry.getEntry(e.entityClass).newInstance(world)))
-					.map(e -> e.entityClass)
-					.collect(CollectorsUtils.randomElement());
+		return world.getBiome(player.getPosition()).getSpawnableList(EnumCreatureType.CREATURE).stream()
+				.filter(e -> CovensAPI.getAPI().isValidFamiliar(EntityRegistry.getEntry(e.entityClass).newInstance(world)))
+				.map(e -> e.entityClass)
+				.collect(CollectorsUtils.randomElement());
 	}
 
 	private boolean checkChalk(World world, EntityLivingBase player) {
