@@ -290,7 +290,7 @@ public class ModelMantle extends ModelBiped {
 
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.7F + 4*this.bipedLeftArm.rotateAngleX);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.7F);
 		this.cape.render(1);
 		this.hood.render(1);
         GlStateManager.disableBlend();
