@@ -10,6 +10,7 @@ import com.covens.api.event.TransformationModifiedEvent;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
+import com.covens.common.core.helper.MobHelper;
 import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.misc.ItemBloodBottle;
@@ -288,6 +289,9 @@ public class VampireAbilityHandler {
 			return true;
 		}
 		if ((player.getLastAttackedEntity() == entity) || (entity.getAttackingEntity() == player)) {
+			return false;
+		}
+		if (!MobHelper.isLivingCorporeal(entity)) {
 			return false;
 		}
 		return Math.abs(player.rotationYawHead - entity.rotationYawHead) < 30;
