@@ -119,6 +119,9 @@ public class MobHelper {
 		if  (CovensAPI.getAPI().isValidFamiliar(entity) && entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
 			return true;
 		}
+		if (CovensAPI.getAPI().isValidFamiliar(entity) && entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
+			return true;
+		}
 		return SPIRITS.contains(entity.getClass().getName());
 	}
 
