@@ -348,7 +348,7 @@ public class ModRituals {
 			.addInput(LibIngredients.anySapling)
 			.addInput(LibIngredients.woolOfBat)
 			.withAllCircles(NORMAL)
-			.withRunningTime(2000)
+			.withRunningTime(200)
 			.withStartingPower(1000)
 			.withTickCost(3)
 			.buildAndRegister(new RitualCreateVampireLair());
