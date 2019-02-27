@@ -6,6 +6,7 @@ import com.covens.common.content.spell.spells.SpellBlink;
 import com.covens.common.content.spell.spells.SpellCallThunderstorm;
 import com.covens.common.content.spell.spells.SpellDestabilization;
 import com.covens.common.content.spell.spells.SpellDisarming;
+import com.covens.common.content.spell.spells.SpellDrainLife;
 import com.covens.common.content.spell.spells.SpellInfuseLife;
 import com.covens.common.content.spell.spells.SpellLesserBlinking;
 import com.covens.common.content.spell.spells.SpellMagnet;
@@ -18,7 +19,7 @@ import com.covens.common.lib.LibMod;
 public class ModSpells {
 
 	public static Spell magnet, poke, water, activation, slowness, lesser_blink, blink, explosion, 
-	disarming, infuse_life, self_heal, call_storm;
+	disarming, infuse_life, self_heal, call_storm, vampire_leech;
 
 	public static void init() {
 		magnet = new SpellMagnet(1, 0xa5cec9, EnumSpellType.PROJECTILE_BLOCK, "magnet", LibMod.MOD_ID);
@@ -33,6 +34,7 @@ public class ModSpells {
 		infuse_life = new SpellInfuseLife(5, 0xf6546a, EnumSpellType.PROJECTILE_ALL, "infuse_life", LibMod.MOD_ID);
 		self_heal = new SpellSelfHeal(4, 0xd20057, EnumSpellType.INSTANT, "self_heal", LibMod.MOD_ID);
 		call_storm = new SpellCallThunderstorm(15, 0x000033, EnumSpellType.INSTANT, "call_storm", LibMod.MOD_ID);
+		vampire_leech = new SpellDrainLife(8, 0x830f0f, EnumSpellType.INSTANT, "vampire_leech", LibMod.MOD_ID);
 		registerAll();
 	}
 
@@ -40,7 +42,7 @@ public class ModSpells {
 		Spell.SPELL_REGISTRY.registerAll(
 				magnet, poke, water, activation, slowness, 
 				lesser_blink, blink, explosion, disarming, 
-				infuse_life, self_heal, call_storm
+				infuse_life, self_heal, call_storm, vampire_leech
 				);
 	}
 

@@ -49,6 +49,7 @@ import com.covens.common.content.cauldron.brews.PotionWolfsbane;
 import com.covens.common.potion.potions.PotionBloodDrained;
 import com.covens.common.potion.potions.PotionMesmerize;
 import com.covens.common.potion.potions.PotionSunWard;
+import com.covens.common.potion.potions.PotionVampireLeech;
 
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -64,7 +65,7 @@ public class ModPotions {
 	public static Potion mending, flower_growth, harvest, smite, ice_world, outcasts_shame, infestation, ozymandias;
 	public static Potion purification, path_of_the_deep, prune_leaves, rotting, setehs_wastes, salted_earth, shell_armor;
 	public static Potion till_land, snow_trail, spider_nightmare, volatility, pulverize, mowing, love, revealing;
-	public static Potion deaths_ebb, power_boon, power_boost, power_drain, power_dampening, rooting;
+	public static Potion deaths_ebb, power_boon, power_boost, power_drain, power_dampening, rooting, vampire_leech;
 
 	public static PotionFrostbite freezing;
 	public static PotionSinking sinking;
@@ -122,6 +123,7 @@ public class ModPotions {
 		power_dampening = new PotionPowerDampening();
 		mesmerized = new PotionMesmerize();
 		rooting = new PotionRooting();
+		vampire_leech = new PotionVampireLeech();
 
 		ForgeRegistries.POTIONS.registerAll(//
 				bloodDrained, wolfsbane, arrow_deflect, absence, plant, //
@@ -133,6 +135,6 @@ public class ModPotions {
 				salted_earth, shell_armor, till_land, sinking, snow_trail, spider_nightmare, //
 				volatility, pulverize, mowing, sun_ward, love, revealing, //
 				deaths_ebb, power_boon, mesmerized, power_drain, power_boost, //
-				power_dampening, rooting);
+				power_dampening, rooting, vampire_leech);
 	}
 }

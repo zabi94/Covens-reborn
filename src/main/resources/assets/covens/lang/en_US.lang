@@ -477,6 +477,7 @@ item.spell_page.covens.disarming.name=Spell of Disarming
 item.spell_page.covens.infuse_life.name=Spell of the Gift
 item.spell_page.covens.self_heal.name=Spell of Restoration
 item.spell_page.covens.call_storm.name=Spell of the Tempest
+item.spell_page.covens.vampire_leech.name=Spell of Life Drain
 
 
 //Mutant Plants
@@ -653,6 +654,9 @@ effect.power_dampening.desc=Temporarily decreases the amount of MP you have
 
 effect.rooting=Rooted
 effect.rooting.desc=Binds the entity in place
+
+effect.vampire_leech=Life Drain
+effect.vampire_leech.desc=Takes life force from enemies and transforms it into blood
 
 //Vanilla potion descriptions
 effect.absorption.desc=Temporarily gives you extra hearts

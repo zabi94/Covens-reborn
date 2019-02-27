@@ -89,6 +89,10 @@ public class MobHelper {
 		}
 
 	}
+	
+	public static boolean isLivingCorporeal(EntityLivingBase entity) {
+		return !isSpirit(entity) && !isDemon(entity) && !isCorporealUndead(entity);
+	}
 
 	public static boolean isVillager(EntityLivingBase entity) {
 		if (entity instanceof INpc) {
