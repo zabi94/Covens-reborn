@@ -48,6 +48,7 @@ import com.covens.common.content.cauldron.brews.PotionVolatility;
 import com.covens.common.content.cauldron.brews.PotionWolfsbane;
 import com.covens.common.potion.potions.PotionBloodDrained;
 import com.covens.common.potion.potions.PotionMesmerize;
+import com.covens.common.potion.potions.PotionSubjugate;
 import com.covens.common.potion.potions.PotionSunWard;
 import com.covens.common.potion.potions.PotionVampireLeech;
 
@@ -57,7 +58,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModPotions {
 
 	// Normal effects
-	public static Potion bloodDrained, sun_ward, mesmerized;
+	public static Potion bloodDrained, sun_ward, mesmerized, vampire_leech;
 
 	// Also brews
 	public static Potion wolfsbane, arrow_deflect, absence, plant, bane_arthropods, corruption, cursed_leaping, demons_bane;
@@ -65,7 +66,7 @@ public class ModPotions {
 	public static Potion mending, flower_growth, harvest, smite, ice_world, outcasts_shame, infestation, ozymandias;
 	public static Potion purification, path_of_the_deep, prune_leaves, rotting, setehs_wastes, salted_earth, shell_armor;
 	public static Potion till_land, snow_trail, spider_nightmare, volatility, pulverize, mowing, love, revealing;
-	public static Potion deaths_ebb, power_boon, power_boost, power_drain, power_dampening, rooting, vampire_leech;
+	public static Potion deaths_ebb, power_boon, power_boost, power_drain, power_dampening, rooting;
 
 	public static PotionFrostbite freezing;
 	public static PotionSinking sinking;
