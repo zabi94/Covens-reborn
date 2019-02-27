@@ -235,15 +235,10 @@ public class ApiInstance extends CovensAPI {
 
 	@Override
 	public boolean bindFamiliar(EntityLiving familiar, EntityPlayer player) {
+		if (familiar == null || player == null) {
+			throw new IllegalArgumentException("You can't bind a familiar if the entity or the player are null");
+		}
 		if (isValidFamiliar(familiar)) {
-			if (familiar == null || player == null) {
-				throw new IllegalArgumentException("You can't bind a familiar if the entity or the player are null");
-			}
-			
-			if (!isValidFamiliar(familiar)) {
-				throw new IllegalArgumentException(familiar.getClass().getCanonicalName()+" is not a valid familiar type");
-			}
-			
 			CapabilityFamiliarCreature famCap = familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
 			
 			if (!famCap.hasOwner()) {
@@ -252,7 +247,7 @@ public class ApiInstance extends CovensAPI {
 				CovensAPI.getAPI().removeMPExpansion(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
 				CovensAPI.getAPI().expandPlayerMP(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
 				HotbarAction.refreshActions(player, player.world);
-				FamiliarController.setupFamiliarAI(familiar);
+				FamiliarController.setupFamiliar(familiar);
 				player.sendStatusMessage(new TextComponentString("You now have "+player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount+" familiars"), true);
 				return true;
 			} else {

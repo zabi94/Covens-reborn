@@ -109,11 +109,12 @@ public class FamiliarController {
 		player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(null);
 	}
 
-	public static void setupFamiliarAI(EntityLiving entity) {
+	public static void setupFamiliar(EntityLiving entity) {
 		if (entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).aiSet) {
 			return;
 		}
 		entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).aiSet = true;
+		entity.getTags().add("familiar");
 		removeTasks(entity);
 		removeTargets(entity);
 		entity.tasks.addTask(1, new AIFollowTarget(entity));

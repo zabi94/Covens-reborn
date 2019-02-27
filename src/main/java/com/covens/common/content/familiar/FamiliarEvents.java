@@ -15,10 +15,13 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -52,13 +55,13 @@ public class FamiliarEvents {
 			evt.setResult(Result.DENY);
 		}
 	}
-
+	
 	@SubscribeEvent
 	public static void attachFamiliarAI(EntityJoinWorldEvent evt) {
 		if (!evt.getWorld().isRemote && (evt.getEntity() instanceof EntityLiving) && CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
 			EntityLiving entity = (EntityLiving) evt.getEntity();
 			if (entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
-				FamiliarController.setupFamiliarAI(entity);
+				FamiliarController.setupFamiliar(entity);
 			}
 		}
 	}
@@ -67,6 +70,28 @@ public class FamiliarEvents {
 	public static void addActions(HotbarActionCollectionEvent evt) {
 		if (evt.player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount > 0) {
 			evt.getList().add(ModAbilities.COMMAND_FAMILIAR);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void protectFamiliars(LivingHurtEvent evt) {
+		if (CovensAPI.getAPI().isValidFamiliar(evt.getEntityLiving()) && evt.getEntityLiving().getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
+			DamageSource src = evt.getSource();
+			if (!src.canHarmInCreative() && (!src.isMagicDamage() && !canHurtSpirits(src))) {
+				evt.setAmount(0);
+				evt.setCanceled(true);
+			}
+		}
+	}
+	
+	private static boolean canHurtSpirits(DamageSource src) {
+		return false; //TODO
+	}
+	
+	@SubscribeEvent
+	public static void stopDrops(LivingDropsEvent evt) {
+		if (evt.getEntityLiving().getTags().contains("familiar")) {
+			evt.setCanceled(true);
 		}
 	}
 
