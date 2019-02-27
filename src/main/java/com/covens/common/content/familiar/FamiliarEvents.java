@@ -6,6 +6,7 @@ import com.covens.api.event.HotbarActionTriggeredEvent;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.familiar.FamiliarController.FamiliarCommand;
+import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.util.syncTasks.FamiliarDeath;
@@ -28,6 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import zabi.minecraft.minerva.common.data.UUIDs;
 import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
 
 @Mod.EventBusSubscriber
@@ -77,14 +79,23 @@ public class FamiliarEvents {
 	public static void protectFamiliars(LivingHurtEvent evt) {
 		if (CovensAPI.getAPI().isValidFamiliar(evt.getEntityLiving()) && evt.getEntityLiving().getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
 			DamageSource src = evt.getSource();
-			if (!src.canHarmInCreative() && (!src.isMagicDamage() && !canHurtSpirits(src))) {
+			if (!src.canHarmInCreative() && !src.isMagicDamage() && !canHurtSpirits(src)) {
 				evt.setAmount(0);
 				evt.setCanceled(true);
+				return;
+			}
+			if (src.getTrueSource() != null && UUIDs.of(src.getTrueSource()).equals(evt.getEntityLiving().getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner)) {
+				evt.setAmount(0);
+				evt.setCanceled(true);
+				return;
 			}
 		}
 	}
 	
 	private static boolean canHurtSpirits(DamageSource src) {
+		if (src.getTrueSource() instanceof EntityPlayer && !src.getTrueSource().getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt()) {
+			return true;
+		}
 		return false; //TODO
 	}
 	
