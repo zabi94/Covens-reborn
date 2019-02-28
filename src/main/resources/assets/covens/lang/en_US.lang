@@ -212,6 +212,7 @@ item.blood_bottle.fresh=Fresh
 item.blood_bottle.normal=Good quality
 item.blood_bottle.old=Old
 item.blood_bottle.stale=Stale
+item.spark_of_darkness.name=Spark of Darkness
 
 //fumes
 item.fume.unfired_jar.name=Unfired Clay Jar

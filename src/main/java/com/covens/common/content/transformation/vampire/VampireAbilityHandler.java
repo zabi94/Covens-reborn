@@ -8,6 +8,7 @@ import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.event.HotbarActionTriggeredEvent;
 import com.covens.api.event.TransformationModifiedEvent;
 import com.covens.api.transformation.DefaultTransformations;
+import com.covens.common.block.ModBlocks;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.helper.MobHelper;
@@ -47,6 +48,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -104,7 +106,7 @@ public class VampireAbilityHandler {
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-	public static void dropInvalidGear(LivingHurtEvent evt) {
+	public static void saveDamageForRestoration(LivingHurtEvent evt) {
 		if (!evt.getEntity().world.isRemote && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			CapabilityTransformation data = evt.getEntityLiving().getCapability(CapabilityTransformation.CAPABILITY, null);
 			if (data.getType() == DefaultTransformations.VAMPIRE) {
@@ -208,8 +210,16 @@ public class VampireAbilityHandler {
 		if ((evt.getEntityLiving() instanceof EntityPlayer) && (evt.getItem().getItem() instanceof ItemFood)) {
 			CapabilityTransformation data = ((EntityPlayer) evt.getEntityLiving()).getCapability(CapabilityTransformation.CAPABILITY, null);
 			if (data.getType() == DefaultTransformations.VAMPIRE) {
-				evt.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 2, false, true));
+				evt.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200, 2, false, true));
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void digBurialDirtFaster(PlayerEvent.BreakSpeed evt) {
+		CapabilityTransformation data = evt.getEntityPlayer().getCapability(CapabilityTransformation.CAPABILITY, null);
+		if (data.getType() == DefaultTransformations.VAMPIRE && evt.getState().getBlock() == ModBlocks.graveyard_dirt && evt.getEntityPlayer().getHeldItemMainhand().isEmpty()) {
+			evt.setNewSpeed(20f * evt.getOriginalSpeed());
 		}
 	}
 

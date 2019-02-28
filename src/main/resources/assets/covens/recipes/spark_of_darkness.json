@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " E ",
+    "SNS",
+    " S "
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:nether_star",
+      "data": 0
+    },
+    "S": {
+      "item": "covens:wool_of_bat",
+      "data": 0
+    }, 
+    "E": {
+      "item": "covens:fume",
+      "data": 17,
+      "_comment": "Reek of death"
+    }
+  },
+  "result": {
+    "item": "covens:spark_of_darkness",
+    "data": 0
+  }
+}

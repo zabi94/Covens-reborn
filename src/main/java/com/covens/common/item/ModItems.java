@@ -49,6 +49,7 @@ import com.covens.common.item.magic.brew.ItemBrewArrow;
 import com.covens.common.item.magic.brew.ItemBrewDrinkable;
 import com.covens.common.item.magic.brew.ItemBrewThrowable;
 import com.covens.common.item.misc.ItemBloodBottle;
+import com.covens.common.item.misc.ItemSparkDarkness;
 import com.covens.common.item.tool.ItemAthame;
 import com.covens.common.item.tool.ItemBoline;
 import com.covens.common.item.tool.ItemColdIronAxe;
@@ -242,6 +243,7 @@ public final class ModItems {
 	public static final Item cold_iron_spade = null;
 	public static final Item cold_iron_pickaxe = null;
 	public static final Item blood_bottle = null;
+	public static final Item spark_of_darkness = null;
 
 	private ModItems() {
 	}
@@ -323,7 +325,8 @@ public final class ModItems {
 				new ItemLocationStone(),  //
 				new ItemTarots(LibItemName.TAROTS), //
 				new ItemBroom(LibItemName.BROOM), //
-				new ItemBloodBottle(LibItemName.BLOOD_BOTTLE) //
+				new ItemBloodBottle(LibItemName.BLOOD_BOTTLE), //
+				new ItemSparkDarkness(LibItemName.SPARK_DARKNESS) //
 				// new ItemMod(LibItemName.WITCHWEED),
 				// new ItemMod(LibItemName.INFESTED_WHEAT)
 		);
