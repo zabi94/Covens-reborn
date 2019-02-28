@@ -80,6 +80,8 @@ public abstract class CovensAPI {
 	 * @throws UnsupportedOperationException if the player is not a vampire
 	 */
 	public abstract boolean addVampireBlood(EntityPlayer player, int amount);
+	
+	public abstract void setVampireBlood(EntityPlayer player, int amount);
 
 	public abstract void registerCircleRitual(IRitual ritual);
 

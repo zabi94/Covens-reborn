@@ -130,6 +130,12 @@ public class ApiInstance extends CovensAPI {
 		CapabilityVampire data = player.getCapability(CapabilityVampire.CAPABILITY, null);
 		return data.addVampireBlood(amount, player);
 	}
+	
+	@Override
+	public void setVampireBlood(EntityPlayer player, int amount) {
+		CapabilityVampire data = player.getCapability(CapabilityVampire.CAPABILITY, null);
+		data.setBlood(0);
+	}
 
 	@Override
 	public void setTypeAndLevel(EntityPlayer player, ITransformation type, int level, boolean isClient) {
