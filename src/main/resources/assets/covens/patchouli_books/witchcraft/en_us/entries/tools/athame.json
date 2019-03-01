@@ -1,7 +1,7 @@
 {
   "name": "Athame",
   "icon": "covens:athame",
-  "category": "obw_the_tools_of_the_trade",
+  "category": "tools",
   "pages": [
     {
       "type": "spotlight",
@@ -9,9 +9,10 @@
       "text": "The athame is the most sacred instrument for a witch. It's a cerimonial blade, typically used during rituals, and is often involved in summoning rites."
     },
     {
-      "type": "crafting",
-      "text": "Creating the Athame",
-      "recipe": "covens:athame"
+      "type": "image",
+      "images": ["covens:textures/gui/books/images/athame.png"],
+      "border": true,
+      "text": "Altar with an athame on top"
     },
     {
       "type": "text",
@@ -19,10 +20,9 @@
       "text": "An athame can be used in multiple ways. The easiest one is to place it on an altar, representing the swords. An altar equipped with an athame will distribute its energy to nearby witches, and restore their internal power more quickly. To place the athame, right-click it on a formed altar"
     },
     {
-      "type": "image",
-      "images": ["covens:textures/gui/books/images/athame.png"],
-      "border": true,
-      "text": "Altar with an athame on top"
+      "type": "crafting",
+      "text": "Creating the Athame",
+      "recipe": "covens:athame"
     }
   ]
 }

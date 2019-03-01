@@ -982,10 +982,12 @@ enchantment.covens.hex_protection.desc=An armor enchantment that protects the we
 enchantment.covens.protection_demon.desc=An armor enchantment that protects the wearer from demons.
 
 //Books
-covens.book.rites.name=Book of Shadows
-covens.book.rites.landing=A grimoire, handed from witch to witch for centuries.
+covens.book.rites.name=Book of Magic (NAME WIP)
+covens.book.rites.landing=A grimoire, handed from witch to witch for centuries, about how to manipulate the power permeating all the things.
 covens.book.brews.name=Almanac of Boiling
-covens.book.brews.landing=TODO
+covens.book.brews.landing=An exhaustive guide on the use of the witch's cauldron.
+covens.book.witchcraft.name=Witchcraft
+covens.book.witchcraft.landing=This ancient book contains the basic knowledge every witch needs for the practice.
 covens.brew.cost=%d base magical power
  
 //Familiars

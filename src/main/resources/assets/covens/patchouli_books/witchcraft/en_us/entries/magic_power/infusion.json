@@ -1,9 +1,13 @@
 {
-  "name": "Infusions",
-  "icon": "covens:fume",
+  "name": "Marks",
+  "icon": "covens:fume:5",
   "sortnum": "3",
-  "category": "obw_on_magic_and_its_forms",
+  "category": "magic_power",
   "pages": [
+    {
+      "type": "text",
+      "text": "This needs to be rewritten from scratch. It's not infusions anymore"
+    },
     {
       "type": "text",
       "text": "As witches delve deeper into witchcraft, they will come to notice the power found within the different realms of existence, brimming with magical energy, resonating through all the different planes, but ultimately anchored to the three main realms of minecraftia, The Overworld, The Nether and The End. $(br) $(br)However such energies can not "

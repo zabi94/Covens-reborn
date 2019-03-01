@@ -2,7 +2,7 @@
   "name": "Magical energy",
   "icon": "covens:pentacle",
   "sortnum": "2",
-  "category": "obw_on_magic_and_its_forms",
+  "category": "magic_power",
   "pages": [
     {
       "type": "text",
@@ -14,7 +14,7 @@
     },
     {
       "type": "text",
-      "text": "how much energy the player has access to, and starts at the mere quantities, later to be increased, $(o)$(l:obw_on_magic_and_its_forms/infusion)should the witch attune themself with a dimension$(). Recharge rate and capacity might also be increased through the use of certain baubles and trinkets. $(br) $(br)This first source of ME, limited though as it might be, certainly proves itself useful to those wishing to delve into the art of witchcraft, powering the devices, rituals and "
+      "text": "how much energy the player has access to, and starts at the mere quantities, later to be increased, $(o)$(l:magic_power/infusion)should the witch attune themself with a dimension$(). Recharge rate and capacity might also be increased through the use of certain baubles and trinkets. $(br) $(br)This first source of ME, limited though as it might be, certainly proves itself useful to those wishing to delve into the art of witchcraft, powering the devices, rituals and "
     },
     {
       "type": "text",
@@ -22,7 +22,7 @@
     },
     {
       "type": "text",
-      "text": "they might use, as well as to reduce the hindrance of the witch needing to be near the different magics it casts. $(br) $(br)Refer to the $(o)$(l:obw_the_tools_of_the_trade/altar)altar$() section for more in depth explanation of the altar mechanics. "
+      "text": "they might use, as well as to reduce the hindrance of the witch needing to be near the different magics it casts. $(br) $(br)Refer to the $(o)$(l:tools/altar)altar$() section for more in depth explanation of the altar mechanics. "
     }
   ]
 }

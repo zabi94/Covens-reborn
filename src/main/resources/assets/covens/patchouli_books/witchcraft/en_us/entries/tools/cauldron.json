@@ -1,7 +1,7 @@
 {
   "name": "Cauldron",
   "icon": "covens:cauldron",
-  "category": "obw_the_tools_of_the_trade",
+  "category": "tools",
   "pages": [
     {
       "type": "text",

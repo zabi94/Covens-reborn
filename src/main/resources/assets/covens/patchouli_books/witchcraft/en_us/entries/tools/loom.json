@@ -1,7 +1,7 @@
 {
   "name": "Loom",
   "icon": "covens:thread_spinner",
-  "category": "obw_the_tools_of_the_trade",
+  "category": "tools",
   "pages": [
     {
       "type": "text",

@@ -1,0 +1,11 @@
+{
+  "name": "covens.book.witchcraft.name",
+  "landing_text": "covens.book.witchcraft.landing",
+  "version": 1,
+  "model": "covens:book_witchcraft",
+  "subtitle": "covens.book.witchcraft.subtitle",
+  "book_texture": "covens:textures/gui/book_witchcraft.png",
+  "show_toasts": false,
+  "creative_tab": "covens_items",
+  "show_progress": false
+}

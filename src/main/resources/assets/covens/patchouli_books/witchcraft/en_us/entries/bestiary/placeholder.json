@@ -1,0 +1,11 @@
+{
+  "name": "Bestiary placeholder",
+  "icon": "covens:heart",
+  "category": "bestiary",
+  "pages": [
+    {
+      "type": "text",
+      "text": "TODO"
+    }
+  ]
+}

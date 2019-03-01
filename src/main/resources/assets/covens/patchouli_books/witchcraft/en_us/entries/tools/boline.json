@@ -1,0 +1,28 @@
+{
+  "name": "Boline",
+  "icon": "covens:boline",
+  "category": "tools",
+  "pages": [
+   {
+      "type": "spotlight",
+      "item": "covens:boline",
+      "text": "The boline is the second cerimonial blade, along with the $(l:tools/athame)Athame$(). It is used for gathering and was born as an instrument. In the practice, it represents the produce, and the act of cutting"
+    },
+    {
+      "type": "image",
+      "images": ["covens:textures/gui/books/images/boline.png"],
+      "border": true,
+      "text": "Altar with a boline on top"
+    },
+    {
+      "type": "text",
+      "title": "Uses",
+      "text": "TODO"
+    },
+    {
+      "type": "crafting",
+      "text": "Creating the Boline",
+      "recipe": "covens:boline"
+    }
+  ]
+}

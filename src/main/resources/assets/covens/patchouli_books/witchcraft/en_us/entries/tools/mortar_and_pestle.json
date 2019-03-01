@@ -1,7 +1,7 @@
 {
   "name": "Mortar and Pestle",
   "icon": "covens:mortar_and_pestle",
-  "category": "obw_the_tools_of_the_trade",
+  "category": "tools",
   "pages": [
     {
       "type": "text",

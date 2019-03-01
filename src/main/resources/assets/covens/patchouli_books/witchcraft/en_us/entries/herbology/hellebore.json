@@ -1,7 +1,7 @@
 {
   "name": "Hellebore",
   "icon": "covens:hellebore",
-  "category": "obw_herbology",
+  "category": "herbology",
   "pages": [
     {
       "type": "text",

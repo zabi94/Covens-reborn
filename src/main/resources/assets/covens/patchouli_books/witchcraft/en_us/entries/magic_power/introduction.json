@@ -2,7 +2,7 @@
   "name": "Introduction",
   "icon": "covens:pentacle",
   "sortnum": "1",
-  "category": "obw_on_magic_and_its_forms",
+  "category": "magic_power",
   "pages": [
     {
       "type": "text",

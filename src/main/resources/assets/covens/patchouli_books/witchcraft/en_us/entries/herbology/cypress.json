@@ -1,7 +1,7 @@
 {
   "name": "Cypress",
   "icon": "covens:log_cypress",
-  "category": "obw_witchy_woodworking",
+  "category": "herbology",
   "pages": [
     {
       "type": "text",
