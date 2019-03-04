@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import zabi.minecraft.minerva.common.entity.PlayerHelper;
+import zabi.minecraft.minerva.common.entity.EntityHelper;
 import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 public class TileEntityTarotsTable extends ModTileEntity {
@@ -39,7 +39,7 @@ public class TileEntityTarotsTable extends ModTileEntity {
 		if (!reader.world.isRemote) {
 			if (this.checkDeck(tarotDeck) && this.altarTracker.drainAltarFirst(reader, this.pos, this.world.provider.getDimension(), READ_COST)) {
 				reader.openGui(Covens.instance, LibGui.TAROT.ordinal(), reader.world, this.pos.getX(), this.pos.getY(), this.pos.getZ());
-				EntityPlayerMP readee = (EntityPlayerMP) PlayerHelper.getPlayerAcrossDimensions(UUID.fromString(tarotDeck.getTagCompound().getString("read_id")));
+				EntityPlayerMP readee = (EntityPlayerMP) EntityHelper.getPlayer(UUID.fromString(tarotDeck.getTagCompound().getString("read_id")));
 				if (readee != null) {
 					NetworkHandler.HANDLER.sendTo(new TarotMessage(readee), (EntityPlayerMP) reader);
 				} else {

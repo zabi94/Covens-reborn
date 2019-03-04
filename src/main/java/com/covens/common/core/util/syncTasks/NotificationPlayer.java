@@ -3,7 +3,7 @@ package com.covens.common.core.util.syncTasks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.ITextComponent;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncTask;
 
 public class NotificationPlayer extends SyncTask<EntityPlayer> {
 	

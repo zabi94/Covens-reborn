@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
-import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.UUIDs;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncTask;
 
 public class EntityBeFollowedByFamiliar extends SyncTask<EntityLivingBase> {
 
@@ -20,7 +20,7 @@ public class EntityBeFollowedByFamiliar extends SyncTask<EntityLivingBase> {
 	
 	@Override
 	public void execute(EntityLivingBase entity) {
-		EntitySyncHelper.executeOnEntityAvailable(familiar, new FamiliarFollowEntity(familiar, target));
+		SyncManager.executeOnEntityAvailable(familiar, new FamiliarFollowEntity(familiar, target));
 	}
 
 	@Override

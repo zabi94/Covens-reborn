@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import zabi.minecraft.minerva.common.entity.PlayerHelper;
+import zabi.minecraft.minerva.common.entity.EntityHelper;
 
 public class PotionBloodDrained extends PotionMod {
 
@@ -54,7 +54,7 @@ public class PotionBloodDrained extends PotionMod {
 
 	private void handleNPCEffect(EntityLiving entity, IBloodReserve reserve) {
 		if (reserve.getDrinkerUUID() != null) {
-			EntityPlayer vampire = PlayerHelper.getPlayerAcrossDimensions(reserve.getDrinkerUUID());
+			EntityPlayer vampire = EntityHelper.getPlayer(reserve.getDrinkerUUID());
 			if (vampire != null) {
 				entity.setRevengeTarget(vampire);
 			}

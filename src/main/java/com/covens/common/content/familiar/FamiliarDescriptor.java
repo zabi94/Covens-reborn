@@ -5,7 +5,7 @@ import java.util.UUID;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
-import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 public class FamiliarDescriptor implements INBTSerializable<NBTTagCompound> {

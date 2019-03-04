@@ -29,8 +29,8 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.UUIDs;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
 
 @Mod.EventBusSubscriber
 public class FamiliarEvents {
@@ -42,10 +42,10 @@ public class FamiliarEvents {
 		}
 		CapabilityFamiliarCreature cap = evt.getEntity().getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
 		if (cap.hasOwner()) {
-			EntitySyncHelper.executeOnPlayerAvailable(cap.owner, new FamiliarDeath(evt.getEntity().getPersistentID(), evt.getEntity().getName()));
+			SyncManager.executeOnPlayerAvailable(cap.owner, new FamiliarDeath(evt.getEntity().getPersistentID(), evt.getEntity().getName()));
 			CovensAPI.getAPI().unbindFamiliar((EntityLiving) evt.getEntity());
 		}
-		EntitySyncHelper.cleanMessagesForEntity(evt.getEntity().getPersistentID());
+		SyncManager.cleanMessagesForEntity(evt.getEntity().getPersistentID());
 	}
 
 	@SubscribeEvent

@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
 
 public class AIGotoPlace extends FamiliarAIBase {
 
@@ -83,7 +83,7 @@ public class AIGotoPlace extends FamiliarAIBase {
 	}
 
 	private void notifyOwner() {
-		EntitySyncHelper.executeOnPlayerAvailable(this.getCap().owner, new NotificationPlayer(new TextComponentTranslation("familiar.command.goto.failed", this.familiar.getName()), true));
+		SyncManager.executeOnPlayerAvailable(this.getCap().owner, new NotificationPlayer(new TextComponentTranslation("familiar.command.goto.failed", this.familiar.getName()), true));
 		this.getCap().destination = null;
 	}
 

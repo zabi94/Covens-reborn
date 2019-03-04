@@ -10,9 +10,10 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.nbt.NBTTagCompound;
-import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper.SyncTask;
+import zabi.minecraft.minerva.common.entity.EntityHelper;
+import zabi.minecraft.minerva.common.entity.UUIDs;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncTask;
 import zabi.minecraft.minerva.common.utils.AttributeModifierModeHelper;
 
 public class FamiliarFollowEntity extends SyncTask<EntityLivingBase> {
@@ -32,9 +33,9 @@ public class FamiliarFollowEntity extends SyncTask<EntityLivingBase> {
 
 	@Override
 	public void execute(EntityLivingBase famEnt) {
-		EntityLivingBase tgtEnt = EntitySyncHelper.getEntityAcrossDimensions(target);
+		EntityLivingBase tgtEnt = EntityHelper.getEntityAcrossDimensions(target);
 		if (tgtEnt == null) {
-			EntitySyncHelper.executeOnEntityAvailable(target, new EntityBeFollowedByFamiliar(familiar, target));
+			SyncManager.executeOnEntityAvailable(target, new EntityBeFollowedByFamiliar(familiar, target));
 		} else {
 			CapabilityFamiliarCreature cap = famEnt.getCapability(CapabilityFamiliarCreature.CAPABILITY, null); 
 			CapabilityFamiliarCreature.setSitting((EntityLiving) famEnt, false);

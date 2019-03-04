@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.EntityHelper;
 import zabi.minecraft.minerva.common.network.SimpleMessage;
 
 public class FetchFamiliarsMessage extends SimpleMessage<FetchFamiliarsMessage> {
@@ -29,7 +29,7 @@ public class FetchFamiliarsMessage extends SimpleMessage<FetchFamiliarsMessage> 
 	}
 
 	private void retrieveAndAdd(EntityPlayer p, List<FamiliarDescriptor> list, FamiliarDescriptor desc) {
-		EntityLivingBase e = EntitySyncHelper.getEntityAcrossDimensions(desc.getUuid());
+		EntityLivingBase e = EntityHelper.getEntityAcrossDimensions(desc.getUuid());
 		boolean available = e != null;
 		if (!available) {
 			

@@ -24,7 +24,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
-import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.utils.annotation.DontSync;
 
 public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicPowerExpander {

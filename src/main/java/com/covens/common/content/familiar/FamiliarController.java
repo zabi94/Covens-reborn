@@ -31,9 +31,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
-import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
 import zabi.minecraft.minerva.common.entity.RayTraceHelper;
+import zabi.minecraft.minerva.common.entity.UUIDs;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
 
 public class FamiliarController {
 
@@ -56,7 +56,7 @@ public class FamiliarController {
 		if (UUIDs.isNull(selectedFamiliar)) {
 			return;
 		}
-		EntitySyncHelper.executeOnEntityAvailable(selectedFamiliar, new FamiliarFollowEntity(selectedFamiliar, UUIDs.of(player)));
+		SyncManager.executeOnEntityAvailable(selectedFamiliar, new FamiliarFollowEntity(selectedFamiliar, UUIDs.of(player)));
 		player.sendStatusMessage(new TextComponentTranslation("familiar.command.followme", getSelectedFamiliarName(selectedFamiliar, player)), true);
 	}
 
@@ -71,7 +71,7 @@ public class FamiliarController {
 			return;
 		}
 
-		EntitySyncHelper.executeOnEntityAvailable(selectedFamiliar, new FamiliarFollowEntity(selectedFamiliar, UUIDs.of(toFollow)));
+		SyncManager.executeOnEntityAvailable(selectedFamiliar, new FamiliarFollowEntity(selectedFamiliar, UUIDs.of(toFollow)));
 		player.sendStatusMessage(new TextComponentTranslation("familiar.command.follow", getSelectedFamiliarName(selectedFamiliar, player), toFollow.getName()), true);
 	}
 
@@ -100,7 +100,7 @@ public class FamiliarController {
 	public static void sendSelectedFamiliarTo(EntityPlayer e, Vec3d hitVec) {
 		UUID familiar = e.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectedFamiliar;
 		if (!familiar.equals(UUIDs.NULL_UUID)) {
-			EntitySyncHelper.executeOnEntityAvailable(familiar, new FamiliarOrderGoto(new BlockPos(hitVec)));
+			SyncManager.executeOnEntityAvailable(familiar, new FamiliarOrderGoto(new BlockPos(hitVec)));
 			e.sendStatusMessage(new TextComponentTranslation("familiar.command.goto", getSelectedFamiliarName(familiar, e)), true);
 		}
 	}

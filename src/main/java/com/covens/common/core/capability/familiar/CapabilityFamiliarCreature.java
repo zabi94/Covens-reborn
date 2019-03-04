@@ -18,8 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
-import zabi.minecraft.minerva.common.data.UUIDs;
-import zabi.minecraft.minerva.common.entity.PlayerHelper;
+import zabi.minecraft.minerva.common.entity.EntityHelper;
+import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.utils.annotation.DontSync;
 import zabi.minecraft.minerva.common.utils.annotation.Ignore;
 
@@ -54,7 +54,7 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 	@Nullable
 	public EntityPlayer getOwner() {
 		if (this.hasOwner()) {
-			return PlayerHelper.getPlayerAcrossDimensions(this.owner);
+			return EntityHelper.getPlayer(this.owner);
 		}
 		return null;
 	}

@@ -60,7 +60,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import zabi.minecraft.minerva.common.entity.EntitySyncHelper;
+import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
 
 public class ApiInstance extends CovensAPI {
 
@@ -270,8 +270,8 @@ public class ApiInstance extends CovensAPI {
 
 	@Override
 	public void unbindFamiliar(UUID familiar, UUID player, String familiarName) {
-		EntitySyncHelper.executeOnEntityAvailable(familiar, new UnbindFamiliarFromPlayer(familiar));
-		EntitySyncHelper.executeOnPlayerAvailable(player, new UnbindPlayerFromFamiliar(player, familiar, familiarName));
+		SyncManager.executeOnEntityAvailable(familiar, new UnbindFamiliarFromPlayer(familiar));
+		SyncManager.executeOnPlayerAvailable(player, new UnbindPlayerFromFamiliar(player, familiar, familiarName));
 	}
 	
 	@Override

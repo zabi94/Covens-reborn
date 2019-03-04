@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import zabi.minecraft.minerva.common.data.UUIDs;
+import zabi.minecraft.minerva.common.entity.UUIDs;
 
 public class CapabilityMimicData implements IMimicData {
 
