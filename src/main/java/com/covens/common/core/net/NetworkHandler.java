@@ -3,9 +3,11 @@ package com.covens.common.core.net;
 import com.covens.client.fx.ParticleF;
 import com.covens.common.core.net.messages.EnergySync;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
+import com.covens.common.core.net.messages.FetchFamiliarsMessage;
 import com.covens.common.core.net.messages.InfusionChangedMessage;
 import com.covens.common.core.net.messages.ParticleMessage;
 import com.covens.common.core.net.messages.PlaceHeldItemMessage;
+import com.covens.common.core.net.messages.PlayerFamiliarsDefinition;
 import com.covens.common.core.net.messages.PlayerTransformationChangedMessage;
 import com.covens.common.core.net.messages.PlayerUsedAbilityMessage;
 import com.covens.common.core.net.messages.SmokeSpawn;
@@ -36,6 +38,7 @@ public final class NetworkHandler {
 	public static void init() {
 		HANDLER.registerMessage(ParticleMessage.ParticleMessageHandler.class, ParticleMessage.class, next(), Side.CLIENT);
 		HANDLER.registerMessage(TarotMessage.TarotMessageHandler.class, TarotMessage.class, next(), Side.CLIENT);
+		HANDLER.registerMessage(PlayerFamiliarsDefinition.Handler.class, PlayerFamiliarsDefinition.class, next(), Side.CLIENT);
 		// TODO <rustylocks79> remove
 		// HANDLER.registerMessage(PlayerMimicDataChanged.PlayerMimicDataHandler.class,
 		// PlayerMimicDataChanged.class, next(), Side.CLIENT);
@@ -49,6 +52,7 @@ public final class NetworkHandler {
 		registerSimpleMessage(PlayerUsedAbilityMessage.class, next(), Side.SERVER);
 		registerSimpleMessage(WitchFireTP.class, next(), Side.SERVER);
 		registerSimpleMessage(PlaceHeldItemMessage.class, next(), Side.SERVER);
+		registerSimpleMessage(FetchFamiliarsMessage.class, next(), Side.SERVER);
 	}
 
 	private static <MSG extends SimpleMessage<MSG>> void registerSimpleMessage(Class<MSG> clazz, int id, Side side) {

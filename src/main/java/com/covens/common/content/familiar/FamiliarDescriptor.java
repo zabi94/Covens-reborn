@@ -23,6 +23,10 @@ public class FamiliarDescriptor implements INBTSerializable<NBTTagCompound> {
 		this.entityID = entityID;
 		this.lastKnownPos = lastSeen;
 	}
+	
+	public FamiliarDescriptor(NBTTagCompound tag) {
+		deserializeNBT(tag);
+	}
 
 	public DimensionalPosition getLastKnownPos() {
 		return this.lastKnownPos;
@@ -66,6 +70,11 @@ public class FamiliarDescriptor implements INBTSerializable<NBTTagCompound> {
 
 	public static FamiliarDescriptor of(EntityLiving in) {
 		return new FamiliarDescriptor(in.getName(), UUIDs.of(in), new DimensionalPosition(in), false, 0);
+	}
+	
+	@Override
+	public String toString() {
+		return "Familiar:"+name+"|"+uuid+"|"+lastKnownPos+(available?"":"|unavailable");
 	}
 	
 }

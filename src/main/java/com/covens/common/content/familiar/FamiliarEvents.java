@@ -1,5 +1,7 @@
 package com.covens.common.content.familiar;
 
+import java.util.List;
+
 import com.covens.api.CovensAPI;
 import com.covens.api.event.HotbarActionCollectionEvent;
 import com.covens.api.event.HotbarActionTriggeredEvent;
@@ -9,7 +11,11 @@ import com.covens.common.content.familiar.FamiliarController.FamiliarCommand;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
+import com.covens.common.core.helper.Log;
+import com.covens.common.core.net.NetworkHandler;
+import com.covens.common.core.net.messages.PlayerFamiliarsDefinition;
 import com.covens.common.core.util.syncTasks.FamiliarDeath;
+import com.google.common.collect.Lists;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -29,8 +35,10 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import zabi.minecraft.minerva.common.entity.EntityHelper;
 import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
+import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 @Mod.EventBusSubscriber
 public class FamiliarEvents {
@@ -138,7 +146,8 @@ public class FamiliarEvents {
 					// NO-OP
 					break;
 				case OPEN_GUI:
-					//TODO
+					Log.i("click");
+					NetworkHandler.HANDLER.sendTo(new PlayerFamiliarsDefinition(getFamiliarDefinitions(p)), (EntityPlayerMP) p);
 					break;
 				case SELECT:
 					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(e);
@@ -158,6 +167,24 @@ public class FamiliarEvents {
 		if (evt.player instanceof EntityPlayerMP) {
 			evt.player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).markDirty((byte) 2);
 			HotbarAction.refreshActions(evt.player, evt.player.world);
+		}
+	}
+	
+	public static List<FamiliarDescriptor> getFamiliarDefinitions(EntityPlayer p) {
+		CapabilityFamiliarOwner owner = p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null);
+		List<FamiliarDescriptor> list = Lists.newArrayList();
+		owner.familiars.forEach((uuid, desc) -> retrieveAndAdd(p, list, desc));
+		return list;
+	}
+	
+	private static void retrieveAndAdd(EntityPlayer p, List<FamiliarDescriptor> list, FamiliarDescriptor desc) {
+		EntityLivingBase e = EntityHelper.getEntityAcrossDimensions(desc.getUuid());
+		boolean available = e != null;
+		if (!available) {
+			FamiliarDescriptor lastDesc = p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiars.get(desc.getUuid());
+			list.add(new FamiliarDescriptor(lastDesc.getName(), lastDesc.getUuid(), lastDesc.getLastKnownPos(), false, 0));
+		} else {
+			list.add(new FamiliarDescriptor(e.getName(), UUIDs.of(e), new DimensionalPosition(e), true, e.getEntityId()));
 		}
 	}
 }

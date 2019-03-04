@@ -1,6 +1,5 @@
 package com.covens.common.core.capability.familiar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -8,7 +7,7 @@ import com.covens.api.mp.IMagicPowerExpander;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.familiar.FamiliarDescriptor;
 import com.covens.common.lib.LibMod;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -17,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Tuple;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.util.Constants.NBT;
@@ -37,7 +35,7 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 	public int familiarCount = 0;
 	
 	@DontSync 
-	@CustomSerializer(reader = SerializerArrayUUID.class, writer = SerializerArrayUUID.class) 
+	@CustomSerializer(reader = SerializerHashmap.class, writer = SerializerHashmap.class) 
 	public HashMap<UUID, FamiliarDescriptor> familiars = new HashMap<>();
 	
 	public UUID selectedFamiliar = UUIDs.NULL_UUID;
@@ -96,25 +94,25 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 		}
 	}
 	
-	public static class SerializerArrayUUID implements SimpleCapability.Reader<ArrayList<Tuple<UUID, String>>>, SimpleCapability.Writer<ArrayList<Tuple<UUID, String>>> {
+	public static class SerializerHashmap implements SimpleCapability.Reader<HashMap<UUID, FamiliarDescriptor>>, SimpleCapability.Writer<HashMap<UUID, FamiliarDescriptor>> {
 
 		@Override
-		public void write(ArrayList<Tuple<UUID, String>> list, NBTTagCompound tag, String field) {
+		public void write(HashMap<UUID, FamiliarDescriptor> map, NBTTagCompound tag, String field) {
 			NBTTagList tlist = new NBTTagList();
-			list.forEach(tup -> {
-				NBTTagCompound entry = new NBTTagCompound();
-				entry.setUniqueId("id", tup.getFirst());
-				entry.setString("name", tup.getSecond());
-				tlist.appendTag(entry);
+			map.values().forEach(tup -> {
+				tlist.appendTag(tup.serializeNBT());
 			});
 			tag.setTag("list", tlist);
 		}
 
 		@Override
-		public ArrayList<Tuple<UUID, String>> read(NBTTagCompound buf, String name) {
-			ArrayList<Tuple<UUID, String>> list = Lists.newArrayList();
-			buf.getTagList("list", NBT.TAG_COMPOUND).forEach(nbt -> list.add(new Tuple<UUID, String>(((NBTTagCompound)nbt).getUniqueId("id"), ((NBTTagCompound)nbt).getString("name"))));
-			return list;
+		public HashMap<UUID, FamiliarDescriptor> read(NBTTagCompound buf, String name) {
+			HashMap<UUID, FamiliarDescriptor> map = Maps.newHashMap();
+			buf.getTagList("list", NBT.TAG_COMPOUND).forEach(nbt -> {
+				FamiliarDescriptor desc = new FamiliarDescriptor((NBTTagCompound) nbt);
+				map.put(desc.getUuid(), desc);
+			});
+			return map;
 		}
 		
 	}
