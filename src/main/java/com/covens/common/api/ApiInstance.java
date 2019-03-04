@@ -249,7 +249,7 @@ public class ApiInstance extends CovensAPI {
 			
 			if (!famCap.hasOwner()) {
 				familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).setOwner(player);
-				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).addFamiliar(familiar.getPersistentID());
+				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).addFamiliar(familiar);
 				CovensAPI.getAPI().removeMPExpansion(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
 				CovensAPI.getAPI().expandPlayerMP(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
 				HotbarAction.refreshActions(player, player.world);
@@ -269,15 +269,15 @@ public class ApiInstance extends CovensAPI {
 	}
 
 	@Override
-	public void unbindFamiliar(UUID familiar, UUID player) {
+	public void unbindFamiliar(UUID familiar, UUID player, String familiarName) {
 		EntitySyncHelper.executeOnEntityAvailable(familiar, new UnbindFamiliarFromPlayer(familiar));
-		EntitySyncHelper.executeOnPlayerAvailable(player, new UnbindPlayerFromFamiliar(player, familiar));
+		EntitySyncHelper.executeOnPlayerAvailable(player, new UnbindPlayerFromFamiliar(player, familiar, familiarName));
 	}
 	
 	@Override
 	public void unbindFamiliar(EntityLiving familiar) {
 		if (isValidFamiliar(familiar)) {
-			unbindFamiliar(familiar.getPersistentID(), familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner);
+			unbindFamiliar(familiar.getPersistentID(), familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).owner, familiar.getName());
 		}
 	}
 	

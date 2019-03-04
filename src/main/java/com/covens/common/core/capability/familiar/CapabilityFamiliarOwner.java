@@ -1,19 +1,23 @@
 package com.covens.common.core.capability.familiar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import com.covens.api.mp.IMagicPowerExpander;
 import com.covens.common.content.actionbar.HotbarAction;
+import com.covens.common.content.familiar.FamiliarDescriptor;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.util.Constants.NBT;
@@ -34,21 +38,21 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 	
 	@DontSync 
 	@CustomSerializer(reader = SerializerArrayUUID.class, writer = SerializerArrayUUID.class) 
-	public ArrayList<UUID> familiars = new ArrayList<UUID>();
+	public HashMap<UUID, FamiliarDescriptor> familiars = new HashMap<>();
 	
 	public UUID selectedFamiliar = UUIDs.NULL_UUID;
 	public String selectedFamiliarName = "";
 
-	public void addFamiliar(UUID familiar) {
-		if (!familiars.contains(familiar)) {
-			familiars.add(familiar);
+	public void addFamiliar(EntityLiving familiar) {
+		if (!familiars.containsKey(UUIDs.of(familiar))) {
+			familiars.put(UUIDs.of(familiar), FamiliarDescriptor.of(familiar));
 			familiarCount++;
 			markDirty((byte) 1); 
 		}
 	}
 
-	public void removeFamiliar(UUID familiar) {
-		if (familiars.contains(familiar)) {
+	public void removeFamiliar(UUID familiar, String name) {
+		if (familiars.containsKey(familiar)) {
 			familiars.remove(familiar);
 			familiarCount--;
 			if (selectedFamiliar.equals(familiar)) {
@@ -92,19 +96,24 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 		}
 	}
 	
-	public static class SerializerArrayUUID implements SimpleCapability.Reader<ArrayList<UUID>>, SimpleCapability.Writer<ArrayList<UUID>> {
+	public static class SerializerArrayUUID implements SimpleCapability.Reader<ArrayList<Tuple<UUID, String>>>, SimpleCapability.Writer<ArrayList<Tuple<UUID, String>>> {
 
 		@Override
-		public void write(ArrayList<UUID> list, NBTTagCompound buf, String field) {
+		public void write(ArrayList<Tuple<UUID, String>> list, NBTTagCompound tag, String field) {
 			NBTTagList tlist = new NBTTagList();
-			list.forEach(uuid -> tlist.appendTag(UUIDs.toNBT(uuid)));
-			buf.setTag("list", tlist);
+			list.forEach(tup -> {
+				NBTTagCompound entry = new NBTTagCompound();
+				entry.setUniqueId("id", tup.getFirst());
+				entry.setString("name", tup.getSecond());
+				tlist.appendTag(entry);
+			});
+			tag.setTag("list", tlist);
 		}
 
 		@Override
-		public ArrayList<UUID> read(NBTTagCompound buf, String name) {
-			ArrayList<UUID> list = Lists.newArrayList();
-			buf.getTagList("list", NBT.TAG_COMPOUND).forEach(nbt -> list.add(UUIDs.fromNBT((NBTTagCompound) nbt)));
+		public ArrayList<Tuple<UUID, String>> read(NBTTagCompound buf, String name) {
+			ArrayList<Tuple<UUID, String>> list = Lists.newArrayList();
+			buf.getTagList("list", NBT.TAG_COMPOUND).forEach(nbt -> list.add(new Tuple<UUID, String>(((NBTTagCompound)nbt).getUniqueId("id"), ((NBTTagCompound)nbt).getString("name"))));
 			return list;
 		}
 		

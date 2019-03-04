@@ -126,5 +126,5 @@ public abstract class CovensAPI {
 
 	public abstract void unbindFamiliar(EntityLiving familiar);
 	
-	public abstract void unbindFamiliar(UUID entity, UUID player);
+	public abstract void unbindFamiliar(UUID entity, UUID player, String name);
 }

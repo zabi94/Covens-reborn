@@ -14,19 +14,21 @@ public class UnbindPlayerFromFamiliar extends SyncTask<EntityPlayer> {
 
 	private UUID pID;
 	private UUID fID;
+	private String name;
 
 	public UnbindPlayerFromFamiliar() {
 	}
 
-	public UnbindPlayerFromFamiliar(UUID player, UUID familiar) {
+	public UnbindPlayerFromFamiliar(UUID player, UUID familiar, String name) {
 		this.pID = player;
 		this.fID = familiar;
+		this.name = name;
 	}
 
 	@Override
 	public void execute(EntityPlayer p) {//TODO add checks
 		CapabilityFamiliarOwner cap = p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null);
-		cap.removeFamiliar(fID);
+		cap.removeFamiliar(fID, name);
 		CovensAPI.getAPI().removeMPExpansion(cap, p);
 		CovensAPI.getAPI().expandPlayerMP(cap, p);
 	}

@@ -27,7 +27,7 @@ public class FamiliarDeath extends SyncTask<EntityPlayer> {
 	@Override
 	public void execute(EntityPlayer p) {
 		p.sendStatusMessage(new TextComponentTranslation("familiar.dead", name), true);
-		p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).removeFamiliar(fam);
+		p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).removeFamiliar(fam, name);
 	}
 
 	@Override
