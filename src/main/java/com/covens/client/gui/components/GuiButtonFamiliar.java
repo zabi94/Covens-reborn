@@ -44,8 +44,8 @@ public class GuiButtonFamiliar extends GuiButton {
 		} else {
 			res.add(TextFormatting.GRAY+I18n.format("covens.familiar.last_at_dim", descriptor.getLastKnownPos().getDim()));
 		}
-		if (descriptor.isAvailable()) {
-			res.add(TextFormatting.GRAY+I18n.format("covens.familiar.available"));
+		if (!descriptor.isAvailable()) {
+			res.add(TextFormatting.DARK_RED+I18n.format("covens.familiar.unavailable"));
 		}
 		return res;
 	}

@@ -1001,5 +1001,5 @@ familiar.command.goto=%s is on the move
 familiar.command.goto.failed=%s lost the way
 familiar.summon.fail=No spirit manifested
 covens.familiar.last_at=Last seen at %d %d %d
-covens.familiar.last_at_dim=Last seen in dimension %d
-covens.familiar.available=Available
+covens.familiar.last_at_dim=In dimension %d
+covens.familiar.unavailable=Unloaded

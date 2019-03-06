@@ -43,8 +43,7 @@ public class PlayerFamiliarsDefinition implements IMessage {
 					SimpleMessage.readString(buf), 
 					SimpleMessage.readUUID(buf), 
 					new DimensionalPosition(SimpleMessage.readBlockPos(buf), buf.readInt()), 
-					buf.readBoolean(), 
-					buf.readInt());
+					buf.readBoolean());
 			familiars.add(fd);
 		}
 	}
@@ -58,7 +57,6 @@ public class PlayerFamiliarsDefinition implements IMessage {
 			SimpleMessage.writeBlockPos(fd.getLastKnownPos().getPosition(), buf);
 			buf.writeInt(fd.getLastKnownPos().getDim());
 			buf.writeBoolean(fd.isAvailable());
-			buf.writeInt(fd.getEntityID());
 		}
 	}
 	

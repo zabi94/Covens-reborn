@@ -13,14 +13,12 @@ public class FamiliarDescriptor implements INBTSerializable<NBTTagCompound> {
 	private String name;
 	private UUID uuid;
 	private boolean available;
-	private int entityID;
 	private DimensionalPosition lastKnownPos;
 	
-	public FamiliarDescriptor(String name, UUID uuid, DimensionalPosition lastSeen, boolean available, int entityID) {
+	public FamiliarDescriptor(String name, UUID uuid, DimensionalPosition lastSeen, boolean available) {
 		this.name = name;
 		this.uuid = uuid;
 		this.available = available;
-		this.entityID = entityID;
 		this.lastKnownPos = lastSeen;
 	}
 	
@@ -44,17 +42,12 @@ public class FamiliarDescriptor implements INBTSerializable<NBTTagCompound> {
 		return this.available;
 	}
 
-	public int getEntityID() {
-		return this.entityID;
-	}
-
 	@Override
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound tag = new NBTTagCompound();
 		tag.setString("name", name);
 		tag.setUniqueId("uuid", uuid);
 		tag.setBoolean("available", available);
-		tag.setInteger("id", entityID);
 		tag.setTag("position", lastKnownPos.writeToNBT());
 		return tag;
 	}
@@ -64,12 +57,11 @@ public class FamiliarDescriptor implements INBTSerializable<NBTTagCompound> {
 		name = nbt.getString("name");
 		uuid = nbt.getUniqueId("uuid");
 		available = nbt.getBoolean("available");
-		entityID = nbt.getInteger("id");
 		lastKnownPos = new DimensionalPosition(nbt.getCompoundTag("position"));
 	}
 
 	public static FamiliarDescriptor of(EntityLiving in) {
-		return new FamiliarDescriptor(in.getName(), UUIDs.of(in), new DimensionalPosition(in), false, 0);
+		return new FamiliarDescriptor(in.getName(), UUIDs.of(in), new DimensionalPosition(in), false);
 	}
 	
 	@Override

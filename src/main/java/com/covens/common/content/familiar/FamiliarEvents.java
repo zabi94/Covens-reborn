@@ -14,6 +14,7 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.PlayerFamiliarsDefinition;
 import com.covens.common.core.util.syncTasks.FamiliarDeath;
+import com.covens.common.core.util.syncTasks.FamiliarPingPosition;
 import com.google.common.collect.Lists;
 
 import net.minecraft.entity.Entity;
@@ -21,14 +22,17 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ClassInheritanceMultiMap;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -52,7 +56,7 @@ public class FamiliarEvents {
 			SyncManager.executeOnPlayerAvailable(cap.owner, new FamiliarDeath(evt.getEntity().getPersistentID(), evt.getEntity().getName()));
 			CovensAPI.getAPI().unbindFamiliar((EntityLiving) evt.getEntity());
 		}
-		SyncManager.cleanMessagesForEntity(evt.getEntity().getPersistentID());
+		SyncManager.cleanMessagesForEntity(evt.getEntity().getPersistentID()); //TODO move to minerva!
 	}
 
 	@SubscribeEvent
@@ -69,8 +73,36 @@ public class FamiliarEvents {
 	public static void attachFamiliarAI(EntityJoinWorldEvent evt) {
 		if (!evt.getWorld().isRemote && (evt.getEntity() instanceof EntityLiving) && CovensAPI.getAPI().isValidFamiliar(evt.getEntity())) {
 			EntityLiving entity = (EntityLiving) evt.getEntity();
-			if (entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
+			CapabilityFamiliarCreature fam = entity.getCapability(CapabilityFamiliarCreature.CAPABILITY, null); 
+			if (fam.hasOwner()) {
 				FamiliarController.setupFamiliar(entity);
+				SyncManager.executeOnPlayerAvailable(fam.owner, new FamiliarPingPosition(UUIDs.of(entity), new DimensionalPosition(entity)), UUIDs.of(entity));
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onFamiliarUnload(ChunkEvent.Unload evt) {
+		CovensAPI api = CovensAPI.getAPI();
+		for (ClassInheritanceMultiMap<Entity> cimm : evt.getChunk().getEntityLists()) {
+			cimm.forEach(e -> {
+				if (api.isValidFamiliar(e)) {
+					CapabilityFamiliarCreature fam = e.getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
+					if (fam.hasOwner()) {
+						SyncManager.executeOnPlayerAvailable(fam.owner, new FamiliarPingPosition(UUIDs.of(e), new DimensionalPosition(e)), UUIDs.of(e));
+					}
+				}
+			});
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onFamiliarChangeDimension(EntityTravelToDimensionEvent evt) {
+		CovensAPI api = CovensAPI.getAPI();
+		if (api.isValidFamiliar(evt.getEntity())) {
+			CapabilityFamiliarCreature fam = evt.getEntity().getCapability(CapabilityFamiliarCreature.CAPABILITY, null);
+			if (fam.hasOwner()) {
+				SyncManager.executeOnPlayerAvailable(fam.owner, new FamiliarPingPosition(UUIDs.of(evt.getEntity()), new DimensionalPosition(evt.getEntity())), UUIDs.of(evt.getEntity()));
 			}
 		}
 	}
@@ -180,9 +212,9 @@ public class FamiliarEvents {
 		boolean available = e != null;
 		if (!available) {
 			FamiliarDescriptor lastDesc = p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiars.get(desc.getUuid());
-			list.add(new FamiliarDescriptor(lastDesc.getName(), lastDesc.getUuid(), lastDesc.getLastKnownPos(), false, 0));
+			list.add(new FamiliarDescriptor(lastDesc.getName(), lastDesc.getUuid(), lastDesc.getLastKnownPos(), false));
 		} else {
-			list.add(new FamiliarDescriptor(e.getName(), UUIDs.of(e), new DimensionalPosition(e), true, e.getEntityId()));
+			list.add(new FamiliarDescriptor(e.getName(), UUIDs.of(e), new DimensionalPosition(e), true));
 		}
 	}
 }

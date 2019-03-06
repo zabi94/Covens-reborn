@@ -35,7 +35,7 @@ public class GuiFamiliarSelector extends GuiScreen {
 		for (int i = 0; i < playerFamiliars.size(); i++) {
 			GuiButtonFamiliar btn = new GuiButtonFamiliar(i, centered(buttonWidth, sr.getScaledWidth()), centered(buttonHeight, sr.getScaledHeight()) + offset(i), buttonWidth, buttonHeight, playerFamiliars.get(i), this);
 			btn.visible = i <= buttonAmount;
-			btn.enabled = btn.visible && playerFamiliars.get(i).getLastKnownPos().getDim() == Minecraft.getMinecraft().world.provider.getDimension();
+			btn.enabled = btn.visible;
 			this.addButton(btn);
 		}
 	}
