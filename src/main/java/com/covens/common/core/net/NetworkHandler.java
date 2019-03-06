@@ -10,6 +10,7 @@ import com.covens.common.core.net.messages.PlaceHeldItemMessage;
 import com.covens.common.core.net.messages.PlayerFamiliarsDefinition;
 import com.covens.common.core.net.messages.PlayerTransformationChangedMessage;
 import com.covens.common.core.net.messages.PlayerUsedAbilityMessage;
+import com.covens.common.core.net.messages.SelectFamiliar;
 import com.covens.common.core.net.messages.SmokeSpawn;
 import com.covens.common.core.net.messages.TarotMessage;
 import com.covens.common.core.net.messages.WitchFireTP;
@@ -53,6 +54,7 @@ public final class NetworkHandler {
 		registerSimpleMessage(WitchFireTP.class, next(), Side.SERVER);
 		registerSimpleMessage(PlaceHeldItemMessage.class, next(), Side.SERVER);
 		registerSimpleMessage(FetchFamiliarsMessage.class, next(), Side.SERVER);
+		registerSimpleMessage(SelectFamiliar.class, next(), Side.SERVER);
 	}
 
 	private static <MSG extends SimpleMessage<MSG>> void registerSimpleMessage(Class<MSG> clazz, int id, Side side) {

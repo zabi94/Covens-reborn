@@ -3,7 +3,6 @@ package com.covens.common.core.event;
 import com.covens.api.mp.IMagicPowerContainer;
 import com.covens.common.core.capability.energy.player.PlayerMPContainer;
 import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExpansion;
-import com.covens.common.core.helper.CapabilityHelper;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EnergySync;
 
@@ -17,14 +16,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 @Mod.EventBusSubscriber
 public class EnergyEvents {
-
-	@SubscribeEvent
-	public static void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
-		if (event.isWasDeath()) {
-			CapabilityHelper.copyDataOnPlayerRespawn(event, IMagicPowerContainer.CAPABILITY);
-			CapabilityHelper.copyDataOnPlayerRespawn(event, CapabilityMPExpansion.CAPABILITY);
-		}
-	}
 
 	@SubscribeEvent
 	public static void onPlayerLogin(PlayerLoggedInEvent evt) {

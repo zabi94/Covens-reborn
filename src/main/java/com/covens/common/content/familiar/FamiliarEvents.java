@@ -11,7 +11,6 @@ import com.covens.common.content.familiar.FamiliarController.FamiliarCommand;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
-import com.covens.common.core.helper.Log;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.PlayerFamiliarsDefinition;
 import com.covens.common.core.util.syncTasks.FamiliarDeath;
@@ -125,7 +124,7 @@ public class FamiliarEvents {
 					// TODO
 					break;
 				case DESELECT:
-					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(null);
+					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).deselectFamiliar();
 					break;
 				case FOLLOW_ME:
 					FamiliarController.followOwner(p);
@@ -146,11 +145,10 @@ public class FamiliarEvents {
 					// NO-OP
 					break;
 				case OPEN_GUI:
-					Log.i("click");
 					NetworkHandler.HANDLER.sendTo(new PlayerFamiliarsDefinition(getFamiliarDefinitions(p)), (EntityPlayerMP) p);
 					break;
 				case SELECT:
-					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(e);
+					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(UUIDs.of(e), e.getName());
 					break;
 				case STAY:
 					// TODO FamiliarController.toggleFamiliarWait(e);

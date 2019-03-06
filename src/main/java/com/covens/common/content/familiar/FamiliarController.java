@@ -106,7 +106,7 @@ public class FamiliarController {
 	}
 
 	public static void openFamiliarSelector(EntityPlayer player) {
-		player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(null);
+		player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).deselectFamiliar();
 	}
 
 	public static void setupFamiliar(EntityLiving entity) {

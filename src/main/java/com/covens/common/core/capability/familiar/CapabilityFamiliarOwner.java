@@ -54,7 +54,7 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 			familiars.remove(familiar);
 			familiarCount--;
 			if (selectedFamiliar.equals(familiar)) {
-				selectFamiliar(null);
+				deselectFamiliar();
 			}
 			markDirty((byte) 1); 
 		}
@@ -80,18 +80,26 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicP
 		return this.familiarCount * 100;
 	}
 	
-	public void selectFamiliar(Entity e) {
-		selectedFamiliar = UUIDs.of(e);
-		selectedFamiliarName = e==null?"":e.getName();
+	public void selectFamiliar(UUID id, String name) {
+		selectedFamiliar = id;
+		if (UUIDs.isNull(id)) {
+			selectedFamiliarName = "";
+		} else {
+			selectedFamiliarName = name;
+		}
+		markDirty((byte) 4); 
+	}
+	
+	public void deselectFamiliar() {
+		selectedFamiliar = UUIDs.NULL_UUID;
+		selectedFamiliarName = "";
 		markDirty((byte) 4); 
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onSyncMessage(byte mode) {
-		if (mode == 2) {
-			HotbarAction.refreshActions(Minecraft.getMinecraft().player, Minecraft.getMinecraft().world);
-		}
+		HotbarAction.refreshActions(Minecraft.getMinecraft().player, Minecraft.getMinecraft().world);
 	}
 	
 	public static class SerializerHashmap implements SimpleCapability.Reader<HashMap<UUID, FamiliarDescriptor>>, SimpleCapability.Writer<HashMap<UUID, FamiliarDescriptor>> {
