@@ -36,6 +36,7 @@ import net.minecraft.util.Tuple;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -226,7 +227,8 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 
 		for (AdapterIRitual rit : AdapterIRitual.REGISTRY) { // Check every ritual
 			if (rit.isValidInput(recipe, this.hasCircles(rit))) { // Check if circles and items match
-				if (rit.isValid(player, this.world, this.pos, recipe, effPos, 1)) { // Checks of extra conditions are met
+				Optional<ITextComponent> problems = rit.isValid(player, this.world, this.pos, recipe, effPos, 1);
+				if (!problems.isPresent()) { // Checks of extra conditions are met
 
 					if (this.altarTracker.drainAltarFirst(player, this.pos, this.world.provider.getDimension(), (int) (rit.getRequiredStartingPower() * powerDrainMult))) { // Check if there is enough starting power (and uses it in case there is)
 
@@ -264,7 +266,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 					player.sendStatusMessage(new TextComponentTranslation("ritual.failure.power"), true);
 					return;
 				}
-				player.sendStatusMessage(new TextComponentTranslation("ritual.failure.precondition"), true);
+				player.sendStatusMessage(problems.get(), true);
 				return;
 
 			}

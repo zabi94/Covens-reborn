@@ -1,6 +1,7 @@
 package com.covens.common.content.ritual.rituals;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.covens.api.ritual.IRitual;
 import com.covens.api.transformation.DefaultTransformations;
@@ -16,6 +17,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -62,11 +65,11 @@ public class RitualCreateVampireLair implements IRitual {
 	}
 
 	@Override
-	public boolean isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
+	public Optional<ITextComponent> isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
 		if ((player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() != DefaultTransformations.VAMPIRE) || (this.getAvailableBlocks(player) <= 0)) {
-			return false;
+			return Optional.of(new TextComponentTranslation("ritual.problem.not_vampire"));
 		}
-		return true;
+		return Optional.empty();
 	}
 
 }

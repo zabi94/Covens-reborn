@@ -1,6 +1,7 @@
 package com.covens.common.content.ritual.rituals;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import com.covens.api.mp.IMagicPowerConsumer;
@@ -18,23 +19,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 public class RitualGateway implements IRitual {
 
 	@Override
-	public boolean isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
+	public Optional<ITextComponent> isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
 		for (ItemStack stack : recipe) {
 			if (stack.getItem().equals(ModItems.location_stone)) {
 				if (ItemLocationStone.isBound(stack)) {
-					return ItemLocationStone.getLocation(stack).get().getDim() == world.provider.getDimension();
+					return ItemLocationStone.getLocation(stack).get().getDim() == world.provider.getDimension()?Optional.empty():Optional.of(new TextComponentTranslation("ritual.problem.cross_dimension"));
 				} else {
-					return false;
+					return Optional.of(new TextComponentTranslation("ritual.problem.unbound_stone"));
 				}
 			}
 		}
-		return false;
+		return Optional.of(new TextComponentTranslation("ritual.problem.unbound_stone"));
 	}
 
 	@Override

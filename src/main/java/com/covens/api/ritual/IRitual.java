@@ -1,6 +1,7 @@
 package com.covens.api.ritual;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.annotation.Nonnull;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -136,10 +138,10 @@ public interface IRitual {
 	 * @param effectivePosition the position where the ritual should take place
 	 * @param covenSize         the size of the coven performing this ritual, player
 	 *                          included
-	 * @return
+	 * @return					an empty optional if the ritual is valid, or an ITextComponent describing the problem
 	 */
-	default boolean isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
-		return true;
+	default Optional<ITextComponent> isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
+		return Optional.empty();
 	}
 	
 	@SideOnly(Side.CLIENT)

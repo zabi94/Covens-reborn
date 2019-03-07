@@ -1,6 +1,7 @@
 package com.covens.common.content.ritual.rituals;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import com.covens.api.ritual.IRitual;
@@ -13,6 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class RitualNetherPortal implements IRitual {
@@ -25,8 +28,8 @@ public class RitualNetherPortal implements IRitual {
 	}
 
 	@Override
-	public boolean isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
-		return world.provider.getDimension() == 0;
+	public Optional<ITextComponent> isValid(EntityPlayer player, World world, BlockPos mainGlyphPos, List<ItemStack> recipe, BlockPos effectivePosition, int covenSize) {
+		return world.provider.getDimension() == 0?Optional.empty():Optional.of(new TextComponentTranslation("ritual.problem.not_overworld"));
 	}
 	
 	@Override
