@@ -1,6 +1,7 @@
 package com.covens.common.content.transformation.vampire;
 
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.UUID;
 
 import com.covens.api.CovensAPI;
@@ -68,12 +69,8 @@ public class VampireAbilityHandler {
 	public static final Ingredient SILVER_WEAPON = new OreIngredient("weaponSilver");
 
 	public static final UUID ATTACK_SPEED_MODIFIER_UUID = UUID.fromString("c73f6d26-65ed-4ba5-ada8-9a96f8712424");
-	// TODO Check: can two different living hurt events run down the subscriber list
-	// in parallel?
-	// If so this doesn't work and one entity might end up receiving the damage
-	// amount meant for someone else in some cases
-	public static float lastDamage = 0;
 
+	public static final Stack<Float> damageStack = new Stack<>(); 
 	/**
 	 * Modifies damage depending on the type. Fire and explosion make it 150%of the
 	 * original, all the other types make it 10% of the original provided there's
@@ -92,7 +89,10 @@ public class VampireAbilityHandler {
 				}
 				float multiplier = getMultiplier(evt); // A multiplier greater 1 makes the damage not be reduced
 				evt.setCanceled(false); // No forms of immunity for vampires
-				evt.setAmount(lastDamage); // No reductions either
+				if (damageStack.size() == 0) {
+					throw new IllegalStateException("The vampire damage restore stack underflowed");
+				}
+				evt.setAmount(damageStack.pop()); // No reductions either
 				if (multiplier > 1) {
 					evt.setAmount(evt.getAmount() * multiplier);
 				} else if (player.getCapability(CapabilityVampire.CAPABILITY, null).getBlood() > 0) { // Don't mitigate damage when there is no blood in the pool
@@ -110,7 +110,7 @@ public class VampireAbilityHandler {
 		if (!evt.getEntity().world.isRemote && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			CapabilityTransformation data = evt.getEntityLiving().getCapability(CapabilityTransformation.CAPABILITY, null);
 			if (data.getType() == DefaultTransformations.VAMPIRE) {
-				lastDamage = evt.getAmount();
+				damageStack.push(evt.getAmount());
 			}
 		}
 	}
