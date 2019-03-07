@@ -15,10 +15,14 @@ public class GuiFamiliarSelector extends GuiScreen {
 
 	private List<FamiliarDescriptor> playerFamiliars;
 	
-	private static final int buttonWidth = 300;
+	private static final int buttonWidth = 200;
 	private static final int buttonHeight = 20;
-	private static final int buttonPadding = 10;
-	private static int buttonAmount = 5;
+	private static final int buttonPadding = 5;
+	private static int buttonAmount = 8;
+	
+	private GuiButton left;
+	private GuiButton right;
+	private int page = 0;
 	
 	public GuiFamiliarSelector(List<FamiliarDescriptor> familiars) {
 		if (familiars == null) {
@@ -31,13 +35,28 @@ public class GuiFamiliarSelector extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
+		buttonList.clear();
 		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 		for (int i = 0; i < playerFamiliars.size(); i++) {
-			GuiButtonFamiliar btn = new GuiButtonFamiliar(i, centered(buttonWidth, sr.getScaledWidth()), centered(buttonHeight, sr.getScaledHeight()) + offset(i), buttonWidth, buttonHeight, playerFamiliars.get(i), this);
-			btn.visible = i <= buttonAmount;
-			btn.enabled = btn.visible;
+			GuiButtonFamiliar btn = new GuiButtonFamiliar(i, centered(buttonWidth, sr.getScaledWidth()), centered(buttonHeight, sr.getScaledHeight()) + offset(i), buttonWidth, buttonHeight, playerFamiliars.get(i));
 			this.addButton(btn);
 		}
+		left = new GuiButton(-1, centered(350, sr.getScaledWidth()), centered(buttonHeight, sr.getScaledHeight()), 20, 20, "<");
+		right = new GuiButton(-1, centered(-350, sr.getScaledWidth()) - 20, centered(buttonHeight, sr.getScaledHeight()), 20, 20, ">");
+		this.addButton(left);
+		this.addButton(right);
+		setPage(0);
+	}
+	
+	public void setPage(int page) {
+		this.page = page;
+		for (int i = 0; i < playerFamiliars.size(); i++) {
+			boolean inPage = i / buttonAmount == page;
+			buttonList.get(i).visible = inPage;
+			buttonList.get(i).enabled = inPage;
+		}
+		left.enabled = page != 0;
+		right.enabled = playerFamiliars.size() / buttonAmount > page;
 	}
 	
 	@Override
@@ -46,7 +65,11 @@ public class GuiFamiliarSelector extends GuiScreen {
 			((GuiButtonFamiliar) button).selectFamiliar();
 			Minecraft.getMinecraft().displayGuiScreen(null);
 		} else {
-			super.actionPerformed(button);
+			if (button.equals(left) && page > 0) {
+				setPage(page - 1);
+			} else if (button.equals(right) && page < playerFamiliars.size() / buttonAmount) {
+				setPage(page + 1);
+			}
 		}
 	}
 	
@@ -63,7 +86,15 @@ public class GuiFamiliarSelector extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawWorldBackground(0);
 		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.buttonList.stream()
+			.filter(b -> b instanceof GuiButtonFamiliar)
+			.filter(b -> b.isMouseOver())
+			.map(b -> (GuiButtonFamiliar) b)
+			.forEach(b -> {
+				drawHoveringText(b.getTooltip(), mouseX, mouseY);
+		});
 	}
+	
 	
 	private static int centered(int elementSize, int screenSize) {
 		return (screenSize - elementSize)/2;

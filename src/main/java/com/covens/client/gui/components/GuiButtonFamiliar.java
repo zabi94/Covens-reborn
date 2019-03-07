@@ -9,34 +9,23 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 
 public class GuiButtonFamiliar extends GuiButton {
 	
 	private FamiliarDescriptor descriptor;
-	private GuiScreen parent;
 
-	public GuiButtonFamiliar(int buttonId, int x, int y, int w, int h, FamiliarDescriptor desc, GuiScreen parentIn) {
+	public GuiButtonFamiliar(int buttonId, int x, int y, int w, int h, FamiliarDescriptor desc) {
 		super(buttonId, x, y, w, h, desc.getName());
 		this.descriptor = desc;
-		this.parent = parentIn;
-	}
-	
-	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-		super.drawButton(mc, mouseX, mouseY, partialTicks);
-		if (this.isMouseOver()) {
-			parent.drawHoveringText(getTooltip(), mouseX, mouseY);
-		}
 	}
 	
 	public void selectFamiliar() {
 		NetworkHandler.HANDLER.sendToServer(new SelectFamiliar(descriptor));
 	}
 
-	private List<String> getTooltip() {
+	public List<String> getTooltip() {
 		List<String> res = Lists.newArrayList();
 		res.add(descriptor.getName());
 		if (descriptor.getLastKnownPos().getDim() == Minecraft.getMinecraft().world.provider.getDimension()) {
