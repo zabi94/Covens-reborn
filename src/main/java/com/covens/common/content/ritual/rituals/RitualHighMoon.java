@@ -19,7 +19,7 @@ public class RitualHighMoon implements IRitual {
 	@Override
 	public void onFinish(EntityPlayer player, TileEntity tile, World world, BlockPos pos, NBTTagCompound tag, BlockPos effectivePosition, int covenSize) {
 		if (!world.isRemote) {
-			world.setWorldTime(17600);
+			world.setWorldTime(world.getWorldTime() + (17600 - (world.getWorldTime() % 24000)));
 		}
 	}
 
