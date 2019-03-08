@@ -24,7 +24,7 @@ public class ModTarots {
 		TarotHandler.registerTarot(new QuickTarot("nitwit", p -> (p.getCapability(IMagicPowerContainer.CAPABILITY, null).getMaxAmount() / 800) > 0, null, p -> p.getCapability(IMagicPowerContainer.CAPABILITY, null).getMaxAmount() / 800));
 		TarotHandler.registerTarot(new QuickTarot("moon", p -> (p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) || (p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF), p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.WEREWOLF, p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getLevel()));
 		TarotHandler.registerTarot(new QuickTarot("silver_sword", p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.HUNTER, p -> false, p -> p.getCapability(CapabilityTransformation.CAPABILITY, null).getLevel()));
-		TarotHandler.registerTarot(new QuickTarot("mounts", p -> p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount > 0, Predicates.not(FamiliarController::hasFamiliarsInRange), p -> p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount));
+		TarotHandler.registerTarot(new QuickTarot("cat", p -> p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount > 0, Predicates.not(FamiliarController::hasFamiliarsInRange), p -> p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount));
 		
 		TarotHandler.registerTarot(new QuickTarot("hermit", Predicates.alwaysFalse(), null, null));
 		TarotHandler.registerTarot(new QuickTarot("ender_dragon", Predicates.alwaysFalse(), null, null));
@@ -37,6 +37,7 @@ public class ModTarots {
 		TarotHandler.registerTarot(new QuickTarot("witch", Predicates.alwaysFalse(), null, null));
 		TarotHandler.registerTarot(new QuickTarot("wither", Predicates.alwaysFalse(), null, null));
 		TarotHandler.registerTarot(new QuickTarot("zombie", Predicates.alwaysFalse(), null, null));
+		TarotHandler.registerTarot(new QuickTarot("mounts", Predicates.alwaysFalse(), null, null));
 	}
 
 }
