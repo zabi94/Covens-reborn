@@ -55,7 +55,7 @@ public class ModCapabilities {
 		SimpleCapability.init(CapabilityVampire.class, LibMod.MOD_ID, CapabilityVampire.CAPABILITY, CapabilityVampire.DEFAULT_INSTANCE);
 		SimpleCapability.init(CapabilityFamiliarCreature.class, LibMod.MOD_ID, CapabilityFamiliarCreature.CAPABILITY, CapabilityFamiliarCreature.DEFAULT_INSTANCE);
 		SimpleCapability.init(CapabilityFamiliarOwner.class, LibMod.MOD_ID, CapabilityFamiliarOwner.CAPABILITY, CapabilityFamiliarOwner.DEFAULT_INSTANCE);
-		AltarCapabilities.loadItems();
+		AltarCapabilities.loadObjects();
 	}
 	
 	@SubscribeEvent

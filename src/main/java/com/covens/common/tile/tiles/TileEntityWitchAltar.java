@@ -51,59 +51,6 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		this.scanHelper = new AltarScanHelper(this);
 	}
 
-	//	@SubscribeEvent
-	//	public static void setModifiers(AltarModifierCollectionEvent evt) {
-	//		Block b = evt.getState().getBlock();
-	//		if (b == Blocks.DIAMOND_BLOCK) {
-	//			evt.extraGain = 1000;
-	//			evt.multiplier = 200;
-	//			return;
-	//		}
-	//		if (b == Blocks.SKULL) {
-	//			TileEntitySkull tes = (TileEntitySkull) evt.getWorld().getTileEntity(evt.getPos());
-	//			switch (tes.getSkullType()) {
-	//				case 0:
-	//				case 2:
-	//				case 4: // Zombie, Skeleton and creeper
-	//					evt.extraGain = 1;
-	//					evt.multiplier = 0.05;
-	//					break;
-	//				case 1:
-	//				case 3:// Wither skull and player skull
-	//					evt.extraGain = 2;
-	//					evt.multiplier = 0.2;
-	//					break;
-	//				case 5: // Dragon
-	//					evt.extraGain = 2;
-	//					evt.multiplier = 0.4;
-	//					break;
-	//				default:
-	//					break;
-	//			}
-	//			return;
-	//		}
-	//		if (b == Blocks.TORCH) {
-	//			evt.extraGain = 1;
-	//			return;
-	//		}
-	//		if ((b == Blocks.FLOWER_POT) && b.hasTileEntity(evt.getState())) {
-	//			TileEntityFlowerPot tefp = (TileEntityFlowerPot) evt.getWorld().getTileEntity(evt.getPos());
-	//			if (!tefp.getFlowerItemStack().isEmpty()) {
-	//				evt.multiplier = 0.1;
-	//			} else {
-	//				evt.multiplier = 0.05;
-	//			}
-	//			return;
-	//		}
-	//		if (b == ModBlocks.gem_bowl) {
-	//			if (evt.getWorld().getTileEntity(evt.getPos()) != null) {
-	//				int t = ((TileEntityGemBowl) evt.getWorld().getTileEntity(evt.getPos())).getGemValue();
-	//				evt.multiplier = 0.05 * t;
-	//			}
-	//			return;
-	//		}
-	//	}
-
 	@Override
 	public void onLoad() {
 		if (!this.world.isRemote) {

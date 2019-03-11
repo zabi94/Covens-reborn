@@ -2,6 +2,9 @@ package com.covens.common.tile.tiles;
 
 import java.util.HashMap;
 
+import com.covens.api.altar.IAltarPowerUpgrade;
+import com.covens.api.altar.UpgradeCapabilities;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -126,6 +129,11 @@ public class TileEntityGemBowl extends ModTileEntity {
 	}
 
 	private ItemStackHandler gemHandler = new ItemStackHandler(1);
+	private MultiplierCap mult;
+	
+	public TileEntityGemBowl() {
+		mult = new MultiplierCap(this);
+	}
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -168,7 +176,7 @@ public class TileEntityGemBowl extends ModTileEntity {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
 	@Override
@@ -176,17 +184,20 @@ public class TileEntityGemBowl extends ModTileEntity {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.gemHandler);
 		}
+		if (capability == UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY) {
+			return UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY.cast(mult);
+		}
 		return super.getCapability(capability, facing);
 	}
 
-	public int getGemValue() {
+	public double getGemValue() {
 		if (!this.hasGem()) {
 			return 0;
 		}
 		for (int oreID : OreDictionary.getOreIDs(this.getGem())) {
 			String oreName = OreDictionary.getOreName(oreID);
 			if (gainMap.containsKey(oreName)) {
-				return gainMap.get(oreName);
+				return gainMap.get(oreName) * 0.05;
 			}
 		}
 		return 0;
@@ -214,5 +225,20 @@ public class TileEntityGemBowl extends ModTileEntity {
 
 	public EnumFacing getDirection() {
 		return this.world.getBlockState(this.pos).getValue(BlockHorizontal.FACING);
+	}
+	
+	private static class MultiplierCap implements IAltarPowerUpgrade {
+		
+		private TileEntityGemBowl bowl;
+		
+		public MultiplierCap(TileEntityGemBowl bowlIn) {
+			this.bowl = bowlIn;
+		}
+
+		@Override
+		public double getAmount() {
+			return bowl.getGemValue();
+		}
+
 	}
 }
