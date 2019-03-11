@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.covens.api.altar.IAltarSpecialEffect;
-import com.covens.api.altar.UpgradeCapabilities;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -22,14 +21,14 @@ public class EffectProvider implements ICapabilityProvider {
 
 	@Override
 	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY;
+		return capability == AltarCapabilities.ALTAR_EFFECT_CAPABILITY;
 	}
 
 	@Override
 	@Nullable
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY) {
-			return UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY.cast(capb);
+		if (capability == AltarCapabilities.ALTAR_EFFECT_CAPABILITY) {
+			return AltarCapabilities.ALTAR_EFFECT_CAPABILITY.cast(capb);
 		}
 		return null;
 	}

@@ -3,7 +3,7 @@ package com.covens.common.tile.tiles;
 import java.util.HashMap;
 
 import com.covens.api.altar.IAltarPowerUpgrade;
-import com.covens.api.altar.UpgradeCapabilities;
+import com.covens.common.core.capability.altar.AltarCapabilities;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
@@ -176,7 +176,7 @@ public class TileEntityGemBowl extends ModTileEntity {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY || super.hasCapability(capability, facing);
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
 	@Override
@@ -184,8 +184,8 @@ public class TileEntityGemBowl extends ModTileEntity {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.gemHandler);
 		}
-		if (capability == UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY) {
-			return UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY.cast(mult);
+		if (capability == AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY) {
+			return AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY.cast(mult);
 		}
 		return super.getCapability(capability, facing);
 	}

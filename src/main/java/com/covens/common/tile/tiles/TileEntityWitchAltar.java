@@ -5,12 +5,12 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.altar.UpgradeCapabilities;
 import com.covens.api.mp.DefaultMPContainer;
 import com.covens.api.mp.MPContainer;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.tiles.BlockWitchAltar;
 import com.covens.common.block.tiles.BlockWitchAltar.AltarMultiblockType;
+import com.covens.common.core.capability.altar.AltarCapabilities;
 import com.covens.common.item.tool.ItemAthame;
 import com.google.common.collect.Lists;
 
@@ -114,19 +114,19 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		}
 		boolean foundCaps = false;
 
-		if (tile.hasCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
-			tile.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
-			swordItems.add(tile.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
+		if (tile.hasCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
+			tile.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
+			swordItems.add(tile.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
 			foundCaps = true;
 		}
 
-		if (tile.hasCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
-			this.gain += tile.getCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
+		if (tile.hasCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
+			this.gain += tile.getCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
 			foundCaps = true;
 		}
 
-		if (tile.hasCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
-			this.multiplier += tile.getCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
+		if (tile.hasCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
+			this.multiplier += tile.getCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
 			foundCaps = true;
 		}
 
@@ -143,17 +143,17 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 			stack = state.getBlock().getItem(world, ps, state);
 		}
 
-		if (stack.hasCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
-			stack.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
-			swordItems.add(stack.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
+		if (stack.hasCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
+			stack.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
+			swordItems.add(stack.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
 		}
 
-		if (stack.hasCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
-			this.gain += stack.getCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
+		if (stack.hasCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
+			this.gain += stack.getCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
 		}
 
-		if (stack.hasCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
-			this.multiplier += stack.getCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
+		if (stack.hasCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
+			this.multiplier += stack.getCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
 		}
 
 	}

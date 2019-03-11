@@ -22,16 +22,26 @@ import net.minecraft.tileentity.TileEntityFlowerPot;
 import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class AltarCapabilities {
+
+	@CapabilityInject(IAltarSpecialEffect.class)
+	public static Capability<IAltarSpecialEffect> ALTAR_EFFECT_CAPABILITY;
+	
+	@CapabilityInject(IAltarSpeedUpgrade.class)
+	public static Capability<IAltarSpeedUpgrade> ALTAR_GAIN_CAPABILITY;
+
+	@CapabilityInject(IAltarPowerUpgrade.class)
+	public static Capability<IAltarPowerUpgrade> ALTAR_MULTIPLIER_CAPABILITY;
 	
 	private static final HashMap<Item, List<ICapabilityProvider>> items = new HashMap<>();
 	private static final HashMap<Class<? extends TileEntity>, List<Function<TileEntity, ICapabilityProvider>>> tiles = new HashMap<>();
-	
 	
 	public static void init() {
 		CapabilityManager.INSTANCE.register(IAltarSpecialEffect.class, new FakeStorage<>(), throwError());
@@ -45,7 +55,7 @@ public class AltarCapabilities {
 			throw new UnsupportedOperationException("Altar power can't use the default capability constructor");
 		};
 	}
-	
+
 	@SubscribeEvent	
 	public void registerItems(AttachCapabilitiesEvent<ItemStack> evt) {
 		if (items.containsKey(evt.getObject().getItem())) {
