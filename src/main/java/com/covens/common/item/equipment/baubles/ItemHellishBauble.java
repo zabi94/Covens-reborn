@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.covens.api.CovensAPI;
-import com.covens.api.mp.IMagicPowerContainer;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.MPContainer;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
@@ -41,7 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Created by Joseph on 1/1/2018.
  */
-public class ItemHellishBauble extends ItemMod implements IBauble, IMagicPowerExpander {
+public class ItemHellishBauble extends ItemMod implements IBauble, PlayerMPExpander {
 	public ItemHellishBauble() {
 		super(LibItemName.HELLISH_BAUBLE);
 		this.setMaxStackSize(1);
@@ -122,7 +122,7 @@ public class ItemHellishBauble extends ItemMod implements IBauble, IMagicPowerEx
 	}
 
 	private boolean hasEnergy(EntityLivingBase entity) {
-		return entity.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50);
+		return entity.getCapability(MPContainer.CAPABILITY, null).drain(50);
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class BlockCandleMedium extends BlockCandle {
@@ -37,4 +39,14 @@ public class BlockCandleMedium extends BlockCandle {
 	public int getType() {
 		return 1;
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerModel() {
+		for (int i = 0; i < 16; i++) {
+			registerDecoyModel(this, i, ModBlocks.candle_medium);
+		}
+	}
+	
+	
 }

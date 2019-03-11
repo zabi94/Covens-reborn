@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.helper.Log;
@@ -290,7 +290,7 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 				if (tilePos != null) {
 					TileEntityWitchAltar tea = (TileEntityWitchAltar) worldIn.getTileEntity(tilePos);
 					tea.forceFullScan();
-					IMagicPowerContainer magicPoints = tea.getCapability(IMagicPowerContainer.CAPABILITY, null);
+					MPContainer magicPoints = tea.getCapability(MPContainer.CAPABILITY, null);
 					playerIn.sendStatusMessage(new TextComponentString(magicPoints.getAmount() + "/" + magicPoints.getMaxAmount() + " (x" + tea.getCurrentGain() + ")"), true);
 					return true;
 				}

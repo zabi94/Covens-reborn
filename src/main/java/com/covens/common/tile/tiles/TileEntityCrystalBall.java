@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.covens.api.divination.IFortune;
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.common.content.crystalBall.Fortune;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
 
@@ -24,7 +24,7 @@ import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 public class TileEntityCrystalBall extends ModTileEntity {
 
-	private IMagicPowerConsumer altarTracker = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
+	private MPUsingMachine altarTracker = MPUsingMachine.CAPABILITY.getDefaultInstance();
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -57,7 +57,7 @@ public class TileEntityCrystalBall extends ModTileEntity {
 			return false;
 		}
 		
-		if (this.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(actualReader, this.getPos(), this.world.provider.getDimension(), 3000)) {
+		if (this.getCapability(MPUsingMachine.CAPABILITY, null).drainAltarFirst(actualReader, this.getPos(), this.world.provider.getDimension(), 3000)) {
 			return this.readFortune(endPlayer, actualReader, valid);
 		}
 		actualReader.sendStatusMessage(new TextComponentTranslation("crystal_ball.error.no_power"), true);
@@ -87,7 +87,7 @@ public class TileEntityCrystalBall extends ModTileEntity {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
+		if (capability == MPUsingMachine.CAPABILITY) {
 			return true;
 		}
 		return super.hasCapability(capability, facing);
@@ -96,8 +96,8 @@ public class TileEntityCrystalBall extends ModTileEntity {
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(this.altarTracker);
+		if (capability == MPUsingMachine.CAPABILITY) {
+			return MPUsingMachine.CAPABILITY.cast(this.altarTracker);
 		}
 		return super.getCapability(capability, facing);
 	}

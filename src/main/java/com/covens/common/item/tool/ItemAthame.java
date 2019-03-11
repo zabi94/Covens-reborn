@@ -2,9 +2,11 @@ package com.covens.common.item.tool;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import com.covens.common.core.capability.altar.EffectProvider;
 import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ModItems;
@@ -40,6 +42,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -50,6 +53,9 @@ import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 
 public class ItemAthame extends ItemSword implements IModelRegister {
+
+	public static final UUID ATHAME_UUID = UUID.fromString("d3a5db67-887b-4dd1-8ac5-d6223f1351f9");
+	private static final EffectProvider cap = new EffectProvider(ATHAME_UUID);
 
 	public ItemAthame() {
 		super(ModMaterials.TOOL_ATHAME);
@@ -137,5 +143,11 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 	@Override
 	public void registerModel() {
 		ModelHandler.registerModel(this, 0);
+	}
+	
+	@Override
+	@Nullable
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return cap;
 	}
 }

@@ -1,7 +1,7 @@
 package com.covens.common.item.food;
 
 import com.covens.api.CovensAPI;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.core.statics.ModCreativeTabs;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +17,7 @@ import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 public class ItemModFood extends ItemFood implements IModelRegister {
 
-	private IMagicPowerExpander expander;
+	private PlayerMPExpander expander;
 
 	public ItemModFood(String id, int amount, float saturation, boolean isWolfFood) {
 		super(amount, saturation, isWolfFood);
@@ -27,7 +27,7 @@ public class ItemModFood extends ItemFood implements IModelRegister {
 	}
 
 	public ItemModFood setMPExpansionValue(int amount) {
-		this.expander = new IMagicPowerExpander() {
+		this.expander = new PlayerMPExpander() {
 
 			@Override
 			public ResourceLocation getID() {

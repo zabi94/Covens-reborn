@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.api.state.StateProperties;
 import com.covens.common.content.cauldron.behaviours.DefaultBehaviours;
 import com.covens.common.content.cauldron.behaviours.ICauldronBehaviour;
@@ -46,7 +46,7 @@ public class TileEntityCauldron extends ModTileEntity implements ITickable {
 	private AxisAlignedBB collectionZone;
 	private CauldronFluidTank tank;
 
-	private IMagicPowerConsumer powerManager = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
+	private MPUsingMachine powerManager = MPUsingMachine.CAPABILITY.getDefaultInstance();
 
 	private DefaultBehaviours defaultBehaviours = new DefaultBehaviours();
 	private LinkedList<ICauldronBehaviour> behaviors = new LinkedList<>();
@@ -184,7 +184,7 @@ public class TileEntityCauldron extends ModTileEntity implements ITickable {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		return (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) || (capability == IMagicPowerConsumer.CAPABILITY);
+		return (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) || (capability == MPUsingMachine.CAPABILITY);
 	}
 
 	@Nullable
@@ -193,8 +193,8 @@ public class TileEntityCauldron extends ModTileEntity implements ITickable {
 		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
 			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.tank);
 		}
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(this.powerManager);
+		if (capability == MPUsingMachine.CAPABILITY) {
+			return MPUsingMachine.CAPABILITY.cast(this.powerManager);
 		}
 		return super.getCapability(capability, facing);
 	}

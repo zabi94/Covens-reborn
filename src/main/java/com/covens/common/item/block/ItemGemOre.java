@@ -4,17 +4,17 @@ import javax.annotation.Nonnull;
 
 import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.core.statics.ModCreativeTabs;
+import com.covens.common.item.ItemBlockMod;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 
-public class ItemGemOre extends ItemBlock implements IModelRegister {
+public class ItemGemOre extends ItemBlockMod implements IModelRegister {
 
 	public ItemGemOre(Block block) {
 		super(block);

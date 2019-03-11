@@ -3,7 +3,7 @@ package com.covens.common.core.capability.familiar;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.familiar.FamiliarDescriptor;
 import com.covens.common.lib.LibMod;
@@ -25,7 +25,7 @@ import zabi.minecraft.minerva.common.capability.SimpleCapability;
 import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.utils.annotation.DontSync;
 
-public class CapabilityFamiliarOwner extends SimpleCapability implements IMagicPowerExpander {
+public class CapabilityFamiliarOwner extends SimpleCapability implements PlayerMPExpander {
 
 	@CapabilityInject(CapabilityFamiliarOwner.class)
 	public static final Capability<CapabilityFamiliarOwner> CAPABILITY = null;

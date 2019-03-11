@@ -1,9 +1,12 @@
 package com.covens.common.item.tool;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
+import com.covens.common.core.capability.altar.EffectProvider;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibItemName;
 
@@ -19,6 +22,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
@@ -26,6 +30,9 @@ import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
 
 public class ItemBoline extends ItemShears implements IModelRegister {
+
+	public static final UUID BOLINE_UUID = UUID.fromString("adf0db30-4d16-44a8-9668-df76f7df34f7");
+	private static final EffectProvider cap = new EffectProvider(BOLINE_UUID);
 
 	@Nonnull
 	public ItemBoline() {
@@ -72,5 +79,11 @@ public class ItemBoline extends ItemShears implements IModelRegister {
 	@Override
 	public void registerModel() {
 		ModelHandler.registerModel(this, 0);
+	}
+	
+	@Override
+	@Nullable
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return cap;
 	}
 }

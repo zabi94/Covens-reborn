@@ -1,6 +1,6 @@
 package com.covens.common.core.net.messages;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -24,7 +24,7 @@ public class EnergySync extends SimpleMessage<EnergySync> {
 	@Override
 	public IMessage handleMessage(MessageContext context) {
 		Minecraft.getMinecraft().addScheduledTask(() -> {
-			IMagicPowerContainer c = Minecraft.getMinecraft().player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer c = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
 			c.setMaxAmount(this.max);
 			c.setAmount(this.amount);
 		});

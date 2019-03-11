@@ -4,11 +4,11 @@ package com.covens.common.item.block;
 
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.natural.tree.BlockModSapling.EnumSaplingType;
+import com.covens.common.item.ItemBlockMod;
 
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockSapling extends ItemBlock {
+public class ItemBlockSapling extends ItemBlockMod {
 
 	public ItemBlockSapling() {
 		super(ModBlocks.sapling);

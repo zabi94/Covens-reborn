@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
@@ -28,7 +28,7 @@ public class CapabilityMPExpansion {
 		CapabilityManager.INSTANCE.register(CapabilityMPExpansion.class, new MagicPowerExpansionStorage(), () -> new CapabilityMPExpansion());
 	}
 
-	public void expand(IMagicPowerExpander exp, EntityPlayer player) {
+	public void expand(PlayerMPExpander exp, EntityPlayer player) {
 		this.increaseMap.put(exp.getID().toString(), exp.getExtraAmount(player));
 		this.dirty = true;
 	}

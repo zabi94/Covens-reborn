@@ -41,6 +41,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IRecipeWrapperFactory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 @JEIPlugin
 public class CovensJEIPlugin implements IModPlugin {
@@ -87,6 +88,9 @@ public class CovensJEIPlugin implements IModPlugin {
 		registry.handleRecipes(DistilleryRecipe.class, DistilleryWrapper::new, DistilleryCategory.UID);
 		registry.addRecipes(ModDistilleryRecipes.REGISTRY.getValuesCollection(), DistilleryCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.distillery), DistilleryCategory.UID);
+		
+		registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ModBlocks.candle_medium_lit, 1, OreDictionary.WILDCARD_VALUE));
+		registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ModBlocks.candle_small_lit, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	@Override

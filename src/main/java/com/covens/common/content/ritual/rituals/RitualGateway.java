@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.api.ritual.IRitual;
 import com.covens.common.content.ritual.AdapterIRitual;
 import com.covens.common.item.ModItems;
@@ -56,7 +56,7 @@ public class RitualGateway implements IRitual {
 				DimensionalPosition pdest = ItemLocationStone.getLocation(stack).get();
 				BlockPos dest = pdest.getPosition();
 				int distance = (int) pdest.getDistanceSqFrom(new DimensionalPosition(effectivePosition, world.provider.getDimension()));
-				list.stream().filter(e -> !e.isSneaking()).filter(elb -> tile.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainPlayerFirst((elb instanceof EntityPlayer ? ((EntityPlayer) elb) : null), circlePos, world.provider.getDimension(), distance)).forEach(elb -> elb.setPositionAndUpdate(dest.getX() + 0.5, dest.getY() + 0.1, dest.getZ() + 0.5));
+				list.stream().filter(e -> !e.isSneaking()).filter(elb -> tile.getCapability(MPUsingMachine.CAPABILITY, null).drainPlayerFirst((elb instanceof EntityPlayer ? ((EntityPlayer) elb) : null), circlePos, world.provider.getDimension(), distance)).forEach(elb -> elb.setPositionAndUpdate(dest.getX() + 0.5, dest.getY() + 0.1, dest.getZ() + 0.5));
 				break;
 			}
 		}

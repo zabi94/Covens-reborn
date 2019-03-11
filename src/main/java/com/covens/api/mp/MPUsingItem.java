@@ -7,23 +7,23 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
-public interface IMagicPowerUsingItem {
+public interface MPUsingItem {
 	/**
 	 * This class is only here to make items that have this capability show the MP
 	 * bar. No additional content required
 	 */
-	@CapabilityInject(IMagicPowerUsingItem.class)
-	public static final Capability<IMagicPowerUsingItem> CAPABILITY = null;
+	@CapabilityInject(MPUsingItem.class)
+	public static final Capability<MPUsingItem> CAPABILITY = null;
 
-	public static class Storage implements IStorage<IMagicPowerUsingItem> {
+	public static class Storage implements IStorage<MPUsingItem> {
 
 		@Override
-		public NBTBase writeNBT(Capability<IMagicPowerUsingItem> capability, IMagicPowerUsingItem instance, EnumFacing side) {
+		public NBTBase writeNBT(Capability<MPUsingItem> capability, MPUsingItem instance, EnumFacing side) {
 			return new NBTTagCompound();
 		}
 
 		@Override
-		public void readNBT(Capability<IMagicPowerUsingItem> capability, IMagicPowerUsingItem instance, EnumFacing side, NBTBase nbt) {
+		public void readNBT(Capability<MPUsingItem> capability, MPUsingItem instance, EnumFacing side, NBTBase nbt) {
 			// No op
 		}
 

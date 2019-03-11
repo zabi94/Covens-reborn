@@ -3,7 +3,7 @@ package com.covens.common.tile.tiles;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.common.Covens;
 import com.covens.common.crafting.DistilleryRecipe;
 import com.covens.common.crafting.ModDistilleryRecipes;
@@ -34,7 +34,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 
 	public static final int BURN_TIME = 1200;
 
-	private IMagicPowerConsumer mp = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
+	private MPUsingMachine mp = MPUsingMachine.CAPABILITY.getDefaultInstance();
 	private int progress = 0;
 	private int heat = 0;
 	private String currentRecipe = "";
@@ -204,7 +204,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return true;
 		}
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
+		if (capability == MPUsingMachine.CAPABILITY) {
 			return true;
 		}
 		return super.hasCapability(capability, facing);
@@ -218,8 +218,8 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable {
 			}
 			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.ioSideWrapper);
 		}
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(this.mp);
+		if (capability == MPUsingMachine.CAPABILITY) {
+			return MPUsingMachine.CAPABILITY.cast(this.mp);
 		}
 		return super.getCapability(capability, facing);
 	}

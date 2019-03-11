@@ -11,15 +11,15 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 
 /**
  * I highly suggest not to implement this interface on a class, but to have a
- * field on your consumer and initializing it to the default implementation,
+ * field on your machine and initializing it to the default implementation,
  * then using the provided methods to save and load the field to/from nbt
  *
  * @author zabi94
  */
-public interface IMagicPowerConsumer {
+public interface MPUsingMachine {
 
-	@CapabilityInject(IMagicPowerConsumer.class)
-	public static final Capability<IMagicPowerConsumer> CAPABILITY = null;
+	@CapabilityInject(MPUsingMachine.class)
+	public static final Capability<MPUsingMachine> CAPABILITY = null;
 
 	public boolean drainAltarFirst(@Nullable EntityPlayer caster, @Nonnull BlockPos pos, int dimension, int amount);
 
@@ -28,7 +28,7 @@ public interface IMagicPowerConsumer {
 	public void readFromNbt(NBTTagCompound tag);
 
 	default boolean drainPlayerFirst(@Nullable EntityPlayer caster, @Nonnull BlockPos pos, int dimension, int amount) {
-		if ((caster != null) && caster.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(amount)) {
+		if ((caster != null) && caster.getCapability(MPContainer.CAPABILITY, null).drain(amount)) {
 			return true;
 		}
 		return drainAltarFirst(null, pos, dimension, amount);

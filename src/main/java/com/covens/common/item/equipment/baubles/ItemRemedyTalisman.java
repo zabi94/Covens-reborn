@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
 
@@ -70,7 +70,7 @@ public class ItemRemedyTalisman extends ItemMod implements IBauble {
 			// by putting "flag" first (in the AND operation) we don't drain MP if there was
 			// nothing to cure
 			// due to java lazy evaluation
-			if (flag && player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
+			if (flag && player.getCapability(MPContainer.CAPABILITY, null).drain(50)) {
 				p.removePotionEffect(MobEffects.NAUSEA);
 				p.removePotionEffect(MobEffects.WITHER);
 				p.removePotionEffect(MobEffects.BLINDNESS);
