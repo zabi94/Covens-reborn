@@ -11,7 +11,6 @@ import com.covens.api.mp.MPContainer;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.tiles.BlockWitchAltar;
 import com.covens.common.block.tiles.BlockWitchAltar.AltarMultiblockType;
-import com.covens.common.core.helper.Log;
 import com.covens.common.item.tool.ItemAthame;
 import com.google.common.collect.Lists;
 
@@ -94,26 +93,17 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		this.gain = 1;
 		this.multiplier = 1;
 		this.swordItems.clear();
-
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dz = -1; dz <= 1; dz++) {
-
 				BlockPos aps = this.getPos().add(dx, 0, dz);
 				if (this.getWorld().getBlockState(aps).getBlock().equals(ModBlocks.witch_altar) && !this.getWorld().getBlockState(aps).getValue(BlockWitchAltar.ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
 					BlockPos ps = aps.up();
-					try {
-						if (!checkCapabilityAsTile(ps)) {
-							checkCapabilityAsItem(ps);
-						}
-					} catch (NullPointerException e) {
-						Log.e("Errored on "+ps);
+					if (!checkCapabilityAsTile(ps)) {
+						checkCapabilityAsItem(ps);
 					}
 				}
-
-
 			}
 		}
-
 		this.markDirty();
 	}
 
