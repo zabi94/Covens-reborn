@@ -1,7 +1,7 @@
 package com.covens.common.item.food;
 
 import com.covens.api.CovensAPI;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibItemName;
 
@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 
-public class ItemHeart extends ItemModFood implements IMagicPowerExpander {
+public class ItemHeart extends ItemModFood implements PlayerMPExpander {
 
 	public ItemHeart() {
 		super(LibItemName.HEART, 8, 1.6F, true);

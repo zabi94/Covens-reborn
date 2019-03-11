@@ -9,7 +9,7 @@ import com.covens.api.divination.IFortune;
 import com.covens.api.hotbar.IHotbarAction;
 import com.covens.api.incantation.IIncantation;
 import com.covens.api.infusion.IInfusion;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.ritual.IRitual;
 import com.covens.api.spell.ISpell;
@@ -112,9 +112,9 @@ public abstract class CovensAPI {
 
 	public abstract void registerFrostfireSmelting(ResourceLocation name, Ingredient input, Supplier<ItemStack> output);
 
-	public abstract void expandPlayerMP(IMagicPowerExpander expander, EntityPlayer player);
+	public abstract void expandPlayerMP(PlayerMPExpander expander, EntityPlayer player);
 
-	public abstract void removeMPExpansion(IMagicPowerExpander expander, EntityPlayer player);
+	public abstract void removeMPExpansion(PlayerMPExpander expander, EntityPlayer player);
 
 	public abstract void removeMPExpansion(ResourceLocation expander, EntityPlayer player);
 

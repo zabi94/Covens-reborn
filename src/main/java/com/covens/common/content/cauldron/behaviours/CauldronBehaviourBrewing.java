@@ -2,7 +2,7 @@ package com.covens.common.content.cauldron.behaviours;
 
 import java.util.Optional;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.common.content.cauldron.BrewBuilder;
 import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.item.ModItems;
@@ -92,7 +92,7 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 	}
 
 	private boolean hasEnergy(int amount) {
-		return this.cauldron.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), amount);
+		return this.cauldron.getCapability(MPUsingMachine.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), amount);
 	}
 
 	private boolean hasRequiredFluidAmount(int potionAmountUsed) {

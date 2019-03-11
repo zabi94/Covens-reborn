@@ -3,7 +3,7 @@ package com.covens.common.content.cauldron.behaviours;
 import java.awt.Color;
 import java.util.Random;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.common.content.cauldron.CauldronCraftingRecipe;
 import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.core.helper.Log;
@@ -70,7 +70,7 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 		if (isActiveBehaviour) {
 			boolean wasLowEnergy = this.lowEnergy;
 			if (this.validRecipe && (this.craftTime < MAX_CRAFT_TIME)) {
-				if (this.cauldron.getCapability(IMagicPowerConsumer.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), POWER_PER_TICK)) {
+				if (this.cauldron.getCapability(MPUsingMachine.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), POWER_PER_TICK)) {
 					this.lowEnergy = false;
 				} else {
 					this.lowEnergy = true;

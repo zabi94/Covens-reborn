@@ -1,6 +1,6 @@
 package com.covens.common.core.capability;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.content.cauldron.teleportCapability.CapabilityCauldronTeleport;
 import com.covens.common.content.crystalBall.capability.CapabilityFortune;
 import com.covens.common.content.infusion.capability.InfusionCapability;
@@ -8,6 +8,7 @@ import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.content.transformation.vampire.CapabilityVampire;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
 import com.covens.common.content.transformation.werewolf.CapabilityWerewolfStatus;
+import com.covens.common.core.capability.altar.AltarCapabilities;
 import com.covens.common.core.capability.energy.MagicPowerConsumer;
 import com.covens.common.core.capability.energy.MagicPowerContainer;
 import com.covens.common.core.capability.energy.MagicPowerUsingItem;
@@ -38,6 +39,7 @@ public class ModCapabilities {
 		CapabilityCauldronTeleport.init();
 		CapabilityMimicData.init();
 		CapabilityMPExpansion.init();
+		AltarCapabilities.init();
 		SimpleCapability.preInit(BarkCapability.class);
 		SimpleCapability.preInit(CapabilityWerewolfStatus.class);
 		SimpleCapability.preInit(CapabilityTransformation.class);
@@ -53,12 +55,13 @@ public class ModCapabilities {
 		SimpleCapability.init(CapabilityVampire.class, LibMod.MOD_ID, CapabilityVampire.CAPABILITY, CapabilityVampire.DEFAULT_INSTANCE);
 		SimpleCapability.init(CapabilityFamiliarCreature.class, LibMod.MOD_ID, CapabilityFamiliarCreature.CAPABILITY, CapabilityFamiliarCreature.DEFAULT_INSTANCE);
 		SimpleCapability.init(CapabilityFamiliarOwner.class, LibMod.MOD_ID, CapabilityFamiliarOwner.CAPABILITY, CapabilityFamiliarOwner.DEFAULT_INSTANCE);
+		AltarCapabilities.loadItems();
 	}
 	
 	@SubscribeEvent
 	public static void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
 		copyDataOnPlayerRespawn(event, CapabilityMPExpansion.CAPABILITY);
-		copyDataOnPlayerRespawn(event, IMagicPowerContainer.CAPABILITY);
+		copyDataOnPlayerRespawn(event, MPContainer.CAPABILITY);
 		copyDataOnPlayerRespawn(event, CapabilityFortune.CAPABILITY);
 		copyDataOnPlayerRespawn(event, CapabilityFamiliarOwner.CAPABILITY);
 		copyDataOnPlayerRespawn(event, CapabilityWerewolfStatus.CAPABILITY);

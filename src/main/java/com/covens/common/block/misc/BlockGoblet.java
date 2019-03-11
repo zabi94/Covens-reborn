@@ -1,6 +1,9 @@
 package com.covens.common.block.misc;
 
+import javax.annotation.Nullable;
+
 import com.covens.common.block.BlockMod;
+import com.covens.common.core.capability.altar.MixedProvider;
 import com.covens.common.integration.optifine.Optifine;
 
 import net.minecraft.block.material.MapColor;
@@ -11,18 +14,22 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class BlockGoblet extends BlockMod {
 
 	public static final PropertyBool FULL = PropertyBool.create("filled");
 
 	private static final AxisAlignedBB bounding_box = new AxisAlignedBB(0.375, 0, 0.375, 0.625, 0.375, 0.625);
+	private static final MixedProvider mult_full = new MixedProvider(0, 0.25);
+	private static final MixedProvider mult_empty = new MixedProvider(0, 0.05);
 
 	public BlockGoblet(String id) {
 		super(id, new Material(MapColor.IRON));
@@ -120,5 +127,15 @@ public class BlockGoblet extends BlockMod {
 	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
 		items.add(new ItemStack(this, 1, 0));
 		items.add(new ItemStack(this, 1, 1));
+	}
+	
+	@Override
+	public boolean hasItemCapabilities() {
+		return true;
+	}
+	
+	@Override
+	public ICapabilityProvider getExtraCaps(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return stack.getMetadata()==1?mult_full:mult_empty;
 	}
 }

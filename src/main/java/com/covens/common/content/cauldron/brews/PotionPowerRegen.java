@@ -1,6 +1,6 @@
 package com.covens.common.content.cauldron.brews;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.content.cauldron.BrewMod;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -21,7 +21,7 @@ public class PotionPowerRegen extends BrewMod {
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
 		if (entity instanceof EntityPlayer) {
-			IMagicPowerContainer playerMP = entity.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer playerMP = entity.getCapability(MPContainer.CAPABILITY, null);
 			playerMP.fill(amplifier);
 		}
 	}

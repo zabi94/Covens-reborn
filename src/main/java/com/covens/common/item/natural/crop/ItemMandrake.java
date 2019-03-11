@@ -1,7 +1,7 @@
 package com.covens.common.item.natural.crop;
 
-import com.covens.api.mp.IMagicPowerContainer;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.MPContainer;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibItemName;
 
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
  * Sunconure11 on 03/17/2017. It's distributed as part of Covens under the MIT
  * license.
  */
-public class ItemMandrake extends ItemCropFood implements IMagicPowerExpander {
+public class ItemMandrake extends ItemCropFood implements PlayerMPExpander {
 
 	public ItemMandrake() {
 		super(LibItemName.MANDRAKE, 1, 2F, false);
@@ -29,7 +29,7 @@ public class ItemMandrake extends ItemCropFood implements IMagicPowerExpander {
 	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
 		super.onFoodEaten(stack, worldIn, player);
 		player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 35, 1));
-		IMagicPowerContainer playerMP = player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+		MPContainer playerMP = player.getCapability(MPContainer.CAPABILITY, null);
 		playerMP.fill(25);
 	}
 

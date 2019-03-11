@@ -2,17 +2,18 @@ package com.covens.common.item.block;
 
 import java.util.List;
 
+import com.covens.common.item.ItemBlockMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBlockMeta<T extends Item> extends ItemBlock {
+public class ItemBlockMeta<T extends Item> extends ItemBlockMod {
 
 	private Enum<?>[] itemVariants;
 	private EnumNameMode nMode;

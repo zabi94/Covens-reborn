@@ -5,6 +5,7 @@ import java.util.Random;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
+import com.covens.common.core.capability.altar.MixedProvider;
 import com.covens.common.lib.LibBlockName;
 
 import net.minecraft.block.material.Material;
@@ -27,10 +28,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class BlockLantern extends BlockMod {
 
 	private static final AxisAlignedBB bounding_box = new AxisAlignedBB(0.2, 0, 0.2, 0.8, 0.9375, 0.8);
+	private static final MixedProvider gain_lit = new MixedProvider(3, 0);
+	private static final MixedProvider gain_unlit = new MixedProvider(2, 0);
 
 	private boolean lit;
 
@@ -133,5 +137,15 @@ public class BlockLantern extends BlockMod {
 			ModelResourceLocation mrl = new ModelResourceLocation(ModBlocks.revealing_lantern.getRegistryName(), "inventory");
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, mrl);
 		}
+	}
+	
+	@Override
+	public boolean hasItemCapabilities() {
+		return true;
+	}
+	
+	@Override
+	public ICapabilityProvider getExtraCaps() {
+		return lit?gain_lit:gain_unlit;
 	}
 }

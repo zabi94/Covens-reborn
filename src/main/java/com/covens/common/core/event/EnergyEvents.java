@@ -1,6 +1,6 @@
 package com.covens.common.core.event;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.core.capability.energy.player.PlayerMPContainer;
 import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExpansion;
 import com.covens.common.core.net.NetworkHandler;
@@ -21,7 +21,7 @@ public class EnergyEvents {
 	public static void onPlayerLogin(PlayerLoggedInEvent evt) {
 		if (evt.player instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) evt.player;
-			IMagicPowerContainer mp = player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer mp = player.getCapability(MPContainer.CAPABILITY, null);
 			syncExpansions(player);
 			NetworkHandler.HANDLER.sendTo(new EnergySync(mp.getAmount(), mp.getMaxAmount()), player);
 		}
@@ -31,7 +31,7 @@ public class EnergyEvents {
 	public static void playerUpdate(LivingEvent.LivingUpdateEvent event) {
 		if (event.getEntity() instanceof EntityPlayerMP) {
 			final EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
-			final PlayerMPContainer energy = (PlayerMPContainer) player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			final PlayerMPContainer energy = (PlayerMPContainer) player.getCapability(MPContainer.CAPABILITY, null);
 			if ((energy.getAmount() < energy.getMaxAmount()) && ((player.ticksExisted % (10 * getRegenTime(player))) == 0)) {
 				energy.fill(getRegenBurst(player));
 			}
@@ -46,7 +46,7 @@ public class EnergyEvents {
 	private static void syncExpansions(EntityPlayer p) {
 		CapabilityMPExpansion exps = p.getCapability(CapabilityMPExpansion.CAPABILITY, null);
 		if (exps.isDirty()) {
-			IMagicPowerContainer impc = p.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer impc = p.getCapability(MPContainer.CAPABILITY, null);
 			int energy = impc.getAmount();
 			int futureMaxAmount = PlayerMPContainer.STARTING_PLAYER_POWER + exps.getTotalIncrease();
 			if (futureMaxAmount < 0) {

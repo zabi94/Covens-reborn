@@ -2,7 +2,7 @@ package com.covens.common.tile.tiles;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.common.Covens;
 import com.covens.common.crafting.SpinningThreadRecipe;
 import com.covens.common.lib.LibGui;
@@ -36,7 +36,7 @@ public class TileEntityThreadSpinner extends ModTileEntity implements ITickable,
 	private SpinningThreadRecipe loadedRecipe;
 	private String customName = null;
 	private int work = 0;
-	private IMagicPowerConsumer altarTracker = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
+	private MPUsingMachine altarTracker = MPUsingMachine.CAPABILITY.getDefaultInstance();
 
 	public TileEntityThreadSpinner() {
 		this.handler = new ItemStackHandler(5);
@@ -125,13 +125,13 @@ public class TileEntityThreadSpinner extends ModTileEntity implements ITickable,
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return (capability == IMagicPowerConsumer.CAPABILITY) || (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
+		return (capability == MPUsingMachine.CAPABILITY) || (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
 	}
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(this.altarTracker);
+		if (capability == MPUsingMachine.CAPABILITY) {
+			return MPUsingMachine.CAPABILITY.cast(this.altarTracker);
 		}
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.handler);

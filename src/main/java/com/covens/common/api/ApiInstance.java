@@ -11,8 +11,8 @@ import com.covens.api.event.TransformationModifiedEvent;
 import com.covens.api.hotbar.IHotbarAction;
 import com.covens.api.incantation.IIncantation;
 import com.covens.api.infusion.IInfusion;
-import com.covens.api.mp.IMagicPowerContainer;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.MPContainer;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.ritual.IRitual;
 import com.covens.api.spell.ISpell;
@@ -210,20 +210,20 @@ public class ApiInstance extends CovensAPI {
 	}
 
 	@Override
-	public void expandPlayerMP(IMagicPowerExpander expander, EntityPlayer player) {
+	public void expandPlayerMP(PlayerMPExpander expander, EntityPlayer player) {
 		player.getCapability(CapabilityMPExpansion.CAPABILITY, null).expand(expander, player);
-		((PlayerMPContainer) player.getCapability(IMagicPowerContainer.CAPABILITY, null)).markDirty();
+		((PlayerMPContainer) player.getCapability(MPContainer.CAPABILITY, null)).markDirty();
 	}
 
 	@Override
-	public void removeMPExpansion(IMagicPowerExpander expander, EntityPlayer player) {
+	public void removeMPExpansion(PlayerMPExpander expander, EntityPlayer player) {
 		this.removeMPExpansion(expander.getID(), player);
 	}
 
 	@Override
 	public void removeMPExpansion(ResourceLocation expander, EntityPlayer player) {
 		player.getCapability(CapabilityMPExpansion.CAPABILITY, null).remove(expander);
-		((PlayerMPContainer) player.getCapability(IMagicPowerContainer.CAPABILITY, null)).markDirty();
+		((PlayerMPContainer) player.getCapability(MPContainer.CAPABILITY, null)).markDirty();
 	}
 
 	@Override

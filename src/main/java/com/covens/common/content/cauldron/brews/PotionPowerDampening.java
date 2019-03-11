@@ -1,7 +1,7 @@
 package com.covens.common.content.cauldron.brews;
 
 import com.covens.api.CovensAPI;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.content.cauldron.BrewMod;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -9,7 +9,7 @@ import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class PotionPowerDampening extends BrewMod implements IMagicPowerExpander {
+public class PotionPowerDampening extends BrewMod implements PlayerMPExpander {
 
 	public PotionPowerDampening() {
 		super("power_dampening", true, 0xFADA5E, false, 3000, 80);

@@ -1,7 +1,7 @@
 package com.covens.common.content.enchantments;
 
 import com.covens.api.CovensAPI;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.lib.LibMod;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +33,7 @@ public class EnchantmentExtraMP extends BaublesEnchantment {
 		}
 	}
 
-	public static class EnchantmentExpander implements IMagicPowerExpander {
+	public static class EnchantmentExpander implements PlayerMPExpander {
 
 		private int amount;
 

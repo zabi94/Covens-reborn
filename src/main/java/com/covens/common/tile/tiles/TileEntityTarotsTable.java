@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.common.Covens;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.TarotMessage;
@@ -28,7 +28,7 @@ import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 public class TileEntityTarotsTable extends ModTileEntity {
 
 	private static final int READ_COST = 2000;
-	private IMagicPowerConsumer altarTracker = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
+	private MPUsingMachine altarTracker = MPUsingMachine.CAPABILITY.getDefaultInstance();
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -53,15 +53,15 @@ public class TileEntityTarotsTable extends ModTileEntity {
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(this.altarTracker);
+		if (capability == MPUsingMachine.CAPABILITY) {
+			return MPUsingMachine.CAPABILITY.cast(this.altarTracker);
 		}
 		return super.getCapability(capability, facing);
 	}
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return (capability == IMagicPowerConsumer.CAPABILITY) || super.hasCapability(capability, facing);
+		return (capability == MPUsingMachine.CAPABILITY) || super.hasCapability(capability, facing);
 	}
 
 	private boolean checkDeck(ItemStack tarotDeck) {

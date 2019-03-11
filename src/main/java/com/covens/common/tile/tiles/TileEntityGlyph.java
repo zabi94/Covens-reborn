@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerConsumer;
+import com.covens.api.mp.MPUsingMachine;
 import com.covens.api.ritual.EnumGlyphType;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.ModBlocks;
@@ -104,7 +104,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 	private BlockPos runningPos = null; // The effective position where to run the ritual, or null if on the spot
 	private UUID entityPlayer; // The player that casted it
 	private NBTTagCompound ritualData = null; // Extra data for the ritual, includes a list of items used
-	private IMagicPowerConsumer altarTracker = IMagicPowerConsumer.CAPABILITY.getDefaultInstance();
+	private MPUsingMachine altarTracker = MPUsingMachine.CAPABILITY.getDefaultInstance();
 
 	// A list of entities for which some rituals behaves differently, depending on
 	// the ritual
@@ -390,7 +390,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
+		if (capability == MPUsingMachine.CAPABILITY) {
 			return true;
 		}
 		return super.hasCapability(capability, facing);
@@ -399,8 +399,8 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable {
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == IMagicPowerConsumer.CAPABILITY) {
-			return IMagicPowerConsumer.CAPABILITY.cast(this.altarTracker);
+		if (capability == MPUsingMachine.CAPABILITY) {
+			return MPUsingMachine.CAPABILITY.cast(this.altarTracker);
 		}
 		return super.getCapability(capability, facing);
 	}

@@ -1,55 +1,45 @@
 package com.covens.common.tile.tiles;
 
+import java.util.List;
+import java.util.UUID;
+
 import javax.annotation.Nullable;
 
-import com.covens.api.event.AltarModifierCheckEvent;
-import com.covens.api.event.AltarModifierCollectionEvent;
-import com.covens.api.event.AltarUpgradeController;
-import com.covens.api.event.AltarUpgradeController.EnumUpgradeClass;
+import com.covens.api.altar.UpgradeCapabilities;
 import com.covens.api.mp.DefaultMPContainer;
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.block.ModBlocks;
-import com.covens.common.block.misc.BlockCandle;
-import com.covens.common.block.misc.BlockGoblet;
-import com.covens.common.block.misc.BlockLantern;
 import com.covens.common.block.tiles.BlockWitchAltar;
 import com.covens.common.block.tiles.BlockWitchAltar.AltarMultiblockType;
-import com.covens.common.item.ModItems;
+import com.covens.common.core.helper.Log;
+import com.covens.common.item.tool.ItemAthame;
+import com.google.common.collect.Lists;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityFlowerPot;
-import net.minecraft.tileentity.TileEntitySkull;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
 @Mod.EventBusSubscriber
 public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 
-	/*
-	 * SWORDS MODIFIERS ALREADY ADDED:
-	 *
-	 * Boline: nature scan radius +2 Athame: Altars recharge players nearby Silver:
-	 * Increase the plant variety bonus
-	 *
-	 */
-
 	private static final int RIGHT_CLICK_RECALCULATION_COOLDOWN = 200;
-	private ItemStack swordItem = ItemStack.EMPTY;
+
+	private List<UUID> swordItems = Lists.newArrayList();
 	private double multiplier = 1;
 	private DefaultMPContainer storage = new DefaultMPContainer(0);
 	private AltarScanHelper scanHelper;
@@ -61,115 +51,58 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		this.scanHelper = new AltarScanHelper(this);
 	}
 
-	@SubscribeEvent
-	public static void onUpgradeChecked(AltarModifierCheckEvent evt) {
-		Block b = evt.getState().getBlock();
-		if ((b == Blocks.DIAMOND_BLOCK) || (b == Blocks.SKULL) || ((b == ModBlocks.placed_item) && (((TileEntityPlacedItem) evt.getWorld().getTileEntity(evt.getPos())).getItem().getItem() == ModItems.pentacle))) {
-			evt.getController().use(EnumUpgradeClass.PENTACLES, evt.getPos());
-			return;
-		}
-		if ((b == Blocks.FLOWER_POT) || (b == ModBlocks.goblet) || (b == ModBlocks.gem_bowl)) {
-			evt.getController().use(EnumUpgradeClass.CUPS, evt.getPos());
-			return;
-		}
-		if ((b == Blocks.TORCH) || (b instanceof BlockCandle) || (b instanceof BlockLantern)) {
-			evt.getController().use(EnumUpgradeClass.WANDS, evt.getPos());
-			return;
-		}
-		if (b == ModBlocks.placed_item) {
-			ItemStack is = ((TileEntityPlacedItem) evt.getWorld().getTileEntity(evt.getPos())).getItem();
-			if ((is.getItem() == ModItems.athame) || (is.getItem() == ModItems.boline) || (is.getItem() == ModItems.silver_sword) || (is.getItem() == ModItems.cold_iron_sword)) {
-				evt.getController().use(EnumUpgradeClass.SWORDS, evt.getPos());
-				return;
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void setModifiers(AltarModifierCollectionEvent evt) {
-		Block b = evt.getState().getBlock();
-		if (b == Blocks.DIAMOND_BLOCK) {
-			evt.extraGain = 1000;
-			evt.multiplier = 200;
-			return;
-		}
-		if ((b == ModBlocks.placed_item) && (((TileEntityPlacedItem) evt.getWorld().getTileEntity(evt.getPos())).getItem().getItem() == ModItems.pentacle)) {
-			evt.extraGain = 3;
-			evt.multiplier = -0.2;
-		}
-		if (b == Blocks.SKULL) {
-			TileEntitySkull tes = (TileEntitySkull) evt.getWorld().getTileEntity(evt.getPos());
-			switch (tes.getSkullType()) {
-				case 0:
-				case 2:
-				case 4: // Zombie, Skeleton and creeper
-					evt.extraGain = 1;
-					evt.multiplier = 0.05;
-					break;
-				case 1:
-				case 3:// Wither skull and player skull
-					evt.extraGain = 2;
-					evt.multiplier = 0.2;
-					break;
-				case 5: // Dragon
-					evt.extraGain = 2;
-					evt.multiplier = 0.4;
-					break;
-				default:
-					break;
-			}
-			return;
-		}
-		if (b == Blocks.TORCH) {
-			evt.extraGain = 1;
-			return;
-		}
-		if (b == ModBlocks.lantern) {
-			evt.extraGain = 2;
-		}
-		if (b == ModBlocks.revealing_lantern) {
-			evt.extraGain = 3;
-		}
-		if (b instanceof BlockCandle) {
-			if (((BlockCandle) b).isLit()) {
-				evt.extraGain = 2;
-			} else {
-				evt.extraGain = 1;
-			}
-			return;
-		}
-		if ((b == Blocks.FLOWER_POT) && b.hasTileEntity(evt.getState())) {
-			TileEntityFlowerPot tefp = (TileEntityFlowerPot) evt.getWorld().getTileEntity(evt.getPos());
-			if (!tefp.getFlowerItemStack().isEmpty()) {
-				evt.multiplier = 0.1;
-			} else {
-				evt.multiplier = 0.05;
-			}
-			return;
-		}
-		if (b == ModBlocks.goblet) {
-			if (evt.getState().getValue(BlockGoblet.FULL)) {
-				evt.multiplier = 0.25;
-			} else {
-				evt.multiplier = 0.05;
-			}
-			return;
-		}
-		if (b == ModBlocks.gem_bowl) {
-			if (evt.getWorld().getTileEntity(evt.getPos()) != null) {
-				int t = ((TileEntityGemBowl) evt.getWorld().getTileEntity(evt.getPos())).getGemValue();
-				evt.multiplier = 0.05 * t;
-			}
-			return;
-		}
-		if (b == ModBlocks.placed_item) {
-			ItemStack is = ((TileEntityPlacedItem) evt.getWorld().getTileEntity(evt.getPos())).getItem();
-			if (evt.getType() == EnumUpgradeClass.SWORDS) {
-				evt.getlAltar().setSwordItem(is.copy());
-				evt.getlAltar().markDirty();
-			}
-		}
-	}
+	//	@SubscribeEvent
+	//	public static void setModifiers(AltarModifierCollectionEvent evt) {
+	//		Block b = evt.getState().getBlock();
+	//		if (b == Blocks.DIAMOND_BLOCK) {
+	//			evt.extraGain = 1000;
+	//			evt.multiplier = 200;
+	//			return;
+	//		}
+	//		if (b == Blocks.SKULL) {
+	//			TileEntitySkull tes = (TileEntitySkull) evt.getWorld().getTileEntity(evt.getPos());
+	//			switch (tes.getSkullType()) {
+	//				case 0:
+	//				case 2:
+	//				case 4: // Zombie, Skeleton and creeper
+	//					evt.extraGain = 1;
+	//					evt.multiplier = 0.05;
+	//					break;
+	//				case 1:
+	//				case 3:// Wither skull and player skull
+	//					evt.extraGain = 2;
+	//					evt.multiplier = 0.2;
+	//					break;
+	//				case 5: // Dragon
+	//					evt.extraGain = 2;
+	//					evt.multiplier = 0.4;
+	//					break;
+	//				default:
+	//					break;
+	//			}
+	//			return;
+	//		}
+	//		if (b == Blocks.TORCH) {
+	//			evt.extraGain = 1;
+	//			return;
+	//		}
+	//		if ((b == Blocks.FLOWER_POT) && b.hasTileEntity(evt.getState())) {
+	//			TileEntityFlowerPot tefp = (TileEntityFlowerPot) evt.getWorld().getTileEntity(evt.getPos());
+	//			if (!tefp.getFlowerItemStack().isEmpty()) {
+	//				evt.multiplier = 0.1;
+	//			} else {
+	//				evt.multiplier = 0.05;
+	//			}
+	//			return;
+	//		}
+	//		if (b == ModBlocks.gem_bowl) {
+	//			if (evt.getWorld().getTileEntity(evt.getPos()) != null) {
+	//				int t = ((TileEntityGemBowl) evt.getWorld().getTileEntity(evt.getPos())).getGemValue();
+	//				evt.multiplier = 0.05 * t;
+	//			}
+	//			return;
+	//		}
+	//	}
 
 	@Override
 	public void onLoad() {
@@ -198,9 +131,9 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 			if (this.recalcCooldown > 0) {
 				this.recalcCooldown--;
 			}
-			if (this.getSwordItemStack().getItem() == ModItems.athame) {
+			if (this.getSwordIds().contains(ItemAthame.ATHAME_UUID)) {
 				this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.pos).grow(5)).forEach(player -> {
-					IMagicPowerContainer playerMP = player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+					MPContainer playerMP = player.getCapability(MPContainer.CAPABILITY, null);
 					int transferValue = Math.min(20, playerMP.getMaxAmount() - playerMP.getAmount());
 					if (this.storage.drain(transferValue)) {
 						playerMP.fill(transferValue / 10);
@@ -210,34 +143,82 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		}
 	}
 
-	public AltarUpgradeController getUpgrades() {
-		AltarUpgradeController controller = new AltarUpgradeController();
-		for (int dx = -1; dx <= 1; dx++) {
-			for (int dz = -1; dz <= 1; dz++) {
-				BlockPos ps = this.getPos().add(dx, 0, dz);
-				if (this.getWorld().getBlockState(ps).getBlock().equals(ModBlocks.witch_altar) && !this.getWorld().getBlockState(ps).getValue(BlockWitchAltar.ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
-					MinecraftForge.EVENT_BUS.post(new AltarModifierCheckEvent(this.getWorld(), ps.up(), this.world.getBlockState(ps.up()), controller));
-				}
-			}
-		}
-		return controller;
-	}
-
 	protected void refreshUpgrades() {
 		this.gain = 1;
 		this.multiplier = 1;
-		this.setSwordItem(ItemStack.EMPTY);
-		AltarUpgradeController controller = this.getUpgrades();
-		for (int i = 0; i < controller.getModifierPositions().length; i++) {
-			BlockPos p = controller.getModifierPositions()[i];
-			if (p != null) {
-				AltarModifierCollectionEvent collector = new AltarModifierCollectionEvent(this.world, p, this.world.getBlockState(p), EnumUpgradeClass.values()[i], this);
-				MinecraftForge.EVENT_BUS.post(collector);
-				this.multiplier += collector.multiplier;
-				this.gain += collector.extraGain;
+		this.swordItems.clear();
+
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dz = -1; dz <= 1; dz++) {
+
+				BlockPos aps = this.getPos().add(dx, 0, dz);
+				if (this.getWorld().getBlockState(aps).getBlock().equals(ModBlocks.witch_altar) && !this.getWorld().getBlockState(aps).getValue(BlockWitchAltar.ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
+					BlockPos ps = aps.up();
+					try {
+						if (!checkCapabilityAsTile(ps)) {
+							checkCapabilityAsItem(ps);
+						}
+					} catch (NullPointerException e) {
+						Log.e("Errored on "+ps);
+					}
+				}
+
+
 			}
 		}
+
 		this.markDirty();
+	}
+
+	private boolean checkCapabilityAsTile(BlockPos ps) {
+		TileEntity tile = world.getTileEntity(ps);
+		if (tile == null) {
+			return false;
+		}
+		boolean foundCaps = false;
+
+		if (tile.hasCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
+			tile.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
+			swordItems.add(tile.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
+			foundCaps = true;
+		}
+
+		if (tile.hasCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
+			this.gain += tile.getCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
+			foundCaps = true;
+		}
+
+		if (tile.hasCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
+			this.multiplier += tile.getCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
+			foundCaps = true;
+		}
+
+		return foundCaps;
+	}
+
+	@SuppressWarnings("deprecation")
+	private void checkCapabilityAsItem(BlockPos ps) {
+		IBlockState state = world.getBlockState(ps);
+		ItemStack stack = null;
+		if (state.getBlock() == ModBlocks.placed_item) {
+			stack = ((TileEntityPlacedItem) world.getTileEntity(ps)).getItem();
+		} else {
+			stack = state.getBlock().getItem(world, ps, state);
+		}
+
+		if (stack.hasCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
+			stack.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
+			swordItems.add(stack.getCapability(UpgradeCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
+		}
+
+		if (stack.hasCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
+			this.gain += stack.getCapability(UpgradeCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
+		}
+
+		if (stack.hasCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
+			this.multiplier += stack.getCapability(UpgradeCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
+		}
+
 	}
 
 	public int getCurrentGain() {
@@ -260,7 +241,7 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		if (capability == IMagicPowerContainer.CAPABILITY) {
+		if (capability == MPContainer.CAPABILITY) {
 			return true;
 		}
 		return super.hasCapability(capability, facing);
@@ -269,8 +250,8 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == IMagicPowerContainer.CAPABILITY) {
-			return IMagicPowerContainer.CAPABILITY.cast(this.storage);
+		if (capability == MPContainer.CAPABILITY) {
+			return MPContainer.CAPABILITY.cast(this.storage);
 		}
 		return super.getCapability(capability, facing);
 	}
@@ -279,7 +260,11 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
 		tag.setTag("mp", this.storage.saveNBTTag());
 		tag.setInteger("gain", this.gain);
-		tag.setTag("swordItem", this.getSwordItemStack().writeToNBT(new NBTTagCompound()));
+		final NBTTagList list = new NBTTagList();
+		swordItems.forEach(id -> {
+			list.appendTag(UUIDs.toNBT(id));
+		});
+		tag.setTag("swords", list);
 		tag.setDouble("multiplier", this.multiplier);
 		tag.setInteger("recalcCooldown", this.recalcCooldown);
 		this.writeModSyncDataNBT(tag);
@@ -289,9 +274,10 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	protected void readAllModDataNBT(NBTTagCompound tag) {
 		this.storage.loadFromNBT(tag.getCompoundTag("mp"));
 		this.gain = tag.getInteger("gain");
-		this.setSwordItem(new ItemStack(tag.getCompoundTag("swordItem")));
 		this.multiplier = tag.getDouble("multiplier");
 		this.recalcCooldown = tag.getInteger("recalcCooldown");
+		this.swordItems.clear();
+		tag.getTagList("swords", NBT.TAG_COMPOUND).forEach(base -> swordItems.add(UUIDs.fromNBT((NBTTagCompound) base)));
 		this.readModSyncDataNBT(tag);
 	}
 
@@ -305,8 +291,8 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		this.color = EnumDyeColor.values()[tag.getInteger("color")];
 	}
 
-	public void setSwordItem(ItemStack swordItem) {
-		this.swordItem = swordItem;
+	public void addSwordItem(UUID id) {
+		swordItems.add(id);
 	}
 
 	public void forceFullScan() {
@@ -316,8 +302,8 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		}
 	}
 
-	public ItemStack getSwordItemStack() {
-		return this.swordItem;
+	public List<UUID> getSwordIds() {
+		return this.swordItems;
 	}
 
 	public double getMultiplier() {

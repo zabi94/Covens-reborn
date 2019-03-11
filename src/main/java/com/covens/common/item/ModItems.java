@@ -1,10 +1,13 @@
 package com.covens.common.item;
 
+import javax.annotation.Nullable;
+
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.chisel.BlockColdIronChiseled;
 import com.covens.common.block.chisel.BlockNetherSteelChiseled;
 import com.covens.common.block.chisel.BlockSilverChiseled;
 import com.covens.common.block.natural.BlockGem.Gem;
+import com.covens.common.core.capability.altar.MixedProvider;
 import com.covens.common.core.helper.CropHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.block.ItemBlockColor;
@@ -69,8 +72,9 @@ import baubles.api.BaubleType;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.LoaderException;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
@@ -307,7 +311,14 @@ public final class ModItems {
 				new ItemMod(LibItemName.SOUL_STRING), // 
 				new ItemMod(LibItemName.GRAVEYARD_DUST), // 
 				new ItemMod(LibItemName.SANGUINE_FABRIC), // 
-				new ItemMod(LibItemName.PENTACLE),  //
+				new ItemMod(LibItemName.PENTACLE) {
+					private final MixedProvider caps = new MixedProvider(3, -0.2);
+					@Override
+					@Nullable
+					public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+						return caps;
+					}
+				},  //
 				new ItemMod(LibItemName.ADDERS_FORK),  //
 				new ItemMod(LibItemName.SNAKE_VENOM),  //
 				new ItemMod(LibItemName.TOE_OF_FROG),  //
@@ -374,6 +385,8 @@ public final class ModItems {
 		registry.registerAll(//
 				new ItemBlockColor(ModBlocks.candle_medium), //
 				new ItemBlockColor(ModBlocks.candle_small), //
+				new ItemBlockColor(ModBlocks.candle_medium_lit), //
+				new ItemBlockColor(ModBlocks.candle_small_lit), //
 				itemBlock(ModBlocks.fake_ice), //
 				new ItemGemOre(ModBlocks.gem_ore).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB), //
 				itemBlock(ModBlocks.silver_block), //
@@ -436,7 +449,7 @@ public final class ModItems {
 		if (block.getRegistryName().toString() == null) {
 			throw new LoaderException("[" + LibMod.MOD_NAME + "] There's something wrong with the registry implementation of " + block.getTranslationKey());
 		}
-		return new ItemBlock(block).setRegistryName(block.getRegistryName());
+		return new ItemBlockMod(block).setRegistryName(block.getRegistryName());
 	}
 
 	public static void init() {

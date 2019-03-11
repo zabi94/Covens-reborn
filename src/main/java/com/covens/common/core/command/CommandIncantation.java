@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import com.covens.api.incantation.IIncantation;
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.content.incantation.ModIncantations;
 import com.google.common.collect.Lists;
 
@@ -56,7 +56,7 @@ public class CommandIncantation implements ICommand {
 			IIncantation incantation = ModIncantations.getCommands().get(command);
 			if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
-				if (player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(incantation.getCost())) {
+				if (player.getCapability(MPContainer.CAPABILITY, null).drain(incantation.getCost())) {
 					incantation.cast(player, args);
 				} else {
 					throw new CommandException("commands.incantation.no_energy", sender.getName());

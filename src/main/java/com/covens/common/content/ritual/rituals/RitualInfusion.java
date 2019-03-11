@@ -1,7 +1,7 @@
 package com.covens.common.content.ritual.rituals;
 
 import com.covens.api.infusion.IInfusion;
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.api.ritual.IRitual;
 import com.covens.common.content.infusion.capability.InfusionCapability;
 import com.covens.common.core.net.NetworkHandler;
@@ -27,7 +27,7 @@ public class RitualInfusion implements IRitual {
 		if (player == null) {
 			return;
 		}
-		IMagicPowerContainer pc = player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+		MPContainer pc = player.getCapability(MPContainer.CAPABILITY, null);
 		pc.drain(pc.getAmount());
 		player.getCapability(InfusionCapability.CAPABILITY, null).setType(this.type);
 		if (player instanceof EntityPlayerMP) {

@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.covens.api.CovensAPI;
 import com.covens.api.infusion.DefaultInfusions;
-import com.covens.api.mp.IMagicPowerContainer;
-import com.covens.api.mp.IMagicPowerUsingItem;
+import com.covens.api.mp.MPContainer;
+import com.covens.api.mp.MPUsingItem;
 import com.covens.client.ResourceLocations;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.lib.LibMod;
@@ -50,7 +50,7 @@ public class EnergyHUD extends HudComponent {
 	@SubscribeEvent
 	public void onTick(TickEvent.ClientTickEvent event) {
 		if ((event.phase == TickEvent.Phase.END) && (Minecraft.getMinecraft().player != null)) {
-			IMagicPowerContainer storage = Minecraft.getMinecraft().player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer storage = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
 			if (this.lastPulsed > 0) {
 				this.lastPulsed--;
 			}
@@ -60,7 +60,7 @@ public class EnergyHUD extends HudComponent {
 		}
 	}
 
-	private void tickBarTimer(IMagicPowerContainer storage) {
+	private void tickBarTimer(MPContainer storage) {
 		if ((this.renderTime > 0) && (storage.getAmount() == storage.getMaxAmount())) {
 			if (this.renderTime < 20) {
 				this.visibilityLeft -= 0.05F;
@@ -70,7 +70,7 @@ public class EnergyHUD extends HudComponent {
 		}
 	}
 
-	private void checkIfBarShouldStay(IMagicPowerContainer storage) {
+	private void checkIfBarShouldStay(MPContainer storage) {
 		boolean energyChanged = (this.oldEnergy != storage.getAmount()) || (this.oldMaxEnergy != storage.getMaxAmount()) || (this.oldInfusion != CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture());
 		if (energyChanged) {
 			this.shouldPulse = this.lastPulsed == 0;
@@ -109,10 +109,10 @@ public class EnergyHUD extends HudComponent {
 		if (p == null) {
 			return false;
 		}
-		if (p.getHeldItemMainhand().hasCapability(IMagicPowerUsingItem.CAPABILITY, null)) {
+		if (p.getHeldItemMainhand().hasCapability(MPUsingItem.CAPABILITY, null)) {
 			return true;
 		}
-		if (p.getHeldItemOffhand().hasCapability(IMagicPowerUsingItem.CAPABILITY, null)) {
+		if (p.getHeldItemOffhand().hasCapability(MPUsingItem.CAPABILITY, null)) {
 			return true;
 		}
 		return HudController.INSTANCE.isEditModeActive();
@@ -130,7 +130,7 @@ public class EnergyHUD extends HudComponent {
 	@Override
 	public String getTooltip(int mouseX, int mouseY) {
 		if (this.renderTime > 0) {
-			IMagicPowerContainer energy = Minecraft.getMinecraft().player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer energy = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
 			return energy.getAmount() + "/" + energy.getMaxAmount();
 		}
 		return null;
@@ -165,7 +165,7 @@ public class EnergyHUD extends HudComponent {
 			GlStateManager.pushMatrix();
 			GlStateManager.enableBlend();
 			GlStateManager.color(1, 1, 1, 1);
-			IMagicPowerContainer energy = Minecraft.getMinecraft().player.getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer energy = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
 			double fill = this.getFillLevel(energy, partialTicks);
 			this.renderBarContent(fill);
 			this.renderPulse(fill);
@@ -204,7 +204,7 @@ public class EnergyHUD extends HudComponent {
 		// NO-OP
 	}
 
-	private double getFillLevel(IMagicPowerContainer energy, float partialTicks) {
+	private double getFillLevel(MPContainer energy, float partialTicks) {
 		double interpEnergy = 0;
 		if (this.oldEnergy >= 0) {
 			interpEnergy = ((double) (energy.getAmount() - this.oldEnergy) * partialTicks) + this.oldEnergy;

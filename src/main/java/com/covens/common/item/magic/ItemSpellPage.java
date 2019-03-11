@@ -4,8 +4,8 @@ package com.covens.common.item.magic;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerContainer;
-import com.covens.api.mp.IMagicPowerUsingItem;
+import com.covens.api.mp.MPContainer;
+import com.covens.api.mp.MPUsingItem;
 import com.covens.api.spell.ISpell;
 import com.covens.api.spell.ISpell.EnumSpellType;
 import com.covens.common.content.spell.Spell;
@@ -103,7 +103,7 @@ public class ItemSpellPage extends ItemMod {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ISpell s = getSpellFromItemStack(playerIn.getHeldItem(handIn));
-		if ((s != null) && s.canBeUsed(worldIn, playerIn.getPosition(), playerIn) && (playerIn.getCapability(IMagicPowerContainer.CAPABILITY, null).getAmount() >= s.getCost())) {
+		if ((s != null) && s.canBeUsed(worldIn, playerIn.getPosition(), playerIn) && (playerIn.getCapability(MPContainer.CAPABILITY, null).getAmount() >= s.getCost())) {
 			playerIn.setActiveHand(handIn);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 		}
@@ -116,7 +116,7 @@ public class ItemSpellPage extends ItemMod {
 		if ((spell != null) && !worldIn.isRemote) {
 			if (entityLiving instanceof EntityPlayer) {
 				int spellCost = spell.getCost() * 80;
-				IMagicPowerContainer mpc = entityLiving.getCapability(IMagicPowerContainer.CAPABILITY, null);
+				MPContainer mpc = entityLiving.getCapability(MPContainer.CAPABILITY, null);
 				if (mpc.drain(spellCost)) {
 					if (spell.getType() == EnumSpellType.INSTANT) {
 						spell.performEffect(new RayTraceResult(Type.MISS, entityLiving.getLookVec(), EnumFacing.UP, entityLiving.getPosition()), entityLiving, worldIn);
@@ -149,7 +149,7 @@ public class ItemSpellPage extends ItemMod {
 
 			@Override
 			public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-				if (capability == IMagicPowerUsingItem.CAPABILITY) {
+				if (capability == MPUsingItem.CAPABILITY) {
 					return true;
 				}
 				return false;

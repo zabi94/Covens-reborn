@@ -4,10 +4,11 @@ package com.covens.common.item.block;
 
 import java.util.List;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.block.misc.BlockWitchFire.EnumFireType;
+import com.covens.common.item.ItemBlockMod;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -15,7 +16,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBlockRevealingLantern extends ItemBlock {
+public class ItemBlockRevealingLantern extends ItemBlockMod {
 
 	private boolean lit;
 
@@ -83,7 +83,7 @@ public class ItemBlockRevealingLantern extends ItemBlock {
 			return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 		}
 
-		if (this.lit && world.getBlockState(pos.offset(side)).getBlock().isReplaceable(world, pos.offset(side)) && player.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(50)) {
+		if (this.lit && world.getBlockState(pos.offset(side)).getBlock().isReplaceable(world, pos.offset(side)) && player.getCapability(MPContainer.CAPABILITY, null).drain(50)) {
 			world.setBlockState(pos.offset(side), ModBlocks.witches_light.getDefaultState(), 3);
 			return EnumActionResult.SUCCESS;
 		}

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.Covens;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibReflection;
@@ -204,7 +204,7 @@ public class EntityFlyingBroom extends Entity {
 	}
 
 	private void refuel(EntityPlayer rider) {
-		IMagicPowerContainer pmp = rider.getCapability(IMagicPowerContainer.CAPABILITY, null);
+		MPContainer pmp = rider.getCapability(MPContainer.CAPABILITY, null);
 		if (pmp.drain(30)) {
 			this.getDataManager().set(FUEL, MAX_FUEL);
 			this.getDataManager().setDirty(FUEL);

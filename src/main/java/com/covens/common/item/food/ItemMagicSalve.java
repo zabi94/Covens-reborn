@@ -1,7 +1,7 @@
 package com.covens.common.item.food;
 
 import com.covens.api.CovensAPI;
-import com.covens.api.mp.IMagicPowerExpander;
+import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 
 //Todo: Make this expand ME only once, and make sure it's ME extension is working
-public class ItemMagicSalve extends ItemMod implements IMagicPowerExpander {
+public class ItemMagicSalve extends ItemMod implements PlayerMPExpander {
 
 	public ItemMagicSalve() {
 		super(LibItemName.MAGIC_SALVE);

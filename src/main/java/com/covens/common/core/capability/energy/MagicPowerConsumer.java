@@ -5,8 +5,8 @@ import java.util.Comparator;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.IMagicPowerConsumer;
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPUsingMachine;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.Covens;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,13 +17,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-public class MagicPowerConsumer implements IMagicPowerConsumer {
+public class MagicPowerConsumer implements MPUsingMachine {
 
 	BlockPos cachedPos = null;
 	int cachedDim = 0;
 
 	public static void init() {
-		CapabilityManager.INSTANCE.register(IMagicPowerConsumer.class, new MagicPowerConsumerStorage(), MagicPowerConsumer::new);
+		CapabilityManager.INSTANCE.register(MPUsingMachine.class, new MagicPowerConsumerStorage(), MagicPowerConsumer::new);
 	}
 
 	@Override
@@ -36,13 +36,13 @@ public class MagicPowerConsumer implements IMagicPowerConsumer {
 		}
 		if (this.cachedPos != null) {
 			World tileWorld = DimensionManager.getWorld(this.cachedDim);
-			IMagicPowerContainer source = tileWorld.getTileEntity(this.cachedPos).getCapability(IMagicPowerContainer.CAPABILITY, null);
+			MPContainer source = tileWorld.getTileEntity(this.cachedPos).getCapability(MPContainer.CAPABILITY, null);
 			if (source.drain(amount)) {
 				return true;
 			}
 		}
 		if (caster != null) {
-			return caster.getCapability(IMagicPowerContainer.CAPABILITY, null).drain(amount);
+			return caster.getCapability(MPContainer.CAPABILITY, null).drain(amount);
 		}
 		return false;
 	}
@@ -50,7 +50,7 @@ public class MagicPowerConsumer implements IMagicPowerConsumer {
 	private void findNewAltar(World world, BlockPos position, int radius) {
 		this.cachedPos = world.tickableTileEntities.parallelStream()//
 				.filter(t -> !t.isInvalid())//
-				.filter(t -> t.hasCapability(IMagicPowerContainer.CAPABILITY, null))//
+				.filter(t -> t.hasCapability(MPContainer.CAPABILITY, null))//
 				.filter(t -> t.getDistanceSq(position.getX(), position.getY(), position.getZ()) < (radius * radius))//
 				.sorted(Comparator.<TileEntity>comparingDouble(t -> t.getDistanceSq(position.getX(), position.getY(), position.getZ())))//
 				.map(t -> t.getPos())//
@@ -70,7 +70,7 @@ public class MagicPowerConsumer implements IMagicPowerConsumer {
 			return false;
 		}
 		TileEntity te = world.getTileEntity(this.cachedPos);
-		return ((te != null) && !te.isInvalid() && te.hasCapability(IMagicPowerContainer.CAPABILITY, null));
+		return ((te != null) && !te.isInvalid() && te.hasCapability(MPContainer.CAPABILITY, null));
 	}
 
 	@Override

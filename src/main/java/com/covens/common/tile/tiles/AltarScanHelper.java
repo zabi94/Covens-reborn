@@ -2,9 +2,10 @@ package com.covens.common.tile.tiles;
 
 import java.util.HashMap;
 
-import com.covens.api.mp.IMagicPowerContainer;
+import com.covens.api.mp.MPContainer;
 import com.covens.common.core.statics.ModConfig;
-import com.covens.common.item.ModItems;
+import com.covens.common.item.tool.ItemBoline;
+import com.covens.common.item.tool.ItemSilverSword;
 import com.covens.common.lib.LibIngredients;
 
 import net.minecraft.block.Block;
@@ -56,7 +57,7 @@ class AltarScanHelper {
 	private void getNextCycle() {
 		this.complete = false;
 		int radius_c = RADIUS;
-		if (this.te.getSwordItemStack().getItem() == ModItems.boline) {
+		if (this.te.getSwordIds().contains(ItemBoline.BOLINE_UUID)) {
 			radius_c += 2;
 		}
 		this.dx++;
@@ -123,12 +124,12 @@ class AltarScanHelper {
 		this.te.refreshUpgrades();
 		int maxPower = this.map.values().parallelStream().reduce(0, (a, b) -> a + b);
 		int varietyMultiplier = 40;
-		if (this.te.getSwordItemStack().getItem() == ModItems.silver_sword) {
+		if (this.te.getSwordIds().contains(ItemSilverSword.SILVER_UUID)) {
 			varietyMultiplier = 51;
 		}
 		maxPower += (this.map.keySet().size() * varietyMultiplier); // Variety is the most important thing
 		maxPower = (int) (maxPower * this.te.getMultiplier());
-		this.te.getCapability(IMagicPowerContainer.CAPABILITY, null).setMaxAmount(maxPower);
+		this.te.getCapability(MPContainer.CAPABILITY, null).setMaxAmount(maxPower);
 		this.map.clear();
 		this.te.markDirty();
 	}

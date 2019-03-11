@@ -5,16 +5,16 @@ import javax.annotation.Nonnull;
 import com.covens.common.block.natural.BlockGem;
 import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.core.statics.ModCreativeTabs;
+import com.covens.common.item.ItemBlockMod;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-public class ItemGemBlock extends ItemBlock implements IModelRegister {
+public class ItemGemBlock extends ItemBlockMod implements IModelRegister {
 	public ItemGemBlock(Block block) {
 		super(block);
 		this.setRegistryName(block.getRegistryName());
