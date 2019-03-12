@@ -15,6 +15,7 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -23,8 +24,10 @@ import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.ai.EntityFlyHelper;
+import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -59,7 +62,8 @@ public class EntityRaven extends EntityMultiSkin {
 	public EntityRaven(World worldIn) {
 		super(worldIn);
 		this.setSize(0.4f, 0.4f);
-		this.moveHelper = new EntityFlyHelper(this);
+		this.moveHelper = new EntityFlyHelperRaven(this);
+
 	}
 
 	@Override
@@ -72,7 +76,7 @@ public class EntityRaven extends EntityMultiSkin {
 		super.applyEntityAttributes();
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
 		this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(1);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(7.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(6.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.85d);
 	}
@@ -91,13 +95,14 @@ public class EntityRaven extends EntityMultiSkin {
 
 	@Override
 	protected void initEntityAI() {
-		this.tasks.addTask(0, new EntityAIPanic(this, 0.7D));
+		this.tasks.addTask(0, new EntityAIPanic(this, 0.5D));
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(3, new EntityAIMate(this, 0.8d));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(4, new EntityAIWatchClosest2(this, EntityPlayer.class, 5f, 1f));
 		this.tasks.addTask(5, new EntityAILookIdle(this));
+		this.tasks.addTask(4, new EntityAIWanderAvoidWaterFlying(this, 1));
 	}
 
 	@Override
@@ -223,6 +228,52 @@ public class EntityRaven extends EntityMultiSkin {
 	@Override
 	public int getSkinTypes() {
 		return 1;
+	}
+
+	public class EntityFlyHelperRaven extends EntityFlyHelper {
+		
+		public EntityFlyHelperRaven(EntityLiving p_i47418_1_) {
+			super(p_i47418_1_);
+		}
+
+		@Override
+		public void onUpdateMoveHelper() {
+			if (this.action == EntityMoveHelper.Action.MOVE_TO) {
+				this.action = EntityMoveHelper.Action.WAIT;
+				this.entity.setNoGravity(true);
+				double dx = this.posX - this.entity.posX;
+				double dy = this.posY - this.entity.posY;
+				double dz = this.posZ - this.entity.posZ;
+				double distSq = (dx * dx) + (dy * dy) + (dz * dz);
+
+				if (distSq < 2.500000277905201E-7D) {
+					this.entity.setMoveVertical(0.0F);
+					this.entity.setMoveForward(0.0F);
+					return;
+				}
+
+				float maxYaw = (float) (MathHelper.atan2(dz, dx) * (180D / Math.PI)) - 90.0F;
+				this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, maxYaw, 10.0F);
+				float moveSpeed;
+				float groundHorizontalMoveSpeed = (float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+				float flyingHorizontalMoveSpeed = (float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue());
+				if (this.entity.onGround) {
+					moveSpeed = groundHorizontalMoveSpeed / 10;
+				} else {
+					moveSpeed = flyingHorizontalMoveSpeed;
+				}
+
+				this.entity.setAIMoveSpeed(moveSpeed);
+				double horizontalDistSq = MathHelper.sqrt((dx * dx) + (dz * dz));
+				float pitchMax = (float) (-(MathHelper.atan2(dy, horizontalDistSq) * (180D / Math.PI)));
+				this.entity.rotationPitch = this.limitAngle(this.entity.rotationPitch, pitchMax, 10.0F);
+				this.entity.setMoveVertical(dy > 0.0D ? flyingHorizontalMoveSpeed : -flyingHorizontalMoveSpeed);
+			} else {
+				this.entity.setNoGravity(false);
+				this.entity.setMoveVertical(0.0F);
+				this.entity.setMoveForward(0.0F);
+			}
+		}
 	}
 
 }

@@ -213,10 +213,10 @@ public class ModelRaven extends ModelBase {
 			}
 		} else {
 			this.setFlyingStance();
-			float time = (raven.ticksExisted + partialTickTime) / 4.71238898F;
-			this.wingRight1.rotateAngleZ = 0.26179938779914943f + (1.047166666666666f * MathHelper.cos(time));
+			float time = 2 * (raven.ticksExisted + partialTickTime) / 4.71238898F;
+			this.wingRight1.rotateAngleZ = 0.26179938779914943f + (1.047166666666666f * MathHelper.cos(time*2.5f));
 			this.wingLeft1.rotateAngleZ = -this.wingRight1.rotateAngleZ;
-			this.wingRight2.rotateAngleZ = -0.52359877559F + (0.34906585039f * MathHelper.sin(time));
+			this.wingRight2.rotateAngleZ = -0.52359877559F + (0.34906585039f * MathHelper.sin(time*2.5f));
 			this.wingLeft2.rotateAngleZ = -this.wingRight2.rotateAngleZ;
 			this.wingRight3.rotateAngleZ = this.wingRight1.rotateAngleZ / 4;
 			this.wingLeft3.rotateAngleZ = -this.wingRight3.rotateAngleZ;
