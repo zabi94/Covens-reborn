@@ -146,7 +146,8 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 
 	@Override
 	public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
-		player.playSound(SoundEvents.BLOCK_WOOD_STEP, 0.75F, 1.9f);
+		IBauble.super.onEquipped(itemstack, player);
+		player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1.15F, 1.9f);
 		player.getCapability(BarkCapability.CAPABILITY, null).pieces = ((EntityPlayer) player).isCreative() ? 10 : 0;
 		fixBark((EntityPlayer) player);
 		player.getCapability(BarkCapability.CAPABILITY, null).markDirty((byte) 1);

@@ -84,7 +84,7 @@ public class ItemHellishBauble extends ItemMod implements IBauble, PlayerMPExpan
 	@Override
 	public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
 		IBauble.super.onEquipped(itemstack, player);
-		player.world.playSound((EntityPlayer) player, player.getPosition(), SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.AMBIENT, 0.75F, 1.9f);
+		player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.PLAYERS, 0.75F, 1.9f);
 		CovensAPI.getAPI().expandPlayerMP(this, (EntityPlayer) player);
 	}
 
