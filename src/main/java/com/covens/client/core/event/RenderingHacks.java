@@ -8,6 +8,8 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.item.block.ItemBlockRevealingLantern;
 
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Tuple;
@@ -51,7 +53,8 @@ public class RenderingHacks {
 	public void transparentFamiliars(RenderLivingEvent.Pre<EntityLivingBase> evt) {
 		if (CovensAPI.getAPI().isValidFamiliar(evt.getEntity()) && evt.getEntity().getCapability(CapabilityFamiliarCreature.CAPABILITY, null).hasOwner()) {
 			GlStateManager.enableBlend();
-			GlStateManager.color(0.7f, 0.7f, 1, 0.7f);
+			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+			GlStateManager.color(0.7f, 0.7f, 1, 0.6f);
 		}
 	}
 	
