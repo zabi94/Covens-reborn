@@ -33,6 +33,7 @@ public final class ModGen {
 		// -------------------salt-------------------//
 		GameRegistry.registerWorldGenerator(WorldGenOre.OreGenBuilder.forOre(ModBlocks.gem_ore, ModConfig.WORLD_GEN.amethyst.amethyst_gen_chance).generateOn(Blocks.STONE).setVeinSize(ModConfig.WORLD_GEN.amethyst.amethyst_min_vein, ModConfig.WORLD_GEN.amethyst.amethyst_max_vein).setHeightRange(ModConfig.WORLD_GEN.amethyst.amethyst_min_height, ModConfig.WORLD_GEN.amethyst.amethyst_max_height).build(block -> Block.getStateById(Gem.AMETHYST.ordinal())), 0);
 		GameRegistry.registerWorldGenerator(WorldGenOre.OreGenBuilder.forOre(ModBlocks.gem_ore, ModConfig.WORLD_GEN.alexandrite.alexandrite_gen_chance).generateOn(Blocks.STONE).setVeinSize(ModConfig.WORLD_GEN.alexandrite.alexandrite_min_vein, ModConfig.WORLD_GEN.alexandrite.alexandrite_max_vein).setHeightRange(ModConfig.WORLD_GEN.alexandrite.alexandrite_min_height, ModConfig.WORLD_GEN.alexandrite.alexandrite_max_height).setBiomes(BiomeDictionary.Type.JUNGLE).build(block -> Block.getStateById(Gem.ALEXANDRITE.ordinal())), 0);
+		GameRegistry.registerWorldGenerator(new TreeGenerator(), -1);
 		GameRegistry.registerWorldGenerator(new WorldGenBeehive(), 0);
 	}
 }

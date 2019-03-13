@@ -60,7 +60,7 @@ public class BlockModSapling extends BlockBush implements IGrowable, IModelRegis
 		ModelLoader.setCustomModelResourceLocation(item, meta, modelResourceLocation);
 	}
 
-	private static void generateElderTree(World world, BlockPos pos, Random r) {
+	public static void generateElderTree(World world, BlockPos pos, Random r) {
 		IBlockState leaves = ModBlocks.leaves_elder.getDefaultState();
 		int h = generateTrunk(3, 5, ModBlocks.log_elder.getDefaultState(), world, pos, r);
 		for (int dx = -2; dx < 3; dx++) {
@@ -75,7 +75,7 @@ public class BlockModSapling extends BlockBush implements IGrowable, IModelRegis
 		}
 	}
 
-	private static void generateJuniperTree(World world, BlockPos pos, Random r) {
+	public static void generateJuniperTree(World world, BlockPos pos, Random r) {
 		int h = generateTrunk(2, 4, ModBlocks.log_juniper.getDefaultState(), world, pos, r);
 		EnumFacing branchOffset = EnumFacing.HORIZONTALS[r.nextInt(4)];
 		BlockPos branching = pos.up(h).offset(branchOffset);
@@ -118,7 +118,7 @@ public class BlockModSapling extends BlockBush implements IGrowable, IModelRegis
 
 	}
 
-	private static void generateYewTree(World world, BlockPos pos, Random r) {
+	public static void generateYewTree(World world, BlockPos pos, Random r) {
 		int h1 = generateTrunk(4, 6, ModBlocks.log_yew.getDefaultState(), world, pos, r);
 		int h2 = generateTrunk(4, 6, ModBlocks.log_yew.getDefaultState(), world, pos.east(), r);
 		int h3 = generateTrunk(4, 6, ModBlocks.log_yew.getDefaultState(), world, pos.east().north(), r);
@@ -238,7 +238,7 @@ public class BlockModSapling extends BlockBush implements IGrowable, IModelRegis
 		return world.getBlockState(current).getBlock().canBeReplacedByLeaves(world.getBlockState(current), world, current);
 	}
 
-	private static void generateCypressTree(World world, BlockPos pos, Random r) { // Todo: Make this like a cypress. This is just test gen for now, while I try
+	public static void generateCypressTree(World world, BlockPos pos, Random r) { // Todo: Make this like a cypress. This is just test gen for now, while I try
 																					// and figure out tree gen
 		IBlockState leaves = ModBlocks.leaves_cypress.getDefaultState();
 		int h = generateTrunk(5, 13, ModBlocks.log_cypress.getDefaultState(), world, pos, r); // Run the bark all the way up the tree
