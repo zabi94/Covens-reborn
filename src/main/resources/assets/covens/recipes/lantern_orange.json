@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "INI",
+    "GCG",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+	"N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "C": {
+      "item": "covens:candle_small",
+	  "data": 1
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    }
+  },
+  "result": {
+    "item": "covens:lantern",
+    "data": 1
+  }
+}
