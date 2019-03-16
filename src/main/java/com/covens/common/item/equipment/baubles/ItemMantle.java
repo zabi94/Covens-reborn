@@ -88,7 +88,7 @@ public class ItemMantle extends ItemMod implements IBauble {
 
 	@Override
 	public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
-		player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.75F, 1.9f);
+		player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, .75F, 1.9f);
 	}
 
 	@Override
