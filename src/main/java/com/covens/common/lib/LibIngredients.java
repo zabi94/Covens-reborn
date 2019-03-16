@@ -131,5 +131,6 @@ public class LibIngredients {
 	public static Ingredient egg = new IngredientMultiOreDict("egg", "foodSimpleEgg", "ingredientEgg", "listAllegg", "bakingEgg");
 	public static Ingredient sugar = Ingredient.fromItem(Items.SUGAR);
 	public static Ingredient garlic = new IngredientMultiOreDict("cropGarlic");
+	public static Ingredient stick = Ingredient.fromItem(Items.STICK);
 	
 }
