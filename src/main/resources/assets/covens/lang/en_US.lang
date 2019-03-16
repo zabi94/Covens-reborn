@@ -846,6 +846,10 @@ ritual.covens.gateway.name=Ritual of the Gates
 ritual.covens.shift_biome.name=Rite of the Falling Leaves
 ritual.covens.nether_portal.name=Rite of the Profane Communion
 ritual.covens.vampire_lair.name=Rite of Rising Darkness
+ritual.covens.grafting_elder.name=Rite of Grafting
+ritual.covens.grafting_juniper.name=Rite of Grafting
+ritual.covens.grafting_yew.name=Rite of Grafting
+ritual.covens.grafting_cypress.name=Rite of Grafting
 
 //Fortunes
 crystal_ball.error.ingredients=The future refuses to be perceived, something's wrong

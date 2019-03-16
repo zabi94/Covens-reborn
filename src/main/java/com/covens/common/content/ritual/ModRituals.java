@@ -5,7 +5,9 @@ import static com.covens.api.ritual.EnumGlyphType.ENDER;
 import static com.covens.api.ritual.EnumGlyphType.NETHER;
 import static com.covens.api.ritual.EnumGlyphType.NORMAL;
 
+import com.covens.api.ritual.EnumGlyphType;
 import com.covens.common.block.ModBlocks;
+import com.covens.common.block.natural.tree.BlockModSapling;
 import com.covens.common.content.ritual.rituals.RitualBiomeShift;
 import com.covens.common.content.ritual.rituals.RitualConjurationBlaze;
 import com.covens.common.content.ritual.rituals.RitualConjurationGhast;
@@ -189,6 +191,58 @@ public class ModRituals {
 			.withStartingPower(2000)
 			.withTickCost(8)
 			.buildAndRegister(new RitualBiomeShift());
+		
+		RitualFactory.create("grafting_elder")
+			.addInput(LibIngredients.anySapling)
+			.addInput(LibIngredients.dirt)
+			.addInput(LibIngredients.anyString, 2)
+			.addInput(LibIngredients.stick)
+			.addInput(LibIngredients.logElder)
+			.withRunningTime(60)
+			.withTickCost(5)
+			.withSmallCircle(EnumGlyphType.NORMAL)
+			.addOutput(new ItemStack(ModBlocks.sapling, 1, BlockModSapling.EnumSaplingType.ELDER.ordinal()))
+			.disallowRemote()
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("grafting_juniper")
+			.addInput(LibIngredients.anySapling)
+			.addInput(LibIngredients.dirt)
+			.addInput(LibIngredients.anyString, 2)
+			.addInput(LibIngredients.stick)
+			.addInput(LibIngredients.logJuniper)
+			.withRunningTime(60)
+			.withTickCost(5)
+			.withSmallCircle(EnumGlyphType.NORMAL)
+			.addOutput(new ItemStack(ModBlocks.sapling, 1, BlockModSapling.EnumSaplingType.JUNIPER.ordinal()))
+			.disallowRemote()
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("grafting_yew")
+			.addInput(LibIngredients.anySapling)
+			.addInput(LibIngredients.dirt)
+			.addInput(LibIngredients.anyString, 2)
+			.addInput(LibIngredients.stick)
+			.addInput(LibIngredients.logYew)
+			.withRunningTime(60)
+			.withTickCost(5)
+			.withSmallCircle(EnumGlyphType.NORMAL)
+			.addOutput(new ItemStack(ModBlocks.sapling, 1, BlockModSapling.EnumSaplingType.YEW.ordinal()))
+			.disallowRemote()
+			.buildAndRegisterSimple();
+		
+		RitualFactory.create("grafting_cypress")
+			.addInput(LibIngredients.anySapling)
+			.addInput(LibIngredients.dirt)
+			.addInput(LibIngredients.anyString, 2)
+			.addInput(LibIngredients.stick)
+			.addInput(LibIngredients.logCypress)
+			.withRunningTime(60)
+			.withTickCost(5)
+			.withSmallCircle(EnumGlyphType.NORMAL)
+			.addOutput(new ItemStack(ModBlocks.sapling, 1, BlockModSapling.EnumSaplingType.CYPRESS.ordinal()))
+			.disallowRemote()
+			.buildAndRegisterSimple();
 		
 //		new RitualFactory(DefaultInfusions.OVERWORLD.getRegistryName())
 //			.addInput(LibIngredients.fumePetrichorOdour)
