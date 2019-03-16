@@ -21,6 +21,8 @@ public class RitualFactory {
 	private EnumGlyphType small = null, medium = null, big = null;
 	private boolean allowRemote = true;
 	
+	private static final IRitual DEFAULT_RITUAL = new IRitual() {};
+	
 	public RitualFactory(String modId, String ritualName) {
 		this(new ResourceLocation(modId, ritualName));
 	}
@@ -118,7 +120,7 @@ public class RitualFactory {
 	}
 	
 	public void buildAndRegisterSimple() {
-		buildAndRegister(new IRitual() {});
+		buildAndRegister(DEFAULT_RITUAL);
 	}
 	
 	public static int circles(EnumGlyphType small, EnumGlyphType medium, EnumGlyphType big) {
