@@ -504,181 +504,57 @@ fluid.for.honey=Honey
 brew.instant=Instant
 
 effect.shell_armor=Shell Armor
-effect.shell_armor.desc=The edges of your shell may hurt those who attack you.
-
 effect.spider_nightmare=Spider Nightmare
-effect.spider_nightmare.desc=Surround your enemy with webs and spiders.
-
 effect.frostbite=Frostbite
-effect.frostbite.desc=Encases a target in ice. May have other effects.
-
 effect.extinguish_fire=Extinguish
-effect.extinguish_fire.desc=Puts out any fires on you.
-
 effect.mars_water=Water of Mars
-effect.mars_water.desc=Inflicts nasty debuffs on the target.
-
 effect.smite=Smite
-effect.smite.desc=Damages undead, spirits and demons, but has no effect on the living.
-
 effect.volatility=Volatility
-effect.volatility.desc=Makes you explode upon being hit.
-
 effect.till_land=Tilled Land
-effect.till_land.desc=Turns dirt into farmland when thrown.
-
 effect.fertilize=Fertilize
-effect.fertilize.desc=Makes stuff grow when thrown.
-
 effect.harvest=Harvest Festival
-effect.harvest.desc=Harvests crops when thrown.
-
 effect.mowing=Mowing
-effect.mowing.desc=Removes grass
-
 effect.grow_flowers=Flower Spring
-effect.grow_flowers.desc=Makes flowers when thrown.
-
 effect.ender_inhibition=Ender Inhibition
-effect.ender_inhibition.desc=Ender beings can't teleport.
-
 effect.path_of_the_deep=Path of the Deep
-effect.path_of_the_deep.desc=Allows you to swim faster.
-
 effect.pulverize=Pulverization
-effect.pulverize.desc=Turns rock into gravel, and gravel into sand.
-
 effect.prune_leaves=Prune Leaves
-effect.prune_leaves.desc=Removes leaves.
-
 effect.plant=Planting
-effect.plant.desc=Plants any seed that is on the ground.
-
 effect.snow_trail=Snow Trail
-effect.snow_trail.desc=Places a snow layer as an affected mob or player walks.
-
 effect.skin_tint=Skin Tint
-effect.skin_tint.desc=Tints your skin with a specific color.
-
 effect.wolfsbane=Wolfsbane
-effect.wolfsbane.desc=Deals damage to wolves and therians.
-
 effect.sinking=Sinking
-effect.sinking.desc=Causes you to sink and be unable to jump.
-
 effect.cursed_leaping=Cursed Leaps
-effect.cursed_leaping.desc=Causes a target to lose jump strength.
-
 effect.bane_arthropods=Arachnophobia
-effect.bane_arthropods.desc=Damages arthropods, useful for dealing with swarms of spiders.
-
 effect.outcasts_shame=Outcast's Shame
-effect.outcasts_shame.desc=Damages those outcast from society, such as Illagers.
-
 effect.grace=Grace
-effect.grace.desc=Negates fall damage.
-
 effect.purify=Purification
-effect.purify.desc=Removes harmful brew effects.
-
 effect.infestation=Infestation
-effect.infestation.desc=Turns grass and dirt into mycelium. May have other effects.
-
 effect.mending=Mending
-effect.mending.desc=Turns mycelium and dirt into grass. Cleans and boosts entities.
-
 effect.ozymandias=Ozymandias' Brew
-effect.ozymandias.desc=Look on my Works, ye Mighty, and despair!
-
 effect.setehs_wastes=Seteh's Wastes
-effect.setehs_wastes.desc=Converts sand and sandstone to their red variants.
-
 effect.fireworld=Fire World
-effect.fireworld.desc=Converts your surroundings to a hellish scene.
-
 effect.ice_world=Ice World
-effect.ice_world.desc=Converts your surroundings to a wintery wonderland.
-
 effect.corruption=Corruption
-effect.corruption.desc=Removes all beneficial brew effects.
-
 effect.salted_earth=Salting
-effect.salted_earth.desc=Destroys farmland and renders it useless.
-
 effect.absence=Absence
-effect.absence.desc=Removes all brew effects from a player.
-
 effect.projectile_resistance=Projectile ward
-effect.projectile_resistance.desc=Negates damage from projectiles.
-
 effect.disrobing=Disrobing
-effect.disrobing.desc=Has a chance of knocking a piece of armor off of a target
-
 effect.rotting=Rotting
-effect.rotting.desc=Rots any living being hit by this brew
-
 effect.arrow_deflection=Deflection
-effect.arrow_deflection.desc=Deflects any arrow sent at you
-
 effect.demons_bane=Demonsbane
-effect.demons_bane.desc=Damages demons and nether-based mobs
-
 effect.freezing=Freezing
-effect.freezing.desc=Freezes things in harmless magic ice
-
 effect.paralysis=Paralysis
-effect.paralysis.desc=Paralyzes a target and prevents them from moving.
-
 effect.love=Love
-effect.love.desc=Puts animals in a loving mood.
-
 effect.revealing=Revealing
-effect.revealing.desc=Dispels illusions
-
 effect.adders_kiss=Adder's Kiss
-effect.adders_kiss.desc=Damages pests, such as rabbits
-
 effect.deaths_ebb=Death's Ebb
-effect.deaths_ebb.desc=Summons a zombie at your location
-
 effect.power_regen=Power Boon
-effect.power_regen.desc=Allows for increased MP recharge
-
 effect.power_drain=Power Drain
-effect.power_drain.desc=Drains your MP over time
-
 effect.power_boost=Power Boost
-effect.power_boost.desc=Temporarily increases the amount of MP you have
-
 effect.power_dampening=Power Dampening
-effect.power_dampening.desc=Temporarily decreases the amount of MP you have
-
 effect.rooting=Rooted
-effect.rooting.desc=Binds the entity in place
-
 effect.vampire_leech=Life Drain
-effect.vampire_leech.desc=Takes life force from enemies and transforms it into blood
-
-//Vanilla potion descriptions
-effect.absorption.desc=Temporarily gives you extra hearts
-effect.fireResistance.desc=Protects you from fire damage, unless you're a vampire
-effect.hunger.desc=Makes your hunger meter deplete faster
-effect.harm.desc=Deals magical damage to most entities
-effect.heal.desc=Restores health to all affected living creatures, harms undead
-effect.invisibility.desc=Makes your body invisible, but not your armor
-effect.nightVision.desc=Enhance your ability to see in the dark
-effect.poison.desc=Deals damage over time for the whole duration
-effect.regeneration.desc=Restores health over time for the whole duration
-effect.moveSpeed.desc=Makes you walk and run faster
-effect.moveSlowdown.desc=Makes you walk and run more slowly
-effect.waterBreathing.desc=Increases your lung capacity
-effect.damageBoost.desc=Makes your hits deal more damage
-effect.levitation.desc=Slowly lifts you up in the air
-effect.resistance.desc=Makes you receive less damage from enemy hits
-effect.digSpeed.desc=Makes you swing your tools faster
-effect.blindness.desc=Anything farther than a few blocks will be shrouded in darkness for your eyes
-effect.weakness.desc=Makes you deal less damage
-effect.jump.desc=Makes you jump higher
 
 //Sound
 covens.subtitle.boil=Cauldron boiling
