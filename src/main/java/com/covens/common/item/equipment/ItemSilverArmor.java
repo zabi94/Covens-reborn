@@ -1,15 +1,9 @@
 package com.covens.common.item.equipment;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.statics.ModCreativeTabs;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -19,7 +13,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -39,16 +32,6 @@ public class ItemSilverArmor extends ItemArmor implements IModelRegister {
 		this.setTranslationKey(id);
 		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 		MinecraftForge.EVENT_BUS.register(this);
-	}
-
-	public String getNameInefficiently(ItemStack stack) {
-		return this.getTranslationKey().substring(5);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.GRAY + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 
 	@SubscribeEvent

@@ -1,9 +1,5 @@
 package com.covens.common.item.equipment.baubles;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
@@ -13,9 +9,6 @@ import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -26,13 +19,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by Joseph on 1/1/2018.
@@ -43,10 +33,6 @@ public class ItemHorseshoe extends ItemMod implements IBauble {
 		this.setMaxStackSize(1);
 		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
 		MinecraftForge.EVENT_BUS.register(this);
-	}
-
-	private static boolean isSpirit(Entity e) {
-		return (e instanceof EntityLivingBase) && MobHelper.isSpirit((EntityLivingBase) e);
 	}
 
 	@Override
@@ -84,20 +70,11 @@ public class ItemHorseshoe extends ItemMod implements IBauble {
 		player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_IRON, SoundCategory.PLAYERS, .75F, 1.9f);
 	}
 
-	public String getNameInefficiently(ItemStack stack) {
-		return this.getTranslationKey().substring(5);
-	}
 
 	@SubscribeEvent
 	public void onEntityDamage(LivingHurtEvent event) {
-		if (isSpirit(event.getSource().getTrueSource())) {
+		if (event.getEntityLiving() instanceof EntityLivingBase && MobHelper.isSpirit((EntityLivingBase) event.getSource().getTrueSource())) {
 			event.setAmount(event.getAmount() * 0.80F);
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 }

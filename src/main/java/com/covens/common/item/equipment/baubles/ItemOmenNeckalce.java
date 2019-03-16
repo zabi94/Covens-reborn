@@ -1,9 +1,5 @@
 package com.covens.common.item.equipment.baubles;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
@@ -12,8 +8,6 @@ import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -23,13 +17,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by Joseph on 1/1/2018.
@@ -75,16 +66,6 @@ public class ItemOmenNeckalce extends ItemMod implements IBauble {
 	@Override
 	public void onEquipped(ItemStack itemstack, EntityLivingBase player) {
 		player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_IRON, SoundCategory.PLAYERS, .75F, 1.9f);
-	}
-
-	public String getNameInefficiently(ItemStack stack) {
-		return this.getTranslationKey().substring(5);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
 	}
 
 	@SubscribeEvent

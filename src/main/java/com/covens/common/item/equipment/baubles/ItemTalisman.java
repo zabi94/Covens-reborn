@@ -1,9 +1,5 @@
 package com.covens.common.item.equipment.baubles;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.covens.common.content.enchantments.BaublesEnchantment;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
@@ -12,8 +8,6 @@ import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,10 +19,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTalisman extends ItemMod implements IBauble {
 
@@ -46,14 +37,6 @@ public class ItemTalisman extends ItemMod implements IBauble {
 	@Override
 	public boolean isDamageable() {
 		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		if (!stack.isItemEnchanted()) {
-			tooltip.add(TextFormatting.AQUA + I18n.format("witch.tooltip.talismans_description.name"));
-		}
 	}
 
 	@Override

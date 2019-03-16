@@ -1,17 +1,11 @@
 package com.covens.common.item.equipment.baubles;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.covens.common.item.ItemMod;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,11 +16,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMantle extends ItemMod implements IBauble {
 
@@ -89,12 +80,6 @@ public class ItemMantle extends ItemMod implements IBauble {
 	@Override
 	public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
 		player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, .75F, 1.9f);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("witch.tooltip." + this.getUnlocalizedNameInefficiently(stack).substring(5) + "_description.name"));
 	}
 
 	@Override

@@ -4,21 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import com.covens.common.core.helper.NBTHelper;
 import com.covens.common.item.food.ItemModFood;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 @SuppressWarnings("WeakerAccess")
@@ -34,16 +27,6 @@ public class ItemCropFood extends ItemModFood {
 	protected void addPotion(Potion... potionsIn) {
 		this.potions = new ArrayList<>();
 		Collections.addAll(this.potions, potionsIn);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add(TextFormatting.ITALIC + I18n.format("witch.tooltip." + this.getNameInefficiently(stack) + "_description.name"));
-	}
-
-	public String getNameInefficiently(ItemStack stack) {
-		return this.getTranslationKey().substring(5);
 	}
 
 	@Override

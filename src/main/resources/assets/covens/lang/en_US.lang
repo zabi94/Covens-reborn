@@ -563,72 +563,12 @@ covens.subtitle.chalk_scribble=Chalk scribbling
 covens.subtitle.owl_hoot=Owl hooting
 covens.subtitle.raven_croaks=Raven croaking
 
-///ToolTips
-witch.tooltip.seed_aconitum_description.name=Seed from a poisonous plant
-witch.tooltip.seed_asphodel_description.name=Seed from a plant of the dead
-witch.tooltip.seed_belladonna_description.name=Seed from a herbaceous plant
-witch.tooltip.seed_ginger_description.name=Seed from a flowering plant
-witch.tooltip.seed_kelp_description.name=Spore from a large algae
-witch.tooltip.seed_mint_description.name=Seed from a herbaceous plant
-witch.tooltip.seed_white_sage_description.name=Seed from an evergreen perennial shrub
-witch.tooltip.seed_mandrake_description.name=Seed from a plant with a strange root
-witch.tooltip.seed_lavender_description.name=Seed from a flowering plant
-witch.tooltip.seed_thistle_description.name=Seed from a thorny flower
-witch.tooltip.seed_silphium_description.name=Seed from a strange fennel
-witch.tooltip.seed_garlic_description.name=Seed from a smelly allium
-witch.tooltip.seed_wormwood_description.name=Seed from a weedy herb
-witch.tooltip.seed_kenaf_description.name=Seed from a bamboo-like hibiscus
-witch.tooltip.seed_tulsi_description.name=Seed from a small herb
-witch.tooltip.seed_hellebore_description.name=Seed from a innocent-looking plant
-witch.tooltip.seed_chrysanthemum_description.name=Seed from a powerful flower
-witch.tooltip.seed_sagebrush_description.name=Seed from a hardy shrub
-
-witch.tooltip.aconitum_description.name=A poisonous flower used to hunt Lycanthropes
-witch.tooltip.asphodel_description.name=Related to death and the afterlife, but not poisonous
-witch.tooltip.belladonna_description.name=A highly toxic plant, this is a prime component of flying ointment
-witch.tooltip.ginger_description.name=An incredibly spicy root
-witch.tooltip.kelp_description.name=A tall algae, with connections to the sea
-witch.tooltip.mint_description.name=An herb with a cooling effect
-witch.tooltip.white_sage_description.name=Used as an aid in exorcisms
-witch.tooltip.mandrake_root_description.name=Used to amplify magical effects
-witch.tooltip.lavender_description.name=Associated with purity and grace
-witch.tooltip.thistle_description.name=A thorny but beautiful flower
-witch.tooltip.silphium_description.name=A strange and unusual fennel
-witch.tooltip.garlic_description.name=A common spice that keeps the undead at bay
-witch.tooltip.wormwood_description.name=An incredibly weedy herb
-witch.tooltip.kenaf_description.name=A tall plant with useful fibers
-witch.tooltip.tulsi_description.name=A small herb considered sacred by some
-witch.tooltip.hellebore_description.name=A beautiful and poisonous flower linked to demons
-witch.tooltip.chrysanthemum_description.name=A rather popular flower, it is often linked with nobility
-witch.tooltip.sagebrush_description.name=An herb associated with purification
-witch.tooltip.infested_wheat_description.name=An ill-looking crop
-witch.tooltip.witchweed_description.name=A small herb that grows on other crops
-
 item.tag_lock.empty=Empty Taglock
 
 tooltip.brew.data=Brew Data:
 tooltip.potion.data=Potion Data:
 
 tooltip.shift_for_info=<hold shift for details>
-
-witch.tooltip.silver_pickaxe_description.name=Deals extra damage to undead
-witch.tooltip.silver_axe_description.name=Deals extra damage to undead
-witch.tooltip.silver_spade_description.name=Deals extra damage to undead
-witch.tooltip.silver_hoe_description.name=Deals extra damage to undead
-witch.tooltip.silver_sword_description.name=Deals extra damage to undead
-
-witch.tooltip.cold_iron_pickaxe_description.name=Deals extra damage to spirits
-witch.tooltip.cold_iron_axe_description.name=Deals extra damage to spirits
-witch.tooltip.cold_iron_spade_description.name=Deals extra damage to spirits
-witch.tooltip.cold_iron_hoe_description.name=Deals extra damage to spirits
-witch.tooltip.cold_iron_sword_description.name=Deals extra damage to spirits
-
-witch.tooltip.silver_chestplate_description.name=Protects against undead
-witch.tooltip.silver_helmet_description.name=Protects against undead
-witch.tooltip.silver_leggings_description.name=Protects against undead
-witch.tooltip.silver_boots_description.name=Protects against undead
-
-witch.tooltip.athame_description.name=A ritual dagger used by witches in cerimonies
 
 //Baubles
 item.shirt.name=Shirt
@@ -646,18 +586,6 @@ item.talisman_adamantine_star_ring.name=Ring of the Adamantine Star
 item.talisman_emerald_pendant.name=Emerald Pendant
 item.talisman_ruby_orb.name=Scarlet Orb
 item.talisman_watching_eye.name=Everwatching Eye
-
-//Trinket Descriptions
-witch.tooltip.omen_necklace_description.name=An amulet that keeps bad luck at bay and provides some immunity from magic attacks
-witch.tooltip.horseshoe_description.name=Horseshoes seem to be rather lucky trinkets in general. Spirits seem averse to you.
-witch.tooltip.triskelion_amulet_description.name=This amulet seems to provide some strength against foes, but drains you slightly.
-witch.tooltip.talismans_description.name=An enchantable trinket, its effects will mainfest once enchanted
-witch.tooltip.remedy_talisman_description.name=The gem in its core seems to absorb illnesses, but it depletes rather quickly
-witch.tooltip.girdle_of_the_wooded_description.name=This belt protects the wearer from harm by growing pieces of bark as armor
-witch.tooltip.mantle_description.name=A plain mantle. It's stylish, though...
-witch.tooltip.pouch_description.name=What secrets does it hold?
-witch.tooltip.wrathful_eye_description.name=This trinket commands respect from demons.
-witch.tooltip.hellish_bauble_description.name=This oddly shaped trinket will allow you to tap into a small portion of demonic power
 
 //Commands
 commands.incantation.notFound=The powers you cast forth fizzle into nothingness
