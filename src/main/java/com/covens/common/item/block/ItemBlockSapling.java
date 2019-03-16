@@ -1,5 +1,3 @@
-
-
 package com.covens.common.item.block;
 
 import com.covens.common.block.ModBlocks;
