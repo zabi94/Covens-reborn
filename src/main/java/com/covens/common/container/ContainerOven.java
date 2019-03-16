@@ -1,15 +1,20 @@
 package com.covens.common.container;
 
+import com.covens.common.block.natural.tree.BlockModSapling;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.tile.tiles.TileEntityOven;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import zabi.minecraft.minerva.common.network.container.ModContainer;
+import zabi.minecraft.minerva.common.network.container.TransferRule;
 import zabi.minecraft.minerva.common.network.container.slot.ModSlot;
 import zabi.minecraft.minerva.common.network.container.slot.SlotFiltered;
 import zabi.minecraft.minerva.common.network.container.slot.SlotOutput;
@@ -25,6 +30,8 @@ public class ContainerOven extends ModContainer<TileEntityOven> {
 		super(tileEntity);
 		IItemHandler handlerUp = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 		IItemHandler handlerDown = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+		
+		this.addRule(new TransferRule(0, 2, ContainerOven::isSapling));
 
 		// input slot
 		this.addSlotToContainer(new ModSlot<>(tileEntity, handlerUp, 0, 44, 19));
@@ -64,5 +71,10 @@ public class ContainerOven extends ModContainer<TileEntityOven> {
 		if ((id >= 0) && (id < 4)) {
 			this.gui_data[id] = data;
 		}
+	}
+	
+	private static boolean isSapling(Slot t) {
+		Block b = Block.getBlockFromItem(t.getStack().getItem());
+		return b instanceof BlockSapling || b instanceof BlockModSapling;
 	}
 }

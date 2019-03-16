@@ -33,4 +33,8 @@ public class ItemBlockSapling extends ItemBlockMod {
 		return true;
 	}
 
+	@Override
+	public int getItemBurnTime(ItemStack itemStack) {
+		return 100;
+	}
 }
