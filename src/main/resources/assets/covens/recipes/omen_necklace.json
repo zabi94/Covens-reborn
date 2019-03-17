@@ -14,8 +14,7 @@
       "ore": "gemLapis"
     },
     "P": {
-      "item": "covens:fume",
-      "data": 7
+      "item": "covens:cleansing_aura"
     }
   },
   "result": {

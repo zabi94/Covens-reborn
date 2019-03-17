@@ -39,7 +39,6 @@ import com.covens.common.item.food.ItemMagicSalve;
 import com.covens.common.item.food.ItemYewAril;
 import com.covens.common.item.magic.ItemBell;
 import com.covens.common.item.magic.ItemBroom;
-import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.item.magic.ItemGem;
 import com.covens.common.item.magic.ItemGemPowder;
 import com.covens.common.item.magic.ItemLocationStone;
@@ -86,8 +85,6 @@ public final class ModItems {
 
 	public static final Item gem = null;
 	public static final Item gem_powder = null;
-
-	public static final Item fume = null;
 
 	public static final Item mandrake_root = null;
 	public static final Item seed_mandrake = null;
@@ -138,6 +135,29 @@ public final class ModItems {
 	public static final Item empty_brew_drink = null;
 	public static final Item empty_brew_splash = null;
 	public static final Item empty_brew_linger = null;
+	
+	//Old fumes
+	public static final Item unfired_jar = null; 
+	public static final Item empty_jar = null; // Empty
+	public static final Item oak_spirit = null; 
+	public static final Item birch_soul = null; 
+	public static final Item acacia_essence = null; 
+	public static final Item spruce_heart = null; // common trees
+	public static final Item cloudy_oil = null; // equivalent of foul fume - byproduct
+	public static final Item cleansing_aura = null; // connected with cleaning, purifying
+	public static final Item emanation_of_dishonesty = null; // connected with evil
+	public static final Item everchanging_presence = null; // connected with changing
+	public static final Item undying_image = null; // connected with rebirth
+	public static final Item demonic_dew = null; // connected with nether/infernal stuff
+	public static final Item otherworld_tears = null; // connected with end/ethereal stuff
+	public static final Item fiery_breeze = null; // connected with fire
+	public static final Item heavenly_winds = null; // connected with air
+	public static final Item petrichor_odour = null; // connected with earth
+	public static final Item zephyr_of_the_depths = null; // connected with water
+	public static final Item reek_of_death = null; //Cypress
+	public static final Item vital_essence = null; //Yew
+	public static final Item droplet_of_wisdom = null; //Elder
+	public static final Item bottled_magic = null; // Juniper
 
 	public static final Item wax = null;
 	public static final Item honey = null;
@@ -256,12 +276,34 @@ public final class ModItems {
 		CropHelper.getFoods().forEach((crop, item) -> registry.register(item));
 		CropHelper.getSeeds().forEach((crop, item) -> registry.register(item));
 		registry.register(new ItemGem());
-		registry.register(new ItemFumes(LibItemName.FUME));
 		registry.register(new ItemGemPowder(LibItemName.GEM_POWDER));
 		registry.register(new ItemMod(LibItemName.COLD_IRON_INGOT));
 		registry.register(new ItemMod(LibItemName.SILVER_POWDER));
 		registry.register(new ItemMod(LibItemName.SILVER_INGOT));
 		registry.register(new ItemMod(LibItemName.SILVER_NUGGET));
+		
+		
+		registry.register(new ItemMod(LibItemName.UNFIRED_JAR));
+		registry.register(new ItemMod(LibItemName.EMPTY_JAR));
+		registry.register(new ItemMod(LibItemName.OAK_SPIRIT));
+		registry.register(new ItemMod(LibItemName.BIRCH_SOUL));
+		registry.register(new ItemMod(LibItemName.ACACIA_ESSENCE));
+		registry.register(new ItemMod(LibItemName.SPRUCE_HEART));
+		registry.register(new ItemMod(LibItemName.CLOUDY_OIL));
+		registry.register(new ItemMod(LibItemName.CLEANSING_AURA));
+		registry.register(new ItemMod(LibItemName.EMANATION_OF_DISHONESTY));
+		registry.register(new ItemMod(LibItemName.EVERCHANGING_PRESENCE));
+		registry.register(new ItemMod(LibItemName.UNDYING_IMAGE));
+		registry.register(new ItemMod(LibItemName.DEMONIC_DEW));
+		registry.register(new ItemMod(LibItemName.OTHERWORLD_TEARS));
+		registry.register(new ItemMod(LibItemName.FIERY_BREEZE));
+		registry.register(new ItemMod(LibItemName.HEAVENLY_WINDS));
+		registry.register(new ItemMod(LibItemName.PETRICHOR_ODOUR));
+		registry.register(new ItemMod(LibItemName.ZEPHYR_OF_THE_DEPTHS));
+		registry.register(new ItemMod(LibItemName.REEK_OF_DEATH));
+		registry.register(new ItemMod(LibItemName.VITAL_ESSENCE));
+		registry.register(new ItemMod(LibItemName.DROPLET_OF_WISDOM));
+		registry.register(new ItemMod(LibItemName.BOTTLED_MAGIC));
 
 		registry.register(new ItemSpellPage(LibItemName.SPELL_PAGE));
 

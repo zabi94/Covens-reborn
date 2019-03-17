@@ -2,7 +2,6 @@ package com.covens.common.container;
 
 import com.covens.common.block.natural.tree.BlockModSapling;
 import com.covens.common.item.ModItems;
-import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.tile.tiles.TileEntityOven;
 
 import net.minecraft.block.Block;
@@ -38,7 +37,7 @@ public class ContainerOven extends ModContainer<TileEntityOven> {
 		// fuel slot
 		this.addSlotToContainer(new SlotFiltered<>(tileEntity, handlerUp, 1, 44, 55, TileEntityFurnace::isItemFuel));
 		// jar slot
-		this.addSlotToContainer(new SlotFiltered<>(tileEntity, handlerUp, 2, 80, 55, stack -> (stack.getItem() == ModItems.fume) && (stack.getMetadata() == ItemFumes.Type.empty_jar.ordinal())));
+		this.addSlotToContainer(new SlotFiltered<>(tileEntity, handlerUp, 2, 80, 55, stack -> stack.getItem() == ModItems.empty_jar));
 		// output slot
 		this.addSlotToContainer(new SlotOutput<>(tileEntity, handlerDown, 0, 116, 19));
 		// fume slot

@@ -14,8 +14,7 @@
       "ore": "nuggetGold"
     },
     "P": {
-      "item": "covens:fume",
-      "data": 4
+      "item": "covens:acacia_essence"
     }
   },
   "result": {

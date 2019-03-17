@@ -14,12 +14,10 @@
       "ore": "ingotSilver"
     },
     "O": {
-      "item": "covens:fume",
-      "data": 12
+      "item": "covens:otherworld_tears"
     },
     "D": {
-      "item": "covens:fume",
-      "data": 11
+      "item": "covens:demonic_dew"
     }
   },
   "result": {

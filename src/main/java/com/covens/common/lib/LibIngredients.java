@@ -2,7 +2,6 @@ package com.covens.common.lib;
 
 import com.covens.common.block.ModBlocks;
 import com.covens.common.item.ModItems;
-import com.covens.common.item.magic.ItemFumes;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,7 +14,7 @@ import zabi.minecraft.minerva.common.crafting.IngredientMultiOreDict;
 public class LibIngredients {
 	
 	static {
-		if (ModItems.fume == null) {
+		if (ModItems.bottled_magic == null) {
 			throw new IllegalStateException("The class LibIngredients is being loaded too early!");
 		}
 	}
@@ -33,7 +32,7 @@ public class LibIngredients {
 	public static Ingredient anyLog = new OreIngredient("logWood");
 	public static Ingredient anyLeaf = new OreIngredient("treeLeaves");
 	public static Ingredient pentacle = Ingredient.fromItem(ModItems.pentacle);
-	public static Ingredient fumeReekOfDeath = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.reek_of_death.ordinal()));
+	public static Ingredient fumeReekOfDeath = Ingredient.fromItem(ModItems.reek_of_death);
 	public static Ingredient anyDye = new OreIngredient("dye");
 	public static Ingredient acaciaLog = Ingredient.fromStacks(new ItemStack(Blocks.LOG2, 1, 0));
 	public static Ingredient redstone = Ingredient.fromItem(Items.REDSTONE);
@@ -45,18 +44,18 @@ public class LibIngredients {
 	public static Ingredient sand = new OreIngredient("sand");
 	public static Ingredient dimensionalSand = Ingredient.fromItem(ModItems.dimensional_sand);
 	public static Ingredient normalRitualChalk = Ingredient.fromStacks(new ItemStack(ModItems.ritual_chalk));
-	public static Ingredient fumeFieryBreeze = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.fiery_breeze.ordinal()));
-	public static Ingredient fumeHeavenlyWind = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.heavenly_winds.ordinal()));
-	public static Ingredient fumePetrichorOdour = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.petrichor_odour.ordinal()));
-	public static Ingredient fumeZephyrOfDepths = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.zephyr_of_the_depths.ordinal()));
-	public static Ingredient fumeCleansingAura = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.cleansing_aura.ordinal()));
-	public static Ingredient fumeCloudyOil = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.cloudy_oil.ordinal()));
-	public static Ingredient fumeBottledMagic = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.bottled_magic.ordinal()));
-	public static Ingredient fumeBirchSoul = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.birch_soul.ordinal()));
-	public static Ingredient fumeDropletOfWisdom = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.droplet_of_wisdom.ordinal()));
-	public static Ingredient fumeEmanationDishonesty = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.emanation_of_dishonesty.ordinal()));
-	public static Ingredient fumeEverchangingPresence = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.everchanging_presence.ordinal()));
-	public static Ingredient fumeUndyingImage = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.undying_image.ordinal()));
+	public static Ingredient fumeFieryBreeze = Ingredient.fromItem(ModItems.fiery_breeze);
+	public static Ingredient fumeHeavenlyWind = Ingredient.fromItem(ModItems.heavenly_winds);
+	public static Ingredient fumePetrichorOdour = Ingredient.fromItem(ModItems.petrichor_odour);
+	public static Ingredient fumeZephyrOfDepths = Ingredient.fromItem(ModItems.zephyr_of_the_depths);
+	public static Ingredient fumeCleansingAura = Ingredient.fromItem(ModItems.cleansing_aura);
+	public static Ingredient fumeCloudyOil = Ingredient.fromItem(ModItems.cloudy_oil);
+	public static Ingredient fumeBottledMagic = Ingredient.fromItem(ModItems.bottled_magic);
+	public static Ingredient fumeBirchSoul = Ingredient.fromItem(ModItems.birch_soul);
+	public static Ingredient fumeDropletOfWisdom = Ingredient.fromItem(ModItems.droplet_of_wisdom);
+	public static Ingredient fumeEmanationDishonesty = Ingredient.fromItem(ModItems.emanation_of_dishonesty);
+	public static Ingredient fumeEverchangingPresence = Ingredient.fromItem(ModItems.everchanging_presence);
+	public static Ingredient fumeUndyingImage = Ingredient.fromItem(ModItems.undying_image);
 	public static Ingredient graveyardDust = Ingredient.fromItem(ModItems.graveyard_dust);
 	public static Ingredient wormwood = Ingredient.fromItem(ModItems.wormwood);
 	public static Ingredient empty_honeycomb = Ingredient.fromItem(ModItems.empty_honeycomb);
@@ -99,11 +98,11 @@ public class LibIngredients {
 	public static Ingredient bloodyRags = Ingredient.fromItem(ModItems.sanguine_fabric);
 	public static Ingredient eyes = Ingredient.fromStacks(new ItemStack(Items.ENDER_EYE), new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.FERMENTED_SPIDER_EYE));
 	public static Ingredient anySapling = new OreIngredient("treeSapling");
-	public static Ingredient acaciaResin = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.acacia_essence.ordinal()));
-	public static Ingredient yewEssence = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.vital_essence.ordinal()));
+	public static Ingredient acaciaResin = Ingredient.fromItem(ModItems.acacia_essence);
+	public static Ingredient yewEssence = Ingredient.fromItem(ModItems.vital_essence);
 	public static Ingredient tulsi = Ingredient.fromItem(ModItems.tulsi);
 	public static Ingredient oakAppleGall = Ingredient.fromItem(ModItems.oak_apple_gall);
-	public static Ingredient empty_jar = Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.empty_jar.ordinal()));
+	public static Ingredient empty_jar = Ingredient.fromItem(ModItems.empty_jar);
 	public static Ingredient anySeed = new OreIngredient("listAllSeeds");// TODO check
 	public static Ingredient feather = Ingredient.fromItem(Items.FEATHER);
 	public static Ingredient spider_web = Ingredient.fromStacks(new ItemStack(Blocks.WEB));

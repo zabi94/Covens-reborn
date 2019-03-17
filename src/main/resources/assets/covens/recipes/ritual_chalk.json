@@ -10,8 +10,7 @@
       "item": "minecraft:cobblestone"
     },
     "S": {
-      "item": "covens:fume",
-      "data": 3
+      "item": "covens:birch_soul"
     },
     "W": {
       "item": "covens:wood_ash",

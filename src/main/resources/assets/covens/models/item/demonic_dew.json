@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "covens:items/fumes/fume_fiery_breeze"
+    "layer0": "covens:items/demonic_dew"
   }
 }

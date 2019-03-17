@@ -19,8 +19,7 @@
       "ore": "string"
     },
     "H": {
-      "item": "covens:fume",
-      "data": 5
+      "item": "covens:spruce_heart"
     }
   },
   "result": {

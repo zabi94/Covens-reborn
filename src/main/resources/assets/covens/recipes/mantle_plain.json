@@ -13,8 +13,7 @@
       "item": "covens:wool_of_bat"
     },
     "O": {
-      "item": "covens:fume",
-      "data": 20
+      "item": "covens:bottled_magic"
     }
   },
   "result": {

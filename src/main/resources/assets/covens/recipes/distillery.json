@@ -15,8 +15,7 @@
       "ore": "gemAmethyst"
     },
     "T": {
-      "item": "covens:fume",
-      "data": 1
+      "item": "covens:empty_jar"
     }
   },
   "result": {

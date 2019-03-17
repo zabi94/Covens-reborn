@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "covens:items/fumes/fume_bottled_magic"
+    "layer0": "covens:items/cloudy_oil"
   }
 }

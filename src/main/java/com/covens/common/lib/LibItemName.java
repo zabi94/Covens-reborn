@@ -108,13 +108,10 @@ public final class LibItemName {
 	public static final String SILVER_POWDER = "silver_powder";
 	public static final String SILVER_INGOT = "silver_ingot";
 	public static final String COLD_IRON_INGOT = "cold_iron_ingot";
-	public static final String FUME = "fume";
 	public static final String SPELL_PAGE = "spell_page";
-	public static final String KNOWLEDGE_FRAGMENT = "knowledge_fragment";
 	public static final String FILLED_BOWL = "stew";
 	public static final String OWLETS_WING = "owlets_wing";
 	public static final String ADDERS_FORK = "adders_fork";
-	public static final String FILET_OF_FENNY_SNAKE = "filet_of_fenny_snake";
 	public static final String SNAKE_VENOM = "snake_venom";
 	public static final String RAVENS_FEATHER = "ravens_feather";
 	public static final String GRAVEYARD_DUST = "graveyard_dust";
@@ -161,7 +158,26 @@ public final class LibItemName {
 	public static final String BELL = "bell";
 	public static final String BLOOD_BOTTLE = "blood_bottle";
 	public static final String SPARK_DARKNESS = "spark_of_darkness";
-
-	private LibItemName() {
-	}
+	
+	public static final String UNFIRED_JAR = "unfired_jar";                                           
+	public static final String EMPTY_JAR = "empty_jar"; 
+	public static final String OAK_SPIRIT = "oak_spirit";                                            
+	public static final String BIRCH_SOUL = "birch_soul";                                            
+	public static final String ACACIA_ESSENCE = "acacia_essence";                                        
+	public static final String SPRUCE_HEART = "spruce_heart"; 
+	public static final String CLOUDY_OIL = "cloudy_oil"; 
+	public static final String CLEANSING_AURA = "cleansing_aura"; 
+	public static final String EMANATION_OF_DISHONESTY = "emanation_of_dishonesty"; 
+	public static final String EVERCHANGING_PRESENCE = "everchanging_presence"; 
+	public static final String UNDYING_IMAGE = "undying_image"; 
+	public static final String DEMONIC_DEW = "demonic_dew"; 
+	public static final String OTHERWORLD_TEARS = "otherworld_tears"; 
+	public static final String FIERY_BREEZE = "fiery_breeze"; 
+	public static final String HEAVENLY_WINDS = "heavenly_winds"; 
+	public static final String PETRICHOR_ODOUR = "petrichor_odour"; 
+	public static final String ZEPHYR_OF_THE_DEPTHS = "zephyr_of_the_depths"; 
+	public static final String REEK_OF_DEATH = "reek_of_death"; 
+	public static final String VITAL_ESSENCE = "vital_essence"; 
+	public static final String DROPLET_OF_WISDOM = "droplet_of_wisdom"; 
+	public static final String BOTTLED_MAGIC = "bottled_magic"; 
 }

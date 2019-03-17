@@ -7,8 +7,7 @@
   ],
   "key": {
     "S": {
-      "item": "covens:fume",
-      "data": 7
+      "item": "covens:cleansing_aura"
     },
     "G": {
       "item": "covens:cold_iron_nugget",

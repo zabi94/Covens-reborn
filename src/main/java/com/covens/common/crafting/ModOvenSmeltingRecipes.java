@@ -2,7 +2,6 @@ package com.covens.common.crafting;
 
 import com.covens.common.block.ModBlocks;
 import com.covens.common.item.ModItems;
-import com.covens.common.item.magic.ItemFumes;
 import com.covens.common.lib.LibMod;
 
 import net.minecraft.init.Blocks;
@@ -16,15 +15,16 @@ public class ModOvenSmeltingRecipes {
 	@SuppressWarnings("ConstantConditions")
 	public static void init() {
 		final ItemStack ash = new ItemStack(ModItems.wood_ash);
-		final ItemStack cloudy_oil = new ItemStack(ModItems.fume, 1, ItemFumes.Type.cloudy_oil.ordinal());
+		final ItemStack cloudy_oil = new ItemStack(ModItems.cloudy_oil);
 
 		// TODO: modify the fumeChances
-		OvenSmeltingRecipe.REGISTRY.registerAll(new OvenSmeltingRecipe(rl("sapling_0"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.oak_spirit.ordinal()), 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_1"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.spruce_heart.ordinal()), 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_2"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 2)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.birch_soul.ordinal()), 0.85f), //
+		OvenSmeltingRecipe.REGISTRY.registerAll(
+				new OvenSmeltingRecipe(rl("sapling_0"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING)), ash, new ItemStack(ModItems.oak_spirit), 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_1"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1)), ash, new ItemStack(ModItems.spruce_heart), 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_2"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 2)), ash, new ItemStack(ModItems.birch_soul), 0.85f), //
 				new OvenSmeltingRecipe(rl("sapling_3"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 3)), ash, cloudy_oil, 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_4"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 4)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.acacia_essence.ordinal()), 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_5"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 5)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.oak_spirit.ordinal()), 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_4"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 4)), ash, new ItemStack(ModItems.acacia_essence), 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_5"), Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 5)), ash, new ItemStack(ModItems.oak_spirit), 0.85f), //
 				new OvenSmeltingRecipe(rl("rotten_flesh"), Ingredient.fromStacks(new ItemStack(Items.ROTTEN_FLESH)), new ItemStack(Items.LEATHER), new ItemStack(Items.SLIME_BALL), 0.85f), //
 				new OvenSmeltingRecipe(rl("iron_ore"), Ingredient.fromStacks(new ItemStack(Blocks.IRON_ORE)), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_NUGGET, 4), 0.85f), //
 				new OvenSmeltingRecipe(rl("gold_ore"), Ingredient.fromStacks(new ItemStack(Blocks.GOLD_ORE)), new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.GOLD_NUGGET, 2), 0.85f), //
@@ -46,11 +46,11 @@ public class ModOvenSmeltingRecipes {
 				new OvenSmeltingRecipe(rl("cactus"), Ingredient.fromStacks(new ItemStack(Blocks.CACTUS)), new ItemStack(Items.DYE, 1, 2), cloudy_oil, 0.85f), //
 				new OvenSmeltingRecipe(rl("chorus_fruit"), Ingredient.fromStacks(new ItemStack(Items.CHORUS_FRUIT)), new ItemStack(Items.CHORUS_FRUIT_POPPED), new ItemStack(ModItems.dimensional_sand, 2), 0.85f), //
 				new OvenSmeltingRecipe(rl("mandrake_root"), Ingredient.fromStacks(new ItemStack(ModItems.mandrake_root)), ash, cloudy_oil, 0.85f), //
-				new OvenSmeltingRecipe(rl("unfired_jar"), Ingredient.fromStacks(new ItemStack(ModItems.fume, 1, ItemFumes.Type.unfired_jar.ordinal())), new ItemStack(ModItems.fume, 1, ItemFumes.Type.empty_jar.ordinal()), ash, 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_6"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 3)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.reek_of_death.ordinal()), 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_7"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 1)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.bottled_magic.ordinal()), 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_8"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 2)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.vital_essence.ordinal()), 0.85f), //
-				new OvenSmeltingRecipe(rl("sapling_9"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 0)), ash, new ItemStack(ModItems.fume, 1, ItemFumes.Type.droplet_of_wisdom.ordinal()), 0.85f)//
+				new OvenSmeltingRecipe(rl("unfired_jar"), Ingredient.fromStacks(new ItemStack(ModItems.unfired_jar)), new ItemStack(ModItems.empty_jar), ash, 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_6"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 3)), ash, new ItemStack(ModItems.reek_of_death), 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_7"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 1)), ash, new ItemStack(ModItems.bottled_magic), 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_8"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 2)), ash, new ItemStack(ModItems.vital_essence), 0.85f), //
+				new OvenSmeltingRecipe(rl("sapling_9"), Ingredient.fromStacks(new ItemStack(ModBlocks.sapling, 1, 0)), ash, new ItemStack(ModItems.droplet_of_wisdom), 0.85f)//
 		);
 	}
 

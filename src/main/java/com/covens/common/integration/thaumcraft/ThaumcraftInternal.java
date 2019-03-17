@@ -124,27 +124,27 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModItems.empty_brew_splash), new AspectList().add(Aspect.ALCHEMY, 6).add(Aspect.CRYSTAL, 6).add(Aspect.EARTH, 6).add(Aspect.VOID, 6));
 
 		// Fumes
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume), new AspectList().add(Aspect.EARTH, 11).add(Aspect.WATER, 11));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 1), new AspectList().add(Aspect.EARTH, 11).add(Aspect.WATER, 11).add(Aspect.FIRE, 11));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 2), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 3), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.SOUL, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 4), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 5), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.LIFE, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 6), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.DARKNESS, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 7), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.VOID, 5).add(Aspect.AURA, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 8), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.DARKNESS, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 9), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.SOUL, 5).add(Aspect.EXCHANGE, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 10), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.BEAST, 5).add(Aspect.EXCHANGE, 3).add(Aspect.LIFE, 3));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 11), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.FIRE, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 12), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.ELDRITCH, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 13), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.FIRE, 10));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 14), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.AIR, 10));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 15), new AspectList().add(Aspect.EARTH, 10).add(Aspect.WATER, 5).add(Aspect.SENSES, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 16), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 10).add(Aspect.AIR, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 17), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.DEATH, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 18), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.LIFE, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 19), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.MIND, 5));
-		evt.register.registerObjectTag(new ItemStack(ModItems.fume, 1, 20), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.unfired_jar), new AspectList().add(Aspect.EARTH, 11).add(Aspect.WATER, 11));
+		evt.register.registerObjectTag(new ItemStack(ModItems.empty_jar), new AspectList().add(Aspect.EARTH, 11).add(Aspect.WATER, 11).add(Aspect.FIRE, 11));
+		evt.register.registerObjectTag(new ItemStack(ModItems.oak_spirit), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.birch_soul), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.SOUL, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.acacia_essence), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.spruce_heart), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.LIFE, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.cloudy_oil), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.DARKNESS, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.cleansing_aura), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.VOID, 5).add(Aspect.AURA, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.emanation_of_dishonesty), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.DARKNESS, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.everchanging_presence), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.SOUL, 5).add(Aspect.EXCHANGE, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.undying_image), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.BEAST, 5).add(Aspect.EXCHANGE, 3).add(Aspect.LIFE, 3));
+		evt.register.registerObjectTag(new ItemStack(ModItems.demonic_dew), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.FIRE, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.otherworld_tears), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.ELDRITCH, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.fiery_breeze), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.FIRE, 10));
+		evt.register.registerObjectTag(new ItemStack(ModItems.heavenly_winds), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.AIR, 10));
+		evt.register.registerObjectTag(new ItemStack(ModItems.petrichor_odour), new AspectList().add(Aspect.EARTH, 10).add(Aspect.WATER, 5).add(Aspect.SENSES, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.zephyr_of_the_depths), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 10).add(Aspect.AIR, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.reek_of_death), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.DEATH, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.vital_essence), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.LIFE, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.droplet_of_wisdom), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.MIND, 5));
+		evt.register.registerObjectTag(new ItemStack(ModItems.bottled_magic), new AspectList().add(Aspect.EARTH, 5).add(Aspect.WATER, 5).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 5));
 
 		// Todo: Make spells choose their aspects based on NBT Data.
 		// Spells

@@ -14,8 +14,7 @@
       "ore": "nuggetGold"
     },
     "P": {
-      "item": "covens:fume",
-      "data": 11
+      "item": "covens:demonic_dew"
     }
   },
   "result": {

@@ -15,9 +15,7 @@
       "data": 0
     }, 
     "E": {
-      "item": "covens:fume",
-      "data": 17,
-      "_comment": "Reek of death"
+      "item": "covens:reek_of_death"
     }
   },
   "result": {

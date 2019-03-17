@@ -7,8 +7,7 @@
   ],
   "key": {
     "M": {
-      "item": "covens:fume",
-      "data": 20
+      "item": "covens:bottled_magic"
     },
     "I": {
       "type": "forge:ore_dict",

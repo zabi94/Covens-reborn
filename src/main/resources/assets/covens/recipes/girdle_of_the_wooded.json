@@ -7,8 +7,7 @@
   ],
   "key": {
     "U": {
-      "item": "covens:fume",
-      "data": 10
+      "item": "covens:undying_image"
     },
     "M": {
       "item": "minecraft:emerald",
@@ -23,8 +22,7 @@
       "data": 0
     },
     "P": {
-      "item": "covens:fume",
-      "data": 15
+      "item": "covens:petrichor_odour"
     }
   },
   "result": {
