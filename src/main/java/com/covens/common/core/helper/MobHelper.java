@@ -117,6 +117,11 @@ public class MobHelper {
 
 	// For usage in cold iron
 	public static boolean isSpirit(EntityLivingBase entity) {
+		if (entity == null) {
+			Log.w("Null entity cannot be spirit");
+			Thread.dumpStack();
+			return false;
+		}
 		if (entity.getCreatureAttribute() == CovensAPI.getAPI().SPIRIT) {
 			return true;
 		}
