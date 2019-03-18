@@ -113,8 +113,6 @@ public final class ModItems {
 	public static final Item seed_tulsi = null;
 	public static final Item kenaf = null;
 	public static final Item seed_kenaf = null;
-	public static final Item silphium = null;
-	public static final Item seed_silphium = null;
 	public static final Item wormwood = null;
 	public static final Item seed_wormwood = null;
 	public static final Item hellebore = null;
@@ -573,10 +571,6 @@ public final class ModItems {
 		OreDictionary.registerOre("cropTulsi", new ItemStack(ModItems.tulsi));
 		OreDictionary.registerOre("listAllherb", new ItemStack(ModItems.tulsi));
 		OreDictionary.registerOre("cropKenaf", new ItemStack(ModItems.kenaf));
-		OreDictionary.registerOre("cropSilphium", new ItemStack(ModItems.silphium));
-		OreDictionary.registerOre("listAllgreenveggie", new ItemStack(ModItems.silphium));
-		OreDictionary.registerOre("listAllherb", new ItemStack(ModItems.silphium));
-		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.silphium));
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("cropWormwood", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("dyeBrown", new ItemStack(ModItems.catechu));

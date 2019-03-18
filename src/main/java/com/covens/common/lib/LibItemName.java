@@ -23,8 +23,6 @@ public final class LibItemName {
 	public static final String SEED_MANDRAKE = "seed_mandrake";
 	public static final String LAVENDER = "lavender";
 	public static final String SEED_LAVENDER = "seed_lavender";
-	public static final String SILPHIUM = "silphium";
-	public static final String SEED_SILPHIUM = "seed_silphium";
 	public static final String TULSI = "tulsi";
 	public static final String SEED_TULSI = "seed_tulsi";
 	public static final String GARLIC = "garlic";

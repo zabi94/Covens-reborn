@@ -14,7 +14,6 @@ import static com.covens.common.core.statics.ModCrops.LAVENDER;
 import static com.covens.common.core.statics.ModCrops.MANDRAKE;
 import static com.covens.common.core.statics.ModCrops.MINT;
 import static com.covens.common.core.statics.ModCrops.SAGEBRUSH;
-import static com.covens.common.core.statics.ModCrops.SILPHIUM;
 import static com.covens.common.core.statics.ModCrops.THISTLE;
 import static com.covens.common.core.statics.ModCrops.TULSI;
 import static com.covens.common.core.statics.ModCrops.WHITE_SAGE;
@@ -58,7 +57,6 @@ public final class RegistryEvents {
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		registerCrop(WHITE_SAGE, ModBlocks.crop_white_sage, new ItemCropFood(LibItemName.WHITE_SAGE, 1, 0.4F, false), LibItemName.SEED_WHITE_SAGE);
 		registerCrop(WORMWOOD, ModBlocks.crop_wormwood, new ItemCropFood(LibItemName.WORMWOOD, 4, 0.8F, false), LibItemName.SEED_WORMWOOD);
-		registerCrop(SILPHIUM, ModBlocks.crop_silphium, new ItemCropFood(LibItemName.SILPHIUM, 4, 6F, false), LibItemName.SEED_SILPHIUM);
 		registerCrop(MANDRAKE, ModBlocks.crop_mandrake_root, new ItemMandrake(), LibItemName.SEED_MANDRAKE);
 		registerCrop(GARLIC, ModBlocks.crop_garlic, new ItemCropFood(LibItemName.GARLIC, 4, 6F, false), LibItemName.SEED_GARLIC);
 		registerCrop(TULSI, ModBlocks.crop_tulsi, new ItemCropFood(LibItemName.TULSI, 1, 0.4F, false), LibItemName.SEED_TULSI);

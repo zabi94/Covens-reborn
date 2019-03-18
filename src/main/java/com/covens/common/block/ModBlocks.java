@@ -28,7 +28,6 @@ import com.covens.common.block.natural.crop.CropBelladonna;
 import com.covens.common.block.natural.crop.CropKelp;
 import com.covens.common.block.natural.crop.CropKenaf;
 import com.covens.common.block.natural.crop.CropMint;
-import com.covens.common.block.natural.crop.CropSilphium;
 import com.covens.common.block.natural.crop.CropThistle;
 import com.covens.common.block.natural.crop.CropWormwood;
 import com.covens.common.block.natural.plants.BlockEmberGrass;
@@ -83,7 +82,6 @@ public final class ModBlocks {
 	public static final BlockCrop crop_thistle = null;
 	public static final BlockCrop crop_tulsi = null;
 	public static final BlockCrop crop_kenaf = null;
-	public static final BlockCrop crop_silphium = null;
 	public static final BlockCrop crop_garlic = null;
 	public static final BlockCrop crop_wormwood = null;
 	public static final BlockCrop crop_hellebore = null;
@@ -154,7 +152,30 @@ public final class ModBlocks {
 	}
 
 	public static void register(final IForgeRegistry<Block> registry) {
-		registry.registerAll(new BlockCrop(LibBlockName.CROP_ACONITUM), new BlockCrop(LibBlockName.CROP_ASPHODEL), new BlockCrop(LibBlockName.CROP_GINGER), new BlockCrop(LibBlockName.CROP_WHITE_SAGE), new BlockCrop(LibBlockName.CROP_MANDRAKE), new BlockCrop(LibBlockName.CROP_LAVENDER), new BlockCrop(LibBlockName.CROP_TULSI), new BlockCrop(LibBlockName.CROP_GARLIC), new BlockCrop(LibBlockName.CROP_HELLEBORE), new BlockCrop(LibBlockName.CROP_CHRYSANTHEMUM), new BlockCrop(LibBlockName.CROP_SAGEBRUSH), new BlockCrop(LibBlockName.CROP_INFESTED_WHEAT), new CropWormwood(), new CropSilphium(), new CropKenaf(), new CropThistle(), new CropKelp(), new CropBelladonna(), new CropMint(), new BlockMoonbell(), new BlockInfestedFarmland(), new BlockMoss(true), new BlockMoss(false));
+		registry.registerAll(
+				new BlockCrop(LibBlockName.CROP_ACONITUM), 
+				new BlockCrop(LibBlockName.CROP_ASPHODEL), 
+				new BlockCrop(LibBlockName.CROP_GINGER), 
+				new BlockCrop(LibBlockName.CROP_WHITE_SAGE), 
+				new BlockCrop(LibBlockName.CROP_MANDRAKE), 
+				new BlockCrop(LibBlockName.CROP_LAVENDER), 
+				new BlockCrop(LibBlockName.CROP_TULSI), 
+				new BlockCrop(LibBlockName.CROP_GARLIC), 
+				new BlockCrop(LibBlockName.CROP_HELLEBORE), 
+				new BlockCrop(LibBlockName.CROP_CHRYSANTHEMUM), 
+				new BlockCrop(LibBlockName.CROP_SAGEBRUSH), 
+				new BlockCrop(LibBlockName.CROP_INFESTED_WHEAT), 
+				new CropWormwood(), 
+				new CropKenaf(), 
+				new CropThistle(), 
+				new CropKelp(), 
+				new CropBelladonna(), 
+				new CropMint(), 
+				new BlockMoonbell(), 
+				new BlockInfestedFarmland(), 
+				new BlockMoss(true), 
+				new BlockMoss(false)
+		);
 		// Ore
 		registry.register(new BlockSilverOre());
 		registry.register(new BlockSaltOre());

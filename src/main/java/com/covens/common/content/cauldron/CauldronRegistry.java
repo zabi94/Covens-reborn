@@ -59,6 +59,7 @@ import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModFluids;
 import com.covens.common.item.ModItems;
+import com.covens.common.lib.LibIngredients;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 import com.google.common.collect.HashBiMap;
@@ -213,7 +214,6 @@ public class CauldronRegistry {
 		registerFood(egg, 2, 1.2f);
 		registerFood(sugar, 1, 0.5f);
 		registerFood(garlic, 2, 0.8f);
-		registerFood(Ingredient.fromItem(ModItems.silphium), 3, 1.3f);
 		registerFood(new IngredientMultiOreDict("cropSeaweed", "cropKelp"), 4, 3.3f);
 		registerFood(salt, 1, 0.5f);
 		registerFood(Ingredient.fromItem(ModItems.mint), 1, 0.7f);
@@ -314,7 +314,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.spider_nightmare, spider_web);
 		registerCombinedBrewEffect(ModPotions.volatility, Ingredient.fromItem(Items.GUNPOWDER));
 		registerCombinedBrewEffect(ModPotions.pulverize, Ingredient.fromItem(Item.getItemFromBlock(Blocks.COBBLESTONE)));
-		registerCombinedBrewEffect(ModPotions.love, Ingredient.fromItem(ModItems.seed_silphium));
+		registerCombinedBrewEffect(ModPotions.love, LibIngredients.moonbell);
 		registerCombinedBrewEffect(ModPotions.revealing, eyes);
 		registerCombinedBrewEffect(ModPotions.deaths_ebb, Ingredient.fromItem(ModItems.asphodel));
 		registerCombinedBrewEffect(ModPotions.power_boon, Ingredient.fromItem(ModItems.mandrake_root));
