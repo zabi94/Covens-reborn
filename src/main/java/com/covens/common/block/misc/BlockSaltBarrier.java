@@ -6,11 +6,10 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.covens.api.CovensAPI;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.content.transformation.CapabilityTransformation;
-import com.covens.common.entity.EntityBatSwarm;
+import com.covens.common.core.helper.MobHelper;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
 import com.google.common.collect.Lists;
@@ -25,11 +24,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityVex;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -285,16 +279,7 @@ public class BlockSaltBarrier extends BlockMod {
 
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-		if (entityIn instanceof EntityLivingBase) {
-			EnumCreatureAttribute attr = ((EntityLivingBase) entityIn).getCreatureAttribute();
-			if ((attr == EnumCreatureAttribute.UNDEAD) || (attr == CovensAPI.getAPI().DEMON) || (attr == CovensAPI.getAPI().SPIRIT)) {
-				addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
-			}
-		}
-		if ((entityIn instanceof EntityBlaze) || (entityIn instanceof EntityGhast) || (entityIn instanceof EntityVex) || (entityIn instanceof EntityBatSwarm)) {
-			addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
-		}
-		if ((entityIn instanceof EntityPlayer) && !((EntityPlayer) entityIn).isCreative() && !entityIn.getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt()) {
+		if (entityIn instanceof EntityLivingBase && MobHelper.isSupernatural((EntityLivingBase) entityIn)) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, wall);
 		}
 	}

@@ -1,9 +1,7 @@
 package com.covens.common.block.misc;
 
-import com.covens.api.CovensAPI;
-import com.covens.api.transformation.ITransformation;
 import com.covens.common.block.BlockMod;
-import com.covens.common.content.transformation.CapabilityTransformation;
+import com.covens.common.core.helper.MobHelper;
 import com.covens.common.lib.LibBlockName;
 
 import net.minecraft.block.SoundType;
@@ -11,8 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -38,8 +34,7 @@ public class BlockPurifyingEarth extends BlockMod {
 
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-		EnumCreatureAttribute attr = ((EntityLivingBase) entityIn).getCreatureAttribute();
-		if ((attr == EnumCreatureAttribute.UNDEAD) || (attr == CovensAPI.getAPI().DEMON) || (attr == CovensAPI.getAPI().SPIRIT) || this.isTransformedPlayer(entityIn)) {
+		if (entityIn instanceof EntityLivingBase && MobHelper.isSupernatural((EntityLivingBase) entityIn)) {
 			if (!entityIn.isBurning()) {
 				entityIn.setFire(1500);
 			}
@@ -47,11 +42,4 @@ public class BlockPurifyingEarth extends BlockMod {
 		}
 	}
 
-	private boolean isTransformedPlayer(Entity e) {
-		if (e instanceof EntityPlayer) {
-			ITransformation transformation = ((EntityPlayer) e).getCapability(CapabilityTransformation.CAPABILITY, null).getType();
-			return !transformation.canCrossSalt();
-		}
-		return false;
-	}
 }

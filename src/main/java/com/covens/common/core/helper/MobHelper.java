@@ -6,6 +6,7 @@ import com.covens.api.CovensAPI;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
+import com.covens.common.entity.EntityBatSwarm;
 import com.google.common.collect.Sets;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -74,6 +75,8 @@ public class MobHelper {
 		HUMANS.add(EntityVindicator.class.getName());
 		HUMANS.add("thaumcraft.common.entities.monster.cult.EntityCultistCleric");
 		HUMANS.add("thaumcraft.common.entities.monster.cult.EntityCultistKnight");
+		
+		UNDEAD_BODY.add(EntityBatSwarm.class.getName());
 
 		VILLAGERS.add("mca.entity.EntityVillagerMCA");
 
@@ -151,5 +154,15 @@ public class MobHelper {
 			return true;
 		}
 		return CANIDS.contains(entity.getClass().getName());
+	}
+
+	public static boolean isSupernatural(EntityLivingBase e) {
+		if (e instanceof EntityPlayer) {
+			if (((EntityPlayer) e).isCreative()) {
+				return false;
+			}
+			return !e.getCapability(CapabilityTransformation.CAPABILITY, null).getType().canCrossSalt();
+		}
+		return isDemon(e) || isSpirit(e) || isCorporealUndead(e);
 	}
 }
