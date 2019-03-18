@@ -38,7 +38,6 @@ public final class ModEntities {
 		registerEntity("brew_arrow", EntityBrewArrow.class, 64, 1, true);
 		registerEntity("brew_bottle", EntityBrew.class, 64, 1, true);
 		registerEntity("brew_lingering_effect", EntityLingeringBrew.class, 64, 100, false);
-		registerEntity("brew_aoe_effect", EntityAoE.class, 64, 100, false);
 
 		// Mob entities
 		registerEntity("owl", EntityOwl.class, 64, 1, true, 0xAF813F, 0x6E5127);

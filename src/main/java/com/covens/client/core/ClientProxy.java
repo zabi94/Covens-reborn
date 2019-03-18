@@ -48,7 +48,6 @@ import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.content.tarot.TarotHandler.TarotInfo;
 import com.covens.common.core.proxy.ISidedProxy;
 import com.covens.common.core.statics.ModFluids;
-import com.covens.common.entity.EntityAoE;
 import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.entity.EntityBrew;
 import com.covens.common.entity.EntityBrewArrow;
@@ -192,7 +191,6 @@ public class ClientProxy implements ISidedProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrewArrow.class, RenderBrewArrow::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrew.class, RenderBrewBottle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLingeringBrew.class, EmptyRenderer::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityAoE.class, EmptyRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityOwl.class, RenderOwl::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySnake.class, RenderSnake::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, RenderLizard::new);
