@@ -38,7 +38,7 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 	@DontSync public BlockPos destination = null;
 
 	public boolean hasOwner() {
-		return !owner.equals(UUIDs.NULL_UUID);
+		return !UUIDs.isNull(owner);
 	}
 
 	public void setOwner(EntityPlayer player) {
