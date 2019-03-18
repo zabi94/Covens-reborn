@@ -65,14 +65,6 @@ public class ModelMantle extends ModelBiped {
 		this.playerModel = model;
 		this.textureWidth = 64;
         this.textureHeight = 64;
-        this.hood = new ModelRenderer(this, 12, 42);
-        this.hood.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.hood.addBox(-4.0F, -8.1F, 3.51F, 8, 4, 1, 0.0F);
-        this.hoodRight2 = new ModelRenderer(this, 22, 43);
-        this.hoodRight2.mirror = true;
-        this.hoodRight2.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.hoodRight2.addBox(0.0F, 0.0F, -4.0F, 1, 4, 9, 0.0F);
-        this.setRotateAngle(hoodRight2, 0.0F, 0.0F, -0.12217304763960307F);
         this.CapeBackRag2 = new ModelRenderer(this, 11, 24);
         this.CapeBackRag2.setRotationPoint(-3.0F, 3.0F, 0.0F);
         this.CapeBackRag2.addBox(0.0F, 0.0F, 0.0F, 2, 3, 1, 0.0F);
@@ -113,10 +105,6 @@ public class ModelMantle extends ModelBiped {
         this.capeLeftDown2.setRotationPoint(-1.0F, 10.0F, 0.0F);
         this.capeLeftDown2.addBox(-5.0F, 0.0F, 0.0F, 6, 3, 1, 0.0F);
         this.setRotateAngle(capeLeftDown2, 0.19198621771937624F, 0.0F, 0.0F);
-        this.hoodTop2 = new ModelRenderer(this, 27, 31);
-        this.hoodTop2.setRotationPoint(-3.5F, -4.5F, 5.0F);
-        this.hoodTop2.addBox(0.0F, 0.0F, 0.0F, 4, 1, 9, 0.0F);
-        this.setRotateAngle(hoodTop2, 0.0F, 3.141592653589793F, -0.12217304763960307F);
         this.CapeRightDown1 = new ModelRenderer(this, 48, 21);
         this.CapeRightDown1.setRotationPoint(0.0F, 15.0F, 1.0F);
         this.CapeRightDown1.addBox(-5.0F, 0.0F, -1.0F, 5, 1, 1, 0.0F);
@@ -125,10 +113,6 @@ public class ModelMantle extends ModelBiped {
         this.capeLeft2.setRotationPoint(-5.0F, 0.0F, -1.0F);
         this.capeLeft2.addBox(-6.0F, 0.0F, 0.0F, 6, 10, 1, 0.0F);
         this.setRotateAngle(capeLeft2, -0.03490658503988659F, -1.5707963267948966F, 0.0F);
-        this.hoodBack = new ModelRenderer(this, 12, 57);
-        this.hoodBack.setRotationPoint(0.0F, -4.0F, 0.0F);
-        this.hoodBack.addBox(-4.0F, 0.0F, 3.5F, 8, 4, 1, 0.0F);
-        this.setRotateAngle(hoodBack, 0.15707963267948966F, 0.0F, 0.0F);
         this.armRight = new ModelRenderer(this, 40, 16);
         this.armRight.mirror = true;
         this.armRight.setRotationPoint(5.0F, 2.0F, 0.0F);
@@ -137,11 +121,6 @@ public class ModelMantle extends ModelBiped {
         this.capeLeftDown2Rag2.setRotationPoint(-4.929999828338623F, 3.0199999809265137F, 0.010000316426157951F);
         this.capeLeftDown2Rag2.addBox(0.0F, 0.0F, 0.0F, 5, 1, 1, 0.0F);
         this.setRotateAngle(capeLeftDown2Rag2, 0.12217304763960307F, 0.0F, -0.10471975511965977F);
-        this.hoodLeft2 = new ModelRenderer(this, 22, 43);
-        this.hoodLeft2.mirror = true;
-        this.hoodLeft2.setRotationPoint(-7.0F, 0.0F, 0.0F);
-        this.hoodLeft2.addBox(0.0F, 0.0F, -5.0F, 1, 4, 9, 0.0F);
-        this.setRotateAngle(hoodLeft2, 0.0F, 3.141592653589793F, 0.12217304763960307F);
         this.CapeRightDown2Rag1 = new ModelRenderer(this, 33, 19);
         this.CapeRightDown2Rag1.setRotationPoint(-5.010000228881836F, 2.0011839866638184F, 0.009999999776482582F);
         this.CapeRightDown2Rag1.addBox(0.0F, 0.0F, -1.0F, 4, 2, 1, 0.0F);
@@ -154,10 +133,6 @@ public class ModelMantle extends ModelBiped {
         this.CapeRightDown2.setRotationPoint(-1.0F, 10.0F, 0.0F);
         this.CapeRightDown2.addBox(-5.0F, 0.0F, -1.0F, 6, 2, 1, 0.0F);
         this.setRotateAngle(CapeRightDown2, -0.19198621771937624F, 0.0F, 0.0F);
-        this.hoodTop1 = new ModelRenderer(this, 27, 31);
-        this.hoodTop1.setRotationPoint(-3.5F, -4.5F, -4.010000228881836F);
-        this.hoodTop1.addBox(-4.0F, 0.0F, -9.0F, 4, 1, 9, 0.0F);
-        this.setRotateAngle(hoodTop1, 3.141592653589793F, 0.0F, -3.01941960595019F);
         this.capeLeftFront1 = new ModelRenderer(this, 48, 1);
         this.capeLeftFront1.setRotationPoint(-3.5F, -0.009999999776482582F, -1.5F);
         this.capeLeftFront1.addBox(-2.5F, 0.0F, 2.299999952316284F, 5, 5, 1, 0.0F);
@@ -183,11 +158,6 @@ public class ModelMantle extends ModelBiped {
         this.capeLeftDown2Rag3.setRotationPoint(1.9800000190734863F, 1.0F, 0.009999999776482582F);
         this.capeLeftDown2Rag3.addBox(0.0F, 0.0F, 0.0F, 2, 4, 1, 0.0F);
         this.setRotateAngle(capeLeftDown2Rag3, 0.0F, 0.0F, -0.3490658503988659F);
-        this.hoodLeft1 = new ModelRenderer(this, 0, 43);
-        this.hoodLeft1.mirror = true;
-        this.hoodLeft1.setRotationPoint(-8.0F, 0.0F, -4.01F);
-        this.hoodLeft1.addBox(-1.0F, -4.0F, -9.0F, 1, 4, 9, 0.0F);
-        this.setRotateAngle(hoodLeft1, 0.0F, 3.141592653589793F, 0.0F);
         this.cape = new ModelRenderer(this, 36, 42);
         this.cape.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.cape.addBox(-4.01F, -1.0F, 1.5F, 8, 6, 3, 0.0F);
@@ -199,16 +169,10 @@ public class ModelMantle extends ModelBiped {
         this.CapeRightDownRag2.setRotationPoint(0.0F, 2.9995431900024414F, 0.0F);
         this.CapeRightDownRag2.addBox(-5.0F, 0.0F, -1.0F, 2, 1, 1, 0.0F);
         this.setRotateAngle(CapeRightDownRag2, -0.19198621771937624F, 0.0F, 0.0F);
-        this.hoodRight1 = new ModelRenderer(this, 0, 43);
-        this.hoodRight1.mirror = true;
-        this.hoodRight1.setRotationPoint(3.5F, -4.0F, -0.5F);
-        this.hoodRight1.addBox(0.0F, -4.0F, -4.0F, 1, 4, 9, 0.0F);
-        this.setRotateAngle(hoodRight1, 0.12217304763960307F, 0.0F, 0.0F);
         this.CapeBack2 = new ModelRenderer(this, 2, 23);
         this.CapeBack2.setRotationPoint(2.0F, 15.0F, -1.0F);
         this.CapeBack2.addBox(-1.0F, 0.0F, 0.0F, 3, 5, 1, 0.0F);
         this.setRotateAngle(CapeBack2, 0.19198621771937624F, 0.0F, 0.0F);
-        this.hoodRight1.addChild(this.hoodRight2);
         this.CapeBackRag1.addChild(this.CapeBackRag2);
         this.cape.addChild(this.armLeft);
         this.CapeBack2.addChild(this.CapeBackRag1);
@@ -219,27 +183,21 @@ public class ModelMantle extends ModelBiped {
         this.CapeLeftDownRag1.addChild(this.CapeLeftDownRag2);
         this.armRight.addChild(this.shoulderRight);
         this.capeLeft2.addChild(this.capeLeftDown2);
-        this.hoodRight1.addChild(this.hoodTop2);
         this.capeRight1.addChild(this.CapeRightDown1);
         this.capeLeft1.addChild(this.capeLeft2);
-        this.hood.addChild(this.hoodBack);
         this.cape.addChild(this.armRight);
         this.capeLeftDown2.addChild(this.capeLeftDown2Rag2);
-        this.hoodRight1.addChild(this.hoodLeft2);
         this.CapeRightDown2.addChild(this.CapeRightDown2Rag1);
         this.CapeRightDown1.addChild(this.CapeRightDownRag1);
         this.capeRight2.addChild(this.CapeRightDown2);
-        this.hoodRight1.addChild(this.hoodTop1);
         this.capeLeft2.addChild(this.capeLeftFront1);
         this.armLeft.addChild(this.shoulderLeft);
         this.CapeLeftDown1.addChild(this.CapeLeftDownRag1);
         this.capeLeft1.addChild(this.CapeLeftDown1);
         this.capeRight2.addChild(this.capeRightFront1);
         this.capeLeftDown2Rag2.addChild(this.capeLeftDown2Rag3);
-        this.hoodRight1.addChild(this.hoodLeft1);
         this.capeBack1.addChild(this.capeLeft1);
         this.CapeRightDownRag1.addChild(this.CapeRightDownRag2);
-        this.hood.addChild(this.hoodRight1);
         this.capeBack1.addChild(this.CapeBack2);
 	}
 
@@ -247,10 +205,8 @@ public class ModelMantle extends ModelBiped {
 	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-
-		this.hood.rotateAngleX = this.bipedHead.rotateAngleX;
-		this.hood.rotateAngleY = this.playerModel.bipedHead.rotateAngleY;
 		
+		float fade = (limbSwingAmount < 0.05) ? -3*this.bipedLeftArm.rotateAngleZ : -3*this.bipedLeftArm.rotateAngleZ+limbSwingAmount*0.65F;
 		
 		if (limbSwingAmount > 0.05) {
 			this.cape.rotateAngleX = this.getAndUpdateRotation((EntityPlayer) entityIn, limbSwingAmount);
@@ -258,37 +214,33 @@ public class ModelMantle extends ModelBiped {
 			this.capeLeftFront1.rotateAngleY = -this.capeRightFront1.rotateAngleY;
 
 		}else {
-			this.capeBack1.rotateAngleX = this.bipedLeftArm.rotateAngleX/2;
-			this.CapeBack2.rotateAngleX = 3*this.bipedRightArm.rotateAngleX;
-			this.CapeBackRag1.rotateAngleX = 5*this.bipedLeftArm.rotateAngleX;
-			this.CapeBackRag2.rotateAngleX = 2*this.CapeBackRag2.rotateAngleX;
-			this.CapeLeftDown1.rotateAngleX = 5*this.bipedRightArm.rotateAngleX;
-			this.CapeLeftDownRag1.rotateAngleX = 3*this.bipedLeftArm.rotateAngleX;
-			this.CapeLeftDownRag2.rotateAngleX = 3*this.bipedLeftArm.rotateAngleX;
-			this.CapeRightDown1.rotateAngleX = 5*this.bipedRightArm.rotateAngleX;
-			this.CapeRightDownRag1.rotateAngleX = 3*this.bipedLeftArm.rotateAngleX;
-			this.CapeRightDownRag2.rotateAngleX = 3*this.bipedLeftArm.rotateAngleX;
-			this.capeLeftDown2.rotateAngleX = 3*this.bipedLeftArm.rotateAngleX;
-			this.capeLeftDown2Rag2.rotateAngleX = this.capeLeftDown2.rotateAngleX;
-			this.capeLeftDown2Rag3.rotateAngleX = this.capeLeftDown2.rotateAngleX;
-			this.CapeRightDown2.rotateAngleX = 3*this.bipedRightArm.rotateAngleX;
-			this.CapeRightDown2Rag2.rotateAngleX = this.CapeRightDown2.rotateAngleX;
-			
+			this.capeBack1.rotateAngleX = fade/5;
+			this.CapeBack2.rotateAngleX = fade/5;
+			this.CapeBackRag1.rotateAngleX = fade;
+			this.CapeBackRag2.rotateAngleX = fade;
+			this.CapeLeftDown1.rotateAngleX = fade;
+			this.CapeLeftDownRag1.rotateAngleX = fade;
+			this.CapeLeftDownRag2.rotateAngleX = fade;
+			this.CapeRightDown1.rotateAngleX = -fade;
+			this.CapeRightDownRag1.rotateAngleX = -fade;
+			this.CapeRightDownRag2.rotateAngleX = -fade;
+			this.capeLeftDown2.rotateAngleX = fade;
+			this.capeLeftDown2Rag2.rotateAngleX = -fade;
+			this.capeLeftDown2Rag3.rotateAngleX = fade;
+			this.CapeRightDown2.rotateAngleX = -fade;
+			this.CapeRightDown2Rag2.rotateAngleX = fade;
 		}
 
 
 		
-		if (entityIn.isSneaking()) {
+		/*if (entityIn.isSneaking()) {
 			this.capeLeftFront1.rotateAngleY = 0;
 			this.capeRightFront1.rotateAngleY = this.capeLeftFront1.rotateAngleY;
-			this.hood.rotateAngleX = this.bipedHead.rotateAngleX + 0.52359877559F;
-		}
-
+		}*/
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.7F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.7F - fade);
 		this.cape.render(1);
-		this.hood.render(1);
         GlStateManager.disableBlend();
 
 		//this.armLeft.render(1);
