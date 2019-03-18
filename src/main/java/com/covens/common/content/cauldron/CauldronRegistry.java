@@ -245,9 +245,9 @@ public class CauldronRegistry {
 		// Arcane recipes
 
 		registerCauldronItemCrafting(ModFluids.HONEY, Fluid.BUCKET_VOLUME, new ItemStack(ModBlocks.goblet, 1, 1), redstone, redstone, redstone, fumeCloudyOil, emptyGoblet, ghastTear);
-		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModItems.ritual_chalk, 2, 3), normalRitualChalk, normalRitualChalk, blazePowder, blazePowder, blazePowder, blazePowder, fumeFieryBreeze, fumeFieryBreeze);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk, 2, 2), normalRitualChalk, normalRitualChalk, dimensionalSand, dimensionalSand, dimensionalSand, dimensionalSand, fumeHeavenlyWind, fumeHeavenlyWind);
-		registerCauldronItemCrafting(ModFluids.HONEY, new ItemStack(ModItems.ritual_chalk, 2, 1), normalRitualChalk, normalRitualChalk, goldNugget, goldNugget, goldNugget, goldNugget, fumeCleansingAura, fumeCleansingAura);
+		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModItems.ritual_chalk_nether), normalRitualChalk, normalRitualChalk, blazePowder, blazePowder, blazePowder, blazePowder, fumeFieryBreeze, fumeFieryBreeze);
+		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk_ender), normalRitualChalk, normalRitualChalk, dimensionalSand, dimensionalSand, dimensionalSand, dimensionalSand, fumeHeavenlyWind, fumeHeavenlyWind);
+		registerCauldronItemCrafting(ModFluids.HONEY, new ItemStack(ModItems.ritual_chalk_golden), normalRitualChalk, normalRitualChalk, goldNugget, goldNugget, goldNugget, goldNugget, fumeCleansingAura, fumeCleansingAura);
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.graveyard_dirt, 8, 0), graveyardDust, graveyardDust, wormwood, wormwood, dirt, dirt, dirt, dirt);
 		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.ember_grass, 2, 0), blazePowder, blazePowder, wormwood, wormwood);
 		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.torchwood, 2, 0), glowstoneDust, glowstoneDust, anyLog, anyLeaf);

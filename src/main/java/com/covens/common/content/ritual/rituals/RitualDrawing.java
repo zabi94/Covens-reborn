@@ -9,6 +9,7 @@ import com.covens.api.ritual.IRitual;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.item.ModItems;
+import com.covens.common.item.magic.ItemRitualChalk;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
@@ -42,13 +43,9 @@ public class RitualDrawing implements IRitual {
 	@Override
 	public void onStarted(EntityPlayer player, TileEntity tile, World world, BlockPos pos, NBTTagCompound data, BlockPos effectivePosition, int covenSize) {
 		ItemStack chalk = player.getHeldItemOffhand();
-		data.setInteger("chalkType", chalk.getMetadata());
+		data.setInteger("chalkType", ((ItemRitualChalk) chalk.getItem()).getType().ordinal());
 		if (!player.isCreative()) {
-			int usesLeft = chalk.getTagCompound().getInteger("usesLeft") - this.coords.size();
-			chalk.getTagCompound().setInteger("usesLeft", usesLeft);
-			if (usesLeft < 1) {
-				chalk.setCount(0);
-			}
+			chalk.damageItem(this.coords.size(), player);
 		}
 		player.setHeldItem(EnumHand.OFF_HAND, chalk);
 	}
@@ -61,12 +58,12 @@ public class RitualDrawing implements IRitual {
 				return Optional.of(new TextComponentTranslation("ritual.problem.obstructed_at", pos2.toString()));
 			}
 		}
-		if (player.getHeldItemOffhand().getItem() != ModItems.ritual_chalk) {
+		if (!(player.getHeldItemOffhand().getItem() instanceof ItemRitualChalk)) {
 			return Optional.of(new TextComponentTranslation("ritual.problem.need_chalk_offhand"));
 		}
-		if (player.getHeldItemOffhand().getMetadata() == 1) {
+		if (player.getHeldItemOffhand().getItem() == ModItems.ritual_chalk_golden) {
 			return Optional.of(new TextComponentTranslation("ritual.problem.need_nongolden_chalk"));
 		}
-		return (player.isCreative() || (player.getHeldItemOffhand().getTagCompound().getInteger("usesLeft") >= this.coords.size()))?Optional.empty():Optional.of(new TextComponentTranslation("ritual.problem.not_enough_durability"));
+		return (player.isCreative() || (ItemRitualChalk.MAX_USES - player.getHeldItemOffhand().getItemDamage() >= this.coords.size()))?Optional.empty():Optional.of(new TextComponentTranslation("ritual.problem.not_enough_durability"));
 	}
 }

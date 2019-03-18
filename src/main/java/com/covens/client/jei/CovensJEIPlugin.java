@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
-import com.covens.api.ritual.EnumGlyphType;
 import com.covens.client.jei.components.BrewModifierCategory;
 import com.covens.client.jei.components.BrewModifierWrapper;
 import com.covens.client.jei.components.BrewingCategory;
@@ -63,7 +62,7 @@ public class CovensJEIPlugin implements IModPlugin {
 		registry.addRecipes(AdapterIRitual.REGISTRY.getValuesCollection().stream()
 				.sorted(Comparator.comparingInt(air -> (air.getInput().size()/3) + (air.getCircles() & 3)))
 				.collect(Collectors.toList()), RitualCategory.UID);
-		registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_chalk, 1, EnumGlyphType.GOLDEN.ordinal()), RitualCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_chalk_golden), RitualCategory.UID);
 
 		registry.handleRecipes(SpinningThreadRecipe.class, i -> new SpinnerWrapper(i), SpinnerCategory.UID);
 		registry.addRecipes(SpinningThreadRecipe.REGISTRY.getValuesCollection(), SpinnerCategory.UID);

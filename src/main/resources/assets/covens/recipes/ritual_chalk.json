@@ -18,8 +18,7 @@
     }
   },
   "result": {
-    "item": "covens:ritual_chalk",
-    "data": 0,
+    "item": "covens:ritual_chalk_normal",
     "count": 2
   }
 }

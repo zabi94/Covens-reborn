@@ -2,6 +2,7 @@ package com.covens.common.item;
 
 import javax.annotation.Nullable;
 
+import com.covens.api.ritual.EnumGlyphType;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.chisel.BlockColdIronChiseled;
 import com.covens.common.block.chisel.BlockNetherSteelChiseled;
@@ -248,7 +249,10 @@ public final class ModItems {
 	public static final Item tarots = null;
 	public static final Item broom = null;
 	public static final Item spell_page = null;
-	public static final Item ritual_chalk = null;
+	public static final Item ritual_chalk_normal = null;
+	public static final Item ritual_chalk_golden = null;
+	public static final Item ritual_chalk_nether = null;
+	public static final Item ritual_chalk_ender = null;
 	public static final Item location_stone = null;
 	public static final Item bell = null;
 
@@ -268,6 +272,8 @@ public final class ModItems {
 	public static final Item cold_iron_pickaxe = null;
 	public static final Item blood_bottle = null;
 	public static final Item spark_of_darkness = null;
+	
+	public static ItemRitualChalk[] chalkType;
 
 	private ModItems() {
 	}
@@ -308,6 +314,15 @@ public final class ModItems {
 		registry.register(new ItemSpellPage(LibItemName.SPELL_PAGE));
 
 		registry.register(new ItemBell());
+		
+		
+		chalkType = new ItemRitualChalk[] {
+				new ItemRitualChalk(EnumGlyphType.NORMAL), //
+				new ItemRitualChalk(EnumGlyphType.GOLDEN), //
+				new ItemRitualChalk(EnumGlyphType.ENDER), //
+				new ItemRitualChalk(EnumGlyphType.NETHER) //
+		};
+		
 		// Misc
 		registry.registerAll( //
 				new ItemHoney(), // 
@@ -372,7 +387,10 @@ public final class ModItems {
 				new ItemJuniperBerries(),  //
 				new ItemYewAril(),  //
 				new ItemFilledBowl(), //
-				new ItemRitualChalk(LibItemName.RITUAL_CHALK), //
+				chalkType[0],
+				chalkType[1],
+				chalkType[2],
+				chalkType[3],
 				new ItemRemedyTalisman(),  //
 				new ItemMagicSalve(), //
 				new ItemLocationStone(),  //
@@ -383,6 +401,8 @@ public final class ModItems {
 				// new ItemMod(LibItemName.WITCHWEED),
 				// new ItemMod(LibItemName.INFESTED_WHEAT)
 		);
+		
+		
 
 		// Baubles
 		registry.registerAll(//

@@ -43,7 +43,7 @@ public class LibIngredients {
 	public static Ingredient netherBrickItem = Ingredient.fromItem(Items.NETHERBRICK);
 	public static Ingredient sand = new OreIngredient("sand");
 	public static Ingredient dimensionalSand = Ingredient.fromItem(ModItems.dimensional_sand);
-	public static Ingredient normalRitualChalk = Ingredient.fromStacks(new ItemStack(ModItems.ritual_chalk));
+	public static Ingredient normalRitualChalk = Ingredient.fromItem(ModItems.ritual_chalk_normal);
 	public static Ingredient fumeFieryBreeze = Ingredient.fromItem(ModItems.fiery_breeze);
 	public static Ingredient fumeHeavenlyWind = Ingredient.fromItem(ModItems.heavenly_winds);
 	public static Ingredient fumePetrichorOdour = Ingredient.fromItem(ModItems.petrichor_odour);
