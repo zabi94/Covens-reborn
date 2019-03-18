@@ -1,10 +1,10 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/covens-reborn",
   "1.12.2": {
-    "0.0.26": "Familiars GUI, vampire transformation unlockable in survival (can't level up yet), LOTS of QoL changes"
+    "0.0.27": "Altar upgrades reworked, trees spawn naturally, new rituals, lanterns craftable, removed silphium"
   },
   "promos": {
-    "1.12.2-latest": "0.0.26",
-    "1.12.2-recommended": "0.0.26"
+    "1.12.2-latest": "0.0.27",
+    "1.12.2-recommended": "0.0.27"
   }
 }
