@@ -104,6 +104,10 @@ public class ClientProxy implements ISidedProxy {
 		unifyVariants(ModBlocks.moonbell);
 	}
 
+	private static void unifyVariants(Block block) {
+		ModelLoader.setCustomStateMapper(block, new AllDefaultModelStateMapper(block));
+	}
+
 	@SubscribeEvent
 	public static void stitchEventPre(TextureStitchEvent.Pre event) {
 		event.getMap().registerSprite(ResourceLocations.STEAM);
@@ -130,10 +134,6 @@ public class ClientProxy implements ISidedProxy {
 		MinecraftForge.EVENT_BUS.register(new WerewolfEventHandler());
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());
 		MinecraftForge.EVENT_BUS.register(new MiscEventHandler(Minecraft.getMinecraft()));
-	}
-
-	private static void unifyVariants(Block block) {
-		ModelLoader.setCustomStateMapper(block, new AllDefaultModelStateMapper(block));
 	}
 
 	@Override
