@@ -12,7 +12,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 
 public enum ParticleF {
-	CAULDRON_BUBBLE(new ParticleBubble.Factory()), STEAM(new ParticleSteam.Factory()), BEE(new ParticleBee.Factory()), SPARK(new ParticleSpark.Factory()), FLAME(new ParticleOvenFlame.Factory()), COLORED_FLAME(new ParticleColoredflame.Factory()), BAT(new ParticleBat.Factory());
+	
+	CAULDRON_BUBBLE(new ParticleBubble.Factory()), 
+	STEAM(new ParticleSteam.Factory()), 
+	BEE(new ParticleBee.Factory()), 
+	SPARK(new ParticleSpark.Factory()), 
+	COLORED_FLAME(new ParticleColoredflame.Factory()), 
+	BAT(new ParticleBat.Factory());
 
 	private final IParticleF factory;
 
