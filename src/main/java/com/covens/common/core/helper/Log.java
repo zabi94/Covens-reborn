@@ -1,31 +1,36 @@
 package com.covens.common.core.helper;
 
-import com.covens.common.Covens;
+import static com.covens.common.lib.LibMod.MOD_NAME;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Log {
+	
+	private static final Logger logger = LogManager.getLogger(MOD_NAME);
 
 	public static void i(String s) {
-		Covens.logger.info(s);
+		logger.info(s);
 	}
 
 	public static void w(String s) {
-		Covens.logger.warn(s);
+		logger.warn(s);
 	}
 
 	public static void e(String s) {
-		Covens.logger.error(s);
+		logger.error(s);
 	}
 
 	public static void i(Object s) {
-		Covens.logger.info(s);
+		logger.info(s);
 	}
 
 	public static void w(Object s) {
-		Covens.logger.warn(s);
+		logger.warn(s);
 	}
 
 	public static void e(Object s) {
-		Covens.logger.error(s);
+		logger.error(s);
 	}
 
 	public static void askForReport() {
@@ -45,7 +50,7 @@ public class Log {
 		if ("true".equals(System.getProperty("debug"))) {
 			i("[DEBUG] -- " + s);
 		} else {
-			Covens.logger.debug(s);
+			logger.debug(s);
 		}
 	}
 }

@@ -2,9 +2,6 @@ package com.covens.common;
 
 import static com.covens.common.lib.LibMod.MOD_NAME;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.covens.common.api.ApiInstance;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.natural.plants.BlockMoonbell;
@@ -66,8 +63,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 @Mod(modid = LibMod.MOD_ID, name = MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.13]", certificateFingerprint = LibMod.FINGERPRINT)
 public class Covens {
 
-	public static final Logger logger = LogManager.getLogger(MOD_NAME);
-	
 	@SidedProxy(serverSide = LibMod.PROXY_COMMON, clientSide = LibMod.PROXY_CLIENT)
 	public static ISidedProxy proxy;
 	@Instance(LibMod.MOD_ID)
