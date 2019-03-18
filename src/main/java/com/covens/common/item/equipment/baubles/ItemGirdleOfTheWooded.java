@@ -166,7 +166,7 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-		return enchantment == Enchantments.BINDING_CURSE;
+		return enchantment == Enchantments.BINDING_CURSE || enchantment.type.canEnchantItem(this);
 	}
 
 	@Override

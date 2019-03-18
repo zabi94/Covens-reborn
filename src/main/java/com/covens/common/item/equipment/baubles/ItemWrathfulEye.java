@@ -19,7 +19,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ItemWrathfulEye extends ItemMod implements IBauble {
 
@@ -27,7 +26,6 @@ public class ItemWrathfulEye extends ItemMod implements IBauble {
 		super(LibItemName.WRATHFUL_EYE);
 		this.setMaxStackSize(1);
 		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
@@ -55,7 +53,7 @@ public class ItemWrathfulEye extends ItemMod implements IBauble {
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-		return enchantment == Enchantments.BINDING_CURSE;
+		return enchantment == Enchantments.BINDING_CURSE || enchantment.type.canEnchantItem(this);
 	}
 
 	@Override
@@ -68,9 +66,8 @@ public class ItemWrathfulEye extends ItemMod implements IBauble {
 		return BaubleType.AMULET;
 	}
 
-	@SuppressWarnings("unused")
-	private boolean doesPlayerHaveAmulet(EntityPlayer e) {
-		return BaublesApi.isBaubleEquipped(e, this) > 0;
-	}
+//	private boolean doesPlayerHaveAmulet(EntityPlayer e) {
+//		return BaublesApi.isBaubleEquipped(e, this) > 0;
+//	}
 
 }

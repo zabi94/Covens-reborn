@@ -16,6 +16,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -73,8 +74,12 @@ public class ItemHorseshoe extends ItemMod implements IBauble {
 
 	@SubscribeEvent
 	public void onEntityDamage(LivingHurtEvent event) {
-		if (event.getEntityLiving() instanceof EntityLivingBase && MobHelper.isSpirit((EntityLivingBase) event.getSource().getTrueSource())) {
+		if (event.getEntityLiving() instanceof EntityPlayer && BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), this) >= 0 && isSourceSpirit(event.getSource())) {
 			event.setAmount(event.getAmount() * 0.80F);
 		}
+	}
+	
+	private static boolean isSourceSpirit(DamageSource source) {
+		return source.getTrueSource() instanceof EntityLivingBase && MobHelper.isSpirit((EntityLivingBase) source.getTrueSource());
 	}
 }

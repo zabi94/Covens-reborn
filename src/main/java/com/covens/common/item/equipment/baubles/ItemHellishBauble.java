@@ -3,6 +3,7 @@ package com.covens.common.item.equipment.baubles;
 import com.covens.api.CovensAPI;
 import com.covens.api.mp.MPContainer;
 import com.covens.api.mp.PlayerMPExpander;
+import com.covens.common.core.helper.MobHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
 import com.covens.common.lib.LibItemName;
@@ -41,7 +42,7 @@ public class ItemHellishBauble extends ItemMod implements IBauble, PlayerMPExpan
 	}
 
 	private static boolean isDemon(Entity e) {
-		return ((e instanceof EntityLivingBase) && (((EntityLivingBase) e).getCreatureAttribute() == CovensAPI.getAPI().DEMON));
+		return e instanceof EntityLivingBase && MobHelper.isDemon((EntityLivingBase) e);
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class ItemHellishBauble extends ItemMod implements IBauble, PlayerMPExpan
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-		return enchantment == Enchantments.BINDING_CURSE;
+		return enchantment == Enchantments.BINDING_CURSE || enchantment.type.canEnchantItem(this);
 	}
 
 	@Override

@@ -17,7 +17,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ItemMantle extends ItemMod implements IBauble {
 
@@ -26,7 +25,6 @@ public class ItemMantle extends ItemMod implements IBauble {
 	public ItemMantle(String id) {
 		super(id);
 		this.setMaxStackSize(1);
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
@@ -84,6 +82,6 @@ public class ItemMantle extends ItemMod implements IBauble {
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-		return enchantment == Enchantments.BINDING_CURSE;
+		return enchantment == Enchantments.BINDING_CURSE || enchantment.type.canEnchantItem(this);
 	}
 }
