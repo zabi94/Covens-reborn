@@ -3,8 +3,8 @@ package com.covens.common.core.net.messages;
 import java.util.UUID;
 
 import com.covens.api.transformation.IBloodReserve;
-import com.covens.common.Covens;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
+import com.covens.common.core.helper.Log;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,7 +43,7 @@ public class EntityInternalBloodChanged extends SimpleMessage<EntityInternalBloo
 					br.setDrinker(this.id_drainer);
 				}
 			} else {
-				Covens.logger.warn("Couldn't find entity " + this.entity_id + " for EntityInternalBloodChanged message");
+				Log.w("Couldn't find entity " + this.entity_id + " for EntityInternalBloodChanged message");
 			}
 		});
 		return null;

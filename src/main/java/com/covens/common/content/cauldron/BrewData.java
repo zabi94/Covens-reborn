@@ -13,7 +13,7 @@ import com.covens.api.cauldron.IBrewData;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.cauldron.IBrewModifierList;
-import com.covens.common.Covens;
+import com.covens.common.core.helper.Log;
 import com.covens.common.entity.EntityLingeringBrew;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.google.common.collect.ImmutableList;
@@ -115,7 +115,7 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 				}
 			}
 		} else {
-			Covens.logger.error("No potion associated with the brew!");
+			Log.e("No potion associated with the brew!");
 		}
 	}
 
@@ -143,7 +143,7 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 			try {
 				CauldronRegistry.getBrewFromPotion(be.getPotion()).applyInWorld(world, new BlockPos(x, y, z), side, be.getModifierList(), thrower);
 			} catch (NoSuchElementException exc) {
-				Covens.logger.error(exc.getMessage());
+				Log.e(exc.getMessage());
 			}
 		});
 	}

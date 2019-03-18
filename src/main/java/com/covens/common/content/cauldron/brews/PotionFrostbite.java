@@ -2,8 +2,8 @@ package com.covens.common.content.cauldron.brews;
 
 import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
-import com.covens.common.Covens;
 import com.covens.common.content.cauldron.BrewMod;
+import com.covens.common.core.helper.Log;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
@@ -77,10 +77,10 @@ public class PotionFrostbite extends BrewMod {
 
 	public Potion getPotion() {
 		if (freezing != null) {
-			Covens.logger.info("Extra Alchemy spotted! The freezing potion entity effect will be \"borrowed\" from it");
+			Log.i("Extra Alchemy spotted! The freezing potion entity effect will be \"borrowed\" from it");
 			return freezing;
 		}
-		Covens.logger.info("No extra alchemy found, freezing potion will default to its potion object!");
+		Log.i("No extra alchemy found, freezing potion will default to its potion object!");
 		return this;
 	}
 

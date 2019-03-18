@@ -2,7 +2,7 @@ package com.covens.common.content.cauldron;
 
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifierList;
-import com.covens.common.Covens;
+import com.covens.common.core.helper.Log;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,7 +31,7 @@ public class BrewVanilla implements IBrewEffect {
 		}
 
 		if (this.duration == 0) {
-			Covens.logger.warn("Couldn't find the correct default duration for " + potion.getName());
+			Log.w("Couldn't find the correct default duration for " + potion.getName());
 			this.duration = 1800;
 		}
 	}

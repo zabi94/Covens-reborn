@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.covens.client.core.ModelResourceLocations;
-import com.covens.common.Covens;
+import com.covens.common.core.helper.Log;
 import com.covens.common.item.ItemMod;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibItemName;
@@ -89,7 +89,7 @@ public class ItemLocationStone extends ItemMod {
 		NBTTagCompound tag = stack.getTagCompound();
 		tag.setInteger("damage", 0);
 		if (isBound(stack) && !tag.hasKey("coords")) {
-			Covens.logger.warn("Stone was bound but had no location data attached");
+			Log.w("Stone was bound but had no location data attached");
 		}
 		return tag;
 	}

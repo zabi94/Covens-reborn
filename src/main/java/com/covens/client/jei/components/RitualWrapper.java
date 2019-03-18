@@ -3,8 +3,8 @@ package com.covens.client.jei.components;
 import java.util.List;
 
 import com.covens.api.ritual.EnumGlyphType;
-import com.covens.common.Covens;
 import com.covens.common.content.ritual.AdapterIRitual;
+import com.covens.common.core.helper.Log;
 import com.covens.common.lib.LibMod;
 
 import mezz.jei.api.IGuiHelper;
@@ -100,7 +100,7 @@ public class RitualWrapper implements IRecipeWrapper {
 				this.colorRandom(minecraft.world.getTotalWorldTime(), circle);
 				break;
 			default:
-				Covens.logger.warn("Probable bug in Covens [RitualWrapper.java]");
+				Log.w("Probable bug in Covens [RitualWrapper.java]");
 				break;
 		}
 	}

@@ -5,9 +5,9 @@ import java.util.Comparator;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.covens.api.mp.MPUsingMachine;
 import com.covens.api.mp.MPContainer;
-import com.covens.common.Covens;
+import com.covens.api.mp.MPUsingMachine;
+import com.covens.common.core.helper.Log;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,7 +65,7 @@ public class MagicPowerConsumer implements MPUsingMachine {
 
 	private boolean isValidAltar(World world, BlockPos position) {
 		if ((world == null) || (position == null)) {
-			Covens.logger.warn("Checked if null is a valid altar dimension/position. I won't crash, but that shouldn't happen");
+			Log.w("Checked if null is a valid altar dimension/position. I won't crash, but that shouldn't happen");
 			new NullPointerException().printStackTrace();
 			return false;
 		}

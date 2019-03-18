@@ -6,7 +6,7 @@ import java.util.Arrays;
 import javax.annotation.Nullable;
 
 import com.covens.api.mp.MPContainer;
-import com.covens.common.Covens;
+import com.covens.common.core.helper.Log;
 import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibReflection;
 
@@ -177,7 +177,7 @@ public class EntityFlyingBroom extends Entity {
 	private void updateFromRider(int broomType) {
 		EntityPlayer rider = (EntityPlayer) this.getControllingPassenger();
 		if (rider == null) {
-			Covens.logger.warn(this + " is being ridden by a null rider!");
+			Log.w(this + " is being ridden by a null rider!");
 			return;
 		}
 		if (this.getDataManager().get(FUEL) < 5) {

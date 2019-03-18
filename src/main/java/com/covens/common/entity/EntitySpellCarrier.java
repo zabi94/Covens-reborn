@@ -9,8 +9,8 @@ import javax.annotation.Nullable;
 
 import com.covens.api.spell.ISpell;
 import com.covens.api.spell.ISpell.EnumSpellType;
-import com.covens.common.Covens;
 import com.covens.common.content.spell.Spell;
+import com.covens.common.core.helper.Log;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -138,7 +138,7 @@ public class EntitySpellCarrier extends EntityThrowable {
 					this.setDead();
 				}
 			} else {
-				Covens.logger.warn("Spell is null for " + this + " with spell reg name of " + this.getSpellName());
+				Log.w("Spell is null for " + this + " with spell reg name of " + this.getSpellName());
 			}
 		}
 	}

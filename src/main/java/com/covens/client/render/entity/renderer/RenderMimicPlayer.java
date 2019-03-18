@@ -2,7 +2,7 @@ package com.covens.client.render.entity.renderer;
 
 import java.util.UUID;
 
-import com.covens.common.Covens;
+import com.covens.common.core.helper.Log;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -144,7 +144,7 @@ public class RenderMimicPlayer extends RenderLivingBase<AbstractClientPlayer> {
 		// mimicking to occur when vitim offline)
 		AbstractClientPlayer newEntity = (AbstractClientPlayer) Minecraft.getMinecraft().world.getPlayerEntityByName(this.mimicName);
 		if (newEntity == null) {
-			Covens.logger.info("Attempted mimicking but player not online. ");
+			Log.i("Attempted mimicking but player not online. ");
 			return entity.getLocationSkin();
 		}
 		return newEntity.getLocationSkin();

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.covens.client.core.event.custom.MimicEvent;
-import com.covens.common.Covens;
+import com.covens.common.core.helper.Log;
 import com.covens.common.lib.LibMod;
 import com.covens.common.lib.LibReflection;
 import com.mojang.authlib.GameProfile;
@@ -52,7 +52,7 @@ public class MimicEventHandler {
 	private static void setPlayerSkin(AbstractClientPlayer player, ResourceLocation skin) {
 		NetHandlerPlayClient connection = Minecraft.getMinecraft().getConnection();
 		if (connection == null) {
-			Covens.logger.debug("Connection object is null, cannot fake skin");
+			Log.d("Connection object is null, cannot fake skin");
 			return;
 		}
 
@@ -69,7 +69,7 @@ public class MimicEventHandler {
 			ptextures.put(Type.SKIN, skin);
 			// TODO find a way to change the model
 		} catch (IllegalArgumentException | IllegalAccessException e) {
-			Covens.logger.fatal(e);
+			Log.e(e);
 		}
 
 	}

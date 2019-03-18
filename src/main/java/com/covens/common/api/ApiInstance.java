@@ -19,7 +19,6 @@ import com.covens.api.spell.ISpell;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.api.transformation.IBloodReserve;
 import com.covens.api.transformation.ITransformation;
-import com.covens.common.Covens;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.content.crystalBall.Fortune;
@@ -37,6 +36,7 @@ import com.covens.common.core.capability.energy.player.PlayerMPContainer;
 import com.covens.common.core.capability.energy.player.expansion.CapabilityMPExpansion;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
+import com.covens.common.core.helper.Log;
 import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
 import com.covens.common.core.util.syncTasks.UnbindFamiliarFromPlayer;
@@ -72,7 +72,7 @@ public class ApiInstance extends CovensAPI {
 		CovensAPI.getAPI().DEMON = EnumHelper.addCreatureAttribute("DEMON");
 		CovensAPI.getAPI().SPIRIT = EnumHelper.addCreatureAttribute("SPIRIT");
 		CovensAPI.getAPI().IMMUTABLE = Type.getType("IMMUTABLE");
-		Covens.logger.debug("API is ready!");
+		Log.d("API is ready!");
 	}
 
 	@Override
