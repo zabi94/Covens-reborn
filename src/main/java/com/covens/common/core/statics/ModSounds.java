@@ -20,10 +20,6 @@ public final class ModSounds {
 	public static final SoundEvent BUZZ = createSoundEvent("buzz");
 	@GameRegistry.ObjectHolder("boil")
 	public static final SoundEvent BOIL = createSoundEvent("boil");
-	@GameRegistry.ObjectHolder("bubble")
-	public static final SoundEvent BUBBLE = createSoundEvent("bubble");
-	@GameRegistry.ObjectHolder("oven_open")
-	public static final SoundEvent OVEN_OPEN = createSoundEvent("oven_open");
 	@GameRegistry.ObjectHolder("chalk_scribble")
 	public static final SoundEvent CHALK_SCRIBBLE = createSoundEvent("chalk_scribble");
 	@GameRegistry.ObjectHolder("broom_sweep")
@@ -51,7 +47,7 @@ public final class ModSounds {
 	public static class RegistrationHandler {
 		@SubscribeEvent
 		public static void registerSoundEvents(final RegistryEvent.Register<SoundEvent> event) {
-			event.getRegistry().registerAll(BUZZ, BOIL, BUBBLE, OVEN_OPEN, CHALK_SCRIBBLE, BROOM_SWEEP, OWL_HOOT);
+			event.getRegistry().registerAll(BUZZ, BOIL, CHALK_SCRIBBLE, BROOM_SWEEP, OWL_HOOT);
 		}
 	}
 }
