@@ -15,14 +15,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
-import thaumcraft.api.crafting.IInfusionStabiliserExt;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-@Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
-public class BlockGem extends BlockMod implements IInfusionStabiliserExt {
+public class BlockGem extends BlockMod {
 	public static final PropertyEnum<BlockGem.Gem> GEM = PropertyEnum.create("gem", BlockGem.Gem.class);
 
 	public BlockGem() {
@@ -65,18 +60,6 @@ public class BlockGem extends BlockMod implements IInfusionStabiliserExt {
 	@Override
 	public int damageDropped(IBlockState state) {
 		return state.getValue(GEM).ordinal();
-	}
-
-	@Optional.Method(modid = "thaumcraft")
-	@Override
-	public boolean canStabaliseInfusion(World world, BlockPos blockPos) {
-		return true;
-	}
-
-	@Override
-	@Optional.Method(modid = "thaumcraft")
-	public float getStabilizationAmount(World world, BlockPos pos) {
-		return 0;
 	}
 
 	public enum Gem implements IStringSerializable {
