@@ -63,7 +63,15 @@ public class BlockGem extends BlockMod {
 	}
 
 	public enum Gem implements IStringSerializable {
-		GARNET, NUUMMITE, TIGERS_EYE, TOURMALINE, BLOODSTONE, JASPER, MALACHITE, AMETHYST, ALEXANDRITE;
+		GARNET, 
+		NUUMMITE, //NUKED
+		TIGERS_EYE, 
+		TOURMALINE, 
+		BLOODSTONE, //NUKED (?)
+		JASPER, //NUKED
+		MALACHITE, 
+		AMETHYST, //NUKED
+		ALEXANDRITE; //NUKED
 
 		@Override
 		public String getName() {
