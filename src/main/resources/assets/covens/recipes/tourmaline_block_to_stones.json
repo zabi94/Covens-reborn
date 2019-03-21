@@ -2,13 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "covens:gem_block",
-      "data": 3
-    }
+      "item": "covens:tourmaline_block"    }
   ],
   "result": {
-    "item": "covens:gem",
-    "data": 3,
+    "item": "covens:gem_tourmaline",
     "count": 9
   }
 }

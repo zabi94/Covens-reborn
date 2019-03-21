@@ -1,13 +1,16 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "I I",
-    "ISI",
+    "S S",
+    "IDI",
     " I "
   ],
   "key": {
     "I": {
       "item": "minecraft:iron_nugget"
+    },
+    "D": {
+      "item": "minecraft:diamond"
     },
     "S": {
       "type": "forge:ore_dict",

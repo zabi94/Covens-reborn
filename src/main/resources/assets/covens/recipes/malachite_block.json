@@ -2,45 +2,35 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     },
     {
-      "item": "covens:gem",
-      "data": 6
+      "item": "covens:gem_malachite"
     }
   ],
   "result": {
-    "item": "covens:gem_block",
-    "data": 6,
+    "item": "covens:malachite_block",
     "count": 1
   }
 }

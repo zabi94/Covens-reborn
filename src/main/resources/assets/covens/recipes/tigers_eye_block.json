@@ -2,45 +2,35 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     },
     {
-      "item": "covens:gem",
-      "data": 2
+      "item": "covens:gem_tigers_eye"
     }
   ],
   "result": {
-    "item": "covens:gem_block",
-    "data": 2,
+    "item": "covens:tigers_eye_block",
     "count": 1
   }
 }

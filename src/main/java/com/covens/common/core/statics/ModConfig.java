@@ -51,28 +51,16 @@ public final class ModConfig {
 
 		@Comment("Silver Ore gen, this determines how much can spawn in a chunk, and how far up")
 		public SilverOre silver = new SilverOre();
-		@Comment("Bloodstone Ore gen, this determines how much can spawn in a chunk, and how far up")
-		public BloodstoneOre blood_stone = new BloodstoneOre();
 		@Comment("Tourmaline Ore gen, this determines how much can spawn in a chunk, and how far up")
 		public Tourmaline tourmaline = new Tourmaline();
 		@Comment("Malachite Ore gen, this determines how much can spawn in a chunk, and how far up")
 		public Malachite malachite = new Malachite();
 		@Comment("Tigers Eye Ore gen, this determines how much can spawn in a chunk, and how far up")
 		public TigersEye tigers_eye = new TigersEye();
-		@Comment("Nuummite Ore gen, this determines how much can spawn in a chunk, and how far up")
-		public Nuummite nuummite = new Nuummite();
 		@Comment("Garnet Ore gen, this determines how much can spawn in a chunk, and how far up")
 		public Garnet garnet = new Garnet();
-		@Comment("Jasper Ore gen, this determines how much can spawn in a chunk, and how far up")
-		public Jasper jasper = new Jasper();
 		@Comment("Salt Ore gen, this determines how much can spawn in a chunk, and how far up")
 		public Salt salt = new Salt();
-		@Comment("Amethyst Ore gen, this determines how much can spawn in a chunk, and how far up")
-		public Amethyst amethyst = new Amethyst();
-		@Comment("Alexandrite Ore gen, this determines how much can spawn in a chunk, and how far up")
-		public Alexandrite alexandrite = new Alexandrite();
-		@Comment("Coquina gen, this determines how much can spawn in a chunk, and how far up")
-		public Coquina coquina = new Coquina();
 		@Comment("Beehive gen, this determines how many can spawn in a chunk, and how far up")
 		public Beehive beehive = new Beehive();
 
@@ -82,14 +70,6 @@ public final class ModConfig {
 			public int silver_min_height = 10;
 			public int silver_max_height = 128;
 			public int silver_gen_chance = 8;
-		}
-
-		public static class BloodstoneOre {
-			public int bloodStone_min_vein = 1;
-			public int bloodStone_max_vein = 2;
-			public int bloodStone_min_height = 10;
-			public int bloodStone_max_height = 100;
-			public int bloodStone_gen_chance = 6;
 		}
 
 		public static class Tourmaline {
@@ -116,14 +96,6 @@ public final class ModConfig {
 			public int tigersEye_gen_chance = 6;
 		}
 
-		public static class Nuummite {
-			public int nuummite_min_vein = 1;
-			public int nuummite_max_vein = 2;
-			public int nuummite_min_height = 10;
-			public int nuummite_max_height = 80;
-			public int nuummite_gen_chance = 6;
-		}
-
 		public static class Garnet {
 			public int garnet_min_vein = 1;
 			public int garnet_max_vein = 2;
@@ -132,44 +104,12 @@ public final class ModConfig {
 			public int garnet_gen_chance = 6;
 		}
 
-		public static class Jasper {
-			public int jasper_min_vein = 1;
-			public int jasper_max_vein = 2;
-			public int jasper_min_height = 10;
-			public int jasper_max_height = 80;
-			public int jasper_gen_chance = 6;
-		}
-
 		public static class Salt {
 			public int salt_min_vein = 1;
 			public int salt_max_vein = 4;
 			public int salt_min_height = 10;
 			public int salt_max_height = 128;
 			public int salt_gen_chance = 6;
-		}
-
-		public static class Amethyst {
-			public int amethyst_min_vein = 1;
-			public int amethyst_max_vein = 4;
-			public int amethyst_min_height = 10;
-			public int amethyst_max_height = 65;
-			public int amethyst_gen_chance = 6;
-		}
-
-		public static class Alexandrite {
-			public int alexandrite_min_vein = 1;
-			public int alexandrite_max_vein = 2;
-			public int alexandrite_min_height = 10;
-			public int alexandrite_max_height = 40;
-			public int alexandrite_gen_chance = 6;
-		}
-
-		public static class Coquina {
-			public int coquina_min_vein = 1;
-			public int coquina_max_vein = 4;
-			public int coquina_min_height = 55;
-			public int coquina_max_height = 65;
-			public int coquina_gen_chance = 4;
 		}
 
 		public static class Beehive {

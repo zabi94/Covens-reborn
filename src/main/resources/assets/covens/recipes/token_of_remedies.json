@@ -14,8 +14,7 @@
       "ore": "nuggetSilver"
     },
     "P": {
-      "item": "covens:gem",
-      "data": 7
+      "item": "covens:gem_tigers_eye"
     }
   },
   "result": {

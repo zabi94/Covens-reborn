@@ -3,6 +3,7 @@ package com.covens.common.item;
 import javax.annotation.Nullable;
 
 import com.covens.common.block.BlockMod;
+import com.covens.common.core.statics.ModCreativeTabs;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -14,6 +15,7 @@ public class ItemBlockMod extends ItemBlock {
 
 	public ItemBlockMod(Block block) {
 		super(block);
+		this.setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB);
 	}
 
 	@Override

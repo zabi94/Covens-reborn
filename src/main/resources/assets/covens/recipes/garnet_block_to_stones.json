@@ -2,13 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "covens:gem_block",
-      "data": 0
+      "item": "covens:garnet_block"
     }
   ],
   "result": {
-    "item": "covens:gem",
-    "data": 0,
+    "item": "covens:gem_garnet",
     "count": 9
   }
 }

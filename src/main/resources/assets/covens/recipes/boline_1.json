@@ -11,8 +11,7 @@
       "ore": "ingotSilver"
     },
     "G": {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_malachite"
     }
   },
   "result": {

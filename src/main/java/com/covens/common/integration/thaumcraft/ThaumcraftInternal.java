@@ -1,7 +1,6 @@
 package com.covens.common.integration.thaumcraft;
 
 import com.covens.common.block.ModBlocks;
-import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.item.ModItems;
 
 import net.minecraft.item.ItemStack;
@@ -61,15 +60,10 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModItems.cold_iron_ingot), new AspectList().add(Aspect.AVERSION, 15).add(Aspect.COLD, 15).add(Aspect.METAL, 15));
 		evt.register.registerObjectTag(new ItemStack(ModItems.empty_honeycomb), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.VOID, 4));
 		evt.register.registerObjectTag(new ItemStack(ModItems.honeycomb), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.LIFE, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.GARNET.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.PROTECT, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.NUUMMITE.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.MAGIC, 4).add(Aspect.COLD, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.TIGERS_EYE.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.SENSES, 4).add(Aspect.LIGHT, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.TOURMALINE.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.AURA, 4).add(Aspect.PROTECT, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.BLOODSTONE.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.LIFE, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.JASPER.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.AVERSION, 4).add(Aspect.PROTECT, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.MALACHITE.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.EARTH, 4).add(Aspect.EXCHANGE, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.AMETHYST.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.ALCHEMY, 4));
-		evt.register.registerObjectTag(new ItemStack(ModItems.gem, 1, Gem.ALEXANDRITE.ordinal()), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.MIND, 4).add(Aspect.PROTECT, 4));
+		evt.register.registerObjectTag(new ItemStack(ModItems.gem_garnet), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.PROTECT, 4));
+		evt.register.registerObjectTag(new ItemStack(ModItems.gem_tigers_eye), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.SENSES, 4).add(Aspect.LIGHT, 4));
+		evt.register.registerObjectTag(new ItemStack(ModItems.gem_tourmaline), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.AURA, 4).add(Aspect.PROTECT, 4));
+		evt.register.registerObjectTag(new ItemStack(ModItems.gem_malachite), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.EARTH, 4).add(Aspect.EXCHANGE, 4));
 		evt.register.registerObjectTag(new ItemStack(ModItems.glass_jar), new AspectList().add(Aspect.VOID, 6).add(Aspect.CRYSTAL, 6));
 		evt.register.registerObjectTag(new ItemStack(ModItems.spectral_dust), new AspectList().add(Aspect.VOID, 4).add(Aspect.SOUL, 4));
 		evt.register.registerObjectTag(new ItemStack(ModItems.equine_tail), new AspectList().add(Aspect.BEAST, 4).add(Aspect.AIR, 4));
@@ -164,15 +158,10 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModBlocks.salt_ore), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
 
 		// Ores
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 0), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.PROTECT, 4).add(Aspect.EARTH, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 1), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.MAGIC, 4).add(Aspect.EARTH, 4).add(Aspect.COLD, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 2), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.SENSES, 4).add(Aspect.EARTH, 4).add(Aspect.LIGHT, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 3), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.AURA, 4).add(Aspect.EARTH, 4).add(Aspect.PROTECT, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 4), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.LIFE, 4).add(Aspect.EARTH, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 5), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.AVERSION, 4).add(Aspect.EARTH, 4).add(Aspect.PROTECT, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 6), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.EARTH, 6).add(Aspect.EXCHANGE, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 7), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.ALCHEMY, 4).add(Aspect.EARTH, 4));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.gem_ore, 1, 8), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.MIND, 4).add(Aspect.EARTH, 4).add(Aspect.PROTECT, 4));
+		evt.register.registerObjectTag(new ItemStack(ModBlocks.garnet_ore), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.PROTECT, 4).add(Aspect.EARTH, 4));
+		evt.register.registerObjectTag(new ItemStack(ModBlocks.tigers_eye_ore), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.SENSES, 4).add(Aspect.EARTH, 4).add(Aspect.LIGHT, 4));
+		evt.register.registerObjectTag(new ItemStack(ModBlocks.tourmaline_ore), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.AURA, 4).add(Aspect.EARTH, 4).add(Aspect.PROTECT, 4));
+		evt.register.registerObjectTag(new ItemStack(ModBlocks.malachite_ore), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.CRYSTAL, 4).add(Aspect.EARTH, 6).add(Aspect.EXCHANGE, 4));
 
 		// Baubles
 		evt.register.registerObjectTag(new ItemStack(ModItems.talisman_ruby_orb), new AspectList().add(Aspect.METAL, 25).add(Aspect.DESIRE, 25).add(Aspect.CRYSTAL, 25));

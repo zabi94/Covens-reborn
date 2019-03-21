@@ -2,7 +2,7 @@
   "type": "forge:ore_shaped",
   "pattern": [
     "FSF",
-    "SPS",
+    "S S",
     "FSF"
   ],
   "key": {
@@ -10,13 +10,8 @@
       "item": "minecraft:stone",
       "data": 0
     },
-    "P": {
-      "item": "covens:pentacle",
-      "data": 0
-    },
     "F": {
-      "item": "covens:gem_powder",
-      "data": 1
+      "item": "covens:gem_powder_malachite"
     }
   },
   "result": {

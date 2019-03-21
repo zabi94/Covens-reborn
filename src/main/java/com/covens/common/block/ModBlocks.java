@@ -17,12 +17,11 @@ import com.covens.common.block.misc.BlockSaltBarrier;
 import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.block.misc.BlockWitchesLight;
 import com.covens.common.block.natural.BlockBeehive;
-import com.covens.common.block.natural.BlockGem;
-import com.covens.common.block.natural.BlockGem.Gem;
 import com.covens.common.block.natural.BlockGemOre;
 import com.covens.common.block.natural.BlockInfestedFarmland;
 import com.covens.common.block.natural.BlockSaltOre;
 import com.covens.common.block.natural.BlockSilverOre;
+import com.covens.common.block.natural.Gem;
 import com.covens.common.block.natural.crop.BlockCrop;
 import com.covens.common.block.natural.crop.CropBelladonna;
 import com.covens.common.block.natural.crop.CropKelp;
@@ -105,7 +104,6 @@ public final class ModBlocks {
 	public static final Block apiary = null;
 	public static final Block brazier = null;
 	public static final Block salt_ore = null;
-	public static final Block gem_ore = null;
 	public static final Block nethersteel = null;
 	public static final Block fake_ice = null;
 	public static final Block torchwood = null;
@@ -147,6 +145,16 @@ public final class ModBlocks {
 	public static final Block silver_block_chisel = null;
 	public static final Block cold_iron_block_chisel = null;
 	public static final Block nethersteel_chisel = null;
+	
+	public static final Block garnet_block = null;
+	public static final Block tigers_eye_block = null;
+	public static final Block tourmaline_block = null;
+	public static final Block malachite_block = null;
+	
+	public static final Block garnet_ore = null;
+	public static final Block tigers_eye_ore = null;
+	public static final Block tourmaline_ore = null;
+	public static final Block malachite_ore = null;
 
 	private ModBlocks() {
 	}
@@ -179,14 +187,28 @@ public final class ModBlocks {
 		// Ore
 		registry.register(new BlockSilverOre());
 		registry.register(new BlockSaltOre());
-		registry.register(new BlockGemOre());
+		
 		registry.register(new BlockWitchFire());
 
 		// Tool Blocks
 		registry.registerAll(new BlockCauldron(), new BlockMagicMirror(), new BlockOven(), new BlockBrazier(), new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM, false), new BlockCandleSmall(LibBlockName.CANDLE_SMALL, false), new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM_LIT, true), new BlockCandleSmall(LibBlockName.CANDLE_SMALL_LIT, true), new BlockSaltBarrier(), new BlockApiary(), new BlockTorchwood(), new BlockEmberGrass(), new BlockBeehive(LibBlockName.BEEHIVE), new BlockWitchAltar(LibBlockName.WITCH_ALTAR, Material.ROCK), new BlockThreadSpinner(LibBlockName.THREAD_SPINNER), new BlockCircleGlyph(LibBlockName.GLYPHS), new BlockCrystalBall(LibBlockName.CRYSTAL_BALL), new BlockGoblet(LibBlockName.GOBLET), new BlockGemBowl(LibBlockName.GEM_BOWL), new BlockTarotTable(), new BlockLantern(true), new BlockLantern(false), new BlockDistillery(LibBlockName.DISTILLERY), new BlockWitchesLight(), new BlockPurifyingEarth(), new BlockPlacedItem());
 
 		// Decorative Blocks
-		registry.registerAll(new BlockMod(LibBlockName.SILVER_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockFakeIce(), new BlockSilverChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockColdIronChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockNetherSteelChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockMod(LibBlockName.COLD_IRON_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockMod(LibBlockName.NETHERSTEEL, Material.IRON, SoundType.METAL).setHardness(5.0F), new BlockGem(), new BlockGraveyardDirt());
+		registry.registerAll(
+				new BlockMod(LibBlockName.SILVER_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F), 
+				new BlockFakeIce(), 
+				new BlockSilverChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), 
+				new BlockColdIronChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), 
+				new BlockNetherSteelChiseled(Material.IRON, SoundType.METAL).setHardness(5.0F), 
+				new BlockMod(LibBlockName.COLD_IRON_BLOCK, Material.IRON, SoundType.METAL).setHardness(5.0F), 
+				new BlockMod(LibBlockName.NETHERSTEEL, Material.IRON, SoundType.METAL).setHardness(5.0F), 
+				new BlockGraveyardDirt()
+		);
+		
+		for (Gem g:Gem.values()) {
+			registry.register(g.setGemBlock(new BlockMod(g.getBlockName(), Material.ROCK, SoundType.STONE).setHardness(5f)));
+			registry.register(g.setOreBlock(new BlockGemOre(g)));
+		}
 
 		// Trees
 		registry.registerAll(new BlockModLog(LibBlockName.LOG_ELDER), new BlockModLog(LibBlockName.LOG_JUNIPER), new BlockModLog(LibBlockName.LOG_YEW), new BlockModLog(LibBlockName.LOG_CYPRESS), new BlockModLeaves(LibBlockName.LEAVES_ELDER), new BlockModLeaves(LibBlockName.LEAVES_JUNIPER), new BlockModLeaves(LibBlockName.LEAVES_YEW), new BlockModLeaves(LibBlockName.LEAVES_CYPRESS), new BlockPlanks(LibBlockName.PLANKS_ELDER), new BlockPlanks(LibBlockName.PLANKS_JUNIPER), new BlockPlanks(LibBlockName.PLANKS_YEW), new BlockPlanks(LibBlockName.PLANKS_CYPRESS), new BlockModSapling(LibBlockName.SAPLING));
@@ -211,25 +233,16 @@ public final class ModBlocks {
 		for (BlockSteelVariant sv : BlockSteelVariant.values()) {
 			OreDictionary.registerOre("blockNethersteel", new ItemStack(ModBlocks.nethersteel_chisel, 1, sv.ordinal()));
 		}
-		OreDictionary.registerOre("blockGarnet", new ItemStack(ModBlocks.gem_block, 1, Gem.GARNET.ordinal()));
-		OreDictionary.registerOre("blockNuummite", new ItemStack(ModBlocks.gem_block, 1, Gem.NUUMMITE.ordinal()));
-		OreDictionary.registerOre("blockTigersEye", new ItemStack(ModBlocks.gem_block, 1, Gem.TIGERS_EYE.ordinal()));
-		OreDictionary.registerOre("blockTourmaline", new ItemStack(ModBlocks.gem_block, 1, Gem.TOURMALINE.ordinal()));
-		OreDictionary.registerOre("blockBloodstone", new ItemStack(ModBlocks.gem_block, 1, Gem.BLOODSTONE.ordinal()));
-		OreDictionary.registerOre("blockJasper", new ItemStack(ModBlocks.gem_block, 1, Gem.JASPER.ordinal()));
-		OreDictionary.registerOre("blockMalachite", new ItemStack(ModBlocks.gem_block, 1, Gem.MALACHITE.ordinal()));
-		OreDictionary.registerOre("blockAmethyst", new ItemStack(ModBlocks.gem_block, 1, Gem.AMETHYST.ordinal()));
-		OreDictionary.registerOre("blockAlexandrite", new ItemStack(ModBlocks.gem_block, 1, Gem.ALEXANDRITE.ordinal()));
+		
+		OreDictionary.registerOre("blockGarnet", new ItemStack(ModBlocks.garnet_block));
+		OreDictionary.registerOre("blockTigersEye", new ItemStack(ModBlocks.garnet_block));
+		OreDictionary.registerOre("blockTourmaline", new ItemStack(ModBlocks.garnet_block));
+		OreDictionary.registerOre("blockMalachite", new ItemStack(ModBlocks.garnet_block));
 
-		OreDictionary.registerOre("oreGarnet", new ItemStack(ModBlocks.gem_ore, 1, Gem.GARNET.ordinal()));
-		OreDictionary.registerOre("oreNuummite", new ItemStack(ModBlocks.gem_ore, 1, Gem.NUUMMITE.ordinal()));
-		OreDictionary.registerOre("oreAmethyst", new ItemStack(ModBlocks.gem_ore, 1, Gem.AMETHYST.ordinal()));
-		OreDictionary.registerOre("oreAlexandrite", new ItemStack(ModBlocks.gem_ore, 1, Gem.ALEXANDRITE.ordinal()));
-		OreDictionary.registerOre("oreBloodstone", new ItemStack(ModBlocks.gem_ore, 1, Gem.BLOODSTONE.ordinal()));
-		OreDictionary.registerOre("oreTourmaline", new ItemStack(ModBlocks.gem_ore, 1, Gem.TOURMALINE.ordinal()));
-		OreDictionary.registerOre("oreMalachite", new ItemStack(ModBlocks.gem_ore, 1, Gem.MALACHITE.ordinal()));
-		OreDictionary.registerOre("oreTigersEye", new ItemStack(ModBlocks.gem_ore, 1, Gem.TIGERS_EYE.ordinal()));
-		OreDictionary.registerOre("oreJasper", new ItemStack(ModBlocks.gem_ore, 1, Gem.JASPER.ordinal()));
+		OreDictionary.registerOre("oreGarnet", new ItemStack(ModBlocks.garnet_ore));
+		OreDictionary.registerOre("oreTourmaline", new ItemStack(ModBlocks.tourmaline_ore));
+		OreDictionary.registerOre("oreMalachite", new ItemStack(ModBlocks.malachite_ore));
+		OreDictionary.registerOre("oreTigersEye", new ItemStack(ModBlocks.tigers_eye_ore));
 
 		OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.silver_ore));
 		OreDictionary.registerOre("blockNethersteel", new ItemStack(ModBlocks.nethersteel));

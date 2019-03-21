@@ -2,45 +2,35 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     },
     {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     }
   ],
   "result": {
-    "item": "covens:gem_block",
-    "data": 0,
+    "item": "covens:garnet_block",
     "count": 1
   }
 }

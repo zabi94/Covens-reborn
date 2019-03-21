@@ -2,13 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "covens:gem_block",
-      "data": 2
+      "item": "covens:tigers_eye_block"
     }
   ],
   "result": {
-    "item": "covens:gem",
-    "data": 2,
+    "item": "covens:gem_tigers_eye",
     "count": 9
   }
 }

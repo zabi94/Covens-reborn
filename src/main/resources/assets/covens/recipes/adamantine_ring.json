@@ -11,8 +11,7 @@
       "ore": "nuggetSilver"
     },
     "E": {
-      "item": "covens:gem",
-      "data": 8
+      "item": "minecraft:diamond"
     }
   },
   "result": {

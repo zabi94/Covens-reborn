@@ -1,0 +1,22 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "blocks/stone",
+      "overlay": "covens:blocks/tigers_eye_ore",
+      "particle": "blocks/stone"
+    },
+    "model": "covens:block_overlay",
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {
+      }
+    ],
+    "inventory": [
+      {
+      }
+    ]
+  }
+}

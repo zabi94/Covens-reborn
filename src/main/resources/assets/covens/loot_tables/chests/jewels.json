@@ -56,7 +56,7 @@
         },
         {
           "type": "item",
-          "name": "covens:gem",
+          "name": "covens:gem_tourmaline",
           "functions": [
             {
               "function": "set_count",
@@ -64,12 +64,47 @@
                 "min": 0,
                 "max": 3
               }
-            },
+            }
+          ],
+          "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "covens:gem_malachite",
+          "functions": [
             {
-              "function": "set_data",
-              "data": {
+              "function": "set_count",
+              "count": {
                 "min": 0,
-                "max": 8
+                "max": 3
+              }
+            }
+          ],
+          "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "covens:gem_tigers_eye",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "covens:gem_garnet",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
               }
             }
           ],

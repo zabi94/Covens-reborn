@@ -15,8 +15,7 @@
       "ore": "string"
     },
     "E": {
-      "item": "covens:gem",
-      "data": 0
+      "item": "covens:gem_garnet"
     }
   },
   "result": {

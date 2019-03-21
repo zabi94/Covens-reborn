@@ -7,10 +7,9 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.block.chisel.BlockColdIronChiseled;
 import com.covens.common.block.chisel.BlockNetherSteelChiseled;
 import com.covens.common.block.chisel.BlockSilverChiseled;
-import com.covens.common.block.natural.BlockGem.Gem;
+import com.covens.common.block.natural.Gem;
 import com.covens.common.core.capability.altar.MixedProvider;
 import com.covens.common.core.helper.CropHelper;
-import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.block.ItemBlockColor;
 import com.covens.common.item.block.ItemBlockMeta;
 import com.covens.common.item.block.ItemBlockMeta.EnumNameMode;
@@ -40,8 +39,6 @@ import com.covens.common.item.food.ItemMagicSalve;
 import com.covens.common.item.food.ItemYewAril;
 import com.covens.common.item.magic.ItemBell;
 import com.covens.common.item.magic.ItemBroom;
-import com.covens.common.item.magic.ItemGem;
-import com.covens.common.item.magic.ItemGemPowder;
 import com.covens.common.item.magic.ItemLocationStone;
 import com.covens.common.item.magic.ItemRitualChalk;
 import com.covens.common.item.magic.ItemSalt;
@@ -83,9 +80,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 @SuppressWarnings("ConstantConditions")
 @ObjectHolder(LibMod.MOD_ID)
 public final class ModItems {
-
-	public static final Item gem = null;
-	public static final Item gem_powder = null;
 
 	public static final Item mandrake_root = null;
 	public static final Item seed_mandrake = null;
@@ -271,6 +265,16 @@ public final class ModItems {
 	public static final Item blood_bottle = null;
 	public static final Item spark_of_darkness = null;
 	
+	public static final Item gem_garnet = null;
+	public static final Item gem_tourmaline = null;
+	public static final Item gem_tigers_eye = null;
+	public static final Item gem_malachite = null;
+	
+	public static final Item gem_powder_garnet = null;
+	public static final Item gem_powder_tourmaline = null;
+	public static final Item gem_powder_tigers_eye = null;
+	public static final Item gem_powder_malachite = null;
+	
 	public static ItemRitualChalk[] chalkType;
 
 	private ModItems() {
@@ -279,8 +283,6 @@ public final class ModItems {
 	public static void register(final IForgeRegistry<Item> registry) {
 		CropHelper.getFoods().forEach((crop, item) -> registry.register(item));
 		CropHelper.getSeeds().forEach((crop, item) -> registry.register(item));
-		registry.register(new ItemGem());
-		registry.register(new ItemGemPowder(LibItemName.GEM_POWDER));
 		registry.register(new ItemMod(LibItemName.COLD_IRON_INGOT));
 		registry.register(new ItemMod(LibItemName.SILVER_POWDER));
 		registry.register(new ItemMod(LibItemName.SILVER_INGOT));
@@ -448,7 +450,6 @@ public final class ModItems {
 				new ItemBlockColor(ModBlocks.candle_medium_lit), //
 				new ItemBlockColor(ModBlocks.candle_small_lit), //
 				itemBlock(ModBlocks.fake_ice), //
-				new ItemGemOre(ModBlocks.gem_ore).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB), //
 				itemBlock(ModBlocks.silver_block), //
 				itemBlock(ModBlocks.silver_ore), //
 				itemBlock(ModBlocks.cauldron), //
@@ -459,7 +460,6 @@ public final class ModItems {
 				itemBlock(ModBlocks.torchwood), //
 				itemBlock(ModBlocks.ember_grass), //
 				itemBlock(ModBlocks.beehive), //
-				new ItemGemBlock(ModBlocks.gem_block).setCreativeTab(ModCreativeTabs.BLOCKS_CREATIVE_TAB), //
 				itemBlock(ModBlocks.salt_ore), //
 				itemBlock(ModBlocks.nethersteel), //
 				itemBlock(ModBlocks.log_elder), //
@@ -489,8 +489,16 @@ public final class ModItems {
 				itemBlock(ModBlocks.graveyard_dirt), //
 				new ItemBlockRevealingLantern(ModBlocks.lantern, false), //
 				new ItemBlockRevealingLantern(ModBlocks.revealing_lantern, true), //
-				itemBlock(ModBlocks.spanish_moss));
+				itemBlock(ModBlocks.spanish_moss)
+		);
 
+		for (Gem g:Gem.values()) {
+			registry.register(g.setGemItem(new ItemMod(g.getGemName())));
+			registry.register(g.setPowderItem(new ItemMod(g.getPowderName())));
+			registry.register(new ItemGemBlock(g.getGemBlock()));
+			registry.register(new ItemGemOre(g.getOreBlock()));
+		}
+		
 		// Chisel
 		registry.registerAll(//
 				new ItemBlockMeta<>(ModBlocks.silver_block_chisel, BlockSilverChiseled.BlockSilverVariant.values(), EnumNameMode.TOOLTIP), //
@@ -519,15 +527,10 @@ public final class ModItems {
 	}
 
 	private static void initOreDictionary() {
-		OreDictionary.registerOre("gemBloodstone", new ItemStack(ModItems.gem, 1, Gem.BLOODSTONE.ordinal()));
-		OreDictionary.registerOre("gemNuummite", new ItemStack(ModItems.gem, 1, Gem.NUUMMITE.ordinal()));
-		OreDictionary.registerOre("gemGarnet", new ItemStack(ModItems.gem, 1, Gem.GARNET.ordinal()));
-		OreDictionary.registerOre("gemTourmaline", new ItemStack(ModItems.gem, 1, Gem.TOURMALINE.ordinal()));
-		OreDictionary.registerOre("gemTigersEye", new ItemStack(ModItems.gem, 1, Gem.TIGERS_EYE.ordinal()));
-		OreDictionary.registerOre("gemJasper", new ItemStack(ModItems.gem, 1, Gem.JASPER.ordinal()));
-		OreDictionary.registerOre("gemMalachite", new ItemStack(ModItems.gem, 1, Gem.MALACHITE.ordinal()));
-		OreDictionary.registerOre("gemAmethyst", new ItemStack(ModItems.gem, 1, Gem.AMETHYST.ordinal()));
-		OreDictionary.registerOre("gemAlexandrite", new ItemStack(ModItems.gem, 1, Gem.ALEXANDRITE.ordinal()));
+		OreDictionary.registerOre("gemGarnet", new ItemStack(ModItems.gem_garnet));
+		OreDictionary.registerOre("gemTourmaline", new ItemStack(ModItems.gem_tourmaline));
+		OreDictionary.registerOre("gemTigersEye", new ItemStack(ModItems.gem_tigers_eye));
+		OreDictionary.registerOre("gemMalachite", new ItemStack(ModItems.gem_malachite));
 
 		OreDictionary.registerOre("nuggetSilver", new ItemStack(ModItems.silver_nugget));
 		OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.silver_ingot));

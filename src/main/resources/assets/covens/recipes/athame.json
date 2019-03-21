@@ -11,8 +11,8 @@
       "ore": "ingotSilver"
     },
     "G": {
-      "item": "covens:gem",
-      "data": 8
+      "item": "minecraft:emerald",
+      "data": 0
     },
     "T": {
       "item": "minecraft:stick"

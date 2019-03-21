@@ -72,27 +72,15 @@ item.witchweed.name=Witchweed
 
 //Gemstones
 item.gem_garnet.name=Garnet
-item.gem_moldavite.name=Moldavite
-item.gem_nuummite.name=Nuummite
 item.gem_tourmaline.name=Tourmaline
 item.gem_tigers_eye.name=Tiger's Eye
-item.gem_bloodstone.name=Bloodstone
-item.gem_jasper.name=Jasper
 item.gem_malachite.name=Malachite
-item.gem_amethyst.name=Amethyst
-item.gem_alexandrite.name=Alexandrite
 
 //Gemstone powders
-item.gem_powder.garnet.name=Garnet Powder
-item.gem_powder.moldavite.name=Moldavite Powder
-item.gem_powder.nuummite.name=Nuummite Powder
-item.gem_powder.tigers_eye.name=Tiger's Eye Powder
-item.gem_powder.tourmaline.name=Tourmaline Powder
-item.gem_powder.bloodstone.name=Bloodstone Powder
-item.gem_powder.jasper.name=Jasper Powder
-item.gem_powder.malachite.name=Malachite Powder
-item.gem_powder.amethyst.name=Amethyst Powder
-item.gem_powder.alexandrite.name=Alexandrite Powder
+item.gem_powder_garnet.name=Garnet Powder
+item.gem_powder_tigers_eye.name=Tiger's Eye Powder
+item.gem_powder_tourmaline.name=Tourmaline Powder
+item.gem_powder_malachite.name=Malachite Powder
 item.quartz_powder.name=Quartz Powder
 item.lapis_powder.name=Lapis Powder
 
@@ -385,32 +373,19 @@ tile.planks_cypress.name=Cypress Wood Planks
 
 //Metals, Stones and Ores
 tile.silver_ore.name=Silver Ore
-tile.gem_ore_moldavite.name=Moldavite Ore
-tile.gem_ore_bloodstone.name=Bloodstone Ore
-tile.gem_ore_malachite.name=Malachite Ore
-tile.gem_ore_tourmaline.name=Tourmaline Ore
-tile.gem_block_tourmaline.name=Tourmaline Block
-tile.gem_block_moldavite.name=Moldavite Block
-tile.gem_block_bloodstone.name=Bloodstone Block
-tile.gem_block_tigers_eye.name=Tiger's Eye Block
-tile.gem_block_malachite.name=Malachite Block
-tile.gem_block_nuummite.name=Nuummite Block
-tile.gem_block_garnet.name=Garnet Block
-tile.gem_block_alexandrite.name=Alexandrite Block
-tile.gem_block_jasper.name=Jasper Block
-tile.gem_block_amethyst.name=Amethyst Block
+tile.malachite_ore.name=Malachite Ore
+tile.tourmaline_ore.name=Tourmaline Ore
+tile.tigers_eye_ore.name=Tiger's Eye Ore
+tile.garnet_ore.name=Garnet Ore
+tile.tourmaline_block.name=Tourmaline Block
+tile.tigers_eye_block.name=Tiger's Eye Block
+tile.malachite_block.name=Malachite Block
+tile.garnet_block.name=Garnet Block
 tile.silver_block.name=Silver Block
 tile.silver_block_chisel.name=Silver Block (Chiseled)
 tile.nethersteel.name=Nethersteel
 tile.nethersteel_chisel.name=Nethersteel (Chiseled)
-tile.gem_ore_jasper.name=Jasper Ore
-tile.gem_ore_tigers_eye.name=Tiger's Eye Ore
-tile.gem_ore_serpentine.name=Serpentine ore
-tile.gem_ore_nuummite.name=Nuummite Ore
-tile.gem_ore_garnet.name=Garnet Ore
 tile.salt_ore.name=Salt Ore
-tile.gem_ore_amethyst.name=Amethyst Ore
-tile.gem_ore_alexandrite.name=Alexandrite Ore
 tile.fake_ice.name=Perpetual Ice
 tile.cold_iron_block.name=Cold Iron Block
 tile.cold_iron_block_chisel.name=Cold Iron Block (Chiseled)

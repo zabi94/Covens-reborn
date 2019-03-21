@@ -34,7 +34,6 @@ public final class LibBlockName {
 	public static final String GRAVEYARD_DIRT = "graveyard_dirt";
 	public static final String PURIFYING_EARTH = "purifying_earth";
 
-	public static final String GEM_ORE = "gem_ore";
 	public static final String SILVER_ORE = "silver_ore";
 	public static final String SILVER_BLOCK = "silver_block";
 	public static final String BLOODSTONE_BLOCK = "bloodstone_block";
@@ -50,7 +49,6 @@ public final class LibBlockName {
 	public static final String BRAZIER = "brazier";
 	public static final String BEEHIVE = "beehive";
 	public static final String SALT_ORE = "salt_ore";
-	public static final String GEM_BLOCK = "gem_block";
 	public static final String TOURMALINE_BLOCK = "tourmaline_block";
 	public static final String MALACHITE_BLOCK = "malachite_block";
 	public static final String TIGERS_EYE_BLOCK = "tigers_eye_block";

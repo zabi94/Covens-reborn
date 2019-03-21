@@ -1,9 +1,9 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "PLP",
+    "LPL",
     "UFU",
-    "PMP"
+    "LML"
   ],
   "key": {
     "U": {
