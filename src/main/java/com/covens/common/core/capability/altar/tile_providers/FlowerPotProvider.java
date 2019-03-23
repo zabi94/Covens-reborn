@@ -3,18 +3,18 @@ package com.covens.common.core.capability.altar.tile_providers;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.covens.common.core.capability.altar.MixedProvider;
+import com.covens.common.core.capability.altar.MultProvider;
 
 import net.minecraft.tileentity.TileEntityFlowerPot;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class FlowerPotProvider extends MixedProvider {
+public class FlowerPotProvider extends MultProvider {
 	
 	private TileEntityFlowerPot pot;
 	
 	public FlowerPotProvider(TileEntityFlowerPot flowerPot) {
-		super(0, 0.12);
+		super(0.12);
 		this.pot = flowerPot;
 	}
 

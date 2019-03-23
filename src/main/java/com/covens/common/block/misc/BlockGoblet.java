@@ -3,7 +3,7 @@ package com.covens.common.block.misc;
 import javax.annotation.Nullable;
 
 import com.covens.common.block.BlockMod;
-import com.covens.common.core.capability.altar.MixedProvider;
+import com.covens.common.core.capability.altar.MultProvider;
 import com.covens.common.integration.optifine.Optifine;
 
 import net.minecraft.block.material.MapColor;
@@ -28,8 +28,8 @@ public class BlockGoblet extends BlockMod {
 	public static final PropertyBool FULL = PropertyBool.create("filled");
 
 	private static final AxisAlignedBB bounding_box = new AxisAlignedBB(0.375, 0, 0.375, 0.625, 0.375, 0.625);
-	private static final MixedProvider mult_full = new MixedProvider(0, 0.25);
-	private static final MixedProvider mult_empty = new MixedProvider(0, 0.05);
+	private static final MultProvider mult_full = new MultProvider(0.25);
+	private static final MultProvider mult_empty = new MultProvider(0.05);
 
 	public BlockGoblet(String id) {
 		super(id, new Material(MapColor.IRON));

@@ -26,7 +26,7 @@ import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 public class ItemSilverSword extends ItemSword implements IModelRegister {
 
 	public static final UUID SILVER_UUID = UUID.fromString("a06cdaba-5c55-48bf-8b36-5a31c5b9ab5b");
-	private static final EffectProvider cap = new EffectProvider(SILVER_UUID);
+	private static final EffectProvider cap = new EffectProvider(SILVER_UUID, "altar.effect.tooltip.silver");
 
 	public ItemSilverSword() {
 		super(ModMaterials.TOOL_SILVER);

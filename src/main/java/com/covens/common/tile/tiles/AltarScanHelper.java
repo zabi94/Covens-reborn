@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.covens.api.mp.MPContainer;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.item.tool.ItemBoline;
+import com.covens.common.item.tool.ItemColdIronSword;
 import com.covens.common.item.tool.ItemSilverSword;
 import com.covens.common.lib.LibIngredients;
 
@@ -114,6 +115,9 @@ class AltarScanHelper {
 				currentScore = this.map.get(block);
 			}
 			int max_score = MAX_SCORE_PER_CATEGORY;
+			if (this.te.getSwordIds().contains(ItemColdIronSword.COLD_IRON_UUID)) {
+				max_score += 10;
+			}
 			if (currentScore < max_score) {
 				this.map.put(block, currentScore + score);
 			}

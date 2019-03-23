@@ -89,73 +89,98 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		}
 	}
 
-	protected void refreshUpgrades() {
+	public void refreshUpgrades() {
 		this.gain = 1;
 		this.multiplier = 1;
 		this.swordItems.clear();
+		List<Object> duplicationCheckList = Lists.newArrayList();
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dz = -1; dz <= 1; dz++) {
 				BlockPos aps = this.getPos().add(dx, 0, dz);
 				if (this.getWorld().getBlockState(aps).getBlock().equals(ModBlocks.witch_altar) && !this.getWorld().getBlockState(aps).getValue(BlockWitchAltar.ALTAR_TYPE).equals(AltarMultiblockType.UNFORMED)) {
 					BlockPos ps = aps.up();
-					if (!checkCapabilityAsTile(ps)) {
-						checkCapabilityAsItem(ps);
+					if (!checkCapabilityAsTile(ps, duplicationCheckList)) {
+						checkCapabilityAsItem(ps, duplicationCheckList);
 					}
 				}
 			}
 		}
+		if (gain < 1) {
+			gain = 1;
+		}
+		if (multiplier < 0) {
+			multiplier = 0;
+		}
 		this.markDirty();
 	}
 
-	private boolean checkCapabilityAsTile(BlockPos ps) {
+	private boolean checkCapabilityAsTile(BlockPos ps, List<Object> duplicationCheckList) {
 		TileEntity tile = world.getTileEntity(ps);
 		if (tile == null) {
 			return false;
 		}
 		boolean foundCaps = false;
 
-		if (tile.hasCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
-			tile.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
-			swordItems.add(tile.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
-			foundCaps = true;
-		}
+		if (!duplicationCheckList.contains(tile.getClass())) {
+			if (tile.hasCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
+				tile.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
+				swordItems.add(tile.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
+				foundCaps = true;
+			}
 
-		if (tile.hasCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
-			this.gain += tile.getCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
-			foundCaps = true;
-		}
+			if (tile.hasCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
+				this.gain += tile.getCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
+				foundCaps = true;
+			}
 
-		if (tile.hasCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
-			this.multiplier += tile.getCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
-			foundCaps = true;
+			if (tile.hasCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
+				this.multiplier += tile.getCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
+				foundCaps = true;
+			}
+			
+			if (foundCaps) {
+				duplicationCheckList.add(tile.getClass());
+			}
 		}
-
 		return foundCaps;
 	}
 
 	@SuppressWarnings("deprecation")
-	private void checkCapabilityAsItem(BlockPos ps) {
+	private void checkCapabilityAsItem(BlockPos ps, List<Object> duplicationCheckList) {
 		IBlockState state = world.getBlockState(ps);
 		ItemStack stack = null;
+		Object index = null;
 		if (state.getBlock() == ModBlocks.placed_item) {
 			stack = ((TileEntityPlacedItem) world.getTileEntity(ps)).getItem();
+			index = stack.getItem();
 		} else {
 			stack = state.getBlock().getItem(world, ps, state);
+			index = state.getBlock();
 		}
 
-		if (stack.hasCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
-			stack.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
-			swordItems.add(stack.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
-		}
+		index = index.toString();
+		
+		if (!duplicationCheckList.contains(index)) {
+			boolean added = false;
+			if (stack.hasCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null)) {
+				stack.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).onApply(world, pos);
+				swordItems.add(stack.getCapability(AltarCapabilities.ALTAR_EFFECT_CAPABILITY, null).getIdentifier());
+				added = true;
+			}
 
-		if (stack.hasCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
-			this.gain += stack.getCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
-		}
+			if (stack.hasCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null)) {
+				this.gain += stack.getCapability(AltarCapabilities.ALTAR_GAIN_CAPABILITY, null).getAmount();
+				added = true;
+			}
 
-		if (stack.hasCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
-			this.multiplier += stack.getCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
+			if (stack.hasCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null)) {
+				this.multiplier += stack.getCapability(AltarCapabilities.ALTAR_MULTIPLIER_CAPABILITY, null).getAmount();
+				added = true;
+			}
+			if (added) {
+				duplicationCheckList.add(index);
+			}
 		}
-
 	}
 
 	public int getCurrentGain() {

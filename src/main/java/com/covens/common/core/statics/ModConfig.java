@@ -152,6 +152,9 @@ public final class ModConfig {
 
 		@Comment("Set this to false to disable ritual circles from emitting particles on non-golden circles. Might increase client performance")
 		public boolean allGlyphParticles = true;
+		
+		@Comment("Set this to false to disable the \"When on altar:\" tooltips")
+		public boolean showAltarModifiersTooltips = true;
 
 		public static class EnergyHUD {
 			@Comment("Should the energy HUD be automatically hidden?")

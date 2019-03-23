@@ -32,7 +32,7 @@ import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 public class ItemBoline extends ItemShears implements IModelRegister {
 
 	public static final UUID BOLINE_UUID = UUID.fromString("adf0db30-4d16-44a8-9668-df76f7df34f7");
-	private static final EffectProvider cap = new EffectProvider(BOLINE_UUID);
+	private static final EffectProvider cap = new EffectProvider(BOLINE_UUID, "altar.effect.tooltip.boline");
 
 	@Nonnull
 	public ItemBoline() {

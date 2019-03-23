@@ -369,7 +369,7 @@ public final class ModItems {
 				new ItemMod(LibItemName.GRAVEYARD_DUST), // 
 				new ItemMod(LibItemName.SANGUINE_FABRIC), // 
 				new ItemMod(LibItemName.PENTACLE) {
-					private final MixedProvider caps = new MixedProvider(3, -0.2);
+					private final MixedProvider caps = new MixedProvider(-2, 0.3);
 					@Override
 					@Nullable
 					public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {

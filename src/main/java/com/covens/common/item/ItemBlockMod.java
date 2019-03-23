@@ -3,6 +3,7 @@ package com.covens.common.item;
 import javax.annotation.Nullable;
 
 import com.covens.common.block.BlockMod;
+import com.covens.common.block.BlockModTileEntity;
 import com.covens.common.core.statics.ModCreativeTabs;
 
 import net.minecraft.block.Block;
@@ -23,6 +24,9 @@ public class ItemBlockMod extends ItemBlock {
 	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
 		if (this.block instanceof BlockMod && ((BlockMod) this.block).hasItemCapabilities()) {
 			return ((BlockMod) this.block).getExtraCaps(stack, nbt);
+		}
+		if (this.block instanceof BlockModTileEntity && ((BlockModTileEntity) this.block).hasItemCapabilities()) {
+			return ((BlockModTileEntity) this.block).getExtraCaps(stack, nbt);
 		}
 		return super.initCapabilities(stack, nbt);
 	}

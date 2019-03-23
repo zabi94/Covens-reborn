@@ -27,5 +27,10 @@ public interface IAltarSpecialEffect {
 	 * this was considered.
 	 */
 	public UUID getIdentifier();
+	
+	/**
+	 * @return the translation key of the tooltip
+	 */
+	public String getDescriptionTranslationKey();
 	 
 }

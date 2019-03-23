@@ -2,7 +2,10 @@ package com.covens.common.block.tiles;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 
+import javax.annotation.Nullable;
+
 import com.covens.common.block.BlockModTileEntity;
+import com.covens.common.core.capability.altar.FakeProvider;
 import com.covens.common.tile.tiles.TileEntityGemBowl;
 
 import net.minecraft.block.material.Material;
@@ -10,6 +13,8 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -17,10 +22,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class BlockGemBowl extends BlockModTileEntity {
 
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.25f, 0.0f, 0.25f, 0.75f, 0.1875f, 0.75f);
+	private static final ICapabilityProvider fakeProvider = new FakeProvider(false, true, "altar.effect.tooltip.needs_gem");
 
 	public BlockGemBowl(String id) {
 		super(id, Material.ROCK);
@@ -28,6 +35,7 @@ public class BlockGemBowl extends BlockModTileEntity {
 		this.setLightOpacity(0);
 		this.setHardness(1f);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setHasCaps();
 	}
 
 	@Override
@@ -88,6 +96,11 @@ public class BlockGemBowl extends BlockModTileEntity {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityGemBowl();
+	}
+	
+	@Override
+	public ICapabilityProvider getExtraCaps(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return fakeProvider;
 	}
 	
 	@Override

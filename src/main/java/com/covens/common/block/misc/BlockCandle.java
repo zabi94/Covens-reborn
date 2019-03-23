@@ -5,7 +5,7 @@ import java.util.Random;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
-import com.covens.common.core.capability.altar.MixedProvider;
+import com.covens.common.core.capability.altar.GainProvider;
 import com.covens.common.integration.optifine.Optifine;
 
 import net.minecraft.block.Block;
@@ -45,8 +45,8 @@ import thaumcraft.api.crafting.IInfusionStabiliserExt;
 public abstract class BlockCandle extends BlockMod implements IInfusionStabiliserExt {
 
 	private boolean isLit;
-	private static final MixedProvider gain_lit = new MixedProvider(2, 0);
-	private static final MixedProvider gain_unlit = new MixedProvider(1, 0);
+	private static final GainProvider gain_lit = new GainProvider(2);
+	private static final GainProvider gain_unlit = new GainProvider(1);
 
 	public BlockCandle(String id, boolean lit) {
 		super(id, Material.CLOTH);

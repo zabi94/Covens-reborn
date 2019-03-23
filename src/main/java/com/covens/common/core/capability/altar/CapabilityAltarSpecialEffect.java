@@ -10,9 +10,11 @@ import net.minecraft.world.World;
 public class CapabilityAltarSpecialEffect implements IAltarSpecialEffect {
 	
 	private UUID id;
+	private String descrKey;
 
-	public CapabilityAltarSpecialEffect(UUID amt) {
+	public CapabilityAltarSpecialEffect(UUID amt, String tooltip) {
 		id = amt;
+		descrKey = tooltip;
 	}
 
 	@Override
@@ -23,6 +25,11 @@ public class CapabilityAltarSpecialEffect implements IAltarSpecialEffect {
 	@Override
 	public UUID getIdentifier() {
 		return id;
+	}
+	
+	@Override
+	public String getDescriptionTranslationKey() {
+		return descrKey;
 	}
 	
 }

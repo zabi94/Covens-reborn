@@ -202,6 +202,16 @@ public class TileEntityGemBowl extends ModTileEntity {
 		}
 		return 0;
 	}
+	
+	public static double getGemValue(ItemStack stack) {
+		for (int oreID : OreDictionary.getOreIDs(stack)) {
+			String oreName = OreDictionary.getOreName(oreID);
+			if (gainMap.containsKey(oreName)) {
+				return gainMap.get(oreName) * 0.05;
+			}
+		}
+		return 0;
+	}
 
 	@Override
 	protected void readAllModDataNBT(NBTTagCompound cmp) {

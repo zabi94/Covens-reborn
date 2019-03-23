@@ -1,34 +1,32 @@
 package com.covens.common.core.capability.altar;
 
-import java.util.UUID;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.covens.api.altar.IAltarSpecialEffect;
+import com.covens.api.altar.IAltarSpeedUpgrade;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class EffectProvider implements ICapabilityProvider {
+public class GainProvider implements ICapabilityProvider {
 	
-	private IAltarSpecialEffect capb;
+	private IAltarSpeedUpgrade gain;
 	
-	public EffectProvider(UUID id, String key) {
-		capb = new CapabilityAltarSpecialEffect(id, key);
+	public GainProvider(int speed) {
+		gain = new CapabilityAltarSpeedUpgrade(speed);
 	}
 
 	@Override
 	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == AltarCapabilities.ALTAR_EFFECT_CAPABILITY;
+		return capability == AltarCapabilities.ALTAR_GAIN_CAPABILITY;
 	}
 
 	@Override
 	@Nullable
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == AltarCapabilities.ALTAR_EFFECT_CAPABILITY) {
-			return AltarCapabilities.ALTAR_EFFECT_CAPABILITY.cast(capb);
+		if (capability == AltarCapabilities.ALTAR_GAIN_CAPABILITY) {
+			return AltarCapabilities.ALTAR_GAIN_CAPABILITY.cast(gain);
 		}
 		return null;
 	}

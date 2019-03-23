@@ -475,6 +475,18 @@ tile.distillery.name=Distillery
 fluid.oil_mundane=Oil
 fluid.for.honey=Honey
 
+//
+altar.effect.tooltip.when=When on altar:
+altar.effect.tooltip.gain=  Affects recharge rate
+altar.effect.tooltip.mult=  Affects power
+altar.effect.tooltip.silver=  Makes variety in plants more significant
+altar.effect.tooltip.athame=  Recharges nearby players' power
+altar.effect.tooltip.boline=  Increases nature scan radius
+altar.effect.tooltip.cold_iron=  Raises the cap of the same plant types
+altar.effect.tooltip.needs_plant=Needs plant inside to work
+altar.effect.tooltip.needs_gem=Needs gem inside to work. Different gems give different amounts
+altar.effect.tooltip.gem=When in gem bowl:§r +%d%%
+
 //Brew
 brew.instant=Instant
 

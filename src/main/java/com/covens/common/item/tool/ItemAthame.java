@@ -50,7 +50,7 @@ import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 public class ItemAthame extends ItemSword implements IModelRegister {
 
 	public static final UUID ATHAME_UUID = UUID.fromString("d3a5db67-887b-4dd1-8ac5-d6223f1351f9");
-	private static final EffectProvider cap = new EffectProvider(ATHAME_UUID);
+	private static final EffectProvider cap = new EffectProvider(ATHAME_UUID, "altar.effect.tooltip.athame");
 
 	public ItemAthame() {
 		super(ModMaterials.TOOL_ATHAME);

@@ -5,7 +5,7 @@ import java.util.Random;
 import com.covens.api.state.StateProperties;
 import com.covens.common.block.BlockMod;
 import com.covens.common.block.ModBlocks;
-import com.covens.common.core.capability.altar.MixedProvider;
+import com.covens.common.core.capability.altar.GainProvider;
 import com.covens.common.lib.LibBlockName;
 
 import net.minecraft.block.material.Material;
@@ -33,8 +33,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 public class BlockLantern extends BlockMod {
 
 	private static final AxisAlignedBB bounding_box = new AxisAlignedBB(0.2, 0, 0.2, 0.8, 0.9375, 0.8);
-	private static final MixedProvider gain_lit = new MixedProvider(3, 0);
-	private static final MixedProvider gain_unlit = new MixedProvider(2, 0);
+	private static final GainProvider gain_lit = new GainProvider(3);
+	private static final GainProvider gain_unlit = new GainProvider(2);
 
 	private boolean lit;
 
