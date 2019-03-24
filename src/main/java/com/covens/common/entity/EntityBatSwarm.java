@@ -5,6 +5,7 @@ import com.covens.api.transformation.DefaultTransformations;
 import com.covens.client.fx.ParticleF;
 import com.covens.common.Covens;
 import com.covens.common.content.transformation.CapabilityTransformation;
+import com.covens.common.item.ModItems;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
@@ -58,7 +59,7 @@ public class EntityBatSwarm extends Entity {
 				if (this.rand.nextInt(7) == 0) {
 					this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_BAT_LOOP, SoundCategory.PLAYERS, 0.8f, 0.8f + (0.4f * this.rand.nextFloat()));
 				}
-				if (rider.isCreative() || CovensAPI.getAPI().addVampireBlood(rider, -1)) {
+				if (rider.isCreative() || rider.inventory.armorInventory.get(3).getItem() == ModItems.vampire_hat || CovensAPI.getAPI().addVampireBlood(rider, -1)) {
 					this.move(MoverType.SELF, this.getLookVec().x, this.getLookVec().y, this.getLookVec().z);
 				} else {
 					rider.dismountRidingEntity();

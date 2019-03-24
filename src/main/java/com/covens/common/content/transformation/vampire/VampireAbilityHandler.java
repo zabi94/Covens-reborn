@@ -115,7 +115,6 @@ public class VampireAbilityHandler {
 		}
 	}
 
-	// NO-SUBSCRIBE
 	private static float getMultiplier(LivingHurtEvent evt) {
 		float mult = 1;
 		if (evt.getSource().getTrueSource() instanceof EntityPlayer) {
@@ -158,10 +157,7 @@ public class VampireAbilityHandler {
 		CapabilityTransformation data = evt.player.getCapability(CapabilityTransformation.CAPABILITY, null);
 		if ((data.getType() == DefaultTransformations.VAMPIRE) && evt.side.isServer()) {
 
-			// Check sun damage
-			if (shouldVampiresBurnHere(evt.player.world, evt.player.getPosition()) && isPlayerOutsideLair(evt.player) && canPlayerBurn(evt.player, data)) {
-				evt.player.attackEntityFrom(SUN_DAMAGE, 11 - data.getLevel());
-			}
+			handleSunExposure(evt, data);
 
 			// Replace hunger mechanics with blood mechanics
 			if ((evt.player.ticksExisted % 30) == 0) {
@@ -170,23 +166,11 @@ public class VampireAbilityHandler {
 					evt.player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 2, false, false));
 					evt.player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 2, false, false));
 				} else {
-					if ((evt.player.getHealth() < evt.player.getMaxHealth()) && CovensAPI.getAPI().addVampireBlood(evt.player, -20)) {
-						evt.player.heal(1);
-					}
+					tickHeal(evt);
 				}
 
-				// Hunger drains blood
-				PotionEffect effect = evt.player.getActivePotionEffect(MobEffects.HUNGER);
-				if (effect != null) {
-					CovensAPI.getAPI().addVampireBlood(evt.player, -effect.getAmplifier() * 5);
-				}
-
-				// Fire resistance becomes hunger
-				PotionEffect pe = evt.player.getActivePotionEffect(MobEffects.FIRE_RESISTANCE);
-				if (pe != null) {
-					evt.player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, pe.getDuration(), pe.getAmplifier()));
-					evt.player.removePotionEffect(MobEffects.FIRE_RESISTANCE);
-				}
+				handleHunger(evt);
+				handleFireResistance(evt);
 
 				// No need for air
 				evt.player.setAir(150);
@@ -195,8 +179,42 @@ public class VampireAbilityHandler {
 		}
 	}
 
+	// Check sun damage
+	private static void handleSunExposure(PlayerTickEvent evt, CapabilityTransformation data) {
+		if (shouldVampiresBurnHere(evt.player.world, evt.player.getPosition()) && isPlayerOutsideLair(evt.player) && canPlayerBurn(evt.player, data)) {
+			evt.player.attackEntityFrom(SUN_DAMAGE, 11 - data.getLevel());
+		}
+	}
+
+	private static void tickHeal(PlayerTickEvent evt) {
+		int bloodCostToHeal = 20;
+		if (evt.player.getCapability(CapabilityVampire.CAPABILITY, null).armorPieces == 3) {
+			bloodCostToHeal = 10;
+		}
+		if ((evt.player.getHealth() < evt.player.getMaxHealth()) && CovensAPI.getAPI().addVampireBlood(evt.player, -bloodCostToHeal)) {
+			evt.player.heal(1);
+		}
+	}
+	
+	// Hunger drains blood
+	private static void handleHunger(PlayerTickEvent evt) {
+		PotionEffect effect = evt.player.getActivePotionEffect(MobEffects.HUNGER);
+		if (effect != null) {
+			CovensAPI.getAPI().addVampireBlood(evt.player, -effect.getAmplifier() * 3);
+		}
+	}
+
+	// Fire resistance becomes hunger
+	private static void handleFireResistance(PlayerTickEvent evt) {
+		PotionEffect pe = evt.player.getActivePotionEffect(MobEffects.FIRE_RESISTANCE);
+		if (pe != null) {
+			evt.player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, pe.getDuration(), pe.getAmplifier()));
+			evt.player.removePotionEffect(MobEffects.FIRE_RESISTANCE);
+		}
+	}
+
 	@SubscribeEvent
-	public static void sleepBed(RightClickBlock evt) {
+	public static void blockBedSleeping(RightClickBlock evt) {
 		CapabilityTransformation data = evt.getEntityPlayer().getCapability(CapabilityTransformation.CAPABILITY, null);
 		if ((data.getType() == DefaultTransformations.VAMPIRE) && (evt.getEntityPlayer().world.getBlockState(evt.getPos()).getBlock() == Blocks.BED)) {
 			evt.setCancellationResult(EnumActionResult.FAIL);
@@ -255,36 +273,9 @@ public class VampireAbilityHandler {
 		if (evt.action == ModAbilities.NIGHT_VISION_VAMPIRE) {
 			vampire.setNightVision(!vampire.nightVision);
 		} else if (evt.action == ModAbilities.DRAIN_BLOOD) {
-
-			if (evt.focusedEntity instanceof EntityLivingBase) {
-				EntityLivingBase entity = (EntityLivingBase) evt.focusedEntity;
-				if (canDrainBloodFrom(evt.player, entity)) {
-					CovensAPI.getAPI().drainBloodFromEntity(evt.player, entity);
-					if (!evt.world.isRemote && data.getLevel() > 3 && evt.player.getHeldItemOffhand().getItem().equals(Items.GLASS_BOTTLE) && evt.player.getRNG().nextInt(10) == 0) {
-						evt.player.getHeldItemOffhand().splitStack(1);
-						evt.player.dropItem(ItemBloodBottle.getNewStack(evt.world), true);
-					}
-				}
-			} else if (data.getLevel() > 1) {
-				RayTraceResult rtr = RayTraceHelper.rayTracePlayerSight(evt.player, evt.player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue(), false);
-				if (rtr != null && rtr.typeOfHit == Type.BLOCK) {
-					IBlockState block = evt.world.getBlockState(rtr.getBlockPos());
-					if (block.getBlock() == Blocks.WOOL && CovensAPI.getAPI().addVampireBlood(evt.player, -50)) {
-						evt.world.setBlockToAir(rtr.getBlockPos());
-						ItemStack is = new ItemStack(ModItems.sanguine_fabric);
-						EntityItem ei = new EntityItem(evt.world, rtr.getBlockPos().getX() + 0.5, rtr.getBlockPos().getY() + 0.5, rtr.getBlockPos().getZ() + 0.5, is);
-						evt.world.spawnEntity(ei);
-					}
-				}
-			}
+			onDrainBloodActivated(evt, data);
 		} else if (evt.action == ModAbilities.BAT_SWARM) {
-			if (!(evt.player.getRidingEntity() instanceof EntityBatSwarm) && (evt.player.isCreative() || CovensAPI.getAPI().addVampireBlood(evt.player, -20))) {
-				EntityBatSwarm bs = new EntityBatSwarm(evt.player.world);
-				float pitch = (Math.abs(evt.player.rotationPitch) < 7) ? 0 : evt.player.rotationPitch;
-				bs.setPositionAndRotation(evt.player.posX, evt.player.posY + evt.player.getEyeHeight(), evt.player.posZ, evt.player.rotationYaw, pitch);
-				evt.player.world.spawnEntity(bs);
-				evt.player.startRiding(bs);
-			}
+			onSwarmActivated(evt);
 		} else if (evt.action == ModAbilities.MESMERIZE) {
 			if ((evt.focusedEntity instanceof EntityLivingBase) && CovensAPI.getAPI().addVampireBlood(evt.player, -150)) {
 				((EntityLivingBase) evt.focusedEntity).addPotionEffect(new PotionEffect(ModPotions.mesmerized, 100, 0, false, true));
@@ -294,15 +285,59 @@ public class VampireAbilityHandler {
 		}
 	}
 
+	private static void onSwarmActivated(HotbarActionTriggeredEvent evt) {
+		if (!(evt.player.getRidingEntity() instanceof EntityBatSwarm) && (evt.player.isCreative() || CovensAPI.getAPI().addVampireBlood(evt.player, -20))) {
+			EntityBatSwarm bs = new EntityBatSwarm(evt.player.world);
+			float pitch = (Math.abs(evt.player.rotationPitch) < 7) ? 0 : evt.player.rotationPitch;
+			bs.setPositionAndRotation(evt.player.posX, evt.player.posY + evt.player.getEyeHeight(), evt.player.posZ, evt.player.rotationYaw, pitch);
+			evt.player.world.spawnEntity(bs);
+			evt.player.startRiding(bs);
+		}
+	}
+
+	private static void onDrainBloodActivated(HotbarActionTriggeredEvent evt, CapabilityTransformation data) {
+		if (evt.focusedEntity instanceof EntityLivingBase) {
+			checkAndDrainLivingCreature(evt, data);
+		} else if (data.getLevel() > 1) {
+			transformWoolIntoCloth(evt);
+		}
+	}
+
+	private static void transformWoolIntoCloth(HotbarActionTriggeredEvent evt) {
+		RayTraceResult rtr = RayTraceHelper.rayTracePlayerSight(evt.player, evt.player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue(), false);
+		if (rtr != null && rtr.typeOfHit == Type.BLOCK) {
+			IBlockState block = evt.world.getBlockState(rtr.getBlockPos());
+			if (block.getBlock() == Blocks.WOOL && CovensAPI.getAPI().addVampireBlood(evt.player, -50)) {
+				evt.world.setBlockToAir(rtr.getBlockPos());
+				ItemStack is = new ItemStack(ModItems.sanguine_fabric);
+				EntityItem ei = new EntityItem(evt.world, rtr.getBlockPos().getX() + 0.5, rtr.getBlockPos().getY() + 0.5, rtr.getBlockPos().getZ() + 0.5, is);
+				evt.world.spawnEntity(ei);
+			}
+		}
+	}
+
+	private static void checkAndDrainLivingCreature(HotbarActionTriggeredEvent evt, CapabilityTransformation data) {
+		EntityLivingBase entity = (EntityLivingBase) evt.focusedEntity;
+		if (canDrainBloodFrom(evt.player, entity)) {
+			CovensAPI.getAPI().drainBloodFromEntity(evt.player, entity);
+			if (!evt.world.isRemote && data.getLevel() > 3 && evt.player.getHeldItemOffhand().getItem().equals(Items.GLASS_BOTTLE) && ((evt.player.inventory.armorInventory.get(2).getItem() == ModItems.vampire_vest && evt.player.getRNG().nextInt(4)==0) || evt.player.getRNG().nextInt(10) == 0)) {
+				evt.player.getHeldItemOffhand().splitStack(1);
+				evt.player.dropItem(ItemBloodBottle.getNewStack(evt.world), true);
+			}
+		}
+	}
+
 	private static boolean canDrainBloodFrom(EntityPlayer player, EntityLivingBase entity) {
 		if (entity.getActivePotionEffect(ModPotions.mesmerized) != null) {
 			return true;
 		}
-		if ((player.getLastAttackedEntity() == entity) || (entity.getAttackingEntity() == player)) {
-			return false;
-		}
+
 		if (!MobHelper.isLivingCorporeal(entity)) {
 			return false;
+		}
+		boolean hasPants = player.inventory.armorInventory.get(1).getItem() == ModItems.vampire_pants;
+		if ((player.getLastAttackedEntity() == entity) || (entity.getAttackingEntity() == player)) {
+			return hasPants;
 		}
 		return Math.abs(player.rotationYawHead - entity.rotationYawHead) < 30;
 	}
@@ -331,7 +366,7 @@ public class VampireAbilityHandler {
 			attack_speed.removeModifier(modifier);
 		}
 		if (data.getType() == DefaultTransformations.VAMPIRE) {
-			attack_speed.applyModifier(new AttributeModifier(ATTACK_SPEED_MODIFIER_UUID, "Vampire Atk Speed", evt.level / 10, AttributeModifierModeHelper.ADD));
+			attack_speed.applyModifier(new AttributeModifier(ATTACK_SPEED_MODIFIER_UUID, "Vampire Atk Speed", evt.level / 10d, AttributeModifierModeHelper.ADD));
 		}
 	}
 

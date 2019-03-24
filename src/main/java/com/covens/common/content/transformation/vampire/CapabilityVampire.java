@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
+import zabi.minecraft.minerva.common.utils.annotation.DontSync;
 
 public class CapabilityVampire extends SimpleCapability {
 
@@ -16,6 +17,7 @@ public class CapabilityVampire extends SimpleCapability {
 
 	public int blood = 0;
 	public boolean nightVision = false;
+	@DontSync public int armorPieces = 0;
 
 	@Override
 	public boolean isRelevantFor(Entity object) {

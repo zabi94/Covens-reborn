@@ -118,12 +118,26 @@ item.silver_helmet.name=Silver Helmet
 item.silver_chestplate.name=Silver Chestplate
 item.silver_leggings.name=Silver Leggings
 item.silver_boots.name=Silver Boots
+
+item.witches_set.effect=Set: increased power
+item.vampire_set.effect=Set: decreased healing blood cost
+
+item.witches_hat.effect=Cleanses a witch from blindness
+item.witches_robes.effect=Cleanses a witch from poison
+item.witches_pants.effect=Cleanses a witch from nausea
+
 item.witches_hat.name=Witches Hat
 item.witches_robes.name=Witches Robes
 item.witches_pants.name=Witches Pants
+
 item.vampire_hat.name=Vampire's Hat
 item.vampire_vest.name=Vampire's Vest
 item.vampire_pants.name=Vampire's Pants
+
+item.vampire_hat.effect=Swarm ability doesn't consume blood over time
+item.vampire_vest.effect=Increased chance of blood bottles
+item.vampire_pants.effect=Drinking blood is easier, entities won't look at you
+
 item.athame.name=Athame
 item.boline.name=Boline
 item.mortar_and_pestle.name=Mortar and Pestle

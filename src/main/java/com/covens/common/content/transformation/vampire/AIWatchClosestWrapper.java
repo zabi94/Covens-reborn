@@ -2,12 +2,16 @@ package com.covens.common.content.transformation.vampire;
 
 import java.lang.reflect.Field;
 
+import com.covens.api.transformation.DefaultTransformations;
+import com.covens.common.content.transformation.CapabilityTransformation;
+import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibReflection;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumSkyBlock;
 
 public class AIWatchClosestWrapper extends EntityAIBase {
@@ -31,7 +35,17 @@ public class AIWatchClosestWrapper extends EntityAIBase {
 	}
 
 	private boolean canLookAt(EntityLiving subject, Entity target) {
-		return !(target.isSneaking() && ((Math.abs(target.getRotationYawHead() - subject.rotationYawHead) < 70) || (target.world.getLightFor(EnumSkyBlock.BLOCK, target.getPosition()) < 3)));
+		return !isVampireWithPants(target) && !(target.isSneaking() && ((Math.abs(target.getRotationYawHead() - subject.rotationYawHead) < 70) || (target.world.getLightFor(EnumSkyBlock.BLOCK, target.getPosition()) < 3)));
+	}
+
+	private boolean isVampireWithPants(Entity target) {
+		if (target instanceof EntityPlayer) {
+			EntityPlayer p = (EntityPlayer) target;
+			if (p.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) {
+				return p.inventory.armorItemInSlot(1).getItem() == ModItems.vampire_pants;
+			}
+		}
+		return false;
 	}
 
 	@Override
