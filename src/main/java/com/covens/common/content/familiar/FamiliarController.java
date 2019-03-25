@@ -15,6 +15,7 @@ import com.covens.common.content.familiar.ai.AIGotoPlace;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.helper.MobHelper;
+import com.covens.common.core.util.ReflectionBridge;
 import com.covens.common.core.util.syncTasks.FamiliarFollowEntity;
 import com.covens.common.core.util.syncTasks.FamiliarOrderGoto;
 import com.google.common.collect.Sets;
@@ -135,7 +136,7 @@ public class FamiliarController {
 				if (entityaitasks$entityaitaskentry.using) {
 					entityaitasks$entityaitaskentry.using = false;
 					entityaitasks$entityaitaskentry.action.resetTask();
-					elb.tasks.executingTaskEntries.remove(entityaitasks$entityaitaskentry);
+					ReflectionBridge.getExecutingTaskEntries(elb.tasks).remove(entityaitasks$entityaitaskentry);
 				}
 				iterator.remove();
 				return;
@@ -150,7 +151,7 @@ public class FamiliarController {
 			if (entry.using) {
 				entry.using = false;
 				entry.action.resetTask();
-				elb.targetTasks.executingTaskEntries.remove(entry);
+				ReflectionBridge.getExecutingTaskEntries(elb.targetTasks).remove(entry);
 			}
 			iterator.remove();
 		}

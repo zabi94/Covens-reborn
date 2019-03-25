@@ -1,11 +1,15 @@
 package com.covens.common.potion.potions;
 
+import java.util.Set;
+
+import com.covens.common.core.util.ReflectionBridge;
 import com.covens.common.potion.PotionMod;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
@@ -36,7 +40,8 @@ public class PotionMesmerize extends PotionMod {
 			}
 			EntityLiving el = (EntityLiving) e;
 			EntityAITaskEntry taskFound = null;
-			for (EntityAITaskEntry task:el.tasks.executingTaskEntries) {
+			Set<EntityAITasks.EntityAITaskEntry> executingTaskEntries = ReflectionBridge.getExecutingTaskEntries(el.tasks);
+			for (EntityAITaskEntry task:executingTaskEntries) {
 				if (task.action instanceof EntityAIPanic) {
 					el.getNavigator().clearPath();
 					taskFound = task;
@@ -46,7 +51,7 @@ public class PotionMesmerize extends PotionMod {
 			if (taskFound != null) {
 				taskFound.using = false;
 				taskFound.action.resetTask();
-				el.tasks.executingTaskEntries.remove(taskFound);
+				executingTaskEntries.remove(taskFound);
 			}
 		}
 	}
