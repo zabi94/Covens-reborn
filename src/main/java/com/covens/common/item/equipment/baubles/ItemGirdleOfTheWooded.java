@@ -28,6 +28,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -66,20 +67,24 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 		return player.getCapability(BarkCapability.CAPABILITY, null).pieces;
 	}
 
+	public static void fixBark(EntityPlayer player, int totalArmorValue) {
+		if (totalArmorValue == 0) {
+			player.getCapability(BarkCapability.CAPABILITY, null).pieces = 0;
+		} else {
+			int value = player.getCapability(BarkCapability.CAPABILITY, null).pieces;
+			int possible = Math.min(Math.max((10 - totalArmorValue), 0), 3);
+			if (value > possible) {
+				value = possible;
+			}
+			if (value < 0) {
+				value = 0;
+			}
+			player.getCapability(BarkCapability.CAPABILITY, null).pieces = value;
+		}
+	}
+	
 	public static void fixBark(EntityPlayer player) {
-		int value = player.getCapability(BarkCapability.CAPABILITY, null).pieces;
-		int possible = Math.max((10 - (int) Math.ceil(ForgeHooks.getTotalArmorValue(player) / 2f)), 0);
-		if (ForgeHooks.getTotalArmorValue(player) == 0) {
-			possible = 0;
-		}
-		possible = Math.min(possible, 4);
-		if (value > possible) {
-			value = possible;
-		}
-		if (value < 0) {
-			value = 0;
-		}
-		player.getCapability(BarkCapability.CAPABILITY, null).pieces = value;
+		fixBark(player, (int) Math.ceil(ForgeHooks.getTotalArmorValue(player) / 2f));
 	}
 
 	@Override
@@ -94,7 +99,7 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 				return;
 			}
 			EntityPlayer player = (EntityPlayer) entity;
-			if ( (entity.getRNG().nextDouble() < 0.0004d && this.isValidSpot(player))) { // ~once every 2 minutes
+			if (((entity.getRNG().nextDouble() < 0.0008d) && this.isValidSpot(player))) { // ~once every minute
 				if (buildBark(player)) {
 					player.addPotionEffect(new PotionEffect(ModPotions.rooting, 80, 0, false, false));
 					player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_CHORUS_FLOWER_GROW, SoundCategory.PLAYERS, 1f, 1f);
@@ -154,7 +159,7 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 
 	@SubscribeEvent
 	public void onPlayerDamaged(LivingHurtEvent evt) {
-		if (!evt.getEntityLiving().world.isRemote && (evt.getAmount() > 2) && (evt.getSource().getTrueSource() != null) && (evt.getEntityLiving() instanceof EntityPlayer)) {
+		if (!evt.getEntityLiving().world.isRemote && (evt.getAmount() > 1.5f) && (evt.getSource().getTrueSource() != null) && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			EntityPlayer player = (EntityPlayer) evt.getEntityLiving();
 			fixBark(player);
 			if (player.getCapability(BarkCapability.CAPABILITY, null).pieces > 0) {
@@ -166,7 +171,7 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-		return enchantment == Enchantments.BINDING_CURSE || enchantment.type.canEnchantItem(this);
+		return (enchantment == Enchantments.BINDING_CURSE) || enchantment.type.canEnchantItem(this);
 	}
 
 	@Override
@@ -196,11 +201,43 @@ public class ItemGirdleOfTheWooded extends ItemMod implements IBauble, IRenderBa
 	@SubscribeEvent
 	public void onEquipmentChanged(LivingEquipmentChangeEvent evt) {
 		if (!evt.getEntityLiving().world.isRemote && (evt.getEntityLiving() instanceof EntityPlayer)) {
-			int base = evt.getEntityLiving().getCapability(BarkCapability.CAPABILITY, null).pieces;
-			int possible = Math.min((ForgeHooks.getTotalArmorValue((EntityPlayer) evt.getEntityLiving()) / 2), 5);
-			int actual = Math.min(possible, base);
-			evt.getEntityLiving().getCapability(BarkCapability.CAPABILITY, null).pieces = actual;
+			fixBark((EntityPlayer) evt.getEntityLiving(), getTotalArmorValue(evt));
 			evt.getEntityLiving().getCapability(BarkCapability.CAPABILITY, null).markDirty((byte) 1);
 		}
 	}
+
+	//This is forge being forge. The event is fired too soon, so the armor values are not updated yet at this point.
+	//I need to update them manually, then revert them back to let forge do the actual change
+	public static int getTotalArmorValue(LivingEquipmentChangeEvent evt) {
+		EntityPlayer player = (EntityPlayer) evt.getEntityLiving();
+		
+		if (!evt.getFrom().isEmpty()) {
+            player.getAttributeMap().removeAttributeModifiers(evt.getFrom().getAttributeModifiers(evt.getSlot()));
+        }
+
+        if (!evt.getTo().isEmpty()) {
+        	player.getAttributeMap().applyAttributeModifiers(evt.getTo().getAttributeModifiers(evt.getSlot()));
+        }
+		
+		int ret = player.getTotalArmorValue();
+		for (int x = 0; x < player.inventory.armorInventory.size(); x++) {
+			ItemStack stack = player.inventory.armorInventory.get(x);
+			if (stack.isItemEqual(evt.getFrom())) {
+				stack = evt.getTo();
+			}
+			if (stack.getItem() instanceof ISpecialArmor) {
+				ret += ((ISpecialArmor) stack.getItem()).getArmorDisplay(player, stack, x);
+			}
+		}
+		
+		if (!evt.getFrom().isEmpty()) {
+            player.getAttributeMap().applyAttributeModifiers(evt.getFrom().getAttributeModifiers(evt.getSlot()));
+        }
+
+        if (!evt.getTo().isEmpty()) {
+        	player.getAttributeMap().removeAttributeModifiers(evt.getTo().getAttributeModifiers(evt.getSlot()));
+        }
+		return ret;
+	}
+
 }
