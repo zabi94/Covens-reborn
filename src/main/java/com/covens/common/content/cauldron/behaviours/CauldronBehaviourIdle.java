@@ -7,7 +7,6 @@ import com.covens.common.Covens;
 import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.core.statics.ModFluids;
 import com.covens.common.core.statics.ModSounds;
-import com.covens.common.item.ModItems;
 import com.covens.common.tile.tiles.TileEntityCauldron;
 import com.covens.common.tile.util.CauldronFluidTank;
 
@@ -145,10 +144,7 @@ public class CauldronBehaviourIdle implements ICauldronBehaviour {
 
 	@Override
 	public void statusChanged(boolean isActive) {
-		if ((this.cauldron.getInputs().size() > 0) && (this.cauldron.getInputs().get(this.cauldron.getInputs().size() - 1).getItem() == ModItems.wood_ash)) {
-			this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().CLEANING);
-			this.cauldron.setTankLock(false);
-		} else if (isActive) {
+		if (isActive) {
 			if (this.cauldron.getInputs().size() > 0) {
 				ItemStack stack = this.cauldron.getInputs().get(this.cauldron.getInputs().size() - 1);
 				if (this.cauldron.getFluid().isPresent() && (this.cauldron.getFluid().get().getFluid() == FluidRegistry.LAVA)) {

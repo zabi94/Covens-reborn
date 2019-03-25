@@ -12,6 +12,7 @@ import com.covens.common.content.cauldron.behaviours.DefaultBehaviours;
 import com.covens.common.content.cauldron.behaviours.ICauldronBehaviour;
 import com.covens.common.content.cauldron.teleportCapability.CapabilityCauldronTeleport;
 import com.covens.common.core.helper.Log;
+import com.covens.common.item.ModItems;
 import com.covens.common.tile.util.CauldronFluidTank;
 
 import net.minecraft.block.state.IBlockState;
@@ -113,14 +114,21 @@ public class TileEntityCauldron extends ModTileEntity implements ITickable {
 			}
 		} else {
 			this.behaviors.forEach(d -> d.update(d == this.currentBehaviour));
-			if (this.behaviors.stream().allMatch(d -> !d.shouldInputsBeBlocked())) {
-				ItemStack next = this.gatherNextItemFromTop();
+			ItemStack next = this.gatherNextItemFromTop();
+			if (next.getItem() == ModItems.wood_ash || this.behaviors.stream().allMatch(d -> !d.shouldInputsBeBlocked())) {
 				if (!next.isEmpty()) {
-					this.ingredients.add(next);
-					this.setTankLock(false);
-					this.behaviors.forEach(d -> d.statusChanged(d == this.currentBehaviour));
-					if (this.targetColorRGB != this.currentBehaviour.getColor()) {
-						this.setColor(this.currentBehaviour.getColor());
+					next = consumeItemSpawnContainer(next);
+					if (next.getItem() == ModItems.wood_ash) {
+						this.setBehaviour(this.getDefaultBehaviours().CLEANING);
+						this.clearItemInputs();
+						this.setTankLock(false);
+					} else {
+						this.ingredients.add(next);
+						this.setTankLock(false);
+						this.behaviors.forEach(d -> d.statusChanged(d == this.currentBehaviour));
+						if (this.targetColorRGB != this.currentBehaviour.getColor()) {
+							this.setColor(this.currentBehaviour.getColor());
+						}
 					}
 					this.markDirty();
 					this.syncToClient();
@@ -143,21 +151,22 @@ public class TileEntityCauldron extends ModTileEntity implements ITickable {
 			return ItemStack.EMPTY;
 		}
 		EntityItem selectedEntityItem = list.get(0);
-		if (this.currentBehaviour.canAccept(selectedEntityItem)) {
-			ItemStack next = selectedEntityItem.getItem().splitStack(1);
-			if (selectedEntityItem.getItem().isEmpty()) {
-				selectedEntityItem.setDead();
-			}
-			ItemStack container = next.getItem().getContainerItem(next);
-			if (!container.isEmpty()) {
-				EntityItem res = new EntityItem(this.world, this.pos.getX() + 0.5, this.pos.getY() + 0.9, this.pos.getZ() + 0.5, container);
-				res.addTag("cauldron_drop");
-				this.world.spawnEntity(res);
-			}
-			this.world.playSound(null, this.pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 1f, (float) ((0.2f * Math.random()) + 1));
-			return next;
+		if (this.currentBehaviour.canAccept(selectedEntityItem) || selectedEntityItem.getItem().getItem() == ModItems.wood_ash) {
+			return selectedEntityItem.getItem();
 		}
 		return ItemStack.EMPTY;
+	}
+	
+	public ItemStack consumeItemSpawnContainer(ItemStack stack) {
+		ItemStack next = stack.splitStack(1);
+		ItemStack container = next.getItem().getContainerItem(next);
+		if (!container.isEmpty()) {
+			EntityItem res = new EntityItem(this.world, this.pos.getX() + 0.5, this.pos.getY() + 0.9, this.pos.getZ() + 0.5, container);
+			res.addTag("cauldron_drop");
+			this.world.spawnEntity(res);
+		}
+		this.world.playSound(null, this.pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 1f, (float) ((0.2f * Math.random()) + 1));
+		return next;
 	}
 
 	public int getColorRGB() {
