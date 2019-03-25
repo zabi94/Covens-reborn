@@ -53,19 +53,8 @@ public class ItemVampireArmor extends ItemArmor implements IModelRegister {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		if (!world.isRemote) {
-			if (itemStack.getItemDamage() > 0 && CovensAPI.getAPI().addVampireBlood(player, -2)) {
+			if (world.getTotalWorldTime() % 100 == 10 * armorType.ordinal() && itemStack.getItemDamage() > 0 && CovensAPI.getAPI().addVampireBlood(player, -10)) {
 				itemStack.setItemDamage(itemStack.getItemDamage() - 1);
-			}
-			switch (this.armorType) {
-				case CHEST:
-					break;
-				case HEAD:
-					break;
-				case LEGS:
-					break;
-				default:
-					break;
-
 			}
 		}
 	}

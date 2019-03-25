@@ -115,7 +115,7 @@ public class ItemWitchesArmor extends ItemArmor implements IModelRegister {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		if (!world.isRemote) {
 
-			if (itemStack.getItemDamage() > 0 && player.getCapability(MPContainer.CAPABILITY, null).drain(10)) {
+			if (world.getTotalWorldTime() % 100 == 10 * armorType.ordinal() && itemStack.getItemDamage() > 0 && player.getCapability(MPContainer.CAPABILITY, null).drain(10)) {
 				itemStack.setItemDamage(itemStack.getItemDamage() - 1);
 			}
 
