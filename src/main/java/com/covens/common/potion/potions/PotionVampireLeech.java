@@ -6,6 +6,7 @@ import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.helper.MobHelper;
 import com.covens.common.potion.PotionMod;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,11 +42,18 @@ public class PotionVampireLeech extends PotionMod {
 	
 	@SubscribeEvent
 	public void onPlayerHitEntity(LivingHurtEvent evt) {
-		if (MobHelper.isLivingCorporeal(evt.getEntityLiving()) && isValidDamage(evt.getSource())) {
+		if (MobHelper.isLivingCorporeal(evt.getEntityLiving()) && isValidDamage(evt.getSource()) && isVampireWithPotion(evt.getSource().getTrueSource())) {
 			CovensAPI.getAPI().drainBloodFromEntity((EntityPlayer) evt.getSource().getTrueSource(), evt.getEntityLiving());
 		}
 	}
 	
+	private boolean isVampireWithPotion(Entity entity) {
+		if (entity instanceof EntityPlayer && entity.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE) {
+			return ((EntityPlayer) entity).getActivePotionEffect(this) != null;
+		}
+		return false;
+	}
+
 	private static boolean isValidDamage(DamageSource src) {
 		return !src.isProjectile() && src.getTrueSource() instanceof EntityLivingBase;
 	}
