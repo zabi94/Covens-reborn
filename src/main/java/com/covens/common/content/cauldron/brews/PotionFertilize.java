@@ -23,7 +23,7 @@ public class PotionFertilize extends BrewMod {
 
 	@Override
 	public void affectEntity(Entity source, Entity indirectSource, EntityLivingBase entity, int amplifier, double health) {
-		if (entity instanceof EntityPlayer) {
+		if (!entity.world.isRemote && entity instanceof EntityPlayer) {
 			for (int i = 0; i < (1 + amplifier); i++) {
 				if (entity.getRNG().nextInt(20) == 0) {
 					ItemGirdleOfTheWooded.buildBark((EntityPlayer) entity);
