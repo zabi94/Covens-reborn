@@ -13,6 +13,8 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.helper.MobHelper;
+import com.covens.common.core.net.NetworkHandler;
+import com.covens.common.core.net.messages.SpawnAngryParticlesAroundEntity;
 import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.misc.ItemBloodBottle;
@@ -39,6 +41,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -195,7 +198,7 @@ public class VampireAbilityHandler {
 			evt.player.heal(1);
 		}
 	}
-	
+
 	// Hunger drains blood
 	private static void handleHunger(PlayerTickEvent evt) {
 		PotionEffect effect = evt.player.getActivePotionEffect(MobEffects.HUNGER);
@@ -232,7 +235,7 @@ public class VampireAbilityHandler {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void digBurialDirtFaster(PlayerEvent.BreakSpeed evt) {
 		CapabilityTransformation data = evt.getEntityPlayer().getCapability(CapabilityTransformation.CAPABILITY, null);
@@ -320,7 +323,7 @@ public class VampireAbilityHandler {
 		EntityLivingBase entity = (EntityLivingBase) evt.focusedEntity;
 		if (canDrainBloodFrom(evt.player, entity)) {
 			CovensAPI.getAPI().drainBloodFromEntity(evt.player, entity);
-			if (!evt.world.isRemote && data.getLevel() > 3 && evt.player.getHeldItemOffhand().getItem().equals(Items.GLASS_BOTTLE) && ((evt.player.inventory.armorInventory.get(2).getItem() == ModItems.vampire_vest && evt.player.getRNG().nextInt(4)==0) || evt.player.getRNG().nextInt(10) == 0)) {
+			if (data.getLevel() > 3 && evt.player.getHeldItemOffhand().getItem().equals(Items.GLASS_BOTTLE) && ((evt.player.inventory.armorInventory.get(2).getItem() == ModItems.vampire_vest && evt.player.getRNG().nextInt(4)==0) || evt.player.getRNG().nextInt(10) == 0)) {
 				evt.player.getHeldItemOffhand().splitStack(1);
 				evt.player.dropItem(ItemBloodBottle.getNewStack(evt.world), true);
 			}
@@ -331,15 +334,22 @@ public class VampireAbilityHandler {
 		if (entity.getActivePotionEffect(ModPotions.mesmerized) != null) {
 			return true;
 		}
-
 		if (!MobHelper.isLivingCorporeal(entity)) {
 			return false;
 		}
 		boolean hasPants = player.inventory.armorInventory.get(1).getItem() == ModItems.vampire_pants;
 		if ((player.getLastAttackedEntity() == entity) || (entity.getAttackingEntity() == player)) {
+			if (!hasPants) {
+				NetworkHandler.HANDLER.sendToAllTracking(new SpawnAngryParticlesAroundEntity(entity, EnumParticleTypes.VILLAGER_ANGRY, 1), entity);
+			}
 			return hasPants;
 		}
-		return Math.abs(player.rotationYawHead - entity.rotationYawHead) < 30;
+//		Log.i(Math.abs(player.rotationYawHead - entity.rotationYawHead));
+		boolean isBehind = Math.abs(player.rotationYawHead - entity.rotationYawHead) < 30;
+		if (!isBehind) {
+			NetworkHandler.HANDLER.sendToAllTracking(new SpawnAngryParticlesAroundEntity(entity, EnumParticleTypes.SMOKE_NORMAL, 10), entity);
+		}
+		return isBehind;
 	}
 
 	@SubscribeEvent

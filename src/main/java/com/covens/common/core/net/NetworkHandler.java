@@ -12,6 +12,7 @@ import com.covens.common.core.net.messages.PlayerTransformationChangedMessage;
 import com.covens.common.core.net.messages.PlayerUsedAbilityMessage;
 import com.covens.common.core.net.messages.SelectFamiliar;
 import com.covens.common.core.net.messages.SmokeSpawn;
+import com.covens.common.core.net.messages.SpawnAngryParticlesAroundEntity;
 import com.covens.common.core.net.messages.TarotMessage;
 import com.covens.common.core.net.messages.WitchFireTP;
 import com.covens.common.core.net.messages.WitchfireFlame;
@@ -49,6 +50,7 @@ public final class NetworkHandler {
 		registerSimpleMessage(EnergySync.class, next(), Side.CLIENT);
 		registerSimpleMessage(InfusionChangedMessage.class, next(), Side.CLIENT);
 		registerSimpleMessage(SmokeSpawn.class, next(), Side.CLIENT);
+		registerSimpleMessage(SpawnAngryParticlesAroundEntity.class, next(), Side.CLIENT);
 
 		registerSimpleMessage(PlayerUsedAbilityMessage.class, next(), Side.SERVER);
 		registerSimpleMessage(WitchFireTP.class, next(), Side.SERVER);
