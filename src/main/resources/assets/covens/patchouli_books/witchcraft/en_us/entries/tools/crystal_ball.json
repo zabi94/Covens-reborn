@@ -1,0 +1,16 @@
+{
+  "name": "Crystal Ball",
+  "icon": "covens:crystal_ball",
+  "category": "tools",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "covens:crystal_ball",
+      "text": "The most commonly used tool when delving in the paths the future holds is, without a doubt the crystal ball.<br>Do not be fooled by its simple appearence, for this powerful tool is imbued with powerful magics, that allow you too see glimpses of what is to come in the form of fortunes."
+    },
+    {
+      "type": "text",
+      "text": "Such magics, imbued through $(thing)$(t:See book of magic)specific crafting rituals$(), place stress on the ball, which thus requires magic to prevent it from shattering when used (as such, make sure there is an altar in the vicinities when using it).$(2br)Be careful, though, as the future will not always show it's good face..."
+    }
+  ]
+}

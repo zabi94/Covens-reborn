@@ -1,0 +1,17 @@
+{
+  "name": "Beehives",
+  "icon": "covens:beehive",
+  "category": "exploration",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "covens:beehive",
+      "text": "Ah, the bee, always humming around, happily unaware of a world much more complex than just making honey in their hive...<br>If it pays attention, a witch will find such hives hanging from trees, regardless of the dimension.<br>Those not wise enough to follow the Art say that simply"
+    },
+    {
+      "type": "spotlight",
+      "item": "covens:empty_honeycomb",
+      "text": "punching it will be enough to obtain honeycombs.<br>Of course, you, a dignified witch, would never do such thing, relying instead on your trusty $(l:tools/boline)boline$() to do the harvesting. You might get stung as those brutes, but at least you will have a garanteed honeycomb drop$(p)$(o)Bee puns really sting..."
+    }
+  ]
+}
