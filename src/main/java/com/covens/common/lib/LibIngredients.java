@@ -131,6 +131,7 @@ public class LibIngredients {
 	public static Ingredient sugar = Ingredient.fromItem(Items.SUGAR);
 	public static Ingredient garlic = new IngredientMultiOreDict("cropGarlic");
 	public static Ingredient stick = Ingredient.fromItem(Items.STICK);
+	public static Ingredient vine = Ingredient.fromStacks(new ItemStack(Blocks.VINE));
 	public static Ingredient moonbell = Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.moonbell));
-	
+	public static Ingredient netherWart = Ingredient.fromItem(Items.NETHER_WART);
 }

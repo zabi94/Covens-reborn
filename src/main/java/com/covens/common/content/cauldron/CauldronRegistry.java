@@ -1,46 +1,6 @@
 package com.covens.common.content.cauldron;
 
-import static com.covens.common.lib.LibIngredients.acaciaLog;
-import static com.covens.common.lib.LibIngredients.anyLeaf;
-import static com.covens.common.lib.LibIngredients.anyLog;
-import static com.covens.common.lib.LibIngredients.apple;
-import static com.covens.common.lib.LibIngredients.beetroot;
-import static com.covens.common.lib.LibIngredients.blazePowder;
-import static com.covens.common.lib.LibIngredients.coldIronDustSmall;
-import static com.covens.common.lib.LibIngredients.dimensionalSand;
-import static com.covens.common.lib.LibIngredients.dirt;
-import static com.covens.common.lib.LibIngredients.egg;
-import static com.covens.common.lib.LibIngredients.emptyGoblet;
-import static com.covens.common.lib.LibIngredients.empty_honeycomb;
-import static com.covens.common.lib.LibIngredients.eyes;
-import static com.covens.common.lib.LibIngredients.fumeCleansingAura;
-import static com.covens.common.lib.LibIngredients.fumeCloudyOil;
-import static com.covens.common.lib.LibIngredients.fumeEverchangingPresence;
-import static com.covens.common.lib.LibIngredients.fumeFieryBreeze;
-import static com.covens.common.lib.LibIngredients.fumeHeavenlyWind;
-import static com.covens.common.lib.LibIngredients.fumeReekOfDeath;
-import static com.covens.common.lib.LibIngredients.garlic;
-import static com.covens.common.lib.LibIngredients.ghastTear;
-import static com.covens.common.lib.LibIngredients.glowstoneDust;
-import static com.covens.common.lib.LibIngredients.goldNugget;
-import static com.covens.common.lib.LibIngredients.goldenApple;
-import static com.covens.common.lib.LibIngredients.goldenCarrot;
-import static com.covens.common.lib.LibIngredients.graveyardDust;
-import static com.covens.common.lib.LibIngredients.hellebore;
-import static com.covens.common.lib.LibIngredients.honeycomb;
-import static com.covens.common.lib.LibIngredients.normalRitualChalk;
-import static com.covens.common.lib.LibIngredients.potato;
-import static com.covens.common.lib.LibIngredients.redstone;
-import static com.covens.common.lib.LibIngredients.salt;
-import static com.covens.common.lib.LibIngredients.snowball;
-import static com.covens.common.lib.LibIngredients.soulSand;
-import static com.covens.common.lib.LibIngredients.speckledMelon;
-import static com.covens.common.lib.LibIngredients.spider_web;
-import static com.covens.common.lib.LibIngredients.sponge;
-import static com.covens.common.lib.LibIngredients.stickyPiston;
-import static com.covens.common.lib.LibIngredients.sugar;
-import static com.covens.common.lib.LibIngredients.woolOfBat;
-import static com.covens.common.lib.LibIngredients.wormwood;
+import static com.covens.common.lib.LibIngredients.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -251,6 +211,8 @@ public class CauldronRegistry {
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.graveyard_dirt, 8, 0), graveyardDust, graveyardDust, wormwood, wormwood, dirt, dirt, dirt, dirt);
 		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.ember_grass, 2, 0), blazePowder, blazePowder, wormwood, wormwood);
 		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.torchwood, 2, 0), glowstoneDust, glowstoneDust, anyLog, anyLeaf);
+		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.spanish_moss, 3), vine, vine, vine, fumeBottledMagic, netherWart);
+		
 		// Banner pattern removal
 		for (int i = 0; i < 16; i++) {
 			registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(Items.BANNER, 1, i), Ingredient.fromStacks(new ItemStack(Items.BANNER, 1, i)));
