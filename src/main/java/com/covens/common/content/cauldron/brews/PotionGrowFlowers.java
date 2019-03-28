@@ -4,7 +4,6 @@ import com.covens.api.cauldron.DefaultModifiers;
 import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.content.cauldron.BrewMod;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -27,10 +26,8 @@ public class PotionGrowFlowers extends BrewMod {
 
 		Iterable<BlockPos> spots = BlockPos.getAllInBox(posI, posF);
 		for (BlockPos spot : spots) {
-			IBlockState state = world.getBlockState(spot);
-			boolean place = world.rand.nextInt(7) <= amplifier;
-			if (place && (state.getBlock() == Blocks.GRASS) && world.isAirBlock(spot.up())) {
-				world.getBiome(pos).plantFlower(world, world.rand, spot.up());
+			if (world.rand.nextInt(7) <= amplifier && canPlaceBlockHere(world, spot)) {
+				world.getBiome(pos).plantFlower(world, world.rand, spot);
 			}
 		}
 	}
@@ -42,7 +39,13 @@ public class PotionGrowFlowers extends BrewMod {
 
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
-		entity.world.getBiome(entity.getPosition()).plantFlower(entity.world, entity.world.rand, entity.getPosition());
+		if (canPlaceBlockHere(entity.world, entity.getPosition())) {
+			entity.world.getBiome(entity.getPosition()).plantFlower(entity.world, entity.world.rand, entity.getPosition());
+		}
+	}
+	
+	private static boolean canPlaceBlockHere(World world, BlockPos pos) {
+		return world.getBlockState(pos.down()).getBlock() == Blocks.GRASS && world.getBlockState(pos).getBlock().isReplaceable(world, pos);
 	}
 
 }
