@@ -1,0 +1,31 @@
+{
+	"components": [ 
+		{
+			"type": "image",
+			"image": "covens:textures/gui/books/templates/processing.png",
+			"x": 25,
+			"width": 64,
+			"height": 24,
+			"texture_width": 64,
+			"texture_height": 24,
+			"scale": 1
+		},
+		{
+			"type": "item",
+			"item": "#input",
+			"x": 29,
+			"y": 4
+		},
+		{
+			"type": "item",
+			"item": "#output",
+			"x": 68,
+			"y": 4
+		},
+		{
+			"type": "text",
+			"text": "#text",
+			"y": 26
+		}
+	]
+}

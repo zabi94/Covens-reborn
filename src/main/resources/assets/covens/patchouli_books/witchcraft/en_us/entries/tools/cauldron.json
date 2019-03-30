@@ -4,13 +4,13 @@
   "category": "tools",
   "pages": [
     {
-      "type": "spotlight",
-      "item": "covens:cauldron",
-      "text": "A boiling cauldron is present in every witches' abode. Indeed, it has a plethora of uses, such as cooking, brewing, teleporting... which makes it an essential tool for the craft. Should a witch want to learn more about all things cauldron related, reading the \"$(item)Almanac of Boiling$()\" is highly recommended..."
+      "type": "crafting",
+      "recipe": "covens:cauldron",
+      "text": "A boiling cauldron is present in every witches' abode. Indeed, it has a plethora of uses, such as cooking, brewing, teleporting... which makes it an essential tool for the craft. Should a witch want to learn more about all things cauldron"
     },
     {
-      "type": "crafting",
-      "recipe": "covens:cauldron"
+      "type": "text",
+      "text": "related, reading the \"$(item)Almanac of Boiling$()\" is highly recommended..."
     }
   ]
 }

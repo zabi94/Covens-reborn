@@ -1,5 +1,5 @@
 {
-  "name": "Crafting with the cauldron",
+  "name": "Cauldron crafting",
   "icon": "minecraft:crafting_table",
 "sortnum": "1",
   "category": "cauldron",
@@ -9,34 +9,28 @@
       "text": "The cauldron can also be used as a mean of processing certain resources. Simply enough, just throwing the required items into the cauldron should be enough, provided there is enough ME nearby (either from a nearby witch or an altar)."
     },
     {
-      "type": "spotlight", 
-      "item": "minecraft:sticky_piston",
-      "title": "Sticky piston cleansing",
-      "sortnum": "2",
+      "type": "processing", 
+      "input": "minecraft:sticky_piston",
+      "output": "minecraft:piston",
       "text": "Throwing a sticky piston to the cauldron allows you to cleanse the goo from it, leaving you a lovely clean one..."
-
     },
     {
-      "type": "spotlight", 
-      "item": "minecraft:sponge:1",
-      "title": "Wetting a sponge",
+      "type": "processing", 
+      "output": "minecraft:sponge:1",
+      "input": "minecraft:sponge",
       "text": "Who would have said that throwing a sponge to a filled cauldron will end in a wet sponge..."
-
     },
     {
-      "type": "spotlight", 
-      "item": "covens:wax",
-      "title": "Wax",
+      "type": "processing", 
+      "output": "covens:wax",
+      "input": "covens:honeycomb",
       "text": "Throwing a filled empty honeycomb to the boiling waters allows the wax to melt, so you can gather the it..."
-
     },
     {
-      "type": "spotlight", 
-      "item": "covens:goblet:1",
-      "title": "Filling the goblet",
-      "text": "One can not simply fill a goblet with plain water. Rather, a special concoction needs to be made by throwing, to a cauldron filled with honey, a ghast tear, cloudy oil and three pieces of redstone, and last but not least, the goblet... $(br2)$(o)Don't you dare question our ancient ways!"
-
+      "type": "processing", 
+      "output": "covens:goblet:1",
+      "input": "covens:goblet:0",
+      "text": "One can not simply fill a goblet with plain water. Rather, a special concoction needs to be made by throwing, to a cauldron filled with honey, a ghast tear, cloudy oil and three pieces of redstone, and last but not least, the goblet... $(br)$(o)Don't you dare question our ancient ways!"
     }
-
   ]
 }
