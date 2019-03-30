@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import com.covens.api.divination.ITarot;
-import com.covens.common.lib.LibMod;
+import com.covens.common.content.enchantments.ModEnchantments;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.RegistryBuilder;
 
 public class TarotHandler {
 
-	public static final IForgeRegistry<ITarot> REGISTRY = new RegistryBuilder<ITarot>().setName(new ResourceLocation(LibMod.MOD_ID, "tarots")).setType(ITarot.class).setIDRange(0, 200).create();
+	@ObjectHolder(value = "covens:silver_sword")
+	public static final ITarot SILVER_SWORD = null;
+	
+	public static IForgeRegistry<ITarot> REGISTRY = null;
 	private static final int MAX_CARDS_PER_READING = 5;
 
 	private TarotHandler() {
@@ -29,18 +32,23 @@ public class TarotHandler {
 	public static ArrayList<TarotInfo> getTarotsForPlayer(EntityPlayer player) {
 
 		ArrayList<TarotInfo> res = new ArrayList<TarotInfo>(5);
-
-		// Can't instantiate since the collected List<> might not support remove
-		// operations,
-		// depending on the jre, so this needs to be addAll for safety
-		res.addAll(REGISTRY.getValuesCollection().parallelStream() //
-				.filter(it -> it.isApplicableToPlayer(player)) //
-				.map(it -> new TarotInfo(it, player)) //
-				.collect(Collectors.toList()));
-
-		// Remove random cards until we have less or equal than max per reading
-		while (res.size() > MAX_CARDS_PER_READING) {
-			res.remove(player.getRNG().nextInt(res.size()));
+		if (SILVER_SWORD.isApplicableToPlayer(player)) {
+			res.addAll(REGISTRY.getValuesCollection().parallelStream() //
+					.filter(it -> player.getRNG().nextBoolean() && !it.equals(SILVER_SWORD)) //
+					.map(it -> new TarotInfo(it, player)) //
+					.collect(Collectors.toList()));
+			while (res.size() >= MAX_CARDS_PER_READING) {
+				res.remove(player.getRNG().nextInt(res.size() - 1));
+			}
+			res.add(new TarotInfo(SILVER_SWORD, player));
+		} else {
+			res.addAll(REGISTRY.getValuesCollection().parallelStream() //
+					.filter(it -> it.isApplicableToPlayer(player) && !it.equals(SILVER_SWORD)) //
+					.map(it -> new TarotInfo(it, player)) //
+					.collect(Collectors.toList()));
+			while (res.size() >= MAX_CARDS_PER_READING) {
+				res.remove(player.getRNG().nextInt(res.size()));
+			}
 		}
 
 		return res;
@@ -106,6 +114,10 @@ public class TarotHandler {
 		public String toString() {
 			return this.getTranslationKey() + ", " + this.number + (this.reversed ? ", reversed" : "");
 		}
+	}
+
+	public static boolean isPlayerProtected(EntityPlayer p) {
+		return p.getRNG().nextInt(10) < ModEnchantments.occultation.getTotalLevelOnPlayer(p);
 	}
 
 }

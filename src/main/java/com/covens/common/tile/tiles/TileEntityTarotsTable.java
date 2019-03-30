@@ -36,17 +36,17 @@ public class TileEntityTarotsTable extends ModTileEntity {
 	}
 
 	public void read(@Nonnull ItemStack tarotDeck, @Nonnull EntityPlayer reader) {
-		if (!reader.world.isRemote) {
-			if (this.checkDeck(tarotDeck) && this.altarTracker.drainAltarFirst(reader, this.pos, this.world.provider.getDimension(), READ_COST)) {
+		if (!reader.world.isRemote && this.checkDeck(tarotDeck)) {
+			if (this.altarTracker.drainAltarFirst(reader, this.pos, this.world.provider.getDimension(), READ_COST)) {
 				reader.openGui(Covens.instance, LibGui.TAROT.ordinal(), reader.world, this.pos.getX(), this.pos.getY(), this.pos.getZ());
 				EntityPlayerMP readee = (EntityPlayerMP) EntityHelper.getPlayer(UUID.fromString(tarotDeck.getTagCompound().getString("read_id")));
 				if (readee != null) {
 					NetworkHandler.HANDLER.sendTo(new TarotMessage(readee), (EntityPlayerMP) reader);
 				} else {
-					reader.sendStatusMessage(new TextComponentTranslation("item.tarots.error_reading"), true);
+					reader.sendStatusMessage(new TextComponentTranslation("item.tarots.error_reading.no_readee"), true);
 				}
 			} else {
-				reader.sendStatusMessage(new TextComponentTranslation("item.tarots.error_reading"), true);
+				reader.sendStatusMessage(new TextComponentTranslation("item.tarots.error_reading.power"), true);
 			}
 		}
 	}

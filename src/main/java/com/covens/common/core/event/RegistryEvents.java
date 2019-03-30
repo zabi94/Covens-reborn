@@ -19,8 +19,10 @@ import static com.covens.common.core.statics.ModCrops.TULSI;
 import static com.covens.common.core.statics.ModCrops.WHITE_SAGE;
 import static com.covens.common.core.statics.ModCrops.WORMWOOD;
 
+import com.covens.api.divination.ITarot;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.block.natural.crop.BlockCrop;
+import com.covens.common.content.tarot.TarotHandler;
 import com.covens.common.core.helper.CropHelper;
 import com.covens.common.core.statics.ModCrops;
 import com.covens.common.item.ModItems;
@@ -42,9 +44,11 @@ import com.covens.common.tile.ModTiles;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.RegistryBuilder;
 
 
 @Mod.EventBusSubscriber(modid = LibMod.MOD_ID)
@@ -90,5 +94,10 @@ public final class RegistryEvents {
 	@SubscribeEvent
 	public static void registerPotions(RegistryEvent.Register<Potion> event) {
 		event.getRegistry().registerAll();
+	}
+	
+	@SubscribeEvent
+	public static void createRegistries(RegistryEvent.NewRegistry evt) {
+		TarotHandler.REGISTRY = new RegistryBuilder<ITarot>().setName(new ResourceLocation(LibMod.MOD_ID, "tarots")).setType(ITarot.class).setIDRange(0, 200).create();
 	}
 }
