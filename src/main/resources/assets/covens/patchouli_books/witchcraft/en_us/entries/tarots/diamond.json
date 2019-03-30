@@ -1,0 +1,16 @@
+{
+  "name": "The Diamonds",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/diamonds.png",
+      "name": "The Diamonds"
+    },
+    {
+      "type": "text",
+      "text": "A fortune awaits those marked with this card. Whether that is good or bad only time will tell..."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+	"components": [
+		{
+			"type": "header",
+			"text": "#name",
+			"x": -1,
+			"centered": true
+		},
+		{
+			"type": "image",
+			"image": "#image",
+			"y": 12,
+			"x": 10,
+			"width": 172,
+			"height": 236,
+			"texture_width": 172,
+			"texture_height": 236,
+			"scale": 0.55
+		}
+	
+	]
+}

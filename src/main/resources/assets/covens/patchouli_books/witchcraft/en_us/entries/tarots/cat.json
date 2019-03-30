@@ -1,0 +1,16 @@
+{
+  "name": "The Cat",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/cat.png",
+      "name": "The Cat"
+    },
+    {
+      "type": "text",
+      "text": "This card reveals itself for those who are bound to spirits sworn to protect them, while disguised as animals. As their number grows, so does this card's.<br>The card will show itself upside down when the witch is too far for their familiar to protect them."
+    }
+  ]
+}

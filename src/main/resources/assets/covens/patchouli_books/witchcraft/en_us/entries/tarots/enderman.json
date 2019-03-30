@@ -1,0 +1,16 @@
+{
+  "name": "The Enderman",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/enderman.png",
+      "name": "The Enderman"
+    },
+    {
+      "type": "text",
+      "text": "Those with this tarot card are found to be bound to a world of beginning long past."
+    }
+  ]
+}

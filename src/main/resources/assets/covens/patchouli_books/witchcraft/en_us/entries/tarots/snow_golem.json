@@ -1,0 +1,16 @@
+{
+  "name": "The Snow Golem",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/nitwit.png",
+      "name": "The Snow Golem"
+    },
+    {
+      "type": "text",
+      "text": "The witchyness of one is shown through the use of this card."
+    }
+  ]
+}

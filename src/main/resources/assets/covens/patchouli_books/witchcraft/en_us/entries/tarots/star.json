@@ -1,0 +1,16 @@
+{
+  "name": "The Nether Star",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/star.png",
+      "name": "The Nether Star"
+    },
+    {
+      "type": "text",
+      "text": "The Nether Star favours those entwind with a realm of nature unkown..."
+    }
+  ]
+}

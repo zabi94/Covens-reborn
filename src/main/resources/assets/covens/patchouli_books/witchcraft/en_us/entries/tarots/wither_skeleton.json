@@ -1,0 +1,16 @@
+{
+  "name": "The Wither Skeleton",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/wither_skeleton.png",
+      "name": "The Wither Skeleton"
+    },
+    {
+      "type": "text",
+      "text": "Those with this tarot card are found to be bound to a world of eternal scorching of their soul."
+    }
+  ]
+}

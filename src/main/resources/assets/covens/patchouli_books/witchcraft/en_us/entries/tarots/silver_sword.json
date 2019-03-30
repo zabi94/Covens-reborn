@@ -1,0 +1,16 @@
+{
+  "name": "The Silver Sword",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/silver_sword.png",
+      "name": "The Silver Sword"
+    },
+    {
+      "type": "text",
+      "text": "Just like a sword cuts a thread in a single swing, so does this card with the flow of knowledge.<br>Creatures with a repulsion against magic will cause this card to show up, interfering with the whole reading.<br>Beware of people who get this image."
+    }
+  ]
+}

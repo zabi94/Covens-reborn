@@ -1,0 +1,16 @@
+{
+  "name": "The Iron Golem",
+  "icon": "covens:tarots",
+  "category": "tarots",
+  "pages": [
+    {
+      "type": "tarot",
+      "image": "covens:textures/gui/tarots/iron_golem.png",
+      "name": "The Iron Golem"
+    },
+    {
+      "type": "text",
+      "text": "Those with this tarot card are found to be bound to a world of life."
+    }
+  ]
+}
