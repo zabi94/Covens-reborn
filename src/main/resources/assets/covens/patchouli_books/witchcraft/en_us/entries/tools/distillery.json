@@ -6,17 +6,17 @@
     {
       "type": "crafting",
       "recipe": "covens:distillery",
-      "text": "Burning things in an oven is sometimes too rough to obtain some of the most delicate essences and liquids.<br>Through the use of tourmaline powder, a witch may focus magical energy into gentle distillation processes"
+      "text": "Burning things in an oven is sometimes too rough to obtain some of the most delicate essences and liquids.$(br2)Through the use of tourmaline powder, a witch may focus magical energy into gentle"
     },
     {
       "type": "image",
       "images": ["covens:textures/gui/books/images/distillery.png"],
       "border": true,
-      "text": "to bottle the purest essences of magic. Up to"
+      "text": "distillation processes to bottle the purest"
     },
     {
       "type": "text",
-      "text": "six diferent items (regardless of the quantity of said item) can be distilled at once, burning them through the use of the powder from a fiery being of Hell.<br>However, to tame the powerful magical flames only this powder creates, magic from an altar or witch is required, which different items requiring differents amount of energy."
+      "text": "essences of magic. $(br2)Up to six diferent items (regardless of the quantity of said item) can be distilled at once, burning them through the use of $(o)$(item)$(t:Blaze powder...)the powder from a fiery being of Hell.$()$(br2)However, to tame the powerful magical flames only this powder creates, magic from an $(o)$(item)altar$() or witch is required, with different items requiring differents amount of energy."
     }
   ]
 }

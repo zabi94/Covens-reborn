@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "This card reveals itself for those who are bound to spirits sworn to protect them, while disguised as animals. As their number grows, so does this card's.<br>The card will show itself upside down when the witch is too far for their familiar to protect them."
+      "text": "This card reveals itself for those who are bound to spirits sworn to protect them, while disguised as animals. $(br2)As their number grows, so does this card's.$(br2)The card will show itself upside down when the witch is too far for their familiar to protect them."
     }
   ]
 }

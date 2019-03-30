@@ -6,16 +6,16 @@
     {
       "type": "crafting",
       "recipe": "covens:apiary",
-      "text": "Beekeeping has been practiced for millennia seeking to obtain the products the bees produce: honey, which has magical properties, and honeycombs, which can be processed for wax.<br>In order to delve into"
+      "text": "Beekeeping has been practiced for millennia seeking to obtain the products the bees produce: honey, which has magical properties, and honeycombs, which can be processed for wax."
     },
     {
       "type": "spotlight",
       "item": "covens:honeycomb",
-      "text": "beekeeping, a witch should first hunt down a $(l:exploration/beehive)beehive$(), in order to obtain an empty honeycomb.$(p)Secondly, such honeycomb should then be used to craft an apiary.<br>In order for the apiary to work, another $(item)empty comb, some paper or carpets$() should be"
+      "text": "In order to delve into beekeeping, a witch should first hunt down a $(l:exploration/beehive)beehive$(), in order to obtain an empty honeycomb.$(p)Secondly, such honeycomb should then be used to craft an apiary.$(br2)For the apiary to work, another $(item)empty comb, some"
     },
     {
     	"type": "text",
-    	"text": "inserted into the apiary; only then will the bees produce more honeycombs or fill them with honey."
+    	"text": "$(item)paper or carpets$() should be inserted into the apiary. $(br2)Only then will the bees produce more honeycombs or fill them with honey."
     }
   ]
 }

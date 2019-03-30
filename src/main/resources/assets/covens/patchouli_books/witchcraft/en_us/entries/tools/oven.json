@@ -5,12 +5,12 @@
   "pages": [
     {
       "type": "crafting",
-      "text": "A simple regular furnace is not enough for the practice of witchcraft. Indeed, a specifically designed oven made out of iron is needed (it looking much more stylish is an added plus).<br>Such oven functions as a",
+      "text": "A simple regular furnace is not enough for the practice of witchcraft. $(br2)Indeed, a specifically designed oven made out of iron is needed $(o)(it looking much more stylish is an added plus).",
       "recipe": "covens:oven"
     },
     {
     	"type": "text",
-    	"text": "regular furnace in that it will require fuel to burn various burnables; however, it also has a specific slot for $(item)clay jars$() which allows you to collect different byproducts, magical or otherwise.$(2br)$(o)Just... don't cook any children in it...$()"
+    	"text": "Such oven functions as a regular furnace in that it will require fuel to burn various burnables; however, it also has a specific slot for $(item)$(o)clay jars$() which allows you to collect different byproducts, magical or otherwise.$(2br)$(o)Just... don't cook any children in it...$()"
     }
   ]
 }

@@ -6,7 +6,7 @@
    {
       "type": "spotlight",
       "item": "covens:boline",
-      "text": "The boline is the second cerimonial blade, along with the $(l:tools/athame)Athame$(). It is used for gathering and was born as an instrument. In the practice, it represents the produce, and the act of cutting"
+      "text": "The boline is the second cerimonial blade, along with the $(l:tools/athame)Athame$(). $(br2)It is used for gathering and was born as an instrument. $(br2)In the practice, it represents the produce, and the act of cutting"
     },
     {
       "type": "image",

@@ -1,6 +1,6 @@
 {
   "name": "The cards",
-  "description": "The tarot deck holds answers to the unknown. Indeed the magics imbued in the deck make the witch pull out cards specific to the $(thing)$(l:tools/tarots)person being read$(). The Tarot explanations gathered in this book are cloudy in meaning for its not completely known what each card means.",
+  "description": "The tarot deck holds answers to the unknown. $(br2)Indeed the magics imbued in the deck make the witch pull out cards specific to the $(thing)$(l:tools/tarots)person being read$(). $(br2)The Tarot explanations gathered in this book are cloudy in meaning for its not completely known what each card means.",
   "parent": "tools",
   "icon": "covens:tarots"
 }

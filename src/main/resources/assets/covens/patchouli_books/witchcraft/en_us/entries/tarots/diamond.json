@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "A fortune awaits those marked with this card. Whether that is good or bad only time will tell..."
+      "text": "A fortune awaits those marked with this card. $(br2)Whether that is good or bad only time will tell..."
     }
   ]
 }
