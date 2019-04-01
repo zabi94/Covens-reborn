@@ -21,6 +21,7 @@ covens.bat_swarm=Bat Swarm
 covens.howl=Howl
 covens.wolf_shift=Transform
 covens.command_familiar=Command Familiar (WIP)
+covens.level_up=Level up [TEMP]
 
 //Gui
 container.apiary=Apiary
@@ -710,6 +711,7 @@ effect.sun_ward=Sun Ward
 //Vampire
 vampire.nightvision.low_blood=You feel weak and your vision obfuscates
 vampire.bed_blocked=This doesn't feel comfortable anymore
+vampire.not_enough_xp=You need %d experience levels
 
 //Keys
 key.categories.covens=covens

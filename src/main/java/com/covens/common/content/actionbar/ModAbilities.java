@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModAbilities {
 
 	public static final HotbarAction BAT_SWARM = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "bat_swarm"), 2, 0);
+	public static final HotbarAction LEVEL_UP = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "level_up"), 4, 0);
 	public static final HotbarAction DRAIN_BLOOD = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "drain_blood"), 1, 0);
 	public static final HotbarAction HOWL = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "howl"), 1, 1);
 	public static final HotbarAction MESMERIZE = new HotbarAction(new ResourceLocation(LibMod.MOD_ID, "mesmerize"), 2, 1);

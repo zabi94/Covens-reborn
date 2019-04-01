@@ -45,7 +45,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -258,8 +257,11 @@ public class VampireAbilityHandler {
 				evt.getList().add(ModAbilities.BAT_SWARM);
 				evt.getList().add(ModAbilities.MESMERIZE);
 			}
-			if (data.getLevel() > 7) {
-				evt.getList().add(ModAbilities.HYPNOTIZE);
+//			if (data.getLevel() > 7) {
+//				evt.getList().add(ModAbilities.HYPNOTIZE);
+//			}
+			if (data.getLevel() < 10) {
+				evt.getList().add(ModAbilities.LEVEL_UP);
 			}
 		} else {
 			evt.player.getCapability(CapabilityVampire.CAPABILITY, null).setNightVision(false);
@@ -283,11 +285,16 @@ public class VampireAbilityHandler {
 			if ((evt.focusedEntity instanceof EntityLivingBase) && CovensAPI.getAPI().addVampireBlood(evt.player, -150)) {
 				((EntityLivingBase) evt.focusedEntity).addPotionEffect(new PotionEffect(ModPotions.mesmerized, 100, 0, false, true));
 			}
-		} else if (evt.action == ModAbilities.HYPNOTIZE) {
-			evt.player.sendStatusMessage(new TextComponentString("Hypnotize ability not available yet"), true);
+		} else if (evt.action == ModAbilities.LEVEL_UP) {
+			if (evt.player.experienceLevel >= data.getLevel() * 5) {
+				evt.player.addExperienceLevel(-5 * data.getLevel());
+				CovensAPI.getAPI().setTypeAndLevel(evt.player, DefaultTransformations.VAMPIRE, data.getLevel() + 1, evt.world.isRemote);
+			} else {
+				evt.player.sendStatusMessage(new TextComponentTranslation("vampire.not_enough_xp", data.getLevel()*5), true);
+			}
 		}
 	}
-
+	
 	private static void onSwarmActivated(HotbarActionTriggeredEvent evt) {
 		if (!(evt.player.getRidingEntity() instanceof EntityBatSwarm) && (evt.player.isCreative() || CovensAPI.getAPI().addVampireBlood(evt.player, -20))) {
 			EntityBatSwarm bs = new EntityBatSwarm(evt.player.world);
