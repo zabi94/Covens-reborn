@@ -488,7 +488,7 @@ tile.distillery.name=Distillery
 
 //Fluid
 fluid.oil_mundane=Oil
-fluid.for.honey=Honey
+fluid.liquid_honey=Honey
 
 //
 altar.effect.tooltip.when=When on altar:
