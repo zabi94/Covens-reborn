@@ -144,16 +144,23 @@ item.athame.name=Athame
 item.boline.name=Boline
 item.mortar_and_pestle.name=Mortar and Pestle
 item.mortar_and_pestle_stone.name=Stone Mortar and Pestle
-item.brew_phial.name=Brew Phial
-item.brew_arrow.name=Coated Arrow
 item.taglock.name=Taglock Kit (WIP)
 item.needle_bone.name=Bone Needle
+
+item.brew_phial.name=Brew Phial
+item.brew_arrow.name=Brew Coated Arrow
 item.brew_phial_drink.name=Brew Phial
 item.brew_phial_splash.name=Splash Brew Phial
 item.brew_phial_linger.name=Lingering Brew Phial
+item.brew_phial_drink.single.name=Brew of %s
+item.brew_phial_splash.single.name=Splash Brew of %s
+item.brew_phial_linger.single.name=Lingering Brew of %s
+item.brew_arrow.single.name=Brew Arrow of %s
+
 item.empty_brew_drink.name=Empty Brew Phial
 item.empty_brew_splash.name=Empty Splash Brew Phial
 item.empty_brew_linger.name=Empty Lingering Brew Phial
+
 item.oak_apple_gall.name=Oak Apple Gall
 item.grilled_watermelon.name=Grilled Watermelon
 item.ritual_chalk_normal.name=Ritual Chalk
@@ -508,7 +515,7 @@ brew.instant=Instant
 effect.shell_armor=Shell Armor
 effect.spider_nightmare=Spider Nightmare
 effect.frostbite=Frostbite
-effect.extinguish_fire=Extinguish
+effect.extinguish_fire=Extinguishing
 effect.mars_water=Water of Mars
 effect.smite=Smite
 effect.volatility=Volatility
@@ -555,7 +562,7 @@ effect.power_regen=Power Boon
 effect.power_drain=Power Drain
 effect.power_boost=Power Boost
 effect.power_dampening=Power Dampening
-effect.rooting=Rooted
+effect.rooting=Rooting
 effect.vampire_leech=Life Drain
 
 //Sound

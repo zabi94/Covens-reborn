@@ -11,6 +11,7 @@ import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.BrewEntry;
 import com.covens.common.content.cauldron.BrewModifierListImpl;
 import com.covens.common.content.cauldron.CauldronRegistry;
+import com.covens.common.content.cauldron.IBrewEntry;
 import com.covens.common.core.helper.RomanNumberHelper;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.item.ItemMod;
@@ -92,6 +93,18 @@ public class ItemBrew extends ItemMod {
 			CauldronRegistry.BREW_POTION_MAP.values().forEach(p -> this.addPotionType(items, p));
 		}
 	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		List<IBrewEntry> list = BrewData.fromStack(stack).getEffects(); 
+		if (list.size() == 1) {
+			String potionName = I18n.format(list.get(0).getPotion().getName());
+			return I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".single.name", potionName);
+		}
+		return super.getItemStackDisplayName(stack);
+	}
+
 
 	private void addPotionType(NonNullList<ItemStack> items, Potion p) {
 		BrewData data = new BrewData();

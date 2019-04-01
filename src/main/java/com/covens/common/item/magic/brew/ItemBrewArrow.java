@@ -6,11 +6,13 @@ import com.covens.common.content.cauldron.BrewData;
 import com.covens.common.content.cauldron.BrewData.BrewEntry;
 import com.covens.common.content.cauldron.BrewModifierListImpl;
 import com.covens.common.content.cauldron.CauldronRegistry;
+import com.covens.common.content.cauldron.IBrewEntry;
 import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.entity.EntityBrewArrow;
 import com.covens.common.lib.LibItemName;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -41,7 +43,7 @@ public class ItemBrewArrow extends ItemArrow implements IModelRegister {
 			CauldronRegistry.BREW_POTION_MAP.values().forEach(p -> this.addPotionType(items, p));
 		}
 	}
-
+	
 	@Override
 	public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
 		EntityBrewArrow brewArrow = new EntityBrewArrow(worldIn, shooter);
@@ -62,6 +64,17 @@ public class ItemBrewArrow extends ItemArrow implements IModelRegister {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		ItemBrew.addTooltip(stack, worldIn, tooltip, flagIn);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		List<IBrewEntry> list = BrewData.fromStack(stack).getEffects(); 
+		if (list.size() == 1) {
+			String potionName = I18n.format(list.get(0).getPotion().getName());
+			return I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".single.name", potionName);
+		}
+		return super.getItemStackDisplayName(stack);
 	}
 
 	@Override
