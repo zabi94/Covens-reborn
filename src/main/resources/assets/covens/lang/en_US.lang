@@ -22,6 +22,7 @@ covens.howl=Howl
 covens.wolf_shift=Transform
 covens.command_familiar=Command Familiar (WIP)
 covens.level_up=Level up [TEMP]
+covens.mesmerize=Mesmerize (WIP)
 
 //Gui
 container.apiary=Apiary
@@ -169,15 +170,16 @@ item.tarots.not_bound=Not bound (Hold shift)
 item.tarots.on_table=You need a divination table to read these
 item.tarots.read_to=Reading %s's future
 item.tarots.bind_howto=Shift-right click to bind it to yourself, or click on some other player to read their future
-item.tarots.error_reading=The cards predictions make no sense
-item.girdle_of_the_wooded.name=Girdle Of The Dryads
-item.mantle.name=Mantle
-item.pouch.name=Witches Pouch
+item.tarots.error_reading.power=Your power source isn't strong enough
+item.tarots.error_reading.no_readee=This deck of cards wasn't shuffled properly
+item.girdle_of_the_wooded.name=Belt of Spring
+item.mantle.name=Mantle (WIP)
+item.pouch.name=Witches Pouch (WIP)
 item.broom_mundane.name=Broom
 item.broom_elder.name=Elder Broom
 item.broom_juniper.name=Juniper Broom
-item.broom_yew.name=Yew Broom
-item.broom_cypress.name=Cypress Broom
+item.broom_yew.name=Yew Broom (WIP)
+item.broom_cypress.name=Cypress Broom (WIP)
 item.gem_powder.name=Gem Powder
 item.cold_iron_nugget.name=Cold Iron Nugget
 item.owlets_wing.name=Owlet's Wing
@@ -209,13 +211,13 @@ item.eye_of_newt.name=Eye of Newt
 item.juniper_berries.name=Juniper Berries
 item.yew_aril.name=Yew Aril
 item.bell.name=Silver Bell
-item.blood_bottle.name=Bottle of Fresh Blood
-item.blood_bottle_spoiled.name=Bottle of Spoiled Blood
+item.blood_bottle.name=Bottle of Fresh Blood (WIP)
+item.blood_bottle_spoiled.name=Bottle of Spoiled Blood (WIP)
 item.blood_bottle.fresh=Fresh
 item.blood_bottle.normal=Good quality
 item.blood_bottle.old=Old
 item.blood_bottle.stale=Stale
-item.spark_of_darkness.name=Spark of Darkness
+item.spark_of_darkness.name=Spark of Darkness (TEMP)
 
 //fumes
 item.unfired_jar.name=Unfired Clay Jar
@@ -242,8 +244,6 @@ item.bottled_magic.name=Liquid Witchcraft
 
 //Dyes
 item.catechu.name=Catechu Brown
-item.absinthe_green.name=Absinthe Green
-item.albedo.name=Alchemical White
 item.iron_gall_ink.name=Iron Gall Ink
 
 //Blocks
@@ -406,7 +406,7 @@ tile.cold_iron_block.name=Cold Iron Block
 tile.cold_iron_block_chisel.name=Cold Iron Block (Chiseled)
 tile.graveyard_dirt.name=Graveyard Dirt
 tile.purifying_earth.name=Purifying Earth
-tile.brazier.name=Brazier
+tile.brazier.name=Brazier (WIP)
 
 //Saplings and Trees
 tile.sapling_cypress.name=Cypress Sapling
@@ -455,20 +455,20 @@ covens.nethersteel_chisel.tooltip.variety.hellish_watching=Hellish (Watching)
 covens.nethersteel_chisel.tooltip.variety.skull=Skull
 
 //Spells
-item.spell_page.name=Forgotten Spell
-item.spell_page.covens.magnet.name=Spell of Far Reach
-item.spell_page.covens.poke.name=Spell of Punch
-item.spell_page.covens.water.name=Spell of the Puddle
-item.spell_page.covens.activation.name=Spell of Telekinesis
-item.spell_page.covens.slowness.name=Spell of the Tangled Feet
-item.spell_page.covens.lesser_blink.name=Spell of Lesser Blink
-item.spell_page.covens.blink.name=Spell of Blink
-item.spell_page.covens.explosion.name=Spell of Destabilization
-item.spell_page.covens.disarming.name=Spell of Disarming
-item.spell_page.covens.infuse_life.name=Spell of the Gift
-item.spell_page.covens.self_heal.name=Spell of Restoration
-item.spell_page.covens.call_storm.name=Spell of the Tempest
-item.spell_page.covens.vampire_leech.name=Spell of Life Drain
+item.spell_page.name=Forgotten Spell (WIP)
+item.spell_page.covens.magnet.name=Spell of Far Reach (WIP)
+item.spell_page.covens.poke.name=Spell of Punch (WIP)
+item.spell_page.covens.water.name=Spell of the Puddle (WIP)
+item.spell_page.covens.activation.name=Spell of Telekinesis (WIP)
+item.spell_page.covens.slowness.name=Spell of the Tangled Feet (WIP)
+item.spell_page.covens.lesser_blink.name=Spell of Lesser Blink (WIP)
+item.spell_page.covens.blink.name=Spell of Blink (WIP)
+item.spell_page.covens.explosion.name=Spell of Destabilization (WIP)
+item.spell_page.covens.disarming.name=Spell of Disarming (WIP)
+item.spell_page.covens.infuse_life.name=Spell of the Gift (WIP)
+item.spell_page.covens.self_heal.name=Spell of Restoration (WIP)
+item.spell_page.covens.call_storm.name=Spell of the Tempest (WIP)
+item.spell_page.covens.vampire_leech.name=Spell of Life Drain (WIP)
 
 
 //Mutant Plants
@@ -483,7 +483,7 @@ tile.oven.name=Oven
 tile.thread_spinner.name=Loom
 tile.witch_altar.name=Witches Altar
 tile.crystal_ball.name=Crystal Ball
-tile.magic_mirror.name=Magic Mirror
+tile.magic_mirror.name=Magic Mirror (WIP)
 tile.distillery.name=Distillery
 
 //Fluid
