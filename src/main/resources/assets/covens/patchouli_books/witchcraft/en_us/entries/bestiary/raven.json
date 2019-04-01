@@ -1,0 +1,23 @@
+{
+  "name": "ravens",
+  "icon": "covens:ravens_feather",
+  "category": "bestiary",
+  "pages": [
+  	{
+    	"type": "entity",
+    	"entity": "covens:raven",
+    	"rotate": false,
+    	"text": "Ravens are a species of birds, often noted for the striking black of their feathers.",
+    	"scale": 0.88
+    },
+    {
+      	"type": "spotlight",
+      	"item": "covens:ravens_feather",
+      	"text": "They are extremely perceptive and intelligent, and witches of similar ability often seek a raven as a companion. Some ravens are even capable of mimicking speech, though they are not reliable messengers.$(2br)Sometimes mistaken as a sign of bad luck, ravens really precede the approach of power and plenty. It's said that"
+    },
+    {
+    	"type": "text",
+    	"text": "wealth draws ravens, much like their greedy cousins, the magpie. They are most often found in grand, open plains, where they may swoop on unsuspecting travelers to take their food.$(2br)$(o)Obligatory second Poe reference"
+    }
+  ]
+}

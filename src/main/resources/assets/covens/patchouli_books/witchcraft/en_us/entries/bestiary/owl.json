@@ -1,0 +1,22 @@
+{
+  "name": "Owls",
+  "icon": "covens:owlets_wing",
+  "category": "bestiary",
+  "pages": [
+  	{
+    	"type": "entity",
+    	"entity": "covens:owl",
+    	"rotate": false,
+    	"text": "Typically found in dense forests, owls are famed as a symbol of wisdom."
+    },
+    {
+      	"type": "spotlight",
+      	"item": "covens:owlets_wing",
+      	"text": "Despite their cumbersome appearance, owls are powerful fliers and lethal hunters:  they prefer smaller game, like rabbits, but have also been known to take chickens from unwitting farmers.$(br2)Owls find the best companion in worldly witches who travel often.<br>It's said that familiarized "
+    },
+    {
+    	"type": "text",
+    	"text": "witches are attuned to the wind, making their work with a broom something to behold.$(2br)$(o)How many licks?"
+    }
+  ]
+}

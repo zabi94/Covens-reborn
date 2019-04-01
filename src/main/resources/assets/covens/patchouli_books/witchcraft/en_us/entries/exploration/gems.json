@@ -1,0 +1,22 @@
+{
+	  "name": "Gems",
+	  "icon": "covens:gem_tourmaline",
+	  "category": "exploration",
+	  "pages": [
+	  		{
+		  		"type": "image",
+			    "images": [
+			    	"covens:textures/gui/books/images/tourmaline_ore.png",
+			    	"covens:textures/gui/books/images/garnet_ore.png",
+			    	"covens:textures/gui/books/images/tigers_eye_ore.png",
+			    	"covens:textures/gui/books/images/malachite_ore.png"
+			    ],
+			    "border": true,
+			    "title": "The gem ores"
+	  		},
+	    	{
+		      "type": "text",
+		      "text": "Found deep within the overworld's core you may find crystallized minerals which have an affinity for magic. Four are the gemstones of interest to the Art, Garnet, Malachite, Tigers Eye, and Tourmaline, each having their own magical properties for rituals or crafting. A witch may also make use of these gems by grinding them with a $(l:tools/mortar_and_pestle)mortar and pestle.$()"
+	    	}
+	    ]
+}
