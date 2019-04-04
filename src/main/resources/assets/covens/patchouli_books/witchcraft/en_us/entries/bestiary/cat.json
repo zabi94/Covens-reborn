@@ -8,7 +8,8 @@
     	"entity": "minecraft:ocelot",
     	"rotate": false,
     	"text": "Though somewhat hard to find, cats have been important companions to witches for ",
-    	"scale": 0.9
+    	"scale": 0.9,
+    	"default_rotation": -40
     },
     {
       	"type": "text",

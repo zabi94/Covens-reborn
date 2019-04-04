@@ -1,0 +1,20 @@
+{
+  "name": "Snakes",
+  "icon": "covens:adders_fork",
+  "category": "bestiary",
+  "pages": [
+  	{
+    	"type": "entity",
+    	"entity": "covens:snake",
+    	"rotate": false,
+    	"text": "Cold-blooded and venomous, snakes have long been a symbol of the dark arts.",
+    	"scale": 1,
+    	"default_rotation": -0.45,
+    	"offset": -0.45
+    },
+    {
+      	"type": "text",
+      	"text": "Take caution when seeking a snake for a companion; to them, you will never be master.  A flexible nature is required to keep a snake, and to tap into the twisted magics they find most appealing.  To entrance the mind and raise the dead, one must be able to shed their skin, sometimes literally.$(br2)$(o)If spaghetti could bite."
+    }
+  ]
+}
