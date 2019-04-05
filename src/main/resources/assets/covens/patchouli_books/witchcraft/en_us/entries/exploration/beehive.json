@@ -6,12 +6,16 @@
     {
       "type": "spotlight",
       "item": "covens:beehive",
-      "text": "Ah, the bee, always humming around, happily unaware of a world much more complex than just making honey in their hive...<br>If it pays attention, a witch will find such hives hanging from trees.<br>Those not wise enough to follow the Art say that simply"
+      "text": "$(o)Ah, the bee, always humming around, happily unaware of a world much more complex than just making honey in their hive... $(br2)$()If it pays attention, a witch will find such hives hanging from trees."
     },
     {
       "type": "spotlight",
       "item": "covens:empty_honeycomb",
-      "text": "punching it will be enough to obtain honeycombs.<br>Of course, you, a dignified witch, would never do such thing, relying instead on your trusty $(l:tools/boline)boline$() to do the harvesting. You might get stung as those brutes, but at least you will have a garanteed honeycomb drop$(p)$(o)Bee puns really sting..."
+      "text": "Those not wise enough to follow the Art say that simply punching it will be enough to obtain honeycombs.$(br2)Of course, you, a dignified witch, would never do such thing, relying instead on your trusty $(l:tools/boline)boline$() to do the harvesting. $(br2)You might get stung as those"
+    },
+    {
+      "type": "text",
+      "text":"brutes, but at least you will have a garanteed honey comb drop...$(br2)$(p)$(o)Bee puns really sting..."
     },
     {
       "type": "image",

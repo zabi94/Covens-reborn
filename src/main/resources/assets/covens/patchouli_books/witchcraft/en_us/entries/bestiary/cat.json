@@ -7,17 +7,17 @@
     	"type": "entity",
     	"entity": "minecraft:ocelot",
     	"rotate": false,
-    	"text": "Though somewhat hard to find, cats have been important companions to witches for ",
+    	"text": "Though somewhat hard to find, cats have been important companions to witches for ages.",
     	"scale": 0.9,
     	"default_rotation": -40
     },
     {
       	"type": "text",
-      	"text": "ages.$(2br)They are powerfully steeped in magic, and some say their reflective eyes can see the dead.$(2br)Wild cats can be found in the jungle and lured with raw fish, but be warned: $(1)they are highly skittish and independent$().$(2br)It should come as no surprise that, as the most traditional familiar, cats have a powerful effect on a witches' magic.<br>In particular, $(thing)rituals$() and"
+      	"text": "ages.$(2br)They are powerfully steeped in magic, some saying their reflective eyes can see the dead.$(2br)Wild cats can be found in the jungle and lured with raw fish, but be warned: $(1)they are highly skittish and independent$().$(2br)It should come as no surprise that, as the most traditional familiar, cats have a powerful effect on a witches' magic. In"
     },
     {
       	"type": "text",
-      	"text": "curses are much stronger.$(2br)$(o)Not quite nine lives."
+      	"text": "particular, $(thing)rituals$() and curses are much stronger.$(2br)$(o)Not quite nine lives."
     }
   ]
 }

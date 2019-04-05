@@ -6,13 +6,17 @@
     {
       "type": "spotlight",
       "item": "covens:salt",
-      "text": "Even though it is a common household item (and particularly great at seasoning potatoes), salt is a powerful ingredient. Magically speaking, salt purifies and repels evil and the grotesque. Supernatural creatures in particular have a hard time with it. Indeed, a ring of salt can never be crossed by them."
+      "text": "Even though it is a common household item (and particularly great at seasoning potatoes), salt is a powerful ingredient. $(br2)Magically speaking, salt purifies and repels evil and the grotesque. Supernatural creatures in particular have a hard time with it."
     },
     {
       "type": "image",
       "images": ["covens:textures/gui/books/images/salt_barrier.png"],
       "border": true,
-      "text": "Bear in mind, however, that any circle can be broken, and leave you unprotected."
+      "text": "Indeed, a ring of salt can never be crossed by them. Bear in mind, however, that"
+    },
+    {
+      "type":"text",
+      "text":"any circle can be broken, and leave you unprotected."
     }
     ]
 }

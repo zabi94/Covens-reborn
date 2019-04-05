@@ -6,11 +6,11 @@
     {
       "type": "spotlight",
       "item": "covens:crystal_ball",
-      "text": "The most commonly used tool when delving in the paths the future holds is, without a doubt the crystal ball.$(br2)Do not be fooled by its simple appearence, for this powerful tool is imbued with powerful magics, that allow you too see glimpses of what is to come in the form of $(o)$(item)fortunes."
+      "text": "The most commonly used tool when delving in the paths the future holds is, without a doubt the crystal ball.$(br2)Do not be fooled by its simple appearence, for this powerful tool is imbued with powerful magics, that allow you too see glimpses of what is to come in the form of $(o)$(thing)fortunes."
     },
     {
       "type": "text",
-      "text": "Such magics, imbued through $(o)$(thing)$(t:See book of magic)specific crafting rituals$(), place stress on the ball, which thus requires magic to prevent it from shattering when used (as such, make sure there is an $(o)$(item)altar $()in the vicinities when using it).$(2br)$(o)Be careful, though, as the future will not always show it's good face..."
+      "text": "Such magics, imbued through $(o)$(item)$(t:See book of magic)specific crafting rituals$(), place stress on the ball, which thus requires magic to prevent it from shattering when used (as such, make sure there is an $(o)$(item)altar $()in the vicinities when using it).$(2br)$(o)Be careful, though, as the future will not always show it's good face..."
     }
   ]
 }

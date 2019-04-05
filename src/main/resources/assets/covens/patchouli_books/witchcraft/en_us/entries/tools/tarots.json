@@ -6,11 +6,11 @@
     {
       "type": "spotlight",
       "item": "covens:tarots",
-      "text": "A form of divination, tarot has long been seeped in mystery, being used by many to help reveal the obscure. Indeed, in the hands of a skilled witch the tarot may illuminate every facet of a player's life.<br>Tarot cards may be created by infusing paper using the $(thing)$(t:See book of magic)Ritual of Engraving.$()"
+      "text": "A form of divination, tarot has long been seeped in mystery, being used by many to help reveal the obscure. Indeed, in the hands of a skilled witch the tarot may illuminate every facet of a player's life.$(br2)Tarot cards may be created by infusing paper using the $(thing)$(t:See book of magic)Ritual of Engraving.$()"
     },
     {
       "type": "text",
-      "text": "To get a reading about yourself, you must Shift + Right Click with the cards in your hand.<br>To uncover secrets about another player simply right click them while holding the cards. Then by placing the cards upon a Divination Table a witch will gain some insight into the unknown.<br><br>Note that this knowledge comes at a cost, $(l:magic_power/magical_energy)power$() that needs to be drawn from a nearby source."
+      "text": "To get a reading about yourself, you must Shift + Right Click with the cards in your hand. On  the other hand, to uncover secrets about another player simply right click them while holding the cards. $(br2)Then by placing the cards upon a Divination Table a witch will gain some insight into the unknown. Note that this knowledge comes at a cost, as $(l:magic_power/magical_energy)power$() needs to be drawn from a nearby source."
     }
   ]
 }

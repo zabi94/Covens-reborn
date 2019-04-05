@@ -16,7 +16,7 @@
 	  		},
 	    	{
 		      "type": "text",
-		      "text": "Found deep within the overworld's core you may find crystallized minerals which have an affinity for magic. Four are the gemstones of interest to the Art, Garnet, Malachite, Tigers Eye, and Tourmaline, each having their own magical properties for rituals or crafting. A witch may also make use of these gems by grinding them with a $(l:tools/mortar_and_pestle)mortar and pestle.$()"
+		      "text": "Found deep within the overworld's core you may find crystallized minerals which have an affinity for magic. $(br2)Four are the gemstones of interest to the Art, Garnet, Malachite, Tigers Eye, and Tourmaline, each having their own magical properties for rituals or crafting. $(br2)A witch may also make use of these gems by grinding them with a $(l:tools/mortar_and_pestle)mortar and pestle.$()"
 	    	}
 	    ]
 }
