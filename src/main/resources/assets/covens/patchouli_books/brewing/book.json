@@ -1,7 +1,7 @@
 {
   "name": "covens.book.brews.name",
   "landing_text": "covens.book.brews.landing",
-  "version": 1,
+  "version": 2,
   "model": "covens:book_brews",
   "subtitle": "covens.book.rites.subtitle",
   "book_texture": "covens:textures/gui/book_brews.png",

@@ -1,7 +1,7 @@
 {
   "name": "covens.book.rituals.name",
   "landing_text": "covens.book.rituals.landing",
-  "version": 1,
+  "version": 2,
   "model": "covens:book_rituals",
   "subtitle": "covens.book.witchcraft.subtitle",
   "book_texture": "covens:textures/gui/book_rituals.png",
