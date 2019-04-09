@@ -23,7 +23,7 @@ public class EnchantmentDesperateWard extends BaublesEnchantment {
 			if ((mpc.getAmount() * 5) < mpc.getMaxAmount()) {
 				int level = this.getMaxLevelOnPlayer(p);
 				if (mpc.drain(10)) {
-					evt.setAmount(evt.getAmount() * (1f - (0.04f * level)));
+					evt.setAmount(evt.getAmount() * (1f - (0.08f * level)));
 				}
 			}
 		}

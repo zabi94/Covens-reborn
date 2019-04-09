@@ -1,0 +1,29 @@
+{
+  "name": "Charms and Talismans",
+  "icon": "covens:talisman_emerald_pendant",
+  "category": "tools",
+  "pages": [
+    {
+      "type": "text",
+      "text": "As many witches know, this world is manipulated by luck and chance. This is sometimes unacceptable, and it is necessary to take precautionary measures to aid the luck and give yourself that extra chance you need. This is where talismans come into play.$(2br)Talismans are no ordinary baubles, as they don't provide"
+    },
+    {
+      "type": "text",
+      "text": "any effect by themselves: the effect of a talisman depends on what $(l:tools/talismans_enchants)enchantment$() you put onto it.$(2br)There are many types of charms, that can be worn on different places, and, depending on the charm properties themselves, they might be more or less receptive to enchantment magic.$(2br)The steps on how to craft them can be found here:"
+    },
+    {
+    	"type": "crafting",
+    	"recipe": "covens:adamantine_ring",
+    	"recipe2": "covens:aquamarine_crown"
+    },
+    {
+    	"type": "crafting",
+    	"recipe": "covens:emerald_amulet",
+    	"recipe2": "covens:scarlet_orb"
+    },
+    {
+    	"type": "crafting",
+    	"recipe": "covens:watchful_eye"
+    }
+  ]
+}

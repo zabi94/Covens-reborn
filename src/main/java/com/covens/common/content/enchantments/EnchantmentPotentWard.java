@@ -17,14 +17,12 @@ public class EnchantmentPotentWard extends BaublesEnchantment {
 
 	@SubscribeEvent
 	public void onDamage(LivingHurtEvent evt) {
-		if (evt.getSource().isMagicDamage() && (evt.getEntityLiving() instanceof EntityPlayer)) {
+		if (evt.getAmount() >= evt.getEntityLiving().getHealth()*0.9f && evt.getSource().isMagicDamage() && (evt.getEntityLiving() instanceof EntityPlayer)) {
 			EntityPlayer p = (EntityPlayer) evt.getEntityLiving();
 			MPContainer mpc = p.getCapability(MPContainer.CAPABILITY, null);
-			if ((mpc.getAmount() * 2) > mpc.getMaxAmount()) {
-				int maxLevel = this.getMaxLevelOnPlayer(p);
-				if (mpc.drain(150)) {
-					evt.setAmount(Math.max(evt.getAmount() - maxLevel, 0f));
-				}
+			int maxLevel = this.getMaxLevelOnPlayer(p);
+			if (maxLevel > 0 && mpc.drain(600/maxLevel)) {
+				evt.setCanceled(true);
 			}
 		}
 	}

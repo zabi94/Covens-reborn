@@ -26,7 +26,7 @@ public class EnchantmentExtraMP extends BaublesEnchantment {
 	}
 
 	public void updateExpansion(EntityPlayer player) {
-		int currentLevel = this.getMaxLevelOnPlayer(player);
+		int currentLevel = this.getTotalLevelOnPlayer(player);
 		CovensAPI.getAPI().removeMPExpansion(expander_name, player);
 		if (currentLevel > 0) {
 			CovensAPI.getAPI().expandPlayerMP(new EnchantmentExpander(currentLevel), player);
@@ -38,7 +38,7 @@ public class EnchantmentExtraMP extends BaublesEnchantment {
 		private int amount;
 
 		public EnchantmentExpander(int level) {
-			this.amount = (1 << level) * 100;
+			this.amount = level * 100;
 		}
 
 		@Override

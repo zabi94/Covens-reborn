@@ -1,0 +1,42 @@
+{
+  "name": "Talismans Enchantments",
+  "icon": "minecraft:enchanted_book",
+  "category": "tools",
+  "pages": [
+  	{
+      "type": "text",
+      "title": "Talismans Enchantments",
+      "text": "These enchantments are created to be applied to $(l:tools/talismans_all)talismans and charms$(), and will only work when they are worn by a player.$(2br)These can be applied at a normal enchanting table, or anything that can enchant items in an equivalent way, such as using the correct book in an anvil."
+    },
+    {
+      "type": "text",
+      "title": "Occultation",
+      "text": "This enchantment will deflect the attempts to seek information about the wearer through magical means. This is not guaranteed to function, but when it does, the talisman will likely heat up and cause the wearer to notice the attempt.$(2br)The higher the level of this enchantment, the more likely it is for it to work. Wearing multiple charms with this enchantment will increase its efficiency."
+    },
+    {
+      "type": "text",
+      "title": "Demon Protection",
+      "text": "Witches wearing this protection will see a reduction of the spiritual damage demons can deal to them.$(2br)Higher levels will further reduce the damage, and wearing multiple charms enchanted with this can make a witch particularly resistant to the grip demons apply to their being, which is why it's a good idea to stack them up if you plan on challenging one."
+    },
+    {
+      "type": "text",
+      "title": "Spirit Protection",
+      "text": "Witches wearing this protection will see a reduction of the spiritual damage spirits can deal to them.$(2br)Higher levels will further reduce the damage, and wearing multiple charms enchanted with this can make a witch particularly resistant to the tears spirits deal to the wearer's soul."
+    },
+    {
+      "type": "text",
+      "title": "Desperate Ward",
+      "text": "When battling magical beings it's often common to run low on magical power and find yourself defenseless.$(2br)With this enchantment a charm will drain a small portion of the witches magic power to create a strong ward that dampens incoming magical damage, but this can only happen when the magical power of the witch is already low."
+    },
+    {
+      "type": "text",
+      "title": "Potent Ward",
+      "text": "This enchantment will protect the wearer from strong magical damage.$(2br)If the magical hit is about to severely injure the witch, this enchantment will drain a significant amount of power and nullify the damage completely. A higher level enchantment will decrease the costs, but multiple talismans won't stack, and the strongest one will apply."
+    },
+    {
+      "type": "text",
+      "title": "Natural Attuning",
+      "text": "Witches can, with this enchantment, use the talisman it is applied to as a storage for some extra magical power.$(2br)The link is quite weak, and removing the charm will cause the stored power to quickly dissipate from the object. Wearing multiple ones is possible, but the link is shortly interrupted everytime this happens, losing the energy stored in $(o)all$() of them"
+    }
+  ]
+}

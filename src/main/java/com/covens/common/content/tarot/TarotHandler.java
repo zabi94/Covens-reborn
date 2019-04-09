@@ -9,6 +9,9 @@ import com.covens.common.content.enchantments.ModEnchantments;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -41,6 +44,7 @@ public class TarotHandler {
 				res.remove(player.getRNG().nextInt(res.size() - 1));
 			}
 			res.add(new TarotInfo(SILVER_SWORD, player));
+			player.sendStatusMessage(new TextComponentTranslation("tarot.silver_sword.attempted").setStyle(new Style().setColor(TextFormatting.DARK_RED)), false);
 		} else {
 			res.addAll(REGISTRY.getValuesCollection().parallelStream() //
 					.filter(it -> it.isApplicableToPlayer(player) && !it.equals(SILVER_SWORD)) //
