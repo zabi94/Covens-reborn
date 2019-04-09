@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModCreativeTabs;
-import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.lib.LibMod;
 
@@ -18,6 +17,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
@@ -70,7 +70,7 @@ public class BlockMoss extends BlockVine implements IModelRegister {
 
 	@Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-		if (!worldIn.isRemote && (stack.getItem() == ModItems.boline) && !this.terminalPiece) {
+		if (!worldIn.isRemote && (stack.getItem() instanceof ItemShears) && !this.terminalPiece) {
 			player.addStat(StatList.getBlockStats(this));
 			spawnAsEntity(worldIn, pos, new ItemStack(ModBlocks.spanish_moss, 1, 0));
 		}

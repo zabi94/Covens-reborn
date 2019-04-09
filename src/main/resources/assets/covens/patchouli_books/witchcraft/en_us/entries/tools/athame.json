@@ -4,25 +4,23 @@
   "category": "tools",
   "pages": [
     {
-      "type": "spotlight",
-      "item": "covens:athame",
-      "text": "The athame is the most sacred instrument for a witch. $(br2)It is a cerimonial blade, typically used during rituals, and is often involved in summoning rites. $(br2)It is also used in sacrificial killing, to obtain specific items from specific entities..."
-    },
-    {
-      "type": "text",
-      "title": "Uses",
-      "text": "An athame can be used in multiple ways. $(br2)The easiest one is to place it on an altar, representing the swords. $(br2)An altar equipped with an athame will distribute its energy to nearby witches, and restore their internal power more quickly. $(br2)To place the athame, right-click it on a formed altar."
-    },
-    {
       "type": "crafting",
-      "text": "Creating the Athame",
+      "text": "The athame is the most sacred instrument for a witch.$(br2)It is a cerimonial blade, typically used during rituals, and is often involved in summoning rites.",
       "recipe": "covens:athame"
     },
     {
       "type": "image",
       "images": ["covens:textures/gui/books/images/athame.png"],
       "border": true,
-      "text": "Altar with an athame on top"
+      "text": "An altar equipped with an athame will distribute its"
+    },
+    {
+      "type": "text",
+      "text": "energy to nearby witches, and restore their internal power more quickly.<br>To place the athame, right-click it on top of a formed altar.$(2br)It is also used in most sacrificial $(thing)$(t:check the proper book)rites$(), to represent the act of cutting your hand for blood, as a pawn for the life force you bring into this world.$(2br)Finally, the instrument is used to obtain some unique items"
+    },
+    {
+      "type": "text",
+      "text": "from various creatures (such as bats, horses, wolves, spiders, $(thing)$(t:even dimensional ones)smaller insects$(), ...) and an increased chance of getting their heads to drop.$(2br)Keep in mind that enchantments to increase the chance of getting resources from creatures do work with it."
     }
   ]
 }

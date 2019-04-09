@@ -11,13 +11,11 @@ import com.covens.common.core.statics.ModCreativeTabs;
 import com.covens.common.lib.LibItemName;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
@@ -42,17 +40,6 @@ public class ItemBoline extends ItemShears implements IModelRegister {
 		this.setRegistryName(LibItemName.BOLINE);
 		this.setTranslationKey(LibItemName.BOLINE);
 		this.setCreativeTab(ModCreativeTabs.ITEMS_CREATIVE_TAB);
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, @Nonnull EntityLivingBase attacker) {
-		if (!target.world.isRemote) {
-			if (attacker instanceof EntityPlayer) {
-				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), 5);
-			}
-			stack.damageItem(1, attacker);
-		}
-		return true;
 	}
 
 	@Override

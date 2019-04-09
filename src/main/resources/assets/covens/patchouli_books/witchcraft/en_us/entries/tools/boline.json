@@ -3,26 +3,24 @@
   "icon": "covens:boline",
   "category": "tools",
   "pages": [
-   {
-      "type": "spotlight",
-      "item": "covens:boline",
-      "text": "The boline is the second cerimonial blade, along with the $(l:tools/athame)Athame$(). $(br2)It is used for gathering and was born as an instrument. $(br2)In the practice, it represents the produce, and the act of cutting"
+   	{
+      "type": "crafting",
+      "recipe": "covens:boline",
+      "text": "The boline is the second cerimonial blade, along with the $(l:tools/athame)Athame$().<br>It is used for gathering and was born as an instrument.$(br2)In the practice, it represents"
+    },
+    {
+      "type": "text",
+      "text": "the produce, and the act of cutting, which is what this item excels at: most natural plants can be harvested with it without being damaged, as you would with normal shears.$(2br)There are a few unique uses for this item where shears just won't work, such as getting between the leaves and the attached piece of a $(l:exploration/beehive)beehive$(), to get the combs without damaging them.$(2br)The boline can also be placed"
     },
     {
       "type": "image",
       "images": ["covens:textures/gui/books/images/boline.png"],
       "border": true,
-      "text": "Altar with a boline on top"
+      "text": "on top of an altar to transfer its harvesting properties and"
     },
     {
       "type": "text",
-      "title": "Uses",
-      "text": "TODO"
-    },
-    {
-      "type": "crafting",
-      "text": "Creating the Boline",
-      "recipe": "covens:boline"
+      "text": "$(thing)$(t:by a small amount, a few blocks)expand the area from which it gathers its power$().$(2br)Finally, a boline can also be used to collect a small sample of a particular $(t:biome)environment$(), by right clicking with it while standing in that particular place."
     }
   ]
 }

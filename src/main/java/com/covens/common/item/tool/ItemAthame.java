@@ -120,7 +120,6 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 
 	private void addDrop(LivingDropsEvent event, ItemStack drop) {
 		EntityItem entityitem = new EntityItem(event.getEntityLiving().world, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, drop);
-		entityitem.setPickupDelay(10);
 		event.getDrops().add(entityitem);
 	}
 
