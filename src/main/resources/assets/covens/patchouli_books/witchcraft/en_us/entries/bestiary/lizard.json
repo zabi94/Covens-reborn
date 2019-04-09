@@ -1,0 +1,23 @@
+{
+  "name": "Lizards",
+  "icon": "covens:lizard_leg",
+  "category": "bestiary",
+  "pages": [
+  	{
+    	"type": "entity",
+    	"entity": "covens:lizard",
+    	"rotate": false,
+    	"text": "Lizards are a common animal, but they often see a grim demise.",
+    	"default_rotation": -40
+    },
+    {
+      	"type": "spotlight",
+      	"item": "covens:lizard_leg",
+      	"text": "They are known for their wide variety in their appearance, and indistinguishable, dry, scale covered skin.$(2br)Lizards are mostly carnivorous, showing stong interest in spider eyes, silver scales, venomous fangs and other sorts of insects and insect remains.<br>They are often found in"
+    },
+    {
+      	"type": "text",
+      	"text": "forests and deserts, as their favorite thing is lying under the sun, on a rock or on a tree.$(2br)Lizards usually have one of two possible destinies: they are either kept as a pet, or their legs are cut off by witches, who then use them as an important ingredient in many of their brews. Not the best death.$(2br)$(o)You're a lizard, Harry!"
+    }
+  ]
+}

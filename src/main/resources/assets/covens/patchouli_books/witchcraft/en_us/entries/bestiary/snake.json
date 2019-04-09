@@ -14,7 +14,11 @@
     },
     {
       	"type": "text",
-      	"text": "Take caution when seeking a snake for a companion, for a 'flexible' nature is required to keep a snake, and to tap into the twisted magics they find most appealing. $(br2)Also, beware of their poisonous bite, since it can be rather lethal...$(br2)$(o)Trus-ss-st in me!"
+      	"text": "Take caution when seeking a snake for a companion; to them, you will never be master. A 'flexible' nature is required to keep a snake, and to tap into the twisted magics they find most appealing. $(br2)In nature, snakes are predators.  They skulk in tall grass and shadowy places, waiting to pounce on small mammals.  Forest rabbits and mice are the most common, but snakes also have a taste for poultry. Beware of their"
+    },
+    {
+      	"type": "text",
+      	"text": "poisonous bite, since it can be rather lethal...$(br2)$(o)Trus-ss-st in me!"
     }
   ]
 }
