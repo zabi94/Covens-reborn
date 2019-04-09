@@ -33,14 +33,20 @@ public class RitualProcessor implements IComponentProcessor {
 			if (val.startsWith("output")) {
 				return this.getOutput(val.substring(6));
 			}
+			if ("tick_cost".equals(val)) {
+				if (ritual.getRunningPower() <= 0 || ritual.getTime() <= 0) {
+					return "0";
+				}
+				return I18n.format("ritual.cost_equation", ritual.getRunningPower()*20, ritual.getTime()/20);
+			}
+			if ("start_cost".equals(val)) {
+				return ""+ritual.getRequiredStartingPower();
+			}
 			if ("ritualname".equals(val)) {
-				return I18n.format("ritual." + this.ritual.getRegistryName().toString().replace(':', '.') + ".name");
+				return I18n.format("ritual." + this.ritual.getRegistryName().toString().replace(':', '.') + ".short.name");
 			}
 			if ("ritual".equals(val)) {
 				return this.ritual.getRegistryName().toString();
-			}
-			if ("separator".equals(val)) {
-				return this.ritual.getOutputRaw().isEmpty() ? "covens:textures/gui/books/ritual/separator_none.png" : "covens:textures/gui/books/ritual/separator.png";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

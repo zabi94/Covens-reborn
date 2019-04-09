@@ -1,0 +1,11 @@
+{
+  "name": "Ritual2",
+  "icon": "minecraft:cauldron",
+  "category": "test",
+  "pages": [
+    {
+      "type": "ritual",
+      "ritual": "covens:conjure_wither"
+    }
+  ]
+}

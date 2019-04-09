@@ -1,10 +1,10 @@
 {
-  "name": "covens.book.ritual.name",
-  "landing_text": "covens.book.ritual.landing",
+  "name": "covens.book.rituals.name",
+  "landing_text": "covens.book.rituals.landing",
   "version": 1,
-  "model": "covens:book_witchcraft",
+  "model": "covens:book_rituals",
   "subtitle": "covens.book.witchcraft.subtitle",
-  "book_texture": "covens:textures/gui/book_witchcraft.png",
+  "book_texture": "covens:textures/gui/book_rituals.png",
   "show_toasts": false,
   "creative_tab": "covens_items",
   "show_progress": false

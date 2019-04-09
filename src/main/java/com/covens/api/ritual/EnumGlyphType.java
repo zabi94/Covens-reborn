@@ -6,8 +6,8 @@ public enum EnumGlyphType implements IStringSerializable {
 
 	NORMAL(0), GOLDEN(-1), ENDER(2), NETHER(3), ANY(1);
 
-	int meta;
-
+	private int meta;
+	
 	EnumGlyphType(int metadata) {
 		this.meta = metadata;
 	}

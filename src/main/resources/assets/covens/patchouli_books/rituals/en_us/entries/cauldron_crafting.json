@@ -1,0 +1,11 @@
+{
+  "name": "Ritual",
+  "icon": "minecraft:crafting_table",
+  "category": "test",
+  "pages": [
+    {
+      "type": "ritual",
+      "ritual": "covens:nether_portal"
+    }
+  ]
+}
