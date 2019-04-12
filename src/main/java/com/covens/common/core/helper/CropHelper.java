@@ -14,9 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 
-@SuppressWarnings({
-		"WeakerAccess"
-})
 public final class CropHelper {
 
 	private static final Map<ModCrops, Item> seeds = new LinkedHashMap<>();

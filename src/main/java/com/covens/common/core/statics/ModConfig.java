@@ -20,9 +20,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import zabi.minecraft.minerva.client.hud.HudComponent.EnumHudAnchor;
 
 
-@SuppressWarnings({
-		"WeakerAccess"
-})
 @Config(modid = LibMod.MOD_ID)
 @Mod.EventBusSubscriber
 public final class ModConfig {

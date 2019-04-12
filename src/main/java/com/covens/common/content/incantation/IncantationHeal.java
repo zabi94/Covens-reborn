@@ -9,7 +9,6 @@ import net.minecraft.potion.PotionEffect;
 
 public class IncantationHeal implements IIncantation {
 
-	@SuppressWarnings("ConstantConditions")
 	@Override
 	public void cast(EntityPlayer sender, String[] args) {
 		if (sender.getHealth() < sender.getMaxHealth()) {

@@ -12,7 +12,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModOvenSmeltingRecipes {
 
-	@SuppressWarnings("ConstantConditions")
 	public static void init() {
 		final ItemStack ash = new ItemStack(ModItems.wood_ash);
 		final ItemStack cloudy_oil = new ItemStack(ModItems.cloudy_oil);

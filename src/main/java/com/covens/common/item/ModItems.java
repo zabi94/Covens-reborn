@@ -77,7 +77,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@SuppressWarnings("ConstantConditions")
 @ObjectHolder(LibMod.MOD_ID)
 public final class ModItems {
 

@@ -13,8 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.client.blockmodels.IModelRegister;
 import zabi.minecraft.minerva.client.blockmodels.ModelHandler;
 
-
-@SuppressWarnings("WeakerAccess")
 public class ItemSeed extends ItemSeeds implements IModelRegister {
 
 	protected final Block crop;

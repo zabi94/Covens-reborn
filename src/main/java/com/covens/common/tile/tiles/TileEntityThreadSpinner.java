@@ -25,7 +25,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 
-@SuppressWarnings("NullableProblems")
 public class TileEntityThreadSpinner extends ModTileEntity implements ITickable, IWorldNameable {
 	public static final int TOTAL_WORK = 200;
 	public static final int POWER_PER_TICK = 6;
@@ -96,7 +95,6 @@ public class TileEntityThreadSpinner extends ModTileEntity implements ITickable,
 		return (this.loadedRecipe != null) && this.handler.insertItem(0, this.loadedRecipe.getOutput(), true).isEmpty() && this.altarTracker.drainAltarFirst(null, this.pos, this.world.provider.getDimension(), POWER_PER_TICK);
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	private void onFinished() {
 		if (this.handler.getStackInSlot(0).isEmpty()) {
 			this.handler.setStackInSlot(0, this.loadedRecipe.getOutput());

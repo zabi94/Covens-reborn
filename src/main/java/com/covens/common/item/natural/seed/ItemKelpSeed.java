@@ -27,7 +27,6 @@ public class ItemKelpSeed extends ItemSeed {
 	}
 
 	@Override
-	@SuppressWarnings("ConstantConditions")
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		final RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, false);
 		ItemStack stack = playerIn.getHeldItem(hand);

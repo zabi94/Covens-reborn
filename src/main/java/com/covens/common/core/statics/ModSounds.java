@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 //Note: Current code is ripped from Choonster's TestMod3, and modified for usage here.
 
-@SuppressWarnings("WeakerAccess")
 @GameRegistry.ObjectHolder(MOD_ID)
 public final class ModSounds {
 

@@ -53,7 +53,6 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 	private ItemStackHandler handlerUp;
 	private ItemStackHandler handlerDown;
 
-	@SuppressWarnings("ConstantConditions")
 	public TileEntityOven() {
 		this.random = new Random();
 		this.handlerDown = new ItemStackHandler(2);
@@ -184,7 +183,6 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 		return false;
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	private void smelt() {
 		ItemStack stack = this.handlerUp.getStackInSlot(0);
 		OvenSmeltingRecipe recipe = OvenSmeltingRecipe.getRecipe(stack);

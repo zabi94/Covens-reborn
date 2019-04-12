@@ -44,9 +44,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-@SuppressWarnings({
-		"WeakerAccess", "deprecation"
-})
+@SuppressWarnings("deprecation")
 public class BlockSaltBarrier extends BlockMod {
 
 	public static final PropertyEnum<BlockSaltBarrier.EnumAttachPosition> NORTH = PropertyEnum.create("north", BlockSaltBarrier.EnumAttachPosition.class);

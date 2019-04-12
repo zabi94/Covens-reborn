@@ -14,7 +14,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 
-@SuppressWarnings("WeakerAccess")
 public class ItemCropFood extends ItemModFood {
 
 	private static final String DRY = "dry";

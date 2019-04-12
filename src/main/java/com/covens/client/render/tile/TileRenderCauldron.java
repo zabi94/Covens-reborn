@@ -23,7 +23,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class TileRenderCauldron extends TileEntitySpecialRenderer<TileEntityCauldron> {
 
-	@SuppressWarnings("ConstantConditions")
 	@Override
 	public void render(TileEntityCauldron te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		Optional<FluidStack> optional = te.getFluid();

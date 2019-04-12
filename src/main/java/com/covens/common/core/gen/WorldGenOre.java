@@ -19,9 +19,6 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-@SuppressWarnings({
-		"WeakerAccess"
-})
 public class WorldGenOre extends WorldGenMinable implements IWorldGenerator {
 
 	private final List<BiomeDictionary.Type> biomes = new ArrayList<>();

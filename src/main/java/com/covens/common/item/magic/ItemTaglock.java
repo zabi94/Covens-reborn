@@ -61,7 +61,6 @@ public class ItemTaglock extends ItemMod {
 		NBTHelper.removeTag(stack, TAGLOCK_ENTITY_NAME);
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
@@ -83,7 +82,6 @@ public class ItemTaglock extends ItemMod {
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	@Override
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
 		IBlockState state = world.getBlockState(pos);

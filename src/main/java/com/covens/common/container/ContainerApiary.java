@@ -10,7 +10,6 @@ import zabi.minecraft.minerva.common.network.container.ModContainer;
 import zabi.minecraft.minerva.common.network.container.slot.SlotFiltered;
 
 
-@SuppressWarnings("ConstantConditions")
 public class ContainerApiary extends ModContainer<TileEntityApiary> {
 
 	public ContainerApiary(InventoryPlayer playerInventory, TileEntityApiary tileEntity) {
