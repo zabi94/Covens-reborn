@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import com.covens.api.mp.MPContainer;
 import com.covens.common.core.helper.Log;
 import com.covens.common.item.ModItems;
-import com.covens.common.lib.LibReflection;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -33,6 +32,7 @@ import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
 @Mod.EventBusSubscriber
@@ -41,7 +41,7 @@ public class EntityFlyingBroom extends Entity {
 	private static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(EntityFlyingBroom.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> FUEL = EntityDataManager.<Integer>createKey(EntityFlyingBroom.class, DataSerializers.VARINT); // ONLY SYNCHRONIZED WHEN EMPTY OR FULL
 	private static final int MAX_FUEL = 100;
-	Field isJumping = LibReflection.field("isJumping", "field_70703_bu", EntityLivingBase.class);
+	Field isJumping = ReflectionHelper.findField(EntityLivingBase.class, "isJumping", "field_70703_bu");
 	private DimensionalPosition orig_position;
 
 	public EntityFlyingBroom(World world) {

@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import com.covens.common.content.cauldron.BrewMod;
-import com.covens.common.lib.LibReflection;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -13,6 +12,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.LoaderException;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class PotionArrowDeflection extends BrewMod {
 
@@ -22,8 +22,8 @@ public class PotionArrowDeflection extends BrewMod {
 	public PotionArrowDeflection() {
 		super("arrow_deflection", false, 0xFFFACD, false, 2400, 20);
 		try {
-			this.fieldInGround = LibReflection.field("inGround", "field_70254_i", EntityArrow.class);
-			this.methodGetArrowStack = LibReflection.method("getArrowStack", "func_184550_j", EntityArrow.class, ItemStack.class);
+			this.fieldInGround = ReflectionHelper.findField(EntityArrow.class, "inGround", "field_70254_i");
+			this.methodGetArrowStack = ReflectionHelper.findMethod(EntityArrow.class, "getArrowStack", "func_184550_j");
 		} catch (Exception e) {
 			throw new LoaderException("Covens cannot find some essential forge data, please report this to the Covens Github page", e);
 		}

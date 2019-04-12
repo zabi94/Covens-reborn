@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-@SuppressWarnings("deprecation")
 public class ReflectionBridge {
 	
 	private static final Field executingTaskEntries = ReflectionHelper.findField(EntityAITasks.class, "executingTaskEntries", "field_75780_b");

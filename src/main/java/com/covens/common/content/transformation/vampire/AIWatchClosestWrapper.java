@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import com.covens.api.transformation.DefaultTransformations;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.item.ModItems;
-import com.covens.common.lib.LibReflection;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -13,11 +12,12 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class AIWatchClosestWrapper extends EntityAIBase {
 
-	private static final Field entityClosest = LibReflection.field("entityClosest", "field_75334_a", EntityAIWatchClosest.class);
-	private static final Field entitySubject = LibReflection.field("entity", "field_75332_b", EntityAIWatchClosest.class);
+	private static final Field entityClosest = ReflectionHelper.findField(EntityAIWatchClosest.class, "entityClosest", "field_75334_a");
+	private static final Field entitySubject = ReflectionHelper.findField(EntityAIWatchClosest.class, "entity", "field_75332_b");
 	private EntityAIWatchClosest wrapped;
 
 	public AIWatchClosestWrapper(EntityAIWatchClosest action) {
