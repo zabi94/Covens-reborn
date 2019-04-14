@@ -36,7 +36,6 @@ import com.covens.common.item.food.ItemHeart;
 import com.covens.common.item.food.ItemHoney;
 import com.covens.common.item.food.ItemJuniperBerries;
 import com.covens.common.item.food.ItemMagicSalve;
-import com.covens.common.item.food.ItemYewAril;
 import com.covens.common.item.magic.ItemBell;
 import com.covens.common.item.magic.ItemBroom;
 import com.covens.common.item.magic.ItemLocationStone;
@@ -188,7 +187,6 @@ public final class ModItems {
 	public static final Item lapis_powder = null;
 
 	public static final Item juniper_berries = null;
-	public static final Item yew_aril = null;
 
 	public static final Item sanguine_fabric = null;
 
@@ -384,7 +382,6 @@ public final class ModItems {
 				new ItemMod(LibItemName.LAPIS_POWDER), //
 				new ItemHeart(),  //
 				new ItemJuniperBerries(),  //
-				new ItemYewAril(),  //
 				new ItemFilledBowl(), //
 				chalkType[0],
 				chalkType[1],
