@@ -1,7 +1,14 @@
 {
   "variants": {
-    "normal": {
-      "model": "covens:leaves_juniper"
-    }
+    "normal": [
+      {
+        "model": "covens:leaves_juniper",
+        "weight": 4
+      },
+      {
+        "model": "covens:leaves_juniper_alt",
+        "weight": 1
+      }
+    ]
   }
 }
