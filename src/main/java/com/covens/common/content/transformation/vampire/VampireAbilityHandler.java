@@ -1,6 +1,5 @@
 package com.covens.common.content.transformation.vampire;
 
-import java.util.ArrayList;
 import java.util.Stack;
 import java.util.UUID;
 
@@ -13,21 +12,15 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.content.transformation.CapabilityTransformation;
 import com.covens.common.core.helper.MobHelper;
-import com.covens.common.core.net.NetworkHandler;
-import com.covens.common.core.net.messages.SpawnAngryParticlesAroundEntity;
 import com.covens.common.entity.EntityBatSwarm;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.misc.ItemBloodBottle;
 import com.covens.common.potion.ModPotions;
 import com.covens.common.world.biome.ModBiomes;
-import com.google.common.collect.Lists;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
@@ -41,13 +34,11 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -337,30 +328,30 @@ public class VampireAbilityHandler {
 		}
 	}
 
-	private static boolean canDrainBloodFrom(EntityPlayer player, EntityLivingBase entity) {
-		if (entity.getActivePotionEffect(ModPotions.mesmerized) != null) {
-			return true;
-		}
-		if (!MobHelper.isLivingCorporeal(entity)) {
+	private static boolean canDrainBloodFrom(EntityPlayer player, EntityLivingBase victim) {
+		if (!MobHelper.isLivingCorporeal(victim)) {
 			return false;
 		}
-		boolean hasPants = player.inventory.armorInventory.get(1).getItem() == ModItems.vampire_pants;
-		if ((player.getLastAttackedEntity() == entity) || (entity.getAttackingEntity() == player)) {
-			if (!hasPants) {
-				NetworkHandler.HANDLER.sendToAllTracking(new SpawnAngryParticlesAroundEntity(entity, EnumParticleTypes.VILLAGER_ANGRY, 1), entity);
-			}
-			return hasPants;
+		if (victim.getActivePotionEffect(ModPotions.mesmerized) != null) {
+			return true;
 		}
-//		Log.i(Math.abs(player.rotationYawHead - entity.rotationYawHead));
-		boolean isBehind = Math.abs(player.rotationYawHead - entity.rotationYawHead) < 30;
-		if (!isBehind) {
-			NetworkHandler.HANDLER.sendToAllTracking(new SpawnAngryParticlesAroundEntity(entity, EnumParticleTypes.SMOKE_NORMAL, 10), entity);
-		}
-		return isBehind;
+//		boolean hasPants = player.inventory.armorInventory.get(1).getItem() == ModItems.vampire_pants;
+//		if ((player.getLastAttackedEntity() == victim) || (victim.getAttackingEntity() == player)) {
+//			if (!hasPants) {
+//				NetworkHandler.HANDLER.sendToAllTracking(new SpawnAngryParticlesAroundEntity(victim, EnumParticleTypes.VILLAGER_ANGRY, 1), victim);
+//			}
+//			return hasPants;
+//		}
+//		boolean isBehind = Math.abs(player.rotationYawHead - victim.rotationYawHead) < 30;
+//		if (!isBehind) {
+//			NetworkHandler.HANDLER.sendToAllTracking(new SpawnAngryParticlesAroundEntity(victim, EnumParticleTypes.SMOKE_NORMAL, 10), victim);
+//		}
+//		return isBehind;
+		return true;
 	}
 
 	@SubscribeEvent
-	public static void abilityHandler(PlayerTickEvent evt) {
+	public static void applyNightVision(PlayerTickEvent evt) {
 		if ((evt.phase == Phase.START) && !evt.player.world.isRemote && (evt.player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE)) {
 			PotionEffect nv = evt.player.getActivePotionEffect(MobEffects.NIGHT_VISION);
 			if (((nv == null) || (nv.getDuration() <= 220)) && evt.player.getCapability(CapabilityVampire.CAPABILITY, null).nightVision) {
@@ -387,16 +378,16 @@ public class VampireAbilityHandler {
 		}
 	}
 
-	@SubscribeEvent
-	public static void onLivingJoinWorld(EntityJoinWorldEvent evt) {
-		if (evt.getEntity() instanceof EntityLiving) {
-			EntityLiving living = (EntityLiving) evt.getEntity();
-			ArrayList<EntityAITaskEntry> tasks = Lists.newArrayList();
-			living.tasks.taskEntries.stream().filter(t -> t.action instanceof EntityAIWatchClosest).forEach(t -> tasks.add(t));
-			tasks.forEach(t -> living.tasks.taskEntries.remove(t));
-			tasks.forEach(t -> living.tasks.taskEntries.add(living.tasks.new EntityAITaskEntry(t.priority, new AIWatchClosestWrapper((EntityAIWatchClosest) t.action))));
-		}
-	}
+//	@SubscribeEvent
+//	public static void onLivingJoinWorld(EntityJoinWorldEvent evt) {
+//		if (evt.getEntity() instanceof EntityLiving) {
+//			EntityLiving living = (EntityLiving) evt.getEntity();
+//			ArrayList<EntityAITaskEntry> tasks = Lists.newArrayList();
+//			living.tasks.taskEntries.stream().filter(t -> t.action instanceof EntityAIWatchClosest).forEach(t -> tasks.add(t));
+//			tasks.forEach(t -> living.tasks.taskEntries.remove(t));
+//			tasks.forEach(t -> living.tasks.taskEntries.add(living.tasks.new EntityAITaskEntry(t.priority, new AIWatchClosestWrapper((EntityAIWatchClosest) t.action))));
+//		}
+//	}
 
 	@SubscribeEvent
 	public static void checkHealing(LivingHealEvent evt) {
