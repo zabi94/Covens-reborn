@@ -1,6 +1,6 @@
 {
   "name": "Instruments and tools",
-  "description": "Tools, blocks and other items at a witch's disposal.",
+  "description": "Everyone has heard about witches using wands or staffs to use magic, however that's not true. They don't use anything like them to perform magic, but they do resort to many different tools, like a farmer uses a hoe instead of his hands.<br>Each tool has its own unique place in the craft, each one is sacred, so treat it with respect.",
   "sortnum": "3",
   "icon": "covens:athame"
 }
