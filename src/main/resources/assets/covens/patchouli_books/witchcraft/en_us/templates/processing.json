@@ -1,0 +1,42 @@
+{
+	"components": [ 
+		{
+			"type": "image",
+			"image": "covens:textures/gui/books/templates/processing.png",
+			"x": 25,
+			"y": 10,
+			"width": 64,
+			"height": 24,
+			"texture_width": 64,
+			"texture_height": 24,
+			"scale": 1
+		},
+		{
+			"type": "item",
+			"item": "#input",
+			"x": 29,
+			"y": 14
+		},
+		{
+			"type": "item",
+			"item": "#output",
+			"x": 68,
+			"y": 14
+		},
+		{
+			"type": "text",
+			"text": "#text",
+			"y": 41
+		},
+		{
+			"type": "header",
+			"text": "#title",
+			"x": -1
+		},
+		{
+			"type": "separator",
+			"x": -1,
+			"y": 35
+		}
+	]
+}

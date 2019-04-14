@@ -4,8 +4,11 @@
   "category": "herbology",
   "pages": [
     {
-      "type": "text",
-      "text": "TODO"
+    	"type": "processing",
+    	"title": "Hellebore",
+    	"input": "covens:seed_hellebore",
+    	"output": "covens:hellebore",
+    	"text": "A rather delicate flower, however, its spores seem to linger for a long period of time. It’s also spoken about it relating to demons in some way."
     }
   ]
 }

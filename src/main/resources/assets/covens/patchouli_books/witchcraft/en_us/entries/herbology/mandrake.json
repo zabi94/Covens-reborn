@@ -1,0 +1,14 @@
+{
+  "name": "Mandrake",
+  "icon": "covens:mandrake_root",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Mandrake",
+    	"input": "covens:seed_mandrake",
+    	"output": "covens:mandrake_root",
+    	"text": "The Mandrake is probably the most well-known nasty twigs among the witch community.$(2br)It strengthens a person's affinity to magic, thanks to the strong roots that absorb power during its growth to maturity, but this causes it to become somewhat hostile to those who harvest it."
+    }
+  ]
+}

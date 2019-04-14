@@ -1,0 +1,14 @@
+{
+  "name": "Chrysanthemum",
+  "icon": "covens:chrysanthemum",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Chrysanthemum",
+    	"input": "covens:seed_chrysanthemum",
+    	"output": "covens:chrysanthemum",
+    	"text": "Their leaves are weirdly arranged in divided leaflets that have either smooth or most commonly, toothed edges. It can either have several, or a single head. However, witches still fascinate over this plant."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Garlic",
+  "icon": "covens:garlic",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Garlic",
+    	"input": "covens:seed_garlic",
+    	"output": "covens:garlic",
+    	"text": "A quite savoury and delicious herb that can be great for cooking (but it’s something that vampires seem to disagree with).$(2br)The seeds for this particular spice can sometimes be found by harvesting it's cousin, the allium. A $(l:tools/boline)boline$() may help your luck"
+    }
+  ]
+}

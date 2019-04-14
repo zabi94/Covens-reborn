@@ -1,0 +1,14 @@
+{
+  "name": "White Sage",
+  "icon": "covens:white_sage",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "White Sage",
+    	"input": "covens:seed_white_sage",
+    	"output": "covens:white_sage",
+    	"text": "This plant's seeds seem to be found in the dry sand wastelands, hidden in the dead vegetation.$(2br)It’s said that undead creatures tend to stay away from this plant, mainly due to it's purifying properties"
+    }
+  ]
+}
