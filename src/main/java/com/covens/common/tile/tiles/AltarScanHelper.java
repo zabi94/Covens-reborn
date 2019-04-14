@@ -129,7 +129,7 @@ class AltarScanHelper {
 		int maxPower = this.map.values().parallelStream().reduce(0, (a, b) -> a + b);
 		int varietyMultiplier = 40;
 		if (this.te.getSwordIds().contains(ItemSilverSword.SILVER_UUID)) {
-			varietyMultiplier = 51;
+			varietyMultiplier = 50;
 		}
 		maxPower += (this.map.keySet().size() * varietyMultiplier); // Variety is the most important thing
 		maxPower = (int) (maxPower * this.te.getMultiplier());
