@@ -1,0 +1,14 @@
+{
+  "name": "Ginger",
+  "icon": "covens:ginger",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Ginger",
+    	"input": "covens:seed_ginger",
+    	"output": "covens:ginger",
+    	"text": "Ginger is a root rumoured to invoke the passion and heat of love, but a witch knows better: the fire is much less of a metaphor than one would think.$(2br)It also works perfectly as a spice in many dishes, adding that touch of heat that many of them lack."
+    }
+  ]
+}

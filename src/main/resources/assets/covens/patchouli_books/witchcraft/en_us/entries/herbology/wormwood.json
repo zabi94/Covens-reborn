@@ -1,0 +1,14 @@
+{
+  "name": "Wormwood",
+  "icon": "covens:wormwood",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Wormwood",
+    	"input": "covens:seed_wormwood",
+    	"output": "covens:wormwood",
+    	"text": "Bitter to the taste, wormwood is known to be used in medicine and restorative spells. The strong affinity to magic makes them fit for a number of recipes.$(2br)Spiders seem to dislike their smell, so hiding them in corners has been proven effective to keep them at bay."
+    }
+  ]
+}

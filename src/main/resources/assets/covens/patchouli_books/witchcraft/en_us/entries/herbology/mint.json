@@ -1,0 +1,14 @@
+{
+  "name": "Mint",
+  "icon": "covens:mint",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Mint",
+    	"input": "covens:seed_mint",
+    	"output": "covens:mint",
+    	"text": "Mint has maybe one of the most unique flavors of all the plants found in the world.$(2br)It has a rather nice scent, but mix some in water and you’ll get a cold and refreshing sensation from your drink. It is almost equal and opposite to spicy food."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Thistle",
+  "icon": "covens:thistle",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Thistle",
+    	"input": "covens:seed_thistle",
+    	"output": "covens:thistle",
+    	"text": "Rather prickly to the touch, possibly to prevent animals from eating it, thistles are useful for witches who aren’t having much luck with their crops and seek a more effective aid than simple bone meal."
+    }
+  ]
+}

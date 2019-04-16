@@ -1,0 +1,14 @@
+{
+  "name": "Tulsi",
+  "icon": "covens:tulsi",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Tulsi",
+    	"input": "covens:seed_tulsi",
+    	"output": "covens:tulsi",
+    	"text": "Tulsi is a sacred plant and is a mandatory ingredient when dealing with blessings and cleanliness.$(2br)It is often regarded as the purest of the plants and as an earthly manifestation of the goddesses themselves."
+    }
+  ]
+}

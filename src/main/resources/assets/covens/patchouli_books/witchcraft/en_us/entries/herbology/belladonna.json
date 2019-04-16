@@ -1,0 +1,14 @@
+{
+  "name": "Belladonna",
+  "icon": "covens:belladonna",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Belladonna",
+    	"input": "covens:seed_belladonna",
+    	"output": "covens:belladonna",
+    	"text": "Belladonna is a mildly poisonous flower that translates to \"beautiful woman\", as it was used to dilate the pupils of young ladies for cosmetic reasons.$(2br)It is advised against such use, as the poison might bring unforseen consequences..."
+    }
+  ]
+}

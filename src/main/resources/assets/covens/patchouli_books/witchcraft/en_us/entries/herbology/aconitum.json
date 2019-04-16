@@ -1,0 +1,14 @@
+{
+  "name": "Aconitum",
+  "icon": "covens:aconitum",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Aconitum",
+    	"input": "covens:seed_aconitum",
+    	"output": "covens:aconitum",
+    	"text": "Aconitum, better known as wolfsbane, is a highly toxic flower.$(2br)Though it has many uses in medicine, it is a famous poison against animals and creatures in the canine family."
+    }
+  ]
+}

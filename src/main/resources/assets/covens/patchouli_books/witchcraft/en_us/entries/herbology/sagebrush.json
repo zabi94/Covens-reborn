@@ -1,0 +1,14 @@
+{
+  "name": "Sagebrush",
+  "icon": "covens:sagebrush",
+  "category": "herbology",
+  "pages": [
+    {
+    	"type": "processing",
+    	"title": "Sagebrush",
+    	"input": "covens:seed_sagebrush",
+    	"output": "covens:sagebrush",
+    	"text": "A bristly plant that is rather quite pure but also most witches have noticed how it’s branches spread vigorously.$(2br)It has a variety of uses, both in $(l:tools/cauldron)cauldron brewing$() and in the $(l:tools/distillery)extraction of essences$()"
+    }
+  ]
+}
