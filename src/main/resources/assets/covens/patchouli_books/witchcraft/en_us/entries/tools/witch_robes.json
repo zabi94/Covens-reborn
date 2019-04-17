@@ -1,0 +1,22 @@
+{
+  "name": "Witch Robes",
+  "category": "tools",
+  "icon": "covens:witches_hat",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Light and fashionable, $(thing)Witch Robes$() are a $(l)must$() for every witch.$(br2)Looks aside, these robes grant some considerable bonuses to the wearer. As example, when wearing the full set of three pieces, the maximum amount of MP will be increased.$(2br)The Armor will also repair itself, and each piece of it is"
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:witches_hat",
+      "recipe2": "covens:witches_robe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:witches_leggings",
+      "text": "able to remove a certain negative potion effect $(o)at the cost of durability$()."
+    }
+
+  ]
+}
