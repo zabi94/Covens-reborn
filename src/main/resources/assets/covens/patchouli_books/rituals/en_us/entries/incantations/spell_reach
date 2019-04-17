@@ -1,0 +1,12 @@
+{
+  "name": "Spell of Far Reach",
+  "category": "glory",
+  "icon": "covens:spell_page:0{spell:\"covens:magnet\"",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "covens:spell_page:0{spell:\"covens:magnet\"",
+      "text": "The $(thing)Spell of Far Reach$() can be cast to retrieve items. $(br2)After it has been cast, a projectile will straightly shoot from the caster to where they were looking, pulling all touched items to the caster."
+    }
+  ]
+}
