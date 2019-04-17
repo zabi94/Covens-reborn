@@ -1,0 +1,16 @@
+{
+  "name": "Hellish Bauble",
+  "category": "tools",
+  "icon": "covens:hellish_bauble",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(thing)Hellish Bauble$() will reduce all damage to Fire, Explosions and other hellish stuff, like Demons. This happens at the cost of MP. $(br2)This bauble also expands the MP of its wearer. "
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:hellish_bauble",
+      "text": "Creating the Hellish Bauble"
+    }
+  ]
+}
