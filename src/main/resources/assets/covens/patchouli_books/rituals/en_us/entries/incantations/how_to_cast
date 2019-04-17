@@ -1,0 +1,12 @@
+{
+  "name": "Casting Incantations",
+  "category": "incantations",
+  "icon": "covens:patchouli_books/rituals/images/how_to_cast.png",
+  "priority": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Incantations are a nice thing for sure, but it they are entirely useless if one does not know how to cast them. $(br2)Generally, incantations are cast by $(o)$(thing)$(t:Typing /chant <incantation>)chanting$(). $(br2)Casting an incantation will consume MP."
+    }
+  ]
+}
