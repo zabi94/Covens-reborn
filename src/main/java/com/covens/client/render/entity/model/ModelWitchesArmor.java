@@ -146,6 +146,13 @@ public class ModelWitchesArmor extends ModelBiped {
 
 		this.bipedHead = new ModelRenderer(this);
 		this.bipedBody = new ModelRenderer(this);
+		this.bipedHeadwear = new ModelRenderer(this);
+		this.bipedLeftLeg = new ModelRenderer(this);
+		this.bipedRightLeg = new ModelRenderer(this);
+		this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
+		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
+		this.bipedLeftArm= new ModelRenderer(this);
+		this.bipedRightArm= new ModelRenderer(this);
 
 		this.legLeft.addChild(this.tunicLeftBack);
 		this.tunicLeftBack.addChild(this.tunicLeftBack_1);
@@ -212,15 +219,19 @@ public class ModelWitchesArmor extends ModelBiped {
 			this.bipedLeftLeg.rotateAngleX = 0.017453292F * entityarmorstand.getLeftLegRotation().getX();
 			this.bipedLeftLeg.rotateAngleY = 0.017453292F * entityarmorstand.getLeftLegRotation().getY();
 			this.bipedLeftLeg.rotateAngleZ = 0.017453292F * entityarmorstand.getLeftLegRotation().getZ();
-			this.bipedLeftLeg.setRotationPoint(1.9F, 11.0F, 0.0F);
 
 			this.bipedRightLeg.rotateAngleX = 0.017453292F * entityarmorstand.getRightLegRotation().getX();
 			this.bipedRightLeg.rotateAngleY = 0.017453292F * entityarmorstand.getRightLegRotation().getY();
 			this.bipedRightLeg.rotateAngleZ = 0.017453292F * entityarmorstand.getRightLegRotation().getZ();
-			this.bipedRightLeg.setRotationPoint(-1.9F, 11.0F, 0.0F);
 			copyModelAngles(this.bipedHead, this.bipedHeadwear);
 		} else {
 			super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+			this.bipedLeftArm.setRotationPoint(5F, 2F, 0F); //Steve
+			this.bipedRightArm.setRotationPoint(-5F, 2F, 0F);		
+			
+			/*this.bipedLeftArm.setRotationPoint(4.5F, 2.5F, 0F); Alex model
+			this.bipedRightArm.setRotationPoint(-4.5F, 2.5F, 0F);*/
+
 		}
 	}
 }
