@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "Upon being cast, some spells will release a projectile. This projectile will generally determine the target of the spell. $(br2)Some spells also have certain requirements. These requirements are elucidated in the entry of the spell itself."
+      "text": "Upon being cast, some spells will release a projectile. This projectile will generally determine the target of the spell. $(br2)Some spells also have certain requirements. These requirements are elucidated in the entry of the spell itself.$(br2)I should also be noted that $(thing)Dispensers can use spells, too, though the spell will be consumed."
     }
   ]
 }
