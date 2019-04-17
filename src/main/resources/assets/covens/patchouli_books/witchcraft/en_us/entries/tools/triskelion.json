@@ -1,0 +1,16 @@
+{
+  "name": "Triskelion Amulet",
+  "category": "tools",
+  "icon": "covens:triskelion_amulet",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(thing)Triskelion Amulet$() will increase its wearer's strength, making their movements more heavy overall. $(br2)This comes at the cost of slower movement speed."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:triskelion",
+      "text": "Creating the Triskelion Amulet"
+    }
+  ]
+}
