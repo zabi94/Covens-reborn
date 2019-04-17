@@ -118,7 +118,7 @@ public class Covens {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-		BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).parallelStream().filter(b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.DENSE)).forEach(b -> {
+		BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).stream().filter(b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.DENSE)).forEach(b -> {
 			BlockMoonbell.addValidMoonbellBiome(b);
 		});
 	}
