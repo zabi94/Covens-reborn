@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Being thought to be one of the more simpler tools of a witch, the Loom is often underrated, however, it is definitely not an unimportant.$(br)Generally, it is used to spin up to four raw materials into a brand new string or silk.$(br)As the enchanting of the product requires powers from beneath the skin, the Loom must be sustained with $(l:tools/altar)Altar Power$()."
+      "text": "Being thought to be one of the simpler tools of a witch, the Loom is often underrated; however, it is definitely not unimportant.$(2br)Generally, it is used to combine materials into a brand new string or silk.$(br)As the enchanting of the product requires powers, the Loom must be sustained with $(l:magic_power/magical_energy)magical power$()."
     },
     {
       "type": "crafting",
