@@ -1,0 +1,16 @@
+{
+  "name": "Token of Remedies",
+  "category": "tools",
+  "icon": "covens:remedy_talisman",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(thing)Token of Remedies$() is a protective talisman against most negative potion effects.$(br2)It will quickly remove a handful of negative potion effects from the player, at the cost of durability.$(br2)Its effect can usually be used up to eight times, though it can technically be enchanted to sustain more damage."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:omen_necklace",
+      "text": "Creating the Token of Remedies"
+    }
+  ]
+}
