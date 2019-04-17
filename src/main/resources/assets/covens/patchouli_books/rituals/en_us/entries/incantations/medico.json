@@ -1,0 +1,11 @@
+{
+  "name": "Incantation: Medico",
+  "category": "incantations",
+  "icon": "covens:patchouli_books/rituals/images/medico.png",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Incantation called $(#ff0000)Medico$() will increase a body's regenerative abilities.$(br2)It should be noted that this incantation is one of the more expensive ones, and that it can not normally be cast without any MP boosting equipment."
+    }
+  ]
+}

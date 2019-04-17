@@ -1,0 +1,19 @@
+{
+  "name": "Incantation: Ignis",
+  "category": "incantations",
+  "icon": "covens:patchouli_books/rituals/images/ignis.png",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Incantation known as $(#ff0000)Ignis$() will light the block under the caster in $(thing)witchfire$().$(br2)These flames won't harm living beings and can be used for many things, such as heating a cauldron.$(br2)Witchfire can also be converted into other types by throwing in certain items."
+    },
+    {
+      "type": "text",
+      "text": "$(l)Frostfire$()$(br)Frostfire is created by throwing a snowball into witchfire.$(br)It can be used to smelt iron ore into $(thing)Cold Iron$().$(br2)$(l)Endfire$()$(br)Endfire is created by throwing dimensional sand into witchfire. For what it can be used for, see $(t:Almanac of Boiling)$(thing)cauldron teleportation$().$(br2)$(l)Sightfire$()$(br)Sightfire is created by throwing glowstone dust into"
+    },
+    {
+      "type": "text",
+      "text": "witchfire. It has revealing properties, can be used to send messages and can be trapped in $(thing)lanterns$()."
+    }
+  ]
+}

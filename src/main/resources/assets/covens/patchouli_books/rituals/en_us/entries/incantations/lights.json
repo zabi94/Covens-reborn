@@ -1,0 +1,11 @@
+{
+  "name": "Incantations of Light",
+  "category": "incantations",
+  "icon": "covens:patchouli_books/rituals/images/lights.png",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Incantation known as $(#ffff00)Lux$() will light any candles in close proximity of the caster. $(br2)It is the opposite of the Incantation $(#000000)Tenebrae$(), which will extinguish candles and other magic light sources instead."
+    }
+  ]
+}

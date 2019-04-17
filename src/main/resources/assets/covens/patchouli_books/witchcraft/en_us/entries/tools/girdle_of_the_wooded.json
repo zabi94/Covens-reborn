@@ -1,0 +1,16 @@
+{
+  "name": "Belt of Spring",
+  "category": "glory",
+  "icon": "covens:girdle_of_the_wooded",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This girdle will slowly grow hard pieces of bark on the wearer's body. This process occurs about every minute and will cause the wearer to be rooted to the ground; however, this is only possible if they happen to stand on grass.$(br)Each piece of bark will absorb damage and will then be destroyed.$(br)It should be noted that bark may only generate when armor is worn."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:girdle_of_the_wooded",
+      "text": "Creating the Belt of Spring"
+    }
+  ]
+}

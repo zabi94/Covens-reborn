@@ -1,0 +1,16 @@
+{
+  "name": "Protective Amulet",
+  "category": "tools",
+  "icon": "covens:omen_necklace",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(thing)Protective Amulet$() will hinder simple curses, like bad luck, to touch its wearer. $(br2)It will also reduce all magic damage by a fraction."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:omen_necklace",
+      "text": "Creating the Protective Amulet"
+    }
+  ]
+}
