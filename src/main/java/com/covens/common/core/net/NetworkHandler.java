@@ -41,9 +41,6 @@ public final class NetworkHandler {
 		HANDLER.registerMessage(ParticleMessage.ParticleMessageHandler.class, ParticleMessage.class, next(), Side.CLIENT);
 		HANDLER.registerMessage(TarotMessage.TarotMessageHandler.class, TarotMessage.class, next(), Side.CLIENT);
 		HANDLER.registerMessage(PlayerFamiliarsDefinition.Handler.class, PlayerFamiliarsDefinition.class, next(), Side.CLIENT);
-		// TODO <rustylocks79> remove
-		// HANDLER.registerMessage(PlayerMimicDataChanged.PlayerMimicDataHandler.class,
-		// PlayerMimicDataChanged.class, next(), Side.CLIENT);
 		registerSimpleMessage(PlayerTransformationChangedMessage.class, next(), Side.CLIENT);
 		registerSimpleMessage(EntityInternalBloodChanged.class, next(), Side.CLIENT);
 		registerSimpleMessage(WitchfireFlame.class, next(), Side.CLIENT);

@@ -11,6 +11,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import zabi.minecraft.minerva.common.network.SimpleMessage;
 import zabi.minecraft.minerva.common.utils.DimensionalPosition;
 
@@ -27,6 +29,7 @@ public class PlayerFamiliarsDefinition implements IMessage {
 	}
 	
 	public static class Handler implements IMessageHandler<PlayerFamiliarsDefinition, IMessage> {
+		@SideOnly(Side.CLIENT)
 		@Override
 		public IMessage onMessage(PlayerFamiliarsDefinition message, MessageContext ctx) {
 			Minecraft.getMinecraft().addScheduledTask(() -> Minecraft.getMinecraft().displayGuiScreen(new GuiFamiliarSelector(message.familiars)));
