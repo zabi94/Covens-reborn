@@ -1,0 +1,16 @@
+{
+  "name": "Wrathful Eye",
+  "category": "tools",
+  "icon": "covens:wrathful_eye",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(thing)Wrathful Eye$() is a trinket straight from hell, and will command respect from all lesser demons."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:wrathful_eye",
+      "text": "Creating the Wrathful Eye"
+    }
+  ]
+}
