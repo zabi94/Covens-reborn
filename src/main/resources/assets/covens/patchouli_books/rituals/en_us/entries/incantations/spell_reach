@@ -1,6 +1,6 @@
 {
   "name": "Spell of Far Reach",
-  "category": "glory",
+  "category": "incantations",
   "icon": "covens:spell_page:0{spell:\"covens:magnet\"",
   "pages": [
     {
