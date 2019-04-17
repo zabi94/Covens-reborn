@@ -1,0 +1,11 @@
+{
+  "name": "Incantation: Aqua",
+  "category": "incantations",
+  "icon": "covens:patchouli_books/rituals/images/aqua.png",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Incantation called $(#0000ff)Aqua$() will increase the body's abilities in water by applying water breathing and night vision."
+    }
+  ]
+}
