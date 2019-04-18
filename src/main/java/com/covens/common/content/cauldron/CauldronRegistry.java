@@ -212,6 +212,7 @@ public class CauldronRegistry {
 		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.ember_grass, 2, 0), blazePowder, blazePowder, wormwood, wormwood);
 		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.torchwood, 2, 0), glowstoneDust, glowstoneDust, anyLog, anyLeaf);
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.spanish_moss, 3), vine, vine, vine, fumeBottledMagic, netherWart);
+		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk_normal), fumeBirchSoul, clayBall);
 		
 		// Banner pattern removal
 		for (int i = 0; i < 16; i++) {
