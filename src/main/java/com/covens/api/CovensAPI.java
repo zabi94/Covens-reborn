@@ -5,6 +5,8 @@ import java.util.function.Supplier;
 
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
+import com.covens.api.cauldron.ICauldronRecipe;
+import com.covens.api.cauldron.ICauldronRecipeBuilder;
 import com.covens.api.divination.IFortune;
 import com.covens.api.hotbar.IHotbarAction;
 import com.covens.api.incantation.IIncantation;
@@ -127,4 +129,8 @@ public abstract class CovensAPI {
 	public abstract void unbindFamiliar(EntityLiving familiar);
 	
 	public abstract void unbindFamiliar(UUID entity, UUID player, String name);
+	
+	public abstract ICauldronRecipeBuilder getNewCauldronRecipeBuilder(ResourceLocation id);
+
+	public abstract void registerCauldronRecipe(ICauldronRecipe recipe);
 }
