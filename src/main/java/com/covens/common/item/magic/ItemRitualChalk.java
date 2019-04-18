@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 public class ItemRitualChalk extends ItemMod {
 
-	public static final int MAX_USES = 40;
+	public static final int MAX_USES = 80;
 	private final EnumGlyphType type;
 
 	public ItemRitualChalk(EnumGlyphType id) {
