@@ -1,0 +1,12 @@
+{
+  "name": "FAQ: Newer MC versions",
+  "icon": "minecraft:book",
+  "category": "meta",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(l)Will you update to newer Minecraft versions?$()$(2br)For 1.13.X is likely a no, but we will likely port to 1.14.X, possibly with Fabric as the default loader. Only time will tell."
+    }
+  ]
+}

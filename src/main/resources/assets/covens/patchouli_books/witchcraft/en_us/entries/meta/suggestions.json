@@ -1,0 +1,12 @@
+{
+  "name": "FAQ: I have a suggestion",
+  "icon": "minecraft:book",
+  "category": "meta",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(l)Can you add this feature/item?$()$(2br)We are currently not accepting suggestions. The mod is huge as is, and we can barely handle what we already have. Plus it's likely that it conflicts with our design and balance choices."
+    }
+  ]
+}
