@@ -1,0 +1,6 @@
+{
+  "name": "THIS IS AN INDEV BUILD",
+  "description": "This is an indev build for covens. This section won't be in the final product and holds answers to many FAQs about it. Read carefully.",
+  "icon": "minecraft:command_block",
+  "sortnum": 0
+}

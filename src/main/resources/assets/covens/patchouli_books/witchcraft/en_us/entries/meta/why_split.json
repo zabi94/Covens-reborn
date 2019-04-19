@@ -1,0 +1,15 @@
+{
+  "name": "FAQ: Bewitchment & split",
+  "icon": "minecraft:book",
+  "category": "meta",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(l)Why did you split from Bewitchment?$()$(2br)I felt like the mod was going too far from what I had in mind, with many thing being bloated up or added without proper reasoning behind.<br>It also went frequently out of my intended theme by adding Arabic, Native American and similar forms of witchcraft, whereas I intended it to"
+    }, {
+      "type": "text",
+      "text": "contain European witchcraft only."
+    }
+  ]
+}

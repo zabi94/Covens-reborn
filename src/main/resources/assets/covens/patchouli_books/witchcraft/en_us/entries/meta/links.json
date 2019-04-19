@@ -1,0 +1,42 @@
+{
+  "name": "Links",
+  "icon": "minecraft:diamond",
+  "sortnum": 0,
+  "category": "meta",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Scroll through the following pages to get relevant links for this mod"
+    },
+    {
+      "type": "link",
+      "text": "Come here to contact us",
+      "url": "https://discord.gg/njMA9kv",
+      "link_text": "Discord Invite"
+    },
+    {
+      "type": "link",
+      "text": "This contains the source code of the mod",
+      "url": "https://github.com/zabi94/Covens-reborn",
+      "link_text": "Github Page"
+    },
+    {
+      "type": "link",
+      "text": "A bug is something that makes the game act weirdly, but doesn't crash Minecraft.$(2br)Please don't open issues to add suggestions, we can't accept them for the time being.",
+      "url": "https://github.com/zabi94/Covens-reborn/issues/new?template=bugs.md",
+      "link_text": "Report a BUG"
+    },
+    {
+      "type": "link",
+      "text": "Crashes are errors that make Minecraft close, not something that works weirdly.$(2br)Please don't open issues to add suggestions, we can't accept them for the time being.",
+      "url": "https://github.com/zabi94/Covens-reborn/issues/new?template=crash.md",
+      "link_text": "Report a CRASH"
+    },
+    {
+      "type": "link",
+      "text": "Donations for now only help this mod grow more quickly, but in the future they will grant cosmetic rewards and unique textures.",
+      "url": "https://github.com/zabi94/Covens-reborn#links",
+      "link_text": "See donation page"
+    }
+  ]
+}

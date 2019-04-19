@@ -1,0 +1,12 @@
+{
+  "name": "FAQ: Intangible Features",
+  "icon": "minecraft:book",
+  "category": "meta",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(l)Will you add features from Intangible?$()$(2br)No, this is a Witchery inspired mod, not an Emoniph inspired mod."
+    }
+  ]
+}

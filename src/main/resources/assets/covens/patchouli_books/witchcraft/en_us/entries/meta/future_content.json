@@ -1,0 +1,15 @@
+{
+  "name": "FAQ: Future content",
+  "icon": "minecraft:book",
+  "category": "meta",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(l)What are you planning on adding?$()$(2br)$(li)Spells, but casted differently. No more wands.$(li)Werewolves, different quests and powers.$(li)Witch hunters, completely revamped.$(li)Spirit World.$(li)Demons.$(li)Spirit and Demon enchanting.$(li)Marks (Witchery's infusions, but completely different)."
+    },{
+      "type": "text",
+      "text": "$(li)Walled villages, eventually.$(li)Mirror magic.$(li)Pendulums, as localization devices.$(li)New and old bosses.$(li)More rituals, brews and other content.$(li)$(o)Actual covens$(), also made of multiple players.$(li)NPCs witches, vampires, werewolves and hunters.$(li)Herb bundles.$(li)Talismans to hold ritual circles."
+    }
+  ]
+}
