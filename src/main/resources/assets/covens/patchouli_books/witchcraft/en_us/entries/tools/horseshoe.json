@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "This lucky trinket knows as $(thing)Horseshoe$() will, as implied, increase the wearer's luck while worn.$(br2)It is also said to protect against $(thing)Spirits$()."
+      "text": "This lucky trinket known as $(thing)Horseshoe$() will, as implied, increase the wearer's luck while worn.$(br2)It is also said to protect against $(thing)Spirits$()."
     },
     {
       "type": "crafting",
