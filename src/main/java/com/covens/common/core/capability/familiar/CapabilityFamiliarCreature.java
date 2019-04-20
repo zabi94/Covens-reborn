@@ -27,7 +27,6 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 
 	@CapabilityInject(CapabilityFamiliarCreature.class)
 	public static final Capability<CapabilityFamiliarCreature> CAPABILITY = null;
-	public static final CapabilityFamiliarCreature DEFAULT_INSTANCE = new CapabilityFamiliarCreature();
 	
 	@Ignore public boolean aiSet = false;
 	public UUID owner = UUIDs.NULL_UUID;
@@ -69,6 +68,10 @@ public class CapabilityFamiliarCreature extends SimpleCapability {
 
 	@Override
 	public boolean isRelevantFor(Entity object) {
+		return canBecomeFamiliar(object);
+	}
+	
+	public static boolean canBecomeFamiliar(Entity object) {
 		return ((object instanceof EntityAnimal) || (object instanceof IFamiliarEligible)) && !(object instanceof IFamiliarUneligible) && !(object instanceof IMob);
 	}
 	

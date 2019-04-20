@@ -19,8 +19,6 @@ public class CapabilityTransformation extends SimpleCapability {
 	@CapabilityInject(CapabilityTransformation.class)
 	public static final Capability<CapabilityTransformation> CAPABILITY = null;
 
-	public static final CapabilityTransformation DEFAULT_INSTANCE = new CapabilityTransformation();
-
 	public int level = 0;
 	public String type;
 

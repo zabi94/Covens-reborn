@@ -32,6 +32,18 @@ public class Log {
 	public static void e(Object s) {
 		logger.error(s);
 	}
+	
+	public static void bigMessage(Object s) {
+		i("**********");
+		i("");
+		i("");
+		i("");
+		i(s);
+		i("");
+		i("");
+		i("");
+		i("**********");
+	}
 
 	public static void askForReport() {
 		StringBuilder sb = new StringBuilder();

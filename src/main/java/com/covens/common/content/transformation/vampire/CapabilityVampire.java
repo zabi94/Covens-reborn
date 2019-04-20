@@ -13,7 +13,6 @@ public class CapabilityVampire extends SimpleCapability {
 
 	@CapabilityInject(CapabilityVampire.class)
 	public static final Capability<CapabilityVampire> CAPABILITY = null;
-	public static final CapabilityVampire DEFAULT_INSTANCE = new CapabilityVampire();
 
 	public int blood = 0;
 	public boolean nightVision = false;

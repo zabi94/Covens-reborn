@@ -3,10 +3,8 @@ package com.covens.common.core.capability.familiar;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.covens.api.mp.PlayerMPExpander;
 import com.covens.common.content.actionbar.HotbarAction;
 import com.covens.common.content.familiar.FamiliarDescriptor;
-import com.covens.common.lib.LibMod;
 import com.google.common.collect.Maps;
 
 import net.minecraft.client.Minecraft;
@@ -15,7 +13,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.util.Constants.NBT;
@@ -25,12 +22,10 @@ import zabi.minecraft.minerva.common.capability.SimpleCapability;
 import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.utils.annotation.DontSync;
 
-public class CapabilityFamiliarOwner extends SimpleCapability implements PlayerMPExpander {
+public class CapabilityFamiliarOwner extends SimpleCapability {
 
 	@CapabilityInject(CapabilityFamiliarOwner.class)
 	public static final Capability<CapabilityFamiliarOwner> CAPABILITY = null;
-	public static final CapabilityFamiliarOwner DEFAULT_INSTANCE = new CapabilityFamiliarOwner();
-	private static final ResourceLocation EXPANDER_ID = new ResourceLocation(LibMod.MOD_ID, "familiars");
 	
 	public int familiarCount = 0;
 	
@@ -70,16 +65,6 @@ public class CapabilityFamiliarOwner extends SimpleCapability implements PlayerM
 		return new CapabilityFamiliarOwner();
 	}
 
-	@Override
-	public ResourceLocation getID() {
-		return EXPANDER_ID;
-	}
-
-	@Override
-	public int getExtraAmount(EntityPlayer p) {
-		return this.familiarCount * 100;
-	}
-	
 	public void selectFamiliar(UUID id, String name) {
 		selectedFamiliar = id;
 		if (UUIDs.isNull(id)) {

@@ -10,7 +10,6 @@ public class CapabilityWerewolfStatus extends SimpleCapability {
 
 	@CapabilityInject(CapabilityWerewolfStatus.class)
 	public static final Capability<CapabilityWerewolfStatus> CAPABILITY = null;
-	public static final CapabilityWerewolfStatus DEFAULT_INSTANCE = new CapabilityWerewolfStatus();
 
 	public int currentWWForm = 0; // 0 = none, 1 = wolf, 2 = wolfman
 	public int texture = 0;

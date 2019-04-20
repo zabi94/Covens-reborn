@@ -113,6 +113,8 @@ public abstract class CovensAPI {
 	public abstract void registerFrostfireSmelting(ResourceLocation name, Ingredient input, Supplier<ItemStack> output);
 
 	public abstract void expandPlayerMP(PlayerMPExpander expander, EntityPlayer player);
+	
+	public abstract void expandPlayerMP(ResourceLocation expander, int amount, EntityPlayer player);
 
 	public abstract void removeMPExpansion(PlayerMPExpander expander, EntityPlayer player);
 

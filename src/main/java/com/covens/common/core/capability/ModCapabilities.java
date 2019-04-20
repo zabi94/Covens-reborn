@@ -9,6 +9,7 @@ import com.covens.common.content.transformation.vampire.CapabilityVampire;
 import com.covens.common.content.transformation.vampire.blood.CapabilityBloodReserve;
 import com.covens.common.content.transformation.werewolf.CapabilityWerewolfStatus;
 import com.covens.common.core.capability.altar.AltarCapabilities;
+import com.covens.common.core.capability.bedowner.CapabilityBedOwner;
 import com.covens.common.core.capability.energy.MagicPowerConsumer;
 import com.covens.common.core.capability.energy.MagicPowerContainer;
 import com.covens.common.core.capability.energy.MagicPowerUsingItem;
@@ -17,13 +18,13 @@ import com.covens.common.core.capability.familiar.CapabilityFamiliarCreature;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.core.capability.mimic.CapabilityMimicData;
 import com.covens.common.core.capability.simple.BarkCapability;
+import com.covens.common.core.capability.simple.TaglockIncarnation;
 import com.covens.common.lib.LibMod;
 
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import zabi.minecraft.minerva.common.capability.SimpleCapability;
 
 @Mod.EventBusSubscriber
@@ -39,6 +40,7 @@ public class ModCapabilities {
 		CapabilityCauldronTeleport.init();
 		CapabilityMimicData.init();
 		CapabilityMPExpansion.init();
+		CapabilityBedOwner.init();
 		AltarCapabilities.init();
 		SimpleCapability.preInit(BarkCapability.class);
 		SimpleCapability.preInit(CapabilityWerewolfStatus.class);
@@ -46,15 +48,17 @@ public class ModCapabilities {
 		SimpleCapability.preInit(CapabilityVampire.class);
 		SimpleCapability.preInit(CapabilityFamiliarCreature.class);
 		SimpleCapability.preInit(CapabilityFamiliarOwner.class);
+		SimpleCapability.preInit(TaglockIncarnation.class);
 	}
 	
 	public static void init() {
-		SimpleCapability.init(BarkCapability.class, LibMod.MOD_ID, BarkCapability.CAPABILITY, BarkCapability.DEFAULT_INSTANCE);
-		SimpleCapability.init(CapabilityWerewolfStatus.class, LibMod.MOD_ID, CapabilityWerewolfStatus.CAPABILITY, CapabilityWerewolfStatus.DEFAULT_INSTANCE);
-		SimpleCapability.init(CapabilityTransformation.class, LibMod.MOD_ID, CapabilityTransformation.CAPABILITY, CapabilityTransformation.DEFAULT_INSTANCE);
-		SimpleCapability.init(CapabilityVampire.class, LibMod.MOD_ID, CapabilityVampire.CAPABILITY, CapabilityVampire.DEFAULT_INSTANCE);
-		SimpleCapability.init(CapabilityFamiliarCreature.class, LibMod.MOD_ID, CapabilityFamiliarCreature.CAPABILITY, CapabilityFamiliarCreature.DEFAULT_INSTANCE);
-		SimpleCapability.init(CapabilityFamiliarOwner.class, LibMod.MOD_ID, CapabilityFamiliarOwner.CAPABILITY, CapabilityFamiliarOwner.DEFAULT_INSTANCE);
+		SimpleCapability.init(BarkCapability.class, LibMod.MOD_ID, BarkCapability.CAPABILITY, new BarkCapability());
+		SimpleCapability.init(CapabilityWerewolfStatus.class, LibMod.MOD_ID, CapabilityWerewolfStatus.CAPABILITY, new CapabilityWerewolfStatus());
+		SimpleCapability.init(CapabilityTransformation.class, LibMod.MOD_ID, CapabilityTransformation.CAPABILITY, new CapabilityTransformation());
+		SimpleCapability.init(CapabilityVampire.class, LibMod.MOD_ID, CapabilityVampire.CAPABILITY, new CapabilityVampire());
+		SimpleCapability.init(CapabilityFamiliarCreature.class, LibMod.MOD_ID, CapabilityFamiliarCreature.CAPABILITY, new CapabilityFamiliarCreature());
+		SimpleCapability.init(CapabilityFamiliarOwner.class, LibMod.MOD_ID, CapabilityFamiliarOwner.CAPABILITY, new CapabilityFamiliarOwner());
+		SimpleCapability.init(TaglockIncarnation.class, LibMod.MOD_ID, TaglockIncarnation.CAPABILITY, new TaglockIncarnation());
 		AltarCapabilities.loadObjects();
 	}
 	
@@ -65,11 +69,6 @@ public class ModCapabilities {
 		copyDataOnPlayerRespawn(event, CapabilityFortune.CAPABILITY);
 		copyDataOnPlayerRespawn(event, CapabilityFamiliarOwner.CAPABILITY);
 		copyDataOnPlayerRespawn(event, CapabilityWerewolfStatus.CAPABILITY);
-	}
-	
-	@SubscribeEvent
-	public static void onPlayerDimensionChange(PlayerChangedDimensionEvent evt) {
-//		HotbarAction.refreshActions(evt.player, evt.player.world);
 	}
 	
 	public static <T> void copyDataOnPlayerRespawn(PlayerEvent.Clone event, Capability<T> c) {

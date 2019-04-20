@@ -44,6 +44,7 @@ import com.covens.common.core.util.syncTasks.UnbindPlayerFromFamiliar;
 import com.covens.common.crafting.FrostFireRecipe;
 import com.covens.common.crafting.OvenSmeltingRecipe;
 import com.covens.common.crafting.SpinningThreadRecipe;
+import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 
 import net.minecraft.entity.Entity;
@@ -60,6 +61,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.entity.synchronization.SyncManager;
 
 public class ApiInstance extends CovensAPI {
@@ -214,6 +216,12 @@ public class ApiInstance extends CovensAPI {
 		player.getCapability(CapabilityMPExpansion.CAPABILITY, null).expand(expander, player);
 		((PlayerMPContainer) player.getCapability(MPContainer.CAPABILITY, null)).markDirty();
 	}
+	
+	@Override
+	public void expandPlayerMP(ResourceLocation expander, int amount, EntityPlayer player) {
+		player.getCapability(CapabilityMPExpansion.CAPABILITY, null).expand(expander, amount);
+		((PlayerMPContainer) player.getCapability(MPContainer.CAPABILITY, null)).markDirty();
+	}
 
 	@Override
 	public void removeMPExpansion(PlayerMPExpander expander, EntityPlayer player) {
@@ -250,8 +258,7 @@ public class ApiInstance extends CovensAPI {
 			if (!famCap.hasOwner()) {
 				familiar.getCapability(CapabilityFamiliarCreature.CAPABILITY, null).setOwner(player);
 				player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).addFamiliar(familiar);
-				CovensAPI.getAPI().removeMPExpansion(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
-				CovensAPI.getAPI().expandPlayerMP(CapabilityFamiliarOwner.DEFAULT_INSTANCE, player);
+				CovensAPI.getAPI().expandPlayerMP(new ResourceLocation(LibMod.MOD_ID, "familiar"+UUIDs.of(familiar)), 100, player);
 				HotbarAction.refreshActions(player, player.world);
 				FamiliarController.setupFamiliar(familiar);
 				player.sendStatusMessage(new TextComponentString("You now have "+player.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).familiarCount+" familiars"), true);
@@ -283,7 +290,7 @@ public class ApiInstance extends CovensAPI {
 	
 	@Override
 	public boolean isValidFamiliar(Entity entity) {
-		return CapabilityFamiliarCreature.DEFAULT_INSTANCE.isRelevantFor(entity);
+		return CapabilityFamiliarCreature.canBecomeFamiliar(entity);
 	}
 
 }

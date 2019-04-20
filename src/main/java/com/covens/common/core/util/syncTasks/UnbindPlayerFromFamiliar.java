@@ -4,9 +4,11 @@ import java.util.UUID;
 
 import com.covens.api.CovensAPI;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
+import com.covens.common.lib.LibMod;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import zabi.minecraft.minerva.common.entity.UUIDs;
 import zabi.minecraft.minerva.common.entity.synchronization.SyncTask;
 
@@ -29,8 +31,7 @@ public class UnbindPlayerFromFamiliar extends SyncTask<EntityPlayer> {
 	public void execute(EntityPlayer p) {//TODO add checks
 		CapabilityFamiliarOwner cap = p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null);
 		cap.removeFamiliar(fID, name);
-		CovensAPI.getAPI().removeMPExpansion(cap, p);
-		CovensAPI.getAPI().expandPlayerMP(cap, p);
+		CovensAPI.getAPI().removeMPExpansion(new ResourceLocation(LibMod.MOD_ID, "familiar"+fID), p);
 	}
 
 	@Override

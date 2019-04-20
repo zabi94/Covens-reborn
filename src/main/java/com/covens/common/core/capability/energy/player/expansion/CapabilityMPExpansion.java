@@ -32,6 +32,11 @@ public class CapabilityMPExpansion {
 		this.increaseMap.put(exp.getID().toString(), exp.getExtraAmount(player));
 		this.dirty = true;
 	}
+	
+	public void expand(ResourceLocation expander, int amount) {
+		this.increaseMap.put(expander.toString(), amount);
+		this.dirty = true;
+	}
 
 	public void remove(ResourceLocation exp) {
 		this.increaseMap.remove(exp.toString());
