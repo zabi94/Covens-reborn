@@ -1,0 +1,33 @@
+{
+  "name": "Juniper Tree",
+  "icon": "covens:sapling:1",
+  "category": "herbology",
+  "sortnum": -3,
+  "pages": [
+    {
+    	"type": "text",
+    	"text": "The Juniper tree might be small, but its wood is strong and deeply in tune with the energies of this world.$(2br)Its leaves are imbued with magic, and its bark is used in many ways by skilled witches who can recognize the power this tree holds."
+    },
+    {
+    	"type": "multiblock",
+    	"multiblock": {
+	        "mapping": {
+    			"L": "covens:leaves_juniper",
+    			"W": "covens:log_juniper",
+    			"0": "covens:log_juniper"
+    		},
+	        "pattern": [
+	          		["        ", "     L  ", "  L LLL ", "     L  ", "        "],
+	          		["     L  ", "  L LLL ", " LLLLWLL", "  L LLL ", "     L  "],
+	          		["  L L   ", " LLLLLL ", "LLWLWLL ", " LLLLLL ", "    L   "],
+	          		["        ", "  L L   ", "  LLWL  ", "     L  ", "        "],
+	          		["        ", "        ", "   W    ", "        ", "        "],
+	          		["        ", "        ", "   0    ", "        ", "        "]
+	          		
+	        ], "symmetrical": true
+      	}, 
+      	"name": "The Juniper Tree",
+    	"enable_visualize": false
+    }
+  ]
+}
