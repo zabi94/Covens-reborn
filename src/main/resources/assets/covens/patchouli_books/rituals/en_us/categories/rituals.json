@@ -1,6 +1,6 @@
 {
   "name": "Rituals",
-  "description": "TODO",
+  "description": "Rituals are a kind of magic that combines reagent and magical energy by channeling them into the focal point of a runic circle. Beware though, the result of not knowing exactly how the ritual is performed may be grave, and could involve disrupting powers that greatly overshadow your own.",
   "sortnum": "0",
   "icon": "covens:ritual_chalk_golden"
 }

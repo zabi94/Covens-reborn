@@ -1,0 +1,37 @@
+{
+  "name": "Cypress Tree",
+  "icon": "covens:sapling:3",
+  "category": "herbology",
+  "sortnum": -1,
+  "pages": [
+    {
+    	"type": "text",
+    	"text": "Identified by its tall, slender, and almost malnourished appearance, the Cypress can be found in many graveyards as if it’s watching over the dead."
+    },
+    {
+    	"type": "multiblock",
+    	"multiblock": {
+	        "mapping": {
+    			"L": "covens:leaves_cypress",
+    			"W": "covens:log_cypress",
+    			"0": "covens:log_cypress"
+    		},
+	        "pattern": [
+	          		["   ", " L ", "   "],
+					["   ", " L ", "   "],
+					[" L ", "LWL", " L "],
+					[" L ", "LWL", " L "],
+					[" L ", "LWL", " L "],
+					["LLL", "LWL", "LLL"],
+					["LLL", "LWL", "LLL"],
+					["LLL", "LWL", "LLL"],
+					[" L ", "LWL", " L "],
+					["   ", " W ", "   "],
+					["   ", " 0 ", "   "]
+	        ], "symmetrical": true
+      	}, 
+      	"name": "The Cypress Tree",
+    	"enable_visualize": false
+    }
+  ]
+}
