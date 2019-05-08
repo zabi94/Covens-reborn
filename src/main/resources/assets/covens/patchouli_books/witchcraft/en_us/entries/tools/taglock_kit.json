@@ -1,0 +1,16 @@
+{
+  "name": "Taglock Kits",
+  "category": "tools",
+  "icon": "covens:taglock",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Have you ever wondered what those vials of blood your neighbor is keeping? The labeled hair maybe? Or did you find a lot of nails in the garbage can of your neighborhood? All those items can be considered taglocks for someone.$(2br)A $(thing)Taglock$() is something personal, or commonly used item of a person."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:taglock",
+      "text": "These taglocks can be used for good or bad towards the taglocked person. You can collect it by using a taglock kit on a person's bed, or directly on them. But beware, they may notice!"
+    }
+  ]
+}

@@ -173,6 +173,8 @@ public class ModelVampireArmor extends ModelBiped {
 		this.bipedHeadwear = new ModelRenderer(this);
 		this.bipedLeftLeg = new ModelRenderer(this);
 		this.bipedRightLeg = new ModelRenderer(this);
+		this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
+		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
 
 		this.capeRightFront.addChild(this.capeRightFront_1);
 		this.capeRightSide.addChild(this.capeRightFront);
@@ -240,12 +242,10 @@ public class ModelVampireArmor extends ModelBiped {
 			this.bipedLeftLeg.rotateAngleX = 0.017453292F * entityarmorstand.getLeftLegRotation().getX();
 			this.bipedLeftLeg.rotateAngleY = 0.017453292F * entityarmorstand.getLeftLegRotation().getY();
 			this.bipedLeftLeg.rotateAngleZ = 0.017453292F * entityarmorstand.getLeftLegRotation().getZ();
-			this.bipedLeftLeg.setRotationPoint(1.9F, 11.0F, 0.0F);
-
+			
 			this.bipedRightLeg.rotateAngleX = 0.017453292F * entityarmorstand.getRightLegRotation().getX();
 			this.bipedRightLeg.rotateAngleY = 0.017453292F * entityarmorstand.getRightLegRotation().getY();
 			this.bipedRightLeg.rotateAngleZ = 0.017453292F * entityarmorstand.getRightLegRotation().getZ();
-			this.bipedRightLeg.setRotationPoint(-1.9F, 11.0F, 0.0F);
 			this.capeBack1.rotateAngleX = 0.26179938779F;
 			this.capeRightFront.rotateAngleY = -1.57079632679F;
 			this.capeLeftFront.rotateAngleY = 1.57079632679F;

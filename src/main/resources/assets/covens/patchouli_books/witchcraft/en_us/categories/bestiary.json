@@ -1,6 +1,6 @@
 {
   "name": "Bestiary",
-  "description": "A guide to tell apart creatures from this world and beyond.",
+  "description": "Being a witch has its many perks, and one of those is the countless spirits and creatures you encounter.$(2br)Some are friendly, and help the witch by staying by their side, others are dangerous, aggressive, and territorial. Meeting one may either be a blessing or bad luck.",
   "sortnum": "5",
   "icon": "covens:heart"
 }

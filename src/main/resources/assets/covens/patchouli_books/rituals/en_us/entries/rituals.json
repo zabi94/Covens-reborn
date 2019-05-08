@@ -1,0 +1,34 @@
+{
+  "name": "Circle magic",
+  "icon": "covens:ritual_chalk_golden",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Perhaps the most common magic used by witches, circle magic utilizes the powers of the world to shape them in the most varied effects to aid the witch who performed the ritual. Although it's effects range from summonings to infusions and much more, the basics of circle magic remains always the same, mainly requiring circles drawn on the ground, an altar or a player to draw"
+    },
+    {
+      "type": "text",
+      "text": "energy from, as well as specific items to redirect the magical energy into the desired effect. $(br) $(br)Therefore, the process of casting such rituals is rather easy; firstly, draw the required circle on the ground, then drop the required reagents and finally activate the final glyph to initiate the ritual. $(br) $(br)It should be noted, however, that rituals might also have specific requirements"
+    },
+    {
+      "type": "text",
+      "text": "particular to that ritual, such as being casted during a full moon, with the presence of a fellow coven witch, specified on the ritual's entry. "
+    },
+    {
+      "type": "multiblock",
+      "name": "The small circle",
+      "multiblock_id": "covens:circle_small"
+    },
+    {
+      "type": "multiblock",
+      "name": "The middle circle",
+      "multiblock_id": "covens:circle_medium"
+    },
+    {
+      "type": "multiblock",
+      "name": "The greater circle",
+      "multiblock_id": "covens:circle_big"
+    }
+  ]
+}

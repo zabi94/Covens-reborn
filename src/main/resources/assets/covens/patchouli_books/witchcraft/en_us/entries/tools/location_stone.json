@@ -1,0 +1,16 @@
+{
+  "name": "Binding Stones",
+  "category": "tools",
+  "icon": "covens:location_stone",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Binding stones are stones infused with $(l:exploration/gems)malachite$(), and have the property of \"binding\" themselves to a location.$(2br)These stones will act as a link the exact location you were standing, and can be used in rituals, but remember, all things age, so does the stone, hence it will be unsusable after many uses."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:location_stone",
+      "text": "The stone can be bound to the location you are standing.<br>To do that, simply Right-click while holding it."
+    }
+  ]
+}

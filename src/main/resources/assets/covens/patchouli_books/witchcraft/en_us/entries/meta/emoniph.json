@@ -1,0 +1,12 @@
+{
+  "name": "FAQ: Where is Emoniph?",
+  "icon": "minecraft:book",
+  "category": "meta",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(l)Where is Emoniph?$()$(2br)We don't know. It's probably best to leave him alone, and respect his choice of not wanting to be contacted."
+    }
+  ]
+}

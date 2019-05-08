@@ -1,0 +1,15 @@
+{
+  "name": "FAQ: How can I help?",
+  "icon": "minecraft:book",
+  "category": "meta",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(l)How do I contribute to this mod's development?$()$(2br)$(li)If you can translate to another (missing) language, hop on the discord server.$(li)If you find bugs, report them.$(li)Add the mod to your modpacks, tell your fellow minecraft players about it.$(li)Provide feedback on discord!$(li)Donate to one of us :)"
+    },{
+      "type": "text",
+      "text": "All the relevant links can be found $(l:meta/links)here$()."
+    }
+  ]
+}
