@@ -1,0 +1,15 @@
+{
+  "name": "Remote Casting",
+  "icon": "covens:ritual_chalk_golden",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is well known that every witch travels, but it is also well known that symbols that are drawn on a surface sadly do not.$(br)This is why rites can be cast $(o)remotely$(). To remotely cast a rite, a $(thing)$(t:See the according entry in the book of Witchcraft)location stone$() must be bound to a position."
+    },
+    {
+      "type": "text",
+      "text": "To cast a rite at this position, the location stone (instead of an empty hand) must be used to activate the golden rune of the circle used to cast the rite.$(br)It should be noted that this will increase the required power, depending on how far the selected location is."
+    }
+  ]
+}
