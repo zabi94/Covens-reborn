@@ -1,0 +1,21 @@
+{
+  "name": "Silver Equipment",
+  "icon": "covens:silver_chestplate",
+  "category": "tools",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This collection of armor pieces is especially strong against the undead and werewolves, as it will significantly reduce damage from them. For werewolves, it will even deal damage to them, making silver armor an even better protection against them."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:silver_helmet",
+      "recipe2": "covens:silver_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:silver_leggings",
+      "recipe2": "covens:silver_boots"
+    }
+  ]
+}
