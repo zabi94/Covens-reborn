@@ -1,28 +1,20 @@
 {
-  "name": "Magical energy",
+  "name": "Magical Energy",
   "icon": "covens:pentacle",
-  "sortnum": "2",
   "category": "magic_power",
+  "sortnum": 2,
   "pages": [
     {
       "type": "text",
-      "text": "Whilst magic is ethereal in it's concept, mysterious and unknown in its intricacies, many a witches have collected knowledge on the matter, narrowing down this concept to the interest of witchcraft. Magic is the alteration of the world produced by the use of magical energy. This magical energy stems from life itself and can be found in every living being. Although it's "
+      "text": "Magical Energy, or short, $(thing)MP$(), as a concept is commonly compared to the fuel of the potentially shaping fire of magic; while they are not exactly the same, this comparison makes explaining it a lot easier.$(br)As example, a witch trying to perform a ritual is comparable to the wood heating the flame. The amount of wood is comparable to the $(thing)current MP$() of the witch: the amount of"
     },
     {
       "type": "text",
-      "text": "known by a myriad of different names, magical energy shall be henceforth referred to as MP (magical power). $(br) $(br)Just as there are a plethora of ways to refer to magic, there are various ways of harnessing it. An inexperienced witch, yet to open itself to the powers of the world, has only access to the magical energy contained within its body. Such energy is represented via a bar found on the screen that indicates "
+      "text": "\"fuel\" that can be used for anything related. $(br)Next, one should imagine that the place for the fuel is limited in its space. This space is the $(thing)MP maximum$(); if this maximum is reached, no MP can be added. Every time MP is used, an MP-Bar, $(t:Usually in the left part of the screen)which can be seen by a witch$(), will appear. It shows the amount of MP in relation to this maximum.$(br)MP is also generated at a certain rate, the $(thing)MP regeneration rate$()."
     },
     {
       "type": "text",
-      "text": "how much energy the player has access to, and starts at the mere quantities, later to be increased, $(o)$(l:magic_power/infusion)should the witch attune themself with a dimension$(). Recharge rate and capacity might also be increased through the use of certain baubles and trinkets. $(br) $(br)This first source of ME, limited though as it might be, certainly proves itself useful to those wishing to delve into the art of witchcraft, powering the devices, rituals and "
-    },
-    {
-      "type": "text",
-      "text": "an aspiring witch would cast on the go, recharging itself over time at a slow pace, and powering devices and incantations on the vicinities of the witch. $(br) $(br)However, more experienced witches might find their own power somewhat limiting when trying to cast more powerful magics. To that end, witches might draw energy from the environment using an altar, which will allow them to vastly increase the amount of power "
-    },
-    {
-      "type": "text",
-      "text": "they might use, as well as to reduce the hindrance of the witch needing to be near the different magics it casts. $(br) $(br)Refer to the $(o)$(l:tools/altar)altar$() section for more in depth explanation of the altar mechanics. "
+      "text": "If a witch wants to use their full potential, this witch will have to increase these three values by various means: baubles or $(l:magic_power/infusion)marks$(), as example."
     }
   ]
 }
