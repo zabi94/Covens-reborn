@@ -1,0 +1,31 @@
+{
+  "name": "Elderwood Tree",
+  "icon": "covens:sapling:0",
+  "category": "herbology",
+  "sortnum": -3,
+  "pages": [
+    {
+    	"type": "text",
+    	"text": "Elder trees, whose leaves are wide and spread, guard the world and have been taled to be the wisest of the trees, since, generation by generation, witches shared secrets under their shade."
+    },
+    {
+    	"type": "multiblock",
+    	"multiblock": {
+	        "mapping": {
+    			"L": "covens:leaves_elder",
+    			"W": "covens:log_elder",
+    			"0": "covens:log_elder"
+    		},
+	        "pattern": [
+	        	["     ", " LLL ", " LLL ", " LLL ", "     "],
+				["LLLL ", "LLLLL", "LLWLL", "LLLLL", " LLL "],
+				[" LLL ", "LLLLL", "LLWLL", "LLLLL", " LLL "],
+				["     ", "     ", "  W  ", "     ", "     "],
+				["     ", "     ", "  0  ", "     ", "     "]
+	        ], "symmetrical": true
+      	}, 
+      	"name": "The Elderwood Tree",
+    	"enable_visualize": false
+    }
+  ]
+}

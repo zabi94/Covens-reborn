@@ -16,10 +16,8 @@ public final class ModIncantations {
 	}
 
 	public static void init() {
-		registerIncantation("medico", new IncantationHeal());
 		registerIncantation("lux", new IncantationCandlelight());
 		registerIncantation("tenebrae", new IncantationSnuff());
-		registerIncantation("aqua", new IncantationFisheye());
 		registerIncantation("ignis", new IncantationWitchFire());
 	}
 

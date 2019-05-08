@@ -1,0 +1,34 @@
+{
+  "name": "Yew Tree",
+  "icon": "covens:sapling:2",
+  "category": "herbology",
+  "sortnum": -3,
+  "pages": [
+    {
+    	"type": "text",
+    	"text": "Yew, being the broadest and healthiest of all magical trees, gives its warm and kind appreciation to the ecosystem that surrounds it, filling it with life force."
+    },
+    {
+    	"type": "multiblock",
+    	"multiblock": {
+	        "mapping": {
+    			"L": "covens:leaves_yew",
+    			"W": "covens:log_yew",
+    			"0": "covens:log_yew"
+    		},
+	        "pattern": [
+	          		["      ", "      ", "  LL  ", "  LL  ", "      ", "      "],
+	          		["      ", " LLLL ", " LLLL ", " LLLL ", " LLLL ", "      "],
+	          		[" LLLL ", "LLLLLL", "LLWWLL", "LLLWLL", "LLLLLL", " LLLL "],
+	          		[" LLLL ", "LLLLLL", "LLWWLL", "LLWWLL", "LLLLLL", " LLLL "],
+	          		[" LLLL ", "LLLLLL", "LLWWLL", "LLWWLL", "LLLLLL", " LLLL "],
+	          		[" LLLL ", "LLLLLL", "LLWWLL", "LLWWLL", "LLLLLL", " LLLL "],
+	          		["      ", "      ", "  WW  ", "  WW  ", "      ", "      "],
+	          		["      ", "      ", "  W0  ", "  WW  ", "      ", "      "]
+	        ], "symmetrical": true
+      	}, 
+      	"name": "The Yew Tree",
+    	"enable_visualize": false
+    }
+  ]
+}
