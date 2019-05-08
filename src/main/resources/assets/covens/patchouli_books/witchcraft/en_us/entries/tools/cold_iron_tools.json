@@ -1,0 +1,26 @@
+{
+  "name": "Cold Iron Tools",
+  "icon": "covens:cold_iron_sword",
+  "category": "tools",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Similar to $(l:tools/silver_tools)silver tools$(), these tools immensely increase damage against certain beings; however, unlike with silver, these beings are not the common undead or werewolves, but spirits and demonic entities."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:cold_iron_sword",
+      "recipe2": "covens:cold_iron_pickaxe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:cold_iron_axe",
+      "recipe2": "covens:cold_iron_spade"
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:cold_iron_hoe",
+      "text": "Creating the cold iron tools"
+    }
+  ]
+}

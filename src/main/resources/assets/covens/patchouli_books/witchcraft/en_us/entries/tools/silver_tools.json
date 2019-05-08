@@ -1,0 +1,26 @@
+{
+  "name": "Silver Tools",
+  "icon": "covens:silver_sword",
+  "category": "tools",
+  "pages": [
+    {
+      "type": "text",
+      "text": "These tools forged from a holy metal will smite the flesh of the undead like the hottest flames! However, this will also greatly affect the durability of the tools, so they should be used with care."
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:silver_sword",
+      "recipe2": "covens:silver_pickaxe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:silver_axe",
+      "recipe2": "covens:silver_spade"
+    },
+    {
+      "type": "crafting",
+      "recipe": "covens:silver_hoe",
+      "text": "Creating the silver tools"
+    }
+  ]
+}
