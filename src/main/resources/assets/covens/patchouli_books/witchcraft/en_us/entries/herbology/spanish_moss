@@ -6,7 +6,7 @@
     {
       "type": "spotlight",
       "item": "covens:spanish_moss",
-      "text": "$(thing)Spanish moss$() is a plant artificially created in a cauldron (with a whiff of literal $(thing)witchcraft$()). It can be planted on almost any solid surface, and will spread viciously."
+      "text": "$(thing)Spanish moss$() is a plant artificially created in a $(l:tools/cauldron)cauldron$() (with a whiff of literal $(thing)witchcraft$()). It can be planted on almost any solid surface, and will spread viciously."
     },
     {
       "type": "text",
