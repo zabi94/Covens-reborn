@@ -1,0 +1,13 @@
+{
+  "name": "Moonbell Flower",
+  "icon": "covens:moonbell",
+  "category": "herbology",
+  "sortnum": -2,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "covens:moonbell",
+      "text": "Like snowdrops that indicate the beginning of winter, $(thing)moonbell flowers$() indicate the rise of the full moon.$(br)These magic flowers can be found in dense forests during a full moon; however, they will quickly vanish when dawn breaks.$(br)When placed by a player, this will not be the case."
+    }
+  ]
+}

@@ -9,11 +9,11 @@
     },
     {
       "type": "text",
-      "text": "energy from, as well as specific items to redirect the magical energy into the desired effect. $(br) $(br)Therefore, the process of casting such rituals is rather easy; firstly, draw the required circle on the ground, then drop the required reagents and finally activate the final glyph to initiate the ritual. $(br) $(br)It should be noted, however, that rituals might also have specific requirements"
+      "text": "energy from, as well as specific items to redirect the magical energy into the desired effect. $(br) $(br)Therefore, the process of casting such rituals is rather easy; firstly, draw the required circle on the ground, then drop the required reagents and finally activate the final glyph to initiate the ritual. $(br) $(br)It should be noted, however, that rituals might also have"
     },
     {
       "type": "text",
-      "text": "particular to that ritual, such as being casted during a full moon, with the presence of a fellow coven witch, specified on the ritual's entry. "
+      "text": "specific requirements particular to that ritual, such as being casted during a full moon, with the presence of a fellow coven witch, specified on the ritual's entry. "
     },
     {
       "type": "multiblock",
@@ -22,7 +22,7 @@
     },
     {
       "type": "multiblock",
-      "name": "The middle circle",
+      "name": "The medium circle",
       "multiblock_id": "covens:circle_medium"
     },
     {

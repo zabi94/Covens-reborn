@@ -1,0 +1,17 @@
+{
+  "name": "Ember Grass",
+  "icon": "covens:ember_grass",
+  "category": "herbology",
+  "sortnum": -2,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "covens:ember_grass",
+      "text": "Who could have thought that combining \"mundane\" plants with the burning rage of fire yields such a nice weed!$(br)Apparently someone did, and this is the result burns anyone touching it."
+    },
+    {
+      "type": "text",
+      "text": "<insert recipe here>$(br)Creating Ember Grass$(br2)$(o)Your recipe could be here!"
+    }
+  ]
+}
