@@ -6,15 +6,15 @@
   "pages": [
     {
       "type": "text",
-      "text": "Magical Energy, or short, $(thing)MP$(), as a concept is commonly compared to the fuel of the potentially shaping fire of magic; while they are not exactly the same, this comparison makes explaining it a lot easier.$(br)As example, a witch trying to perform a ritual is comparable to the wood heating the flame. The amount of wood is comparable to the $(thing)current MP$() of the witch: the amount of"
+      "text": "Magical Energy, or short, $(thing)MP$(), as a concept is commonly compared to the fuel of the potentially shaping fire of magic; while they are not exactly the same, this comparison makes explaining it a lot easier.$(br)As an example, a witch trying to perform a ritual is comparable to the wood heating the flame. The amount of wood is comparable to the $(thing)current"
     },
     {
       "type": "text",
-      "text": "\"fuel\" that can be used for anything related. $(br)Next, one should imagine that the place for the fuel is limited in its space. This space is the $(thing)MP maximum$(); if this maximum is reached, no MP can be added. Every time MP is used, an MP-Bar, $(t:Usually in the left part of the screen)which can be seen by a witch$(), will appear. It shows the amount of MP in relation to this maximum.$(br)MP is also generated at a certain rate, the $(thing)MP regeneration rate$()."
+      "text": "$(thing)MP$() of the witch: the amount of \"fuel\" that can be used for anything related.$(2br)Next, one should imagine that the place for the fuel is limited in its space. This space is the $(thing)MP maximum$(); if this maximum is reached, no MP can be added. Every time MP is used, an MP-Bar, $(t:Usually in the left part of the screen)which can be seen by a witch$(), will appear. It shows the amount of MP $(l)in relation to this maximum$().$(2br)MP is also generated at a"
     },
     {
       "type": "text",
-      "text": "If a witch wants to use their full potential, this witch will have to increase these three values by various means: baubles or $(l:magic_power/infusion)marks$(), as example."
+      "text": "certain rate, the $(thing)MP regeneration rate$().$(2br)If a witch wants to use their full potential, this witch will have to increase these three values by various means: baubles or $(l:magic_power/infusion)marks$(), as example."
     }
   ]
 }
