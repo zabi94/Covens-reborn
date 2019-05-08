@@ -55,7 +55,6 @@ public interface MPContainer {
 	 */
 	public void setMaxAmount(int amount);
 
-	@SuppressWarnings("serial")
 	public static class MPManipulationException extends RuntimeException {
 
 		public MPManipulationException(String string) {
