@@ -2,6 +2,7 @@
   "name": "Spanish Moss",
   "icon": "covens:spanish_moss",
   "category": "herbology",
+  "sortnum": -2,
   "pages": [
     {
       "type": "spotlight",

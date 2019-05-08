@@ -2,7 +2,7 @@
   "name": "Elderwood Tree",
   "icon": "covens:sapling:0",
   "category": "herbology",
-  "sortnum": -4,
+  "sortnum": -3,
   "pages": [
     {
     	"type": "text",

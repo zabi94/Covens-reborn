@@ -2,6 +2,7 @@
   "name": "Torchwood",
   "icon": "covens:torchwood",
   "category": "herbology",
+  "sortnum": -2,
   "pages": [
     {
       "type": "spotlight",

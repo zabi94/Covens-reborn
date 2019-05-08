@@ -2,6 +2,7 @@
   "name": "Ember Grass",
   "icon": "covens:ember_grass",
   "category": "herbology",
+  "sortnum": -2,
   "pages": [
     {
       "type": "spotlight",

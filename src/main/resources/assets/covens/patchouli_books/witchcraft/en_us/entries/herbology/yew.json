@@ -2,7 +2,7 @@
   "name": "Yew Tree",
   "icon": "covens:sapling:2",
   "category": "herbology",
-  "sortnum": -2,
+  "sortnum": -3,
   "pages": [
     {
     	"type": "text",

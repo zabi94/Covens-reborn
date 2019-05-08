@@ -2,6 +2,7 @@
   "name": "Moonbell Flower",
   "icon": "covens:moonbell",
   "category": "herbology",
+  "sortnum": -2,
   "pages": [
     {
       "type": "spotlight",
