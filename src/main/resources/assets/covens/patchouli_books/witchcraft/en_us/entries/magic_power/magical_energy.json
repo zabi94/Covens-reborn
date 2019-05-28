@@ -14,7 +14,7 @@
     },
     {
       "type": "text",
-      "text": "certain rate, the $(thing)MP regeneration rate$().$(2br)If a witch wants to use their full potential, this witch will have to increase these three values by various means: baubles or $(l:magic_power/infusion)marks$(), as example."
+      "text": "certain rate, the $(thing)MP regeneration rate$().$(2br)If a witch wants to use their full potential, this witch will have to increase these three values by various means: brews, trinkets, eating certain herbs, familiars or $(l:magic_power/infusion)marks$(), for example."
     }
   ]
 }
