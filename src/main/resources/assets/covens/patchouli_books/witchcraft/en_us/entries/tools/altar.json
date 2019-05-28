@@ -2,10 +2,11 @@
   "name": "Altar",
   "icon": "covens:witch_altar",
   "category": "tools",
+  "sortnum": -2,
   "pages": [
     {
       "type": "text",
-      "text": "Writers, this is a TODO for you."
+      "text": "The altar is the most iconic piece of the instruments to manuipulate the $(l:magic_power/magical_energy)energy$() surrounding us.$(2br)It consists of a base of sacred stone covered in a cloth, and $(thing)$(t:Searching for '#altar' in JEI will list all of them)some items$() placed on top according to the necessities of its owner.$(2br)An altar will be the receptacle in which the magical power"
     },
     {
       "type": "multiblock",
@@ -23,7 +24,11 @@
           ]
         ]
       },
-      "text": "The blocks around the altar must $(i)not$() be other altar blocks"
+      "text": "$(5)The blocks around the altar must $(i)not$()$(5) be other altar blocks"
+    },
+    {
+      "type": "text",
+      "text": "accumulates over time, by absorbing the natural energies irradiated by the nearby natural apparatus.$(2br)The maximum capacity of an altar depends on how many different plants, flowers, crops and trees surround it, whereas the speed only depends on the symbols used to decorate it. The amount of power can also be increased and decreased by these objects.$(2br)Magical rites and tools can"
     },
     {
       "type": "multiblock",
@@ -42,7 +47,15 @@
         ]
       },
       "enable_visualize": false,
-      "text": "Any carpet can be used on the altar to form the final structure"
+      "text": "$(5)Any carpet can be used on the altar to form the final structure"
+    },
+    {
+      "type": "text",
+      "text": "tap into this reservoir to take the stored magical power as fuel.$(2br)Do note that the altar needs to be $(thing)$(t:16 blocks, typically)somewhat close$() to the point where the magic is cast, and that the radius where nature provides power and the radius where you can use it are not the same.$(2br)Another important note is that, when looking for a nice place to place your altar, the variety of plants is often more"
+    },
+    {
+      "type": "text",
+      "text": "significant than the amount of plants.$(l) It's better to have 3 different plants than 10 of the same kind!$()$(2br)And finally, altars are not mechanical machines, and they are not technological prodigies. They take time in what they do, as the magic naturally flows through them. This means that it might take a few moments for them to react to the change of nature around them, don't hurry!"
     }
   ]
 }
