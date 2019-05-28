@@ -1,0 +1,40 @@
+{
+  "name": "Brooms",
+  "icon": "covens:broom:0",
+  "category": "tools",
+  "pages": [
+    {
+  	  "type": "text",
+  	  "text": "The most characteristic tool of a witch, and their main means of transportation: the Broom.<br>For ages witches have ridden these apparently simple housecleaning props to fly under the moon and reaching remote forests to perform  forgotten rites. But, as with most magic, the way to obtain something powerful starts in the realm of the ordinary: a simple, non flying broom."
+    },
+   	{
+      "type": "crafting",
+      "recipe": "covens:broom",
+      "text": "This ordinary broom serves its own purpose: cleaning. It will clean that pesky chalk that is so difficult to erease from the ground in one single swipe, but you can clean $(thing)$(t:WIP)more than that.$()<br>Starting from this simple tool,"
+    },
+    {
+      "type": "text",
+      "text": "a witch can perform some rites to infuse the essence of a different magical trees, to grant the broom traits unique to that wood, that will manifest by focusing a small amount of magical power into the wood when riding it."
+    },
+    {
+      "type": "spotlight",
+      "item": "covens:broom:1",
+      "text": "The Elder Broom is the broom to go to when you are in a hurry and far away from your destination. It's fast, but it's hard to control and has a slight downward drift at all times."
+    },
+    {
+      "type": "spotlight",
+      "item": "covens:broom:2",
+      "text": "The Juniper Broom is a builder's best friend. It's precise, very easy to drive, but is the slowest of all brooms. Trying to go backwards will result in the broom braking instead."
+    },
+    {
+      "type": "spotlight",
+      "item": "covens:broom:3",
+      "text": "The Yew Broom is not very fast and its controls are very unconventional, as it will either go forward when left untouched or drift without brakes when trying to go backwards, only stopped by the air resistance. What makes it special is what happens once you dismount: the riders will find themselves back to where they started!"
+    },
+    {
+      "type": "spotlight",
+      "item": "covens:broom:4",
+      "text": "The Cypress Broom drives akin to the Yew Broom, but has a different effect: instead of bringing the rider back, it will fly using it's own magic, without consuming the power of the witch that rides it."
+    }
+  ]
+}

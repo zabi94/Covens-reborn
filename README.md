@@ -13,7 +13,7 @@ If you decide to try it out, regardless of this warning, please make a backup of
 
 
 [![Zabi's Patreon](https://img.shields.io/badge/Patreon-Become%20a%20Patron%20%28Zabi%29-orange.svg?logo=Patreon&longCache=true&style=for-the-badge)](https://www.patreon.com/Zabi94)  
-[![Zabi's Paypal](https://img.shields.io/badge/Paypal-Donate%20%28Zabi%29-blue.svg?logo=paypal&longCache=true&style=for-the-badge)](https://paypal.me/zabi94)  
+[![Zabi's Paypal](https://img.shields.io/badge/Paypal-Donate%20%28Zabi%29-blue.svg?logo=paypal&longCache=true&style=for-the-badge)](https://paypal.me/SimoneZanin)  
 [![Ingo's Patreon](https://img.shields.io/badge/Patreon-Become%20a%20Patron%20%28Ingoleth%29-orange.svg?logo=Patreon&longCache=true&style=for-the-badge)](https://www.patreon.com/Ingoleth)  
 ## License
 Everything up to commit fd60b9d6ba58b969d6f8b8d0b5ea8368a8fb7a56 is distributed under MIT License.  
