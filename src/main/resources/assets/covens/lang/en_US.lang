@@ -6,12 +6,7 @@ itemGroup.covens_brews=covens - Brews
 
 //Config
 covens.config.world_gen=World Gen
-covens.config.energy_hud=Energy HUD
-covens.config.blood_hud=Blood Viewer HUD
-covens.config.moon_hud=Moon Warning HUD
-covens.config.current_action_hud=Selected Ability HUD
 covens.config.client=Client Settings
-covens.config.familiar_hud=Familar HUD
 
 //Actions
 covens.night_vision_vampire=Night Vision

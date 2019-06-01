@@ -1,5 +1,7 @@
 package com.covens.client.core.hud;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import com.covens.api.CovensAPI;
@@ -9,28 +11,29 @@ import com.covens.api.mp.MPUsingItem;
 import com.covens.client.ResourceLocations;
 import com.covens.common.core.statics.ModConfig;
 import com.covens.common.lib.LibMod;
+import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Config.Type;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import zabi.minecraft.minerva.client.hud.HudComponent;
 import zabi.minecraft.minerva.client.hud.HudController;
+import zabi.minecraft.minerva.client.hud.IHudComponent;
 
 @SideOnly(Side.CLIENT)
-public class EnergyHUD extends HudComponent {
+public class EnergyHUD implements IHudComponent {
+	
+	private static final ResourceLocation ID = new ResourceLocation(LibMod.MOD_ID, "mp_hud");
 
 	private int renderTime;
 	private float visibilityLeft;
@@ -43,7 +46,7 @@ public class EnergyHUD extends HudComponent {
 									// between 2 pulsation
 
 	public EnergyHUD() {
-		super(25, 102, "covens.hud.energy.title", "covens.hud.energy.title");
+//		super(25, 102, , "covens.hud.energy.title");
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -75,7 +78,7 @@ public class EnergyHUD extends HudComponent {
 		if (energyChanged) {
 			this.shouldPulse = this.lastPulsed == 0;
 		}
-		if (energyChanged || this.isItemEnergyUsing() || !ModConfig.CLIENT.ENERGY_HUD.autoHide) {
+		if (energyChanged || this.isItemEnergyUsing() || !ModConfig.CLIENT.autoHideMPHud) {
 			this.oldEnergy = storage.getAmount();
 			this.oldMaxEnergy = storage.getMaxAmount();
 			this.oldInfusion = CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture();
@@ -117,28 +120,17 @@ public class EnergyHUD extends HudComponent {
 		}
 		return HudController.INSTANCE.isEditModeActive();
 	}
-
+	
+	
 	@Override
-	public void resetConfig() {
-		ModConfig.CLIENT.ENERGY_HUD.v_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-		ModConfig.CLIENT.ENERGY_HUD.h_anchor = EnumHudAnchor.START_ABSOULTE;
-		ModConfig.CLIENT.ENERGY_HUD.x = 10;
-		ModConfig.CLIENT.ENERGY_HUD.y = 0;
-		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
+	public boolean shouldShowTooltips() {
+		return this.renderTime > 0;
 	}
-
+	
 	@Override
-	public String getTooltip(int mouseX, int mouseY) {
-		if (this.renderTime > 0) {
-			MPContainer energy = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
-			return energy.getAmount() + "/" + energy.getMaxAmount();
-		}
-		return null;
-	}
-
-	@Override
-	public void onClick(int mouseX, int mouseY) {
-		// NO-OP
+	public List<String> getTooltip(ITooltipFlag flag) {
+		MPContainer energy = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
+		return Lists.newArrayList(energy.getAmount() + "/" + energy.getMaxAmount());
 	}
 
 	private void renderTexture(double x, double y, double width, double height, double vMin, double vMax) {
@@ -154,49 +146,28 @@ public class EnergyHUD extends HudComponent {
 		tessellator.draw();
 	}
 
-	@Override
-	public void render(ScaledResolution resolution, float partialTicks, boolean renderDummy) {
-		if (renderDummy) {
-			float fll = (System.currentTimeMillis() % 3000) / 3000f;
-			this.renderBarContent(fll);
-			this.renderFrame(DefaultInfusions.NONE.getTexture());
-			this.renderText(2000, 2000);
-		} else if (this.renderTime > 0) {
-			GlStateManager.pushMatrix();
-			GlStateManager.enableBlend();
-			GlStateManager.color(1, 1, 1, 1);
-			MPContainer energy = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
-			double fill = this.getFillLevel(energy, partialTicks);
-			this.renderBarContent(fill);
-			this.renderPulse(fill);
-			this.renderFrame(CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture());
-			this.renderText(energy.getAmount(), energy.getMaxAmount());
-			GlStateManager.popMatrix();
-		}
-	}
-
-	private void renderBarContent(double filled) {
+	private void renderBarContent(double filled, int x, int y) {
 		GlStateManager.pushMatrix();
 		GlStateManager.color(1f, 1f, 1f, this.visibilityLeft);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ResourceLocations.ENERGY_BACKGROUND_FILL);
-		this.renderTexture(this.getX() + 9, this.getY() + 14 + (74 * (1 - filled)), 7, 74 * filled, 0, filled);
+		this.renderTexture(x + 9, y + 14 + (74 * (1 - filled)), 7, 74 * filled, 0, filled);
 		GlStateManager.popMatrix();
 	}
 
-	private void renderPulse(double filled) {
+	private void renderPulse(double filled, int x, int y) {
 		float alpha = this.barPulse * this.visibilityLeft;
 		GlStateManager.pushMatrix();
 		GlStateManager.color(1, 1, 1, alpha);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ResourceLocations.ENERGY_BACKGROUND_PULSE);
-		this.renderTexture(this.getX() + 9, this.getY() + 14 + (74 * (1 - filled)), 7, 74 * filled, 0, filled);
+		this.renderTexture(x + 9, y + 14 + (74 * (1 - filled)), 7, 74 * filled, 0, filled);
 		GlStateManager.popMatrix();
 	}
 
-	private void renderFrame(ResourceLocation texture) {
+	private void renderFrame(ResourceLocation texture, int x, int y, int w, int h) {
 		GlStateManager.pushMatrix();
 		GlStateManager.color(1f, 1f, 1f, this.visibilityLeft);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
-		this.renderTexture(this.getX(), this.getY(), this.w, this.h, 0, 1);
+		this.renderTexture(x, y, w, h, 0, 1);
 		GlStateManager.popMatrix();
 	}
 
@@ -214,47 +185,37 @@ public class EnergyHUD extends HudComponent {
 		return interpEnergy / energy.getMaxAmount();
 	}
 
+
 	@Override
-	public boolean isActive() {
-		return !ModConfig.CLIENT.ENERGY_HUD.deactivate;
+	public void drawAt(int x, int y, int w, int h, RenderMode m) {
+		if (m != RenderMode.NORMAL) {
+			float fll = (System.currentTimeMillis() % 3000) / 3000f;
+			this.renderBarContent(fll, x, y);
+			this.renderFrame(DefaultInfusions.NONE.getTexture(), x, y, w, h);
+			this.renderText(2000, 2000);
+		} else if (this.renderTime > 0) {
+			GlStateManager.pushMatrix();
+			GlStateManager.enableBlend();
+			GlStateManager.color(1, 1, 1, 1);
+			MPContainer energy = Minecraft.getMinecraft().player.getCapability(MPContainer.CAPABILITY, null);
+			double fill = this.getFillLevel(energy, Minecraft.getMinecraft().getRenderPartialTicks());
+			this.renderBarContent(fill, x, y);
+			this.renderPulse(fill, x, y);
+			this.renderFrame(CovensAPI.getAPI().getPlayerInfusion(Minecraft.getMinecraft().player).getTexture(), x, y, w, h);
+			this.renderText(energy.getAmount(), energy.getMaxAmount());
+			GlStateManager.popMatrix();
+		}
+		
 	}
 
 	@Override
-	public void setHidden(boolean hidden) {
-		ModConfig.CLIENT.ENERGY_HUD.deactivate = hidden;
-		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
+	public ResourceLocation getIdentifier() {
+		return ID;
 	}
 
 	@Override
-	public double getX() {
-		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.ENERGY_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.ENERGY_HUD.x, this.getWidth(), sr.getScaledWidth());
-	}
-
-	@Override
-	public double getY() {
-		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.ENERGY_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.ENERGY_HUD.y, this.getHeight(), sr.getScaledHeight());
-	}
-
-	@Override
-	public void setRelativePosition(double x, double y, EnumHudAnchor horizontal, EnumHudAnchor vertical) {
-		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		ModConfig.CLIENT.ENERGY_HUD.v_anchor = vertical;
-		ModConfig.CLIENT.ENERGY_HUD.h_anchor = horizontal;
-		ModConfig.CLIENT.ENERGY_HUD.x = horizontal.pixelToData(x, this.getWidth(), sr.getScaledWidth());
-		ModConfig.CLIENT.ENERGY_HUD.y = vertical.pixelToData(y, this.getHeight(), sr.getScaledHeight());
-		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
-	}
-
-	@Override
-	public EnumHudAnchor getAnchorHorizontal() {
-		return ModConfig.CLIENT.ENERGY_HUD.h_anchor;
-	}
-
-	@Override
-	public EnumHudAnchor getAnchorVertical() {
-		return ModConfig.CLIENT.ENERGY_HUD.v_anchor;
+	public String getTitleTranslationKey() {
+		return "covens.hud.energy.title";
 	}
 
 }
