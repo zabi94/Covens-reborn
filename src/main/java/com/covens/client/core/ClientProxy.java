@@ -130,7 +130,7 @@ public class ClientProxy implements ISidedProxy {
 		HudController.registerNewComponent(new SelectedActionHUD(), 0, -40, 32, 32, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.CENTER_ABSOLUTE, true);
 		HudController.registerNewComponent(ExtraBarButtonsHUD.INSTANCE, 130, 2, 70, 16, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.END_ABSOLUTE, true);
 		HudController.registerNewComponent(new VampireBloodBarHUD(), 49, 23, 80, 8, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.END_ABSOLUTE, true);
-		HudController.registerNewComponent(new FamiliarHUD(), 10, 10, 64, 32, EnumHudAnchor.END_ABSOLUTE, EnumHudAnchor.END_ABSOLUTE, true);
+		HudController.registerNewComponent(new FamiliarHUD(), 0, 5, 64, 32, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.START_ABSOULTE, true);
 		MinecraftForge.EVENT_BUS.register(new GirdleOfTheWoodedHUD());
 		MinecraftForge.EVENT_BUS.register(new TransformationsEventHandler());
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());
