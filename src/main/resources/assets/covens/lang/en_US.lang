@@ -751,7 +751,7 @@ vampire.bed_blocked=This doesn't feel comfortable anymore
 vampire.not_enough_xp=You need %d experience levels
 
 //Keys
-key.categories.covens=covens
+key.categories.covens=Covens
 key.description.jump_to_bar=Jump to extra bar
 key.description.enable_bar=Toggle extra bar reachability
 key.description.place_item=Place Item
