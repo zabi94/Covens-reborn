@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +29,7 @@ public class FamiliarHUD implements IHudComponent {
 
 	@Override
 	public List<String> getTooltip(ITooltipFlag flag) {
-		return Lists.newArrayList("covens.hud.open_familiar_gui");
+		return Lists.newArrayList(I18n.format("covens.hud.open_familiar_gui"));
 	}
 
 	@Override
