@@ -784,6 +784,18 @@ moon.tooltip.1=Your heart is beating faster, your thoughts are slipping out of c
 moon.tooltip.2=No matter how hard you try, you cannot switch back
 
 covens.hud.open_familiar_gui=Familiars
+covens.familiar_order.stay=Stay
+covens.familiar_order.select=Select
+covens.familiar_order.deselect=Deselect
+covens.familiar_order.follow_target=Follow That
+covens.familiar_order.follow_me=Follow Me
+covens.familiar_order.guard=Guard Area
+covens.familiar_order.goto=Go There
+covens.familiar_order.attack=Attack
+covens.familiar_order.open_gui=Familiars
+covens.familiar_order.free=Dismiss
+covens.familiar_order.no_command=?
+covens.familiar_order.go_home=Go Home
 
 //Mobs
 entity.owl.name=Owl

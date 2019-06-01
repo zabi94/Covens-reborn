@@ -2,6 +2,7 @@ package com.covens.client.core.hud;
 
 import java.util.List;
 
+import com.covens.common.content.actionbar.ModAbilities;
 import com.covens.common.core.capability.familiar.CapabilityFamiliarOwner;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Lists;
@@ -40,8 +41,10 @@ public class FamiliarHUD implements IHudComponent {
 		}
 		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 		fr.drawString(name, (float) (x + ((w - fr.getStringWidth(name)) / 2)), (float) y, 0xFFFFFF, true);
+		String abname = ModAbilities.COMMAND_FAMILIAR.lastCommand == null ? I18n.format("familiar.command.none") : I18n.format("covens.familiar_order."+ModAbilities.COMMAND_FAMILIAR.lastCommand.name().toLowerCase());
+		fr.drawString(abname, (float) (x + ((w - fr.getStringWidth(abname)) / 2)), y + fr.FONT_HEIGHT + 2, 0xFFFFFF, true);
 		Minecraft.getMinecraft().renderEngine.bindTexture(ICON);
-		GuiScreen.drawScaledCustomSizeModalRect(x + 24, y + 16, 0, 0, w, h, 16, 16, w, h);
+		GuiScreen.drawScaledCustomSizeModalRect(x + 24, y + 19, 0, 0, w, h, 16, 16, w, h);
 	}
 
 	@Override
