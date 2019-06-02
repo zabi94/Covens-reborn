@@ -17,7 +17,6 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import zabi.minecraft.minerva.client.hud.HudComponent.EnumHudAnchor;
 
 
 @Config(modid = LibMod.MOD_ID)
@@ -115,34 +114,7 @@ public final class ModConfig {
 	}
 
 	public static class ClientConfig {
-		@Comment("Customize the Energy HUD positions in the screen")
-		@Config.LangKey("covens.config.energy_hud")
-		public EnergyHUD ENERGY_HUD = new EnergyHUD();
-
-		@Comment("Customize the Blood Drain HUD positions in the screen")
-		@Config.LangKey("covens.config.blood_hud")
-		public BloodIndicatorHUD BLOOD_HUD = new BloodIndicatorHUD();
-
-		@Comment("Customize the Moon HUD positions in the screen")
-		@Config.LangKey("covens.config.moon_hud")
-		public MoonHUD MOON_HUD = new MoonHUD();
-
-		@Comment("Customize the currently selected bar action HUD positions in the screen")
-		@Config.LangKey("covens.config.current_action_hud")
-		public CurrentActionHUD CURRENTACTION_HUD = new CurrentActionHUD();
-
-		@Comment("Customize the action bar HUD positions in the screen")
-		@Config.LangKey("covens.config.action_bar")
-		public AbilityBarHUD ACTION_BAR_HUD = new AbilityBarHUD();
-
-		@Comment("Customize the vampire blood meter HUD positions in the screen")
-		@Config.LangKey("covens.config.vampire_blood_meter")
-		public VampireBloodHUD VAMPIRE_METER_HUD = new VampireBloodHUD();
 		
-		@Comment("Customize the familiar HUD positions in the screen")
-		@Config.LangKey("covens.config.familiar_hud")
-		public FamiliarHUD FAMILIAR_HUD = new FamiliarHUD();
-
 		@Comment("The amount of visual imprecision to give to chalk runes. Use 0 to have them perfectly aligned to the block")
 		@Config.RangeDouble(min = 0d, max = 1d)
 		public double glyphImprecision = 0.3d;
@@ -152,114 +124,19 @@ public final class ModConfig {
 		
 		@Comment("Set this to false to disable the \"When on altar:\" tooltips")
 		public boolean showAltarModifiersTooltips = true;
-
-		public static class EnergyHUD {
-			@Comment("Should the energy HUD be automatically hidden?")
-			public boolean autoHide = true;
-
-			@Comment("Should the energy HUD be completely removed?")
-			public boolean deactivate = false;
-
-			@Comment("Horizontal position of the HUD in the screen")
-			public double x = 10;
-			@Comment("Vertical position of the HUD in the screen")
-			public double y = 10;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor h_anchor = EnumHudAnchor.START_ABSOULTE;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor v_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-		}
-
-		public static class BloodIndicatorHUD {
-			@Comment("Should the blood indicator be completely removed?")
-			public boolean deactivate = false;
-
-			@Comment("Horizontal position of the HUD in the screen")
-			public double x = 10;
-			@Comment("Vertical position of the HUD in the screen")
-			public double y = 10;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor h_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor v_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-		}
-
-		public static class MoonHUD {
-			@Comment("Should the moon indicator be completely removed?")
-			public boolean deactivate = false;
-
-			@Comment("Horizontal position of the HUD in the screen")
-			public double x = 10;
-			@Comment("Vertical position of the HUD in the screen")
-			public double y = 10;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor h_anchor = EnumHudAnchor.START_ABSOULTE;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor v_anchor = EnumHudAnchor.START_ABSOULTE;
-		}
-
-		public static class VampireBloodHUD {
-			@Comment("Should the vampire blood meter be completely removed?")
-			public boolean deactivate = false;
-
-			@Comment("Horizontal position of the HUD in the screen")
-			public double x = 9;
-			@Comment("Vertical position of the HUD in the screen")
-			public double y = 39;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor h_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor v_anchor = EnumHudAnchor.END_ABSOLUTE;
-		}
-
-		public static class AbilityBarHUD {
-			@Comment("Should the ability bar be completely removed?")
-			public boolean deactivate = false;
-
-			@Comment("Horizontal position of the HUD in the screen")
-			public double x = 130;
-			@Comment("Vertical position of the HUD in the screen")
-			public double y = 2;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor h_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor v_anchor = EnumHudAnchor.END_ABSOLUTE;
-			@Comment("Setting this to false will cause the hand to show anyway when an ability is selected")
-			public boolean hideHandWithAbility = true;
-			@Comment("Should the arrows to the extra bar buttons be shown?")
-			public boolean showArrowsInBar = true;
-			@Comment("When true, scrolling right while having the last itembar slot selected will take you to the action bar")
-			public boolean autoJumpToBar = false;
-		}
-
-		public static class CurrentActionHUD {
-			@Comment("Should the indicator be completely removed?")
-			public boolean deactivate = false;
-
-			@Comment("Horizontal position of the HUD in the screen")
-			public double x = 0;
-			@Comment("Vertical position of the HUD in the screen")
-			public double y = 0.25;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor h_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor v_anchor = EnumHudAnchor.START_RELATIVE;
-			@Comment("Defines how big the icon is")
-			public double scale = 1;
-		}
 		
-		public static class FamiliarHUD {
-			@Comment("Should the familiar hud be completely removed?")
-			public boolean deactivate = false;
+		@Comment("Set this to false to keep the MP HUD on screen instead of fading out when not used")
+		public boolean autoHideMPHud = true;
 
-			@Comment("Horizontal position of the HUD in the screen")
-			public double x = 10;
-			@Comment("Vertical position of the HUD in the screen")
-			public double y = 10;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor h_anchor = EnumHudAnchor.END_ABSOLUTE;
-			@Comment("Defines how to calculate the x offset")
-			public EnumHudAnchor v_anchor = EnumHudAnchor.END_ABSOLUTE;
-		}
+		@Comment("When this is true, the player hands in first person will be hidden when an ability is selected")
+		public boolean hideHandWithAbility = true;
+
+		@Comment("Set this to true to extend the item hotbar and scroll automatically to the actions instead of looping back to the first item")
+		public boolean autoJumpToBar = false;
+
+		@Comment("When this is true, an arrow symbol will appear, and it will highlight when scrolling will automatically go to the action menu")
+		public boolean showArrowsInBar = true;
+
+		
 	}
 }

@@ -17,9 +17,10 @@ import com.covens.common.core.statics.ModConfig;
 import com.covens.common.lib.LibMod;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
@@ -36,12 +37,13 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import zabi.minecraft.minerva.client.hud.HudComponent;
+import zabi.minecraft.minerva.client.hud.IHudComponent;
 
 @SideOnly(Side.CLIENT)
-public class ExtraBarButtonsHUD extends HudComponent {
+public class ExtraBarButtonsHUD implements IHudComponent {
 
 	public static final ResourceLocation TEXTURE = new ResourceLocation(LibMod.MOD_ID, "textures/gui/ability_selector.png");
+	private static final ResourceLocation ID = new ResourceLocation(LibMod.MOD_ID, "abilitybar");
 	public static final ExtraBarButtonsHUD INSTANCE = new ExtraBarButtonsHUD();
 	private static final IHotbarAction arrows = new IHotbarAction() {
 
@@ -73,7 +75,7 @@ public class ExtraBarButtonsHUD extends HudComponent {
 	private boolean isInExtraBar = false;
 
 	private ExtraBarButtonsHUD() {
-		super(70, 16, "covens.hud.actionbar.title", "covens.hud.actionbar.description");
+//		super(70, 16, , "covens.hud.actionbar.description");
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -109,7 +111,7 @@ public class ExtraBarButtonsHUD extends HudComponent {
 
 	@SubscribeEvent
 	public void handRender(RenderHandEvent evt) {
-		if (this.isInExtraBar && ModConfig.CLIENT.ACTION_BAR_HUD.hideHandWithAbility) {
+		if (this.isInExtraBar && ModConfig.CLIENT.hideHandWithAbility) {
 			evt.setCanceled(true);
 		}
 	}
@@ -124,7 +126,7 @@ public class ExtraBarButtonsHUD extends HudComponent {
 	@SubscribeEvent
 	public void scrollWheelHijacker(MouseEvent evt) {
 		int dir = evt.getDwheel() == 0 ? 0 : evt.getDwheel() > 0 ? -1 : 1;
-		if ((dir == 0) || (!Minecraft.getMinecraft().player.isSneaking() && !ModConfig.CLIENT.ACTION_BAR_HUD.autoJumpToBar && !this.isInExtraBar)) {
+		if ((dir == 0) || (!Minecraft.getMinecraft().player.isSneaking() && !ModConfig.CLIENT.autoJumpToBar && !this.isInExtraBar)) {
 			return;
 		}
 		int curItm = Minecraft.getMinecraft().player.inventory.currentItem;
@@ -211,7 +213,7 @@ public class ExtraBarButtonsHUD extends HudComponent {
 			}
 		}
 		if (Keybinds.alwaysEnableBar.isPressed()) {
-			ModConfig.CLIENT.ACTION_BAR_HUD.autoJumpToBar = !ModConfig.CLIENT.ACTION_BAR_HUD.autoJumpToBar;
+			ModConfig.CLIENT.autoJumpToBar = !ModConfig.CLIENT.autoJumpToBar;
 			ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_1) || Keyboard.isKeyDown(Keyboard.KEY_2) || Keyboard.isKeyDown(Keyboard.KEY_3) || Keyboard.isKeyDown(Keyboard.KEY_4) || Keyboard.isKeyDown(Keyboard.KEY_5) || Keyboard.isKeyDown(Keyboard.KEY_6) || Keyboard.isKeyDown(Keyboard.KEY_7) || Keyboard.isKeyDown(Keyboard.KEY_8) || Keyboard.isKeyDown(Keyboard.KEY_9)) {
@@ -238,96 +240,34 @@ public class ExtraBarButtonsHUD extends HudComponent {
 	}
 
 	@Override
-	public boolean isActive() {
-		return !ModConfig.CLIENT.ACTION_BAR_HUD.deactivate;
-	}
-
-	@Override
-	public void setHidden(boolean hidden) {
-		ModConfig.CLIENT.ACTION_BAR_HUD.deactivate = hidden;
-		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
-	}
-
-	@Override
-	public double getX() {
-		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.ACTION_BAR_HUD.h_anchor.dataToPixel(ModConfig.CLIENT.ACTION_BAR_HUD.x, this.getWidth(), sr.getScaledWidth());
-	}
-
-	@Override
-	public double getY() {
-		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		return ModConfig.CLIENT.ACTION_BAR_HUD.v_anchor.dataToPixel(ModConfig.CLIENT.ACTION_BAR_HUD.y, this.getHeight(), sr.getScaledHeight());
-	}
-
-	@Override
-	public void setRelativePosition(double x, double y, EnumHudAnchor horizontal, EnumHudAnchor vertical) {
-		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-		ModConfig.CLIENT.ACTION_BAR_HUD.v_anchor = vertical;
-		ModConfig.CLIENT.ACTION_BAR_HUD.h_anchor = horizontal;
-		ModConfig.CLIENT.ACTION_BAR_HUD.x = horizontal.pixelToData(x, this.getWidth(), sr.getScaledWidth());
-		ModConfig.CLIENT.ACTION_BAR_HUD.y = vertical.pixelToData(y, this.getHeight(), sr.getScaledHeight());
-		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
-	}
-
-	@Override
-	public void resetConfig() {
-		ModConfig.CLIENT.ACTION_BAR_HUD.v_anchor = EnumHudAnchor.END_ABSOLUTE;
-		ModConfig.CLIENT.ACTION_BAR_HUD.h_anchor = EnumHudAnchor.CENTER_ABSOLUTE;
-		ModConfig.CLIENT.ACTION_BAR_HUD.x = 130;
-		ModConfig.CLIENT.ACTION_BAR_HUD.y = 2;
-		ModConfig.CLIENT.ACTION_BAR_HUD.deactivate = false;
-		ConfigManager.sync(LibMod.MOD_ID, Type.INSTANCE);
-	}
-
-	@Override
-	public EnumHudAnchor getAnchorHorizontal() {
-		return ModConfig.CLIENT.ACTION_BAR_HUD.h_anchor;
-	}
-
-	@Override
-	public EnumHudAnchor getAnchorVertical() {
-		return ModConfig.CLIENT.ACTION_BAR_HUD.v_anchor;
-	}
-
-	@Override
-	public String getTooltip(int mouseX, int mouseY) {
-		return null;
-	}
-
-	@Override
-	public void onClick(int mouseX, int mouseY) {
-		// NO-OP
-	}
-
-	@Override
-	public void render(ScaledResolution sr, float partialTicks, boolean renderDummy) {
-		if (renderDummy) {
-			arrows.render(this.getX(), this.getY(), 16, 16, 1f);
-			ModAbilities.DRAIN_BLOOD.render(this.getX() + 18, this.getY(), 16, 16, 0.4f);
-			ModAbilities.BAT_SWARM.render(this.getX() + 36, this.getY(), 16, 16, 1f);
-			ModAbilities.HOWL.render(this.getX() + 54, this.getY(), 16, 16, 0.4f);
-			this.renderSelectionBox(this.getX() + 35, this.getY() - 1);
+	public void drawAt(int x, int y, int w, int h, RenderMode m) {
+		if (m != RenderMode.NORMAL) {
+			arrows.render(x, y, 16, 16, 1f);
+			ModAbilities.DRAIN_BLOOD.render(x + 18, y, 16, 16, 0.4f);
+			ModAbilities.BAT_SWARM.render(x + 36, y, 16, 16, 1f);
+			ModAbilities.HOWL.render(x + 54, y, 16, 16, 0.4f);
+			this.renderSelectionBox(x + 35, y - 1);
 		} else {
-			this.renderReal();
+			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+			this.renderReal(x, y);
 		}
 	}
 
-	private void renderReal() {
+	private void renderReal(int x, int y) {
 		if (this.actionScroller[0] != null) {
-			this.actionScroller[0].render(this.getX() + 36, this.getY(), 16, 16, this.slotSelected < 0 ? 0.4f : 1f);
+			this.actionScroller[0].render(x + 36, y, 16, 16, this.slotSelected < 0 ? 0.4f : 1f);
 			if (this.isInExtraBar) {
-				this.renderSelectionBox(this.getX() + 35, this.getY() - 1);
+				this.renderSelectionBox(x + 35, y - 1);
 			}
 		}
 		if (this.actionScroller[2] != null) {
-			this.actionScroller[2].render(this.getX() + 54, this.getY(), 16, 16, 0.4f);
+			this.actionScroller[2].render(x + 54, y, 16, 16, 0.4f);
 		}
 		if (this.actionScroller[1] != null) {
-			this.actionScroller[1].render(this.getX() + 18, this.getY(), 16, 16, 0.4f);
+			this.actionScroller[1].render(x + 18, y, 16, 16, 0.4f);
 		}
-		if ((this.slotSelected < 0) && (this.actions.size() > 0) && ModConfig.CLIENT.ACTION_BAR_HUD.showArrowsInBar) {
-			arrows.render(this.getX(), this.getY(), 16, 16, ((Minecraft.getMinecraft().player.isSneaking() || ModConfig.CLIENT.ACTION_BAR_HUD.autoJumpToBar) ? 1 : 0.2f));
+		if ((this.slotSelected < 0) && (this.actions.size() > 0) && ModConfig.CLIENT.showArrowsInBar) {
+			arrows.render(x, y, 16, 16, ((Minecraft.getMinecraft().player.isSneaking() || ModConfig.CLIENT.autoJumpToBar) ? 1 : 0.2f));
 		}
 	}
 
@@ -348,5 +288,15 @@ public class ExtraBarButtonsHUD extends HudComponent {
 		tessellator.draw();
 		GlStateManager.disableBlend();
 		GlStateManager.popMatrix();
+	}
+
+	@Override
+	public ResourceLocation getIdentifier() {
+		return ID;
+	}
+
+	@Override
+	public String getTitleTranslationKey() {
+		return "covens.hud.actionbar.title";
 	}
 }

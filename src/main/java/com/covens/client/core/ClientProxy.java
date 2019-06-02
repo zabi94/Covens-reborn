@@ -15,7 +15,7 @@ import com.covens.client.core.event.GirdleOfTheWoodedHUD;
 import com.covens.client.core.event.MimicEventHandler;
 import com.covens.client.core.event.MiscEventHandler;
 import com.covens.client.core.event.RenderingHacks;
-import com.covens.client.core.event.WerewolfEventHandler;
+import com.covens.client.core.event.TransformationsEventHandler;
 import com.covens.client.core.hud.BloodViewerHUD;
 import com.covens.client.core.hud.EnergyHUD;
 import com.covens.client.core.hud.ExtraBarButtonsHUD;
@@ -87,6 +87,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import zabi.minecraft.minerva.client.blockmodels.AllDefaultModelStateMapper;
+import zabi.minecraft.minerva.client.hud.EnumHudAnchor;
 import zabi.minecraft.minerva.client.hud.HudController;
 
 
@@ -123,15 +124,15 @@ public class ClientProxy implements ISidedProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		this.registerRenders();
-		HudController.registerNewComponent(new BloodViewerHUD());
-		HudController.registerNewComponent(new EnergyHUD());
-		HudController.registerNewComponent(new MoonHUD());
-		HudController.registerNewComponent(new SelectedActionHUD());
-		HudController.registerNewComponent(ExtraBarButtonsHUD.INSTANCE);
-		HudController.registerNewComponent(new VampireBloodBarHUD());
-		HudController.registerNewComponent(new FamiliarHUD());
+		HudController.registerNewComponent(new BloodViewerHUD(), 15, 0, 10, 14, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.CENTER_ABSOLUTE, true);
+		HudController.registerNewComponent(new EnergyHUD(), 10, 0, 25, 102, EnumHudAnchor.START_ABSOULTE, EnumHudAnchor.CENTER_ABSOLUTE, true);
+		HudController.registerNewComponent(new MoonHUD(), 10, 10, 16, 16, EnumHudAnchor.START_ABSOULTE, EnumHudAnchor.START_ABSOULTE, true);
+		HudController.registerNewComponent(new SelectedActionHUD(), 0, -40, 32, 32, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.CENTER_ABSOLUTE, true);
+		HudController.registerNewComponent(ExtraBarButtonsHUD.INSTANCE, 130, 2, 70, 16, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.END_ABSOLUTE, true);
+		HudController.registerNewComponent(new VampireBloodBarHUD(), 49, 23, 80, 8, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.END_ABSOLUTE, true);
+		HudController.registerNewComponent(new FamiliarHUD(), 0, 5, 64, 32, EnumHudAnchor.CENTER_ABSOLUTE, EnumHudAnchor.START_ABSOULTE, true);
 		MinecraftForge.EVENT_BUS.register(new GirdleOfTheWoodedHUD());
-		MinecraftForge.EVENT_BUS.register(new WerewolfEventHandler());
+		MinecraftForge.EVENT_BUS.register(new TransformationsEventHandler());
 		MinecraftForge.EVENT_BUS.register(new RenderingHacks());
 		MinecraftForge.EVENT_BUS.register(new MiscEventHandler(Minecraft.getMinecraft()));
 	}

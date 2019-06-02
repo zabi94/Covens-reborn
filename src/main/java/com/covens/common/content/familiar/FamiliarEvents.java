@@ -26,6 +26,7 @@ import net.minecraft.util.ClassInheritanceMultiMap;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -153,7 +154,7 @@ public class FamiliarEvents {
 			Tuple<FamiliarCommand, RayTraceResult> res = FamiliarController.getExecutedCommand(evt.player, e);
 			switch (res.getFirst()) {
 				case ATTACK:
-					// TODO
+					p.sendStatusMessage(new TextComponentTranslation("This is not implemented yet, sorry!"), true);
 					break;
 				case DESELECT:
 					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).deselectFamiliar();
@@ -166,15 +167,16 @@ public class FamiliarEvents {
 					break;
 				case FREE:
 					// TODO FamiliarController.toggleFamiliarWait(e);
+					p.sendStatusMessage(new TextComponentTranslation("This is not implemented yet, sorry!"), true);
 					break;
 				case GOTO:
 					FamiliarController.sendSelectedFamiliarTo(evt.player, res.getSecond().hitVec);
 					break;
 				case GUARD:
-					//TODO
+					p.sendStatusMessage(new TextComponentTranslation("This is not implemented yet, sorry!"), true);
 					break;
 				case NO_COMMAND:
-					// NO-OP
+					p.sendStatusMessage(new TextComponentTranslation("This is not implemented yet, sorry!"), true);
 					break;
 				case OPEN_GUI:
 					NetworkHandler.HANDLER.sendTo(new PlayerFamiliarsDefinition(getFamiliarDefinitions(p)), (EntityPlayerMP) p);
@@ -183,10 +185,10 @@ public class FamiliarEvents {
 					p.getCapability(CapabilityFamiliarOwner.CAPABILITY, null).selectFamiliar(UUIDs.of(e), e.getName());
 					break;
 				case STAY:
-					// TODO FamiliarController.toggleFamiliarWait(e);
+					p.sendStatusMessage(new TextComponentTranslation("This is not implemented yet, sorry!"), true);
 					break;
 				default:
-					//NO OP
+					p.sendStatusMessage(new TextComponentTranslation("This is a bug, report to Covens!"), true);
 					break;
 			}
 		}

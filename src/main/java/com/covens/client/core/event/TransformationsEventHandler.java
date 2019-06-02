@@ -12,13 +12,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class WerewolfEventHandler {
+public class TransformationsEventHandler {
 
 	private static final ResourceLocation WEREWOLF_SKIN = new ResourceLocation(LibMod.MOD_ID, "textures/entity/mobs/npcs/werewolf_grey_feral.png");
 	private static final ModelWerewolf WW_MODEL = new ModelWerewolf();
@@ -41,6 +42,13 @@ public class WerewolfEventHandler {
 				GlStateManager.enableLighting();
 				GlStateManager.popMatrix();
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void renderOverlay(RenderGameOverlayEvent.Pre event) {
+		if (((event.getType() == RenderGameOverlayEvent.ElementType.FOOD) || (event.getType() == RenderGameOverlayEvent.ElementType.AIR)) && (Minecraft.getMinecraft().player.getCapability(CapabilityTransformation.CAPABILITY, null).getType() == DefaultTransformations.VAMPIRE)) {
+			event.setCanceled(true);
 		}
 	}
 }

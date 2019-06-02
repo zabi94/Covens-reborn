@@ -6,12 +6,7 @@ itemGroup.covens_brews=covens - Brews
 
 //Config
 covens.config.world_gen=World Gen
-covens.config.energy_hud=Energy HUD
-covens.config.blood_hud=Blood Viewer HUD
-covens.config.moon_hud=Moon Warning HUD
-covens.config.current_action_hud=Selected Ability HUD
 covens.config.client=Client Settings
-covens.config.familiar_hud=Familar HUD
 
 //Actions
 covens.night_vision_vampire=Night Vision
@@ -756,7 +751,7 @@ vampire.bed_blocked=This doesn't feel comfortable anymore
 vampire.not_enough_xp=You need %d experience levels
 
 //Keys
-key.categories.covens=covens
+key.categories.covens=Covens
 key.description.jump_to_bar=Jump to extra bar
 key.description.enable_bar=Toggle extra bar reachability
 key.description.place_item=Place Item
@@ -789,6 +784,18 @@ moon.tooltip.1=Your heart is beating faster, your thoughts are slipping out of c
 moon.tooltip.2=No matter how hard you try, you cannot switch back
 
 covens.hud.open_familiar_gui=Familiars
+covens.familiar_order.stay=Stay
+covens.familiar_order.select=Select
+covens.familiar_order.deselect=Deselect
+covens.familiar_order.follow_target=Follow That
+covens.familiar_order.follow_me=Follow Me
+covens.familiar_order.guard=Guard Area
+covens.familiar_order.goto=Go There
+covens.familiar_order.attack=Attack
+covens.familiar_order.open_gui=Familiars
+covens.familiar_order.free=Dismiss
+covens.familiar_order.no_command=?
+covens.familiar_order.go_home=Go Home
 
 //Mobs
 entity.owl.name=Owl
