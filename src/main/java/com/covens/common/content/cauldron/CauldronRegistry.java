@@ -1,11 +1,57 @@
 package com.covens.common.content.cauldron;
 
-import static com.covens.common.lib.LibIngredients.*;
+import static com.covens.common.lib.LibIngredients.anyLeaf;
+import static com.covens.common.lib.LibIngredients.anyLog;
+import static com.covens.common.lib.LibIngredients.apple;
+import static com.covens.common.lib.LibIngredients.beetroot;
+import static com.covens.common.lib.LibIngredients.blazePowder;
+import static com.covens.common.lib.LibIngredients.clayBall;
+import static com.covens.common.lib.LibIngredients.coldIronDustSmall;
+import static com.covens.common.lib.LibIngredients.dimensionalSand;
+import static com.covens.common.lib.LibIngredients.dirt;
+import static com.covens.common.lib.LibIngredients.egg;
+import static com.covens.common.lib.LibIngredients.emptyGoblet;
+import static com.covens.common.lib.LibIngredients.empty_honeycomb;
+import static com.covens.common.lib.LibIngredients.eyes;
+import static com.covens.common.lib.LibIngredients.fumeBirchSoul;
+import static com.covens.common.lib.LibIngredients.fumeBottledMagic;
+import static com.covens.common.lib.LibIngredients.fumeCleansingAura;
+import static com.covens.common.lib.LibIngredients.fumeCloudyOil;
+import static com.covens.common.lib.LibIngredients.fumeEverchangingPresence;
+import static com.covens.common.lib.LibIngredients.fumeFieryBreeze;
+import static com.covens.common.lib.LibIngredients.fumeHeavenlyWind;
+import static com.covens.common.lib.LibIngredients.fumeReekOfDeath;
+import static com.covens.common.lib.LibIngredients.garlic;
+import static com.covens.common.lib.LibIngredients.ghastTear;
+import static com.covens.common.lib.LibIngredients.glowstoneDust;
+import static com.covens.common.lib.LibIngredients.goldNugget;
+import static com.covens.common.lib.LibIngredients.goldenApple;
+import static com.covens.common.lib.LibIngredients.goldenCarrot;
+import static com.covens.common.lib.LibIngredients.graveyardDust;
+import static com.covens.common.lib.LibIngredients.hellebore;
+import static com.covens.common.lib.LibIngredients.honeycomb;
+import static com.covens.common.lib.LibIngredients.moonbell;
+import static com.covens.common.lib.LibIngredients.netherWart;
+import static com.covens.common.lib.LibIngredients.normalRitualChalk;
+import static com.covens.common.lib.LibIngredients.potato;
+import static com.covens.common.lib.LibIngredients.redstone;
+import static com.covens.common.lib.LibIngredients.salt;
+import static com.covens.common.lib.LibIngredients.sand;
+import static com.covens.common.lib.LibIngredients.snowball;
+import static com.covens.common.lib.LibIngredients.soulSand;
+import static com.covens.common.lib.LibIngredients.speckledMelon;
+import static com.covens.common.lib.LibIngredients.spider_web;
+import static com.covens.common.lib.LibIngredients.sponge;
+import static com.covens.common.lib.LibIngredients.stickyPiston;
+import static com.covens.common.lib.LibIngredients.sugar;
+import static com.covens.common.lib.LibIngredients.sunflower;
+import static com.covens.common.lib.LibIngredients.vine;
+import static com.covens.common.lib.LibIngredients.woolOfBat;
+import static com.covens.common.lib.LibIngredients.wormwood;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -16,10 +62,12 @@ import com.covens.api.cauldron.IBrewModifier;
 import com.covens.api.cauldron.IBrewModifier.ModifierResult;
 import com.covens.api.cauldron.IBrewModifier.ResultType;
 import com.covens.api.cauldron.IBrewModifierList;
+import com.covens.api.cauldron.ICauldronRecipe;
+import com.covens.api.cauldron.ICauldronRecipeBuilder;
 import com.covens.common.block.ModBlocks;
 import com.covens.common.core.statics.ModFluids;
+import com.covens.common.crafting.CauldronRecipe;
 import com.covens.common.item.ModItems;
-import com.covens.common.lib.LibIngredients;
 import com.covens.common.lib.LibMod;
 import com.covens.common.potion.ModPotions;
 import com.google.common.collect.HashBiMap;
@@ -31,6 +79,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -43,7 +92,7 @@ public class CauldronRegistry {
 
 	public static final HashBiMap<IBrewEffect, Potion> BREW_POTION_MAP = HashBiMap.<IBrewEffect, Potion>create(90);
 	public static final IForgeRegistry<IBrewModifier> BREW_MODIFIERS = new RegistryBuilder<IBrewModifier>().setName(new ResourceLocation(LibMod.MOD_ID, "brew modifiers")).setIDRange(0, 200).setType(IBrewModifier.class).create();
-	public static final ArrayList<CauldronCraftingRecipe> CRAFTING_REGISTRY = new ArrayList<>();
+	public static final ArrayList<CauldronRecipe.Wrapper> CRAFTING_REGISTRY = new ArrayList<>();
 	private static final HashMap<Ingredient, CauldronFoodValue> STEW_REGISTRY = new HashMap<>();
 	private static final HashMap<Ingredient, IBrewEffect> BREW_INGREDIENT_REGISTRY = new HashMap<>();
 	// The less entries an Ingredient has, the higher priority it will be in the
@@ -68,36 +117,8 @@ public class CauldronRegistry {
 		BREW_INGREDIENT_REGISTRY.put(ingredient, effect);
 	}
 
-	public static void registerCauldronItemCrafting(Fluid fluid, ItemStack output, Ingredient... ingredients) {
-		CRAFTING_REGISTRY.add(new CauldronItemCraftingRecipe(fluid, Fluid.BUCKET_VOLUME / 4, output, ingredients));
-	}
-
-	public static void registerCauldronItemCrafting(Fluid fluid, int fluidAmount, ItemStack output, Ingredient... ingredients) {
-		CRAFTING_REGISTRY.add(new CauldronItemCraftingRecipe(fluid, fluidAmount, output, ingredients));
-	}
-
-	public static void registerCauldronFluidCrafting(Fluid fluid, FluidStack output, Ingredient... ingredients) {
-		CRAFTING_REGISTRY.add(new CauldronFluidCraftingRecipe(fluid, Fluid.BUCKET_VOLUME, output, ingredients));
-	}
-
-	public static void registerCauldronFluidCrafting(Fluid fluid, int exactFluidAmount, FluidStack output, Ingredient... ingredients) {
-		CRAFTING_REGISTRY.add(new CauldronFluidCraftingRecipe(fluid, exactFluidAmount, output, ingredients));
-	}
-
-	public static void registerCauldronMixedCrafting(Fluid fluid, FluidStack fluidOutput, ItemStack itemOutput, Ingredient... ingredients) {
-		CRAFTING_REGISTRY.add(new CauldronMixedCraftingRecipe(fluid, Fluid.BUCKET_VOLUME, fluidOutput, itemOutput, ingredients));
-	}
-
-	public static void registerCauldronMixedCrafting(Fluid fluid, int exactFluidAmount, FluidStack fluidOutput, ItemStack itemOutput, Ingredient... ingredients) {
-		CRAFTING_REGISTRY.add(new CauldronMixedCraftingRecipe(fluid, exactFluidAmount, fluidOutput, itemOutput, ingredients));
-	}
-
 	public static CauldronFoodValue getCauldronFoodValue(ItemStack stack) {
 		return STEW_REGISTRY.entrySet().stream().filter(e -> e.getKey().apply(stack)).sorted(STEW_INGREDIENT_PRIORITY).map(e -> e.getValue()).findFirst().orElse(null);
-	}
-
-	public static Optional<CauldronCraftingRecipe> getCraftingResult(FluidStack fluid, List<ItemStack> stacks) {
-		return CRAFTING_REGISTRY.stream().filter(r -> r.matches(stacks, fluid)).findFirst();
 	}
 
 	public static Potion getPotionFromBrew(IBrewEffect effect) {
@@ -194,34 +215,134 @@ public class CauldronRegistry {
 		registerFood(new IngredientMultiOreDict("listAllmuttoncooked"), 6, 9.6f);
 		registerFood(new IngredientMultiOreDict("listAllrabbitcooked"), 5, 6f);
 		registerFood(new IngredientMultiOreDict("listAllfishcooked"), 5, 6f);
-		// Todo: Support for more modded foods.
 
-		// Miscellaneous water-based recipes
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(Blocks.PISTON, 1, 0), stickyPiston);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(Blocks.SPONGE, 1, 1), sponge);
-		// Cooking and Processing with Water
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.wax), empty_honeycomb);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.catechu, 3, 0), acaciaLog);
-		// Arcane recipes
-
-		registerCauldronItemCrafting(ModFluids.HONEY, Fluid.BUCKET_VOLUME, new ItemStack(ModBlocks.goblet, 1, 1), redstone, redstone, redstone, fumeCloudyOil, emptyGoblet, ghastTear);
-		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModItems.ritual_chalk_nether), normalRitualChalk, normalRitualChalk, blazePowder, blazePowder, blazePowder, blazePowder, fumeFieryBreeze, fumeFieryBreeze);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk_ender), normalRitualChalk, normalRitualChalk, dimensionalSand, dimensionalSand, dimensionalSand, dimensionalSand, fumeHeavenlyWind, fumeHeavenlyWind);
-		registerCauldronItemCrafting(ModFluids.HONEY, new ItemStack(ModItems.ritual_chalk_golden), normalRitualChalk, normalRitualChalk, goldNugget, goldNugget, goldNugget, goldNugget, fumeCleansingAura, fumeCleansingAura);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.graveyard_dirt, 8, 0), graveyardDust, graveyardDust, wormwood, wormwood, dirt, dirt, dirt, dirt);
-		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.ember_grass, 2, 0), blazePowder, blazePowder, wormwood, wormwood);
-		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.torchwood, 2, 0), glowstoneDust, glowstoneDust, anyLog, anyLeaf);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.spanish_moss, 3), vine, vine, vine, fumeBottledMagic, netherWart);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk_normal), fumeBirchSoul, clayBall);
+		newRecipe("cleanPiston")
+			.addInput(stickyPiston, 1)
+			.setValidFluid(FluidRegistry.WATER)
+			.setRequiredPower(0)
+			.addOutput(new ItemStack(Blocks.PISTON))
+			.buildAndRegister();
 		
-		// Banner pattern removal
+		newRecipe("wetSponge")
+			.addInput(sponge, 1)
+			.setValidFluid(FluidRegistry.WATER)
+			.setRequiredPower(0)
+			.addOutput(new ItemStack(Blocks.SPONGE, 1, 1))
+			.buildAndRegister();
+		
+		newRecipe("combToHoney")
+			.addInput(honeycomb, 2)
+			.setValidFluid(FluidRegistry.WATER)
+			.setOutputFluidFixedAmount(ModFluids.HONEY, Fluid.BUCKET_VOLUME)
+			.addOutput(new ItemStack(ModItems.empty_honeycomb, 2))
+			.setRequiredPower(200)
+			.buildAndRegister();
+		
+		newRecipe("oil")
+			.addInput(potato, 2)
+			.addInput(sunflower, 1)
+			.setValidFluid(FluidRegistry.WATER)
+			.setOutputFluidFixedAmount(ModFluids.MUNDANE_OIL, Fluid.BUCKET_VOLUME)
+			.setRequiredPower(0)
+			.buildAndRegister();
+		
 		for (int i = 0; i < 16; i++) {
-			registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(Items.BANNER, 1, i), Ingredient.fromStacks(new ItemStack(Items.BANNER, 1, i)));
+			newRecipe("clearBanner"+i)
+				.addInput(Ingredient.fromStacks(new ItemStack(Items.BANNER, 1, i)), 1)
+				.addOutput(new ItemStack(Items.BANNER, 1, i))
+				.setValidFluid(FluidRegistry.WATER)
+				.setRequiredPower(0)
+				.buildAndRegister();
 		}
+		
+		newRecipe("wax")
+			.addInput(empty_honeycomb, 1)
+			.setValidFluid(FluidRegistry.WATER, Fluid.BUCKET_VOLUME/4)
+			.setRequiredPower(100)
+			.addOutput(new ItemStack(ModItems.wax))
+			.buildAndRegister();
+		
+		newRecipe("fillGoblet")
+			.addInput(emptyGoblet, 1)
+			.addInput(redstone, 5)
+			.addInput(ghastTear, 1)
+			.addInput(fumeCloudyOil, 1)
+			.addOutput(new ItemStack(ModBlocks.goblet, 1, 1))
+			.setValidFluid(FluidRegistry.WATER)
+			.setRequiredPower(6000)
+			.buildAndRegister();
+		
+		newRecipe("fieryChalk")
+			.addInput(normalRitualChalk, 1)
+			.addInput(blazePowder, 4)
+			.addInput(fumeFieryBreeze, 2)
+			.addOutput(new ItemStack(ModItems.ritual_chalk_nether))
+			.setValidFluid(ModFluids.MUNDANE_OIL)
+			.setRequiredPower(3000)
+			.buildAndRegister();
+		
+		newRecipe("enderChalk")
+			.setValidFluid(FluidRegistry.WATER)
+			.addOutput(new ItemStack(ModItems.ritual_chalk_ender))
+			.addInput(normalRitualChalk, 1)
+			.addInput(dimensionalSand, 4)
+			.addInput(fumeHeavenlyWind, 2)
+			.setRequiredPower(3000)
+			.buildAndRegister();
+		
+		newRecipe("goldenChalk")
+			.setValidFluid(ModFluids.HONEY)
+			.addOutput(new ItemStack(ModItems.ritual_chalk_golden))
+			.addInput(normalRitualChalk, 1)
+			.addInput(goldNugget, 4)
+			.addInput(fumeCleansingAura, 2)
+			.setRequiredPower(3000)
+			.buildAndRegister();
 
-		registerCauldronMixedCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.HONEY, Fluid.BUCKET_VOLUME), new ItemStack(ModItems.empty_honeycomb), honeycomb);
-		registerCauldronFluidCrafting(FluidRegistry.WATER, new FluidStack(ModFluids.MUNDANE_OIL, Fluid.BUCKET_VOLUME), potato, Ingredient.fromStacks(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0)));
-
+		newRecipe("graveyardDirt")
+			.setValidFluid(FluidRegistry.WATER)
+			.addOutput(new ItemStack(ModBlocks.graveyard_dirt, 8))
+			.addInput(wormwood, 2)
+			.addInput(dirt, 8)
+			.addInput(graveyardDust, 2)
+			.setRequiredPower(4000)
+			.buildAndRegister();
+		
+		newRecipe("emberGrass")
+			.addInput(blazePowder, 2)
+			.addInput(wormwood, 2)
+			.addOutput(new ItemStack(ModBlocks.ember_grass, 2))
+			.setValidFluid(ModFluids.MUNDANE_OIL)
+			.setRequiredPower(2000)
+			.buildAndRegister();
+		
+		newRecipe("torchwood")
+			.addInput(glowstoneDust, 2)
+			.addInput(anyLog, 1)
+			.addInput(anyLeaf, 1)
+			.addOutput(new ItemStack(ModBlocks.torchwood, 2))
+			.setValidFluid(ModFluids.MUNDANE_OIL)
+			.setRequiredPower(2000)
+			.buildAndRegister();
+		
+		newRecipe("spanishMoss")
+			.addInput(vine, 3)
+			.addInput(fumeBottledMagic, 1)
+			.addInput(netherWart, 1)
+			.addOutput(new ItemStack(ModBlocks.spanish_moss, 3))
+			.setValidFluid(FluidRegistry.WATER)
+			.setRequiredPower(2000)
+			.buildAndRegister();
+			
+		newRecipe("chalk")
+			.setValidFluid(FluidRegistry.WATER)
+			.addInput(fumeBirchSoul, 1)
+			.addInput(clayBall, 1)
+			.addInput(sand, 2)
+			.addOutput(new ItemStack(ModItems.ritual_chalk_normal))
+			.setRequiredPower(3000)
+			.buildAndRegister();
+		
 		registerVanillaBrewEffect(MobEffects.ABSORPTION, 20, goldenApple, 600);
 		registerVanillaBrewEffect(MobEffects.FIRE_RESISTANCE, 20, Ingredient.fromItem(Items.MAGMA_CREAM));
 		registerVanillaBrewEffect(MobEffects.HUNGER, 30, Ingredient.fromItem(Items.ROTTEN_FLESH), 600);
@@ -277,7 +398,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.spider_nightmare, spider_web);
 		registerCombinedBrewEffect(ModPotions.volatility, Ingredient.fromItem(Items.GUNPOWDER));
 		registerCombinedBrewEffect(ModPotions.pulverize, Ingredient.fromItem(Item.getItemFromBlock(Blocks.COBBLESTONE)));
-		registerCombinedBrewEffect(ModPotions.love, LibIngredients.moonbell);
+		registerCombinedBrewEffect(ModPotions.love, moonbell);
 		registerCombinedBrewEffect(ModPotions.revealing, eyes);
 		registerCombinedBrewEffect(ModPotions.deaths_ebb, Ingredient.fromItem(ModItems.asphodel));
 		registerCombinedBrewEffect(ModPotions.power_boon, Ingredient.fromItem(ModItems.mandrake_root));
@@ -301,6 +422,10 @@ public class CauldronRegistry {
 	private static void registerVanillaBrewEffect(Potion potion, int cost, Ingredient ingredient, int duration) {
 		CovensAPI.getAPI().registerBrewEffect(new BrewVanilla(duration, cost), potion, ingredient);
 	}
+	
+	private static ICauldronRecipeBuilder newRecipe(String name) {
+		return CovensAPI.getAPI().getNewCauldronRecipeBuilder(new ResourceLocation(LibMod.MOD_ID, name));
+	}
 
 	private static void registerCombinedBrewEffect(Potion potion, Ingredient ingredient) {
 		if (potion == null) {
@@ -318,5 +443,14 @@ public class CauldronRegistry {
 
 	private static void registerFood(Ingredient ingredient, int hunger, float saturation) {
 		registerFoodValue(ingredient, new CauldronFoodValue(hunger, saturation));
+	}
+
+	public static Optional<ICauldronRecipe> getCraftingResult(FluidStack fluidStack, NonNullList<ItemStack> inputs) {
+		for (CauldronRecipe.Wrapper cr: CRAFTING_REGISTRY) {
+			if (cr.isValidFluid(fluidStack) && cr.matches(inputs)) {
+				return Optional.of(cr);
+			}
+		}
+		return Optional.empty();
 	}
 }

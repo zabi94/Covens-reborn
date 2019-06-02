@@ -296,7 +296,7 @@ public class ApiInstance extends CovensAPI {
 	
 	@Override
 	public void registerCauldronRecipe(ICauldronRecipe recipe) {
-		//TODO
+		CauldronRegistry.CRAFTING_REGISTRY.add(new CauldronRecipe.Wrapper(recipe));
 	}
 
 }

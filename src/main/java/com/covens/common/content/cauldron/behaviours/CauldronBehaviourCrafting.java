@@ -1,10 +1,11 @@
 package com.covens.common.content.cauldron.behaviours;
 
 import java.awt.Color;
+import java.util.Optional;
 import java.util.Random;
 
+import com.covens.api.cauldron.ICauldronRecipe;
 import com.covens.api.mp.MPUsingMachine;
-import com.covens.common.content.cauldron.CauldronCraftingRecipe;
 import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.core.helper.Log;
 import com.covens.common.tile.tiles.TileEntityCauldron;
@@ -21,10 +22,11 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 
 	private static final String ID = "craft";
-	private static final int MAX_CRAFT_TIME = 100, POWER_PER_TICK = 2;
+	private static final int MAX_CRAFT_TIME = 100;
 
 	private int craftTime = 0, color = TileEntityCauldron.DEFAULT_COLOR;
 	private boolean validRecipe = false, lowEnergy = false;
+	private int currentRecipeMPCost = 0;
 	private TileEntityCauldron cauldron;
 
 	@Override
@@ -58,7 +60,11 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 	@Override
 	public void statusChanged(boolean isActiveBehaviour) {
 		if (isActiveBehaviour && !this.cauldron.getInputs().isEmpty() && this.cauldron.getFluid().isPresent() && !this.validRecipe) {
-			this.validRecipe = CauldronRegistry.getCraftingResult(this.cauldron.getFluid().get(), this.cauldron.getInputs()).isPresent();
+			Optional<ICauldronRecipe> optional = CauldronRegistry.getCraftingResult(this.cauldron.getFluid().get(), this.cauldron.getInputs());
+			this.validRecipe = optional.isPresent();
+			if (validRecipe) {
+				this.currentRecipeMPCost = optional.get().getMPRequired(this.cauldron.getInputs(), this.cauldron.getFluid().get());
+			}
 			this.color = Color.getHSBColor(this.cauldron.getWorld().rand.nextFloat(), 0.6f + (0.4f * this.cauldron.getWorld().rand.nextFloat()), this.cauldron.getWorld().rand.nextFloat()).getRGB();
 			this.cauldron.markDirty();
 			this.cauldron.syncToClient();
@@ -70,7 +76,7 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 		if (isActiveBehaviour) {
 			boolean wasLowEnergy = this.lowEnergy;
 			if (this.validRecipe && (this.craftTime < MAX_CRAFT_TIME)) {
-				if (this.cauldron.getCapability(MPUsingMachine.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), POWER_PER_TICK)) {
+				if (this.cauldron.getCapability(MPUsingMachine.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), this.currentRecipeMPCost)) {
 					this.lowEnergy = false;
 				} else {
 					this.lowEnergy = true;
@@ -86,7 +92,7 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 			}
 
 			if (this.validRecipe && (this.craftTime >= MAX_CRAFT_TIME)) {
-				CauldronCraftingRecipe result = CauldronRegistry.getCraftingResult(this.cauldron.getFluid().orElse(new FluidStack(FluidRegistry.WATER, 0)), this.cauldron.getInputs()).orElse(null);
+				ICauldronRecipe result = CauldronRegistry.getCraftingResult(this.cauldron.getFluid().orElse(new FluidStack(FluidRegistry.WATER, 0)), this.cauldron.getInputs()).orElse(null);
 				if (result == null) {
 					Log.w("This shouldn't happen... Please report to Covens Reborn\nCauldronBehaviourCrafting - update()\nRecipe output is null\nCauldron status:\ncurrent setting: " + this.cauldron.getCurrentBehaviour().getID() + "\nlow energy: " + this.lowEnergy + "\nvalid recipe: " + this.validRecipe + "\ncraft time: " + this.craftTime);
 					Log.w("Item inside:");
@@ -96,30 +102,29 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
 					this.lowEnergy = false;
 					this.validRecipe = false;
+					this.currentRecipeMPCost = 0;
 					this.craftTime = 0;
 					this.cauldron.markDirty();
 					return;
 				}
 				this.cauldron.setTankLock(true);
 				CauldronFluidTank tank = (CauldronFluidTank) this.cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-				tank.drain(result.getRequiredFluidAmount(), true);
+				
 
-				if (result.hasItemOutput()) {
-					EntityItem e = new EntityItem(this.cauldron.getWorld(), this.cauldron.getPos().getX() + 0.5, this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.5, result.getItemResult());
+				for (ItemStack resultItem : result.getOutputs(this.cauldron.getInputs(), tank.getFluid())) {
+					EntityItem e = new EntityItem(this.cauldron.getWorld(), this.cauldron.getPos().getX() + 0.5, this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.5, resultItem);
 					e.addTag("cauldron_drop");
 					e.motionY = 0.06;
 					e.motionX = 0;
 					e.motionZ = 0;
 					this.cauldron.getWorld().spawnEntity(e);
 				}
-
-				if (result.hasFluidOutput()) {
-					tank.setFluid(result.getFluidResult());
-				}
-
+				tank.setFluid(result.processFluid(this.cauldron.getInputs(), tank.getFluid()));
+				
 				this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().IDLE);
 				this.lowEnergy = false;
 				this.validRecipe = false;
+				this.currentRecipeMPCost = 0;
 				this.craftTime = 0;
 				this.cauldron.clearItemInputs();// MD & StC called here
 			}

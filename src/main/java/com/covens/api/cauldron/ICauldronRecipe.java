@@ -58,4 +58,9 @@ public interface ICauldronRecipe {
 	 * @return the amount of power to be drained by this recipe.
 	 */
 	public int getMPRequired(List<ItemStack> input, FluidStack fluid);
+	
+	/**
+	 * @return a list of fluids that should be shown in JEI and books
+	 */
+	public List<FluidStack> getJEIFluidCache();
 }

@@ -3,6 +3,7 @@ package com.covens.common.crafting;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.ICauldronRecipe;
@@ -22,14 +23,19 @@ import zabi.minecraft.minerva.common.utils.ValidationHelper;
 
 public class CauldronRecipe implements ICauldronRecipe {
 	
-	private ResourceLocation name;
-	private int mpRequired = 0;
-	private Predicate<FluidStack> fluidChecker = Predicates.alwaysTrue();
-	private List<NumberedInput> inputs = Lists.newArrayList();
-	private List<List<ItemStack>> outputs = Lists.newArrayList();
-	private BiFunction<List<ItemStack>, FluidStack, List<ItemStack>> outputProcessor = (s, f) -> Lists.newArrayList();
-	private BiFunction<List<ItemStack>, FluidStack, FluidStack> outputFluidProcessor = (s, f) -> new FluidStack(FluidRegistry.WATER, 0);
+	protected ResourceLocation name;
+	protected int mpRequired = 0;
+	protected Predicate<FluidStack> fluidChecker = Predicates.alwaysTrue();
+	protected List<NumberedInput> inputs = Lists.newArrayList();
+	protected List<List<ItemStack>> outputs = Lists.newArrayList();
+	protected BiFunction<List<ItemStack>, FluidStack, List<ItemStack>> outputProcessor = (s, f) -> Lists.newArrayList();
+	protected BiFunction<List<ItemStack>, FluidStack, FluidStack> outputFluidProcessor = (s, f) -> new FluidStack(FluidRegistry.WATER, 0);
+	protected List<FluidStack> jeiCache = Lists.newArrayList();
 
+	public void setJEIFluidCache(List<FluidStack> JEIFluidCache) {
+		jeiCache = JEIFluidCache;
+	}
+	
 	public void setRegistryName(ResourceLocation nameIn) {
 		name = nameIn;
 	}
@@ -77,8 +83,7 @@ public class CauldronRecipe implements ICauldronRecipe {
 	public void setOutputs(List<List<ItemStack>> outputs) {
 		this.outputs = outputs;
 	}
-
-
+	
 	@Override
 	public FluidStack processFluid(List<ItemStack> input, FluidStack fluid) {
 		return outputFluidProcessor.apply(input, fluid);
@@ -92,6 +97,11 @@ public class CauldronRecipe implements ICauldronRecipe {
 	@Override
 	public int getMPRequired(List<ItemStack> input, FluidStack fluid) {
 		return mpRequired;
+	}
+
+	@Override
+	public List<FluidStack> getJEIFluidCache() {
+		return jeiCache;
 	}
 	
 	public boolean matches(List<ItemStack> stacks) {
@@ -107,6 +117,8 @@ public class CauldronRecipe implements ICauldronRecipe {
 		private List<List<ItemStack>> outputs = Lists.newArrayList();
 		private BiFunction<List<ItemStack>, FluidStack, List<ItemStack>> outputProcessor;
 		private BiFunction<List<ItemStack>, FluidStack, FluidStack> outputFluidProcessor;
+		
+		private List<FluidStack> JEIFluidCache = Lists.newArrayList();
 		
 		public CauldronRecipeBuilder(ResourceLocation name) {
 			if (name == null) {
@@ -161,7 +173,8 @@ public class CauldronRecipe implements ICauldronRecipe {
 		}
 
 		@Override
-		public ICauldronRecipeBuilder setValidFluid(Predicate<Fluid> fluidPredicate) {
+		public ICauldronRecipeBuilder setValidFluid(Predicate<Fluid> fluidPredicate, List<FluidStack> JEICache) {
+			this.JEIFluidCache = JEICache;
 			return setValidFluid(fluidPredicate, Fluid.BUCKET_VOLUME);
 		}
 
@@ -179,13 +192,14 @@ public class CauldronRecipe implements ICauldronRecipe {
 
 		@Override
 		public ICauldronRecipeBuilder setConsumeAllFluid() {
-			outputFluidProcessor = (s, fs) -> new FluidStack(FluidRegistry.WATER, fs.amount);
+			outputFluidProcessor = (s, fs) -> new FluidStack(FluidRegistry.WATER, 0);
 			return this;
 		}
 
 		@Override
 		public ICauldronRecipeBuilder setOutputFluidFixedAmount(Fluid fluid, int amount) {
 			outputFluidProcessor = (s, fs) -> new FluidStack(fluid, amount);
+			this.JEIFluidCache = Lists.newArrayList(new FluidStack(fluid, amount));
 			return this;
 		}
 
@@ -196,7 +210,8 @@ public class CauldronRecipe implements ICauldronRecipe {
 		}
 
 		@Override
-		public ICauldronRecipeBuilder setCustomFluidProcessor(BiFunction<List<ItemStack>, FluidStack, FluidStack> processor) {
+		public ICauldronRecipeBuilder setCustomFluidProcessor(BiFunction<List<ItemStack>, FluidStack, FluidStack> processor, List<FluidStack> JEICache) {
+			this.JEIFluidCache = JEICache;
 			this.outputFluidProcessor = processor;
 			return this;
 		}
@@ -212,6 +227,7 @@ public class CauldronRecipe implements ICauldronRecipe {
 			result.setOutputFluidProcessor(outputFluidProcessor);
 			result.setOutputProcessor(outputProcessor);
 			result.setRequiredMP(mpRequired);
+			result.setJEIFluidCache(JEIFluidCache);
 			return result;
 		}
 
@@ -233,5 +249,66 @@ public class CauldronRecipe implements ICauldronRecipe {
 		}
 		
 	}
+	
+	public static class Wrapper implements ICauldronRecipe {
+		
+		private ICauldronRecipe base;
+		private List<List<ItemStack>> inputs = null;
+		
+		public Wrapper(ICauldronRecipe recipe) {
+			base = recipe;
+		}
 
+		@Override
+		public ResourceLocation getRegistryName() {
+			return base.getRegistryName();
+		}
+
+		@Override
+		public boolean isValidFluid(FluidStack in) {
+			return base.isValidFluid(in);
+		}
+
+		@Override
+		public List<NumberedInput> getInputList() {
+			return base.getInputList();
+		}
+
+		@Override
+		public List<List<ItemStack>> getOutputList() {
+			return base.getOutputList();
+		}
+
+		@Override
+		public FluidStack processFluid(List<ItemStack> input, FluidStack fluid) {
+			return base.processFluid(input, fluid);
+		}
+
+		@Override
+		public List<ItemStack> getOutputs(List<ItemStack> input, FluidStack fluid) {
+			return base.getOutputs(input, fluid);
+		}
+
+		@Override
+		public int getMPRequired(List<ItemStack> input, FluidStack fluid) {
+			return base.getMPRequired(input, fluid);
+		}
+
+		@Override
+		public List<FluidStack> getJEIFluidCache() {
+			return base.getJEIFluidCache();
+		}
+		
+		public boolean matches(List<ItemStack> stacks) {
+			return ExactRecipeHelper.matches(stacks, getInputList());
+		}
+		
+		public List<List<ItemStack>> getJEIItemStacksInput() {
+			if (inputs == null) {
+				inputs = getInputList().stream().map(ni -> ni.getCachedStacks()).collect(Collectors.toList());
+			}
+			return inputs;
+		}
+		
+	}
 }

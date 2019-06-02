@@ -50,24 +50,25 @@ public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftin
 	public void setRecipe(IRecipeLayout recipeLayout, CauldronCraftingWrapper recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup is = recipeLayout.getItemStacks();
 		recipeLayout.setShapeless();
-		List<List<ItemStack>> isList = recipeWrapper.getOriginal().getJEIInput();
+		List<List<ItemStack>> isList = recipeWrapper.getOriginal().getJEIItemStacksInput();
+		int lastAdded = 0;
 		for (int i = 0; i < isList.size(); i++) {
 			is.init(i + 3, true, (18 * i) + ((120 - (18 * isList.size())) / 2), 5);
 			is.set(i + 3, isList.get(i));
+			lastAdded++;
 		}
 		IGuiFluidStackGroup fs = recipeLayout.getFluidStacks();
 		fs.init(0, true, 52, 30);
 		fs.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0).get(0));
 
-		if (recipeWrapper.getOriginal().hasItemOutput()) {
-			is.init(1, false, 72, 67);
-			is.set(1, recipeWrapper.getOriginal().getItemResult());
+		for (List<ItemStack> isl:recipeWrapper.getOriginal().getOutputList()) {
+			lastAdded++;
+			is.init(lastAdded, false, 72, 67);
+			is.set(lastAdded, isl);
 		}
 
-		if (recipeWrapper.getOriginal().hasFluidOutput()) {
-			fs.init(2, false, 31, 65);
-			fs.set(2, recipeWrapper.getOriginal().getFluidResult());
-		}
+		fs.init(2, false, 31, 65);
+		fs.set(2, recipeWrapper.getOriginal().getJEIFluidCache());
 	}
 
 }

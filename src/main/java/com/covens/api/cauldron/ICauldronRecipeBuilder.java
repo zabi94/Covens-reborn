@@ -28,7 +28,7 @@ public interface ICauldronRecipeBuilder {
 	
 	public ICauldronRecipeBuilder setValidFluid(Fluid fluid);
 	
-	public ICauldronRecipeBuilder setValidFluid(Predicate<Fluid> fluid);
+	public ICauldronRecipeBuilder setValidFluid(Predicate<Fluid> fluid, List<FluidStack> JEICache);
 	
 	public ICauldronRecipeBuilder setRequiredPower(int amount);
 	
@@ -40,7 +40,7 @@ public interface ICauldronRecipeBuilder {
 	
 	public ICauldronRecipeBuilder setCustomOutputProcessor(BiFunction<List<ItemStack>, FluidStack, List<ItemStack>> processor);
 	
-	public ICauldronRecipeBuilder setCustomFluidProcessor(BiFunction<List<ItemStack>, FluidStack, FluidStack> processor);
+	public ICauldronRecipeBuilder setCustomFluidProcessor(BiFunction<List<ItemStack>, FluidStack, FluidStack> processor, List<FluidStack> JEICache);
 	
 	public ICauldronRecipe build();
 	

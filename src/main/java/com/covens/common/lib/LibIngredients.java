@@ -134,4 +134,5 @@ public class LibIngredients {
 	public static Ingredient vine = Ingredient.fromStacks(new ItemStack(Blocks.VINE));
 	public static Ingredient moonbell = Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.moonbell));
 	public static Ingredient netherWart = Ingredient.fromItem(Items.NETHER_WART);
+	public static Ingredient sunflower = Ingredient.fromStacks(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0));
 }
