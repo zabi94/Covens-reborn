@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.covens.client.fx.ParticleF;
 import com.covens.common.Covens;
-import com.covens.common.content.cauldron.CauldronRegistry;
 import com.covens.common.core.statics.ModFluids;
 import com.covens.common.core.statics.ModSounds;
 import com.covens.common.tile.tiles.TileEntityCauldron;
@@ -151,9 +150,6 @@ public class CauldronBehaviourIdle implements ICauldronBehaviour {
 					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().LAVA);
 				} else if ((stack.getItem() == Items.NETHER_WART) && (this.cauldron.getFluid().get().getFluid() == FluidRegistry.WATER)) {
 					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().BREWING);
-					this.cauldron.setTankLock(false);
-				} else if ((CauldronRegistry.getCauldronFoodValue(stack) != null) && (this.cauldron.getFluid().get().getFluid() == FluidRegistry.WATER)) {
-					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().STEW);
 					this.cauldron.setTankLock(false);
 				} else {
 					this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().CRAFTING);

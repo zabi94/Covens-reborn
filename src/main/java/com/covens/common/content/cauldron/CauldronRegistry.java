@@ -1,53 +1,6 @@
 package com.covens.common.content.cauldron;
 
-import static com.covens.common.lib.LibIngredients.anyLeaf;
-import static com.covens.common.lib.LibIngredients.anyLog;
-import static com.covens.common.lib.LibIngredients.apple;
-import static com.covens.common.lib.LibIngredients.beetroot;
-import static com.covens.common.lib.LibIngredients.blazePowder;
-import static com.covens.common.lib.LibIngredients.clayBall;
-import static com.covens.common.lib.LibIngredients.coldIronDustSmall;
-import static com.covens.common.lib.LibIngredients.dimensionalSand;
-import static com.covens.common.lib.LibIngredients.dirt;
-import static com.covens.common.lib.LibIngredients.egg;
-import static com.covens.common.lib.LibIngredients.emptyGoblet;
-import static com.covens.common.lib.LibIngredients.empty_honeycomb;
-import static com.covens.common.lib.LibIngredients.eyes;
-import static com.covens.common.lib.LibIngredients.fumeBirchSoul;
-import static com.covens.common.lib.LibIngredients.fumeBottledMagic;
-import static com.covens.common.lib.LibIngredients.fumeCleansingAura;
-import static com.covens.common.lib.LibIngredients.fumeCloudyOil;
-import static com.covens.common.lib.LibIngredients.fumeEverchangingPresence;
-import static com.covens.common.lib.LibIngredients.fumeFieryBreeze;
-import static com.covens.common.lib.LibIngredients.fumeHeavenlyWind;
-import static com.covens.common.lib.LibIngredients.fumeReekOfDeath;
-import static com.covens.common.lib.LibIngredients.garlic;
-import static com.covens.common.lib.LibIngredients.ghastTear;
-import static com.covens.common.lib.LibIngredients.glowstoneDust;
-import static com.covens.common.lib.LibIngredients.goldNugget;
-import static com.covens.common.lib.LibIngredients.goldenApple;
-import static com.covens.common.lib.LibIngredients.goldenCarrot;
-import static com.covens.common.lib.LibIngredients.graveyardDust;
-import static com.covens.common.lib.LibIngredients.hellebore;
-import static com.covens.common.lib.LibIngredients.honeycomb;
-import static com.covens.common.lib.LibIngredients.moonbell;
-import static com.covens.common.lib.LibIngredients.netherWart;
-import static com.covens.common.lib.LibIngredients.normalRitualChalk;
-import static com.covens.common.lib.LibIngredients.potato;
-import static com.covens.common.lib.LibIngredients.redstone;
-import static com.covens.common.lib.LibIngredients.salt;
-import static com.covens.common.lib.LibIngredients.sand;
-import static com.covens.common.lib.LibIngredients.snowball;
-import static com.covens.common.lib.LibIngredients.soulSand;
-import static com.covens.common.lib.LibIngredients.speckledMelon;
-import static com.covens.common.lib.LibIngredients.spider_web;
-import static com.covens.common.lib.LibIngredients.sponge;
-import static com.covens.common.lib.LibIngredients.stickyPiston;
-import static com.covens.common.lib.LibIngredients.sugar;
-import static com.covens.common.lib.LibIngredients.sunflower;
-import static com.covens.common.lib.LibIngredients.vine;
-import static com.covens.common.lib.LibIngredients.woolOfBat;
-import static com.covens.common.lib.LibIngredients.wormwood;
+import static com.covens.common.lib.LibIngredients.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -93,17 +46,8 @@ public class CauldronRegistry {
 	public static final HashBiMap<IBrewEffect, Potion> BREW_POTION_MAP = HashBiMap.<IBrewEffect, Potion>create(90);
 	public static final IForgeRegistry<IBrewModifier> BREW_MODIFIERS = new RegistryBuilder<IBrewModifier>().setName(new ResourceLocation(LibMod.MOD_ID, "brew modifiers")).setIDRange(0, 200).setType(IBrewModifier.class).create();
 	public static final ArrayList<CauldronRecipe.Wrapper> CRAFTING_REGISTRY = new ArrayList<>();
-	private static final HashMap<Ingredient, CauldronFoodValue> STEW_REGISTRY = new HashMap<>();
 	private static final HashMap<Ingredient, IBrewEffect> BREW_INGREDIENT_REGISTRY = new HashMap<>();
-	// The less entries an Ingredient has, the higher priority it will be in the
-	// list
-	private static final Comparator<Map.Entry<Ingredient, CauldronFoodValue>> STEW_INGREDIENT_PRIORITY = Map.Entry.<Ingredient, CauldronFoodValue>comparingByKey(Comparator.comparing(i -> i.getMatchingStacks().length)).reversed();
 
-	public static void registerFoodValue(Ingredient ingredient, CauldronFoodValue value) {
-		if (ingredient.getMatchingStacks().length > 0) {
-			STEW_REGISTRY.put(ingredient, value);
-		}
-	}
 
 	public static void bindPotionAndEffect(IBrewEffect effect, Potion potion) {
 		BREW_POTION_MAP.put(effect, potion);
@@ -115,10 +59,6 @@ public class CauldronRegistry {
 
 	public static void registerBrewIngredient(IBrewEffect effect, Ingredient ingredient) {
 		BREW_INGREDIENT_REGISTRY.put(ingredient, effect);
-	}
-
-	public static CauldronFoodValue getCauldronFoodValue(ItemStack stack) {
-		return STEW_REGISTRY.entrySet().stream().filter(e -> e.getKey().apply(stack)).sorted(STEW_INGREDIENT_PRIORITY).map(e -> e.getValue()).findFirst().orElse(null);
 	}
 
 	public static Potion getPotionFromBrew(IBrewEffect effect) {
@@ -166,55 +106,6 @@ public class CauldronRegistry {
 	}
 
 	public static void init() {
-
-		registerFood(apple, 4, 2.4f);
-		registerFood(Ingredient.fromItem(Items.BAKED_POTATO), 5, 6f);
-		registerFood(beetroot, 1, 1.2f);
-		registerFood(Ingredient.fromItem(Items.BREAD), 5, 6f);
-		registerFood(Ingredient.fromItem(Items.CARROT), 3, 3.6f);
-		registerFood(Ingredient.fromItem(Items.FISH), 2, 0.4f);
-		registerFood(Ingredient.fromItem(Items.COOKED_CHICKEN), 6, 7.2f);
-		registerFood(Ingredient.fromItem(Items.COOKED_FISH), 5, 6f);
-		registerFood(Ingredient.fromItem(Items.COOKED_MUTTON), 6, 9.6f);
-		registerFood(Ingredient.fromItem(Items.COOKED_PORKCHOP), 8, 12.8f);
-		registerFood(Ingredient.fromItem(Items.COOKED_BEEF), 7, 12.8f);
-		registerFood(Ingredient.fromItem(Items.COOKED_RABBIT), 5, 6f);
-		registerFood(speckledMelon, 3, 7.6f);
-		registerFood(goldenApple, 4, 9.6f);
-		registerFood(goldenCarrot, 6, 14.4f);
-		registerFood(Ingredient.fromItem(Items.MELON), 2, 1.2f);
-		registerFood(potato, 1, 0.6f);
-		registerFood(Ingredient.fromItem(Items.BEEF), 3, 1.8f);
-		registerFood(Ingredient.fromItem(Items.CHICKEN), 2, 1.2f);
-		registerFood(Ingredient.fromItem(Items.MUTTON), 2, 1.2f);
-		registerFood(Ingredient.fromItem(Items.RABBIT), 3, 1.8f);
-		registerFood(Ingredient.fromItem(Items.WHEAT_SEEDS), 2, 1f);
-		registerFood(Ingredient.fromItem(Items.PUMPKIN_SEEDS), 2, 1.3f);
-		registerFood(Ingredient.fromItem(Items.MELON_SEEDS), 2, 1.2f);
-		registerFood(Ingredient.fromItem(Items.BEETROOT_SEEDS), 2, 1.1f);
-		registerFood(egg, 2, 1.2f);
-		registerFood(sugar, 1, 0.5f);
-		registerFood(garlic, 2, 0.8f);
-		registerFood(new IngredientMultiOreDict("cropSeaweed", "cropKelp"), 4, 3.3f);
-		registerFood(salt, 1, 0.5f);
-		registerFood(Ingredient.fromItem(ModItems.mint), 1, 0.7f);
-		registerFood(Ingredient.fromItem(ModItems.tulsi), 1, 0.7f);
-		registerFood(new IngredientMultiOreDict("cropGinger"), 3, 0.9f);
-		registerFood(Ingredient.fromItem(ModItems.lavender), 1, 0.6f);
-		registerFood(wormwood, 1, 0.8f);
-		registerFood(Ingredient.fromItem(ModItems.white_sage), 2, 0.9f);
-		registerFood(new IngredientMultiOreDict("dropHoney", "honeyDrop", "foodHoneydrop"), 2, 1.3f);
-		registerFood(Ingredient.fromItem(ModItems.heart), 6, 6.6f);
-		registerFood(Ingredient.fromItem(ModItems.tongue_of_dog), 4, 4.4f);
-		registerFood(Ingredient.fromItem(Items.ROTTEN_FLESH), 2, 1.4f);
-		registerFood(new IngredientMultiOreDict("listAllvenisoncooked"), 7, 11.9f);
-		registerFood(new IngredientMultiOreDict("listAllturkeycooked"), 6, 8.3f);
-		registerFood(new IngredientMultiOreDict("listAllbeefcooked"), 7, 12.8f);
-		registerFood(new IngredientMultiOreDict("listAllchickencooked"), 6, 7.2f);
-		registerFood(new IngredientMultiOreDict("listAllporkcooked"), 8, 12.8f);
-		registerFood(new IngredientMultiOreDict("listAllmuttoncooked"), 6, 9.6f);
-		registerFood(new IngredientMultiOreDict("listAllrabbitcooked"), 5, 6f);
-		registerFood(new IngredientMultiOreDict("listAllfishcooked"), 5, 6f);
 
 		newRecipe("cleanPiston")
 			.addInput(stickyPiston, 1)
@@ -439,10 +330,6 @@ public class CauldronRegistry {
 			return;
 		}
 		throw new IllegalArgumentException(potion + " is not an IBrewEffect. Use CovensAPI#registerBrewEffect to register them as separate objects");
-	}
-
-	private static void registerFood(Ingredient ingredient, int hunger, float saturation) {
-		registerFoodValue(ingredient, new CauldronFoodValue(hunger, saturation));
 	}
 
 	public static Optional<ICauldronRecipe> getCraftingResult(FluidStack fluidStack, NonNullList<ItemStack> inputs) {

@@ -4,12 +4,11 @@ import com.covens.common.tile.tiles.TileEntityCauldron;
 
 public class DefaultBehaviours {
 
-	public ICauldronBehaviour IDLE, FAILING, BREWING, STEW, CRAFTING, CLEANING, LAVA;
+	public ICauldronBehaviour IDLE, FAILING, BREWING, CRAFTING, CLEANING, LAVA;
 
 	public void init(TileEntityCauldron tile) {
 		this.IDLE = new CauldronBehaviourIdle();
 		this.LAVA = new CauldronBehaviourLava();
-		this.STEW = new CauldronBehaviourStew();
 		this.FAILING = new CauldronBehaviourFailing();
 		this.CLEANING = new CauldronBehaviourClean();
 		this.BREWING = new CauldronBehaviourBrewing();
@@ -17,7 +16,6 @@ public class DefaultBehaviours {
 
 		this.IDLE.setCauldron(tile);
 		this.LAVA.setCauldron(tile);
-		this.STEW.setCauldron(tile);
 		this.FAILING.setCauldron(tile);
 		this.CLEANING.setCauldron(tile);
 		this.BREWING.setCauldron(tile);
@@ -25,7 +23,6 @@ public class DefaultBehaviours {
 
 		tile.addBehaviour(this.IDLE);
 		tile.addBehaviour(this.LAVA);
-		tile.addBehaviour(this.STEW);
 		tile.addBehaviour(this.FAILING);
 		tile.addBehaviour(this.CLEANING);
 		tile.addBehaviour(this.BREWING);
