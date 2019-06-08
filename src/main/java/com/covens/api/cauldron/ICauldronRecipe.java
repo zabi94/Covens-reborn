@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import zabi.minecraft.minerva.common.crafting.NumberedInput;
 
@@ -20,10 +21,28 @@ public interface ICauldronRecipe {
 	public ResourceLocation getRegistryName();
 	
 	/**
-	 * @param in The fluid currently present inside the cauldron, before any processing
-	 * @return true if the fluid matches this recipe, false otherwise. This should match both the fluid type <b>and</b> the fluid amount
+	 * @return a list of fluids that can trigger this recipe
 	 */
-	public boolean isValidFluid(FluidStack in);
+	public List<Fluid> getInputFluid();
+	
+	/**
+	 * @return the amount of fluid required by the recipe
+	 */
+	public int getMinimumFluid();
+	
+	/**
+	 * @return the maximum amount of fluid allowed by the recipe
+	 */
+	default int getMaximumFluid() {
+		return getMinimumFluid();
+	}
+	
+	/**
+	 * By default the output fluid will have the same amount of the fluid inside the cauldron.
+	 * 
+	 * @return the output fluid to replace the one in the cauldron
+	 */
+	public Fluid getOutputFluid();
 	
 	/**
 	 * @return a list of inputs to match exactly for this recipe to work. Order is irrelevant.
@@ -31,14 +50,16 @@ public interface ICauldronRecipe {
 	public List<NumberedInput> getInputList();
 	
 	/**
-	 * Mainly used to provide JEI and book representation
+	 * This method should be used to decide what to show in JEI, so you can have a 
+	 * pre-formatted output here, and modify the actual output through {@link ICauldronRecipe#processOutput(List, FluidStack)}
 	 * 
-	 * @return a list with an element for each stack the output contains. The element should be another list with
-	 * all the stacks accepted for that element
+	 * @return a simple item to be spit out by the cauldron
 	 */
-	public List<List<ItemStack>> getOutputList();
+	public ItemStack getOutput();
 	
 	/**
+	 * This is the chance to apply NBT to the fluid
+	 * 
 	 * @param input The itemstacks used to trigger this recipe
 	 * @param fluid The fluid present in the cauldron <i>before</i> this recipe is processed
 	 * @return the fluidstack that should be left in the cauldron after this recipe has been processed
@@ -46,11 +67,15 @@ public interface ICauldronRecipe {
 	public FluidStack processFluid(List<ItemStack> input, FluidStack fluid);
 	
 	/**
+	 * This is the chance to apply NBT or other item transformations to the output
+	 * 
 	 * @param input The itemstacks used to trigger this recipe
 	 * @param fluid The fluid present in the cauldron <i>before</i> this recipe is processed
-	 * @return a list of ItemStacks to be spit out from the cauldron after this recipe has been processed
+	 * @return the ItemStack to be produced by this recipe 
 	 */
-	public List<ItemStack> getOutputs(List<ItemStack> input, FluidStack fluid);
+	default ItemStack processOutput(List<ItemStack> input, FluidStack fluid) {
+		return getOutput();
+	}
 	
 	/**
 	 * @param input The itemstacks used to trigger this recipe
@@ -59,8 +84,4 @@ public interface ICauldronRecipe {
 	 */
 	public int getMPRequired(List<ItemStack> input, FluidStack fluid);
 	
-	/**
-	 * @return a list of fluids that should be shown in JEI and books
-	 */
-	public List<FluidStack> getJEIFluidCache();
 }

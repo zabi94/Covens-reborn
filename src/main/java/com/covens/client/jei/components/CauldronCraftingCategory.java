@@ -23,7 +23,7 @@ public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftin
 	private static ResourceLocation rl = new ResourceLocation(LibMod.MOD_ID, "textures/gui/jei_cauldron_crafting.png");
 
 	public CauldronCraftingCategory(IGuiHelper igh) {
-		this.bg = igh.drawableBuilder(rl, 0, 0, 120, 88).setTextureSize(120, 88).build();
+		this.bg = igh.drawableBuilder(rl, 0, 0, 120, 108).setTextureSize(120, 108).build();
 	}
 
 	@Override
@@ -50,25 +50,22 @@ public class CauldronCraftingCategory implements IRecipeCategory<CauldronCraftin
 	public void setRecipe(IRecipeLayout recipeLayout, CauldronCraftingWrapper recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup is = recipeLayout.getItemStacks();
 		recipeLayout.setShapeless();
-		List<List<ItemStack>> isList = recipeWrapper.getOriginal().getJEIItemStacksInput();
-		int lastAdded = 0;
+		List<List<ItemStack>> isList = ingredients.getInputs(VanillaTypes.ITEM);
 		for (int i = 0; i < isList.size(); i++) {
-			is.init(i + 3, true, (18 * i) + ((120 - (18 * isList.size())) / 2), 5);
+			is.init(i + 3, true, (18 * i) + ((120 - (18 * isList.size())) / 2), 2);
 			is.set(i + 3, isList.get(i));
-			lastAdded++;
 		}
 		IGuiFluidStackGroup fs = recipeLayout.getFluidStacks();
-		fs.init(0, true, 52, 30);
-		fs.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0).get(0));
-
-		for (List<ItemStack> isl:recipeWrapper.getOriginal().getOutputList()) {
-			lastAdded++;
-			is.init(lastAdded, false, 72, 67);
-			is.set(lastAdded, isl);
+		fs.init(0, true, 52, 26);
+		fs.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
+		if (recipeWrapper.hasItems()) {
+			is.init(1, false, 51, 90);
+			is.set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0)); 
 		}
-
-		fs.init(2, false, 31, 65);
-		fs.set(2, recipeWrapper.getOriginal().getJEIFluidCache());
+		if (recipeWrapper.hasFluid()) {
+			fs.init(2, false, 52, 62);
+			fs.set(2, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
+		}
 	}
 
 }

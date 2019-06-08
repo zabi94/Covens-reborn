@@ -3,9 +3,7 @@ package com.covens.common.content.cauldron;
 import static com.covens.common.lib.LibIngredients.*;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -45,7 +43,7 @@ public class CauldronRegistry {
 
 	public static final HashBiMap<IBrewEffect, Potion> BREW_POTION_MAP = HashBiMap.<IBrewEffect, Potion>create(90);
 	public static final IForgeRegistry<IBrewModifier> BREW_MODIFIERS = new RegistryBuilder<IBrewModifier>().setName(new ResourceLocation(LibMod.MOD_ID, "brew modifiers")).setIDRange(0, 200).setType(IBrewModifier.class).create();
-	public static final ArrayList<CauldronRecipe.Wrapper> CRAFTING_REGISTRY = new ArrayList<>();
+	public static final ArrayList<ICauldronRecipe> CRAFTING_REGISTRY = new ArrayList<>();
 	private static final HashMap<Ingredient, IBrewEffect> BREW_INGREDIENT_REGISTRY = new HashMap<>();
 
 
@@ -109,30 +107,33 @@ public class CauldronRegistry {
 
 		newRecipe("cleanPiston")
 			.addInput(stickyPiston, 1)
-			.setValidFluid(FluidRegistry.WATER)
+			.addFluidInput(FluidRegistry.WATER)
 			.setRequiredPower(0)
-			.addOutput(new ItemStack(Blocks.PISTON))
+			.setOutput(new ItemStack(Blocks.PISTON))
+			.drainFlatAmount(FluidRegistry.WATER, Fluid.BUCKET_VOLUME/4)
 			.buildAndRegister();
 		
 		newRecipe("wetSponge")
 			.addInput(sponge, 1)
-			.setValidFluid(FluidRegistry.WATER)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
+			.addFluidInput(FluidRegistry.WATER)
 			.setRequiredPower(0)
-			.addOutput(new ItemStack(Blocks.SPONGE, 1, 1))
+			.setOutput(new ItemStack(Blocks.SPONGE, 1, 1))
 			.buildAndRegister();
 		
 		newRecipe("combToHoney")
 			.addInput(honeycomb, 2)
-			.setValidFluid(FluidRegistry.WATER)
+			.addFluidInput(FluidRegistry.WATER)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.setOutputFluidFixedAmount(ModFluids.HONEY, Fluid.BUCKET_VOLUME)
-			.addOutput(new ItemStack(ModItems.empty_honeycomb, 2))
+			.setOutput(new ItemStack(ModItems.empty_honeycomb, 2))
 			.setRequiredPower(200)
 			.buildAndRegister();
 		
 		newRecipe("oil")
 			.addInput(potato, 2)
 			.addInput(sunflower, 1)
-			.setValidFluid(FluidRegistry.WATER)
+			.setOutputFluidConvertingExisitingAmount(FluidRegistry.WATER)
 			.setOutputFluidFixedAmount(ModFluids.MUNDANE_OIL, Fluid.BUCKET_VOLUME)
 			.setRequiredPower(0)
 			.buildAndRegister();
@@ -140,17 +141,19 @@ public class CauldronRegistry {
 		for (int i = 0; i < 16; i++) {
 			newRecipe("clearBanner"+i)
 				.addInput(Ingredient.fromStacks(new ItemStack(Items.BANNER, 1, i)), 1)
-				.addOutput(new ItemStack(Items.BANNER, 1, i))
-				.setValidFluid(FluidRegistry.WATER)
+				.setOutput(new ItemStack(Items.BANNER, 1, i))
+				.addFluidInput(FluidRegistry.WATER)
+				.drainFlatAmount(FluidRegistry.WATER, Fluid.BUCKET_VOLUME/4)
 				.setRequiredPower(0)
 				.buildAndRegister();
 		}
 		
 		newRecipe("wax")
 			.addInput(empty_honeycomb, 1)
-			.setValidFluid(FluidRegistry.WATER, Fluid.BUCKET_VOLUME/4)
+			.addFluidInput(FluidRegistry.WATER)
+			.drainFlatAmount(FluidRegistry.WATER, Fluid.BUCKET_VOLUME/4)
 			.setRequiredPower(100)
-			.addOutput(new ItemStack(ModItems.wax))
+			.setOutput(new ItemStack(ModItems.wax))
 			.buildAndRegister();
 		
 		newRecipe("fillGoblet")
@@ -158,8 +161,9 @@ public class CauldronRegistry {
 			.addInput(redstone, 5)
 			.addInput(ghastTear, 1)
 			.addInput(fumeCloudyOil, 1)
-			.addOutput(new ItemStack(ModBlocks.goblet, 1, 1))
-			.setValidFluid(FluidRegistry.WATER)
+			.setOutput(new ItemStack(ModBlocks.goblet, 1, 1))
+			.addFluidInput(FluidRegistry.WATER)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.setRequiredPower(6000)
 			.buildAndRegister();
 		
@@ -167,34 +171,38 @@ public class CauldronRegistry {
 			.addInput(normalRitualChalk, 1)
 			.addInput(blazePowder, 4)
 			.addInput(fumeFieryBreeze, 2)
-			.addOutput(new ItemStack(ModItems.ritual_chalk_nether))
-			.setValidFluid(ModFluids.MUNDANE_OIL)
+			.setOutput(new ItemStack(ModItems.ritual_chalk_nether))
+			.addFluidInput(ModFluids.MUNDANE_OIL)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.setRequiredPower(3000)
 			.buildAndRegister();
 		
 		newRecipe("enderChalk")
-			.setValidFluid(FluidRegistry.WATER)
-			.addOutput(new ItemStack(ModItems.ritual_chalk_ender))
+			.addFluidInput(FluidRegistry.WATER)
+			.setOutput(new ItemStack(ModItems.ritual_chalk_ender))
 			.addInput(normalRitualChalk, 1)
 			.addInput(dimensionalSand, 4)
 			.addInput(fumeHeavenlyWind, 2)
 			.setRequiredPower(3000)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.buildAndRegister();
 		
 		newRecipe("goldenChalk")
-			.setValidFluid(ModFluids.HONEY)
-			.addOutput(new ItemStack(ModItems.ritual_chalk_golden))
+			.addFluidInput(ModFluids.HONEY)
+			.setOutput(new ItemStack(ModItems.ritual_chalk_golden))
 			.addInput(normalRitualChalk, 1)
 			.addInput(goldNugget, 4)
 			.addInput(fumeCleansingAura, 2)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.setRequiredPower(3000)
 			.buildAndRegister();
 
 		newRecipe("graveyardDirt")
-			.setValidFluid(FluidRegistry.WATER)
-			.addOutput(new ItemStack(ModBlocks.graveyard_dirt, 8))
+			.addFluidInput(FluidRegistry.WATER)
+			.setOutput(new ItemStack(ModBlocks.graveyard_dirt, 8))
 			.addInput(wormwood, 2)
 			.addInput(dirt, 8)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.addInput(graveyardDust, 2)
 			.setRequiredPower(4000)
 			.buildAndRegister();
@@ -202,17 +210,19 @@ public class CauldronRegistry {
 		newRecipe("emberGrass")
 			.addInput(blazePowder, 2)
 			.addInput(wormwood, 2)
-			.addOutput(new ItemStack(ModBlocks.ember_grass, 2))
-			.setValidFluid(ModFluids.MUNDANE_OIL)
+			.setOutput(new ItemStack(ModBlocks.ember_grass, 2))
+			.addFluidInput(ModFluids.MUNDANE_OIL)
 			.setRequiredPower(2000)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.buildAndRegister();
 		
 		newRecipe("torchwood")
 			.addInput(glowstoneDust, 2)
 			.addInput(anyLog, 1)
 			.addInput(anyLeaf, 1)
-			.addOutput(new ItemStack(ModBlocks.torchwood, 2))
-			.setValidFluid(ModFluids.MUNDANE_OIL)
+			.setOutput(new ItemStack(ModBlocks.torchwood, 2))
+			.addFluidInput(ModFluids.MUNDANE_OIL)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.setRequiredPower(2000)
 			.buildAndRegister();
 		
@@ -220,17 +230,19 @@ public class CauldronRegistry {
 			.addInput(vine, 3)
 			.addInput(fumeBottledMagic, 1)
 			.addInput(netherWart, 1)
-			.addOutput(new ItemStack(ModBlocks.spanish_moss, 3))
-			.setValidFluid(FluidRegistry.WATER)
+			.setOutput(new ItemStack(ModBlocks.spanish_moss, 3))
+			.addFluidInput(FluidRegistry.WATER)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.setRequiredPower(2000)
 			.buildAndRegister();
 			
 		newRecipe("chalk")
-			.setValidFluid(FluidRegistry.WATER)
+			.addFluidInput(FluidRegistry.WATER)
+			.setExactFluidAmount(Fluid.BUCKET_VOLUME)
 			.addInput(fumeBirchSoul, 1)
 			.addInput(clayBall, 1)
 			.addInput(sand, 2)
-			.addOutput(new ItemStack(ModItems.ritual_chalk_normal))
+			.setOutput(new ItemStack(ModItems.ritual_chalk_normal))
 			.setRequiredPower(3000)
 			.buildAndRegister();
 		
@@ -333,8 +345,8 @@ public class CauldronRegistry {
 	}
 
 	public static Optional<ICauldronRecipe> getCraftingResult(FluidStack fluidStack, NonNullList<ItemStack> inputs) {
-		for (CauldronRecipe.Wrapper cr: CRAFTING_REGISTRY) {
-			if (cr.isValidFluid(fluidStack) && cr.matches(inputs)) {
+		for (ICauldronRecipe cr: CRAFTING_REGISTRY) {
+			if (CauldronRecipe.matches(cr, inputs, fluidStack)) {
 				return Optional.of(cr);
 			}
 		}

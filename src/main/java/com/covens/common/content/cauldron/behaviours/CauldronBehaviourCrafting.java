@@ -76,7 +76,7 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 		if (isActiveBehaviour) {
 			boolean wasLowEnergy = this.lowEnergy;
 			if (this.validRecipe && (this.craftTime < MAX_CRAFT_TIME)) {
-				if (this.cauldron.getCapability(MPUsingMachine.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), this.currentRecipeMPCost)) {
+				if (this.cauldron.getCapability(MPUsingMachine.CAPABILITY, null).drainAltarFirst(null, this.cauldron.getPos(), this.cauldron.getWorld().provider.getDimension(), this.currentRecipeMPCost/MAX_CRAFT_TIME)) {
 					this.lowEnergy = false;
 				} else {
 					this.lowEnergy = true;
@@ -110,8 +110,8 @@ public class CauldronBehaviourCrafting implements ICauldronBehaviour {
 				this.cauldron.setTankLock(true);
 				CauldronFluidTank tank = (CauldronFluidTank) this.cauldron.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 				
-
-				for (ItemStack resultItem : result.getOutputs(this.cauldron.getInputs(), tank.getFluid())) {
+				ItemStack resultItem = result.processOutput(this.cauldron.getInputs(), tank.getFluid());
+				if (!resultItem.isEmpty()) {
 					EntityItem e = new EntityItem(this.cauldron.getWorld(), this.cauldron.getPos().getX() + 0.5, this.cauldron.getPos().getY() + 0.5, this.cauldron.getPos().getZ() + 0.5, resultItem);
 					e.addTag("cauldron_drop");
 					e.motionY = 0.06;

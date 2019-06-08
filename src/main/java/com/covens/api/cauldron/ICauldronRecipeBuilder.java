@@ -1,8 +1,6 @@
 package com.covens.api.cauldron;
 
-import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
+import com.covens.api.TriProcessor;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -16,19 +14,17 @@ public interface ICauldronRecipeBuilder {
 	
 	public ICauldronRecipeBuilder addInput(Ingredient in, int amount);
 	
-	public ICauldronRecipeBuilder addOutput(ItemStack out);
+	public ICauldronRecipeBuilder addFluidInput(Fluid fluid);
 	
-	public ICauldronRecipeBuilder addOutput(List<ItemStack> out);
+	public ICauldronRecipeBuilder drainFlatAmount(Fluid output, int amountDrained);
 	
-	public ICauldronRecipeBuilder setCustomFluidChecker(Predicate<FluidStack> checker);
+	public ICauldronRecipeBuilder setExactFluidAmount(int exactAmount);
 	
-	public ICauldronRecipeBuilder setValidFluid(Fluid fluid, int amount);
+	public ICauldronRecipeBuilder setMaxFluidAllowed(int maxAmount);
 	
-	public ICauldronRecipeBuilder setValidFluid(Predicate<Fluid> fluid, int amount);
+	public ICauldronRecipeBuilder setMinFluidRequired(int minAmount);
 	
-	public ICauldronRecipeBuilder setValidFluid(Fluid fluid);
-	
-	public ICauldronRecipeBuilder setValidFluid(Predicate<Fluid> fluid, List<FluidStack> JEICache);
+	public ICauldronRecipeBuilder setOutput(ItemStack out);
 	
 	public ICauldronRecipeBuilder setRequiredPower(int amount);
 	
@@ -38,9 +34,9 @@ public interface ICauldronRecipeBuilder {
 	
 	public ICauldronRecipeBuilder setOutputFluidFixedAmount(Fluid fluid, int amount);
 	
-	public ICauldronRecipeBuilder setCustomOutputProcessor(BiFunction<List<ItemStack>, FluidStack, List<ItemStack>> processor);
+	public ICauldronRecipeBuilder setCustomOutputFluid(TriProcessor<FluidStack> processor);
 	
-	public ICauldronRecipeBuilder setCustomFluidProcessor(BiFunction<List<ItemStack>, FluidStack, FluidStack> processor, List<FluidStack> JEICache);
+	public ICauldronRecipeBuilder setCustomOutputProcessor(TriProcessor<ItemStack> processor);
 	
 	public ICauldronRecipe build();
 	

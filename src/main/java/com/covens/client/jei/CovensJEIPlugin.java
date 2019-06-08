@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
+import com.covens.api.cauldron.ICauldronRecipe;
 import com.covens.client.jei.components.BrewModifierCategory;
 import com.covens.client.jei.components.BrewModifierWrapper;
 import com.covens.client.jei.components.BrewingCategory;
 import com.covens.client.jei.components.BrewingWrapper;
 import com.covens.client.jei.components.CauldronCraftingCategory;
+import com.covens.client.jei.components.CauldronCraftingWrapper;
 import com.covens.client.jei.components.DistilleryCategory;
 import com.covens.client.jei.components.DistilleryWrapper;
 import com.covens.client.jei.components.OvenCategory;
@@ -78,9 +80,9 @@ public class CovensJEIPlugin implements IModPlugin {
 		registry.addRecipes(CauldronRegistry.BREW_MODIFIERS.getValuesCollection(), BrewModifierCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.cauldron), BrewModifierCategory.UID);
 
-//		registry.handleRecipes(CauldronCraftingRecipe.class, CauldronCraftingWrapper::new, CauldronCraftingCategory.UID);
-//		registry.addRecipes(CauldronRegistry.CRAFTING_REGISTRY, CauldronCraftingCategory.UID);
-//		registry.addRecipeCatalyst(new ItemStack(ModBlocks.cauldron), CauldronCraftingCategory.UID);
+		registry.handleRecipes(ICauldronRecipe.class, CauldronCraftingWrapper::new, CauldronCraftingCategory.UID);
+		registry.addRecipes(CauldronRegistry.CRAFTING_REGISTRY, CauldronCraftingCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.cauldron), CauldronCraftingCategory.UID);
 
 		registry.handleRecipes(DistilleryRecipe.class, DistilleryWrapper::new, DistilleryCategory.UID);
 		registry.addRecipes(ModDistilleryRecipes.REGISTRY.getValuesCollection(), DistilleryCategory.UID);
