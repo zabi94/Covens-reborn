@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
-import com.covens.api.cauldron.ICauldronRecipe;
+import com.covens.api.cauldron.ICauldronCraftingRecipe;
 import com.covens.client.jei.components.BrewModifierCategory;
 import com.covens.client.jei.components.BrewModifierWrapper;
 import com.covens.client.jei.components.BrewingCategory;
@@ -80,7 +80,7 @@ public class CovensJEIPlugin implements IModPlugin {
 		registry.addRecipes(CauldronRegistry.BREW_MODIFIERS.getValuesCollection(), BrewModifierCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.cauldron), BrewModifierCategory.UID);
 
-		registry.handleRecipes(ICauldronRecipe.class, CauldronCraftingWrapper::new, CauldronCraftingCategory.UID);
+		registry.handleRecipes(ICauldronCraftingRecipe.class, CauldronCraftingWrapper::new, CauldronCraftingCategory.UID);
 		registry.addRecipes(CauldronRegistry.CRAFTING_REGISTRY, CauldronCraftingCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.cauldron), CauldronCraftingCategory.UID);
 

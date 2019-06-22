@@ -16,6 +16,7 @@ import com.covens.api.cauldron.IBrewModifierList;
 import com.covens.common.core.helper.Log;
 import com.covens.common.entity.EntityLingeringBrew;
 import com.covens.common.tile.tiles.TileEntityCauldron;
+import com.covens.common.tile.util.CauldronMode;
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.Entity;
@@ -200,13 +201,13 @@ public class BrewData implements INBTSerializable<NBTTagList>, IBrewData {
 	}
 
 	@Override
-	public int getCost() {
+	public int getCostPerTick() {
 		int cost = 0;
 		List<IBrewEntry> list = getEffects();
 		for (IBrewEntry be:list) {
 			cost += getCostFor(be);
 		}
-		return cost * list.size();
+		return cost * list.size() / CauldronMode.BREW_ABSORBING.work;
 	}
 
 	private int getCostFor(IBrewEntry be) {

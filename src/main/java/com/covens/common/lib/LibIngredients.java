@@ -135,4 +135,25 @@ public class LibIngredients {
 	public static Ingredient moonbell = Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.moonbell));
 	public static Ingredient netherWart = Ingredient.fromItem(Items.NETHER_WART);
 	public static Ingredient sunflower = Ingredient.fromStacks(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0));
+	public static Ingredient magmaCream = Ingredient.fromItem(Items.MAGMA_CREAM);
+	public static Ingredient rottenFlesh = Ingredient.fromItem(Items.ROTTEN_FLESH);
+	public static Ingredient fermentedSpiderEye = Ingredient.fromItem(Items.FERMENTED_SPIDER_EYE);
+	public static Ingredient equineTail = Ingredient.fromItem(ModItems.equine_tail);
+	public static Ingredient spiderEye = Ingredient.fromItem(Items.SPIDER_EYE);
+	public static Ingredient a3 = Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 3)); //TODO what's this?
+	public static Ingredient rabbitHide = Ingredient.fromItem(Items.RABBIT_HIDE);
+	public static Ingredient belladonna = Ingredient.fromItem(ModItems.belladonna);
+	public static Ingredient lavender = Ingredient.fromItem(ModItems.lavender);
+	public static Ingredient heart = Ingredient.fromItem(ModItems.heart);
+	
+	public static Ingredient shulker_shell = Ingredient.fromItem(Items.SHULKER_SHELL);
+	public static Ingredient aconitum = Ingredient.fromItem(ModItems.aconitum);
+	public static Ingredient redMushroom = Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_MUSHROOM));
+	public static Ingredient chorusFruit = Ingredient.fromItem(Items.CHORUS_FRUIT);
+	public static Ingredient bone = Ingredient.fromItem(Items.BONE);
+	public static Ingredient silverScales = Ingredient.fromItem(ModItems.silver_scales);
+	public static Ingredient mintSeeds = Ingredient.fromItem(ModItems.seed_mint);
+	public static Ingredient thistle = Ingredient.fromItem(ModItems.thistle);
+	public static Ingredient ginger = Ingredient.fromItem(ModItems.ginger);
+	
 }

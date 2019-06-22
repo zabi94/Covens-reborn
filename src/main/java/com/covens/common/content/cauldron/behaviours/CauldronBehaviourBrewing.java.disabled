@@ -63,7 +63,7 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 			} else if (heldItem == ModItems.empty_brew_drink) {
 				potionAmountUsed = 300;
 			}
-			int cost = new BrewBuilder(this.cauldron.getInputs()).build().orElseGet(BrewData::new).getCost();
+			int cost = new BrewBuilder(this.cauldron.getInputs()).build().orElseGet(BrewData::new).getCostPerTick();
 			if ((finalized || this.hasEnergy(cost)) && this.hasRequiredFluidAmount(potionAmountUsed)) { // TODO make energy dependent on brew
 				finalized = true;
 				if (heldItem == ModItems.empty_brew_drink) {
@@ -149,7 +149,7 @@ public class CauldronBehaviourBrewing implements ICauldronBehaviour {
 			Optional<BrewData> data = new BrewBuilder(this.cauldron.getInputs()).build();
 			if (data.isPresent()) {
 				this.color = data.get().getColor();
-				this.projectedCost = data.get().getCost();
+				this.projectedCost = data.get().getCostPerTick();
 			} else {
 				this.cauldron.setBehaviour(this.cauldron.getDefaultBehaviours().FAILING);
 				this.projectedCost = 0;

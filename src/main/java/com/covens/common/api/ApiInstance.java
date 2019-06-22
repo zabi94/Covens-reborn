@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 import com.covens.api.CovensAPI;
 import com.covens.api.cauldron.IBrewEffect;
 import com.covens.api.cauldron.IBrewModifier;
-import com.covens.api.cauldron.ICauldronRecipe;
+import com.covens.api.cauldron.ICauldronCraftingRecipe;
 import com.covens.api.cauldron.ICauldronRecipeBuilder;
 import com.covens.api.divination.IFortune;
 import com.covens.api.event.TransformationModifiedEvent;
@@ -43,7 +43,7 @@ import com.covens.common.core.net.NetworkHandler;
 import com.covens.common.core.net.messages.EntityInternalBloodChanged;
 import com.covens.common.core.util.syncTasks.UnbindFamiliarFromPlayer;
 import com.covens.common.core.util.syncTasks.UnbindPlayerFromFamiliar;
-import com.covens.common.crafting.CauldronRecipe;
+import com.covens.common.crafting.CauldronRecipeBuilder;
 import com.covens.common.crafting.FrostFireRecipe;
 import com.covens.common.crafting.OvenSmeltingRecipe;
 import com.covens.common.crafting.SpinningThreadRecipe;
@@ -291,11 +291,11 @@ public class ApiInstance extends CovensAPI {
 
 	@Override
 	public ICauldronRecipeBuilder getNewCauldronRecipeBuilder(ResourceLocation id) {
-		return new CauldronRecipe.CauldronRecipeBuilder(id);
+		return new CauldronRecipeBuilder(id);
 	}
 	
 	@Override
-	public void registerCauldronRecipe(ICauldronRecipe recipe) {
+	public void registerCauldronRecipe(ICauldronCraftingRecipe recipe) {
 		CauldronRegistry.CRAFTING_REGISTRY.add(recipe);
 	}
 

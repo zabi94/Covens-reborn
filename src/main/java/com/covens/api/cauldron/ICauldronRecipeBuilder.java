@@ -14,32 +14,22 @@ public interface ICauldronRecipeBuilder {
 	
 	public ICauldronRecipeBuilder addInput(Ingredient in, int amount);
 	
-	public ICauldronRecipeBuilder addFluidInput(Fluid fluid);
-	
-	public ICauldronRecipeBuilder drainFlatAmount(Fluid output, int amountDrained);
-	
-	public ICauldronRecipeBuilder setExactFluidAmount(int exactAmount);
-	
-	public ICauldronRecipeBuilder setMaxFluidAllowed(int maxAmount);
-	
-	public ICauldronRecipeBuilder setMinFluidRequired(int minAmount);
+	public ICauldronRecipeBuilder setFluidInput(Fluid fluid);
 	
 	public ICauldronRecipeBuilder setOutput(ItemStack out);
 	
 	public ICauldronRecipeBuilder setRequiredPower(int amount);
 	
-	public ICauldronRecipeBuilder setOutputFluidConvertingExisitingAmount(Fluid fluid);
+	public ICauldronRecipeBuilder setOutputFluid(Fluid fluid);
 	
-	public ICauldronRecipeBuilder setConsumeAllFluid();
-	
-	public ICauldronRecipeBuilder setOutputFluidFixedAmount(Fluid fluid, int amount);
+	public ICauldronRecipeBuilder setFluidConsumed(int amount);
 	
 	public ICauldronRecipeBuilder setCustomOutputFluid(TriProcessor<FluidStack> processor);
 	
 	public ICauldronRecipeBuilder setCustomOutputProcessor(TriProcessor<ItemStack> processor);
 	
-	public ICauldronRecipe build();
+	public ICauldronCraftingRecipe build();
 	
-	public ICauldronRecipe buildAndRegister();
+	public ICauldronCraftingRecipe buildAndRegister();
 
 }
