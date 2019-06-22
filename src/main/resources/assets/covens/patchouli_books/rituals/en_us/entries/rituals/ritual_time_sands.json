@@ -1,0 +1,17 @@
+{
+  "name": "Ritual of the Sands of Time",
+  "icon": "covens:ritual_chalk_normal",
+  "category": "rituals",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "ritual",
+      "ritual": "covens:time_sands"
+    },
+    {
+      "type": "text",
+      "title": "",
+      "text": "Differently from the $(l:rituals/ritual_high_moon)Ritual of the High Moon$(), this ritual will only speed the planetary movements up, by beaconing the magical energy up in the sky. This comes at a slightly more expensive cost."
+    }
+  ]
+}

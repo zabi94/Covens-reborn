@@ -2,6 +2,7 @@
   "name": "Circle magic",
   "icon": "covens:ritual_chalk_golden",
   "category": "rituals",
+  "sortnum": -2,
   "pages": [
     {
       "type": "text",
@@ -13,12 +14,13 @@
     },
     {
       "type": "text",
-      "text": "specific requirements particular to that ritual, such as being casted during a full moon, with the presence of a fellow coven witch, specified on the ritual's entry. "
+      "text": "specific requirements particular to that ritual, such as being casted during a full moon, with the presence of a fellow coven witch, specified on the ritual's entry.<br>Finally, it is possible to also place items on nearby horizontal surfaces instead of dropping them uncerimoniously on the ground (Use the $(thing)$(k:description.place_item) key$())"
     },
     {
       "type": "multiblock",
       "name": "The small circle",
-      "multiblock_id": "covens:circle_small"
+      "multiblock_id": "covens:circle_small",
+      "text": "Some rituals will be shown with multicolored circles. That means any single color will work"
     },
     {
       "type": "multiblock",

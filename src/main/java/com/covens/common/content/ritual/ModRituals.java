@@ -46,7 +46,7 @@ public class ModRituals {
 			.addInput(LibIngredients.sand)
 			.addInput(LibIngredients.diamondOre)
 			.withStartingPower(1000)
-			.withRunningTime(5)
+			.withTickCost(5)
 			.withAllCircles(NORMAL)
 			.neverEnding()
 			.disallowRemote()

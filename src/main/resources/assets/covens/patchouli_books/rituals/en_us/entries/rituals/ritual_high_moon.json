@@ -1,0 +1,17 @@
+{
+  "name": "Ritual of the High Moon",
+  "icon": "covens:ritual_chalk_normal",
+  "category": "rituals",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "ritual",
+      "ritual": "covens:high_moon"
+    },
+    {
+      "type": "text",
+      "title": "",
+      "text": "The ritual of the High Moon will call upon the power of the shadows to quickly turn daytime into night time.$(2br)It is obvious that this rite won't have any effect when the night is already vigilant on the land."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Ritual of Perception",
+  "icon": "covens:ritual_chalk_normal",
+  "category": "rituals",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "ritual",
+      "ritual": "covens:perception"
+    },
+    {
+      "type": "text",
+      "title": "",
+      "text": "Being around the focus of this ritual will cause living and supernatural creatures to emanate energies that are clear to everyone, allowing them to be seen behind walls and other creatures."
+    }
+  ]
+}

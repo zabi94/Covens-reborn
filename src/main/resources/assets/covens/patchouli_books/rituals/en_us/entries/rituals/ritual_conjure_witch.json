@@ -1,0 +1,17 @@
+{
+  "name": "Ritual of Conjuration: Witch",
+  "icon": "covens:ritual_chalk_nether",
+  "category": "rituals",
+  "sortnum": 33,
+  "pages": [
+    {
+      "type": "ritual",
+      "ritual": "covens:conjure_witch"
+    },
+    {
+      "type": "text",
+      "title": "",
+      "text": "This rituals conjures both the spirit and the flesh of a deceased witch back to the world of the living. Beware!"
+    }
+  ]
+}

@@ -34,10 +34,7 @@ public class RitualProcessor implements IComponentProcessor {
 				return this.getOutput(val.substring(6));
 			}
 			if ("tick_cost".equals(val)) {
-				if (ritual.getRunningPower() <= 0 || ritual.getTime() <= 0) {
-					return "0";
-				}
-				return I18n.format("ritual.cost_equation", ritual.getRunningPower()*20, ritual.getTime()/20);
+				return ""+ritual.getRunningPower();
 			}
 			if ("start_cost".equals(val)) {
 				return ""+ritual.getRequiredStartingPower();
