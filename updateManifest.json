@@ -4,7 +4,7 @@
     "0.0.28": "Log not provided"
   },
   "promos": {
-    "1.12.2-latest": "0.0.28",
-    "1.12.2-recommended": "0.0.28"
+    "1.12.2-latest": "0.1.0",
+    "1.12.2-recommended": "0.1.0"
   }
 }
