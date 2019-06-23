@@ -3,7 +3,6 @@ package com.covens.common.content.ritual;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -29,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
-import zabi.minecraft.minerva.common.crafting.InputCounter;
+import zabi.minecraft.minerva.common.crafting.ExactRecipeHelper;
 import zabi.minecraft.minerva.common.crafting.NumberedInput;
 
 public class AdapterIRitual implements IForgeRegistryEntry<AdapterIRitual> {
@@ -97,25 +96,7 @@ public class AdapterIRitual implements IForgeRegistryEntry<AdapterIRitual> {
 	}
 
 	public boolean isValidInput(List<ItemStack> ground, boolean circles) {
-		List<InputCounter> counters = input.parallelStream().map(ni -> ni.getCounter()).collect(Collectors.toList());
-		for (ItemStack is:ground) {
-			boolean found = false;
-			for (InputCounter ic:counters) {
-				if (ic.count(is)) {
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
-				return false;
-			}
-		}
-		for (InputCounter ic:counters) {
-			if (!ic.isExact()) {
-				return false;
-			}
-		}
-		return circles;
+		return circles && ExactRecipeHelper.matches(ground, input);
 	}
 	
 	@SideOnly(Side.CLIENT)
