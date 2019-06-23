@@ -26,9 +26,12 @@ public class BloodViewerHUD implements IHudComponent {
 		if (m == RenderMode.NORMAL) {
 			IBloodReserve ibr = Minecraft.getMinecraft().pointedEntity.getCapability(CapabilityBloodReserve.CAPABILITY, null);
 			filled = ibr.getPercentFilled();
+			GlStateManager.color(filled, filled, filled, 1);
+		} else {
+			GlStateManager.color(filled, filled, filled);
 		}
+		
 		GlStateManager.pushMatrix();
-		GlStateManager.color(filled, filled, filled);
 		GlStateManager.enableAlpha();
 		Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
 		GuiScreen.drawScaledCustomSizeModalRect(x, y, 0, 0, w, h, 10, 14, w, h);

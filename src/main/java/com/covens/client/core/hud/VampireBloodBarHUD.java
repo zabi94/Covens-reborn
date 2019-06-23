@@ -56,6 +56,7 @@ public class VampireBloodBarHUD implements IHudComponent {
 				blood = v_data.getBlood() / (double) v_data.getMaxBlood(Minecraft.getMinecraft().player);
 				level = t_data.getLevel();
 			}
+			GlStateManager.color(1, 1, 1, 1);
 		}
 		GlStateManager.pushMatrix();
 		Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
