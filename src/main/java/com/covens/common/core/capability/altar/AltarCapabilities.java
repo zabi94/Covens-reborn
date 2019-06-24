@@ -159,7 +159,7 @@ public class AltarCapabilities {
 
 	public static void loadObjects() {
 		add(Blocks.TORCH, new GainProvider(1));
-		add(Blocks.DIAMOND_BLOCK, new MixedProvider(999, 200));
+//		add(Blocks.DIAMOND_BLOCK, new MixedProvider(999, 200));
 
 		add(TileEntityFlowerPot.class, t -> new FlowerPotProvider((TileEntityFlowerPot) t), s -> ImmutableList.of(new FakeProvider(false, true, "altar.effect.tooltip.needs_plant")), Items.FLOWER_POT);
 		add(TileEntitySkull.class, t -> new SkullProvider((TileEntitySkull) t), s -> ImmutableList.of(new FakeProvider(true, true)), Items.SKULL);
