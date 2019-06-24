@@ -137,8 +137,7 @@ item.vampire_pants.effect=Drinking blood is easier, entities won't look at you
 
 item.athame.name=Athame
 item.boline.name=Boline
-item.mortar_and_pestle.name=Mortar and Pestle
-item.mortar_and_pestle_stone.name=Stone Mortar and Pestle
+item.mortar_and_pestle_stone.name=Mortar and Pestle
 item.taglock.name=Taglock Kit (WIP)
 item.needle_bone.name=Bone Needle
 

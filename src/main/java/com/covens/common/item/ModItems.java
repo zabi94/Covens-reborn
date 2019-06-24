@@ -164,7 +164,6 @@ public final class ModItems {
 	public static final Item silver_ingot = null;
 	public static final Item silver_powder = null;
 	public static final Item silver_nugget = null;
-	public static final Item mortar_and_pestle = null;
 	public static final Item mortar_and_pestle_stone = null;
 	public static final Item athame = null;
 	public static final Item boline = null;
@@ -328,7 +327,6 @@ public final class ModItems {
 				new ItemMod(LibItemName.WAX), // 
 				new ItemMod(LibItemName.HONEYCOMB), // 
 				new ItemMod(LibItemName.EMPTY_HONEYCOMB), // 
-				new ItemMortar(LibItemName.MORTAR_AND_PESTLE), // 
 				new ItemMortar(LibItemName.MORTAR_AND_PESTLE_STONE), // 
 				new ItemBrewDrinkable(), // 
 				new ItemBrewThrowable(LibItemName.BREW_PHIAL_SPLASH), // 

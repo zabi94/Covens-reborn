@@ -61,7 +61,7 @@ public final class ModCreativeTabs {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public ItemStack getIcon() {
-			return new ItemStack(ModItems.mortar_and_pestle);
+			return new ItemStack(ModItems.athame);
 		}
 	}
 
