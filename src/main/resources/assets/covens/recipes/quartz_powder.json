@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "item": "covens:mortar_and_pestle_stone",
-      "data": 0
+      "data": 32767
     },
     {
       "type": "forge:ore_dict",

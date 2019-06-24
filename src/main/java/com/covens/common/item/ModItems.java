@@ -56,6 +56,7 @@ import com.covens.common.item.tool.ItemColdIronHoe;
 import com.covens.common.item.tool.ItemColdIronPickaxe;
 import com.covens.common.item.tool.ItemColdIronSpade;
 import com.covens.common.item.tool.ItemColdIronSword;
+import com.covens.common.item.tool.ItemMortar;
 import com.covens.common.item.tool.ItemSilverAxe;
 import com.covens.common.item.tool.ItemSilverHoe;
 import com.covens.common.item.tool.ItemSilverPickaxe;
@@ -327,8 +328,8 @@ public final class ModItems {
 				new ItemMod(LibItemName.WAX), // 
 				new ItemMod(LibItemName.HONEYCOMB), // 
 				new ItemMod(LibItemName.EMPTY_HONEYCOMB), // 
-				new ItemMod(LibItemName.MORTAR_AND_PESTLE), // 
-				new ItemMod(LibItemName.MORTAR_AND_PESTLE_STONE), // 
+				new ItemMortar(LibItemName.MORTAR_AND_PESTLE), // 
+				new ItemMortar(LibItemName.MORTAR_AND_PESTLE_STONE), // 
 				new ItemBrewDrinkable(), // 
 				new ItemBrewThrowable(LibItemName.BREW_PHIAL_SPLASH), // 
 				new ItemBrewThrowable(LibItemName.BREW_PHIAL_LINGER), // 
