@@ -45,7 +45,7 @@ public class ItemRitualChalk extends ItemMod {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		boolean isReplacing = worldIn.getBlockState(pos).getBlock().equals(ModBlocks.ritual_glyphs) && (worldIn.getBlockState(pos).getValue(StateProperties.GLYPH_TYPE) != EnumGlyphType.GOLDEN);
-		if (!worldIn.isRemote && (((facing == EnumFacing.UP) && ModBlocks.ritual_glyphs.canPlaceBlockAt(worldIn, pos.up())) || isReplacing)) {
+		if (!worldIn.isRemote && ( (facing == EnumFacing.UP && worldIn.getBlockState(pos.up()).getBlock().isReplaceable(worldIn, pos.up())) || isReplacing)) {
 			ItemStack chalk = player.getHeldItem(hand);
 			if (!player.isCreative()) {
 				chalk.damageItem(1, player);
