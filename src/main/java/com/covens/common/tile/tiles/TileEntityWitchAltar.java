@@ -1,5 +1,6 @@
 package com.covens.common.tile.tiles;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,11 +12,20 @@ import com.covens.common.block.ModBlocks;
 import com.covens.common.block.tiles.BlockWitchAltar;
 import com.covens.common.block.tiles.BlockWitchAltar.AltarMultiblockType;
 import com.covens.common.core.capability.altar.AltarCapabilities;
+import com.covens.common.core.statics.ModConfig;
 import com.covens.common.item.tool.ItemAthame;
+import com.covens.common.item.tool.ItemBoline;
+import com.covens.common.item.tool.ItemColdIronSword;
+import com.covens.common.item.tool.ItemSilverSword;
+import com.covens.common.lib.LibIngredients;
 import com.google.common.collect.Lists;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,6 +37,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.Mod;
@@ -36,29 +47,24 @@ import zabi.minecraft.minerva.common.tileentity.ModTileEntity;
 @Mod.EventBusSubscriber
 public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 
-	private static final int RIGHT_CLICK_RECALCULATION_COOLDOWN = 200;
-
+	private static final int RADIUS = 12;
+	private static final int MAX_SCORE_PER_CATEGORY = 20;
+	
 	private List<UUID> swordItems = Lists.newArrayList();
 	private double multiplier = 1;
 	private DefaultMPContainer storage = new DefaultMPContainer(0);
-	private AltarScanHelper scanHelper;
 	private int gain = 1;
-	private int recalcCooldown = 0;
+	private int baseValue = 0;
+	private int refreshTimer = 0;
 	private EnumDyeColor color = EnumDyeColor.RED;
 
 	public TileEntityWitchAltar() {
-		this.scanHelper = new AltarScanHelper(this);
 	}
 
 	@Override
 	public void onLoad() {
 		if (!this.world.isRemote) {
-			this.scanHelper.forceFullScan();
 		}
-	}
-
-	public void scheduleUpgradeCheck() {
-		this.scanHelper.scheduleUpgradeCheck();
 	}
 
 	@Override
@@ -69,13 +75,13 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	@Override
 	public void update() {
 		if (!this.getWorld().isRemote) {
-			this.scanHelper.scanNature();
 			if (this.storage.getAmount() < this.storage.getMaxAmount()) {
 				this.storage.fill(this.gain);
 				this.markDirty();
 			}
-			if (this.recalcCooldown > 0) {
-				this.recalcCooldown--;
+			if (--refreshTimer < 0) {
+				refreshTimer = ModConfig.altar_scan_delay;
+				scanNature();
 			}
 			if (this.getSwordIds().contains(ItemAthame.ATHAME_UUID)) {
 				this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.pos).grow(5)).forEach(player -> {
@@ -87,6 +93,63 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 				});
 			}
 		}
+	}
+
+	private void scanNature() {
+		int radius_c = RADIUS;
+		if (this.getSwordIds().contains(ItemBoline.BOLINE_UUID)) {
+			radius_c += 2;
+		}
+		HashMap<Block, Integer> map = new HashMap<Block, Integer>();
+		BlockPos.MutableBlockPos.getAllInBox(this.pos.getX() - radius_c, this.pos.getY() - radius_c/2, this.pos.getZ() - radius_c, this.pos.getX() + radius_c, this.pos.getY() + radius_c/2, this.pos.getZ() + radius_c).forEach(bp -> {
+			int score = getPowerValue(bp, this.world);
+			if (score > 0) {
+				Block block = this.world.getBlockState(bp).getBlock();
+				int currentScore = 0;
+				if (map.containsKey(block)) {
+					currentScore = map.get(block);
+				}
+				int max_score = MAX_SCORE_PER_CATEGORY;
+				if (getSwordIds().contains(ItemColdIronSword.COLD_IRON_UUID)) {
+					max_score += 10;
+				}
+				if (currentScore < max_score) {
+					map.put(block, currentScore + score);
+				}
+			}
+		});
+		this.refreshUpgrades();
+		int maxPower = map.values().parallelStream().reduce(0, (a, b) -> a + b);
+		int varietyMultiplier = 40;
+		if (getSwordIds().contains(ItemSilverSword.SILVER_UUID)) {
+			varietyMultiplier = 50;
+		}
+		maxPower += (map.keySet().size() * varietyMultiplier); // Variety is the most important thing
+		baseValue = maxPower;
+		this.getCapability(MPContainer.CAPABILITY, null).setMaxAmount((int) (maxPower * this.getMultiplier()));
+		map.clear();
+		this.markDirty();
+	}
+	
+	private static int getPowerValue(BlockPos add, World world) {
+		IBlockState blockState = world.getBlockState(add);
+		Block block = blockState.getBlock();
+		if (block.equals(Blocks.AIR)) {
+			return 0;
+		}
+		if (block instanceof IPlantable || block instanceof IGrowable) {
+			return 30;
+		}
+		if (blockState.getMaterial() == Material.LEAVES) {
+			return 8;
+		}
+		ItemStack stack = new ItemStack(blockState.getBlock());
+		if (!stack.isEmpty()) {
+			if (LibIngredients.anyLog.apply(stack)) {
+				return 15;
+			}
+		}
+		return 0;
 	}
 
 	public void refreshUpgrades() {
@@ -111,6 +174,7 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		if (multiplier < 0) {
 			multiplier = 0;
 		}
+		this.getCapability(MPContainer.CAPABILITY, null).setMaxAmount((int) (baseValue * multiplier));
 		this.markDirty();
 	}
 
@@ -222,13 +286,14 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 	protected void writeAllModDataNBT(NBTTagCompound tag) {
 		tag.setTag("mp", this.storage.saveNBTTag());
 		tag.setInteger("gain", this.gain);
+		tag.setInteger("baseValue", baseValue);
+		tag.setInteger("refreshTimer", refreshTimer);
 		final NBTTagList list = new NBTTagList();
 		swordItems.forEach(id -> {
 			list.appendTag(UUIDs.toNBT(id));
 		});
 		tag.setTag("swords", list);
 		tag.setDouble("multiplier", this.multiplier);
-		tag.setInteger("recalcCooldown", this.recalcCooldown);
 		this.writeModSyncDataNBT(tag);
 	}
 
@@ -237,8 +302,9 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 		this.storage.loadFromNBT(tag.getCompoundTag("mp"));
 		this.gain = tag.getInteger("gain");
 		this.multiplier = tag.getDouble("multiplier");
-		this.recalcCooldown = tag.getInteger("recalcCooldown");
 		this.swordItems.clear();
+		this.baseValue = tag.getInteger("baseValue");
+		this.refreshTimer = tag.getInteger("refreshTimer");
 		tag.getTagList("swords", NBT.TAG_COMPOUND).forEach(base -> swordItems.add(UUIDs.fromNBT((NBTTagCompound) base)));
 		this.readModSyncDataNBT(tag);
 	}
@@ -255,13 +321,6 @@ public class TileEntityWitchAltar extends ModTileEntity implements ITickable {
 
 	public void addSwordItem(UUID id) {
 		swordItems.add(id);
-	}
-
-	public void forceFullScan() {
-		if (this.recalcCooldown == 0) {
-			this.scanHelper.forceFullScan();
-			this.recalcCooldown = RIGHT_CLICK_RECALCULATION_COOLDOWN;
-		}
 	}
 
 	public List<UUID> getSwordIds() {

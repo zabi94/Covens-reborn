@@ -206,7 +206,6 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 			// This should never cause NPEs. If it does, investigate why
 			// getAltarTileFromMultiblock returned null from a formed piece of altar
 			TileEntityWitchAltar te = (TileEntityWitchAltar) world.getTileEntity(getAltarTileFromMultiblock(world, pos));
-			te.scheduleUpgradeCheck();
 			te.refreshUpgrades();
 		}
 	}
@@ -291,7 +290,6 @@ public class BlockWitchAltar extends BlockMod implements ITileEntityProvider {
 				BlockPos tilePos = getAltarTileFromMultiblock(worldIn, pos);
 				if (tilePos != null) {
 					TileEntityWitchAltar tea = (TileEntityWitchAltar) worldIn.getTileEntity(tilePos);
-					tea.forceFullScan();
 					MPContainer magicPoints = tea.getCapability(MPContainer.CAPABILITY, null);
 					playerIn.sendStatusMessage(new TextComponentString(magicPoints.getAmount() + "/" + magicPoints.getMaxAmount() + " (x" + tea.getCurrentGain() + ")"), true);
 					return true;
