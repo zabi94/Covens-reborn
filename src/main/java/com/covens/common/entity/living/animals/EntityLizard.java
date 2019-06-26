@@ -2,7 +2,6 @@ package com.covens.common.entity.living.animals;
 
 import java.util.Set;
 
-import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Sets;
 
@@ -42,7 +41,7 @@ import net.minecraft.world.World;
 public class EntityLizard extends EntityTameable {
 
 	private static final ResourceLocation loot = new ResourceLocation(LibMod.MOD_ID, "entities/lizard");
-	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModItems.silver_scales, ModItems.envenomed_fang);
+	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE);
 	private static final DataParameter<Integer> SKIN_TYPE = EntityDataManager.createKey(EntityLizard.class, DataSerializers.VARINT);
 
 	public EntityLizard(World worldIn) {

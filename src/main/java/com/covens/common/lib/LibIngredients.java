@@ -5,6 +5,7 @@ import com.covens.common.item.ModItems;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -77,7 +78,7 @@ public class LibIngredients {
 	public static Ingredient whiteSage = Ingredient.fromItem(ModItems.white_sage);
 	public static Ingredient sagebrush = Ingredient.fromItem(ModItems.sagebrush);
 	public static Ingredient enderPearl = Ingredient.fromItem(Items.ENDER_PEARL);
-	public static Ingredient lapisPowder = Ingredient.fromItem(ModItems.lapis_powder);
+	public static Ingredient lapis = Ingredient.fromStacks(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()));
 	public static Ingredient salt = Ingredient.fromItem(ModItems.salt);
 	public static Ingredient paper = Ingredient.fromItem(Items.PAPER);
 	public static Ingredient wax = Ingredient.fromItem(ModItems.wax);
@@ -101,7 +102,6 @@ public class LibIngredients {
 	public static Ingredient acaciaResin = Ingredient.fromItem(ModItems.acacia_essence);
 	public static Ingredient yewEssence = Ingredient.fromItem(ModItems.vital_essence);
 	public static Ingredient tulsi = Ingredient.fromItem(ModItems.tulsi);
-	public static Ingredient oakAppleGall = Ingredient.fromItem(ModItems.oak_apple_gall);
 	public static Ingredient empty_jar = Ingredient.fromItem(ModItems.empty_jar);
 	public static Ingredient anySeed = new OreIngredient("listAllSeeds");// TODO check
 	public static Ingredient feather = Ingredient.fromItem(Items.FEATHER);
@@ -121,10 +121,9 @@ public class LibIngredients {
 	public static Ingredient beetroot = Ingredient.fromItem(Items.BEETROOT);
 	public static Ingredient brick_item = Ingredient.fromItem(Items.BRICK);
 	public static Ingredient hellebore = Ingredient.fromItem(ModItems.hellebore);
+	public static Ingredient toeOfFrog = Ingredient.fromItem(ModItems.toe_of_frog);
 	public static Ingredient snowball = Ingredient.fromItem(Items.SNOWBALL);
 	public static Ingredient iceBlock = Ingredient.fromItem(Item.getItemFromBlock(Blocks.ICE));
-	public static Ingredient coldIronDustSmall = Ingredient.fromItem(ModItems.cold_iron_dust_small);
-	public static Ingredient coldIronDust = Ingredient.fromItem(ModItems.cold_iron_dust);
 	public static Ingredient speckledMelon = Ingredient.fromItem(Items.SPECKLED_MELON);
 	public static Ingredient goldenApple = Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 0));
 	public static Ingredient egg = new IngredientMultiOreDict("egg", "foodSimpleEgg", "ingredientEgg", "listAllegg", "bakingEgg");

@@ -56,7 +56,6 @@ import com.covens.common.item.tool.ItemColdIronHoe;
 import com.covens.common.item.tool.ItemColdIronPickaxe;
 import com.covens.common.item.tool.ItemColdIronSpade;
 import com.covens.common.item.tool.ItemColdIronSword;
-import com.covens.common.item.tool.ItemMortar;
 import com.covens.common.item.tool.ItemSilverAxe;
 import com.covens.common.item.tool.ItemSilverHoe;
 import com.covens.common.item.tool.ItemSilverPickaxe;
@@ -162,30 +161,20 @@ public final class ModItems {
 	public static final Item needle_bone = null;
 	public static final Item cold_iron_ingot = null;
 	public static final Item silver_ingot = null;
-	public static final Item silver_powder = null;
 	public static final Item silver_nugget = null;
-	public static final Item mortar_and_pestle_stone = null;
 	public static final Item athame = null;
 	public static final Item boline = null;
 	public static final Item taglock = null;
 	public static final Item spectral_dust = null;
 	public static final Item silver_scales = null;
 	public static final Item heart = null;
-	public static final Item envenomed_fang = null;
 	public static final Item dimensional_sand = null;
-	public static final Item catechu = null;
 	public static final Item owlets_wing = null;
 	public static final Item ravens_feather = null;
 	public static final Item equine_tail = null;
-	public static final Item oak_apple_gall = null;
-	public static final Item iron_gall_ink = null;
 	public static final Item stew = null;
 	public static final Item cold_iron_nugget = null;
 	public static final Item spanish_moss = null;
-
-	public static final Item quartz_powder = null;
-	public static final Item lapis_powder = null;
-
 	public static final Item juniper_berries = null;
 
 	public static final Item sanguine_fabric = null;
@@ -197,9 +186,6 @@ public final class ModItems {
 	public static final Item pure_filament = null;
 	public static final Item soul_string = null;
 	public static final Item graveyard_dust = null;
-
-	public static final Item cold_iron_dust_small = null;
-	public static final Item cold_iron_dust = null;
 
 	public static final Item silver_pickaxe = null;
 	public static final Item silver_axe = null;
@@ -267,11 +253,6 @@ public final class ModItems {
 	public static final Item gem_tigers_eye = null;
 	public static final Item gem_malachite = null;
 	
-	public static final Item gem_powder_garnet = null;
-	public static final Item gem_powder_tourmaline = null;
-	public static final Item gem_powder_tigers_eye = null;
-	public static final Item gem_powder_malachite = null;
-	
 	public static ItemRitualChalk[] chalkType;
 
 	private ModItems() {
@@ -281,7 +262,6 @@ public final class ModItems {
 		CropHelper.getFoods().forEach((crop, item) -> registry.register(item));
 		CropHelper.getSeeds().forEach((crop, item) -> registry.register(item));
 		registry.register(new ItemMod(LibItemName.COLD_IRON_INGOT));
-		registry.register(new ItemMod(LibItemName.SILVER_POWDER));
 		registry.register(new ItemMod(LibItemName.SILVER_INGOT));
 		registry.register(new ItemMod(LibItemName.SILVER_NUGGET));
 		
@@ -327,7 +307,6 @@ public final class ModItems {
 				new ItemMod(LibItemName.WAX), // 
 				new ItemMod(LibItemName.HONEYCOMB), // 
 				new ItemMod(LibItemName.EMPTY_HONEYCOMB), // 
-				new ItemMortar(LibItemName.MORTAR_AND_PESTLE_STONE), // 
 				new ItemBrewDrinkable(), // 
 				new ItemBrewThrowable(LibItemName.BREW_PHIAL_SPLASH), // 
 				new ItemBrewThrowable(LibItemName.BREW_PHIAL_LINGER), // 
@@ -345,18 +324,12 @@ public final class ModItems {
 				new ItemMod(LibItemName.WOOD_ASH), // 
 				new ItemMod(LibItemName.SPECTRAL_DUST), // 
 				new ItemMod(LibItemName.SILVER_SCALES), // 
-				new ItemMod(LibItemName.ENVENOMED_FANG), // 
 				new ItemMod(LibItemName.DIMENSIONAL_SAND), // 
 				new ItemMod(LibItemName.EQUINE_TAIL), // 
-				new ItemMod(LibItemName.CATECHU), // 
-				new ItemMod(LibItemName.OAK_APPLE_GALL), // 
-				new ItemMod(LibItemName.IRON_GALL_INK), // 
 				new ItemMod(LibItemName.GOLDEN_THREAD), // 
 				new ItemMod(LibItemName.COLD_IRON_NUGGET), //
 				new ItemMod(LibItemName.OWLETS_WING), //  //
 				new ItemMod(LibItemName.RAVENS_FEATHER), // 
-				new ItemMod(LibItemName.COLD_IRON_DUST), // 
-				new ItemMod(LibItemName.COLD_IRON_DUST_SMALL), // 
 				new ItemMod(LibItemName.REGAL_SILK), // 
 				new ItemMod(LibItemName.WITCHES_STITCHING), // 
 				new ItemMod(LibItemName.DIABOLIC_VEIN), // 
@@ -377,8 +350,6 @@ public final class ModItems {
 				new ItemMod(LibItemName.TOE_OF_FROG),  //
 				new ItemMod(LibItemName.LIZARD_LEG),  //
 				new ItemMod(LibItemName.EYE_OF_NEWT),  //
-				new ItemMod(LibItemName.QUARTZ_POWDER),  //
-				new ItemMod(LibItemName.LAPIS_POWDER), //
 				new ItemHeart(),  //
 				new ItemJuniperBerries(),  //
 				new ItemFilledBowl(), //
@@ -489,7 +460,6 @@ public final class ModItems {
 
 		for (Gem g:Gem.values()) {
 			registry.register(g.setGemItem(new ItemMod(g.getGemName())));
-			registry.register(g.setPowderItem(new ItemMod(g.getPowderName())));
 			registry.register(new ItemGemBlock(g.getGemBlock()));
 			registry.register(new ItemGemOre(g.getOreBlock()));
 		}
@@ -571,10 +541,6 @@ public final class ModItems {
 		OreDictionary.registerOre("cropKenaf", new ItemStack(ModItems.kenaf));
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("cropWormwood", new ItemStack(ModItems.wormwood));
-		OreDictionary.registerOre("dyeBrown", new ItemStack(ModItems.catechu));
-		OreDictionary.registerOre("dyeBlack", new ItemStack(ModItems.iron_gall_ink));
-		OreDictionary.registerOre("dye", new ItemStack(ModItems.iron_gall_ink));
-		OreDictionary.registerOre("dye", new ItemStack(ModItems.catechu));
 		OreDictionary.registerOre("ingotColdIron", new ItemStack(ModItems.cold_iron_ingot));
 		OreDictionary.registerOre("nuggetColdIron", new ItemStack(ModItems.cold_iron_nugget));
 	}

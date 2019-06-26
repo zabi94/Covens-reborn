@@ -80,7 +80,6 @@ public final class LibItemName {
 	public static final String ATHAME = "athame";
 	public static final String BOLINE = "boline";
 	public static final String TAGLOCK = "taglock";
-	public static final String MORTAR_AND_PESTLE_STONE = "mortar_and_pestle_stone";
 	public static final String WAX = "wax";
 	public static final String SALT = "salt";
 	public static final String WOOL_OF_BAT = "wool_of_bat";
@@ -88,13 +87,9 @@ public final class LibItemName {
 	public static final String WOOD_ASH = "wood_ash";
 	public static final String SPECTRAL_DUST = "spectral_dust";
 	public static final String SILVER_SCALES = "silver_scales";
-	public static final String ENVENOMED_FANG = "envenomed_fang";
 	public static final String HEART = "heart";
 	public static final String DIMENSIONAL_SAND = "dimensional_sand";
 	public static final String EQUINE_TAIL = "equine_tail";
-	public static final String CATECHU = "catechu";
-	public static final String OAK_APPLE_GALL = "oak_apple_gall";
-	public static final String IRON_GALL_INK = "iron_gall_ink";
 	public static final String HONEYCOMB = "honeycomb";
 	public static final String EMPTY_HONEYCOMB = "empty_honeycomb";
 	public static final String HONEY = "honey";
@@ -143,8 +138,6 @@ public final class LibItemName {
 	public static final String PURE_FILAMENT = "pure_filament";
 	public static final String SOUL_STRING = "soul_string";
 	public static final String COLD_IRON_NUGGET = "cold_iron_nugget";
-	public static final String COLD_IRON_DUST = "cold_iron_dust";
-	public static final String COLD_IRON_DUST_SMALL = "cold_iron_dust_small";
 	public static final String LOCATION_STONE = "location_stone";
 	public static final String SANGUINE_FABRIC = "sanguine_fabric";
 	public static final String QUARTZ_POWDER = "quartz_powder";

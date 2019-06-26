@@ -17,13 +17,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.AbstractSkeleton;
-import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySilverfish;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.AbstractHorse;
@@ -99,10 +97,6 @@ public class ItemAthame extends ItemSword implements IModelRegister {
 					this.addDrop(event, new ItemStack(ModItems.silver_scales, 2));
 				} else if (MobHelper.isHumanoid(event.getEntityLiving()) && (rand.nextInt(2) <= (2 + (2 * looting)))) {
 					this.addDrop(event, new ItemStack(ModItems.heart, 1));
-				} else if ((event.getEntityLiving() instanceof EntitySpider) && (rand.nextInt(6) <= (2 + (2 * looting)))) {
-					this.addDrop(event, new ItemStack(ModItems.envenomed_fang, 2));
-				} else if ((event.getEntityLiving() instanceof EntityCaveSpider) && (rand.nextInt(6) <= (2 + (2 * looting)))) {
-					this.addDrop(event, new ItemStack(ModItems.envenomed_fang, 2));
 				} else if ((event.getEntityLiving() instanceof EntityEndermite) && (rand.nextInt(6) <= (2 + (2 * looting)))) {
 					this.addDrop(event, new ItemStack(ModItems.dimensional_sand, 2));
 				} else if ((event.getEntityLiving() instanceof AbstractHorse) && (rand.nextInt(4) <= (2 + (2 * looting)))) {

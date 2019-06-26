@@ -88,7 +88,7 @@ public class ModRituals {
 
 		RitualFactory.create("conjure_vex")
 			.addInput(LibIngredients.athame)
-			.addInput(LibIngredients.oakAppleGall)
+			.addInput(LibIngredients.graveyardDust)
 			.addInput(LibIngredients.wormwood, 2)
 			.addOutput(new ItemStack(ModItems.athame))
 			.withRunningTime(120)

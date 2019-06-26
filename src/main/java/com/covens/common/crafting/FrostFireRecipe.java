@@ -34,8 +34,6 @@ public class FrostFireRecipe extends IForgeRegistryEntry.Impl<FrostFireRecipe> {
 	public static void init() {
 		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron"), LibIngredients.ironOre, () -> new ItemStack(ModItems.cold_iron_nugget, 1 + rng.nextInt(4))));
 		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "packed_ice"), LibIngredients.iceBlock, () -> packedIce));
-		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron_dust_small"), LibIngredients.coldIronDustSmall, () -> new ItemStack(ModItems.cold_iron_nugget, 1)));
-		REGISTRY.register(new FrostFireRecipe(new ResourceLocation(LibMod.MOD_ID, "cold_iron_dust"), LibIngredients.coldIronDust, () -> new ItemStack(ModItems.cold_iron_ingot, 1)));
 	}
 
 	public static Optional<ItemStack> getOutput(ItemStack in) {

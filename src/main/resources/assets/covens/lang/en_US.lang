@@ -73,14 +73,6 @@ item.gem_tourmaline.name=Tourmaline
 item.gem_tigers_eye.name=Tiger's Eye
 item.gem_malachite.name=Malachite
 
-//Gemstone powders
-item.gem_powder_garnet.name=Garnet Powder
-item.gem_powder_tigers_eye.name=Tiger's Eye Powder
-item.gem_powder_tourmaline.name=Tourmaline Powder
-item.gem_powder_malachite.name=Malachite Powder
-item.quartz_powder.name=Quartz Powder
-item.lapis_powder.name=Lapis Powder
-
 //Resources and Tools
 item.wax.name=Wax
 item.honey.name=Honey
@@ -93,14 +85,12 @@ item.wood_ash.name=Wood Ash
 item.spectral_dust.name=Spectral Dust
 item.silver_scales.name=Silver Scales
 item.heart.name=Heart
-item.envenomed_fang.name=Envenomed Fang
 item.dimensional_sand.name=Dimensional Sand
 item.equine_tail.name=Equine's Tail
 item.salt.name=Salt
 item.cold_iron_ingot.name=Cold Iron Ingot
 item.silver_ingot.name=Silver Ingot
 item.silver_nugget.name=Silver Nugget
-item.silver_powder.name=Silver Powder
 item.silver_pickaxe.name=Silver Pickaxe
 item.silver_sword.name=Silver Sword
 item.silver_axe.name=Silver Axe
@@ -137,7 +127,6 @@ item.vampire_pants.effect=Drinking blood is easier, entities won't look at you
 
 item.athame.name=Athame
 item.boline.name=Boline
-item.mortar_and_pestle_stone.name=Mortar and Pestle
 item.taglock.name=Taglock Kit (WIP)
 item.needle_bone.name=Bone Needle
 
@@ -155,7 +144,6 @@ item.empty_brew_drink.name=Empty Brew Phial
 item.empty_brew_splash.name=Empty Splash Brew Phial
 item.empty_brew_linger.name=Empty Lingering Brew Phial
 
-item.oak_apple_gall.name=Oak Apple Gall
 item.grilled_watermelon.name=Grilled Watermelon
 item.ritual_chalk_normal.name=Ritual Chalk
 item.ritual_chalk_nether.name=Fiery Chalk
@@ -182,14 +170,11 @@ item.broom_elder.name=Elder Broom
 item.broom_juniper.name=Juniper Broom
 item.broom_yew.name=Yew Broom (WIP)
 item.broom_cypress.name=Cypress Broom (WIP)
-item.gem_powder.name=Gem Powder
 item.cold_iron_nugget.name=Cold Iron Nugget
 item.owlets_wing.name=Owlet's Wing
 item.ravens_feather.name=Raven's Feather
 item.adders_fork.name=Adder's Fork
 item.snake_venom.name=Snake Venom
-item.cold_iron_dust.name=Cold Iron Powder
-item.cold_iron_dust_small.name=Cold Iron Dustpile
 item.spanish_moss_stuffing.name=Spanish Moss Stuffing
 item.soul_string.name=Soul String
 item.pure_filament.name=Pure Filament
@@ -243,10 +228,6 @@ item.reek_of_death.name=Ebb of Death
 item.vital_essence.name=Essence of Vitality
 item.droplet_of_wisdom.name=Droplet of Wisdom
 item.bottled_magic.name=Liquid Witchcraft
-
-//Dyes
-item.catechu.name=Catechu Brown
-item.iron_gall_ink.name=Iron Gall Ink
 
 //Blocks
 tile.candle_small.white.name=Small White Candle

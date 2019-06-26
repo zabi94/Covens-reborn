@@ -201,7 +201,6 @@ public class CauldronRegistry {
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(Blocks.SPONGE, 1, 1), sponge);
 		// Cooking and Processing with Water
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.wax), empty_honeycomb);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.catechu, 3, 0), acaciaLog);
 		// Arcane recipes
 
 		registerCauldronItemCrafting(ModFluids.HONEY, Fluid.BUCKET_VOLUME, new ItemStack(ModBlocks.goblet, 1, 1), redstone, redstone, redstone, fumeCloudyOil, emptyGoblet, ghastTear);
@@ -244,7 +243,7 @@ public class CauldronRegistry {
 
 		registerCombinedBrewEffect(ModPotions.wolfsbane, Ingredient.fromItem(ModItems.aconitum));
 		registerCombinedBrewEffect(ModPotions.arrow_deflect, fumeEverchangingPresence);
-		registerCombinedBrewEffect(ModPotions.absence, coldIronDustSmall);
+		registerCombinedBrewEffect(ModPotions.absence, toeOfFrog);
 		registerCombinedBrewEffect(ModPotions.plant, Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));
 		registerCombinedBrewEffect(ModPotions.bane_arthropods, wormwood);
 		registerCombinedBrewEffect(ModPotions.corruption, Ingredient.fromItem(Items.BONE));

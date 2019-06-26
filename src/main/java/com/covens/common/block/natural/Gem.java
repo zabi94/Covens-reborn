@@ -19,21 +19,12 @@ public enum Gem implements IStringSerializable {
 	private Block gemBlock;
 	private Block oreBlock;
 	private Item gemItem;
-	private Item powderItem;
 	
 	public Item setGemItem(Item itemIn) {
 		if (this.gemItem != null) {
 			throw new IllegalStateException("Can't set the gem item twice for Gem "+this.getName());
 		}
 		this.gemItem = itemIn;
-		return itemIn;
-	}
-	
-	public Item setPowderItem(Item itemIn) {
-		if (this.powderItem != null) {
-			throw new IllegalStateException("Can't set the powder item twice for Gem "+this.getName());
-		}
-		this.powderItem = itemIn;
 		return itemIn;
 	}
 	
@@ -70,10 +61,6 @@ public enum Gem implements IStringSerializable {
 		return getName()+"_ore";
 	}
 	
-	public String getPowderName() {
-		return "gem_powder_"+getName();
-	}
-
 	public Block getGemBlock() {
 		return this.gemBlock;
 	}
@@ -85,10 +72,5 @@ public enum Gem implements IStringSerializable {
 	public Item getGemItem() {
 		return this.gemItem;
 	}
-
-	public Item getPowderItem() {
-		return this.powderItem;
-	}
-
 	
 }
