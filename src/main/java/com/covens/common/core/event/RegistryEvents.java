@@ -4,10 +4,7 @@ import static com.covens.common.core.statics.ModCrops.ACONITUM;
 import static com.covens.common.core.statics.ModCrops.BELLADONNA;
 import static com.covens.common.core.statics.ModCrops.CHRYSANTHEMUM;
 import static com.covens.common.core.statics.ModCrops.GARLIC;
-import static com.covens.common.core.statics.ModCrops.GINGER;
 import static com.covens.common.core.statics.ModCrops.HELLEBORE;
-import static com.covens.common.core.statics.ModCrops.KELP;
-import static com.covens.common.core.statics.ModCrops.LAVENDER;
 import static com.covens.common.core.statics.ModCrops.MANDRAKE;
 import static com.covens.common.core.statics.ModCrops.MINT;
 import static com.covens.common.core.statics.ModCrops.SAGEBRUSH;
@@ -26,12 +23,8 @@ import com.covens.common.item.ModItems;
 import com.covens.common.item.natural.crop.ItemAconitum;
 import com.covens.common.item.natural.crop.ItemBelladonna;
 import com.covens.common.item.natural.crop.ItemCropFood;
-import com.covens.common.item.natural.crop.ItemGinger;
-import com.covens.common.item.natural.crop.ItemKelp;
-import com.covens.common.item.natural.crop.ItemLavender;
 import com.covens.common.item.natural.crop.ItemMandrake;
 import com.covens.common.item.natural.crop.ItemThistle;
-import com.covens.common.item.natural.seed.ItemKelpSeed;
 import com.covens.common.item.natural.seed.ItemSeed;
 import com.covens.common.lib.LibItemName;
 import com.covens.common.lib.LibMod;
@@ -66,10 +59,7 @@ public final class RegistryEvents {
 		registerCrop(SAGEBRUSH, ModBlocks.crop_sagebrush, new ItemCropFood(LibItemName.SAGEBRUSH, 2, 0.1F, false), LibItemName.SEED_SAGEBRUSH);
 		registerCrop(BELLADONNA, ModBlocks.crop_belladonna, new ItemBelladonna(), LibItemName.SEED_BELLADONNA);
 		registerCrop(ACONITUM, ModBlocks.crop_aconitum, new ItemAconitum(), LibItemName.SEED_ACONITUM);
-		registerCrop(LAVENDER, ModBlocks.crop_lavender, new ItemLavender(), LibItemName.SEED_LAVENDER);
 		registerCrop(THISTLE, ModBlocks.crop_thistle, new ItemThistle(), LibItemName.SEED_THISTLE);
-		registerCrop(GINGER, ModBlocks.crop_ginger, new ItemGinger(), LibItemName.SEED_GINGER);
-		CropHelper.registerCrop(KELP, ModBlocks.crop_kelp, new ItemKelp(), new ItemKelpSeed());
 
 		ModItems.register(event.getRegistry());
 	}

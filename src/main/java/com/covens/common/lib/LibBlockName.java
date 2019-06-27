@@ -13,12 +13,9 @@ public final class LibBlockName {
 
 	public static final String CROP_ACONITUM = "crop_aconitum";
 	public static final String CROP_BELLADONNA = "crop_belladonna";
-	public static final String CROP_GINGER = "crop_ginger";
-	public static final String CROP_KELP = "crop_kelp";
 	public static final String CROP_MINT = "crop_mint";
 	public static final String CROP_WHITE_SAGE = "crop_white_sage";
 	public static final String CROP_MANDRAKE = "crop_mandrake_root";
-	public static final String CROP_LAVENDER = "crop_lavender";
 	public static final String CROP_TULSI = "crop_tulsi";
 	public static final String CROP_GARLIC = "crop_garlic";
 	public static final String CROP_WORMWOOD = "crop_wormwood";

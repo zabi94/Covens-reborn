@@ -81,14 +81,8 @@ public final class ModItems {
 
 	public static final Item mandrake_root = null;
 	public static final Item seed_mandrake = null;
-	public static final Item lavender = null;
-	public static final Item seed_lavender = null;
 	public static final Item belladonna = null;
 	public static final Item seed_belladonna = null;
-	public static final Item kelp = null;
-	public static final Item seed_kelp = null;
-	public static final Item ginger = null;
-	public static final Item seed_ginger = null;
 	public static final Item mint = null;
 	public static final Item seed_mint = null;
 	public static final Item thistle = null;
@@ -505,16 +499,8 @@ public final class ModItems {
 		OreDictionary.registerOre("ingredientSalt", new ItemStack(ModItems.salt));
 		OreDictionary.registerOre("pinchSalt", new ItemStack(ModItems.salt));
 		OreDictionary.registerOre("portionSalt", new ItemStack(ModItems.salt));
-		OreDictionary.registerOre("cropLavender", new ItemStack(ModItems.lavender));
-		OreDictionary.registerOre("listAllherb", new ItemStack(ModItems.lavender));
 		OreDictionary.registerOre("cropBelladonna", new ItemStack(ModItems.belladonna));
 		OreDictionary.registerOre("cropMandrake", new ItemStack(ModItems.mandrake_root));
-		OreDictionary.registerOre("cropKelp", new ItemStack(ModItems.kelp));
-		OreDictionary.registerOre("cropSeaweed", new ItemStack(ModItems.kelp));
-		OreDictionary.registerOre("listAllveggie", new ItemStack(ModItems.kelp));
-		OreDictionary.registerOre("listAllgreenveggie", new ItemStack(ModItems.kelp));
-		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.ginger));
-		OreDictionary.registerOre("cropGinger", new ItemStack(ModItems.ginger));
 		OreDictionary.registerOre("cropMint", new ItemStack(ModItems.mint));
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.mint));
 		OreDictionary.registerOre("cropSpiceleaf", new ItemStack(ModItems.mint));

@@ -23,7 +23,6 @@ import com.covens.common.block.natural.BlockSilverOre;
 import com.covens.common.block.natural.Gem;
 import com.covens.common.block.natural.crop.BlockCrop;
 import com.covens.common.block.natural.crop.CropBelladonna;
-import com.covens.common.block.natural.crop.CropKelp;
 import com.covens.common.block.natural.crop.CropMint;
 import com.covens.common.block.natural.crop.CropThistle;
 import com.covens.common.block.natural.crop.CropWormwood;
@@ -49,7 +48,6 @@ import com.covens.common.block.tiles.BlockTarotTable;
 import com.covens.common.block.tiles.BlockThreadSpinner;
 import com.covens.common.block.tiles.BlockWitchAltar;
 import com.covens.common.crafting.VanillaCrafting;
-import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibBlockName;
 import com.covens.common.lib.LibMod;
 
@@ -69,12 +67,9 @@ public final class ModBlocks {
 
 	public static final BlockCrop crop_aconitum = null;
 	public static final BlockCrop crop_belladonna = null;
-	public static final BlockCrop crop_ginger = null;
-	public static final BlockCrop crop_kelp = null;
 	public static final BlockCrop crop_mint = null;
 	public static final BlockCrop crop_white_sage = null;
 	public static final BlockCrop crop_mandrake_root = null;
-	public static final BlockCrop crop_lavender = null;
 	public static final BlockCrop crop_thistle = null;
 	public static final BlockCrop crop_tulsi = null;
 	public static final BlockCrop crop_garlic = null;
@@ -156,10 +151,8 @@ public final class ModBlocks {
 	public static void register(final IForgeRegistry<Block> registry) {
 		registry.registerAll(
 				new BlockCrop(LibBlockName.CROP_ACONITUM), 
-				new BlockCrop(LibBlockName.CROP_GINGER), 
 				new BlockCrop(LibBlockName.CROP_WHITE_SAGE), 
 				new BlockCrop(LibBlockName.CROP_MANDRAKE), 
-				new BlockCrop(LibBlockName.CROP_LAVENDER), 
 				new BlockCrop(LibBlockName.CROP_TULSI), 
 				new BlockCrop(LibBlockName.CROP_GARLIC), 
 				new BlockCrop(LibBlockName.CROP_HELLEBORE), 
@@ -167,7 +160,6 @@ public final class ModBlocks {
 				new BlockCrop(LibBlockName.CROP_SAGEBRUSH), 
 				new CropWormwood(), 
 				new CropThistle(), 
-				new CropKelp(), 
 				new CropBelladonna(), 
 				new CropMint(), 
 				new BlockMoonbell(), 
@@ -275,8 +267,5 @@ public final class ModBlocks {
 		OreDictionary.registerOre("treeLeaves", ModBlocks.leaves_yew);
 		OreDictionary.registerOre("treeLeaves", ModBlocks.leaves_cypress);
 		OreDictionary.registerOre("treeSapling", ModBlocks.sapling);
-
-		// Misc
-		OreDictionary.registerOre("kelp", ModItems.kelp);
 	}
 }

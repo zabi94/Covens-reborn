@@ -27,19 +27,13 @@ container.thread_spinner=Loom
 ////Names
 //Items
 item.seed_aconitum.name=Aconitum Seeds
-item.seed_asphodel.name=Asphodel Seeds
 item.seed_belladonna.name=Belladonna Seeds
-item.seed_ginger.name=Ginger Seeds
-item.seed_kelp.name=Kelp Spores
 item.seed_mint.name=Mint Seeds
 item.seed_white_sage.name=White Sage Seeds
 item.seed_mandrake.name=Mandrake Seeds
-item.seed_lavender.name=Lavender Seeds
 item.seed_thistle.name=Thistle Seeds
-item.seed_silphium.name=Silphium Seeds
 item.seed_tulsi.name=Tulsi Seeds
 item.seed_garlic.name=Garlic Seeds
-item.seed_kenaf.name=Kenaf Seeds
 item.seed_wormwood.name=Wormwood Seeds
 item.seed_hellebore.name=Hellebore Seeds
 item.seed_chrysanthemum.name=Chrysanthemum Seeds
@@ -47,25 +41,17 @@ item.seed_sagebrush.name=Sagebrush Seeds
 
 //Crops
 item.aconitum.name=Aconitum
-item.asphodel.name=Asphodel
 item.belladonna.name=Belladonna
-item.ginger.name=Ginger
-item.kelp.name=Kelp
 item.mint.name=Mint
 item.white_sage.name=White Sage
 item.mandrake_root.name=Mandrake Root
-item.lavender.name=Lavender
 item.thistle.name=Thistle
-item.silphium.name=Silphium
 item.wormwood.name=Wormwood
-item.kenaf.name=Kenaf
 item.garlic.name=Garlic
 item.tulsi.name=Tulsi
 item.hellebore.name=Hellebore
 item.chrysanthemum.name=Chrysanthemum
 item.sagebrush.name=Sagebrush
-item.infested_wheat.name=Infested Wheat (WIP)
-item.witchweed.name=Witchweed (WIP)
 
 //Gemstones
 item.gem_garnet.name=Garnet
@@ -144,7 +130,6 @@ item.empty_brew_drink.name=Empty Brew Phial
 item.empty_brew_splash.name=Empty Splash Brew Phial
 item.empty_brew_linger.name=Empty Lingering Brew Phial
 
-item.grilled_watermelon.name=Grilled Watermelon
 item.ritual_chalk_normal.name=Ritual Chalk
 item.ritual_chalk_nether.name=Fiery Chalk
 item.ritual_chalk_ender.name=Phasing Chalk
@@ -174,7 +159,6 @@ item.cold_iron_nugget.name=Cold Iron Nugget
 item.owlets_wing.name=Owlet's Wing
 item.ravens_feather.name=Raven's Feather
 item.adders_fork.name=Adder's Fork
-item.snake_venom.name=Snake Venom
 item.spanish_moss_stuffing.name=Spanish Moss Stuffing
 item.soul_string.name=Soul String
 item.pure_filament.name=Pure Filament
@@ -190,13 +174,11 @@ item.location_stone.bound_to=Bound to %d %d %d (%s)
 item.location_stone.name=Binding Stone
 item.location_stone.unbound=Not bound
 item.pentacle.name=Pentacle
-item.wrathful_eye.name=Wrathful Eye
 item.sanguine_fabric.name=Bloody Rags
 item.toe_of_frog.name=Toe of Frog
 item.lizard_leg.name=Lizard's Leg
 item.eye_of_newt.name=Eye of Newt
 item.juniper_berries.name=Juniper Berries
-item.yew_aril.name=Yew Aril
 item.bell.name=Silver Bell
 item.blood_bottle.name=Bottle of Fresh Blood (WIP)
 item.blood_bottle_spoiled.name=Bottle of Spoiled Blood (WIP)
@@ -336,24 +318,17 @@ tile.revealing_lantern.red.name=Revealing Lantern (Red)
 tile.revealing_lantern.black.name=Revealing Lantern (Black)
 
 tile.crop_aconitum.name=Aconitum Crop
-tile.crop_asphodel.name=Asphodel Crop
 tile.crop_belladonna.name=Belladonna Crop
-tile.crop_ginger.name=Ginger Crop
-tile.crop_kelp.name=Kelp Crop
 tile.crop_mint.name=Mint Crop
 tile.crop_white_sage.name=White Sage Crop
 tile.crop_mandrake_root.name=Mandrake Crop
-tile.crop_lavender.name=Lavender Crop
 tile.crop_thistle.name=Thistle Crop
-tile.crop_silphium.name=Silphium Crop
 tile.crop_garlic.name=Garlic Crop
 tile.crop_wormwood.name=Wormwood Crop
-tile.crop_kenaf.name=Kenaf Crop
 tile.crop_tulsi.name=Tulsi Crop
 tile.crop_chrysanthemum.name=Chrysanthemum Crop
 tile.crop_sagebrush.name=Sagebrush Crop
 tile.spanish_moss.name=Spanish Moss
-tile.infested_farmland.name=Infested Farmland (WIP)
 
 //Misc plants
 tile.moonbell.name=Moonbell Flower

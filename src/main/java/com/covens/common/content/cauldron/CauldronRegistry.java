@@ -179,7 +179,6 @@ public class CauldronRegistry {
 		registerFood(Ingredient.fromItem(ModItems.mint), 1, 0.7f);
 		registerFood(Ingredient.fromItem(ModItems.tulsi), 1, 0.7f);
 		registerFood(new IngredientMultiOreDict("cropGinger"), 3, 0.9f);
-		registerFood(Ingredient.fromItem(ModItems.lavender), 1, 0.6f);
 		registerFood(wormwood, 1, 0.8f);
 		registerFood(Ingredient.fromItem(ModItems.white_sage), 2, 0.9f);
 		registerFood(new IngredientMultiOreDict("dropHoney", "honeyDrop", "foodHoneydrop"), 2, 1.3f);
@@ -237,7 +236,7 @@ public class CauldronRegistry {
 		registerVanillaBrewEffect(MobEffects.STRENGTH, 40, blazePowder);
 		registerVanillaBrewEffect(MobEffects.WEAKNESS, 60, Ingredient.fromItem(Items.RABBIT_HIDE));
 		registerVanillaBrewEffect(MobEffects.BLINDNESS, 50, Ingredient.fromItem(ModItems.belladonna), 200);
-		registerVanillaBrewEffect(MobEffects.HASTE, 10, Ingredient.fromItem(ModItems.lavender), 1200);
+		registerVanillaBrewEffect(MobEffects.HASTE, 10, cookie, 1200);
 		registerVanillaBrewEffect(MobEffects.RESISTANCE, 30, Ingredient.fromItem(ModItems.heart), 100);
 		registerVanillaBrewEffect(MobEffects.LEVITATION, 80, Ingredient.fromItem(Items.SHULKER_SHELL), 100);
 
@@ -254,7 +253,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.ender_inhibition, Ingredient.fromItem(ModItems.dimensional_sand));
 		registerCombinedBrewEffect(ModPotions.extinguish_fires, Ingredient.fromItem(ModItems.seed_mint));
 		registerCombinedBrewEffect(ModPotions.fertilize, Ingredient.fromItem(ModItems.thistle)); // TODO make it bonemeal, but it will collide with the color modifier
-		registerCombinedBrewEffect(ModPotions.fireworld, Ingredient.fromItem(ModItems.ginger));
+		registerCombinedBrewEffect(ModPotions.fireworld, magmaBlock);
 		registerCombinedBrewEffect(ModPotions.grace, woolOfBat);
 		registerCombinedBrewEffect(ModPotions.mending, goldenApple); //TODO change ingredient, absorption
 		registerCombinedBrewEffect(ModPotions.flower_growth, Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_FLOWER)));
@@ -265,7 +264,7 @@ public class CauldronRegistry {
 		registerCombinedBrewEffect(ModPotions.infestation, Ingredient.fromItem(Item.getItemFromBlock(Blocks.MYCELIUM)));
 		registerCombinedBrewEffect(ModPotions.ozymandias, Ingredient.fromItem(Item.getItemFromBlock(Blocks.SANDSTONE)));
 		registerCombinedBrewEffect(ModPotions.purification, Ingredient.fromItem(ModItems.tulsi));
-		registerCombinedBrewEffect(ModPotions.path_of_the_deep, new IngredientMultiOreDict("kelp", "seaWeed", "cropSeaweed", "cropKelp"));
+		registerCombinedBrewEffect(ModPotions.path_of_the_deep, fumeZephyrOfDepths);
 		registerCombinedBrewEffect(ModPotions.prune_leaves, Ingredient.fromItem(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)));
 		registerCombinedBrewEffect(ModPotions.rotting, Ingredient.fromItem(ModItems.tongue_of_dog));
 		registerCombinedBrewEffect(ModPotions.setehs_wastes, Ingredient.fromStacks(new ItemStack(Blocks.SAND, 1, 1)));
