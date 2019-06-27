@@ -109,7 +109,6 @@ public class LibIngredients {
 	public static Ingredient hay = Ingredient.fromStacks(new ItemStack(Blocks.HAY_BLOCK));
 	public static Ingredient wheat = Ingredient.fromItem(Items.WHEAT);
 	public static Ingredient soul_string = Ingredient.fromItem(ModItems.soul_string);
-	public static Ingredient kenaf = Ingredient.fromItem(ModItems.kenaf);
 	public static Ingredient witches_stitching = Ingredient.fromItem(ModItems.witches_stitching);
 	public static Ingredient honeycomb = Ingredient.fromItem(ModItems.honeycomb);
 	public static Ingredient ingotIron = Ingredient.fromItem(Items.IRON_INGOT);

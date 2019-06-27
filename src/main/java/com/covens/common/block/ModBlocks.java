@@ -24,7 +24,6 @@ import com.covens.common.block.natural.Gem;
 import com.covens.common.block.natural.crop.BlockCrop;
 import com.covens.common.block.natural.crop.CropBelladonna;
 import com.covens.common.block.natural.crop.CropKelp;
-import com.covens.common.block.natural.crop.CropKenaf;
 import com.covens.common.block.natural.crop.CropMint;
 import com.covens.common.block.natural.crop.CropThistle;
 import com.covens.common.block.natural.crop.CropWormwood;
@@ -170,7 +169,6 @@ public final class ModBlocks {
 				new BlockCrop(LibBlockName.CROP_CHRYSANTHEMUM), 
 				new BlockCrop(LibBlockName.CROP_SAGEBRUSH), 
 				new CropWormwood(), 
-				new CropKenaf(), 
 				new CropThistle(), 
 				new CropKelp(), 
 				new CropBelladonna(), 

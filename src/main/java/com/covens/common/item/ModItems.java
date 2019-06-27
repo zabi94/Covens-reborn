@@ -103,8 +103,6 @@ public final class ModItems {
 	public static final Item seed_white_sage = null;
 	public static final Item tulsi = null;
 	public static final Item seed_tulsi = null;
-	public static final Item kenaf = null;
-	public static final Item seed_kenaf = null;
 	public static final Item wormwood = null;
 	public static final Item seed_wormwood = null;
 	public static final Item hellebore = null;
@@ -535,7 +533,6 @@ public final class ModItems {
 		OreDictionary.registerOre("cropWhiteSage", new ItemStack(ModItems.white_sage));
 		OreDictionary.registerOre("cropTulsi", new ItemStack(ModItems.tulsi));
 		OreDictionary.registerOre("listAllherb", new ItemStack(ModItems.tulsi));
-		OreDictionary.registerOre("cropKenaf", new ItemStack(ModItems.kenaf));
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("cropWormwood", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("ingotColdIron", new ItemStack(ModItems.cold_iron_ingot));
