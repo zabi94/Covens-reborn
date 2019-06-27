@@ -27,7 +27,6 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModItems.wood_ash), new AspectList().add(Aspect.PLANT, 3).add(Aspect.ENTROPY, 3));
 		evt.register.registerObjectTag(new ItemStack(ModItems.moonbell), new AspectList().add(Aspect.PLANT, 2).add(Aspect.DARKNESS, 2));
 		evt.register.registerObjectTag(new ItemStack(ModItems.aconitum), new AspectList().add(Aspect.PLANT, 2).add(Aspect.DEATH, 2));
-		evt.register.registerObjectTag(new ItemStack(ModItems.asphodel), new AspectList().add(Aspect.PLANT, 2).add(Aspect.DARKNESS, 2));
 		evt.register.registerObjectTag(new ItemStack(ModItems.belladonna), new AspectList().add(Aspect.PLANT, 2).add(Aspect.DEATH, 2).add(Aspect.MAGIC, 2));
 		evt.register.registerObjectTag(new ItemStack(ModItems.chrysanthemum), new AspectList().add(Aspect.PLANT, 2).add(Aspect.SENSES, 2));
 		evt.register.registerObjectTag(new ItemStack(ModItems.garlic), new AspectList().add(Aspect.PLANT, 2).add(Aspect.SENSES, 2).add(Aspect.AVERSION, 2));
@@ -84,7 +83,6 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_ginger), new AspectList().add(Aspect.PLANT, 1).add(Aspect.SENSES, 1).add(Aspect.FIRE, 1));
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_aconitum), new AspectList().add(Aspect.PLANT, 1).add(Aspect.DEATH, 1));
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_wormwood), new AspectList().add(Aspect.PLANT, 1).add(Aspect.SOUL, 1));
-		evt.register.registerObjectTag(new ItemStack(ModItems.seed_asphodel), new AspectList().add(Aspect.PLANT, 1).add(Aspect.DARKNESS, 1));
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_chrysanthemum), new AspectList().add(Aspect.PLANT, 1));
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_mint), new AspectList().add(Aspect.PLANT, 1).add(Aspect.SENSES, 1).add(Aspect.COLD, 1));
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_belladonna), new AspectList().add(Aspect.PLANT, 1).add(Aspect.DEATH, 1).add(Aspect.MAGIC, 1));

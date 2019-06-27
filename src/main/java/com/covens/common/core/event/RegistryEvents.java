@@ -1,14 +1,12 @@
 package com.covens.common.core.event;
 
 import static com.covens.common.core.statics.ModCrops.ACONITUM;
-import static com.covens.common.core.statics.ModCrops.ASPHODEL;
 import static com.covens.common.core.statics.ModCrops.BELLADONNA;
 import static com.covens.common.core.statics.ModCrops.CHRYSANTHEMUM;
 import static com.covens.common.core.statics.ModCrops.GARLIC;
 import static com.covens.common.core.statics.ModCrops.GINGER;
 import static com.covens.common.core.statics.ModCrops.HELLEBORE;
 import static com.covens.common.core.statics.ModCrops.KELP;
-import static com.covens.common.core.statics.ModCrops.KENAF;
 import static com.covens.common.core.statics.ModCrops.LAVENDER;
 import static com.covens.common.core.statics.ModCrops.MANDRAKE;
 import static com.covens.common.core.statics.ModCrops.MINT;
@@ -26,7 +24,6 @@ import com.covens.common.core.helper.CropHelper;
 import com.covens.common.core.statics.ModCrops;
 import com.covens.common.item.ModItems;
 import com.covens.common.item.natural.crop.ItemAconitum;
-import com.covens.common.item.natural.crop.ItemAsphodel;
 import com.covens.common.item.natural.crop.ItemBelladonna;
 import com.covens.common.item.natural.crop.ItemCropFood;
 import com.covens.common.item.natural.crop.ItemGinger;
@@ -63,14 +60,12 @@ public final class RegistryEvents {
 		registerCrop(MANDRAKE, ModBlocks.crop_mandrake_root, new ItemMandrake(), LibItemName.SEED_MANDRAKE);
 		registerCrop(GARLIC, ModBlocks.crop_garlic, new ItemCropFood(LibItemName.GARLIC, 4, 6F, false), LibItemName.SEED_GARLIC);
 		registerCrop(TULSI, ModBlocks.crop_tulsi, new ItemCropFood(LibItemName.TULSI, 1, 0.4F, false), LibItemName.SEED_TULSI);
-		registerCrop(KENAF, ModBlocks.crop_kenaf, new ItemCropFood(LibItemName.KENAF, 4, 6F, false), LibItemName.SEED_KENAF);
 		registerCrop(MINT, ModBlocks.crop_mint, new ItemCropFood(LibItemName.MINT, 1, 2F, false), LibItemName.SEED_MINT);
 		registerCrop(HELLEBORE, ModBlocks.crop_hellebore, new ItemCropFood(LibItemName.HELLEBORE, 2, 0.1F, false), LibItemName.SEED_HELLEBORE);
 		registerCrop(CHRYSANTHEMUM, ModBlocks.crop_chrysanthemum, new ItemCropFood(LibItemName.CHRYSANTHEMUM, 2, 0.1F, false), LibItemName.SEED_CHRYSANTHEMUM);
 		registerCrop(SAGEBRUSH, ModBlocks.crop_sagebrush, new ItemCropFood(LibItemName.SAGEBRUSH, 2, 0.1F, false), LibItemName.SEED_SAGEBRUSH);
 		registerCrop(BELLADONNA, ModBlocks.crop_belladonna, new ItemBelladonna(), LibItemName.SEED_BELLADONNA);
 		registerCrop(ACONITUM, ModBlocks.crop_aconitum, new ItemAconitum(), LibItemName.SEED_ACONITUM);
-		registerCrop(ASPHODEL, ModBlocks.crop_asphodel, new ItemAsphodel(), LibItemName.SEED_ASPHODEL);
 		registerCrop(LAVENDER, ModBlocks.crop_lavender, new ItemLavender(), LibItemName.SEED_LAVENDER);
 		registerCrop(THISTLE, ModBlocks.crop_thistle, new ItemThistle(), LibItemName.SEED_THISTLE);
 		registerCrop(GINGER, ModBlocks.crop_ginger, new ItemGinger(), LibItemName.SEED_GINGER);

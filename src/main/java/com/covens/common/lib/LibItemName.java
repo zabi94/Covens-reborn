@@ -7,8 +7,6 @@ public final class LibItemName {
 	public static final String SEED_HELLEBORE = "seed_hellebore";
 	public static final String ACONITUM = "aconitum";
 	public static final String SEED_ACONITUM = "seed_aconitum";
-	public static final String ASPHODEL = "asphodel";
-	public static final String SEED_ASPHODEL = "seed_asphodel";
 	public static final String BELLADONNA = "belladonna";
 	public static final String SEED_BELLADONNA = "seed_belladonna";
 	public static final String GINGER = "ginger";
@@ -29,8 +27,6 @@ public final class LibItemName {
 	public static final String SEED_GARLIC = "seed_garlic";
 	public static final String WORMWOOD = "wormwood";
 	public static final String SEED_WORMWOOD = "seed_wormwood";
-	public static final String KENAF = "kenaf";
-	public static final String SEED_KENAF = "seed_kenaf";
 	public static final String THISTLE = "thistle";
 	public static final String SEED_THISTLE = "seed_thistle";
 	public static final String SAGEBRUSH = "sagebrush";

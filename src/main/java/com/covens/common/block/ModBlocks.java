@@ -68,7 +68,6 @@ public final class ModBlocks {
 	// Todo: Add new gemstone blocks, and meta the existing ones.
 
 	public static final BlockCrop crop_aconitum = null;
-	public static final BlockCrop crop_asphodel = null;
 	public static final BlockCrop crop_belladonna = null;
 	public static final BlockCrop crop_ginger = null;
 	public static final BlockCrop crop_kelp = null;
@@ -78,7 +77,6 @@ public final class ModBlocks {
 	public static final BlockCrop crop_lavender = null;
 	public static final BlockCrop crop_thistle = null;
 	public static final BlockCrop crop_tulsi = null;
-	public static final BlockCrop crop_kenaf = null;
 	public static final BlockCrop crop_garlic = null;
 	public static final BlockCrop crop_wormwood = null;
 	public static final BlockCrop crop_hellebore = null;
@@ -158,7 +156,6 @@ public final class ModBlocks {
 	public static void register(final IForgeRegistry<Block> registry) {
 		registry.registerAll(
 				new BlockCrop(LibBlockName.CROP_ACONITUM), 
-				new BlockCrop(LibBlockName.CROP_ASPHODEL), 
 				new BlockCrop(LibBlockName.CROP_GINGER), 
 				new BlockCrop(LibBlockName.CROP_WHITE_SAGE), 
 				new BlockCrop(LibBlockName.CROP_MANDRAKE), 

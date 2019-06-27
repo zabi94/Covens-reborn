@@ -85,8 +85,6 @@ public final class ModItems {
 	public static final Item seed_lavender = null;
 	public static final Item belladonna = null;
 	public static final Item seed_belladonna = null;
-	public static final Item asphodel = null;
-	public static final Item seed_asphodel = null;
 	public static final Item kelp = null;
 	public static final Item seed_kelp = null;
 	public static final Item ginger = null;
@@ -519,7 +517,6 @@ public final class ModItems {
 		OreDictionary.registerOre("cropSeaweed", new ItemStack(ModItems.kelp));
 		OreDictionary.registerOre("listAllveggie", new ItemStack(ModItems.kelp));
 		OreDictionary.registerOre("listAllgreenveggie", new ItemStack(ModItems.kelp));
-		OreDictionary.registerOre("cropAsphodel", new ItemStack(ModItems.asphodel));
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.ginger));
 		OreDictionary.registerOre("cropGinger", new ItemStack(ModItems.ginger));
 		OreDictionary.registerOre("cropMint", new ItemStack(ModItems.mint));

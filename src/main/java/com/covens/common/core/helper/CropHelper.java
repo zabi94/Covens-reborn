@@ -61,7 +61,6 @@ public final class CropHelper {
 		MinecraftForge.addGrassSeed(new ItemStack(ModItems.seed_belladonna), 8);
 		MinecraftForge.addGrassSeed(new ItemStack(ModItems.seed_thistle), 8);
 		MinecraftForge.addGrassSeed(new ItemStack(ModItems.seed_wormwood), 8);
-		MinecraftForge.addGrassSeed(new ItemStack(ModItems.seed_asphodel), 6);
 		MinecraftForge.addGrassSeed(new ItemStack(ModItems.seed_aconitum), 6);
 		MinecraftForge.addGrassSeed(new ItemStack(ModItems.seed_mint), 6);
 		MinecraftForge.addGrassSeed(new ItemStack(ModItems.seed_lavender), 4);
