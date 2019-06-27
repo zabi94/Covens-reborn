@@ -114,8 +114,6 @@ public final class ModItems {
 	public static final Item chrysanthemum = null;
 	public static final Item seed_chrysanthemum = null;
 	public static final Item moonbell = null;
-	public static final Item infested_wheat = null;
-	public static final Item witchweed = null;
 
 	public static final Item glass_jar = null;
 
@@ -445,7 +443,6 @@ public final class ModItems {
 				itemBlock(ModBlocks.moonbell), //
 				itemBlock(ModBlocks.witch_altar), //
 				itemBlock(ModBlocks.thread_spinner), //
-				itemBlock(ModBlocks.infested_farmland), //
 				itemBlock(ModBlocks.crystal_ball), //
 				new ItemGoblet(), //
 				itemBlock(ModBlocks.gem_bowl), //

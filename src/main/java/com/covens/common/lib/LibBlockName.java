@@ -28,9 +28,7 @@ public final class LibBlockName {
 	public static final String CROP_HELLEBORE = "crop_hellebore";
 	public static final String CROP_CHRYSANTHEMUM = "crop_chrysanthemum";
 	public static final String CROP_SAGEBRUSH = "crop_sagebrush";
-	public static final String CROP_INFESTED_WHEAT = "crop_infested_wheat";
 
-	public static final String INFESTED_FARMLAND = "infested_farmland";
 	public static final String GRAVEYARD_DIRT = "graveyard_dirt";
 	public static final String PURIFYING_EARTH = "purifying_earth";
 

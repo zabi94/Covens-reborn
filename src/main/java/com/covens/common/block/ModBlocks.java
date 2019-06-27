@@ -18,7 +18,6 @@ import com.covens.common.block.misc.BlockWitchFire;
 import com.covens.common.block.misc.BlockWitchesLight;
 import com.covens.common.block.natural.BlockBeehive;
 import com.covens.common.block.natural.BlockGemOre;
-import com.covens.common.block.natural.BlockInfestedFarmland;
 import com.covens.common.block.natural.BlockSaltOre;
 import com.covens.common.block.natural.BlockSilverOre;
 import com.covens.common.block.natural.Gem;
@@ -86,7 +85,6 @@ public final class ModBlocks {
 	public static final BlockCrop crop_hellebore = null;
 	public static final BlockCrop crop_chrysanthemum = null;
 	public static final BlockCrop crop_sagebrush = null;
-	public static final BlockCrop crop_infested_wheat = null;
 	// --------------------------------Blocks--------------------------------//
 	public static final Block silver_block = null;
 	public static final Block silver_ore = null;
@@ -135,7 +133,6 @@ public final class ModBlocks {
 	public static final Block spanish_moss = null;
 	public static final Block spanish_moss_end = null;
 
-	public static final Block infested_farmland = null;
 	public static final Block witchfire = null;
 	public static final Block revealing_lantern = null;
 	public static final Block lantern = null;
@@ -172,7 +169,6 @@ public final class ModBlocks {
 				new BlockCrop(LibBlockName.CROP_HELLEBORE), 
 				new BlockCrop(LibBlockName.CROP_CHRYSANTHEMUM), 
 				new BlockCrop(LibBlockName.CROP_SAGEBRUSH), 
-				new BlockCrop(LibBlockName.CROP_INFESTED_WHEAT), 
 				new CropWormwood(), 
 				new CropKenaf(), 
 				new CropThistle(), 
@@ -180,7 +176,6 @@ public final class ModBlocks {
 				new CropBelladonna(), 
 				new CropMint(), 
 				new BlockMoonbell(), 
-				new BlockInfestedFarmland(), 
 				new BlockMoss(true), 
 				new BlockMoss(false)
 		);
