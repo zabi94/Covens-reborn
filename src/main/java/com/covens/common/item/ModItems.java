@@ -225,7 +225,6 @@ public final class ModItems {
 	public static final Item location_stone = null;
 	public static final Item bell = null;
 
-	public static final Item snake_venom = null;
 	public static final Item adders_fork = null;
 
 	public static final Item toe_of_frog = null;
@@ -340,7 +339,6 @@ public final class ModItems {
 					}
 				},  //
 				new ItemMod(LibItemName.ADDERS_FORK),  //
-				new ItemMod(LibItemName.SNAKE_VENOM),  //
 				new ItemMod(LibItemName.TOE_OF_FROG),  //
 				new ItemMod(LibItemName.LIZARD_LEG),  //
 				new ItemMod(LibItemName.EYE_OF_NEWT),  //
@@ -480,8 +478,6 @@ public final class ModItems {
 
 	public static void init() {
 		initOreDictionary();
-
-		snake_venom.setContainerItem(glass_jar);
 	}
 
 	private static void initOreDictionary() {

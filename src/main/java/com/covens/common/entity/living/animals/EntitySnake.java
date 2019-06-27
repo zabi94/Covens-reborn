@@ -3,7 +3,6 @@ package com.covens.common.entity.living.animals;
 import java.util.Set;
 
 import com.covens.common.entity.living.EntityMultiSkin;
-import com.covens.common.item.ModItems;
 import com.covens.common.lib.LibMod;
 import com.google.common.collect.Sets;
 
@@ -30,7 +29,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -59,9 +57,6 @@ public class EntitySnake extends EntityMultiSkin {
 	// "Snape", "Solid Snake", "Apophis", "Ouroboros"};
 	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.RABBIT, Items.CHICKEN);
 	private static final DataParameter<Integer> TINT = EntityDataManager.createKey(EntitySnake.class, DataSerializers.VARINT);
-	private static final int TIME_BETWEEN_MILK = 3600;
-
-	private int milkCooldown = 0;
 
 	public EntitySnake(World worldIn) {
 		super(worldIn);
@@ -128,14 +123,6 @@ public class EntitySnake extends EntityMultiSkin {
 	}
 
 	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-		if (this.milkCooldown > 0) {
-			this.milkCooldown--;
-		}
-	}
-
-	@Override
 	public int getMaxSpawnedInChunk() {
 		return 2;
 	}
@@ -176,32 +163,8 @@ public class EntitySnake extends EntityMultiSkin {
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		// DEV ONLY CODE -- REMOVE BEFORE COMPILATION
-		// TODO
-		this.setTamedBy(player);
-		this.setSitting(!player.isSneaking());
-		// ---- ^^^^ ----
 		if ((this.getAttackTarget() == null) || this.getAttackTarget().isDead || (this.getRevengeTarget() == null) || this.getRevengeTarget().isDead) {
 			ItemStack itemstack = player.getHeldItem(hand);
-			if (itemstack.getItem() == ModItems.glass_jar) {
-				if ((this.milkCooldown == 0) && this.getRNG().nextBoolean()) {
-					if ((this.getGrowingAge() >= 0) && !player.capabilities.isCreativeMode) {
-						itemstack.shrink(1);
-						if (itemstack.isEmpty()) {
-							player.setHeldItem(hand, new ItemStack(ModItems.snake_venom));
-						} else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.snake_venom))) {
-							player.dropItem(new ItemStack(ModItems.snake_venom), false);
-						}
-						this.milkCooldown = TIME_BETWEEN_MILK;
-						return true;
-					}
-				} else {
-					// if milk not ready, or randomly 1/2 of the times
-					this.setAttackTarget(player);
-					this.setRevengeTarget(player);
-				}
-			}
-
 			if (!this.isTamed() && TAME_ITEMS.contains(itemstack.getItem())) {
 				if (!player.capabilities.isCreativeMode) {
 					itemstack.shrink(1);
@@ -242,18 +205,6 @@ public class EntitySnake extends EntityMultiSkin {
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntitySnake(this.world);
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		this.milkCooldown = compound.getInteger("milkCooldown");
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
-		compound.setInteger("milkCooldown", this.milkCooldown);
 	}
 
 	@Override
