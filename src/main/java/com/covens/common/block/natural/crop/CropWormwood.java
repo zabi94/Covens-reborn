@@ -26,9 +26,7 @@ public class CropWormwood extends BlockCrop {
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if (rand.nextBoolean() || !worldIn.getBiome(pos).canRain()) {
-			return;
-		}
+		super.updateTick(worldIn, pos, state, rand);
 		if (this.isMaxAge(state) && (state.getValue(AGE) != 7) && this.canSustainBush(worldIn.getBlockState(pos.down())) && worldIn.isAirBlock(pos.up())) {
 			if (worldIn.getBlockState(pos.down()).getBlock() == this) {
 				worldIn.setBlockState(pos, state.withProperty(AGE, 7), 2);
