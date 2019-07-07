@@ -30,7 +30,6 @@ import com.covens.common.item.equipment.baubles.ItemPouch;
 import com.covens.common.item.equipment.baubles.ItemRemedyTalisman;
 import com.covens.common.item.equipment.baubles.ItemTalisman;
 import com.covens.common.item.equipment.baubles.ItemTriskelionAmulet;
-import com.covens.common.item.equipment.baubles.ItemWrathfulEye;
 import com.covens.common.item.food.ItemFilledBowl;
 import com.covens.common.item.food.ItemHeart;
 import com.covens.common.item.food.ItemHoney;
@@ -203,7 +202,6 @@ public final class ModItems {
 	public static final Item horseshoe = null;
 	public static final Item remedy_talisman = null;
 	public static final Item girdle_of_the_wooded = null;
-	public static final Item wrathful_eye = null;
 	public static final Item mantle = null;
 	public static final Item pouch = null;
 
@@ -362,7 +360,6 @@ public final class ModItems {
 				new ItemHorseshoe(), //
 				new ItemTriskelionAmulet(), //
 				new ItemHellishBauble(), //
-				new ItemWrathfulEye(), //
 				new ItemTalisman(BaubleType.HEAD, 35, LibItemName.TALISMAN_AQUAMARINE_CROWN), //
 				new ItemTalisman(BaubleType.RING, 18, LibItemName.TALISMAN_ADAMANTINE_STAR_RING), //
 				new ItemTalisman(BaubleType.AMULET, 18, LibItemName.TALISMAN_EMERALD_PENDANT), //
