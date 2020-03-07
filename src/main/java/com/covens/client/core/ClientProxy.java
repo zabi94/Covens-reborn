@@ -8,7 +8,6 @@ import com.covens.client.core.colorhandlers.BrewColorHandler;
 import com.covens.client.core.colorhandlers.ColorPropertyHandler;
 import com.covens.client.core.colorhandlers.CrystalBallSmokeColorHandler;
 import com.covens.client.core.colorhandlers.GlyphColorHandler;
-import com.covens.client.core.colorhandlers.MossColorHandler;
 import com.covens.client.core.colorhandlers.SpellPageColorHandler;
 import com.covens.client.core.colorhandlers.WitchfireColorHandler;
 import com.covens.client.core.event.GirdleOfTheWoodedHUD;
@@ -96,7 +95,6 @@ public class ClientProxy implements ISidedProxy {
 
 	@SubscribeEvent
 	public static void registerItemModels(ModelRegistryEvent event) {
-		unifyVariants(ModBlocks.ember_grass);
 		unifyVariants(ModBlocks.leaves_cypress);
 		unifyVariants(ModBlocks.leaves_elder);
 		unifyVariants(ModBlocks.leaves_juniper);
@@ -157,7 +155,6 @@ public class ClientProxy implements ISidedProxy {
 		blocks.registerBlockColorHandler(ColorPropertyHandler.INSTANCE, ModBlocks.candle_medium, ModBlocks.candle_small, ModBlocks.candle_medium_lit, ModBlocks.candle_small_lit, ModBlocks.lantern, ModBlocks.revealing_lantern);
 		blocks.registerBlockColorHandler(new WitchfireColorHandler(), ModBlocks.witchfire);
 		blocks.registerBlockColorHandler(new GlyphColorHandler(), ModBlocks.ritual_glyphs);
-		blocks.registerBlockColorHandler(new MossColorHandler(), ModBlocks.spanish_moss, ModBlocks.spanish_moss_end);
 		blocks.registerBlockColorHandler(new CrystalBallSmokeColorHandler(), ModBlocks.crystal_ball);
 		// Item Colors
 		ItemColors items = Minecraft.getMinecraft().getItemColors();

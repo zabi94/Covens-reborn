@@ -207,9 +207,6 @@ public class CauldronRegistry {
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk_ender), normalRitualChalk, normalRitualChalk, dimensionalSand, dimensionalSand, dimensionalSand, dimensionalSand, fumeHeavenlyWind, fumeHeavenlyWind);
 		registerCauldronItemCrafting(ModFluids.HONEY, new ItemStack(ModItems.ritual_chalk_golden), normalRitualChalk, normalRitualChalk, goldNugget, goldNugget, goldNugget, goldNugget, fumeCleansingAura, fumeCleansingAura);
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.graveyard_dirt, 8, 0), graveyardDust, graveyardDust, wormwood, wormwood, dirt, dirt, dirt, dirt);
-		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.ember_grass, 2, 0), blazePowder, blazePowder, wormwood, wormwood);
-		registerCauldronItemCrafting(ModFluids.MUNDANE_OIL, new ItemStack(ModBlocks.torchwood, 2, 0), glowstoneDust, glowstoneDust, anyLog, anyLeaf);
-		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModBlocks.spanish_moss, 3), vine, vine, vine, fumeBottledMagic, netherWart);
 		registerCauldronItemCrafting(FluidRegistry.WATER, new ItemStack(ModItems.ritual_chalk_normal), fumeBirchSoul, clayBall);
 		
 		// Banner pattern removal

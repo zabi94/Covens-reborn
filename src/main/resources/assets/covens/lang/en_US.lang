@@ -159,7 +159,6 @@ item.cold_iron_nugget.name=Cold Iron Nugget
 item.owlets_wing.name=Owlet's Wing
 item.ravens_feather.name=Raven's Feather
 item.adders_fork.name=Adder's Fork
-item.spanish_moss_stuffing.name=Spanish Moss Stuffing
 item.soul_string.name=Soul String
 item.pure_filament.name=Pure Filament
 item.diabolic_vein.name=Diabolic Vein
@@ -328,7 +327,6 @@ tile.crop_wormwood.name=Wormwood Crop
 tile.crop_tulsi.name=Tulsi Crop
 tile.crop_chrysanthemum.name=Chrysanthemum Crop
 tile.crop_sagebrush.name=Sagebrush Crop
-tile.spanish_moss.name=Spanish Moss
 
 //Misc plants
 tile.moonbell.name=Moonbell Flower
@@ -427,11 +425,6 @@ item.spell_page.covens.infuse_life.name=Spell of the Gift (WIP)
 item.spell_page.covens.self_heal.name=Spell of Restoration (WIP)
 item.spell_page.covens.call_storm.name=Spell of the Tempest (WIP)
 item.spell_page.covens.vampire_leech.name=Spell of Life Drain (WIP)
-
-
-//Mutant Plants
-tile.torchwood.name=Torchwood
-tile.ember_grass.name=Ember Grass
 
 //Devices
 tile.cauldron.name=Witches Cauldron

@@ -83,7 +83,6 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_belladonna), new AspectList().add(Aspect.PLANT, 1).add(Aspect.DEATH, 1).add(Aspect.MAGIC, 1));
 		evt.register.registerObjectTag(new ItemStack(ModItems.seed_thistle), new AspectList().add(Aspect.PLANT, 1).add(Aspect.AVERSION, 1).add(Aspect.PROTECT, 1));
 		evt.register.registerObjectTag(new ItemStack(ModItems.spanish_moss), new AspectList().add(Aspect.PLANT, 2).add(Aspect.AIR, 2).add(Aspect.MAGIC, 2));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.spanish_moss), new AspectList().add(Aspect.PLANT, 2).add(Aspect.AIR, 2).add(Aspect.MAGIC, 2));
 		evt.register.registerObjectTag(new ItemStack(ModItems.owlets_wing), new AspectList().add(Aspect.BEAST, 3).add(Aspect.AIR, 2));
 		evt.register.registerObjectTag(new ItemStack(ModItems.ravens_feather), new AspectList().add(Aspect.BEAST, 3).add(Aspect.AIR, 2).add(Aspect.DARKNESS, 2));
 		evt.register.registerObjectTag(new ItemStack(ModItems.graveyard_dust), new AspectList().add(Aspect.DEATH, 3).add(Aspect.SOUL, 2));
@@ -125,8 +124,6 @@ public class ThaumcraftInternal {
 		evt.register.registerObjectTag(new ItemStack(ModItems.spell_page, 1, 0), new AspectList().add(Aspect.MAGIC, 6).add(Aspect.TOOL, 6));
 
 		// Blocks
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.torchwood), new AspectList().add(Aspect.PLANT, 8).add(Aspect.FIRE, 8).add(Aspect.MAGIC, 8));
-		evt.register.registerObjectTag(new ItemStack(ModBlocks.ember_grass), new AspectList().add(Aspect.PLANT, 8).add(Aspect.FIRE, 8).add(Aspect.AVERSION, 8));
 		evt.register.registerObjectTag(new ItemStack(ModBlocks.moonbell), new AspectList().add(Aspect.PLANT, 6).add(Aspect.DARKNESS, 6).add(Aspect.MAGIC, 6));
 		evt.register.registerObjectTag(new ItemStack(ModBlocks.crystal_ball), new AspectList().add(Aspect.CRYSTAL, 25).add(Aspect.MAGIC, 25).add(Aspect.DESIRE, 25));
 		evt.register.registerObjectTag(new ItemStack(ModBlocks.tarot_table), new AspectList().add(Aspect.EARTH, 25).add(Aspect.PLANT, 25).add(Aspect.MAGIC, 25).add(Aspect.DESIRE, 25));

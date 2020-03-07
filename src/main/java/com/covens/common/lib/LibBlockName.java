@@ -45,16 +45,10 @@ public final class LibBlockName {
 	public static final String TOURMALINE_BLOCK = "tourmaline_block";
 	public static final String MALACHITE_BLOCK = "malachite_block";
 	public static final String TIGERS_EYE_BLOCK = "tigers_eye_block";
-	public static final String NUUMMITE_BLOCK = "nuummite_block";
-	public static final String ALEXANDRITE_BLOCK = "alexandrite_block";
-	public static final String AMETHYST_BLOCK = "amethyst_block";
-	public static final String JASPER_BLOCK = "jasper_block";
 	public static final String GARNET_BLOCK = "garnet_block";
 	public static final String NETHERSTEEL = "nethersteel";
 	public static final String SALT_BARRIER = "salt_barrier";
 	public static final String FAKE_ICE = "fake_ice";
-	public static final String TORCHWOOD = "torchwood";
-	public static final String EMBER_GRASS = "ember_grass";
 	public static final String LOG_ELDER = "log_elder";
 	public static final String LOG_JUNIPER = "log_juniper";
 	public static final String LOG_YEW = "log_yew";
@@ -69,7 +63,6 @@ public final class LibBlockName {
 	public static final String PLANKS_CYPRESS = "planks_cypress";
 	public static final String SAPLING = "sapling";
 	public static final String MOONBELL = "moonbell";
-	public static final String SPANISH_MOSS = "spanish_moss";
 	public static final String WITCH_ALTAR = "witch_altar";
 	public static final String THREAD_SPINNER = "thread_spinner";
 	public static final String GLYPHS = "ritual_glyphs";

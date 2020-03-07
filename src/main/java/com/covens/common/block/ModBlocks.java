@@ -26,10 +26,7 @@ import com.covens.common.block.natural.crop.CropBelladonna;
 import com.covens.common.block.natural.crop.CropMint;
 import com.covens.common.block.natural.crop.CropThistle;
 import com.covens.common.block.natural.crop.CropWormwood;
-import com.covens.common.block.natural.plants.BlockEmberGrass;
 import com.covens.common.block.natural.plants.BlockMoonbell;
-import com.covens.common.block.natural.plants.BlockMoss;
-import com.covens.common.block.natural.plants.BlockTorchwood;
 import com.covens.common.block.natural.tree.BlockModLeaves;
 import com.covens.common.block.natural.tree.BlockModLog;
 import com.covens.common.block.natural.tree.BlockModSapling;
@@ -96,8 +93,6 @@ public final class ModBlocks {
 	public static final Block salt_ore = null;
 	public static final Block nethersteel = null;
 	public static final Block fake_ice = null;
-	public static final Block torchwood = null;
-	public static final Block ember_grass = null;
 	public static final Block log_elder = null;
 	public static final Block log_juniper = null;
 	public static final Block log_yew = null;
@@ -122,8 +117,6 @@ public final class ModBlocks {
 	public static final Block cold_iron_block = null;
 	public static final Block graveyard_dirt = null;
 	public static final Block purifying_earth = null;
-	public static final Block spanish_moss = null;
-	public static final Block spanish_moss_end = null;
 
 	public static final Block witchfire = null;
 	public static final Block revealing_lantern = null;
@@ -162,9 +155,7 @@ public final class ModBlocks {
 				new CropThistle(), 
 				new CropBelladonna(), 
 				new CropMint(), 
-				new BlockMoonbell(), 
-				new BlockMoss(true), 
-				new BlockMoss(false)
+				new BlockMoonbell() 
 		);
 		// Ore
 		registry.register(new BlockSilverOre());
@@ -173,7 +164,31 @@ public final class ModBlocks {
 		registry.register(new BlockWitchFire());
 
 		// Tool Blocks
-		registry.registerAll(new BlockCauldron(), new BlockMagicMirror(), new BlockOven(), new BlockBrazier(), new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM, false), new BlockCandleSmall(LibBlockName.CANDLE_SMALL, false), new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM_LIT, true), new BlockCandleSmall(LibBlockName.CANDLE_SMALL_LIT, true), new BlockSaltBarrier(), new BlockApiary(), new BlockTorchwood(), new BlockEmberGrass(), new BlockBeehive(LibBlockName.BEEHIVE), new BlockWitchAltar(LibBlockName.WITCH_ALTAR, Material.ROCK), new BlockThreadSpinner(LibBlockName.THREAD_SPINNER), new BlockCircleGlyph(LibBlockName.GLYPHS), new BlockCrystalBall(LibBlockName.CRYSTAL_BALL), new BlockGoblet(LibBlockName.GOBLET), new BlockGemBowl(LibBlockName.GEM_BOWL), new BlockTarotTable(), new BlockLantern(true), new BlockLantern(false), new BlockDistillery(LibBlockName.DISTILLERY), new BlockWitchesLight(), new BlockPurifyingEarth(), new BlockPlacedItem());
+		registry.registerAll(new BlockCauldron(), //
+					new BlockMagicMirror(),  //
+					new BlockOven(),  //
+					new BlockBrazier(),  //
+					new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM, false), // 
+					new BlockCandleSmall(LibBlockName.CANDLE_SMALL, false),  //
+					new BlockCandleMedium(LibBlockName.CANDLE_MEDIUM_LIT, true), // 
+					new BlockCandleSmall(LibBlockName.CANDLE_SMALL_LIT, true),  //
+					new BlockSaltBarrier(),  //
+					new BlockApiary(),  //
+					new BlockBeehive(LibBlockName.BEEHIVE), // 
+					new BlockWitchAltar(LibBlockName.WITCH_ALTAR, Material.ROCK), // 
+					new BlockThreadSpinner(LibBlockName.THREAD_SPINNER),  //
+					new BlockCircleGlyph(LibBlockName.GLYPHS),  //
+					new BlockCrystalBall(LibBlockName.CRYSTAL_BALL), // 
+					new BlockGoblet(LibBlockName.GOBLET),  //
+					new BlockGemBowl(LibBlockName.GEM_BOWL),  //
+					new BlockTarotTable(),  //
+					new BlockLantern(true),  //
+					new BlockLantern(false),  //
+					new BlockDistillery(LibBlockName.DISTILLERY), // 
+					new BlockWitchesLight(),  //
+					new BlockPurifyingEarth(),  //
+					new BlockPlacedItem()//
+		); //
 
 		// Decorative Blocks
 		registry.registerAll(

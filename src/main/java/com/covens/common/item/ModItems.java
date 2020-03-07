@@ -406,8 +406,6 @@ public final class ModItems {
 				itemBlock(ModBlocks.distillery), //
 				itemBlock(ModBlocks.apiary), //
 				itemBlock(ModBlocks.brazier), //
-				itemBlock(ModBlocks.torchwood), //
-				itemBlock(ModBlocks.ember_grass), //
 				itemBlock(ModBlocks.beehive), //
 				itemBlock(ModBlocks.salt_ore), //
 				itemBlock(ModBlocks.nethersteel), //
@@ -436,8 +434,7 @@ public final class ModItems {
 				itemBlock(ModBlocks.cold_iron_block), //
 				itemBlock(ModBlocks.graveyard_dirt), //
 				new ItemBlockRevealingLantern(ModBlocks.lantern, false), //
-				new ItemBlockRevealingLantern(ModBlocks.revealing_lantern, true), //
-				itemBlock(ModBlocks.spanish_moss)
+				new ItemBlockRevealingLantern(ModBlocks.revealing_lantern, true)//
 		);
 
 		for (Gem g:Gem.values()) {
