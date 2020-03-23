@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "covens",
+  "version": "${version}",
+
+  "name": "Covens",
+  "description": "A clever description of a magic mod",
+  "authors": [
+    "zabi94",
+    "Ingoleth"
+  ],
+  "contact": {
+    "homepage": "https://github.com/zabi94/Covens-reborn/",
+    "sources": "https://github.com/zabi94/Covens-reborn/"
+  },
+
+  "license": "ARR",
+  "icon": "assets/covens/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.covens.Covens"
+    ]
+  },
+  "mixins": [
+    "covens.mixins.json"
+  ],
+
+  "depends": {
+    "fabric": "*"
+  }
+}

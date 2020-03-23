@@ -1,138 +1,80 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven {
-            name = "gradle"
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.7'
-    }
+plugins {
+	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'maven-publish'
 }
-
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.matthewprenger.cursegradle'
-
-version = "${cv_version}"
-group = "com.covens"
-archivesBaseName = "Covens-${mc_version}"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-class StructExtApi {
-    String name
-    String api
-    String exclusion
-    String root = api
-}
-
-minecraft {
-    version = mc_forge_version
-    mappings = mcp_mappings
-    runDir = "run"
-
-	replace '@VERSION@', project.version
-    replace '@FINGERPRINT@', project.findProperty('signSHA1')
-}
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version': project.version, 'mcversion': project.minecraft.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
 
 repositories {
-    maven { //Hwyla
-        name = "Mobius Repo"
-        url = "http://tehnut.info/maven"
-    }
-    maven {
-        name = "JEI"
-        url = "http://dvs1.progwml6.com/files/maven"
-    }
-    maven { //?? tc/baubles?
-        url = "https://minecraft.curseforge.com/api/maven/"
-    }
-    maven { //Patchouli
-      	url = 'https://maven.blamejared.com' 
-    }
+    mavenLocal()
+    jcenter() //Cloth
     maven {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
+    maven {
+    	name = "ModMenu"
+    	url = "https://maven.fabricmc.net/"
+    }
 }
 
 dependencies {
-    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
-    compile "baubles:Baubles:1.12:${baubles_version}"
-    deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
-    runtime "mezz.jei:jei_${mc_version}:${jei_version}"
-    compile "thaumcraft:Thaumcraft:1.12.2:${thaumcraft_version}"
-    compile "vazkii.patchouli:Patchouli:${patchouli_version}"
-    compile "minerva-library:minerva:library:${minerva_version}"
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	
+	//Deps
+	modRuntime "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
+	modRuntime "io.github.prospector:modmenu:${project.modmenu_version}"
 }
 
-runClient {
-    if (project.hasProperty("mc_username") && project.hasProperty("mc_password")) {
-        args "--username=${project.mc_username}"
-        args "--password=${project.mc_password}"
-    }
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
 }
 
-task signJar(type: SignJar, dependsOn: reobfJar) {
-
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
 }
 
-build.dependsOn signJar
-
-idea {
-    module {
-        inheritOutputDirs = true
-    }
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = "sources"
+	from sourceSets.main.allSource
 }
 
 jar {
-    from sourceSets.main.output
-    from sourceSets.api.output
+	from "LICENSE"
 }
 
-task apiJar(type: Jar) {
-    classifier = 'api'
-    from sourceSets.main.output //Save .class files
-    from sourceSets.main.allJava //Save corresponding .java files
-    include 'com/covens/api/**/*' //Only include the api directory and subdirectory
-}
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			artifact(remapJar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
 
-artifacts {
-    archives apiJar
+	repositories {
+		// mavenLocal()
+	}
 }
